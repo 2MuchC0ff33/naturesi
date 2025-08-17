@@ -1,0 +1,14 @@
+{
+  "issuer": "https://www.naturesinfusions.com.au",
+  "openid_provider": false,
+  "authorization_endpoint": null,
+  "token_endpoint": null,
+  "userinfo_endpoint": null,
+  "registration_endpoint": null,
+  "scopes_supported": [],
+  "response_types_supported": [],
+  "subject_types_supported": [],
+  "id_token_signing_alg_values_supported": [],
+  "claims_supported": [],
+  "service_description": "Nature's Infusions is a static, privacy-focused, non-federated artisan marketplace. No OpenID Connect, OAuth, or dynamic authentication/identity services are provided. See /privacy.txt and documentation for details."
+}

@@ -1,0 +1,39 @@
+# Privacy Policy – Nature's Infusions / Ultra-Simple POSIX Static EStore
+
+Effective Date: 2025-07-01
+
+## 1. No Tracking, No Cookies, No Analytics
+This website does not use cookies, analytics, or any tracking technologies. We do not collect, store, or share your browsing data.
+
+## 2. Information We Collect
+We only collect information that you voluntarily provide when:
+- Placing an order (name, shipping address, PayPal email for payment)
+- Submitting a support request (name, email, and message)
+- Leaving a product review (name and review content, optional)
+
+All payments are processed securely via PayPal. We do not store or process your payment details on this website.
+
+## 3. How We Use Your Information
+Your information is used solely to:
+- Process and fulfill your order
+- Respond to your support requests
+- Display your product reviews (if submitted)
+
+We do not sell, rent, or share your information with third parties, except as required to process your order (e.g., with PayPal for payment).
+
+## 4. Data Security
+All data is stored securely and is only accessible to the solo developer responsible for site maintenance and support.
+
+## 5. Data Retention
+Order and support information is retained only as long as necessary to fulfill your request and comply with legal obligations.
+
+## 6. Your Rights
+You may request to view or delete your personal information at any time by contacting support@naturesinfusions.com.
+
+## 7. Contact
+For privacy questions or requests, contact:
+support@naturesinfusions.com
+
+---
+
+This privacy policy is consistent with the Ultra-Simple POSIX Static EStore Framework's commitment to privacy, minimal data collection, and small business best practices.

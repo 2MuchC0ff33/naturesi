@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XRD xmlns="http://docs.oasis-open.org/ns/xri/xrd-1.0">
+  <Subject>https://www.naturesinfusions.com.au/</Subject>
+  <Property type="privacy-policy">/privacy.txt</Property>
+  <Link rel="self" href="https://www.naturesinfusions.com.au/.well-known/host-meta"/>
+  <Note>No WebFinger, OAuth, or dynamic discovery services are provided. This is a static, privacy-focused site. See privacy.txt for details.</Note>
+</XRD>

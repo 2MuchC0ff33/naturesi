@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!--
+  crossdomain.xml for naturesinfusions.com.au
+  Security: Only allow trusted domain, restrict headers, master-only policy
+-->
+<cross-domain-policy>
+  <!-- Only allow access from the official domain -->
+  <site-control permitted-cross-domain-policies="master-only"/>
+  <allow-access-from domain="naturesinfusions.com.au" secure="true"/>
+  <!-- Only allow minimal headers for PayPal or AJAX (adjust as needed) -->
+  <allow-http-request-headers-from domain="naturesinfusions.com.au" headers="Content-Type"/>
+</cross-domain->

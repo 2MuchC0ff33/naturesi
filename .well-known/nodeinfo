@@ -1,0 +1,31 @@
+{
+  "version": "2.0",
+  "software": {
+    "name": "Ultra-Simple POSIX Static EStore Framework",
+    "version": "2025.07"
+  },
+  "protocols": [],
+  "services": {
+    "inbound": [],
+    "outbound": []
+  },
+  "openRegistrations": false,
+  "usage": {
+    "users": {
+      "total": 0,
+      "activeMonth": 0
+    },
+    "localPosts": 0
+  },
+  "metadata": {
+    "description": "Nature's Infusions is a static, privacy-focused, non-federated artisan marketplace. No user accounts, social features, or federation. See /privacy.txt and documentation for details.",
+    "compliance": [
+      "POSIX (IEEE 1003, ISO/IEC 9945:2024)",
+      "XHTML 1.0 Strict (W3C)",
+      "WCAG 2.1 AA",
+      "ISO/IEC 25010",
+      "ISO/IEC/IEEE 29148"
+    ],
+    "contact": "See /privacy.txt and /terms.txt"
+  }
+}

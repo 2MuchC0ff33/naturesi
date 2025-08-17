@@ -1,0 +1,3 @@
+# ads.txt for Nature's Infusions
+# This site does not authorize any digital advertising sellers.
+# No programmatic or third-party ads are permitted.

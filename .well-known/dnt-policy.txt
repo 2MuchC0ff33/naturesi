@@ -1,0 +1,9 @@
+Nature's Infusions – Do Not Track (DNT) Policy
+
+This static website does not track, profile, or analyze visitors in any way.
+- No cookies, analytics, or third-party tracking scripts are used.
+- No behavioral advertising or cross-site tracking is performed.
+- Do Not Track (DNT) signals are respected by default, as no tracking occurs.
+- No personal data is collected, stored, or shared.
+
+For more information, see privacy.txt.

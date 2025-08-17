@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/"
+  xmlns:moz="http://www.mozilla.org/2006/browser/search/">
+  <ShortName>Nature's Infusions</ShortName>
+  <Description>Search handcrafted products and artisan blends at Nature's Infusions marketplace.</Description>
+  <InputEncoding>UTF-8</InputEncoding>
+  <OutputEncoding>UTF-8</OutputEncoding>
+  <Language>en-AU</Language>
+  <Image height="16" width="16" type="image/png">/favicon-16x16.png</Image>
+  <Image height="64" width="64" type="image/svg+xml">/assets/img/logo.svg</Image>
+  <Url type="text/html" method="get" template="/index.xhtml?q={searchTerms}"/>
+  <Query role="example" searchTerms="herbal tea"/>
+  <Developer>Solo Developer</Developer>
+  <Attribution>Nature's Infusions – Ultra-Simple POSIX Static EStore</Attribution>
+  <Contact>support@naturesinfusions.com</Contact>
+  <Tags>nature,infusions,artisan,marketplace,herbal,handcrafted,products</Tags>
+  <LongName>Nature's Infusions – Artisan Marketplace Search</LongName>
+  <moz:SearchForm>/index.xhtml</moz:SearchForm>
+</OpenSearchDescription>

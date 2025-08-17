@@ -1,0 +1,226 @@
+{
+  "name": "Nature's Infusions",
+  "short_name": "Nature's Infusions",
+  "description": "Nature's Infusions is a Perth-based Naturopath's passion project, offering high-quality organic teas for healthy living.",
+  "start_url": "/index.html",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#4CAF50",
+  "orientation": "any",
+  "lang": "en-AU",
+  "dir": "ltr",
+  "manifest_version": 1,
+
+  "icons": [
+    {
+      "src": "assets/img/logo.webp",
+      "type": "image/webp"
+    },
+    {
+      "src": "/android-icon-36x36.png",
+      "sizes": "36x36",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-icon-48x48.png",
+      "sizes": "48x48",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/assets/img/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ],
+
+  "screenshots": [
+    {
+      "src": "/assets/img/social-share-og.webp",
+      "sizes": "1200x630",
+      "type": "image/webp",
+      "label": "Main Banner"
+    },
+    {
+      "src": "/assets/img/botanicglow1.webp",
+      "sizes": "800x600",
+      "type": "image/webp",
+      "label": "Botanic Glow Product"
+    },
+    {
+      "src": "/assets/img/rainforest1.webp",
+      "sizes": "800x600",
+      "type": "image/webp",
+      "label": "Rainforest Product"
+    }
+  ],
+
+  "categories": ["food", "health", "lifestyle", "wellness"],
+
+  "shortcuts": [
+    {
+      "name": "Our Store",
+      "short_name": "Store",
+      "description": "Browse our organic tea collection",
+      "url": "/store.html",
+      "icons": [{
+        "src": "/assets/img/logo.svg",
+        "sizes": "48x48",
+        "type": "image/svg+xml"
+      }]
+    },
+    {
+      "name": "About Us",
+      "short_name": "About",
+      "description": "Learn about our passion",
+      "url": "/about.html"
+    },
+    {
+      "name": "Contact",
+      "short_name": "Contact",
+      "description": "Get in touch",
+      "url": "/contact.html"
+    },
+    {
+      "name": "Stockists",
+      "short_name": "Stockists",
+      "description": "Find our products",
+      "url": "/stockists.html"
+    },
+    {
+      "name": "Terms",
+      "short_name": "Terms",
+      "description": "Terms and conditions",
+      "url": "/terms.html"
+    }
+  ],
+
+  "related_applications": [],
+
+  "prefer_related_applications": false,
+
+  "file_handlers": [{
+    "action": "/index.html",
+    "accept": {
+      "text/html": [".html"]
+    }
+  }],
+
+  "share_target": {
+    "action": "/social.xhtml",
+    "method": "GET",
+    "enctype": "application/x-www-form-urlencoded",
+    "params": {
+      "title": "name",
+      "text": "description",
+      "url": "link"
+    }
+  },
+
+  "protocol_handlers": [{
+    "protocol": "web+natures",
+    "url": "/index.html?uri=%s"
+  }],
+
+  "web_accessible_resources": [{
+    "resources": [
+      "/assets/img/*.webp",
+      "/assets/css/*.css",
+      "/assets/js/app.js",
+      "/offline.xhtml",
+      "/404.xhtml",
+      "/pages/*.html"
+    ],
+    "matches": ["*://*/*"]
+  }],
+
+  "serviceworker": {
+    "src": "/service-worker.js",
+    "scope": "/",
+    "use_cache": true
+  },
+
+  "offline_enabled": true,
+
+  "display_override": ["window-controls-overlay", "minimal-ui"],
+
+  "edge_side_panel": {
+    "preferred_width": 360
+  },
+
+  "launch_handler": {
+    "client_mode": "focus-existing"
+  },
+
+  "permissions": [
+    "clipboard-write",
+    "clipboard-read"
+  ],
+
+  "optional_permissions": [
+    "geolocation"
+  ],
+
+  "author": {
+    "name": "Nature's Infusions",
+    "website": "https://naturesinfusions.com.au"
+  },
+
+  "homepage_url": "https://naturesinfusions.com.au",
+
+  "developer": {
+    "name": "Nature's Infusions Team",
+    "url": "https://naturesinfusions.com.au/about"
+  }
+}

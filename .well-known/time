@@ -1,0 +1,3 @@
+# Nature's Infusions does not provide any time, clock, or time-based API services.
+# No time synchronization, NTP, or dynamic time endpoints are available or required.
+# See /privacy.txt and documentation for details.

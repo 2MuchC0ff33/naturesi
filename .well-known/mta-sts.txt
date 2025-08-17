@@ -1,0 +1,5 @@
+Nature's Infusions – MTA-STS Policy
+
+This static website does not provide email services or accept SMTP connections.
+No MTA-STS policy is applicable for this domain.
+For more information, see privacy.txt.

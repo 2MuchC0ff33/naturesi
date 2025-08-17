@@ -1,0 +1,8 @@
+{
+  "@context": "https://www.w3.org/ns/did/v1",
+  "id": "did:web:naturesinfusions.com.au",
+  "service": [],
+  "assertionMethod": [],
+  "authentication": [],
+  "note": "This static site does not provide decentralized identity, authentication, or verifiable credentials. No personal data, DIDs, or identity services are offered. See privacy.txt for details."
+}

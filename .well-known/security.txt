@@ -1,0 +1,4 @@
+# Nature's Infusions is a static, privacy-focused, non-dynamic artisan marketplace.
+# No user data, authentication, or dynamic input is processed.
+# No security contact is available; no vulnerability reporting is required.
+# See /privacy.txt and /terms.txt for details.

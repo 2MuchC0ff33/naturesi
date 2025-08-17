@@ -1,0 +1,44 @@
+# Terms of Sale, Returns, and Risk Waiver – Nature's Infusions / Ultra-Simple POSIX Static EStore
+
+Effective Date: 2025-07-01
+
+## 1. Terms of Sale
+- All products are sold by local artisans through the Nature's Infusions marketplace.
+- Prices are listed in AUD and include GST where applicable.
+- Payment is accepted via PayPal only. Orders are processed after payment confirmation.
+- Shipping costs are calculated at checkout and displayed before payment.
+
+## 2. Returns and Exchanges
+- Returns are accepted only for items that are damaged or defective on arrival.
+- To request a return, contact support@naturesinfusions.com within 7 days of delivery.
+- Approved returns will be refunded via PayPal or replaced at our discretion.
+- Returns for change of mind or incorrect choice are not accepted.
+- Exchanges are subject to product availability.
+
+## 3. Order Processing and Shipping
+- Orders are processed within 2 business days after payment.
+- Shipping is via standard post or courier as selected at checkout.
+- Delivery times may vary depending on location and carrier.
+
+## 4. Product Descriptions and Images
+- Product descriptions are generated using AI and provided by the artisan.
+- Images are for reference only; actual products may vary slightly due to their handmade nature.
+
+## 5. Limitation of Liability
+- Nature's Infusions and the Ultra-Simple POSIX Static EStore Framework are not liable for any damages, losses, or injuries resulting from the use or misuse of products sold. Follow manufactuers instructions for use.
+- All products are the responsibility of the individual artisan.
+
+## 6. Privacy and Data
+- We do not use cookies or tracking. See privacy.txt for details.
+
+## 7. Contact and Support
+- For support, returns, or questions, contact: support@naturesinfusions.com
+- Support is provided via online ticketing only (no phone or direct email support).
+
+## 8. Changes to Terms
+- These terms may be updated at any time. The latest version is always available at /terms.txt.
+
+---
+
+By placing an order, you agree to these terms and conditions.
+
