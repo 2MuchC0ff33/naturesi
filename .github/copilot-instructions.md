@@ -1,88 +1,66 @@
-# Copilot Instructions — Nature's Infusions (Static Site)
+# Copilot instructions — Nature's Infusions (static  EStore)
 
-## Overview
-This repository is a static e-commerce-style site for Nature's Infusions, a marketplace for premium organic teas and herbal remedies. The site is designed as a Progressive Web App (PWA) with offline capabilities and is built using HTML, CSS, and JavaScript. The product catalog is data-driven from `products.json`.
+Purpose: give an AI coding agent the minimal, practical context needed to be productive editing this repo.
 
-### Key Components
-- **HTML Pages**: Located in the root and `pages/` directory, these include `index.html`, `404.xhtml`, `offline.xhtml`, and other content pages.
-- **CSS**: Styling is managed in `assets/css/main.css`.
-- **JavaScript**: Client-side logic is in `assets/js/app.js`.
-- **Service Worker**: `service-worker.js` handles PWA functionality.
-- **Product Data**: `products.json` contains the product catalog.
-- **Images**: Stored in `assets/img/`.
+Checklist for this task
+- Understand this is a static, mobile-first (no build step).
+- Preserve privacy-first and accessibility-first constraints (no analytics, no cookies).
+- Make only minimal, reversible edits; follow repository conventions (single-file HTML pages,  scripts mentioned in docs).
+ - Use Australian English (`en-AU`) for all new copy, comments, commit messages and code-facing strings. Prefer Australian spellings (e.g. "colour", "organisation", "labour") and DD/MM/YYYY dates where a format is required.
 
-## Architecture
-- **Static Site**: No server-side code; all functionality is client-side.
-- **PWA**: Includes a service worker for offline support and a manifest file for PWA configuration.
-- **Data Flow**: Product data is fetched from `products.json` and rendered dynamically on the store page.
+Big picture
+- This is an Ultra-Simple  Static EStore: plain HTML, CSS, and vanilla JS. There is no Node/npm build pipeline or tests directory. Edits are direct to files in repo root, `pages/`, `assets/css/`, and `assets/js/`.
+- Data: product metadata appears in `products.json` and `.env` points to CSV paths (e.g. `PRODUCTS_CSV_PATH=data/products.csv`), suggesting small CSV/JSON-based data flows rather than a database.
 
-## Development Workflows
-### Local Preview
-Run a local static server to preview the site:
-```powershell
-# Using Python 3
-python -m http.server 8000; Start-Process "http://localhost:8000"
+Key patterns & conventions (concrete examples)
+- Service worker: dev/no-cache pattern — see `service-worker.js` and registration guards in `assets/js/app.js` (only register on `localhost` or `https:`). Avoid changing caching semantics without verifying offline behavior.
+- PWA manifest and offline shell: `manifest.json`, `offline.html`, `404.html`, `index.html` and `manifest.json` fields control app install behavior.
+- Static server rules: `.htaccess` and `web.config` contain redirects, MIME types and a canonical `index.html` redirect. Keep URL-cleaning rules intact when changing paths.
+- Forms / cart: `pages/store.html` contains notes that product forms submit to a hidden cart form (`/add-to-cart`) and PayPal integration is referenced in `.env` via `PAYPAL_EMAIL`. Changes to forms may affect payment flow; inspect `pages/store.html` and `products.json` first.
+- Accessibility & privacy: repository explicitly disables analytics and tracking (`privacy.txt`, `.well-known/` files). Respect these constraints; do not add third-party trackers.
 
-# Using Node.js (http-server)
-npx http-server -p 8000 -c-1; Start-Process "http://localhost:8000"
-```
+Developer workflows
+- There is no build or test command in the repo. Typical workflow is edit -> validate HTML/CSS -> deploy static files. Check `.env` for `DEPLOY_PATH` which documents the intended deploy destination.
+- For local testing: open `index.html` (or pages under `pages/`) in a browser or use a simple static file server (not committed here). Be careful with `service-worker.js` — it registers only on `https:` or `localhost`.
 
-### JSON Validation
-Validate `products.json` to ensure it is well-formed:
-```powershell
-Get-Content .\products.json -Raw | ConvertFrom-Json > $null; if ($?) { "products.json valid" }
-```
+Where to look first for common edits
+- Global styles: `assets/css/main.css`.
+- Site JS: `assets/js/app.js` (service worker, live-reload helpers).
+- Page templates: `pages/*.html` and root-level `index.html`, `offline.html`, `404.html`.
+- Site metadata & config: `.env`, `manifest.json`, `sitemap.xml`, `opensearch.xml`.
 
-### Debugging
-- Use browser DevTools to monitor network requests for `products.json` and `service-worker.js`.
-- Check console logs for service worker registration and cache-clearing messages.
+Rules for automated edits
+- Do not introduce remote third-party scripts or analytics by default.
+- If adding JS/CSS, place under `assets/js/` or `assets/css/` and reference with relative paths.
+- When modifying payment, cart, or checkout logic, flag it for manual review: these are safety-sensitive changes.
+ - Language & style enforcement: when adding or editing UI text or documentation, use Australian English (`en-AU`) and set `<html lang="en-AU">` or `lang="en-AU"` in new/changed pages. Keep tone consistent with existing content (concise, privacy-first).
 
-## Project-Specific Conventions
-- **Product IDs**: Keep `id` fields in `products.json` stable; they are used as keys in the UI.
-- **XHTML Compliance**: Pages like `404.xhtml` and `offline.xhtml` must adhere to XHTML 1.0 Strict standards.
-- **Service Worker**: The development service worker (`service-worker.js`) uses a network-only strategy and clears caches on activation.
-- **CSP and Headers**: Update both `index.html` and `web.config` when modifying headers or Content Security Policy (CSP).
+Commit message template (en-AU)
+- Keep commit messages short and in Australian English. Use present-tense verbs and include the affected file(s) or area.
+- Template:
 
-## Key Files and Directories
-- `index.html`: Main entry point.
-- `products.json`: Product catalog.
-- `assets/css/main.css`: Stylesheet.
-- `assets/js/app.js`: Client-side logic.
-- `service-worker.js`: Service worker for PWA functionality.
-- `web.config`: IIS configuration for deployment.
+	<type>(scope): short summary
 
-## Examples
-### Product Entry in `products.json`
-```json
-{
-  "id": "product-turmeric",
-  "name": "Turmeric Tea",
-  "images": ["turmeric1.webp", "turmeric2.webp"],
-  "inStock": true,
-  "ingredients": ["Turmeric", "Ginger", "Cinnamon"],
-  "options": [
-    { "type": "Pouch", "weight": "60 grams", "price": 14.00 }
-  ]
-}
-```
+	Detailed description (why), additional notes, and any manual review required.
 
-### Service Worker Registration in `app.js`
-```javascript
-if ('serviceWorker' in navigator && (window.location.hostname === 'localhost' || window.location.protocol === 'https:')) {
-  navigator.serviceWorker.register('/service-worker.js')
-    .then(registration => console.log('Service Worker registered:', registration))
-    .catch(error => console.log('Service Worker registration failed:', error));
-}
-```
+- Example (fix):
 
-## Missing Features
-- No build scripts, CI/CD pipelines, or automated tests are configured.
-- Consider adding a production-ready service worker (`service-worker.prod.js`) with caching strategies.
+	fix(pages/about.html): remove malformed meta characters and close head tags
 
-## Next Steps
-- Add a README with deployment instructions and local preview commands.
-- Validate and expand `products.json` with complete product data.
-- Ensure XHTML compliance for all `.xhtml` files using tools like `xmllint`.
+	Clean up malformed markup in `pages/about.html` head. Ensures valid meta tags and correct `lang` attribute for accessibility. Verified locally.
 
-For any ambiguities, refer to the `pages/` directory or run the site locally to observe behavior.
+- Example (docs):
+
+	docs(.github/copilot-instructions.md): add en-AU language guidance and commit template
+
+	Add explicit Australian English guidance for UI text, comments and commit messages. Include commit-message example.
+
+Small examples (what an AI should do)
+- Fix a broken meta tag: update `pages/about.html` head block to remove malformed characters and close tags correctly.
+- Improve dev service-worker error handling by replacing the placeholder `catch(error => {…})` in `service-worker.js` with a minimal network-fallback response. (Make a small, well-commented change and run a browser smoke test.)
+
+If something is unclear
+- Ask a short clarifying question and reference the exact file path you inspected.
+
+Next: request feedback on any unclear or missing sections so we can iterate.
 

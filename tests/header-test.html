@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en-AU">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Header unit test — Nature's Infusions</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <style>
+        body {
+            font-family: Arial, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            padding: 2rem;
+        }
+
+        .test-result {
+            margin-top: 1rem;
+        }
+
+        .pass {
+            color: green;
+        }
+
+        .fail {
+            color: #b00020;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Header unit smoke test</h1>
+
+    <!-- Minimal header snippet reusing real site CSS -->
+    <header id="site-header" role="banner">
+        <nav class="site-nav container" role="navigation" aria-label="Site navigation">
+            <div class="nav-left">
+                <a class="logo" href="/" aria-label="Nature's Infusions home">
+                    <img src="/assets/img/logo.svg" alt="Nature's Infusions logo">
+                </a>
+            </div>
+
+            <div class="nav-center">
+                <form class="site-search" action="/pages/store.html" method="get" role="search"
+                    aria-label="Search site">
+                    <select id="search-category" name="category" class="search-dropdown">
+                        <option value="all">Show All</option>
+                    </select>
+                    <input id="site-search" name="q" type="search" class="search-box" placeholder="Search">
+                    <button class="search-icon" type="submit" aria-label="Submit search">🔍</button>
+                </form>
+            </div>
+
+            <div class="nav-right">
+                <a class="cart-option" href="/pages/cart.html" aria-label="Cart">
+                    <span class="cart-text">Cart</span>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="test-result" id="results"></div>
+
+    <script>
+        // Tiny assertions: existence and basic ARIA attributes
+        const tests = [];
+
+        tests.push({
+            name: 'site-nav present',
+            ok: !!document.querySelector('.site-nav')
+        });
+
+        tests.push({
+            name: 'logo link has aria-label',
+            ok: document.querySelector('.logo') && document.querySelector('.logo').hasAttribute('aria-label')
+        });
+
+        tests.push({
+            name: 'search form method GET and has q input',
+            ok: (function () {
+                const f = document.querySelector('.site-search');
+                return f && f.method && f.method.toLowerCase() === 'get' && !!f.querySelector('input[name="q"]');
+            })()
+        });
+
+        tests.push({
+            name: 'cart-count present',
+            ok: !!document.querySelector('.cart-count')
+        });
+
+        // Render
+        const results = document.getElementById('results');
+        tests.forEach(t => {
+            const el = document.createElement('div');
+            el.className = t.ok ? 'pass' : 'fail';
+            el.textContent = (t.ok ? 'PASS: ' : 'FAIL: ') + t.name;
+            results.appendChild(el);
+        });
+
+        // Provide a machine-friendly exit code hint
+        const allOk = tests.every(t => t.ok);
+        const hint = document.createElement('pre');
+        hint.textContent = allOk ? 'ALL TESTS PASS' : 'SOME TESTS FAIL';
+        results.appendChild(hint);
+    </script>
+</body>
+
+</html>

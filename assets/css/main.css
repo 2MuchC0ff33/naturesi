@@ -54,39 +54,28 @@ Base Reset (HTML5 Boilerplate Enhanced)
 ========================================================================== */
 
 *,
-    *::before,
-    *::after {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-    }
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-    /* Document
+/* Document
     ========================================================================== */
 
 html {
     color: var(--color-text);
     font-size: var(--min-font);
     line-height: var(--line-height);
+    /* Use Arial-first, fall back to system-ui for modern rendering and accessibility */
+    font-family: "Arial", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
     -webkit-text-size-adjust: 100%;
-    -webkit-font-smoothing: antialiased;
-    scroll-behavior: smooth;
-    scroll-padding-top: var(--space-md);
 }
 
-/* Fluid typography scaling */
 @media (min-width: 320px) {
     html {
-        font-size: calc(
-        var(--min-font) + (var(--max-font) - var(--min-font)) *
-        ((100vw - var(--min-width)) / (var(--max-width) - var(--min-width)))
-        );
-    }
-}
-
-@media (min-width: 1200px) {
-    html {
-        font-size: var(--max-font);
+        font-size: calc(var(--min-font) + (var(--max-font) - var(--min-font)) * ((100vw - var(--min-width)) / (var(--max-width) - var(--min-width))));
     }
 }
 
@@ -95,32 +84,21 @@ html {
 
 ::-moz-selection {
     background: var(--color-accent);
-    text-shadow: none;
-}
-
-::selection {
-    background: var(--color-accent);
     color: white;
     text-shadow: none;
 }
 
-/* Media elements
-========================================================================== */
-
-audio,
-canvas,
-iframe,
+/* media elements (images, svg, video) */
 img,
 svg,
 video {
-    display: block;
-    max-width: 100%;
-    height: auto;
-    vertical-align: middle; /* Remove baseline gap */
+    /* Remove baseline gap */
 }
 
 img {
-    font-style: italic; /* Alt text fallback style */
+    display: block;
+    max-width: 100%;
+    height: auto;
 }
 
 /* Forms
@@ -130,30 +108,16 @@ button,
 input,
 select,
 textarea {
-    font: inherit;
-    color: inherit;
-    background-color: var(--color-background);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-sm);
     padding: var(--space-xs) var(--space-sm);
     transition:
-    border-color var(--transition-fast),
-    box-shadow var(--transition-fast);
-}
-
-fieldset {
-    border: 0;
+        border-color var(--transition-fast),
+        box-shadow var(--transition-fast);
     margin: 0;
-    padding: 0;
 }
 
 textarea {
     resize: vertical;
-    min-height: 8rem;
 }
-
-/* Interactive elements
-========================================================================== */
 
 a,
 button {
@@ -193,6 +157,44 @@ button:focus-visible {
 :focus-visible {
     outline: 2px solid var(--color-accent);
     outline-offset: 0.25rem;
+}
+
+/* Skip link: always visible, positioned just below the header on the left
+   (adjust --header-height variable if header size changes). */
+.skip-link {
+    /* Keep the skip link accessible but visually out of the way by default.
+       It becomes visible when focused (keyboard users). */
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    z-index: 9999;
+    background: rgba(19, 25, 33, 0.9);
+    color: #fff;
+    padding: 0.15rem 0.4rem;
+    border-radius: 0.25rem;
+    font-size: 0.8rem;
+    line-height: 1;
+    text-decoration: none;
+    box-shadow: none;
+    opacity: 0.98;
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+    /* Bring the link on-screen when focused so keyboard users can interact. */
+    position: absolute;
+    left: var(--space-md);
+    top: calc(var(--header-height, 3.75rem));
+    outline: 2px solid color-mix(in srgb, var(--color-accent) 80%, white);
+    transform: translateY(-1px);
+}
+
+@media (max-width: 640px) {
+    .skip-link {
+        left: calc(var(--space-xs) + 0.25rem);
+        top: calc(var(--header-height, 3.25rem));
+        font-size: 0.72rem;
+    }
 }
 
 /* Horizontal rule
@@ -259,6 +261,14 @@ Modern Utilities
     max-width: var(--max-width);
 }
 
+/* Header-specific container adjustments: allow the header nav to use less inset
+   so items can stretch closer to the viewport edges while other containers keep
+   their standard padding. */
+.site-nav.container {
+    padding-inline: calc(var(--space-sm) / 2);
+    max-width: 100%;
+}
+
 /* Grid system */
 .grid {
     display: grid;
@@ -272,10 +282,21 @@ Modern Utilities
 }
 
 /* Spacing utilities */
-.p-sm { padding: var(--space-sm); }
-.p-md { padding: var(--space-md); }
-.mt-sm { margin-top: var(--space-sm); }
-.mb-md { margin-bottom: var(--space-md); }
+.p-sm {
+    padding: var(--space-sm);
+}
+
+.p-md {
+    padding: var(--space-md);
+}
+
+.mt-sm {
+    margin-top: var(--space-sm);
+}
+
+.mb-md {
+    margin-bottom: var(--space-md);
+}
 
 /* ==========================================================================
 Media Queries
@@ -313,265 +334,872 @@ Media Queries
 ========================================================================== */
 
 @media print {
+
     *,
-        *::before,
-        *::after {
-            background: #fff !important;
-            color: #000 !important;
-            box-shadow: none !important;
-            text-shadow: none !important;
-        }
-
-        a,
-        a:visited {
-            text-decoration: underline;
-        }
-
-        a[href]::after {
-            content: " (" attr(href) ")";
-        }
-
-        abbr[title]::after {
-            content: " (" attr(title) ")";
-        }
-
-        a[href^="#"]::after,
-        a[href^="javascript:"]::after {
-            content: "";
-        }
-
-        pre {
-            white-space: pre-wrap !important;
-        }
-
-        pre,
-        blockquote {
-            border: 1px solid #999;
-            page-break-inside: avoid;
-        }
-
-        tr,
-        img {
-            page-break-inside: avoid;
-        }
-
-        p,
-        h2,
-        h3 {
-            orphans: 3;
-            widows: 3;
-        }
-
-        h2,
-        h3 {
-            page-break-after: avoid;
-        }
+    *::before,
+    *::after {
+        background: #fff !important;
+        color: #000 !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
     }
 
-    /* Header
-     * ========================================================================== */
+    a,
+    a:visited {
+        text-decoration: underline;
+    }
 
-nav {
-    height: 60px;
-    display: flex;
-    align-items: center;
-    background-color: #0f1111;
+    a[href]::after {
+        content: " (" attr(href) ")";
+    }
+
+    abbr[title]::after {
+        content: " (" attr(title) ")";
+    }
+
+    a[href^="#"]::after,
+    a[href^="javascript:"]::after {
+        content: "";
+    }
+
+    pre {
+        white-space: pre-wrap !important;
+    }
+
+    pre,
+    blockquote {
+        border: 1px solid #999;
+        page-break-inside: avoid;
+    }
+
+    tr,
+    img {
+        page-break-inside: avoid;
+    }
+
+    p,
+    h2,
+    h3 {
+        orphans: 3;
+        widows: 3;
+    }
+
+    h2,
+    h3 {
+        page-break-after: avoid;
+    }
+}
+
+
+/* Amazon-like header styles (mobile-first)
+    Full-bleed header: apply visual background to the header element
+    and keep the header content centred. */
+#site-header {
+    /* Use the site's accent colour for a cohesive header look and expose
+       a CSS variable for header height so other elements can align to it. */
+    --header-height: 1.9rem;
+    /* reduced for a shorter, tighter header */
+    /* compact header with a lighter top so inline SVG/logo text remains readable */
+    background: linear-gradient(180deg,
+            color-mix(in srgb, var(--color-accent) 72%, white 28%),
+            color-mix(in srgb, var(--color-accent) 60%, black 40%));
     color: white;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-accent) 20%, black);
 }
 
-.nav-left {
+/* Consolidated .site-nav block: grouped rules for layout, logo, search and cart
+   This single block replaces fragmented header rules and ensures predictable
+   ordering for cascade overrides and media queries. */
+.site-nav {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: calc(var(--space-xxs));
+    align-items: center;
+    padding: 0.26rem var(--space-sm);
+    border-bottom: 1px solid var(--color-border);
+    background: color-mix(in srgb, var(--color-accent) 4%, transparent);
+    font-size: 0.9rem;
+    line-height: 1.02;
+    min-height: 44px;
+}
+
+.site-nav .nav-left,
+.site-nav .nav-center,
+.site-nav .nav-right {
     display: flex;
     align-items: center;
-    justify-content: center;
-    margin-left: .5rem;
+    white-space: nowrap;
 }
 
-.nav-logo img {
-    width: 100px;
-    padding: .5rem;
+.site-nav .nav-left {
+    gap: calc(var(--space-xxs));
+    min-width: 64px;
 }
 
-.nav-logo:hover {
-    outline: 1px solid white;
-}
-
-.location {
-    height: 100%;
-    font-size: .7rem;
-    padding: .5rem 1rem;
-}
-
-.location:hover {
-    outline: 1px solid white;
-}
-
-.location-icon {
-    display: flex;
+.site-nav .nav-left .all-logo,
+.site-nav .logo {
+    display: inline-flex;
     align-items: center;
+    gap: 0.28rem;
+    padding: 0.02rem 0.35rem;
+    border-radius: 0.4rem;
+    background: rgba(255, 255, 255, 0.95);
+    color: color-mix(in srgb, var(--color-accent) 70%, black);
+    text-decoration: none;
+}
+
+@media (prefers-color-scheme: dark) {
+
+    .site-nav .logo,
+    .site-nav .all-logo {
+        background: rgba(0, 0, 0, 0.45);
+        color: white;
+    }
+}
+
+.site-nav .logo img,
+.site-nav .all-logo img {
+    /* slightly tighter default logo sizing for a lower header footprint */
+    max-height: 30px;
+    width: auto;
+    height: auto;
+}
+
+/* Responsive logo sizing: increase modestly on larger viewports while keeping
+   the header compact and consistent. */
+@media (min-width: 640px) {
+
+    .site-nav .logo img,
+    .site-nav .all-logo img {
+        max-height: 34px;
+    }
+}
+
+@media (min-width: 900px) {
+
+    .site-nav .logo img,
+    .site-nav .all-logo img {
+        max-height: 38px;
+    }
+}
+
+@media (min-width: 1200px) {
+
+    .site-nav .logo img,
+    .site-nav .all-logo img {
+        max-height: 44px;
+    }
 }
 
 .nav-center {
-    height: 40px;
+    flex: 2 1 280px;
+    gap: 0.35rem;
+    width: 100%;
+}
+
+/* site-search (centre) */
+.site-search {
     display: flex;
-    flex-grow: 1;
-    border-radius: 5px;
-    margin-left: 1rem;
+    gap: 0.4rem;
+    align-items: center;
+    width: 100%;
 }
 
-.nav-center:hover {
-    outline: 2px solid rgb(232, 176, 73);
+.site-search .search-dropdown {
+    flex: 0 0 130px;
+    box-sizing: border-box;
+    appearance: none;
+    -webkit-appearance: none;
+    border: 1px solid var(--color-border);
+    padding: 0 0.6rem;
+    border-radius: 6px;
+    background: white;
+    font-size: 0.95rem;
+    /* ensure selected value is readable (header sets color: white) */
+    color: var(--color-text);
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
 }
 
-.search-dropdown {
-    width: 5rem;
-    font-size: 1rem;
-    background-color: rgb(210, 208, 208);
-    padding: .5rem;
-    border-radius: 5px 0 0 5px;
-    outline: none;
+.site-search .search-box {
+    flex: 1 1 auto;
+    min-width: 0;
+    box-sizing: border-box;
+    padding: 0 0.6rem;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    line-height: 1.1;
+    height: 36px;
+    display: flex;
+    align-items: center;
 }
 
-.search-dropdown:focus {
-    outline: none;
+/* Ensure inputs inside the header use the page text colour instead of
+   inheriting the header's white colour. This keeps placeholder and value
+   readable across browsers. */
+.site-search .search-box,
+.site-search .search-box::placeholder {
+    color: var(--color-text);
 }
 
-.search-box {
-    font-size: 1rem;
-    flex-grow: 1;
-    padding: .5rem;
+/* Options in native select elements are limited to UA styling in some
+   browsers, but setting option colour helps in many desktop browsers. */
+.site-search .search-dropdown option {
+    color: var(--color-text);
+    background: white;
 }
 
-.search-box:focus {
-    outline: none;
+/* Make the search icon/button use a contrasting foreground colour against
+   the light highlight background */
+.site-search .search-icon {
+    color: #111;
 }
 
-.search-icon i {
-    height: 100%;
-    background-color: rgba(255, 203, 105, 0.849);
-    border-radius: 0 5px 5px 0;
-    padding: .7rem .5rem;
-    outline: none;
+.site-search .search-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-highlight);
+    border: 1px solid var(--color-border);
+    padding: 0.18rem;
+    border-radius: 6px;
+}
+
+/* Icon sizing and accessibility-friendly targets */
+svg[aria-hidden="true"] {
+    display: inline-block;
+    fill: currentColor;
+    max-height: 20px;
+    width: auto;
+}
+
+.site-nav .search-icon,
+.site-nav .cart-option,
+.site-nav .all-logo {
+    min-height: 32px;
+    min-width: 32px;
+    height: 36px;
 }
 
 .nav-right {
-    display: flex;
-    align-items: center;
-    margin: 0 1rem;
-}
-
-.language-option {
-    display: flex;
-    padding: .5rem .5rem;
-}
-
-.language-option:hover {
-    outline: 1px solid white;
-}
-
-.flag {
-    width: 20px;
-}
-
-.select-language {
-    font-size: .7rem;
-    font-weight: bold;
-    color: white;
-    background: transparent;
-    border: none;
-}
-
-.select-language option {
-    color: black;
-}
-
-.account-option {
-    padding: .5rem .5rem;
-}
-
-.account-option:hover {
-    outline: 1px solid white;
-}
-
-.account-option .top-text {
-    font-size: .5rem;
-    margin-left: 5px;
-}
-
-.select-account {
-    font-size: .7rem;
-    font-weight: bold;
-    background: transparent;
-    color: white;
-    border: none;
-}
-
-.order-option {
-    padding: .5rem .5rem;
-}
-
-.order-option:hover {
-    outline: 1px solid white;
-}
-
-.order-option .top-text {
-    font-size: .5rem;
-}
-
-.order-option .bottom-text {
-    font-size: .7rem;
-    font-weight: bold;
+    flex: 1 1 160px;
+    justify-content: flex-end;
+    gap: var(--space-xs);
 }
 
 .cart-option {
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    font-size: 0.8rem;
+    gap: 0.5rem;
+    background: transparent;
+    padding: 0.08rem 0.35rem;
+    border-radius: 6px;
+    color: var(--color-text);
+    text-decoration: none;
+}
+
+/* Hide the word 'Cart' on smaller viewports to reduce header width/height
+   while keeping an accessible cart icon. Reveal on wider screens. */
+.cart-text {
+    display: none;
+}
+
+@media (min-width: 900px) {
+    .cart-text {
+        display: inline;
+        font-weight: 600;
+        margin-right: 0.25rem;
+    }
+}
+
+.cart-option .cart-count {
+    background: var(--color-accent);
+    color: #fff;
+    padding: 0 0.45rem;
+    border-radius: var(--radius-full);
     font-weight: 700;
-    padding: .5rem .5rem;
 }
 
-.cart-option:hover {
-    outline: 1px solid white;
+@media (max-width: 640px) {
+    .nav-center {
+        order: 3;
+        flex-basis: 100%;
+        gap: .4rem;
+    }
+
+    .nav-right {
+        order: 2;
+        flex-basis: auto;
+    }
+
+    .nav-left {
+        order: 1;
+    }
+
 }
 
-.cart-logo i {
-    width: 20px;
-}
 
-.nav-options {
-    height: 42px;
-    display: flex;
+/* header-top legacy comments removed */
+
+/* Logo container backdrop for guaranteed legibility and visual polish */
+.site-nav .logo {
+    display: inline-flex;
     align-items: center;
-    background-color: #222f3d;
-    color: white;
-    justify-content: start;
-
+    gap: 0.4rem;
+    padding: 0.08rem 0.5rem;
+    border-radius: 0.5rem;
+    background: rgba(255, 255, 255, 0.9);
+    color: color-mix(in srgb, var(--color-accent) 70%, black);
+    text-decoration: none;
 }
 
-.nav-options * {
+@media (prefers-color-scheme: dark) {
+    .site-nav .logo {
+        background: rgba(0, 0, 0, 0.45);
+        color: white;
+    }
+}
+
+/* Ensure search controls share a consistent, compact height and align visually */
+.site-search .search-dropdown,
+.site-search .search-box,
+.site-search .search-icon {
+    height: 36px;
+    box-sizing: border-box;
+}
+
+.site-search .search-box {
+    padding: 0 0.6rem;
+    /* horizontal padding; vertical spacing comes from height */
+}
+
+/* Make interactive header elements show a clear focus ring for keyboard users */
+.site-nav a:focus-visible,
+.site-nav button:focus-visible,
+.site-nav select:focus-visible,
+.site-nav input:focus-visible {
+    outline: 3px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
+    outline-offset: 2px;
+}
+
+/* Reduce visible cart text on tiny screens to keep header compact */
+@media (max-width: 420px) {
+    .cart-option .cart-text {
+        display: none;
+    }
+
+    .site-search .search-dropdown {
+        flex: 0 0 110px;
+    }
+}
+
+/* Slight spacing refinement for large viewports */
+@media (min-width: 1200px) {
+    .site-nav {
+        gap: var(--space-sm);
+        padding-inline: var(--space-md);
+    }
+
+    .site-search .search-dropdown {
+        flex: 0 0 160px;
+    }
+
+    .site-nav .logo img {
+        max-height: 56px;
+    }
+}
+
+@media (max-width: 640px) {
+    .skip-link {
+        font-size: 0.72rem;
+    }
+
+    .skip-link:focus,
+    .skip-link:focus-visible {
+        /* Use slightly different placement on small screens when focused. */
+        position: absolute;
+        left: calc(var(--space-xs) + 0.25rem);
+        top: calc(var(--header-height, 3.25rem));
+        outline: 2px solid color-mix(in srgb, var(--color-accent) 80%, white);
+        transform: translateY(-1px);
+    }
+
+    /* legacy .header-top references removed */
+}
+
+/* Small screens: reduce header padding so content uses more horizontal room */
+@media (max-width: 480px) {
+    .site-nav {
+        padding-inline: calc(var(--space-xs) / 2);
+        gap: 0.25rem;
+    }
+
+    .site-nav .nav-left {
+        min-width: 70px;
+    }
+}
+
+/* Footer — responsive, compact and tidy */
+/* Footer theming — prefer site variables so header/footer match */
+.site-footer,
+footer[itemscope][itemtype*="WPFooter"] {
+    --footer-bg: color-mix(in srgb, var(--color-accent) 18%, black 6%);
+    --footer-text: #fff;
+    --footer-accent-outline: color-mix(in srgb, var(--color-accent) 36%, transparent);
+    background: var(--footer-bg);
+    color: var(--footer-text);
+    padding: calc(var(--space-sm) * 1) var(--space-md);
+}
+
+/* Use an inner container grid with controlled column widths so the footer
+   remains compact rather than evenly stretched. */
+.site-footer .container,
+footer[itemscope][itemtype*="WPFooter"] .container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 240px;
+    gap: calc(var(--space-sm) / 1.2);
+    align-items: start;
+    max-width: var(--max-width);
+}
+
+.site-footer h3,
+footer[itemscope][itemtype*="WPFooter"] h3 {
+    color: var(--footer-text);
+    margin: 0 0 0.25rem 0;
+    font-size: 1.05rem;
+    font-weight: 600;
+}
+
+.site-footer h4,
+footer[itemscope][itemtype*="WPFooter"] h4 {
+    color: var(--footer-text);
+    margin: 0 0 0.35rem 0;
+    font-size: 0.98rem;
+    font-weight: 600;
+}
+
+.site-footer p,
+.site-footer li,
+footer[itemscope][itemtype*="WPFooter"] p,
+footer[itemscope][itemtype*="WPFooter"] li {
+    color: color-mix(in srgb, var(--footer-text) 92%, var(--color-accent) 8%);
+    line-height: 1.35;
+    font-size: 0.95rem;
+}
+
+footer[itemscope][itemtype*="WPFooter"] ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+footer[itemscope][itemtype*="WPFooter"] li+li {
+    margin-top: calc(var(--space-xxs));
+}
+
+.site-footer a,
+footer[itemscope][itemtype*="WPFooter"] a {
+    color: var(--footer-text);
+    text-decoration: none;
+}
+
+.site-footer a:focus-visible,
+.site-footer a:hover,
+footer[itemscope][itemtype*="WPFooter"] a:focus-visible,
+footer[itemscope][itemtype*="WPFooter"] a:hover {
+    text-decoration: underline;
+    outline: 3px solid var(--footer-accent-outline);
+    outline-offset: 2px;
+}
+
+.site-footer .legal,
+footer[itemscope][itemtype*="WPFooter"] .legal {
+    font-size: 0.88rem;
+    opacity: 0.95;
+}
+
+/* Full-width legal bar that stretches across the viewport */
+.site-footer .legal-bar {
+    width: 100vw;
+    /* full viewport width */
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    box-sizing: border-box;
+    padding: calc(var(--space-sm)) var(--space-md);
+    background: color-mix(in srgb, var(--color-accent) 12%, black 4%);
+    color: var(--footer-text);
+    border-top: 1px solid color-mix(in srgb, var(--footer-text) 6%, transparent);
+    text-align: center;
+}
+
+.site-footer .legal-bar p {
+    margin: 0.25rem 0;
+    font-size: 0.95rem;
+}
+
+@media (max-width: 640px) {
+    .site-footer .legal-bar {
+        padding: calc(var(--space-xs)) var(--space-xs);
+        text-align: center;
+    }
+}
+
+/* Footer social icon / badge styles */
+.site-footer nav[aria-label="Social media links"] ul {
+    display: flex;
+    gap: calc(var(--space-xs));
+    align-items: center;
+}
+
+.site-footer nav[aria-label="Social media links"] a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 0.5rem;
+    color: var(--footer-text);
+    background: transparent;
+    transition: background var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+    text-decoration: none;
+}
+
+.site-footer nav[aria-label="Social media links"] a svg {
+    width: 20px;
+    height: 20px;
+    display: block;
+    fill: currentColor;
+}
+
+.site-footer nav[aria-label="Social media links"] a:focus-visible,
+.site-footer nav[aria-label="Social media links"] a:hover {
+    background: color-mix(in srgb, var(--color-accent) 18%, transparent);
+    color: #fff;
+    transform: translateY(-1px);
+    outline: 3px solid var(--footer-accent-outline);
+    outline-offset: 2px;
+}
+
+/* Small tweak for the GitHub icon in the legal block */
+.site-footer .legal a.github {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--footer-text);
+    text-decoration: none;
+}
+
+.site-footer .legal a.github svg {
+    fill: currentColor;
+    width: 18px;
+    height: 18px;
+}
+
+/* Footer logo sizing when using external image (keeps layout stable) */
+.footer-logo {
+    width: 120px;
+    height: auto;
+    display: inline-block;
+}
+
+/* Brand-specific hover/focus colours for footer social icons */
+.site-footer nav[aria-label="Social media links"] a.facebook {
+    color: #1877F2;
+}
+
+.site-footer nav[aria-label="Social media links"] a.facebook:focus-visible,
+.site-footer nav[aria-label="Social media links"] a.facebook:hover {
+    background: rgba(24, 119, 242, 0.12);
+    color: #fff;
+    outline-color: rgba(24, 119, 242, 0.36);
+}
+
+.site-footer nav[aria-label="Social media links"] a.instagram {
+    color: #E4405F;
+}
+
+.site-footer nav[aria-label="Social media links"] a.instagram:focus-visible,
+.site-footer nav[aria-label="Social media links"] a.instagram:hover {
+    background: linear-gradient(45deg, rgba(228, 64, 95, 0.12), rgba(252, 175, 69, 0.12));
+    color: #fff;
+    outline-color: rgba(228, 64, 95, 0.36);
+}
+
+.site-footer .legal a.github {
+    color: var(--footer-text);
+}
+
+.site-footer .legal a.github:focus-visible,
+.site-footer .legal a.github:hover {
+    color: #6e5494;
+    background: transparent;
+    outline-color: rgba(110, 84, 148, 0.36);
+}
+
+/* Ensure the small 'view all' band also uses site variables */
+footer#view-all {
+    background: transparent;
+    padding: calc(var(--space-xs) / 1.3) var(--space-md);
+    text-align: center;
+    font-size: 0.95rem;
+}
+
+/* Compact 'view all' band: centre the link and keep small padding */
+footer#view-all {
+    background: transparent;
+    padding: calc(var(--space-xs) / 1.3) var(--space-md);
+    text-align: center;
+    font-size: 0.95rem;
+}
+
+@media (max-width: 880px) {
+    footer[itemscope][itemtype*="WPFooter"] .container {
+        grid-template-columns: 1fr;
+        gap: var(--space-sm);
+    }
+}
+
+/* Medium-small screens (denser two-column quick-links) */
+@media (min-width: 480px) and (max-width: 640px) {
+
+    .site-footer .container,
+    footer[itemscope][itemtype*="WPFooter"] .container {
+        grid-template-columns: 1fr 320px;
+        gap: var(--space-sm);
+        align-items: start;
+    }
+
+    /* Make quick links denser: two-column mini-grid inside the links panel */
+    .site-footer .links-grid ul {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.2rem 0.6rem;
+        align-items: start;
+    }
+
+    /* Slightly reduce font-size in the compact link grid for density */
+    .site-footer .links-grid a {
+        font-size: 0.92rem;
+        padding: 0.15rem 0.2rem;
+        display: inline-block;
+    }
+}
+
+/* Visual separators for stacked quick-links (helpful on vertical stacks) */
+.site-footer .links-grid ul li {
+    padding-inline: 0.2rem;
+}
+
+.site-footer .links-grid ul li+li {
+    border-top: 1px solid color-mix(in srgb, var(--footer-text) 6%, transparent);
+    margin-top: 0.35rem;
+    padding-top: 0.45rem;
+}
+
+/* Accordion toggle styling */
+.accordion-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: transparent;
+    color: var(--footer-text);
+    border: 0;
+    padding: 0;
+    font: inherit;
     cursor: pointer;
 }
 
-.all-logo {
+.accordion-toggle::after {
+    content: '\25be';
+    /* small down caret */
+    display: inline-block;
+    transform-origin: center;
+    transition: transform var(--transition-fast) ease;
+    font-size: 0.85rem;
+}
+
+.accordion-toggle[aria-expanded="true"]::after {
+    transform: rotate(-180deg);
+}
+
+/* Accordion panel collapsed state for very small screens */
+.links-grid[aria-hidden="true"] {
+    display: none !important;
+}
+
+/* When visible, ensure full-width list on small screens */
+@media (max-width: 480px) {
+    .accordion-toggle {
+        width: 100%;
+        justify-content: center;
+        padding: 0.2rem 0;
+    }
+
+    .site-footer .links-grid ul li+li {
+        border-top: 1px solid color-mix(in srgb, var(--footer-text) 6%, transparent);
+        margin-top: 0.15rem;
+        padding-top: 0.35rem;
+    }
+}
+
+/* Very small screens: compact, stacked footer layout */
+@media (max-width: 480px) {
+
+    .site-footer,
+    footer[itemscope][itemtype*="WPFooter"] {
+        padding: calc(var(--space-xs) / 1.2) var(--space-xs);
+    }
+
+    .site-footer .container,
+    footer[itemscope][itemtype*="WPFooter"] .container {
+        grid-template-columns: 1fr;
+        gap: var(--space-sm);
+        align-items: center;
+        text-align: center;
+    }
+
+    /* Centre brand and description */
+    .site-footer h3,
+    .site-footer p[itemprop="description"] {
+        margin-inline: auto;
+        text-align: center;
+    }
+
+    /* Stack quick links vertically and make them easier to tap */
+    .site-footer nav[aria-label="Quick links"] ul {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-xxs);
+        align-items: center;
+        padding-top: var(--space-xs);
+    }
+
+    .site-footer nav[aria-label="Quick links"] a {
+        display: inline-block;
+        padding: 0.25rem 0.5rem;
+        width: 100%;
+        max-width: 220px;
+    }
+
+    /* Centre social icons and increase tappable area */
+    .site-footer nav[aria-label="Social media links"] ul {
+        justify-content: center;
+        gap: var(--space-xs);
+        padding-top: var(--space-xs);
+    }
+
+    .site-footer nav[aria-label="Social media links"] a {
+        width: 40px;
+        height: 40px;
+    }
+
+    /* Legal block: tighten spacing and centre */
+    .site-footer .legal {
+        text-align: center;
+        padding-top: var(--space-sm);
+    }
+
+    .site-footer .legal p {
+        margin: 0.08rem 0;
+        font-size: 0.9rem;
+    }
+
+    /* Compact view-all band */
+    footer#view-all {
+        padding: calc(var(--space-xxs) / 1.2) var(--space-xs);
+        font-size: 0.92rem;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+
+    /* Dark theme: provide explicit footer variable overrides so the footer
+       matches the site's dark theming and yields stronger contrast. */
+    .site-footer,
+    footer[itemscope][itemtype*="WPFooter"] {
+        /* Slightly more pronounced accent mix against a darker base */
+        --footer-bg: color-mix(in srgb, var(--color-accent) 22%, black 28%);
+        /* Off-white text improves legibility against the darker background */
+        --footer-text: #f7fbf7;
+        /* Stronger accent for focus outlines in dark mode */
+        --footer-accent-outline: color-mix(in srgb, var(--color-accent) 48%, transparent);
+        background: var(--footer-bg);
+        color: var(--footer-text);
+    }
+
+    /* Preserve other site dark-mode rules elsewhere in the file. */
+}
+
+/* Removed unused ID-based search rules (#search-form, #search-select) in favour of
+    `.site-search` and `.search-dropdown`/`.search-box` which are used in markup. */
+
+
+/* Keep the search CTA styling minimal — primary visual styles are provided
+    by .site-search .search-icon and .site-search .search-box above. */
+
+.header-actions {
     display: flex;
+    gap: var(--space-sm);
     align-items: center;
-    gap: .3rem;
-    padding: .5rem;
-    margin-left: 2rem;
 }
 
-.all-logo:hover {
-    outline: 1px solid white;
+.nav-link {
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.9rem;
+    padding: 0.25rem 0.5rem;
 }
 
-.nav-options .options {
-    display: flex;
+.nav-link:focus,
+.nav-link:hover {
+    background: rgba(255, 255, 255, 0.04);
+    outline: 2px solid rgba(255, 255, 255, 0.12);
+    border-radius: 4px;
 }
 
-.nav-options .options p {
-    padding: 0.5rem;
+/* Consolidated cart count styling is provided by .cart-option .cart-count earlier in the file. */
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+
+    /* hide the dropdown at small widths; selector targets class used in markup */
+    .site-search .search-dropdown {
+        display: none;
+    }
+
+    /* legacy header-top removed; no-op here to keep cascade safe */
+
+    .search-box {
+        font-size: 0.95rem;
+    }
+
+    .nav-link {
+        font-size: 0.8rem;
+    }
 }
 
-.nav-options .options p:hover {
-    outline: 1px solid white;
+@media (min-width: 900px) {
+    .search-box {
+        font-size: 1.05rem;
+    }
+}
+
+/* Larger screens: allow the header to breathe slightly but still use full viewport width */
+@media (min-width: 1200px) {
+    .site-nav {
+        padding-inline: var(--space-md);
+        gap: var(--space-sm);
+    }
+
+    .site-nav.container {
+        max-width: var(--max-width);
+    }
+}
+
+.theme-switch {
+    display: none;
 }

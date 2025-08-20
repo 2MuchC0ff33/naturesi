@@ -1,0 +1,16 @@
+# Commit message template (en-AU)
+# Use this as your repository commit template. It uses Australian English and present-tense verbs.
+# Example:
+#   fix(pages/about.html): remove malformed meta characters and close head tags
+#
+# Template:
+<type>(scope): short summary
+
+Detailed description (why), additional notes, and any manual review required.
+
+# Commit types (one-line convention)
+# fix — bug fix
+# feat — new feature
+# docs — documentation only changes
+# chore — maintenance tasks, tooling, or build changes
+# refactor — code changes that do not change behaviour

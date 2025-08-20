@@ -29,7 +29,7 @@ self.addEventListener('fetch', event => {
       console.error('Service Worker: Network fetch failed', error);
       // Only show offline page for navigation requests
       if (event.request.mode === 'navigate') {
-        return fetch('/offline.xhtml', { cache: 'no-store' }).catch(() => {
+        return fetch('/offline.html', { cache: 'no-store' }).catch(() => {
           return new Response('Offline - Network unavailable', {
             status: 503,
             statusText: 'Service Unavailable'
