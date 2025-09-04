@@ -186,7 +186,7 @@
 <body itemscope itemtype="https://schema.org/WebPage">
     <a class="skip-link visually-hidden focusable" href="#main-content">Skip to main content</a>
     <header id="site-header" role="banner">
-        <nav class="site-nav container" role="navigation" aria-label="Site navigation">
+        <nav class="site-nav" role="navigation" aria-label="Site navigation">
             <div class="nav-left">
                 <a class="logo" href="/" aria-label="Nature's Infusions home">
                     <img src="/assets/img/logo.svg" alt="Nature's Infusions logo">
@@ -194,16 +194,18 @@
             </div>
 
             <div class="nav-center">
-                <form class="site-search" action="/pages/store.html" method="get" role="search"
+                <form class="site-search" action="/pages/search.html" method="get" role="search"
                     aria-label="Search site">
-                    <label for="search-category" class="visually-hidden">Search category</label>
-                    <select id="search-category" name="category" class="search-dropdown" aria-label="Search category">
-                        <option value="all">Show All (24)</option>
-                        <option value="wellness-blends">Wellness Blends (5)</option>
+                    <label for="search-category" class="visually-hidden">Select a category</label>
+                    <select id="search-category" name="category" class="search-dropdown" aria-label="Select a category"
+                        onchange="window.location.href = '/pages/store.html#' + this.value;">
+                        <option value="">Select a category</option>
+                        <option value="">Show All</option>
+                        <option value="wellness-blends">Wellness Blends</option>
                         <option value="artisan-blends">Artisan Blends</option>
-                        <option value="herbal-infusions">Herbal Teas and Infusions (13)</option>
-                        <option value="black-tea">Black Tea (5)</option>
-                        <option value="green-tea">Green Tea (2)</option>
+                        <option value="herbal-infusions">Herbal Teas and Infusions</option>
+                        <option value="black-tea">Black Tea</option>
+                        <option value="green-tea">Green Tea</option>
                         <option value="ice-tea">Ice Tea</option>
                         <option value="balms">Herbal Balms</option>
                         <option value="creams">Herbal Creams</option>

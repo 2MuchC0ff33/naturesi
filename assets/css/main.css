@@ -1,3 +1,13 @@
+/* Category anchor for jump links (hidden, but accessible for navigation) */
+.category-anchor {
+    display: block;
+    height: 0;
+    width: 0;
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
 /* ==========================================================================
 Mobile-first E-commerce Base Styles
 Combines HTML5 Boilerplate v9.0.1 with modern enhancements
@@ -264,10 +274,6 @@ Modern Utilities
 /* Header-specific container adjustments: allow the header nav to use less inset
    so items can stretch closer to the viewport edges while other containers keep
    their standard padding. */
-.site-nav.container {
-    padding-inline: calc(var(--space-sm) / 2);
-    max-width: 100%;
-}
 
 /* Grid system */
 .grid {
@@ -638,9 +644,6 @@ svg[aria-hidden="true"] {
     }
 
 }
-
-
-/* header-top legacy comments removed */
 
 /* Logo container backdrop for guaranteed legibility and visual polish */
 .site-nav .logo {

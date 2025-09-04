@@ -8,7 +8,7 @@
   <Language>en-AU</Language>
   <Image height="16" width="16" type="image/png">/favicon-16x16.png</Image>
   <Image height="64" width="64" type="image/svg+xml">/assets/img/logo.svg</Image>
-  <Url type="text/html" method="get" template="/index.html?q={searchTerms}"/>
+  <Url type="text/html" method="get" template="/pages/search.html?q={searchTerms}"/>
   <Query role="example" searchTerms="herbal tea"/>
   <Developer>Solo Developer</Developer>
   <Attribution>Nature's Infusions – Ultra-Simple  Static EStore</Attribution>
