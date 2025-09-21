@@ -19,7 +19,7 @@
         content="organic tea, herbal infusion, naturopath, Perth, wellness, detox, chamomile, peppermint, turmeric">
     <meta name="author" content="Nature's Infusions">
     <meta name="copyright" content="© 2025 Nature's Infusions">
-    <meta name="generator" content="Ultra-Simple POSIX StaticEStore Framework">
+    <meta name="generator" content="Ultra-Simple StaticEStore Framework">
     <base href="/">
 
     <!-- SEO & Indexing -->
@@ -100,7 +100,7 @@
 
     <!-- Security Headers -->
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'">
+        content="default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; script-src-elem 'self' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://static.cloudflareinsights.com">
     <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="Strict-Transport-Security" content="max-age=63072000; includeSubDomains; preload">
@@ -113,58 +113,59 @@
 
     <!-- Structured Data -->
     <script type="application/ld+json">
-        {
-            "@context": "https://schema.org",
-            "@type": "Organization",
-            "@id": "https://www.naturesinfusions.com.au/#organization",
-            "name": "Nature's Infusions",
-            "url": "https://www.naturesinfusions.com.au/",
-            "logo": "https://www.naturesinfusions.com.au/assets/img/logo.svg",
-            "description": "Perth-based naturopath's passion project offering certified organic teas and herbal infusions",
-            "foundingDate": "2025",
-            "sameAs": [
-                "https://www.facebook.com/naturesinfusions.herbaltea/",
-                "https://www.instagram.com/natures_infusions_au/",
-                "https://au.linkedin.com/in/bree-gallo-75a81518a"
-            ],
-            "contactPoint": [
-                {
-                    "@type": "ContactPoint",
-                    "telephone": "+61 434 947 131",
-                    "contactType": "customer service",
-                    "email": "tea@naturesinfusions.com.au",
-                    "areaServed": "AU",
-                    "availableLanguage": "English"
-                }
-            ],
-            "address": {
-                "@type": "PostalAddress",
-                "streetAddress": "63 Meadowbrook Drive",
-                "addressLocality": "Parkwood",
-                "addressRegion": "WA",
-                "postalCode": "6147",
-                "addressCountry": "AU"
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://www.naturesinfusions.com.au/#organization",
+        "name": "Nature's Infusions",
+        "url": "https://www.naturesinfusions.com.au/",
+        "logo": "https://www.naturesinfusions.com.au/assets/img/logo.svg",
+        "description": "Perth-based naturopath's passion project offering certified organic teas and herbal infusions",
+        "foundingDate": "2025",
+        "sameAs": [
+            "https://www.facebook.com/naturesinfusions.herbaltea/",
+            "https://www.instagram.com/natures_infusions_au/",
+            "https://au.linkedin.com/in/bree-gallo-75a81518a"
+        ],
+        "contactPoint": [
+            {
+                "@type": "ContactPoint",
+                "telephone": "+61 434 947 131",
+                "contactType": "customer service",
+                "email": "tea@naturesinfusions.com.au",
+                "areaServed": "AU",
+                "availableLanguage": "English"
             }
+        ],
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "63 Meadowbrook Drive",
+            "addressLocality": "Parkwood",
+            "addressRegion": "WA",
+            "postalCode": "6147",
+            "addressCountry": "AU"
         }
-        </script>
+    }
+    </script>
 
     <script type="application/ld+json">
-            {
+    {
         "@context": "https://schema.org",
         "@type": "WebSite",
         "@id": "https://www.naturesinfusions.com.au/#website",
         "url": "https://www.naturesinfusions.com.au/",
         "name": "Nature's Infusions",
+        "publisher": { "@id": "https://www.naturesinfusions.com.au/#organization" },
         "potentialAction": {
             "@type": "SearchAction",
             "target": "https://www.naturesinfusions.com.au/search?q={search_term_string}",
             "query-input": "required name=search_term_string"
         }
     }
-        </script>
+    </script>
 
     <script type="application/ld+json">
-            {
+    {
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
         "itemListElement": [{
@@ -174,13 +175,8 @@
             "item": "https://www.naturesinfusions.com.au/"
         }]
     }
-        </script>
+    </script>
 
-    <!-- Site Search -->
-    <link rel="search" href="/opensearch.xml" type="application/opensearchdescription+xml"
-        title="Nature's Infusions Search">
-
-    <!-- Styling -->
     <link rel="stylesheet" href="/assets/css/main.css" type="text/css">
 
     <!-- Script Loading -->
@@ -188,38 +184,70 @@
 </head>
 
 <body itemscope itemtype="https://schema.org/WebPage">
-    <!-- Site Header with dialog-based mobile menu -->
-    <header id="site-header" itemscope itemtype="https://schema.org/Organization">
-        <div id="header">
-            <button id="menu-toggle" aria-haspopup="dialog" aria-controls="mobile-menu" aria-expanded="false">
-                <span aria-hidden="true">☰</span> <span>Menu</span>
-            </button>
-            <!-- site title: use non-heading so pages can use a single H1 for page title -->
-            <p class="site-title" id="business-name">
-                <a href="#home-page" itemprop="url"><span itemprop="name">Nature's Infusions</span></a>
-            </p>
-            <button id="cart" aria-label="Shopping cart with 0 items" type="button" aria-expanded="false">
-                <span aria-hidden="true">🛒</span> <span class="cart-count">Cart (<span>0</span>)</span>
-            </button>
-        </div>
+    <a class="skip-link visually-hidden focusable" href="#main-content">Skip to main content</a>
+    <header id="site-header" role="banner">
+        <nav class="site-nav" role="navigation" aria-label="Site navigation">
+            <div class="nav-left">
+                <a class="logo" href="/" aria-label="Nature's Infusions home">
+                    <img src="/assets/img/logo.svg" alt="Nature's Infusions logo">
+                </a>
+            </div>
 
-        <dialog id="mobile-menu" aria-labelledby="menu-heading">
-            <h2 id="menu-heading">Main Menu</h2>
-            <nav id="site-navigation" aria-label="Main" itemscope itemtype="https://schema.org/SiteNavigationElement">
-                <ul>
-                    <li itemprop="name"><a href="#home-page" itemprop="url">Home</a></li>
-                    <li itemprop="name"><a href="pages/store.html" itemprop="url">Online Store</a></li>
-                    <li itemprop="name"><a href="pages/about.html" itemprop="url">About Us</a></li>
-                    <li itemprop="name"><a href="pages/stockists.html" itemprop="url">Find Stockists</a></li>
-                    <li itemprop="name"><a href="pages/contact.html" itemprop="url">Contact Us</a></li>
-                    <li itemprop="name"><a href="pages/social.html" itemprop="url">Find Us on Socials</a></li>
-                    <li itemprop="name"><a href="pages/terms.html" itemprop="url">Terms and Conditions</a></li>
-                </ul>
-            </nav>
-            <button onclick="this.closest('dialog').close()" aria-label="Close menu">✕ Close</button>
-        </dialog>
+<div class="nav-center">
+    
+        <nav aria-label="Browse by category" class="category-dropdown">
+        <details>
+            <summary aria-haspopup="listbox" role="button">Select a category ▾</summary>
+            <ul style="list-style: none; padding: 0; margin: 0;">
+                <li><a href="/pages/store.html#wellness-blends">Wellness Blends</a></li>
+                <li><a href="/pages/store.html#herbal-infusions">Herbal Infusions</a></li>
+                <li><a href="/pages/store.html#black-tea">Black Tea</a></li>
+                <li><a href="/pages/store.html#green-tea">Green Tea</a></li>
+                <li><a href="/pages/store.html#balms">Balms</a></li>
+                <li><a href="/pages/store.html#creams">Creams</a></li>
+                <li><a href="/pages/store.html#selfcare">Self Care</a></li>
+                <li><a href="/pages/store.html#accessories">Accessories</a></li>
+                <li><a href="/pages/store.html#ice-tea">Ice Tea</a></li>
+                <li><a href="/pages/store.html#artisan-blends">Artisan Blends</a></li>
+            </ul>
+        </details>
+    </nav>
+    
+    <form class="site-search" action="/pages/search.html" method="get" role="search" aria-label="Search site">
+        <label for="site-search" class="visually-hidden">Search Nature's Infusions</label>
+        <input id="site-search" name="q" type="search" placeholder="Search Nature's Infusions" class="search-box" aria-label="Search site">
+        <button class="search-icon" type="submit" aria-label="Submit search">
+            <!-- inline svg magnifier -->
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true" focusable="false">
+                <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79L20 21.49 21.49 20l-5.99-6zM4 9.5a5.5 5.5 0 1111 0 5.5 5.5 0 01-11 0z"
+                    fill="currentColor" />
+            </svg>
+        </button>
+    </form>
 
-        <a href="#main-content" class="skip-link visually-hidden focusable">Skip to main content</a>
+</div>
+
+            <div class="nav-right">
+                <a class="cart-option" href="/pages/cart.html" aria-label="Cart" role="link">
+                    <div class="cart-logo" aria-hidden="true">
+                        <!-- inline svg cart -->
+                        <svg width="20" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                            aria-hidden="true" focusable="false">
+                            <!-- Simple cart shape (rectangle body + wheels) -->
+                            <rect x="3" y="4" width="14" height="10" rx="1" stroke="currentColor" stroke-width="1.25"
+                                fill="none" />
+                            <path d="M7 4L6 2H3" stroke="currentColor" stroke-width="1.25" fill="none" />
+                            <circle cx="8.5" cy="17.5" r="1.25" fill="currentColor" />
+                            <circle cx="17.5" cy="17.5" r="1.25" fill="currentColor" />
+                        </svg>
+                    </div>
+                    <span class="cart-text">Cart</span>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+        </nav>
+    </header>
 
         <!-- Main landmark for page content -->
         <main id="main-content" role="main">
@@ -277,24 +305,23 @@
     <!-- Category Filter -->
     <section id="category-filter">
         <h2>Browse by Category</h2>
-        <form id="filter-form">
-            <fieldset id="category-dropdown">
-                <legend>Categories</legend>
-                <label for="category-select">Select category:</label>
-                <select id="category-select" name="category">
-                    <option value="all">Show All (24)</option>
-                    <option value="wellness-blends">Wellness Blends (5)</option>
-                    <option value="artisan-blends">Artisan Blends (?)</option>
-                    <option value="herbal-infusions">Herbal Teas and Infusions (13)</option>
-                    <option value="black-tea">Black Tea (5)</option>
-                    <option value="green-tea">Green Tea (2)</option>
-                    <option value="ice-tea">Ice Tea (?)</option>
-                    <option value="balms">Herbal Balms (?)</option>
-                    <option value="creams">Herbal Creams (?)</option>
-                    <option value="selfcare">Self Care (?)</option>
-                    <option value="accessories">Accessories (?)</option>
-                </select>
-            </fieldset>
+        <nav aria-label="Browse by category" class="category-dropdown">
+        <details>
+            <summary aria-haspopup="listbox" role="button">Select a category ▾</summary>
+            <ul style="list-style: none; padding: 0; margin: 0;">
+                <li><a href="/pages/store.html#wellness-blends">Wellness Blends</a></li>
+                <li><a href="/pages/store.html#herbal-infusions">Herbal Infusions</a></li>
+                <li><a href="/pages/store.html#black-tea">Black Tea</a></li>
+                <li><a href="/pages/store.html#green-tea">Green Tea</a></li>
+                <li><a href="/pages/store.html#balms">Balms</a></li>
+                <li><a href="/pages/store.html#creams">Creams</a></li>
+                <li><a href="/pages/store.html#selfcare">Self Care</a></li>
+                <li><a href="/pages/store.html#accessories">Accessories</a></li>
+                <li><a href="/pages/store.html#ice-tea">Ice Tea</a></li>
+                <li><a href="/pages/store.html#artisan-blends">Artisan Blends</a></li>
+            </ul>
+        </details>
+    </nav>
 
             <fieldset id="sort-options">
                 <legend>Sort options</legend>
@@ -316,13 +343,20 @@
         </form>
     </section>
     </section>
-
-    <!-- Product Catalog - HTML5 -->
+    
+        <!-- Product Catalog - HTML5 -->
     <section id="product-catalog" itemscope itemtype="https://schema.org/ItemList" aria-labelledby="catalog-heading">
         <h2 id="catalog-heading">Product Catalog</h2>
         <a id="all" class="category-anchor"></a>
-        <a id="wellness-blends" class="category-anchor"></a>
-        <a id="enchanted-turmeric" class="product-anchor"></a>
+          <!-- Category Sections -->
+<section id="store-page" aria-labelledby="store-heading">
+<h2 id="store-heading">Our products</h2>
+<!-- Wellness Blends -->
+<a id="wellness-blends" class="category-anchor"></a>
+<section>
+<h3>Wellness Blends</h3>
+<!-- List Wellness Blends products here -->
+<a id="enchanted-turmeric" class="product-anchor"></a>
         <article id="enchanted-turmeric" class="product" itemprop="itemListElement" itemscope
             itemtype="https://schema.org/Product">
             <header>
@@ -345,11 +379,11 @@
                 <div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                     <link itemprop="availability" href="https://schema.org/InStock">
                     <meta itemprop="priceCurrency" content="AUD">
-                    <p>✓ <span itemprop="itemCondition">In Stock</span></p>
+                    <p>&#10003; <span itemprop="itemCondition">In Stock</span></p>
                 </div>
 
                 <div class="reviews" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
-                    <span aria-hidden="true">★★★★★</span>
+                    <span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
                     <span>(<span itemprop="ratingCount">12</span> reviews, Rating: <span
                             itemprop="ratingValue">5</span>/5)</span>
                 </div>
@@ -438,11 +472,11 @@
                 <div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                     <link itemprop="availability" href="https://schema.org/InStock">
                     <meta itemprop="priceCurrency" content="AUD">
-                    <p>✓ <span itemprop="itemCondition">In Stock</span></p>
+                    <p>&#10003; <span itemprop="itemCondition">In Stock</span></p>
                 </div>
 
                 <div class="reviews" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
-                    <span aria-hidden="true">★★★★</span>
+                    <span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;</span>
                     <span>(<span itemprop="ratingCount">5</span> reviews, Rating: <span
                             itemprop="ratingValue">4</span>/5)</span>
                 </div>
@@ -537,11 +571,11 @@
                 <div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                     <link itemprop="availability" href="https://schema.org/InStock">
                     <meta itemprop="priceCurrency" content="AUD">
-                    <p>✓ <span itemprop="itemCondition">In Stock</span></p>
+                    <p>&#10003; <span itemprop="itemCondition">In Stock</span></p>
                 </div>
 
                 <div class="reviews" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
-                    <span aria-hidden="true">★★★★★</span>
+                    <span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
                     <span>(<span itemprop="ratingCount">6</span> reviews, Rating: <span
                             itemprop="ratingValue">5</span>/5)</span>
                 </div>
@@ -636,11 +670,11 @@
                 <div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                     <link itemprop="availability" href="https://schema.org/InStock">
                     <meta itemprop="priceCurrency" content="AUD">
-                    <p>✓ <span itemprop="itemCondition">In Stock</span></p>
+                    <p>&#10003; <span itemprop="itemCondition">In Stock</span></p>
                 </div>
 
                 <div class="reviews" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
-                    <span aria-hidden="true">★★★★★</span>
+                    <span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
                     <span>(<span itemprop="ratingCount">20</span> reviews, Rating: <span
                             itemprop="ratingValue">5</span>/5)</span>
                 </div>
@@ -730,11 +764,11 @@
                 <div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                     <link itemprop="availability" href="https://schema.org/OutOfStock">
                     <meta itemprop="priceCurrency" content="AUD">
-                    <p>⚑ <span itemprop="itemCondition">Out of Stock</span></p>
+                    <p>&#10007; <span itemprop="itemCondition">Out of Stock</span></p>
                 </div>
 
                 <div class="reviews" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
-                    <span aria-hidden="true">★★★</span>
+                    <span aria-hidden="true">&#9733;&#9733;&#9733;</span>
                     <span>(<span itemprop="ratingCount">3</span> reviews, Rating: <span
                             itemprop="ratingValue">3</span>/5)</span>
                 </div>
@@ -798,11 +832,11 @@
                 <div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                     <link itemprop="availability" href="https://schema.org/OutOfStock">
                     <meta itemprop="priceCurrency" content="AUD">
-                    <p>⚑ <span itemprop="itemCondition">Out of Stock</span></p>
+                    <p>&#10007; <span itemprop="itemCondition">Out of Stock</span></p>
                 </div>
 
                 <div class="reviews" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
-                    <span aria-hidden="true">★★★★</span>
+                    <span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;</span>
                     <span>(<span itemprop="ratingCount">1</span> review, Rating: <span
                             itemprop="ratingValue">4</span>/5)</span>
                 </div>
@@ -872,11 +906,11 @@
                 <div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                     <link itemprop="availability" href="https://schema.org/InStock">
                     <meta itemprop="priceCurrency" content="AUD">
-                    <p>✓ <span itemprop="itemCondition">In Stock</span></p>
+                    <p>&#10003; <span itemprop="itemCondition">In Stock</span></p>
                 </div>
 
                 <div class="reviews" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
-                    <span aria-hidden="true">★★★★</span>
+                    <span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;</span>
                     <span>(<span itemprop="ratingCount">1</span> review, Rating: <span
                             itemprop="ratingValue">4</span>/5)</span>
                 </div>
@@ -948,6 +982,831 @@
                 </details>
             </footer>
         </article>
+                <a id="product-winter" class="product-anchor"></a>
+        <article id="product-winter" class="product" itemprop="itemListElement" itemscope
+            itemtype="https://schema.org/Product">
+            <header>
+                <figure class="product-gallery">
+                    <picture>
+                        <source srcset="assets/img/winterwellness1.webp" type="image/webp">
+                        <img src="assets/img/winterwellness1.webp" alt="Winter Wellness Tea" width="300" height="300"
+                            loading="lazy" itemprop="image">
+                    </picture>
+                    <picture>
+                        <source srcset="assets/img/winterwellness2.webp" type="image/webp">
+                        <img src="assets/img/winterwellness2.webp" alt="Winter Wellness Tea Package" width="300"
+                            height="300" loading="lazy" itemprop="image">
+                    </picture>
+                    <figcaption>Product images</figcaption>
+                </figure>
+
+                <h3 itemprop="name">Winter Wellness</h3>
+
+                <div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                    <link itemprop="availability" href="https://schema.org/InStock">
+                    <meta itemprop="priceCurrency" content="AUD">
+                    <p>&#10003; <span itemprop="itemCondition">In Stock</span></p>
+                </div>
+
+                <div class="reviews" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
+                    <span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                    <span>(<span itemprop="ratingCount">6</span> reviews, Rating: <span
+                            itemprop="ratingValue">5</span>/5)</span>
+                </div>
+            </header>
+
+            <section class="product-description" itemprop="description">
+                <p>A comforting blend of ginger root, lemon balm, yarrow, and echinacea, thoughtfully crafted to offer
+                    gentle throat-soothing qualities and warmth. This soothing infusion is designed for comfort during
+                    colder months, making it an ideal companion for your seasonal wellness routine.</p>
+            </section>
+
+            <section class="product-ingredients" itemprop="nutrition" itemscope
+                itemtype="https://schema.org/NutritionInformation">
+                <h4>Ingredients</h4>
+                <p itemprop="ingredients">Ginger Root, Lemon Balm, Yarrow and
+                    Echinacea.</p>
+                <p><small>Sourced from multiple origins</small></p>
+            </section>
+
+            <form action="/add-to-cart" method="post" class="product-options">
+                <fieldset>
+                    <legend>Product Options</legend>
+
+                    <div class="package-options" role="radiogroup" aria-labelledby="package-label">
+                        <h4 id="package-label">Select Packaging</h4>
+
+                        <label>
+                            <input type="radio" name="package" value="pouch" checked itemprop="price" content="14.00"
+                                data-price="14.00">
+                            <span>$14.00 - 50 grams <small>(Pouch)</small></span>
+                        </label>
+
+                        <label>
+                            <input type="radio" name="package" value="cylinder" itemprop="price" content="22.00"
+                                data-price="22.00">
+                            <span>$22.00 - 70 grams <small>(Cylinder)</small></span>
+                        </label>
+                    </div>
+
+                    <div class="quantity-selector">
+                        <label for="qty-winter">Quantity:</label>
+                        <select id="qty-winter" name="quantity" min="1" max="10" required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+
+                    <output name="total-price" for="qty-winter package" class="total-price">
+                        Total: $14.00
+                    </output>
+
+                    <button type="submit" class="add-to-cart">Add to Cart</button>
+                </fieldset>
+            </form>
+
+            <footer class="product-disclaimer">
+                <details>
+                    <summary><small>Important Disclaimer</small></summary>
+                    <p itemprop="disambiguatingDescription">
+                        <small>This product is not intended to diagnose, treat, cure, or prevent any disease. Always
+                            consult
+                            with a healthcare provider before starting any new supplement or wellness regimen.</small>
+                    </p>
+                </details>
+            </footer>
+        </article>
+        </section>
+                    <!-- Herbal Infusions -->
+            <a id="herbal-infusions"></a>
+            <section>
+                <h3>Herbal Infusions</h3>
+                <a id="enchanted-turmeric" class="product-anchor"></a>
+        <article id="enchanted-turmeric" class="product" itemprop="itemListElement" itemscope
+            itemtype="https://schema.org/Product">
+            <header>
+                <figure class="product-gallery">
+                    <picture>
+                        <source srcset="assets/img/enchantedturmeric1.webp" type="image/webp">
+                        <img src="assets/img/enchantedturmeric1.webp" alt="Enchanted Turmeric Dream Tea" width="300"
+                            height="300" loading="lazy" itemprop="image">
+                    </picture>
+                    <picture>
+                        <source srcset="assets/img/enchantedturmeric2.webp" type="image/webp">
+                        <img src="assets/img/enchantedturmeric2.webp" alt="Enchanted Turmeric Dream Tea Package"
+                            width="300" height="300" loading="lazy" itemprop="image">
+                    </picture>
+                    <figcaption>Product images</figcaption>
+                </figure>
+
+                <h3 itemprop="name">Enchanted Turmeric</h3>
+
+                <div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                    <link itemprop="availability" href="https://schema.org/InStock">
+                    <meta itemprop="priceCurrency" content="AUD">
+                    <p>&#10003; <span itemprop="itemCondition">In Stock</span></p>
+                </div>
+
+                <div class="reviews" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
+                    <span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                    <span>(<span itemprop="ratingCount">12</span> reviews, Rating: <span
+                            itemprop="ratingValue">5</span>/5)</span>
+                </div>
+            </header>
+
+            <section class="product-description" itemprop="description">
+                <p>A warming blend of turmeric, ginger root, rose petals, licorice root, juniper berries, and cardamom,
+                    thoughtfully crafted to support your body's natural response to inflammation. This infusion combines
+                    the earthly flavour to turmeric with aromatic spices, making it a delightful addition to self-care
+                    rituals.</p>
+            </section>
+
+            <section class="product-ingredients" itemprop="nutrition" itemscope
+                itemtype="https://schema.org/NutritionInformation">
+                <h4>Ingredients</h4>
+                <p itemprop="ingredients">Turmeric, Ginger Root, Rose Petals, Liquorice Root, Juniper Berries and
+                    Cardamom.</p>
+                <p><small>Sourced from multiple origins</small></p>
+            </section>
+
+            <form action="/add-to-cart" method="post" class="product-options">
+                <fieldset>
+                    <legend>Product Options</legend>
+
+                    <div class="package-options" role="radiogroup" aria-labelledby="package-label">
+                        <h4 id="package-label">Select Packaging</h4>
+
+                        <label>
+                            <input type="radio" name="package" value="pouch" checked itemprop="price" content="14.00"
+                                data-price="14.00">
+                            <span>$14.00 - 60 grams <small>(Pouch)</small></span>
+                        </label>
+
+                        <label>
+                            <input type="radio" name="package" value="cylinder" itemprop="price" content="22.00"
+                                data-price="22.00">
+                            <span>$22.00 - 100 grams <small>(Cylinder)</small></span>
+                        </label>
+                    </div>
+
+                    <div class="quantity-selector">
+                        <label for="qty-turmeric">Quantity:</label>
+                        <select id="qty-turmeric" name="quantity" min="1" max="10" required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+
+                    <output name="total-price" for="qty-turmeric package" class="total-price">
+                        Total: $14.00
+                    </output>
+
+                    <button type="submit" class="add-to-cart">Add to Cart</button>
+                </fieldset>
+            </form>
+
+            <footer class="product-disclaimer">
+                <details>
+                    <summary><small>Important Disclaimer</small></summary>
+                    <p itemprop="disambiguatingDescription">
+                        <small>This product is not intended to diagnose, treat, cure, or prevent any disease. Always
+                            consult with a healthcare provider before starting any new supplement or wellness
+                            regimen.</small>
+                    </p>
+                </details>
+            </footer>
+        </article>
+        <a id="calming-garden" class="product-anchor"></a>
+        <article id="calming-garden" class="product" itemprop="itemListElement" itemscope
+            itemtype="https://schema.org/Product">
+            <header>
+                <figure class="product-gallery">
+                    <picture>
+                        <source srcset="assets/img/calmingtea.webp" type="image/webp">
+                        <img src="assets/img/calmingtea.webp" alt="Calming Garden Tea" width="300" height="300"
+                            loading="lazy" itemprop="image">
+                    </picture>
+                    <figcaption>Product image</figcaption>
+                </figure>
+
+                <h3 itemprop="name">Calming Garden</h3>
+
+                <div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                    <link itemprop="availability" href="https://schema.org/InStock">
+                    <meta itemprop="priceCurrency" content="AUD">
+                    <p>&#10003; <span itemprop="itemCondition">In Stock</span></p>
+                </div>
+
+                <div class="reviews" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
+                    <span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;</span>
+                    <span>(<span itemprop="ratingCount">5</span> reviews, Rating: <span
+                            itemprop="ratingValue">4</span>/5)</span>
+                </div>
+            </header>
+
+            <section class="product-description" itemprop="description">
+                <p>Crafted with a calming blend of rosemary, passionflower, lavender, chamomile, and rose petals, this
+                    tea
+                    offers a soothing floral experience inspired by traditional herbal gardens. Each sip provides a
+                    comforting moment, ideal for relaxation and unwinding.</p>
+            </section>
+
+            <section class="product-ingredients" itemprop="nutrition" itemscope
+                itemtype="https://schema.org/NutritionInformation">
+                <h4>Ingredients</h4>
+                <p itemprop="ingredients">Rosemary,
+                    Passionflower, Lavender, Chamomile and Rose
+                    Petals.</p>
+                <p><small>Sourced from multiple origins</small></p>
+            </section>
+
+            <form action="/add-to-cart" method="post" class="product-options">
+                <fieldset>
+                    <legend>Product Options</legend>
+
+                    <div class="package-options" role="radiogroup" aria-labelledby="package-label">
+                        <h4 id="package-label">Select Packaging</h4>
+
+                        <label>
+                            <input type="radio" name="package" value="pouch" checked itemprop="price" content="14.00"
+                                data-price="14.00">
+                            <span>$14.00 - 50 grams <small>(Pouch)</small></span>
+                        </label>
+
+                        <label>
+                            <input type="radio" name="package" value="cylinder" itemprop="price" content="22.00"
+                                data-price="22.00">
+                            <span>$22.00 - 70 grams <small>(Cylinder)</small></span>
+                        </label>
+                    </div>
+
+                    <div class="quantity-selector">
+                        <label for="qty-calming">Quantity:</label>
+                        <select id="qty-calming" name="quantity" min="1" max="10" required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+
+                    <output name="total-price" for="qty-calming package" class="total-price">
+                        Total: $14.00
+                    </output>
+
+                    <button type="submit" class="add-to-cart">Add to Cart</button>
+                </fieldset>
+            </form>
+
+            <footer class="product-disclaimer">
+                <details>
+                    <summary><small>Important Disclaimer</small></summary>
+                    <p itemprop="disambiguatingDescription">
+                        <small>This product is not intended to diagnose, treat, cure, or prevent any disease. Always
+                            consult
+                            with a healthcare provider before starting any new supplement or wellness regimen.</small>
+                    </p>
+                </details>
+            </footer>
+        </article>
+        <a id="sleeping-soundly" class="product-anchor"></a>
+        <article id="sleeping-soundly" class="product" itemprop="itemListElement" itemscope
+            itemtype="https://schema.org/Product">
+            <header>
+                <figure class="product-gallery">
+                    <picture>
+                        <source srcset="assets/img/sleepingsoundly1.webp" type="image/webp">
+                        <img src="assets/img/sleepingsoundly1.webp" alt="Sleeping Soundly Tea" width="300" height="300"
+                            loading="lazy" itemprop="image">
+                    </picture>
+                    <picture>
+                        <source srcset="assets/img/sleepingsoundly2.webp" type="image/webp">
+                        <img src="assets/img/sleepingsoundly2.webp" alt="Sleeping Soundly Tea Package" width="300"
+                            height="300" loading="lazy" itemprop="image">
+                    </picture>
+                    <figcaption>Product images</figcaption>
+                </figure>
+
+                <h3 itemprop="name">Sleeping Soundly</h3>
+
+                <div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                    <link itemprop="availability" href="https://schema.org/InStock">
+                    <meta itemprop="priceCurrency" content="AUD">
+                    <p>&#10003; <span itemprop="itemCondition">In Stock</span></p>
+                </div>
+
+                <div class="reviews" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
+                    <span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                    <span>(<span itemprop="ratingCount">6</span> reviews, Rating: <span
+                            itemprop="ratingValue">5</span>/5)</span>
+                </div>
+            </header>
+
+            <section class="product-description" itemprop="description">
+                <p>An evening blend of lemon balm, passionflower ginger root, and tulsi, thoughtfully created to support
+                    a
+                    peaceful transition into rest. With its gentle herbal aroma and cosy warmth, this tea is a
+                    comforting
+                    choice for relaxing the mind and preparing for a restful night.</p>
+            </section>
+
+            <section class="product-ingredients" itemprop="nutrition" itemscope
+                itemtype="https://schema.org/NutritionInformation">
+                <h4>Ingredients</h4>
+                <p itemprop="ingredients">Lemon Balm, Passionflower, Ginger Root and
+                    Tulsi</p>
+                <p><small>Sourced from multiple origins</small></p>
+            </section>
+
+            <form action="/add-to-cart" method="post" class="product-options">
+                <fieldset>
+                    <legend>Product Options</legend>
+
+                    <div class="package-options" role="radiogroup" aria-labelledby="package-label">
+                        <h4 id="package-label">Select Packaging</h4>
+
+                        <label>
+                            <input type="radio" name="package" value="pouch" checked itemprop="price" content="14.00"
+                                data-price="14.00">
+                            <span>$14.00 - 50 grams <small>(Pouch)</small></span>
+                        </label>
+
+                        <label>
+                            <input type="radio" name="package" value="cylinder" itemprop="price" content="22.00"
+                                data-price="22.00">
+                            <span>$22.00 - 80 grams <small>(Cylinder)</small></span>
+                        </label>
+                    </div>
+
+                    <div class="quantity-selector">
+                        <label for="qty-sleeping">Quantity:</label>
+                        <select id="qty-sleeping" name="quantity" min="1" max="10" required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+
+                    <output name="total-price" for="qty-sleeping package" class="total-price">
+                        Total: $14.00
+                    </output>
+
+                    <button type="submit" class="add-to-cart">Add to Cart</button>
+                </fieldset>
+            </form>
+
+            <footer class="product-disclaimer">
+                <details>
+                    <summary><small>Important Disclaimer</small></summary>
+                    <p itemprop="disambiguatingDescription">
+                        <small>This product is not intended to diagnose, treat, cure, or prevent any disease. Always
+                            consult
+                            with a healthcare provider before starting any new supplement or wellness regimen.</small>
+                    </p>
+                </details>
+            </footer>
+        </article>
+        <a id="hormone-harmony" class="product-anchor"></a>
+        <article id="hormone-harmony" class="product" itemprop="itemListElement" itemscope
+            itemtype="https://schema.org/Product">
+            <header>
+                <figure class="product-gallery">
+                    <picture>
+                        <source srcset="assets/img/hormoneharmony1.webp" type="image/webp">
+                        <img src="assets/img/hormoneharmony1.webp" alt="Hormone Harmony Tea" width="300" height="300"
+                            loading="lazy" itemprop="image">
+                    </picture>
+                    <picture>
+                        <source srcset="assets/img/hormoneharmony2.webp" type="image/webp">
+                        <img src="assets/img/hormoneharmony2.webp" alt="Hormone Harmony Tea Package" width="300"
+                            height="300" loading="lazy" itemprop="image">
+                    </picture>
+                    <figcaption>Product images</figcaption>
+                </figure>
+
+                <h3 itemprop="name">Hormone Harmony</h3>
+
+                <div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                    <link itemprop="availability" href="https://schema.org/InStock">
+                    <meta itemprop="priceCurrency" content="AUD">
+                    <p>&#10003; <span itemprop="itemCondition">In Stock</span></p>
+                </div>
+
+                <div class="reviews" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
+                    <span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                    <span>(<span itemprop="ratingCount">20</span> reviews, Rating: <span
+                            itemprop="ratingValue">5</span>/5)</span>
+                </div>
+            </header>
+
+            <section class="product-description" itemprop="description">
+                <p>A harmonious blend of honeybush, rose petals, chasteberry, fennel, lemon verbena, and sage,
+                    thoughtfully
+                    crafted to support overall wellness. With fragrant floral notes and a soothing herbal character,
+                    this
+                    tea offers a comforting sip for those seeking balance and serenity.</p>
+            </section>
+
+            <section class="product-ingredients" itemprop="nutrition" itemscope
+                itemtype="https://schema.org/NutritionInformation">
+                <h4>Ingredients</h4>
+                <p itemprop="ingredients">Honeybush, Rose Petals, Chasteberry,
+                    Fennel, Lemon Verbena and Sage</p>
+                <p><small>Sourced from multiple origins</small></p>
+            </section>
+
+            <form action="/add-to-cart" method="post" class="product-options">
+                <fieldset>
+                    <legend>Product Options</legend>
+
+                    <div class="package-options" role="radiogroup" aria-labelledby="package-label">
+                        <h4 id="package-label">Select Packaging</h4>
+
+                        <label>
+                            <input type="radio" name="package" value="pouch" checked itemprop="price" content="14.00"
+                                data-price="14.00">
+                            <span>$14.00 - 50 grams <small>(Pouch)</small></span>
+                        </label>
+
+                        <label>
+                            <input type="radio" name="package" value="cylinder" itemprop="price" content="22.00"
+                                data-price="22.00">
+                            <span>$22.00 - 80 grams <small>(Cylinder)</small></span>
+                        </label>
+                    </div>
+
+                    <div class="quantity-selector">
+                        <label for="qty-hormone">Quantity:</label>
+                        <select id="qty-hormone" name="quantity" min="1" max="10" required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+
+                    <output name="total-price" for="qty-hormone package" class="total-price">
+                        Total: $14.00
+                    </output>
+
+                    <button type="submit" class="add-to-cart">Add to Cart</button>
+                </fieldset>
+            </form>
+
+            <footer class="product-disclaimer">
+                <details>
+                    <summary><small>Important Disclaimer</small></summary>
+                    <p itemprop="disambiguatingDescription">
+                        <small>This product is not intended to diagnose, treat, cure, or prevent any disease. Always
+                            consult
+                            with a healthcare provider before starting any new supplement or wellness regimen.</small>
+                    </p>
+                </details>
+            </footer>
+        </article>
+        <a id="natures-detox" class="product-anchor"></a>
+        <article id="natures-detox" class="product" itemprop="itemListElement" itemscope
+            itemtype="https://schema.org/Product">
+            <header>
+                <figure class="product-gallery">
+                    <picture>
+                        <source srcset="assets/img/Natures2_with_fonts.webp" type="image/webp">
+                        <img src="assets/img/Natures2_with_fonts.webp" alt="Nature's Detox Tea" width="300" height="300"
+                            loading="lazy" itemprop="image">
+                    </picture>
+                    <figcaption>Product image</figcaption>
+                </figure>
+
+                <h3 itemprop="name">Nature's Detox</h3>
+
+                <div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                    <link itemprop="availability" href="https://schema.org/OutOfStock">
+                    <meta itemprop="priceCurrency" content="AUD">
+                    <p>&#10007; <span itemprop="itemCondition">Out of Stock</span></p>
+                </div>
+
+                <div class="reviews" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
+                    <span aria-hidden="true">&#9733;&#9733;&#9733;</span>
+                    <span>(<span itemprop="ratingCount">3</span> reviews, Rating: <span
+                            itemprop="ratingValue">3</span>/5)</span>
+                </div>
+            </header>
+
+            <section class="product-description" itemprop="description">
+                <p>A gentle blend of dandelion root, tulsi, lemon peel, dandelion leaf, lemongrass, and blue cornflower
+                    petals, thoughtfully crafted to support the body's natural cleansing processes. This soothing
+                    infusion
+                    is designed to be easy on the tummy, making it a refreshing choice for everyday wellness.</p>
+            </section>
+
+            <section class="product-ingredients" itemprop="nutrition" itemscope
+                itemtype="https://schema.org/NutritionInformation">
+                <h4>Ingredients</h4>
+                <p itemprop="ingredients">Dandelion Root, Tulsi, Lemon Peel,
+                    Dandelion Leaf, Lemongrass and Blue Cornflower Petals.</p>
+                <p><small>Sourced from multiple origins</small></p>
+            </section>
+
+            <form action="mailto:info@naturesinfusions.com" method="post" class="product-options">
+                <fieldset>
+                    <legend>Out of Stock Notification</legend>
+
+                    <div class="email-notification">
+                        <label for="customer-email-detox">Email Address:</label>
+                        <input type="email" id="customer-email-detox" name="email" required placeholder="your@email.com"
+                            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+                    </div>
+
+                    <button type="submit" class="notify-me">Notify When Available</button>
+                </fieldset>
+            </form>
+
+            <footer class="product-disclaimer">
+                <details>
+                    <summary><small>Important Disclaimer</small></summary>
+                    <p itemprop="disambiguatingDescription">
+                        <small>This product is not intended to diagnose, treat, cure, or prevent any disease. Always
+                            consult
+                            with a healthcare provider before starting any new supplement or wellness regimen.</small>
+                    </p>
+                </details>
+            </footer>
+        </article>
+        <a id="digestive-bliss" class="product-anchor"></a>
+        <article id="digestive-bliss" class="product" itemprop="itemListElement" itemscope
+            itemtype="https://schema.org/Product">
+            <header>
+                <figure class="product-gallery">
+                    <picture>
+                        <source srcset="assets/img/digestivebliss.webp" type="image/webp">
+                        <img src="assets/img/digestivebliss.webp" alt="Digestive Bliss Tea" width="300" height="300"
+                            loading="lazy" itemprop="image">
+                    </picture>
+                    <figcaption>Product image</figcaption>
+                </figure>
+
+                <h3 itemprop="name">Digestive Bliss</h3>
+
+                <div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                    <link itemprop="availability" href="https://schema.org/OutOfStock">
+                    <meta itemprop="priceCurrency" content="AUD">
+                    <p>&#10007; <span itemprop="itemCondition">Out of Stock</span></p>
+                </div>
+
+                <div class="reviews" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
+                    <span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;</span>
+                    <span>(<span itemprop="ratingCount">1</span> review, Rating: <span
+                            itemprop="ratingValue">4</span>/5)</span>
+                </div>
+            </header>
+
+            <section class="product-description" itemprop="description">
+                <p>A delightful blend of meadowsweet, aniseed, ginger root, and peppermint, thoughtfully crafted to
+                    support
+                    digestive comfort. This soothing infusion is designed to be a refreshing choice for those seeking
+                    gentle
+                    stomach support and overall digestive well-being.</p>
+            </section>
+
+            <section class="product-ingredients" itemprop="nutrition" itemscope
+                itemtype="https://schema.org/NutritionInformation">
+                <h4>Ingredients</h4>
+                <p itemprop="ingredients">Meadowsweet, Aniseed, Ginger Root and
+                    Peppermint.</p>
+                <p><small>Sourced from multiple origins</small></p>
+            </section>
+
+            <form action="mailto:info@naturesinfusions.com" method="post" class="product-options">
+                <fieldset>
+                    <legend>Out of Stock Notification</legend>
+
+                    <div class="email-notification">
+                        <label for="customer-email-digestive">Email Address:</label>
+                        <input type="email" id="customer-email-digestive" name="email" required
+                            placeholder="your@email.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+                    </div>
+
+                    <button type="submit" class="notify-me">Notify When Available</button>
+                </fieldset>
+            </form>
+
+            <footer class="product-disclaimer">
+                <details>
+                    <summary><small>Important Disclaimer</small></summary>
+                    <p itemprop="disambiguatingDescription">
+                        <small>This product is not intended to diagnose, treat, cure, or prevent any disease. Always
+                            consult
+                            with a healthcare provider before starting any new supplement or wellness regimen.</small>
+                    </p>
+                </details>
+            </footer>
+        </article>
+        <a id="botanic-glow" class="product-anchor"></a>
+        <article id="botanic-glow" class="product" itemprop="itemListElement" itemscope
+            itemtype="https://schema.org/Product">
+            <header>
+                <figure class="product-gallery">
+                    <picture>
+                        <source srcset="assets/img/botanicglow1.webp" type="image/webp">
+                        <img src="assets/img/botanicglow1.webp" alt="Botanic Glow Tea" width="300" height="300"
+                            loading="lazy" itemprop="image">
+                    </picture>
+                    <picture>
+                        <source srcset="assets/img/botanicglow2.webp" type="image/webp">
+                        <img src="assets/img/botanicglow2.webp" alt="Botanic Glow Tea Package" width="300" height="300"
+                            loading="lazy" itemprop="image">
+                    </picture>
+                    <figcaption>Product images</figcaption>
+                </figure>
+
+                <h3 itemprop="name">Botanic Glow</h3>
+
+                <div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                    <link itemprop="availability" href="https://schema.org/InStock">
+                    <meta itemprop="priceCurrency" content="AUD">
+                    <p>&#10003; <span itemprop="itemCondition">In Stock</span></p>
+                </div>
+
+                <div class="reviews" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
+                    <span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;</span>
+                    <span>(<span itemprop="ratingCount">1</span> review, Rating: <span
+                            itemprop="ratingValue">4</span>/5)</span>
+                </div>
+            </header>
+
+            <section class="product-description" itemprop="description">
+                <p>A revitalising blend of nettle, spearmint, linseed, and echinacea, thoughtfully crafted to support
+                    immune
+                    health and promote skin vitality. With nurturing properties, this refreshing infusion is designed to
+                    be
+                    a delightful addition to your daily routine.</p>
+            </section>
+
+            <section class="product-ingredients" itemprop="nutrition" itemscope
+                itemtype="https://schema.org/NutritionInformation">
+                <h4>Ingredients</h4>
+                <p itemprop="ingredients">Nettle, Spearmint, Linseed and
+                    Echinacea."</p>
+                <p><small>Sourced from multiple origins</small></p>
+            </section>
+
+            <form action="/add-to-cart" method="post" class="product-options">
+                <fieldset>
+                    <legend>Product Options</legend>
+
+                    <div class="package-options" role="radiogroup" aria-labelledby="package-label">
+                        <h4 id="package-label">Select Packaging</h4>
+
+                        <label>
+                            <input type="radio" name="package" value="pouch" checked itemprop="price" content="14.00"
+                                data-price="14.00">
+                            <span>$14.00 - 50 grams <small>(Pouch)</small></span>
+                        </label>
+
+                        <label>
+                            <input type="radio" name="package" value="cylinder" itemprop="price" content="22.00"
+                                data-price="22.00">
+                            <span>$22.00 - 80 grams <small>(Cylinder)</small></span>
+                        </label>
+                    </div>
+
+                    <div class="quantity-selector">
+                        <label for="qty-botanic">Quantity:</label>
+                        <select id="qty-botanic" name="quantity" min="1" max="10" required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+
+                    <output name="total-price" for="qty-botanic package" class="total-price">
+                        Total: $14.00
+                    </output>
+
+                    <button type="submit" class="add-to-cart">Add to Cart</button>
+                </fieldset>
+            </form>
+
+            <footer class="product-disclaimer">
+                <details>
+                    <summary><small>Important Disclaimer</small></summary>
+                    <p itemprop="disambiguatingDescription">
+                        <small>This product is not intended to diagnose, treat, cure, or prevent any disease. Always
+                            consult
+                            with a healthcare provider before starting any new supplement or wellness regimen.</small>
+                    </p>
+                </details>
+            </footer>
+        </article>
+                <a id="product-winter" class="product-anchor"></a>
+        <article id="product-winter" class="product" itemprop="itemListElement" itemscope
+            itemtype="https://schema.org/Product">
+            <header>
+                <figure class="product-gallery">
+                    <picture>
+                        <source srcset="assets/img/winterwellness1.webp" type="image/webp">
+                        <img src="assets/img/winterwellness1.webp" alt="Winter Wellness Tea" width="300" height="300"
+                            loading="lazy" itemprop="image">
+                    </picture>
+                    <picture>
+                        <source srcset="assets/img/winterwellness2.webp" type="image/webp">
+                        <img src="assets/img/winterwellness2.webp" alt="Winter Wellness Tea Package" width="300"
+                            height="300" loading="lazy" itemprop="image">
+                    </picture>
+                    <figcaption>Product images</figcaption>
+                </figure>
+
+                <h3 itemprop="name">Winter Wellness</h3>
+
+                <div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                    <link itemprop="availability" href="https://schema.org/InStock">
+                    <meta itemprop="priceCurrency" content="AUD">
+                    <p>&#10003; <span itemprop="itemCondition">In Stock</span></p>
+                </div>
+
+                <div class="reviews" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
+                    <span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                    <span>(<span itemprop="ratingCount">6</span> reviews, Rating: <span
+                            itemprop="ratingValue">5</span>/5)</span>
+                </div>
+            </header>
+
+            <section class="product-description" itemprop="description">
+                <p>A comforting blend of ginger root, lemon balm, yarrow, and echinacea, thoughtfully crafted to offer
+                    gentle throat-soothing qualities and warmth. This soothing infusion is designed for comfort during
+                    colder months, making it an ideal companion for your seasonal wellness routine.</p>
+            </section>
+
+            <section class="product-ingredients" itemprop="nutrition" itemscope
+                itemtype="https://schema.org/NutritionInformation">
+                <h4>Ingredients</h4>
+                <p itemprop="ingredients">Ginger Root, Lemon Balm, Yarrow and
+                    Echinacea.</p>
+                <p><small>Sourced from multiple origins</small></p>
+            </section>
+
+            <form action="/add-to-cart" method="post" class="product-options">
+                <fieldset>
+                    <legend>Product Options</legend>
+
+                    <div class="package-options" role="radiogroup" aria-labelledby="package-label">
+                        <h4 id="package-label">Select Packaging</h4>
+
+                        <label>
+                            <input type="radio" name="package" value="pouch" checked itemprop="price" content="14.00"
+                                data-price="14.00">
+                            <span>$14.00 - 50 grams <small>(Pouch)</small></span>
+                        </label>
+
+                        <label>
+                            <input type="radio" name="package" value="cylinder" itemprop="price" content="22.00"
+                                data-price="22.00">
+                            <span>$22.00 - 70 grams <small>(Cylinder)</small></span>
+                        </label>
+                    </div>
+
+                    <div class="quantity-selector">
+                        <label for="qty-winter">Quantity:</label>
+                        <select id="qty-winter" name="quantity" min="1" max="10" required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+
+                    <output name="total-price" for="qty-winter package" class="total-price">
+                        Total: $14.00
+                    </output>
+
+                    <button type="submit" class="add-to-cart">Add to Cart</button>
+                </fieldset>
+            </form>
+
+            <footer class="product-disclaimer">
+                <details>
+                    <summary><small>Important Disclaimer</small></summary>
+                    <p itemprop="disambiguatingDescription">
+                        <small>This product is not intended to diagnose, treat, cure, or prevent any disease. Always
+                            consult
+                            with a healthcare provider before starting any new supplement or wellness regimen.</small>
+                    </p>
+                </details>
+            </footer>
+        </article>
         <a id="african-chai" class="product-anchor"></a>
         <article id="african-chai" class="product" itemprop="itemListElement" itemscope
             itemtype="https://schema.org/Product">
@@ -966,11 +1825,11 @@
                 <div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                     <link itemprop="availability" href="https://schema.org/InStock">
                     <meta itemprop="priceCurrency" content="AUD">
-                    <p>✓ <span itemprop="itemCondition">In Stock</span></p>
+                    <p>&#10003; <span itemprop="itemCondition">In Stock</span></p>
                 </div>
 
                 <div class="reviews" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
-                    <span aria-hidden="true">★★★★★</span>
+                    <span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
                     <span>(<span itemprop="ratingCount">12</span> reviews, Rating: <span
                             itemprop="ratingValue">5</span>/5)</span>
                 </div>
@@ -1041,103 +1900,6 @@
                 </details>
             </footer>
         </article>
-        <a id="product-winter" class="product-anchor"></a>
-        <article id="product-winter" class="product" itemprop="itemListElement" itemscope
-            itemtype="https://schema.org/Product">
-            <header>
-                <figure class="product-gallery">
-                    <picture>
-                        <source srcset="assets/img/winterwellness1.webp" type="image/webp">
-                        <img src="assets/img/winterwellness1.webp" alt="Winter Wellness Tea" width="300" height="300"
-                            loading="lazy" itemprop="image">
-                    </picture>
-                    <picture>
-                        <source srcset="assets/img/winterwellness2.webp" type="image/webp">
-                        <img src="assets/img/winterwellness2.webp" alt="Winter Wellness Tea Package" width="300"
-                            height="300" loading="lazy" itemprop="image">
-                    </picture>
-                    <figcaption>Product images</figcaption>
-                </figure>
-
-                <h3 itemprop="name">Winter Wellness</h3>
-
-                <div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-                    <link itemprop="availability" href="https://schema.org/InStock">
-                    <meta itemprop="priceCurrency" content="AUD">
-                    <p>✓ <span itemprop="itemCondition">In Stock</span></p>
-                </div>
-
-                <div class="reviews" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
-                    <span aria-hidden="true">★★★★★</span>
-                    <span>(<span itemprop="ratingCount">6</span> reviews, Rating: <span
-                            itemprop="ratingValue">5</span>/5)</span>
-                </div>
-            </header>
-
-            <section class="product-description" itemprop="description">
-                <p>A comforting blend of ginger root, lemon balm, yarrow, and echinacea, thoughtfully crafted to offer
-                    gentle throat-soothing qualities and warmth. This soothing infusion is designed for comfort during
-                    colder months, making it an ideal companion for your seasonal wellness routine.</p>
-            </section>
-
-            <section class="product-ingredients" itemprop="nutrition" itemscope
-                itemtype="https://schema.org/NutritionInformation">
-                <h4>Ingredients</h4>
-                <p itemprop="ingredients">Ginger Root, Lemon Balm, Yarrow and
-                    Echinacea.</p>
-                <p><small>Sourced from multiple origins</small></p>
-            </section>
-
-            <form action="/add-to-cart" method="post" class="product-options">
-                <fieldset>
-                    <legend>Product Options</legend>
-
-                    <div class="package-options" role="radiogroup" aria-labelledby="package-label">
-                        <h4 id="package-label">Select Packaging</h4>
-
-                        <label>
-                            <input type="radio" name="package" value="pouch" checked itemprop="price" content="14.00"
-                                data-price="14.00">
-                            <span>$14.00 - 50 grams <small>(Pouch)</small></span>
-                        </label>
-
-                        <label>
-                            <input type="radio" name="package" value="cylinder" itemprop="price" content="22.00"
-                                data-price="22.00">
-                            <span>$22.00 - 70 grams <small>(Cylinder)</small></span>
-                        </label>
-                    </div>
-
-                    <div class="quantity-selector">
-                        <label for="qty-winter">Quantity:</label>
-                        <select id="qty-winter" name="quantity" min="1" max="10" required>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                        </select>
-                    </div>
-
-                    <output name="total-price" for="qty-winter package" class="total-price">
-                        Total: $14.00
-                    </output>
-
-                    <button type="submit" class="add-to-cart">Add to Cart</button>
-                </fieldset>
-            </form>
-
-            <footer class="product-disclaimer">
-                <details>
-                    <summary><small>Important Disclaimer</small></summary>
-                    <p itemprop="disambiguatingDescription">
-                        <small>This product is not intended to diagnose, treat, cure, or prevent any disease. Always
-                            consult
-                            with a healthcare provider before starting any new supplement or wellness regimen.</small>
-                    </p>
-                </details>
-            </footer>
-        </article>
         <a id="product-apple" class="product-anchor"></a>
         <article id="product-apple" class="product" itemprop="itemListElement" itemscope
             itemtype="https://schema.org/Product">
@@ -1156,11 +1918,11 @@
                 <div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                     <link itemprop="availability" href="https://schema.org/InStock">
                     <meta itemprop="priceCurrency" content="AUD">
-                    <p>⚑ <span itemprop="itemCondition">Out of Stock</span></p>
+                    <p>&#10007; <span itemprop="itemCondition">Out of Stock</span></p>
                 </div>
 
                 <div class="reviews" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
-                    <span aria-hidden="true">★★★★★</span>
+                    <span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
                     <span>(<span itemprop="ratingCount">20</span> reviews, Rating: <span
                             itemprop="ratingValue">5</span>/5)</span>
                 </div>
@@ -1269,11 +2031,11 @@
                 <div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                     <link itemprop="availability" href="https://schema.org/InStock">
                     <meta itemprop="priceCurrency" content="AUD">
-                    <p>✓ <span itemprop="itemCondition">In Stock</span></p>
+                    <p>&#10003; <span itemprop="itemCondition">In Stock</span></p>
                 </div>
 
                 <div class="reviews" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
-                    <span aria-hidden="true">★★★</span>
+                    <span aria-hidden="true">&#9733;&#9733;&#9733;</span>
                     <span>(<span itemprop="ratingCount">3</span> reviews, Rating: <span
                             itemprop="ratingValue">3</span>/5)</span>
                 </div>
@@ -1366,11 +2128,11 @@
                 <div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                     <link itemprop="availability" href="https://schema.org/InStock">
                     <meta itemprop="priceCurrency" content="AUD">
-                    <p>✓ <span itemprop="itemCondition">In Stock</span></p>
+                    <p>&#10003; <span itemprop="itemCondition">In Stock</span></p>
                 </div>
 
                 <div class="reviews" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
-                    <span aria-hidden="true">★★★★</span>
+                    <span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;</span>
                     <span>(<span itemprop="ratingCount">1</span> review, Rating: <span
                             itemprop="ratingValue">4</span>/5)</span>
                 </div>
@@ -1439,6 +2201,11 @@
                 </details>
             </footer>
         </article>
+        </section>
+                    <!-- Black Tea -->
+            <a id="black-tea"></a>
+            <section>
+                <h3>Black Tea</h3>
         <a id="product-ceylon" class="product-anchor"></a>
         <article id="product-ceylon" class="product" itemprop="itemListElement" itemscope
             itemtype="https://schema.org/Product">
@@ -1462,11 +2229,11 @@
                 <div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                     <link itemprop="availability" href="https://schema.org/InStock">
                     <meta itemprop="priceCurrency" content="AUD">
-                    <p>✓ <span itemprop="itemCondition">In Stock</span></p>
+                    <p>&#10003; <span itemprop="itemCondition">In Stock</span></p>
                 </div>
 
                 <div class="reviews" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
-                    <span aria-hidden="true">★★★★</span>
+                    <span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;</span>
                     <span>(<span itemprop="ratingCount">1</span> review, Rating: <span
                             itemprop="ratingValue">4</span>/5)</span>
                 </div>
@@ -1561,11 +2328,11 @@
                 <div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                     <link itemprop="availability" href="https://schema.org/InStock">
                     <meta itemprop="priceCurrency" content="AUD">
-                    <p>✓ <span itemprop="itemCondition">In Stock</span></p>
+                    <p>&#10003; <span itemprop="itemCondition">In Stock</span></p>
                 </div>
 
                 <div class="reviews" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
-                    <span aria-hidden="true">★★★★★</span>
+                    <span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
                     <span>(<span itemprop="ratingCount">12</span> reviews, Rating: <span
                             itemprop="ratingValue">5</span>/5)</span>
                 </div>
@@ -1654,11 +2421,11 @@
                 <div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                     <link itemprop="availability" href="https://schema.org/InStock">
                     <meta itemprop="priceCurrency" content="AUD">
-                    <p>✓ <span itemprop="itemCondition">In Stock</span></p>
+                    <p>&#10003; <span itemprop="itemCondition">In Stock</span></p>
                 </div>
 
                 <div class="reviews" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
-                    <span aria-hidden="true">★★★★</span>
+                    <span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;</span>
                     <span>(<span itemprop="ratingCount">5</span> reviews, Rating: <span
                             itemprop="ratingValue">4</span>/5)</span>
                 </div>
@@ -1746,11 +2513,11 @@
                 <div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                     <link itemprop="availability" href="https://schema.org/OutOfStock">
                     <meta itemprop="priceCurrency" content="AUD">
-                    <p>⚑ <span itemprop="itemCondition">Out of Stock</span></p>
+                    <p>&#10007; <span itemprop="itemCondition">Out of Stock</span></p>
                 </div>
 
                 <div class="reviews" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
-                    <span aria-hidden="true">★★★★★</span>
+                    <span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
                     <span>(<span itemprop="ratingCount">6</span> reviews, Rating: <span
                             itemprop="ratingValue">5</span>/5)</span>
                 </div>
@@ -1819,11 +2586,946 @@
                 <div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                     <link itemprop="availability" href="https://schema.org/InStock">
                     <meta itemprop="priceCurrency" content="AUD">
-                    <p>✓ <span itemprop="itemCondition">In Stock</span></p>
+                    <p>&#10003; <span itemprop="itemCondition">In Stock</span></p>
                 </div>
 
                 <div class="reviews" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
-                    <span aria-hidden="true">★★★★★</span>
+                    <span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                    <span>(<span itemprop="ratingCount">20</span> reviews, Rating: <span
+                            itemprop="ratingValue">5</span>/5)</span>
+                </div>
+            </header>
+
+            <section class="product-description" itemprop="description">
+                <p>Experience the unique flavours of Australia with our Australian Rainforest and Lemon Myrtle tea,
+                    crafted
+                    from premium Black Tea grown in the tropical regions of Australia. This blend is infused with the
+                    refreshing essence of lemon myrtle, known for its bright, citrusy aroma and flavour.</p>
+            </section>
+
+            <section class="product-ingredients" itemprop="nutrition" itemscope
+                itemtype="https://schema.org/NutritionInformation">
+                <h4>Ingredients</h4>
+                <p itemprop="ingredients">Black Tea and Lemon Myrtle.</p>
+                <p><small>Sourced from multiple origins</small></p>
+            </section>
+
+            <form action="/add-to-cart" method="post" class="product-options">
+                <fieldset>
+                    <legend>Product Options</legend>
+
+                    <div class="package-options" role="radiogroup" aria-labelledby="package-label">
+                        <h4 id="package-label">Select Packaging</h4>
+
+                        <label>
+                            <input type="radio" name="package" value="pouch" checked itemprop="price" content="14.00"
+                                data-price="14.00">
+                            <span>$14.00 - 50 grams <small>(Pouch)</small></span>
+                        </label>
+
+                        <label>
+                            <input type="radio" name="package" value="cylinder" itemprop="price" content="22.00"
+                                data-price="22.00">
+                            <span>$22.00 - 80 grams <small>(Cylinder)</small></span>
+                        </label>
+                    </div>
+
+                    <div class="quantity-selector">
+                        <label for="qty-rainforest">Quantity:</label>
+                        <select id="qty-rainforest" name="quantity" min="1" max="10" required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+
+                    <output name="total-price" for="qty-rainforest package" class="total-price">
+                        Total: $14.00
+                    </output>
+
+                    <button type="submit" class="add-to-cart">Add to Cart</button>
+                </fieldset>
+            </form>
+
+            <footer class="product-disclaimer">
+                <details>
+                    <summary><small>Important Disclaimer</small></summary>
+                    <p itemprop="disambiguatingDescription">
+                        <small>This product is not intended to diagnose, treat, cure, or prevent any disease. Always
+                            consult
+                            with a healthcare provider before starting any new supplement or wellness regimen.</small>
+                    </p>
+                </details>
+            </footer>
+        </article>
+        </section>
+                    <!-- Green Tea -->
+            <a id="green-tea"></a>
+            <section>
+                <h3>Green Tea</h3
+        <a id="product-energizer" class="product-anchor"></a>
+        <article id="product-energizer" class="product" itemprop="itemListElement" itemscope
+            itemtype="https://schema.org/Product">
+            <header>
+                <figure class="product-gallery">
+                    <picture>
+                        <source srcset="assets/img/energizer1.webp" type="image/webp">
+                        <img src="assets/img/energizer1.webp" alt="Energiser Tea" width="300" height="300"
+                            loading="lazy" itemprop="image">
+                    </picture>
+                    <picture>
+                        <source srcset="assets/img/energizer2.webp" type="image/webp">
+                        <img src="assets/img/energizer2.webp" alt="Energiser Tea Package" width="300" height="300"
+                            loading="lazy" itemprop="image">
+                    </picture>
+                    <figcaption>Product images</figcaption>
+                </figure>
+
+                <h3 itemprop="name">Energiser</h3>
+
+                <div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                    <link itemprop="availability" href="https://schema.org/InStock">
+                    <meta itemprop="priceCurrency" content="AUD">
+                    <p>&#10003; <span itemprop="itemCondition">In Stock</span></p>
+                </div>
+
+                <div class="reviews" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
+                    <span aria-hidden="true">&#9733;&#9733;&#9733;</span>
+                    <span>(<span itemprop="ratingCount">3</span> reviews, Rating: <span
+                            itemprop="ratingValue">3</span>/5)</span>
+                </div>
+            </header>
+
+            <section class="product-description" itemprop="description">
+                <p>Ignite your day with our Energiser blend, featuring premium Sencha Green Tea and aromatic Tulsi. This
+                    refreshing tea, rich in antioxidants, supports overall wellness and vitality. With its holy basil
+                    twist,
+                    Energiser is an ideal choice for a revitalising post-workout beverage.</p>
+            </section>
+
+            <section class="product-ingredients" itemprop="nutrition" itemscope
+                itemtype="https://schema.org/NutritionInformation">
+                <h4>Ingredients</h4>
+                <p itemprop="ingredients">Sencha Green Tea and Tulsi.</p>
+                <p><small>Sourced from multiple origins</small></p>
+            </section>
+
+            <form action="/add-to-cart" method="post" class="product-options">
+                <fieldset>
+                    <legend>Product Options</legend>
+
+                    <div class="package-options" role="radiogroup" aria-labelledby="package-label">
+                        <h4 id="package-label">Select Packaging</h4>
+
+                        <label>
+                            <input type="radio" name="package" value="pouch" checked itemprop="price" content="14.00"
+                                data-price="14.00">
+                            <span>$14.00 - 50 grams <small>(Pouch)</small></span>
+                        </label>
+
+                        <label>
+                            <input type="radio" name="package" value="cylinder" itemprop="price" content="22.00"
+                                data-price="22.00">
+                            <span>$22.00 - 80 grams <small>(Cylinder)</small></span>
+                        </label>
+                    </div>
+
+                    <div class="quantity-selector">
+                        <label for="qty-energiser">Quantity:</label>
+                        <select id="qty-energiser" name="quantity" min="1" max="10" required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+
+                    <output name="total-price" for="qty-energiser package" class="total-price">
+                        Total: $14.00
+                    </output>
+
+                    <button type="submit" class="add-to-cart">Add to Cart</button>
+                </fieldset>
+            </form>
+
+            <footer class="product-disclaimer">
+                <details>
+                    <summary><small>Important Disclaimer</small></summary>
+                    <p itemprop="disambiguatingDescription">
+                        <small>This product is not intended to diagnose, treat, cure, or prevent any disease. Always
+                            consult
+                            with a healthcare provider before starting any new supplement or wellness regimen.</small>
+                    </p>
+                </details>
+            </footer>
+        </article>
+        <a id="product-orangeginger" class="product-anchor"></a>
+        <article id="product-orangeginger" class="product" itemprop="itemListElement" itemscope
+            itemtype="https://schema.org/Product">
+            <header>
+                <figure class="product-gallery">
+                    <picture>
+                        <source srcset="assets/img/Natures2_with_fonts.webp" type="image/webp">
+                        <img src="assets/img/Natures2_with_fonts.webp" alt="Orange and Ginger Tea" width="300"
+                            height="300" loading="lazy" itemprop="image">
+                    </picture>
+                    <figcaption>Product image</figcaption>
+                </figure>
+
+                <h3 itemprop="name">Orange and Ginger</h3>
+
+                <div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                    <link itemprop="availability" href="https://schema.org/OutOfStock">
+                    <meta itemprop="priceCurrency" content="AUD">
+                    <p>&#10007; <span itemprop="itemCondition">Out of Stock</span></p>
+                </div>
+
+                <div class="reviews" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
+                    <span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;</span>
+                    <span>(<span itemprop="ratingCount">1</span> review, Rating: <span
+                            itemprop="ratingValue">4</span>/5)</span>
+                </div>
+            </header>
+
+            <section class="product-description" itemprop="description">
+                <p>Savour a light and refreshing experience with our Orange and Ginger Green Tea, a blend of premium
+                    Sencha
+                    Green Tea, vibrant sweet orange peel, warming ginger root, invigorating spearmint, and a hint of
+                    licorice root for a delightful aftertaste.</p>
+            </section>
+
+            <section class="product-ingredients" itemprop="nutrition" itemscope
+                itemtype="https://schema.org/NutritionInformation">
+                <h4>Ingredients</h4>
+                <p itemprop="ingredients">Sencha Green Tea, Orange Peel, Ginger,
+                    Spearmint and Licorice Root.</p>
+                <p><small>Sourced from multiple origins</small></p>
+            </section>
+
+            <form action="mailto:info@naturesinfusions.com" method="post" class="product-options">
+                <fieldset>
+                    <legend>Out of Stock Notification</legend>
+
+                    <div class="email-notification">
+                        <label for="customer-email-orangeginger">Email Address:</label>
+                        <input type="email" id="customer-email-orangeginger" name="email" required
+                            placeholder="your@email.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+                    </div>
+
+                    <button type="submit" class="notify-me">Notify When Available</button>
+                </fieldset>
+            </form>
+
+            <footer class="product-disclaimer">
+                <details>
+                    <summary><small>Important Disclaimer</small></summary>
+                    <p itemprop="disambiguatingDescription">
+                        <small>This product is not intended to diagnose, treat, cure, or prevent any disease. Always
+                            consult
+                            with a healthcare provider before starting any new supplement or wellness regimen.</small>
+                    </p>
+                </details>
+            </footer>
+        </article>
+        </section>
+                    <!-- Ice Tea -->
+            <a id="ice-tea"></a>
+            <section>
+                <h3>Ice Tea</h3>
+                        <a id="product-apple" class="product-anchor"></a>
+        <article id="product-apple" class="product" itemprop="itemListElement" itemscope
+            itemtype="https://schema.org/Product">
+            <header>
+                <figure class="product-gallery">
+                    <picture>
+                        <source srcset="assets/img/Natures2_with_fonts.webp" type="image/webp">
+                        <img src="assets/img/Natures2_with_fonts.webp" alt="Apple Delight Tea" width="300" height="300"
+                            loading="lazy" itemprop="image">
+                    </picture>
+                    <figcaption>Product image</figcaption>
+                </figure>
+
+                <h3 itemprop="name">Apple Delight</h3>
+
+                <div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                    <link itemprop="availability" href="https://schema.org/InStock">
+                    <meta itemprop="priceCurrency" content="AUD">
+                    <p>&#10007; <span itemprop="itemCondition">Out of Stock</span></p>
+                </div>
+
+                <div class="reviews" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
+                    <span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                    <span>(<span itemprop="ratingCount">20</span> reviews, Rating: <span
+                            itemprop="ratingValue">5</span>/5)</span>
+                </div>
+            </header>
+
+            <section class="product-description" itemprop="description">
+                <p>Savour the taste of summer with this refreshing blend of dried apple pieces, rosehip, lemongrass, and
+                    spearmint. This naturally sweet, fruity tea can be enjoyed hot or cold, offering a revitalising
+                    experience in each sip.</p>
+            </section>
+
+            <section class="product-ingredients" itemprop="nutrition" itemscope
+                itemtype="https://schema.org/NutritionInformation">
+                <h4>Ingredients</h4>
+                <p itemprop="ingredients">Apple Pieces, Rosehip, Lemongrass and
+                    Spearmint.</p>
+                <p><small>Sourced from multiple origins</small></p>
+            </section>
+
+            <form action="mailto:info@naturesinfusions.com" method="post" class="product-options">
+                <fieldset>
+                    <legend>Out of Stock Notification</legend>
+
+                    <div class="email-notification">
+                        <label for="customer-email-digestive">Email Address:</label>
+                        <input type="email" id="customer-email-digestive" name="email" required
+                            placeholder="your@email.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+                    </div>
+
+                    <button type="submit" class="notify-me">Notify When Available</button>
+                </fieldset>
+            </form>
+
+            <!-- <form action="/add-to-cart" method="post" class="product-options">
+            <fieldset>
+                <legend>Product Options</legend>
+
+                <div class="package-options" role="radiogroup" aria-labelledby="package-label">
+                    <h4 id="package-label">Select Packaging</h4>
+
+                    <label>
+                        <input type="radio" name="package" value="pouch" checked
+                               itemprop="price" content="14.00"
+                               data-price="14.00">
+                        <span>$14.00 - 70 grams <small>(Pouch)</small></span>
+                    </label>
+
+                    <label>
+                        <input type="radio" name="package" value="cylinder"
+                               itemprop="price" content="22.00"
+                               data-price="22.00">
+                        <span>$22.00 - 100 grams <small>(Cylinder)</small></span>
+                    </label>
+                </div>
+
+                <div class="quantity-selector">
+                    <label for="qty-apple">Quantity:</label>
+                    <select id="qty-apple" name="quantity" min="1" max="10" required>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+
+                <output name="total-price" for="qty-apple package" class="total-price">
+                    Total: $14.00
+                </output>
+
+                <button type="submit" class="add-to-cart">Add to Cart</button>
+            </fieldset>
+        </form> -->
+
+            <footer class="product-disclaimer">
+                <details>
+                    <summary><small>Important Disclaimer</small></summary>
+                    <p itemprop="disambiguatingDescription">
+                        <small>This product is not intended to diagnose, treat, cure, or prevent any disease. Always
+                            consult
+                            with a healthcare provider before starting any new supplement or wellness regimen.</small>
+                    </p>
+                </details>
+            </footer>
+        </article>
+        <a id="product-summer" class="product-anchor"></a>
+        <article id="product-summer" class="product" itemprop="itemListElement" itemscope
+            itemtype="https://schema.org/Product">
+            <header>
+                <figure class="product-gallery">
+                    <picture>
+                        <source srcset="assets/img/summerbreeze1.webp" type="image/webp">
+                        <img src="assets/img/summerbreeze1.webp" alt="Summer Breeze Tea" width="300" height="300"
+                            loading="lazy" itemprop="image">
+                    </picture>
+                    <picture>
+                        <source srcset="assets/img/summerbreeze2.webp" type="image/webp">
+                        <img src="assets/img/summerbreeze2.webp" alt="Summer Breeze Tea Package" width="300"
+                            height="300" loading="lazy" itemprop="image">
+                    </picture>
+                    <figcaption>Product images</figcaption>
+                </figure>
+
+                <h3 itemprop="name">Summer Breeze</h3>
+
+                <div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                    <link itemprop="availability" href="https://schema.org/InStock">
+                    <meta itemprop="priceCurrency" content="AUD">
+                    <p>&#10003; <span itemprop="itemCondition">In Stock</span></p>
+                </div>
+
+                <div class="reviews" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
+                    <span aria-hidden="true">&#9733;&#9733;&#9733;</span>
+                    <span>(<span itemprop="ratingCount">3</span> reviews, Rating: <span
+                            itemprop="ratingValue">3</span>/5)</span>
+                </div>
+            </header>
+
+            <section class="product-description" itemprop="description">
+                <p>A vibrant pink blend of hibiscus, peppermint, and lemon balm, this tea is perfect for warm days and
+                    can
+                    be enjoyed hot or cold. Hibiscus brings refreshing qualities, while peppermint and lemon balm add
+                    gentle, soothing notes to each sip.</p>
+            </section>
+
+            <section class="product-ingredients" itemprop="nutrition" itemscope
+                itemtype="https://schema.org/NutritionInformation">
+                <h4>Ingredients</h4>
+                <p itemprop="ingredients">Hibiscus, Peppermint and Lemon Balm.</p>
+                <p><small>Sourced from multiple origins</small></p>
+            </section>
+
+            <form action="/add-to-cart" method="post" class="product-options">
+                <fieldset>
+                    <legend>Product Options</legend>
+
+                    <div class="package-options" role="radiogroup" aria-labelledby="package-label">
+                        <h4 id="package-label">Select Packaging</h4>
+
+                        <label>
+                            <input type="radio" name="package" value="pouch" checked itemprop="price" content="14.00"
+                                data-price="14.00">
+                            <span>$14.00 - 40 grams <small>(Pouch)</small></span>
+                        </label>
+
+                        <label>
+                            <input type="radio" name="package" value="cylinder" itemprop="price" content="22.00"
+                                data-price="22.00">
+                            <span>$22.00 - 70 grams <small>(Cylinder)</small></span>
+                        </label>
+                    </div>
+
+                    <div class="quantity-selector">
+                        <label for="qty-summer">Quantity:</label>
+                        <select id="qty-summer" name="quantity" min="1" max="10" required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+
+                    <output name="total-price" for="qty-summer package" class="total-price">
+                        Total: $14.00
+                    </output>
+
+                    <button type="submit" class="add-to-cart">Add to Cart</button>
+                </fieldset>
+            </form>
+
+            <footer class="product-disclaimer">
+                <details>
+                    <summary><small>Important Disclaimer</small></summary>
+                    <p itemprop="disambiguatingDescription">
+                        <small>This product is not intended to diagnose, treat, cure, or prevent any disease. Always
+                            consult
+                            with a healthcare provider before starting any new supplement or wellness regimen.</small>
+                    </p>
+                </details>
+            </footer>
+        </article>
+        <a id="product-lemonginger" class="product-anchor"></a>
+        <article id="product-lemonginger" class="product" itemprop="itemListElement" itemscope
+            itemtype="https://schema.org/Product">
+            <header>
+                <figure class="product-gallery">
+                    <picture>
+                        <source srcset="assets/img/lemongrassginger1.webp" type="image/webp">
+                        <img src="assets/img/lemongrassginger1.webp" alt="Lemongrass and Ginger Tea" width="300"
+                            height="300" loading="lazy" itemprop="image">
+                    </picture>
+                    <picture>
+                        <source srcset="assets/img/lemongrassginger2.webp" type="image/webp">
+                        <img src="assets/img/lemongrassginger2.webp" alt="Lemongrass and Ginger Tea Package" width="300"
+                            height="300" loading="lazy" itemprop="image">
+                    </picture>
+                    <figcaption>Product images</figcaption>
+                </figure>
+
+                <h3 itemprop="name">Lemongrass and Ginger</h3>
+
+                <div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                    <link itemprop="availability" href="https://schema.org/InStock">
+                    <meta itemprop="priceCurrency" content="AUD">
+                    <p>&#10003; <span itemprop="itemCondition">In Stock</span></p>
+                </div>
+
+                <div class="reviews" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
+                    <span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;</span>
+                    <span>(<span itemprop="ratingCount">1</span> review, Rating: <span
+                            itemprop="ratingValue">4</span>/5)</span>
+                </div>
+            </header>
+
+            <section class="product-description" itemprop="description">
+                <p>A refreshing blend of lemongrass and ginger, combining the citrusy notes of lemongrass with the
+                    warming
+                    spice of ginger. This invigorating tea supports digestion and provides a natural energy boost.</p>
+            </section>
+
+            <section class="product-ingredients" itemprop="nutrition" itemscope
+                itemtype="https://schema.org/NutritionInformation">
+                <h4>Ingredients</h4>
+                <p itemprop="ingredients">Lemongrass and Ginger.</p>
+                <p><small>Sourced from multiple origins</small></p>
+            </section>
+
+            <form action="/add-to-cart" method="post" class="product-options">
+                <fieldset>
+                    <legend>Product Options</legend>
+
+                    <div class="package-options" role="radiogroup" aria-labelledby="package-label">
+                        <h4 id="package-label">Select Packaging</h4>
+
+                        <label>
+                            <input type="radio" name="package" value="pouch" checked itemprop="price" content="14.00"
+                                data-price="14.00">
+                            <span>$14.00 - 50 grams <small>(Pouch)</small></span>
+                        </label>
+
+                        <label>
+                            <input type="radio" name="package" value="cylinder" itemprop="price" content="22.00"
+                                data-price="22.00">
+                            <span>$22.00 - 80 grams <small>(Cylinder)</small></span>
+                        </label>
+                    </div>
+
+                    <div class="quantity-selector">
+                        <label for="qty-lemonginger">Quantity:</label>
+                        <select id="qty-lemonginger" name="quantity" min="1" max="10" required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+
+                    <output name="total-price" for="qty-lemonginger package" class="total-price">
+                        Total: $14.00
+                    </output>
+
+                    <button type="submit" class="add-to-cart">Add to Cart</button>
+                </fieldset>
+            </form>
+
+            <footer class="product-disclaimer">
+                <details>
+                    <summary><small>Important Disclaimer</small></summary>
+                    <p itemprop="disambiguatingDescription">
+                        <small>This product is not intended to diagnose, treat, cure, or prevent any disease. Always
+                            consult
+                            with a healthcare provider before starting any new supplement or wellness regimen.</small>
+                    </p>
+                </details>
+            </footer>
+        </article>
+        </section>
+                    <!-- Artisan Blends -->
+            <a id="artisan-blends"></a>
+            <section>
+                <h3>Artisan Blends</h3>
+                        <a id="product-ceylon" class="product-anchor"></a>
+        <article id="product-ceylon" class="product" itemprop="itemListElement" itemscope
+            itemtype="https://schema.org/Product">
+            <header>
+                <figure class="product-gallery">
+                    <picture>
+                        <source srcset="assets/img/ceylonchai1.webp" type="image/webp">
+                        <img src="assets/img/ceylonchai1.webp" alt="Ceylon Chai Tea" width="300" height="300"
+                            loading="lazy" itemprop="image">
+                    </picture>
+                    <picture>
+                        <source srcset="assets/img/ceylonchai2.webp" type="image/webp">
+                        <img src="assets/img/ceylonchai2.webp" alt="Ceylon Chai Tea Package" width="300" height="300"
+                            loading="lazy" itemprop="image">
+                    </picture>
+                    <figcaption>Product images</figcaption>
+                </figure>
+
+                <h3 itemprop="name">Ceylon Chai</h3>
+
+                <div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                    <link itemprop="availability" href="https://schema.org/InStock">
+                    <meta itemprop="priceCurrency" content="AUD">
+                    <p>&#10003; <span itemprop="itemCondition">In Stock</span></p>
+                </div>
+
+                <div class="reviews" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
+                    <span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;</span>
+                    <span>(<span itemprop="ratingCount">1</span> review, Rating: <span
+                            itemprop="ratingValue">4</span>/5)</span>
+                </div>
+            </header>
+
+            <section class="product-description" itemprop="description">
+                <p>Enjoy the vibrant warmth of our Ceylon Chai, a delightful fusion of rich Ceylon Black Tea and
+                    aromatic
+                    spices. This invigorating blend features ginger, cardamom, cinnamon, star anise, cloves, and
+                    peppercorn,
+                    offering a cozy and uplifting experience.</p>
+            </section>
+
+            <section class="product-ingredients" itemprop="nutrition" itemscope
+                itemtype="https://schema.org/NutritionInformation">
+                <h4>Ingredients</h4>
+                <p itemprop="ingredients">Ceylon Black Tea, Ginger, Cardamon,
+                    Cinnamon, Star Anise, Cloves and Peppercorn.</p>
+                <p><small>Sourced from multiple origins</small></p>
+            </section>
+
+            <form action="/add-to-cart" method="post" class="product-options">
+                <fieldset>
+                    <legend>Product Options</legend>
+
+                    <div class="package-options" role="radiogroup" aria-labelledby="package-label">
+                        <h4 id="package-label">Select Packaging</h4>
+
+                        <label>
+                            <input type="radio" name="package" value="pouch" checked itemprop="price" content="14.00"
+                                data-price="14.00">
+                            <span>$14.00 - 50 grams <small>(Pouch)</small></span>
+                        </label>
+
+                        <label>
+                            <input type="radio" name="package" value="cylinder" itemprop="price" content="22.00"
+                                data-price="22.00">
+                            <span>$22.00 - 100 grams <small>(Cylinder)</small></span>
+                        </label>
+                    </div>
+
+                    <div class="quantity-selector">
+                        <label for="qty-ceylon">Quantity:</label>
+                        <select id="qty-ceylon" name="quantity" min="1" max="10" required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+
+                    <output name="total-price" for="qty-ceylon package" class="total-price">
+                        Total: $14.00
+                    </output>
+
+                    <button type="submit" class="add-to-cart">Add to Cart</button>
+                </fieldset>
+            </form>
+
+            <footer class="product-disclaimer">
+                <details>
+                    <summary><small>Important Disclaimer</small></summary>
+                    <p itemprop="disambiguatingDescription">
+                        <small>This product is not intended to diagnose, treat, cure, or prevent any disease. Always
+                            consult
+                            with a healthcare provider before starting any new supplement or wellness regimen.</small>
+                    </p>
+                </details>
+            </footer>
+        </article>
+        <a id="product-french" class="product-anchor"></a>
+        <article id="product-french" class="product" itemprop="itemListElement" itemscope
+            itemtype="https://schema.org/Product">
+            <header>
+                <figure class="product-gallery">
+                    <picture>
+                        <source srcset="assets/img/frenchearlgrey1.webp" type="image/webp">
+                        <img src="assets/img/frenchearlgrey1.webp" alt="French Earl Grey Tea" width="300" height="300"
+                            loading="lazy" itemprop="image">
+                    </picture>
+                    <picture>
+                        <source srcset="assets/img/frenchearlgrey2.webp" type="image/webp">
+                        <img src="assets/img/frenchearlgrey2.webp" alt="French Earl Grey Tea Package" width="300"
+                            height="300" loading="lazy" itemprop="image">
+                    </picture>
+                    <figcaption>Product images</figcaption>
+                </figure>
+
+                <h3 itemprop="name">French Earl Grey</h3>
+
+                <div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                    <link itemprop="availability" href="https://schema.org/InStock">
+                    <meta itemprop="priceCurrency" content="AUD">
+                    <p>&#10003; <span itemprop="itemCondition">In Stock</span></p>
+                </div>
+
+                <div class="reviews" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
+                    <span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                    <span>(<span itemprop="ratingCount">12</span> reviews, Rating: <span
+                            itemprop="ratingValue">5</span>/5)</span>
+                </div>
+            </header>
+
+            <section class="product-description" itemprop="description">
+                <p>Indulge in the elegance of our French Earl Grey, a refined blend of classic black tea infused with
+                    aromatic bergamot oil, and enriched with delicate rose petals, vibrant calendula petals, and
+                    enchanting
+                    blue cornflower petals.</p>
+            </section>
+
+            <section class="product-ingredients" itemprop="nutrition" itemscope
+                itemtype="https://schema.org/NutritionInformation">
+                <h4>Ingredients</h4>
+                <p itemprop="ingredients">Black Tea, Bergamot, Rose Petals,
+                    Calendula Petals and Blue Cornflower Petals.</p>
+                <p><small>Sourced from multiple origins</small></p>
+            </section>
+
+            <form action="/add-to-cart" method="post" class="product-options">
+                <fieldset>
+                    <legend>Product Options</legend>
+
+                    <div class="package-options" role="radiogroup" aria-labelledby="package-label">
+                        <h4 id="package-label">Select Packaging</h4>
+
+                        <label>
+                            <input type="radio" name="package" value="pouch" checked itemprop="price" content="14.00"
+                                data-price="14.00">
+                            <span>$14.00 - 50 grams <small>(Pouch)</small></span>
+                        </label>
+
+                        <label>
+                            <input type="radio" name="package" value="cylinder" itemprop="price" content="22.00"
+                                data-price="22.00">
+                            <span>$22.00 - 70 grams <small>(Cylinder)</small></span>
+                        </label>
+                    </div>
+
+                    <div class="quantity-selector">
+                        <label for="qty-french">Quantity:</label>
+                        <select id="qty-french" name="quantity" min="1" max="10" required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+
+                    <output name="total-price" for="qty-french package" class="total-price">
+                        Total: $14.00
+                    </output>
+
+                    <button type="submit" class="add-to-cart">Add to Cart</button>
+                </fieldset>
+            </form>
+
+            <footer class="product-disclaimer">
+                <details>
+                    <summary><small>Important Disclaimer</small></summary>
+                    <p itemprop="disambiguatingDescription">
+                        <small>This product is not intended to diagnose, treat, cure, or prevent any disease. Always
+                            consult
+                            with a healthcare provider before starting any new supplement or wellness regimen.</small>
+                    </p>
+                </details>
+            </footer>
+        </article>
+        <a id="product-english" class="product-anchor"></a>
+        <article id="product-english" class="product" itemprop="itemListElement" itemscope
+            itemtype="https://schema.org/Product">
+            <header>
+                <figure class="product-gallery">
+                    <picture>
+                        <source srcset="assets/img/Natures2_with_fonts.webp" type="image/webp">
+                        <img src="assets/img/Natures2_with_fonts.webp" alt="English Breakfast Tea" width="300"
+                            height="300" loading="lazy" itemprop="image">
+                    </picture>
+                    <figcaption>Product image</figcaption>
+                </figure>
+
+                <h3 itemprop="name">English Breakfast</h3>
+
+                <div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                    <link itemprop="availability" href="https://schema.org/InStock">
+                    <meta itemprop="priceCurrency" content="AUD">
+                    <p>&#10003; <span itemprop="itemCondition">In Stock</span></p>
+                </div>
+
+                <div class="reviews" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
+                    <span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;</span>
+                    <span>(<span itemprop="ratingCount">5</span> reviews, Rating: <span
+                            itemprop="ratingValue">4</span>/5)</span>
+                </div>
+            </header>
+
+            <section class="product-description" itemprop="description">
+                <p>Start your day with the robust and hearty flavor of our English Breakfast tea. This classic blend
+                    combines a selection of premium black teas, delivering a strong and invigorating brew perfect with
+                    or
+                    without milk.</p>
+            </section>
+
+            <section class="product-ingredients" itemprop="nutrition" itemscope
+                itemtype="https://schema.org/NutritionInformation">
+                <h4>Ingredients</h4>
+                <p itemprop="ingredients">Black Tea.</p>
+                <p><small>Sourced from multiple origins</small></p>
+            </section>
+
+            <form action="/add-to-cart" method="post" class="product-options">
+                <fieldset>
+                    <legend>Product Options</legend>
+
+                    <div class="package-options" role="radiogroup" aria-labelledby="package-label">
+                        <h4 id="package-label">Select Packaging</h4>
+
+                        <label>
+                            <input type="radio" name="package" value="pouch" checked itemprop="price" content="14.00"
+                                data-price="14.00">
+                            <span>$14.00 - 50 grams <small>(Pouch)</small></span>
+                        </label>
+
+                        <label>
+                            <input type="radio" name="package" value="cylinder" itemprop="price" content="22.00"
+                                data-price="22.00">
+                            <span>$22.00 - 80 grams <small>(Cylinder)</small></span>
+                        </label>
+                    </div>
+
+                    <div class="quantity-selector">
+                        <label for="qty-english">Quantity:</label>
+                        <select id="qty-english" name="quantity" min="1" max="10" required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+
+                    <output name="total-price" for="qty-english package" class="total-price">
+                        Total: $14.00
+                    </output>
+
+                    <button type="submit" class="add-to-cart">Add to Cart</button>
+                </fieldset>
+            </form>
+
+            <footer class="product-disclaimer">
+                <details>
+                    <summary><small>Important Disclaimer</small></summary>
+                    <p itemprop="disambiguatingDescription">
+                        <small>This product is not intended to diagnose, treat, cure, or prevent any disease. Always
+                            consult
+                            with a healthcare provider before starting any new supplement or wellness regimen.</small>
+                    </p>
+                </details>
+            </footer>
+        </article>
+        <a id="product-lemonlift" class="product-anchor"></a>
+        <article id="product-lemonlift" class="product" itemprop="itemListElement" itemscope
+            itemtype="https://schema.org/Product">
+            <header>
+                <figure class="product-gallery">
+                    <picture>
+                        <source srcset="assets/img/Natures2_with_fonts.webp" type="image/webp">
+                        <img src="assets/img/Natures2_with_fonts.webp" alt="Lemon Lift Tea" width="300" height="300"
+                            loading="lazy" itemprop="image">
+                    </picture>
+                    <figcaption>Product image</figcaption>
+                </figure>
+
+                <h3 itemprop="name">Lemon Lift</h3>
+
+                <div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                    <link itemprop="availability" href="https://schema.org/OutOfStock">
+                    <meta itemprop="priceCurrency" content="AUD">
+                    <p>&#10007; <span itemprop="itemCondition">Out of Stock</span></p>
+                </div>
+
+                <div class="reviews" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
+                    <span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                    <span>(<span itemprop="ratingCount">6</span> reviews, Rating: <span
+                            itemprop="ratingValue">5</span>/5)</span>
+                </div>
+            </header>
+
+            <section class="product-description" itemprop="description">
+                <p>Revitalise your senses with our Lemon Lift blend, featuring a delightful combination of robust black
+                    tea,
+                    infused with zesty lemon myrtle, refreshing lemon peel, fragrant lemon verbena, and invigorating
+                    lemongrass.</p>
+            </section>
+
+            <section class="product-ingredients" itemprop="nutrition" itemscope
+                itemtype="https://schema.org/NutritionInformation">
+                <h4>Ingredients</h4>
+                <p itemprop="ingredients">Black Tea, Lemon Myrtle, Lemon Peel, Lemon
+                    Verbena and Lemongrass.</p>
+                <p><small>Sourced from multiple origins</small></p>
+            </section>
+
+            <form action="mailto:info@naturesinfusions.com" method="post" class="product-options">
+                <fieldset>
+                    <legend>Out of Stock Notification</legend>
+
+                    <div class="email-notification">
+                        <label for="customer-email-lemonlift">Email Address:</label>
+                        <input type="email" id="customer-email-lemonlift" name="email" required
+                            placeholder="your@email.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+                    </div>
+
+                    <button type="submit" class="notify-me">Notify When Available</button>
+                </fieldset>
+            </form>
+
+            <footer class="product-disclaimer">
+                <details>
+                    <summary><small>Important Disclaimer</small></summary>
+                    <p itemprop="disambiguatingDescription">
+                        <small>This product is not intended to diagnose, treat, cure, or prevent any disease. Always
+                            consult
+                            with a healthcare provider before starting any new supplement or wellness regimen.</small>
+                    </p>
+                </details>
+            </footer>
+        </article>
+        <a id="product-rainforest" class="product-anchor"></a>
+        <article id="product-rainforest" class="product" itemprop="itemListElement" itemscope
+            itemtype="https://schema.org/Product">
+            <header>
+                <figure class="product-gallery">
+                    <picture>
+                        <source srcset="assets/img/rainforest1.webp" type="image/webp">
+                        <img src="assets/img/rainforest1.webp" alt="Australian Rainforest and Lemon Myrtle Tea"
+                            width="300" height="300" loading="lazy" itemprop="image">
+                    </picture>
+                    <picture>
+                        <source srcset="assets/img/rainforest2.webp" type="image/webp">
+                        <img src="assets/img/rainforest2.webp" alt="Australian Rainforest and Lemon Myrtle Tea Package"
+                            width="300" height="300" loading="lazy" itemprop="image">
+                    </picture>
+                    <figcaption>Product images</figcaption>
+                </figure>
+
+                <h3 itemprop="name">Australian Rainforest and Lemon Myrtle</h3>
+
+                <div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                    <link itemprop="availability" href="https://schema.org/InStock">
+                    <meta itemprop="priceCurrency" content="AUD">
+                    <p>&#10003; <span itemprop="itemCondition">In Stock</span></p>
+                </div>
+
+                <div class="reviews" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
+                    <span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
                     <span>(<span itemprop="ratingCount">20</span> reviews, Rating: <span
                             itemprop="ratingValue">5</span>/5)</span>
                 </div>
@@ -1916,11 +3618,11 @@
                 <div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                     <link itemprop="availability" href="https://schema.org/InStock">
                     <meta itemprop="priceCurrency" content="AUD">
-                    <p>✓ <span itemprop="itemCondition">In Stock</span></p>
+                    <p>&#10003; <span itemprop="itemCondition">In Stock</span></p>
                 </div>
 
                 <div class="reviews" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
-                    <span aria-hidden="true">★★★</span>
+                    <span aria-hidden="true">&#9733;&#9733;&#9733;</span>
                     <span>(<span itemprop="ratingCount">3</span> reviews, Rating: <span
                             itemprop="ratingValue">3</span>/5)</span>
                 </div>
@@ -2008,11 +3710,11 @@
                 <div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                     <link itemprop="availability" href="https://schema.org/OutOfStock">
                     <meta itemprop="priceCurrency" content="AUD">
-                    <p>⚑ <span itemprop="itemCondition">Out of Stock</span></p>
+                    <p>&#10007; <span itemprop="itemCondition">Out of Stock</span></p>
                 </div>
 
                 <div class="reviews" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
-                    <span aria-hidden="true">★★★★</span>
+                    <span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;</span>
                     <span>(<span itemprop="ratingCount">1</span> review, Rating: <span
                             itemprop="ratingValue">4</span>/5)</span>
                 </div>
@@ -2058,6 +3760,11 @@
                 </details>
             </footer>
         </article>
+        </section>
+                    <!-- Balms -->
+            <a id="balms"></a>
+            <section>
+                <h3>Balms</h3>
         <a id="product-sleepbalm" class="product-anchor"></a>
         <article id="product-sleepbalm" class="product" itemprop="itemListElement" itemscope
             itemtype="https://schema.org/Product">
@@ -2076,11 +3783,11 @@
                 <div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                     <link itemprop="availability" href="https://schema.org/InStock">
                     <meta itemprop="priceCurrency" content="AUD">
-                    <p>✓ <span itemprop="itemCondition">In Stock</span></p>
+                    <p>&#10003; <span itemprop="itemCondition">In Stock</span></p>
                 </div>
 
                 <div class="reviews" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
-                    <span aria-hidden="true">★★★★</span>
+                    <span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;</span>
                     <span>(<span itemprop="ratingCount">5</span> reviews, Rating: <span
                             itemprop="ratingValue">4</span>/5)</span>
                 </div>
@@ -2153,11 +3860,11 @@
                 <div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                     <link itemprop="availability" href="https://schema.org/InStock">
                     <meta itemprop="priceCurrency" content="AUD">
-                    <p>✓ <span itemprop="itemCondition">In Stock</span></p>
+                    <p>&#10003; <span itemprop="itemCondition">In Stock</span></p>
                 </div>
 
                 <div class="reviews" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
-                    <span aria-hidden="true">★★★★</span>
+                    <span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;</span>
                     <span>(<span itemprop="ratingCount">5</span> reviews, Rating: <span
                             itemprop="ratingValue">4</span>/5)</span>
                 </div>
@@ -2214,6 +3921,11 @@
                 </details>
             </footer>
         </article>
+        </section>
+                    <!-- Creams -->
+            <a id="creams"></a>
+            <section>
+                <h3>Creams</h3>
         <a id="product-calendula" class="product-anchor"></a>
         <article id="product-calendula" class="product" itemprop="itemListElement" itemscope
             itemtype="https://schema.org/Product">
@@ -2232,11 +3944,11 @@
                 <div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                     <link itemprop="availability" href="https://schema.org/InStock">
                     <meta itemprop="priceCurrency" content="AUD">
-                    <p>✓ <span itemprop="itemCondition">In Stock</span></p>
+                    <p>&#10003; <span itemprop="itemCondition">In Stock</span></p>
                 </div>
 
                 <div class="reviews" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
-                    <span aria-hidden="true">★★★★</span>
+                    <span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;</span>
                     <span>(<span itemprop="ratingCount">5</span> reviews, Rating: <span
                             itemprop="ratingValue">4</span>/5)</span>
                 </div>
@@ -2295,6 +4007,11 @@
                 </details>
             </footer>
         </article>
+        </section>
+                    <!-- Self Care -->
+            <a id="selfcare"></a>
+            <section>
+                <h3>Self Care</h3>
         <a id="product-pillow" class="product-anchor"></a>
         <article id="product-pillow" class="product" itemprop="itemListElement" itemscope
             itemtype="https://schema.org/Product">
@@ -2313,11 +4030,11 @@
                 <div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                     <link itemprop="availability" href="https://schema.org/InStock">
                     <meta itemprop="priceCurrency" content="AUD">
-                    <p>✓ <span itemprop="itemCondition">In Stock</span></p>
+                    <p>&#10003; <span itemprop="itemCondition">In Stock</span></p>
                 </div>
 
                 <div class="reviews" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
-                    <span aria-hidden="true">★★★★</span>
+                    <span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;</span>
                     <span>(<span itemprop="ratingCount">5</span> reviews, Rating: <span
                             itemprop="ratingValue">4</span>/5)</span>
                 </div>
@@ -2388,11 +4105,11 @@
                 <div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                     <link itemprop="availability" href="https://schema.org/InStock">
                     <meta itemprop="priceCurrency" content="AUD">
-                    <p>✓ <span itemprop="itemCondition">In Stock</span></p>
+                    <p>&#10003; <span itemprop="itemCondition">In Stock</span></p>
                 </div>
 
                 <div class="reviews" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
-                    <span aria-hidden="true">★★★★</span>
+                    <span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;</span>
                     <span>(<span itemprop="ratingCount">5</span> reviews, Rating: <span
                             itemprop="ratingValue">4</span>/5)</span>
                 </div>
@@ -2463,11 +4180,11 @@
                 <div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                     <link itemprop="availability" href="https://schema.org/InStock">
                     <meta itemprop="priceCurrency" content="AUD">
-                    <p>✓ <span itemprop="itemCondition">In Stock</span></p>
+                    <p>&#10003; <span itemprop="itemCondition">In Stock</span></p>
                 </div>
 
                 <div class="reviews" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
-                    <span aria-hidden="true">★★★★</span>
+                    <span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;</span>
                     <span>(<span itemprop="ratingCount">5</span> reviews, Rating: <span
                             itemprop="ratingValue">4</span>/5)</span>
                 </div>
@@ -2519,6 +4236,11 @@
                 </details>
             </footer>
         </article>
+        </section>
+                    <!-- Accessories -->
+            <a id="accessories"></a>
+            <section>
+                <h3>Accessories</h3>
         <a id="product-flask" class="product-anchor"></a>
         <article id="product-flask" class="product" itemprop="itemListElement" itemscope
             itemtype="https://schema.org/Product">
@@ -2537,11 +4259,11 @@
                 <div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                     <link itemprop="availability" href="https://schema.org/InStock">
                     <meta itemprop="priceCurrency" content="AUD">
-                    <p>✓ <span itemprop="itemCondition">In Stock</span></p>
+                    <p>&#10003; <span itemprop="itemCondition">In Stock</span></p>
                 </div>
 
                 <div class="reviews" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
-                    <span aria-hidden="true">★★★★</span>
+                    <span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;</span>
                     <span>(<span itemprop="ratingCount">1</span> review, Rating: <span
                             itemprop="ratingValue">4</span>/5)</span>
                 </div>
@@ -2576,12 +4298,12 @@
                     <dt>Capacity</dt>
                     <dd>500ml</dd>
                     <dt>Dimensions</dt>
-                    <dd>6.5cm diameter × 22.5cm height</dd>
+                    <dd>6.5cm diameter Ã— 22.5cm height</dd>
                     <dt>Weight</dt>
                     <dd>380g</dd>
                     <dt>Heat Retention</dt>
-                    <dd>Tested at room temperature 20°C. When filled with boiling water 95°C, the cup maintains a
-                        temperature above 42°C for up to six hours.</dd>
+                    <dd>Tested at room temperature 20Â°C. When filled with boiling water 95Â°C, the cup maintains a
+                        temperature above 42Â°C for up to six hours.</dd>
                 </dl>
             </section>
 
@@ -2662,11 +4384,11 @@
                 <div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                     <link itemprop="availability" href="https://schema.org/InStock">
                     <meta itemprop="priceCurrency" content="AUD">
-                    <p>⚑ <span itemprop="itemCondition">Out of Stock</span></p>
+                    <p>&#10007; <span itemprop="itemCondition">Out of Stock</span></p>
                 </div>
 
                 <div class="reviews" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
-                    <span aria-hidden="true">★★★★</span>
+                    <span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;</span>
                     <span>(<span itemprop="ratingCount">1</span> review, Rating: <span
                             itemprop="ratingValue">4</span>/5)</span>
                 </div>
@@ -2694,7 +4416,7 @@
                     <dt>Material</dt>
                     <dd>304 Stainless steel</dd>
                     <dt>Dimensions</dt>
-                    <dd>14.5cm length × 2cm diameter</dd>
+                    <dd>14.5cm length Ã— 2cm diameter</dd>
                     <dt>Capacity</dt>
                     <dd>Holds up to 2 teaspoons of tea</dd>
                     <dt>Weight</dt>
@@ -2769,11 +4491,11 @@
                 <div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                     <link itemprop="availability" href="https://schema.org/InStock">
                     <meta itemprop="priceCurrency" content="AUD">
-                    <p>✓ <span itemprop="itemCondition">In Stock</span></p>
+                    <p>&#10003; <span itemprop="itemCondition">In Stock</span></p>
                 </div>
 
                 <div class="reviews" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
-                    <span aria-hidden="true">★★★★</span>
+                    <span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;</span>
                     <span>(<span itemprop="ratingCount">1</span> review, Rating: <span
                             itemprop="ratingValue">4</span>/5)</span>
                 </div>
@@ -2803,11 +4525,11 @@
                     <dt>Capacity</dt>
                     <dd>800ml</dd>
                     <dt>Dimensions</dt>
-                    <dd>11cm height × 10cm diameter</dd>
+                    <dd>11cm height Ã— 10cm diameter</dd>
                     <dt>Weight</dt>
                     <dd>650g</dd>
                     <dt>Heat Resistance</dt>
-                    <dd>Between -20°C to 150°C</dd>
+                    <dd>Between -20Â°C to 150Â°C</dd>
                 </dl>
             </section>
 
@@ -2864,11 +4586,11 @@
                 <div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                     <link itemprop="availability" href="https://schema.org/InStock">
                     <meta itemprop="priceCurrency" content="AUD">
-                    <p>✓ <span itemprop="itemCondition">In Stock</span></p>
+                    <p>&#10003; <span itemprop="itemCondition">In Stock</span></p>
                 </div>
 
                 <div class="reviews" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
-                    <span aria-hidden="true">★★★★</span>
+                    <span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;</span>
                     <span>(<span itemprop="ratingCount">1</span> review, Rating: <span
                             itemprop="ratingValue">4</span>/5)</span>
                 </div>
@@ -2898,7 +4620,7 @@
                     <dt>Quantity</dt>
                     <dd>10 bags per pack</dd>
                     <dt>Bag Size</dt>
-                    <dd>7.5cm × 6.5cm</dd>
+                    <dd>7.5cm Ã— 6.5cm</dd>
                     <dt>Compost Time</dt>
                     <dd>3-6 months in home compost</dd>
                 </dl>
@@ -2956,11 +4678,11 @@
             <div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                 <link itemprop="availability" href="https://schema.org/InStock">
                 <meta itemprop="priceCurrency" content="AUD">
-                <p>✓ <span itemprop="itemCondition">In Stock</span></p>
+                <p>&#10003; <span itemprop="itemCondition">In Stock</span></p>
             </div>
             
             <div class="reviews" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
-                <span aria-hidden="true">★★★★</span>
+                <span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;</span>
                 <span>(<span itemprop="ratingCount">1</span> review, Rating: <span itemprop="ratingValue">4</span>/5)</span>
             </div>
         </header>
@@ -3011,11 +4733,11 @@
                 <div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                     <link itemprop="availability" href="https://schema.org/InStock">
                     <meta itemprop="priceCurrency" content="AUD">
-                    <p>✓ <span itemprop="itemCondition">In Stock</span></p>
+                    <p>&#10003; <span itemprop="itemCondition">In Stock</span></p>
                 </div>
 
                 <div class="reviews" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
-                    <span aria-hidden="true">★★★★</span>
+                    <span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;</span>
                     <span>(<span itemprop="ratingCount">1</span> review, Rating: <span
                             itemprop="ratingValue">4</span>/5)</span>
                 </div>
@@ -3050,12 +4772,12 @@
                     <dt>Capacity</dt>
                     <dd>500ml</dd>
                     <dt>Dimensions</dt>
-                    <dd>6.5cm diameter × 22.5cm height</dd>
+                    <dd>6.5cm diameter Ã— 22.5cm height</dd>
                     <dt>Weight</dt>
                     <dd>380g</dd>
                     <dt>Heat Retention</dt>
-                    <dd>Tested at room temperature 20°C. When filled with boiling water 95°C, the cup maintains a
-                        temperature above 42°C for up to six hours.</dd>
+                    <dd>Tested at room temperature 20Â°C. When filled with boiling water 95Â°C, the cup maintains a
+                        temperature above 42Â°C for up to six hours.</dd>
                 </dl>
             </section>
 
@@ -3136,11 +4858,11 @@
                 <div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                     <link itemprop="availability" href="https://schema.org/InStock">
                     <meta itemprop="priceCurrency" content="AUD">
-                    <p>⚑ <span itemprop="itemCondition">Out of Stock</span></p>
+                    <p>&#10007; <span itemprop="itemCondition">Out of Stock</span></p>
                 </div>
 
                 <div class="reviews" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
-                    <span aria-hidden="true">★★★★</span>
+                    <span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;</span>
                     <span>(<span itemprop="ratingCount">1</span> review, Rating: <span
                             itemprop="ratingValue">4</span>/5)</span>
                 </div>
@@ -3168,7 +4890,7 @@
                     <dt>Material</dt>
                     <dd>304 Stainless steel</dd>
                     <dt>Dimensions</dt>
-                    <dd>14.5cm length × 2cm diameter</dd>
+                    <dd>14.5cm length Ã— 2cm diameter</dd>
                     <dt>Capacity</dt>
                     <dd>Holds up to 2 teaspoons of tea</dd>
                     <dt>Weight</dt>
@@ -3243,11 +4965,11 @@
                 <div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                     <link itemprop="availability" href="https://schema.org/InStock">
                     <meta itemprop="priceCurrency" content="AUD">
-                    <p>✓ <span itemprop="itemCondition">In Stock</span></p>
+                    <p>&#10003; <span itemprop="itemCondition">In Stock</span></p>
                 </div>
 
                 <div class="reviews" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
-                    <span aria-hidden="true">★★★★</span>
+                    <span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;</span>
                     <span>(<span itemprop="ratingCount">1</span> review, Rating: <span
                             itemprop="ratingValue">4</span>/5)</span>
                 </div>
@@ -3277,11 +4999,11 @@
                     <dt>Capacity</dt>
                     <dd>800ml</dd>
                     <dt>Dimensions</dt>
-                    <dd>11cm height × 10cm diameter</dd>
+                    <dd>11cm height Ã— 10cm diameter</dd>
                     <dt>Weight</dt>
                     <dd>650g</dd>
                     <dt>Heat Resistance</dt>
-                    <dd>Between -20°C to 150°C</dd>
+                    <dd>Between -20Â°C to 150Â°C</dd>
                 </dl>
             </section>
 
@@ -3336,11 +5058,11 @@
             <div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                 <link itemprop="availability" href="https://schema.org/InStock">
                 <meta itemprop="priceCurrency" content="AUD">
-                <p>✓ <span itemprop="itemCondition">In Stock</span></p>
+                <p>&#10003; <span itemprop="itemCondition">In Stock</span></p>
             </div>
             
             <div class="reviews" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
-                <span aria-hidden="true">★★★★</span>
+                <span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;</span>
                 <span>(<span itemprop="ratingCount">1</span> review, Rating: <span itemprop="ratingValue">4</span>/5)</span>
             </div>
         </header>
@@ -3368,7 +5090,7 @@
                 <dt>Quantity</dt>
                 <dd>10 bags per pack</dd>
                 <dt>Bag Size</dt>
-                <dd>7.5cm × 6.5cm</dd>
+                <dd>7.5cm Ã— 6.5cm</dd>
                 <dt>Compost Time</dt>
                 <dd>3-6 months in home compost</dd>
             </dl>
@@ -3410,6 +5132,7 @@
             </details>
         </footer>
     </article> -->
+    </section>
 
         <hr />
 
@@ -3481,46 +5204,98 @@
         </script>
 
         <hr />
-        <footer itemscope itemtype="https://schema.org/WPFooter">
-            <h3>Nature's Infusions</h3>
-            <p itemprop="description">Nature's Infusions, your source for premium tea and herbal remedies.</p>
+            <footer class="site-footer" itemscope itemtype="https://schema.org/WPFooter" role="contentinfo"
+                aria-label="Site footer">
+                <div class="container">
+                    <div class="branding">
+                        <div class="brand-text">
+                            <h3>Nature's Infusions</h3>
+                            <p itemprop="description">Premium organic teas and herbal remedies — handcrafted in Perth.
+                            </p>
+                            <a class="logo" href="/" aria-label="Nature's Infusions home">
+                                <img src="/assets/img/logo.svg" alt="Nature's Infusions logo">
+                            </a>
+                        </div>
+                    </div>
 
-            <section>
-                <h4>Quick Links</h4>
-                <nav aria-label="Quick links">
-                    <ul>
-                        <li><a href="../index.html" itemprop="url">Home</a></li>
-                        <li><a href="pages/about.html" itemprop="url">About</a></li>
-                        <li><a href="." itemprop="url">Store</a></li>
-                        <li><a href="pages/stockists.html" itemprop="url">Stockists</a></li>
-                        <li><a href="pages/contact.html" itemprop="url">Contact & Support</a></li>
-                        <li><a href="pages/terms.html" itemprop="url">Terms & Conditions</a></li>
-                        <li><a href="pages/social.html" itemprop="url">Social</a></li>
-                    </ul>
-                </nav>
-            </section>
+                    <section class="quick-links-wrapper">
+                        <h4>
+                            <button class="accordion-toggle" aria-expanded="false" aria-controls="quick-links-panel"
+                                data-controls="quick-links-panel">Quick Links</button>
+                        </h4>
+                        <nav id="quick-links-panel" class="links-grid" aria-label="Quick links" aria-hidden="false">
+                            <ul>
+                                <li><a href="." itemprop="url">Home</a></li>
+                                <li><a href="pages/about.html" itemprop="url">About</a></li>
+                                <li><a href="pages/store.html" itemprop="url">Store</a></li>
+                                <li><a href="pages/stockists.html" itemprop="url">Stockists</a></li>
+                                <li><a href="pages/contact.html" itemprop="url">Contact &amp; Support</a></li>
+                                <li><a href="pages/terms.html" itemprop="url">Terms &amp; Conditions</a></li>
+                                <li><a href="pages/social.html" itemprop="url">Social</a></li>
+                            </ul>
+                        </nav>
+                    </section>
 
-            <section>
-                <h4>Connect</h4>
-                <nav aria-label="Social media links">
-                    <ul>
-                        <li><a href="https://www.facebook.com/NaturesInfusions/" rel="noopener noreferrer"
-                                itemprop="sameAs">Facebook</a></li>
-                        <li><a href="https://www.instagram.com/natures_infusions_au/" rel="noopener noreferrer"
-                                itemprop="sameAs">Instagram</a></li>
-                    </ul>
-                </nav>
-            </section>
+                    <section>
+                        <h4>Connect</h4>
+                        <nav aria-label="Social media links">
+                            <ul>
+                                <li>
+                                    <a class="facebook" href="https://www.facebook.com/NaturesInfusions/"
+                                        rel="noopener noreferrer" itemprop="sameAs" target="_blank"
+                                        aria-label="Nature's Infusions on Facebook (opens in new tab)">
+                                        <!-- Facebook SVG (uses currentColor) -->
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                                            <path
+                                                d="M22 12C22 6.477 17.523 2 12 2S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878V14.89h-2.54v-2.89h2.54V9.845c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.772-1.63 1.562v1.868h2.773l-.443 2.89h-2.33v6.99C18.343 21.128 22 16.991 22 12z"
+                                                fill="currentColor" />
+                                        </svg>
+                                        <span class="visually-hidden">Facebook</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="instagram" href="https://www.instagram.com/natures_infusions_au/"
+                                        rel="noopener noreferrer" itemprop="sameAs" target="_blank"
+                                        aria-label="Nature's Infusions on Instagram (opens in new tab)">
+                                        <!-- Instagram SVG (uses currentColor) -->
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                                            <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor"
+                                                stroke-width="1.5" fill="none" />
+                                            <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5"
+                                                fill="none" />
+                                            <circle cx="17.5" cy="6.5" r="0.75" fill="currentColor" />
+                                        </svg>
+                                        <span class="visually-hidden">Instagram</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </section>
 
-            <div>
-                <p>&copy; <time datetime="2025">2025</time> Nature's Infusions. All rights reserved.</p>
-                <p>Powered by Ultra-Simple Static EStore Framework</p>
-                <p>Author: <span itemprop="author">2MuchC0ff33</span> <a href="https://2muchc0ff33.github.io"
-                        itemprop="url">Adrian Gallo (aka 2MuchC0ff33)</a></p>
-                <p>Website generated: <time datetime="2025-07-21" itemprop="datePublished">2025/07/21</time></p>
-            </div>
-        </footer>
-    </section>
+                </div>
+                <div class="legal-bar" role="contentinfo" aria-label="Legal and credits">
+                    <div class="legal">
+                        <p>&copy; <time datetime="2025">2025</time> Nature's Infusions. All rights reserved.</p>
+                        <p>Powered by Ultra-Simple Static EStore Framework</p>
+                        <p>Author: <span itemprop="author">Adrian Gallo (2MuchC0ff33)</span>
+                            <a class="github" href="https://2muchc0ff33.github.io" itemprop="url" target="_blank"
+                                rel="noopener noreferrer" aria-label="Adrian Gallo on GitHub (opens in new tab)">
+                                <!-- GitHub mark (inline SVG) -->
+                                <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill="currentColor"
+                                        d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.38-3.88-1.38-.53-1.36-1.3-1.72-1.3-1.72-1.06-.73-.01-.73-.01-.73 1.14.08 1.74 1.17 1.74 1.17 1.04 1.78 2.7 1.27 3.36.97.1-.76.4-1.27.72-1.56-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.17-3.1-.12-.29-.51-1.44.11-3 0 0 .95-.31 3.12 1.18A10.94 10.94 0 0112 6.84c.96.005 1.92.13 2.82.38 2.16-1.5 3.11-1.18 3.11-1.18.62 1.56.23 2.71.12 3 .73.81 1.16 1.84 1.16 3.1 0 4.43-2.7 5.4-5.27 5.68.41.36.78 1.07.78 2.16 0 1.56-.01 2.82-.01 3.2 0 .31.21.67.8.56A11.5 11.5 0 0023.5 12C23.5 5.73 18.27.5 12 .5z" />
+                                </svg>
+                                <span class=" visually-hidden">Adrian Gallo (aka 2MuchC0ff33) on GitHub</span>
+                            </a>
+                        </p>
+                        <p>Website generated: <time datetime="2025-07-21" itemprop="datePublished">21/07/2025</time>
+                        </p>
+                    </div>
+                </div>
+            </footer>
     </main>
 </body>
 
