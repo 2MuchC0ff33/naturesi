@@ -1,4 +1,6 @@
-/* Category anchor for jump links (hidden, but accessible for navigation) */
+/* ==========================================================================
+Category anchor for jump links (hidden, but accessible for navigation)
+========================================================================== */
 .category-anchor {
     display: block;
     height: 0;
@@ -12,9 +14,7 @@
 Mobile-first E-commerce Base Styles
 Combines HTML5 Boilerplate v9.0.1 with modern enhancements
 ========================================================================== */
-
 :root {
-    /* Color System */
     --color-background: #ffffff;
     --color-text: #050505;
     --color-accent: #346967;
@@ -24,45 +24,34 @@ Combines HTML5 Boilerplate v9.0.1 with modern enhancements
     --color-success: #4caf50;
     --color-warning: #ff9800;
     --color-error: #f44336;
-
-    /* Typography */
     --min-font: 16px;
     --max-font: 20px;
     --min-width: 320px;
     --max-width: 1200px;
     --line-height: 1.6;
-
-    /* Spacing System (1rem = 16px) */
     --space-unit: 1rem;
-    --space-xxs: calc(0.25 * var(--space-unit));
-    --space-xs: calc(0.5 * var(--space-unit));
-    --space-sm: calc(0.75 * var(--space-unit));
-    --space-md: calc(1.25 * var(--space-unit));
-    --space-lg: calc(2 * var(--space-unit));
-    --space-xl: calc(3.25 * var(--space-unit));
-
-    /* Effects */
+    --space-xxs: 0.25rem;
+    --space-xs: 0.5rem;
+    --space-sm: 0.75rem;
+    --space-md: 1.25rem;
+    --space-lg: 2rem;
+    --space-xl: 3.25rem;
     --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
     --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
     --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
     --shadow-accent: 0 0 0 3px color-mix(in srgb, var(--color-accent) 20%, transparent);
-
-    /* Borders */
     --radius-sm: 0.25rem;
     --radius-md: 0.5rem;
     --radius-lg: 1rem;
     --radius-full: 9999px;
-
-    /* Transitions */
     --transition-fast: 150ms;
     --transition-medium: 300ms;
     --transition-slow: 500ms;
 }
 
 /* ==========================================================================
-Base Reset (HTML5 Boilerplate Enhanced)
+Base Reset
 ========================================================================== */
-
 *,
 *::before,
 *::after {
@@ -71,14 +60,10 @@ Base Reset (HTML5 Boilerplate Enhanced)
     padding: 0;
 }
 
-/* Document
-    ========================================================================== */
-
 html {
     color: var(--color-text);
     font-size: var(--min-font);
     line-height: var(--line-height);
-    /* Use Arial-first, fall back to system-ui for modern rendering and accessibility */
     font-family: "Arial", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
     -webkit-text-size-adjust: 100%;
 }
@@ -89,16 +74,18 @@ html {
     }
 }
 
-/* Selection styles
+/* ==========================================================================
+Selection styles
 ========================================================================== */
-
 ::-moz-selection {
     background: var(--color-accent);
     color: white;
     text-shadow: none;
 }
 
-/* media elements (images, svg, video) */
+/* ==========================================================================
+Media elements
+========================================================================== */
 img,
 svg,
 video {
@@ -111,17 +98,15 @@ img {
     height: auto;
 }
 
-/* Forms
+/* ==========================================================================
+Forms
 ========================================================================== */
-
 button,
 input,
 select,
 textarea {
     padding: var(--space-xs) var(--space-sm);
-    transition:
-        border-color var(--transition-fast),
-        box-shadow var(--transition-fast);
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
     margin: 0;
 }
 
@@ -161,19 +146,15 @@ button:focus-visible {
     transform: translateY(-1px);
 }
 
-/* Accessibility
+/* ==========================================================================
+Accessibility
 ========================================================================== */
-
 :focus-visible {
     outline: 2px solid var(--color-accent);
     outline-offset: 0.25rem;
 }
 
-/* Skip link: always visible, positioned just below the header on the left
-   (adjust --header-height variable if header size changes). */
 .skip-link {
-    /* Keep the skip link accessible but visually out of the way by default.
-       It becomes visible when focused (keyboard users). */
     position: absolute;
     left: -9999px;
     top: auto;
@@ -191,7 +172,6 @@ button:focus-visible {
 
 .skip-link:focus,
 .skip-link:focus-visible {
-    /* Bring the link on-screen when focused so keyboard users can interact. */
     position: absolute;
     left: var(--space-md);
     top: calc(var(--header-height, 3.75rem));
@@ -207,9 +187,9 @@ button:focus-visible {
     }
 }
 
-/* Horizontal rule
+/* ==========================================================================
+Horizontal rule
 ========================================================================== */
-
 hr {
     border: 0;
     border-top: 1px solid var(--color-light-background);
@@ -218,9 +198,8 @@ hr {
 }
 
 /* ==========================================================================
-HTML5 Boilerplate Helper Classes (Enhanced)
+Helper Classes
 ========================================================================== */
-
 .hidden,
 [hidden] {
     display: none !important;
@@ -262,8 +241,6 @@ HTML5 Boilerplate Helper Classes (Enhanced)
 /* ==========================================================================
 Modern Utilities
 ========================================================================== */
-
-/* Container system */
 .container {
     width: 100%;
     padding-inline: var(--space-md);
@@ -271,11 +248,6 @@ Modern Utilities
     max-width: var(--max-width);
 }
 
-/* Header-specific container adjustments: allow the header nav to use less inset
-   so items can stretch closer to the viewport edges while other containers keep
-   their standard padding. */
-
-/* Grid system */
 .grid {
     display: grid;
     gap: var(--space-md);
@@ -287,7 +259,6 @@ Modern Utilities
     }
 }
 
-/* Spacing utilities */
 .p-sm {
     padding: var(--space-sm);
 }
@@ -305,19 +276,14 @@ Modern Utilities
 }
 
 /* ==========================================================================
-Media Queries
+Media Queries — Device, Dark Mode, Print
 ========================================================================== */
-
-/* High-resolution devices */
 @media print,
 (-webkit-min-device-pixel-ratio: 1.25),
 (min-resolution: 1.25dppx),
 (min-resolution: 120dpi) {
-    /* Future high-DPI adjustments */
+    /* High-DPI adjustments */
 }
-
-/* Dark mode
-========================================================================== */
 
 @media (prefers-color-scheme: dark) {
     :root {
@@ -335,9 +301,6 @@ Media Queries
         color: color-mix(in srgb, var(--color-accent) 80%, white);
     }
 }
-
-/* Print styles
-========================================================================== */
 
 @media print {
 
@@ -396,16 +359,11 @@ Media Queries
     }
 }
 
-
-/* Amazon-like header styles (mobile-first)
-    Full-bleed header: apply visual background to the header element
-    and keep the header content centred. */
+/* ==========================================================================
+Header Styles
+========================================================================== */
 #site-header {
-    /* Use the site's accent colour for a cohesive header look and expose
-       a CSS variable for header height so other elements can align to it. */
     --header-height: 1.9rem;
-    /* reduced for a shorter, tighter header */
-    /* compact header with a lighter top so inline SVG/logo text remains readable */
     background: linear-gradient(180deg,
             color-mix(in srgb, var(--color-accent) 72%, white 28%),
             color-mix(in srgb, var(--color-accent) 60%, black 40%));
@@ -413,13 +371,13 @@ Media Queries
     border-bottom: 1px solid color-mix(in srgb, var(--color-accent) 20%, black);
 }
 
-/* Consolidated .site-nav block: grouped rules for layout, logo, search and cart
-   This single block replaces fragmented header rules and ensures predictable
-   ordering for cascade overrides and media queries. */
+/* ==========================================================================
+Site Navigation
+========================================================================== */
 .site-nav {
     display: grid;
     grid-template-columns: auto 1fr auto;
-    gap: calc(var(--space-xxs));
+    gap: var(--space-xxs);
     align-items: center;
     padding: 0.26rem var(--space-sm);
     border-bottom: 1px solid var(--color-border);
@@ -438,12 +396,12 @@ Media Queries
 }
 
 .site-nav .nav-left {
-    gap: calc(var(--space-xxs));
+    gap: var(--space-xxs);
     min-width: 64px;
 }
 
-.site-nav .nav-left .all-logo,
-.site-nav .logo {
+.site-nav .logo,
+.site-nav .all-logo {
     display: inline-flex;
     align-items: center;
     gap: 0.28rem;
@@ -465,14 +423,11 @@ Media Queries
 
 .site-nav .logo img,
 .site-nav .all-logo img {
-    /* slightly tighter default logo sizing for a lower header footprint */
     max-height: 30px;
     width: auto;
     height: auto;
 }
 
-/* Responsive logo sizing: increase modestly on larger viewports while keeping
-   the header compact and consistent. */
 @media (min-width: 640px) {
 
     .site-nav .logo img,
@@ -503,7 +458,6 @@ Media Queries
     width: 100%;
 }
 
-/* site-search (centre) */
 .site-search {
     display: flex;
     gap: 0.4rem;
@@ -521,7 +475,6 @@ Media Queries
     border-radius: 6px;
     background: white;
     font-size: 0.95rem;
-    /* ensure selected value is readable (header sets color: white) */
     color: var(--color-text);
     height: 36px;
     display: inline-flex;
@@ -541,28 +494,18 @@ Media Queries
     align-items: center;
 }
 
-/* Ensure inputs inside the header use the page text colour instead of
-   inheriting the header's white colour. This keeps placeholder and value
-   readable across browsers. */
 .site-search .search-box,
 .site-search .search-box::placeholder {
     color: var(--color-text);
 }
 
-/* Options in native select elements are limited to UA styling in some
-   browsers, but setting option colour helps in many desktop browsers. */
 .site-search .search-dropdown option {
     color: var(--color-text);
     background: white;
 }
 
-/* Make the search icon/button use a contrasting foreground colour against
-   the light highlight background */
 .site-search .search-icon {
     color: #111;
-}
-
-.site-search .search-icon {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -572,7 +515,6 @@ Media Queries
     border-radius: 6px;
 }
 
-/* Icon sizing and accessibility-friendly targets */
 svg[aria-hidden="true"] {
     display: inline-block;
     fill: currentColor;
@@ -605,8 +547,6 @@ svg[aria-hidden="true"] {
     text-decoration: none;
 }
 
-/* Hide the word 'Cart' on smaller viewports to reduce header width/height
-   while keeping an accessible cart icon. Reveal on wider screens. */
 .cart-text {
     display: none;
 }
@@ -642,10 +582,8 @@ svg[aria-hidden="true"] {
     .nav-left {
         order: 1;
     }
-
 }
 
-/* Logo container backdrop for guaranteed legibility and visual polish */
 .site-nav .logo {
     display: inline-flex;
     align-items: center;
@@ -664,7 +602,6 @@ svg[aria-hidden="true"] {
     }
 }
 
-/* Ensure search controls share a consistent, compact height and align visually */
 .site-search .search-dropdown,
 .site-search .search-box,
 .site-search .search-icon {
@@ -674,10 +611,8 @@ svg[aria-hidden="true"] {
 
 .site-search .search-box {
     padding: 0 0.6rem;
-    /* horizontal padding; vertical spacing comes from height */
 }
 
-/* Make interactive header elements show a clear focus ring for keyboard users */
 .site-nav a:focus-visible,
 .site-nav button:focus-visible,
 .site-nav select:focus-visible,
@@ -686,7 +621,6 @@ svg[aria-hidden="true"] {
     outline-offset: 2px;
 }
 
-/* Reduce visible cart text on tiny screens to keep header compact */
 @media (max-width: 420px) {
     .cart-option .cart-text {
         display: none;
@@ -697,7 +631,6 @@ svg[aria-hidden="true"] {
     }
 }
 
-/* Slight spacing refinement for large viewports */
 @media (min-width: 1200px) {
     .site-nav {
         gap: var(--space-sm);
@@ -713,6 +646,74 @@ svg[aria-hidden="true"] {
     }
 }
 
+.site-nav .category-dropdown {
+    display: inline-block;
+    position: relative;
+}
+
+.site-nav .category-dropdown summary {
+    list-style: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 36px;
+    padding: 0 0.6rem;
+    border-radius: 6px;
+    border: 1px solid var(--color-border);
+    background: var(--color-background);
+    color: var(--color-text);
+    z-index: 1001;
+    position: relative;
+}
+
+.site-nav .category-dropdown summary::-webkit-details-marker {
+    display: none;
+}
+
+.site-nav .category-dropdown ul {
+    position: absolute;
+    left: 0;
+    top: calc(100% + 0.35rem);
+    min-width: max(180px, 12rem);
+    max-height: 16rem;
+    overflow: auto;
+    margin: 0;
+    padding: 0.35rem;
+    background: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    z-index: 1002;
+    list-style: none;
+}
+
+.site-nav .category-dropdown a {
+    display: block;
+    padding: 0.35rem 0.5rem;
+    color: var(--color-text);
+    text-decoration: none;
+    border-radius: 4px;
+    pointer-events: auto;
+}
+
+.site-nav .category-dropdown a:hover,
+.site-nav .category-dropdown a:focus {
+    background: #f1f7f6;
+    outline: none;
+    color: var(--color-text);
+}
+
+@media (max-width: 640px) {
+    .site-nav .category-dropdown summary {
+        height: 36px;
+    }
+
+    .site-nav .category-dropdown ul {
+        min-width: 140px;
+    }
+}
+
 @media (max-width: 640px) {
     .skip-link {
         font-size: 0.72rem;
@@ -720,18 +721,14 @@ svg[aria-hidden="true"] {
 
     .skip-link:focus,
     .skip-link:focus-visible {
-        /* Use slightly different placement on small screens when focused. */
         position: absolute;
         left: calc(var(--space-xs) + 0.25rem);
         top: calc(var(--header-height, 3.25rem));
         outline: 2px solid color-mix(in srgb, var(--color-accent) 80%, white);
         transform: translateY(-1px);
     }
-
-    /* legacy .header-top references removed */
 }
 
-/* Small screens: reduce header padding so content uses more horizontal room */
 @media (max-width: 480px) {
     .site-nav {
         padding-inline: calc(var(--space-xs) / 2);
@@ -743,8 +740,9 @@ svg[aria-hidden="true"] {
     }
 }
 
-/* Footer — responsive, compact and tidy */
-/* Footer theming — prefer site variables so header/footer match */
+/* ==========================================================================
+Footer Styles
+========================================================================== */
 .site-footer,
 footer[itemscope][itemtype*="WPFooter"] {
     --footer-bg: color-mix(in srgb, var(--color-accent) 18%, black 6%);
@@ -752,11 +750,9 @@ footer[itemscope][itemtype*="WPFooter"] {
     --footer-accent-outline: color-mix(in srgb, var(--color-accent) 36%, transparent);
     background: var(--footer-bg);
     color: var(--footer-text);
-    padding: calc(var(--space-sm) * 1) var(--space-md);
+    padding: var(--space-sm) var(--space-md);
 }
 
-/* Use an inner container grid with controlled column widths so the footer
-   remains compact rather than evenly stretched. */
 .site-footer .container,
 footer[itemscope][itemtype*="WPFooter"] .container {
     display: grid;
@@ -798,7 +794,7 @@ footer[itemscope][itemtype*="WPFooter"] ul {
 }
 
 footer[itemscope][itemtype*="WPFooter"] li+li {
-    margin-top: calc(var(--space-xxs));
+    margin-top: var(--space-xxs);
 }
 
 .site-footer a,
@@ -822,17 +818,15 @@ footer[itemscope][itemtype*="WPFooter"] .legal {
     opacity: 0.95;
 }
 
-/* Full-width legal bar that stretches across the viewport */
 .site-footer .legal-bar {
     width: 100vw;
-    /* full viewport width */
     position: relative;
     left: 50%;
     right: 50%;
     margin-left: -50vw;
     margin-right: -50vw;
     box-sizing: border-box;
-    padding: calc(var(--space-sm)) var(--space-md);
+    padding: var(--space-sm) var(--space-md);
     background: color-mix(in srgb, var(--color-accent) 12%, black 4%);
     color: var(--footer-text);
     border-top: 1px solid color-mix(in srgb, var(--footer-text) 6%, transparent);
@@ -846,15 +840,14 @@ footer[itemscope][itemtype*="WPFooter"] .legal {
 
 @media (max-width: 640px) {
     .site-footer .legal-bar {
-        padding: calc(var(--space-xs)) var(--space-xs);
+        padding: var(--space-xs);
         text-align: center;
     }
 }
 
-/* Footer social icon / badge styles */
 .site-footer nav[aria-label="Social media links"] ul {
     display: flex;
-    gap: calc(var(--space-xs));
+    gap: var(--space-xs);
     align-items: center;
 }
 
@@ -887,7 +880,6 @@ footer[itemscope][itemtype*="WPFooter"] .legal {
     outline-offset: 2px;
 }
 
-/* Small tweak for the GitHub icon in the legal block */
 .site-footer .legal a.github {
     display: inline-flex;
     align-items: center;
@@ -902,14 +894,12 @@ footer[itemscope][itemtype*="WPFooter"] .legal {
     height: 18px;
 }
 
-/* Footer logo sizing when using external image (keeps layout stable) */
 .footer-logo {
     width: 120px;
     height: auto;
     display: inline-block;
 }
 
-/* Brand-specific hover/focus colours for footer social icons */
 .site-footer nav[aria-label="Social media links"] a.facebook {
     color: #1877F2;
 }
@@ -932,10 +922,6 @@ footer[itemscope][itemtype*="WPFooter"] .legal {
     outline-color: rgba(228, 64, 95, 0.36);
 }
 
-.site-footer .legal a.github {
-    color: var(--footer-text);
-}
-
 .site-footer .legal a.github:focus-visible,
 .site-footer .legal a.github:hover {
     color: #6e5494;
@@ -943,15 +929,6 @@ footer[itemscope][itemtype*="WPFooter"] .legal {
     outline-color: rgba(110, 84, 148, 0.36);
 }
 
-/* Ensure the small 'view all' band also uses site variables */
-footer#view-all {
-    background: transparent;
-    padding: calc(var(--space-xs) / 1.3) var(--space-md);
-    text-align: center;
-    font-size: 0.95rem;
-}
-
-/* Compact 'view all' band: centre the link and keep small padding */
 footer#view-all {
     background: transparent;
     padding: calc(var(--space-xs) / 1.3) var(--space-md);
@@ -966,7 +943,6 @@ footer#view-all {
     }
 }
 
-/* Medium-small screens (denser two-column quick-links) */
 @media (min-width: 480px) and (max-width: 640px) {
 
     .site-footer .container,
@@ -976,7 +952,6 @@ footer#view-all {
         align-items: start;
     }
 
-    /* Make quick links denser: two-column mini-grid inside the links panel */
     .site-footer .links-grid ul {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -984,7 +959,6 @@ footer#view-all {
         align-items: start;
     }
 
-    /* Slightly reduce font-size in the compact link grid for density */
     .site-footer .links-grid a {
         font-size: 0.92rem;
         padding: 0.15rem 0.2rem;
@@ -992,7 +966,6 @@ footer#view-all {
     }
 }
 
-/* Visual separators for stacked quick-links (helpful on vertical stacks) */
 .site-footer .links-grid ul li {
     padding-inline: 0.2rem;
 }
@@ -1003,7 +976,6 @@ footer#view-all {
     padding-top: 0.45rem;
 }
 
-/* Accordion toggle styling */
 .accordion-toggle {
     display: inline-flex;
     align-items: center;
@@ -1018,7 +990,6 @@ footer#view-all {
 
 .accordion-toggle::after {
     content: '\25be';
-    /* small down caret */
     display: inline-block;
     transform-origin: center;
     transition: transform var(--transition-fast) ease;
@@ -1029,12 +1000,10 @@ footer#view-all {
     transform: rotate(-180deg);
 }
 
-/* Accordion panel collapsed state for very small screens */
 .links-grid[aria-hidden="true"] {
     display: none !important;
 }
 
-/* When visible, ensure full-width list on small screens */
 @media (max-width: 480px) {
     .accordion-toggle {
         width: 100%;
@@ -1049,7 +1018,6 @@ footer#view-all {
     }
 }
 
-/* Very small screens: compact, stacked footer layout */
 @media (max-width: 480px) {
 
     .site-footer,
@@ -1065,14 +1033,12 @@ footer#view-all {
         text-align: center;
     }
 
-    /* Centre brand and description */
     .site-footer h3,
     .site-footer p[itemprop="description"] {
         margin-inline: auto;
         text-align: center;
     }
 
-    /* Stack quick links vertically and make them easier to tap */
     .site-footer nav[aria-label="Quick links"] ul {
         display: flex;
         flex-direction: column;
@@ -1088,7 +1054,6 @@ footer#view-all {
         max-width: 220px;
     }
 
-    /* Centre social icons and increase tappable area */
     .site-footer nav[aria-label="Social media links"] ul {
         justify-content: center;
         gap: var(--space-xs);
@@ -1100,7 +1065,6 @@ footer#view-all {
         height: 40px;
     }
 
-    /* Legal block: tighten spacing and centre */
     .site-footer .legal {
         text-align: center;
         padding-top: var(--space-sm);
@@ -1111,7 +1075,6 @@ footer#view-all {
         font-size: 0.9rem;
     }
 
-    /* Compact view-all band */
     footer#view-all {
         padding: calc(var(--space-xxs) / 1.2) var(--space-xs);
         font-size: 0.92rem;
@@ -1120,89 +1083,112 @@ footer#view-all {
 
 @media (prefers-color-scheme: dark) {
 
-    /* Dark theme: provide explicit footer variable overrides so the footer
-       matches the site's dark theming and yields stronger contrast. */
     .site-footer,
     footer[itemscope][itemtype*="WPFooter"] {
-        /* Slightly more pronounced accent mix against a darker base */
         --footer-bg: color-mix(in srgb, var(--color-accent) 22%, black 28%);
-        /* Off-white text improves legibility against the darker background */
         --footer-text: #f7fbf7;
-        /* Stronger accent for focus outlines in dark mode */
         --footer-accent-outline: color-mix(in srgb, var(--color-accent) 48%, transparent);
         background: var(--footer-bg);
         color: var(--footer-text);
     }
-
-    /* Preserve other site dark-mode rules elsewhere in the file. */
 }
 
-/* Removed unused ID-based search rules (#search-form, #search-select) in favour of
-    `.site-search` and `.search-dropdown`/`.search-box` which are used in markup. */
+/* ==========================================================================
+Header Category Dropdown Menu Styles
+========================================================================== */
+#site-header .category-dropdown,
+#site-header .category-dropdown details {
+    position: relative;
+    z-index: 2000;
+    color: var(--color-text);
+}
 
-
-/* Keep the search CTA styling minimal — primary visual styles are provided
-    by .site-search .search-icon and .site-search .search-box above. */
-
-.header-actions {
-    display: flex;
-    gap: var(--space-sm);
+#site-header .category-dropdown summary {
+    list-style: none;
+    cursor: pointer;
+    display: inline-flex;
     align-items: center;
+    justify-content: space-between;
+    height: 36px;
+    padding: 0 0.6rem;
+    border-radius: 6px;
+    border: 1px solid var(--color-border);
+    background: var(--color-background) !important;
+    color: var(--color-text) !important;
+    font-size: 0.95rem;
+    line-height: 1;
+    margin: 0;
+    -webkit-tap-highlight-color: transparent;
+    position: relative;
+    z-index: 2001;
 }
 
-.nav-link {
-    color: #fff;
+#site-header .category-dropdown summary::-webkit-details-marker {
+    display: none;
+}
+
+#site-header .category-dropdown ul {
+    position: absolute;
+    top: calc(100% + 0.35rem);
+    left: 0;
+    min-width: 180px;
+    max-width: 320px;
+    max-height: 16rem;
+    overflow: auto;
+    padding: 0.35rem;
+    background: var(--color-background) !important;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+    list-style: none;
+    margin: 0;
+    z-index: 2100;
+    pointer-events: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+#site-header .category-dropdown li {
+    margin: 0;
+    padding: 0;
+}
+
+#site-header .category-dropdown a {
+    display: block;
+    padding: 0.35rem 0.5rem;
+    color: var(--color-text) !important;
     text-decoration: none;
-    font-size: 0.9rem;
-    padding: 0.25rem 0.5rem;
-}
-
-.nav-link:focus,
-.nav-link:hover {
-    background: rgba(255, 255, 255, 0.04);
-    outline: 2px solid rgba(255, 255, 255, 0.12);
     border-radius: 4px;
+    pointer-events: auto;
 }
 
-/* Consolidated cart count styling is provided by .cart-option .cart-count earlier in the file. */
+#site-header .category-dropdown a:hover,
+#site-header .category-dropdown a:focus {
+    background: color-mix(in srgb, var(--color-accent) 12%, white);
+    color: var(--color-text) !important;
+    outline: none;
+}
 
-/* Responsive adjustments */
+#site-header .category-dropdown,
+#site-header .category-dropdown * {
+    color: inherit !important;
+}
+
 @media (max-width: 640px) {
-
-    /* hide the dropdown at small widths; selector targets class used in markup */
-    .site-search .search-dropdown {
-        display: none;
+    #site-header .category-dropdown summary {
+        height: 36px;
+        padding: 0 0.45rem;
     }
 
-    /* legacy header-top removed; no-op here to keep cascade safe */
-
-    .search-box {
-        font-size: 0.95rem;
-    }
-
-    .nav-link {
-        font-size: 0.8rem;
+    #site-header .category-dropdown ul {
+        min-width: 140px;
+        right: auto;
+        left: 0;
     }
 }
 
-@media (min-width: 900px) {
-    .search-box {
-        font-size: 1.05rem;
-    }
-}
-
-/* Larger screens: allow the header to breathe slightly but still use full viewport width */
-@media (min-width: 1200px) {
-    .site-nav {
-        padding-inline: var(--space-md);
-        gap: var(--space-sm);
-    }
-
-    .site-nav.container {
-        max-width: var(--max-width);
-    }
-}
-
+/* ==========================================================================
+Theme Switch (hidden for now)
+========================================================================== */
 .theme-switch {
     display: none;
 }
