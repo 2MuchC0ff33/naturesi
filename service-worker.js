@@ -24,7 +24,7 @@ function shouldBypassRequest(request) {
   try {
     const url = new URL(request.url);
     // Bypass requests to Cloudflare internal endpoints and common analytics static hosts
-    if (url.pathname.startsWith('/cdn-cgi/') || url.hostname.includes('cloudflareinsights.com') || url.hostname.includes('cdn-cgi')) {
+    if (url.pathname.startsWith('/cdn-cgi/') || url.hostname.includes('cloudflareinsights.com')) {
       return true;
     }
     // Bypass cross-origin requests (let browser/network handle them)
