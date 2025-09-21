@@ -1114,7 +1114,7 @@ Header Category Dropdown Menu Styles
     border-radius: 6px;
     border: 1px solid var(--color-border);
     background: var(--color-background) !important;
-    color: var(--color-text) !important;
+    color: var(--color-text);
     font-size: 0.95rem;
     line-height: 1;
     margin: 0;
