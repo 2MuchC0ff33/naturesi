@@ -6,6 +6,7 @@ import { wireFooterAccordionHandlers, initFooterAccordions } from './modules/foo
 import { initCategoryDropdown } from './modules/category-dropdown.js';
 import { updateCategoryHubCounts } from './modules/category-hub-counts.js';
 import { getProducts } from './modules/products-data.js';
+import { initSearchClient } from './modules/search-client.js';
 
 // Initialise service worker registration (keeps original guards intact)
 registerServiceWorker();
@@ -18,6 +19,8 @@ document.addEventListener('DOMContentLoaded', () => {
   wireFooterAccordionHandlers();
   initCategoryDropdown();
   updateCategoryHubCounts();
+  // Wire client-side search behaviour on the dedicated search page
+  initSearchClient();
 
   // Load products.json in the background to demonstrate modular JSON loading
   // and to warm any future client-side search or category-count features.

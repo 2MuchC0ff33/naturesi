@@ -158,7 +158,7 @@
         "publisher": { "@id": "https://www.naturesinfusions.com.au/#organization" },
         "potentialAction": {
             "@type": "SearchAction",
-            "target": "https://www.naturesinfusions.com.au/search?q={search_term_string}",
+            "target": "https://www.naturesinfusions.com.au/pages/search.html?q={search_term_string}",
             "query-input": "required name=search_term_string"
         }
     }
@@ -178,6 +178,8 @@
     </script>
 
     <link rel="stylesheet" href="/assets/css/main.css" type="text/css">
+    <!-- OpenSearch description for browser search providers (matches /opensearch.xml) -->
+    <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="Nature's Infusions">
 
     <!-- Script Loading: load main JS as an ES module so app.js can import smaller modules (modular refactor) -->
     <script type="module" src="/assets/js/app.js"></script>
@@ -198,22 +200,41 @@
         <nav aria-label="Browse by category" class="category-dropdown">
         <details>
             <summary aria-haspopup="listbox" role="button">Select a category ▾</summary>
-            <ul style="list-style: none; padding: 0; margin: 0;">
-                <li><a href="/pages/store.html#wellness-blends">Wellness Blends</a></li>
-                <li><a href="/pages/store.html#herbal-infusions">Herbal Infusions</a></li>
-                <li><a href="/pages/store.html#black-tea">Black Tea</a></li>
-                <li><a href="/pages/store.html#green-tea">Green Tea</a></li>
-                <li><a href="/pages/store.html#balms">Balms</a></li>
-                <li><a href="/pages/store.html#creams">Creams</a></li>
-                <li><a href="/pages/store.html#selfcare">Self Care</a></li>
-                <li><a href="/pages/store.html#accessories">Accessories</a></li>
-                <li><a href="/pages/store.html#ice-tea">Ice Tea</a></li>
-                <li><a href="/pages/store.html#artisan-blends">Artisan Blends</a></li>
+            <ul role="listbox" aria-label="Product categories" style="list-style: none; padding: 0; margin: 0;">
+                                <li role="option" tabindex="0" data-value="wellness-blends">Wellness Blends</li>
+                                <li role="option" tabindex="0" data-value="herbal-infusions">Herbal Infusions</li>
+                                <li role="option" tabindex="0" data-value="black-tea">Black Tea</li>
+                                <li role="option" tabindex="0" data-value="green-tea">Green Tea</li>
+                                <li role="option" tabindex="0" data-value="balms">Balms</li>
+                                <li role="option" tabindex="0" data-value="creams">Creams</li>
+                                <li role="option" tabindex="0" data-value="selfcare">Self Care</li>
+                                <li role="option" tabindex="0" data-value="accessories">Accessories</li>
+                                <li role="option" tabindex="0" data-value="ice-tea">Ice Tea</li>
+                                <li role="option" tabindex="0" data-value="artisan-blends">Artisan Blends</li>
             </ul>
         </details>
+                <!-- No-JS fallback: show simple links when JavaScript is disabled -->
+                <noscript>
+                    <div class="category-fallback">
+                        <ul>
+                            <li><a href="/pages/store.html#wellness-blends">Wellness Blends</a></li>
+                            <li><a href="/pages/store.html#herbal-infusions">Herbal Infusions</a></li>
+                            <li><a href="/pages/store.html#black-tea">Black Tea</a></li>
+                            <li><a href="/pages/store.html#green-tea">Green Tea</a></li>
+                            <li><a href="/pages/store.html#balms">Balms</a></li>
+                            <li><a href="/pages/store.html#creams">Creams</a></li>
+                            <li><a href="/pages/store.html#selfcare">Self Care</a></li>
+                            <li><a href="/pages/store.html#accessories">Accessories</a></li>
+                            <li><a href="/pages/store.html#ice-tea">Ice Tea</a></li>
+                            <li><a href="/pages/store.html#artisan-blends">Artisan Blends</a></li>
+                        </ul>
+                    </div>
+                </noscript>
     </nav>
 
     <form class="site-search" action="/pages/search.html" method="get" role="search" aria-label="Search site">
+        <!-- Hidden input to carry selected category from the header dropdown (used by OpenSearch and form submits) -->
+        <input type="hidden" id="search-category" name="category" value="" />
         <label for="site-search" class="visually-hidden">Search Nature's Infusions</label>
         <input id="site-search" name="q" type="search" placeholder="Search Nature's Infusions" class="search-box" aria-label="Search site">
         <button class="search-icon" type="submit" aria-label="Submit search">
@@ -394,8 +415,9 @@
                     <p>Your browser doesn't support HTML5 video. <a href="/assets/video/production.mp4">Download the video</a> instead.</p>
                     </video>
                     </section> -->
+                    </section>
 
-            <hr aria-hidden="true">
+                    <hr aria-hidden="true">
 
 
             <footer class="site-footer" itemscope itemtype="https://schema.org/WPFooter" role="contentinfo"

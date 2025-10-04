@@ -1,46 +1,11 @@
 header
-Connect the search form to a client-side product search using products.json.
+
 Wire the search controls to an actual search submit (form + action). I can convert .nav-center to a form that hits store.html and submit category & q.
 Add simple JS in app.js to update the .cart-count live.
  want the search form to include category counts in the options dynamically, I can wire a tiny JS to load products.json and populate counts.
  make the header keyboard-navigable with focus styles for the new controls if you'd like further polish.
 
 PLANNED BRANCHED PR WORKFLOW (one branch + one PR per task)
-
-1) Connect search form -> client-side product search
-- Branch name:
-  feature/search-client-products
-- PR title:
-  feat(search): implement client-side product search using products.json
-- PR description (template):
-  - Summary: Load [`products.json`](products.json) on the client and add a lightweight search implementation in [`assets/js/app.js`](assets/js/app.js). Search UI will be wired from the header (e.g. `.nav-center` in [`index.html`](index.html)) and results will be rendered on [`pages/store.html`](pages/store.html) or a small client-side overlay.
-  - Files changed (expected):
-    - [products.json](products.json) (read only)
-    - [assets/js/app.js](assets/js/app.js)
-    - [index.html](index.html) (search form markup)
-    - [pages/store.html](pages/store.html) (search results container OR minor query-handling)
-  - Testing:
-    1. Run linters & formatters: `npm run lint` && `npm run stylelint` && `npm run format`
-    2. Smoke test: `python -m http.server 8000` → open http://localhost:8000 and exercise header search (verify results from [`products.json`](products.json))
-    3. Accessibility check: keyboard search, ARIA attributes
-  - Notes / Risks:
-    - Manual review required: payment/cart changes in `pages/store.html` or `products.json` — do NOT merge without 2MuchC0ff33 approval.
-    - Request reviewer: code owner listed in [.github/CODEOWNERS](.github/CODEOWNERS) (e.g. @2MuchC0ff33)
-  - CI expectations: pass CI (ESLint, Stylelint, Prettier, HTML validate)
-- Merge workflow:
-  1. git checkout -b feature/search-client-products
-  2. make changes, run local linters/formatters and tests
-  3. git add -A && git commit -m "feat(search): implement client-side product search"
-  4. git push -u origin feature/search-client-products
-  5. Open a Draft PR with the PR description above; assign @2MuchC0ff33 and add label `manual-review` (because it touches `pages/store.html`)
-  6. After 2MuchC0ff33/manual reviewer approves and CI passes, convert PR out of Draft, squash commits and use "Squash and merge"
-     - Squash commit title: `feat(search): implement client-side product search`
-     - Commit body must include:
-       - Files changed (list)
-       - Smoke test performed
-       - The exact manual-review line from repo guidance:
-         Manual review required: payment/cart changes in `pages/store.html` or `products.json` — do NOT merge without 2MuchC0ff33 approval.
-  7. Delete branch locally & remotely: `git branch -d feature/search-client-products` && `git push origin --delete feature/search-client-products`
 
 2) Wire search controls to actual search submit (form + action)
 - Branch name:

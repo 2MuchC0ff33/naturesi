@@ -72,6 +72,8 @@ export function initCategoryDropdown() {
   categoryList.addEventListener('click', function (ev) {
     const li = ev.target.closest('li[role="option"]');
     if (!li) return;
+    // Prevent default navigation if the option contains an anchor — JS-enhanced behaviour
+    if (ev.target && ev.target.closest && ev.target.closest('a')) ev.preventDefault();
     const value = li.dataset && li.dataset.value ? li.dataset.value : '';
     hiddenCategory.value = value;
 
@@ -79,6 +81,9 @@ export function initCategoryDropdown() {
       opt.setAttribute('aria-selected', opt === li ? 'true' : 'false');
     });
   });
+    // Close parent <details> if present to give immediate feedback
+    const details = li.closest('details');
+    if (details && details.open) details.open = false;
 
   // Keyboard support: Enter and Space activate options
   categoryList.addEventListener('keydown', function (ev) {
