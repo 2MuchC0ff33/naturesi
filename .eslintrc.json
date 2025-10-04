@@ -18,5 +18,15 @@
   "rules": {
     "no-unused-vars": "warn",
     "no-console": "off"
-  }
+  },
+  "plugins": ["html"],
+  "overrides": [
+    {
+      "files": ["*.html"],
+      "parser": "espree",
+      "rules": {
+        // Add specific rules for HTML here
+      }
+    }
+  ]
 }

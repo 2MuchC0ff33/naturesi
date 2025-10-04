@@ -15,6 +15,10 @@
   },
   "homepage": "https://github.com/2MuchC0ff33/naturesi#readme",
   "devDependencies": {
+    "@babel/core": "^7.22.0",
+    "@babel/eslint-parser": "^7.22.0",
+    "@babel/plugin-syntax-import-assertions": "^7.22.0",
+    "@babel/preset-env": "^7.22.0",
     "eslint": "^8.57.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
@@ -22,11 +26,7 @@
     "lint-staged": "^16.2.3",
     "prettier": "^3.6.2",
     "stylelint": "^16.25.0",
-    "stylelint-config-recommended": "^17.0.0",
-    "@babel/core": "^7.22.0",
-    "@babel/eslint-parser": "^7.22.0",
-    "@babel/preset-env": "^7.22.0",
-    "@babel/plugin-syntax-import-assertions": "^7.22.0"
+    "stylelint-config-recommended": "^17.0.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -53,5 +53,8 @@
       "prettier --write",
       "git add"
     ]
+  },
+  "dependencies": {
+    "eslint-plugin-html": "^8.1.3"
   }
 }

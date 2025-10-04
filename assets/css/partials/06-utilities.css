@@ -55,3 +55,10 @@ Small, well-scoped utilities (spacing, layout helpers, grid) live here.
 .mb-md {
   margin-bottom: var(--space-md);
 }
+
+/* Utility to reset list styling and spacing (used to replace inline style attributes) */
+.list-reset {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}

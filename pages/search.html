@@ -2,13 +2,18 @@
 <!-- Use canonical uppercase DOCTYPE to satisfy parsers and follow HTML5 spec. -->
 <html lang="en-AU">
   <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8" >
     <!-- Normalised to lowercase per HTML5 recommendations. -->
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="viewport" content=" width=device-width,initial-scale=1">
     <!-- Compact viewport value to match project checklist. -->
     <title>Search Results - Nature's Infusions</title>
-    <link rel="stylesheet" href="/assets/css/main.css" />
-  <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="Nature's Infusions">
+    <link rel="stylesheet" href="/assets/css/main.css" >
+    <link
+      rel="search"
+      type="application/opensearchdescription+xml"
+      href="/opensearch.xml"
+      title="Nature's Infusions"
+    >
   </head>
 
   <body>
@@ -16,7 +21,7 @@
       <a class="skip-link visually-hidden focusable" href="#main-content">Skip to main content</a>
       <h1>Search Results</h1>
     </header>
-    <main id="main-content" role="main">
+    <main id="main-content">
       <form
         class="site-search"
         action="/pages/search.html"
@@ -27,28 +32,23 @@
       >
         <label for="search-category" class="visually-hidden">Select a category</label>
 
-        <!-- Hidden input to carry selected category in query string for OpenSearch and form submits.
-             Accessibility: bound to the existing label (`for="search-category"`) per HTML5 refactor checklist. -->
-        <input type="hidden" id="search-category" name="category" value="" />
-
-        <nav aria-label="Product categories" class="category-dropdown">
-          <details>
-            <summary aria-haspopup="listbox" role="button">Select a category ▾</summary>
-            <ul role="listbox" aria-label="Categories">
-              <li role="option" tabindex="0" data-value="" aria-selected="true">Show All</li>
-              <li role="option" tabindex="0" data-value="wellness-blends">Wellness Blends</li>
-              <li role="option" tabindex="0" data-value="artisan-blends">Artisan Blends</li>
-              <li role="option" tabindex="0" data-value="herbal-infusions">Herbal Infusions</li>
-              <li role="option" tabindex="0" data-value="black-tea">Black Tea</li>
-              <li role="option" tabindex="0" data-value="green-tea">Green Tea</li>
-              <li role="option" tabindex="0" data-value="ice-tea">Ice Tea</li>
-              <li role="option" tabindex="0" data-value="balms">Herbal Balms</li>
-              <li role="option" tabindex="0" data-value="creams">Herbal Creams</li>
-              <li role="option" tabindex="0" data-value="selfcare">Self Care</li>
-              <li role="option" tabindex="0" data-value="accessories">Accessories</li>
-            </ul>
-          </details>
-        </nav>
+        <!-- Replaced the custom listbox with a native <select> element to improve accessibility,
+             keyboard support and to satisfy the linter recommendation (use native select). -->
+        <div class="category-dropdown">
+          <select id="search-category" name="category" class="category-select">
+            <option value="" selected>Show All</option>
+            <option value="wellness-blends">Wellness Blends</option>
+            <option value="artisan-blends">Artisan Blends</option>
+            <option value="herbal-infusions">Herbal Infusions</option>
+            <option value="black-tea">Black Tea</option>
+            <option value="green-tea">Green Tea</option>
+            <option value="ice-tea">Ice Tea</option>
+            <option value="balms">Herbal Balms</option>
+            <option value="creams">Herbal Creams</option>
+            <option value="selfcare">Self Care</option>
+            <option value="accessories">Accessories</option>
+          </select>
+        </div>
 
         <label for="site-search" class="visually-hidden">Search Nature's Infusions</label>
         <input
@@ -58,7 +58,7 @@
           placeholder="Search Nature's Infusions"
           class="search-box"
           aria-label="Search site"
-        />
+        >
 
         <button class="search-icon" type="submit" aria-label="Submit search">
           <!-- inline svg magnifier -->
