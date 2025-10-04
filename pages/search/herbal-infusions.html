@@ -1,25 +1,31 @@
 <!doctype html>
 <html lang="en-AU">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Search Results - Herbal Infusions</title>
     <link rel="stylesheet" href="/assets/css/main.css" />
+    <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="Nature's Infusions">
   </head>
-
   <body>
     <header>
       <a class="skip-link visually-hidden focusable" href="#main-content">Skip to main content</a>
-      <h1>Search Results for "Herbal Infusions"</h1>
+      <h1>Search Results — Herbal Infusions</h1>
     </header>
     <main id="main-content" role="main">
-      <ul>
-        <li><a href="/pages/store.html#herbal-infusions">Herbal Infusion 1</a></li>
-        <li><a href="/pages/store.html#herbal-infusions">Herbal Infusion 2</a></li>
-      </ul>
+      <form class="site-search" action="/pages/search.html" method="get" role="search" aria-label="Search site" data-debounce-ms="300">
+        <label for="search-category" class="visually-hidden">Select a category</label>
+        <input type="hidden" id="search-category" name="category" value="" />
+        <nav aria-label="Product categories" class="category-dropdown"><details><summary aria-haspopup="listbox" role="button">Select a category ▾</summary><ul role="listbox" aria-label="Categories"></ul></details></nav>
+        <label for="site-search" class="visually-hidden">Search Nature's Infusions</label>
+        <input id="site-search" name="q" type="search" placeholder="Search Nature's Infusions" class="search-box" aria-label="Search site" />
+        <button class="search-icon" type="submit" aria-label="Submit search">Search</button>
+      </form>
+      <noscript><p>No JavaScript: view category in the store <a href="/pages/store.html#herbal-infusions">Herbal Infusions</a>.</p></noscript>
+      <section id="all-products"></section>
     </main>
-    <footer>
-      <p>&copy; 2025 Nature's Infusions</p>
-    </footer>
+    <footer><p>&copy; 2025 Nature's Infusions</p></footer>
+    <script>(function(){try{const slug='herbal-infusions';const url=new URL(location.href);if(!url.searchParams.has('category')){url.searchParams.set('category',slug);history.replaceState({},'',url.toString());}}catch(e){}})();</script>
+    <script type="module" src="/assets/js/app.js"></script>
   </body>
 </html>

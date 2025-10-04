@@ -80,10 +80,10 @@ export function initCategoryDropdown() {
     categoryList.querySelectorAll('li[role="option"]').forEach((opt) => {
       opt.setAttribute('aria-selected', opt === li ? 'true' : 'false');
     });
-  });
     // Close parent <details> if present to give immediate feedback
     const details = li.closest('details');
     if (details && details.open) details.open = false;
+  });
 
   // Keyboard support: Enter and Space activate options
   categoryList.addEventListener('keydown', function (ev) {
