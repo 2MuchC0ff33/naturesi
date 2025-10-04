@@ -34,7 +34,9 @@
     "prepare": "husky install",
     "stylelint": "stylelint \"**/*.{css,scss}\" --fix",
     "lint": "eslint \"**/*.js\" --fix",
-    "generate:categories": "node scripts/generate-product-categories.js"
+    "generate:categories": "node scripts/generate-product-categories.js",
+    "serve": "python -m http.server 8000",
+    "pa11y": "node scripts/run-pa11y.js"
   },
   "lint-staged": {
     "*.{css,scss}": [

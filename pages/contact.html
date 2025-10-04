@@ -78,7 +78,7 @@
               <legend>Request Details</legend>
               <div>
                 <label for="request-type">Request Type: <span aria-hidden="true">*</span></label>
-                <select id="request-type" name="request_type" required>
+                <select id="request-type" name="request_type" required aria-describedby="request-type-hint">
                   <option value="">Please select...</option>
                   <option value="order-support">Order Support</option>
                   <option value="payment-issues">Payment Support</option>
@@ -86,6 +86,7 @@
                   <option value="wholesale-enquiry">Wholesale Enquiry</option>
                   <option value="other">Other Inquiry</option>
                 </select>
+                <small id="request-type-hint" class="visually-hidden">Choose the best matching request type so we can route your enquiry.</small>
               </div>
               <div>
                 <label for="message">Message: <span aria-hidden="true">*</span></label>
@@ -98,12 +99,16 @@
                   required
                   placeholder="Please describe your issue in detail..."
                   spellcheck="true"
+                  aria-describedby="message-hint"
                 ></textarea>
+                <small id="message-hint">Minimum 20 characters. Provide relevant order or account details where applicable.</small>
               </div>
               <div>
                 <button type="submit">Submit Request</button>
                 <button type="reset">Reset Form</button>
               </div>
+              <!-- Accessibility: live status region for screen reader users to announce form submission results -->
+              <div id="contact-form-status" role="status" aria-live="polite" aria-atomic="true" class="visually-hidden"></div>
             </fieldset>
           </form>
         </section>
