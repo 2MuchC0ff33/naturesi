@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en-AU">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Green Tea — Nature's Infusions</title>
+    <link rel="stylesheet" href="/assets/css/main.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Green Tea</h1>
+      <nav aria-label="Breadcrumb"><a href="/pages/store.html">Store</a> › Green Tea</nav>
+    </header>
+    <main>
+      <section aria-labelledby="greentea-heading">
+        <h2 id="greentea-heading">Green Tea</h2>
+        <!-- Green Tea products moved from pages/store.html -->
+        <a id="energiser" class="product-anchor slug-anchor" aria-hidden="true"></a>
+        <a id="product-energiser" class="product-anchor"></a>
+        <article
+          id="product-energiser"
+          class="product"
+          itemprop="itemListElement"
+          itemscope
+          itemtype="https://schema.org/Product"
+        >
+          <header>
+            <figure class="product-gallery">
+              <picture>
+                <source srcset="assets/img/energiser1.webp" type="image/webp" />
+                <img
+                  src="assets/img/energiser1.webp"
+                  alt="Energiser Tea"
+                  width="300"
+                  height="300"
+                  loading="lazy"
+                  itemprop="image"
+                />
+              </picture>
+              <picture>
+                <source srcset="assets/img/energiser2.webp" type="image/webp" />
+                <img
+                  src="assets/img/energiser2.webp"
+                  alt="Energiser Tea Package"
+                  width="300"
+                  height="300"
+                  loading="lazy"
+                  itemprop="image"
+                />
+              </picture>
+              <figcaption>Product images</figcaption>
+            </figure>
+
+            <h3 itemprop="name">Energiser</h3>
+
+            <div
+              class="availability"
+              itemprop="offers"
+              itemscope
+              itemtype="https://schema.org/Offer"
+            >
+              <link itemprop="availability" href="https://schema.org/InStock" />
+              <meta itemprop="priceCurrency" content="AUD" />
+              <p>&#10003; <span itemprop="itemCondition">In Stock</span></p>
+            </div>
+
+            <div
+              class="reviews"
+              itemprop="aggregateRating"
+              itemscope
+              itemtype="https://schema.org/AggregateRating"
+            >
+              <span aria-hidden="true">&#9733;&#9733;&#9733;</span>
+              <span
+                >(<span itemprop="ratingCount">3</span> reviews, Rating:
+                <span itemprop="ratingValue">3</span>/5)</span
+              >
+            </div>
+          </header>
+
+          <section class="product-description" itemprop="description">
+            <p>
+              Ignite your day with our Energiser blend, featuring premium Sencha Green Tea and
+              aromatic Tulsi. This refreshing tea, rich in antioxidants, supports overall wellness
+              and vitality. With its holy basil twist, Energiser is an ideal choice for a
+              revitalising post-workout beverage.
+            </p>
+          </section>
+
+          <section
+            class="product-ingredients"
+            itemprop="nutrition"
+            itemscope
+            itemtype="https://schema.org/NutritionInformation"
+          >
+            <h4>Ingredients</h4>
+            <p itemprop="ingredients">Sencha Green Tea and Tulsi.</p>
+            <p><small>Sourced from multiple origins</small></p>
+          </section>
+
+          <form action="/add-to-cart" method="post" class="product-options">
+            <fieldset>
+              <legend>Product Options</legend>
+
+              <div class="package-options" role="radiogroup" aria-labelledby="package-label">
+                <h4 id="package-label">Select Packaging</h4>
+
+                <label>
+                  <input
+                    type="radio"
+                    name="package"
+                    value="pouch"
+                    checked
+                    itemprop="price"
+                    content="14.00"
+                    data-price="14.00"
+                  />
+                  <span>$14.00 - 50 grams <small>(Pouch)</small></span>
+                </label>
+
+                <label>
+                  <input
+                    type="radio"
+                    name="package"
+                    value="cylinder"
+                    itemprop="price"
+                    content="22.00"
+                    data-price="22.00"
+                  />
+                  <span>$22.00 - 80 grams <small>(Cylinder)</small></span>
+                </label>
+              </div>
+
+              <div class="quantity-selector">
+                <label for="qty-energiser">Quantity:</label>
+                <select id="qty-energiser" name="quantity" min="1" max="10" required>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+              </div>
+
+              <output name="total-price" for="qty-energiser package" class="total-price">
+                Total: $14.00
+              </output>
+
+              <button type="submit" class="add-to-cart">Add to Cart</button>
+            </fieldset>
+          </form>
+        </article>
+
+        <a id="orange-and-ginger" class="product-anchor slug-anchor" aria-hidden="true"></a>
+        <a id="product-orangeginger" class="product-anchor"></a>
+        <article
+          id="product-orangeginger"
+          class="product"
+          itemprop="itemListElement"
+          itemscope
+          itemtype="https://schema.org/Product"
+        >
+          <header>
+            <figure class="product-gallery">
+              <picture>
+                <source srcset="assets/img/Natures2_with_fonts.webp" type="image/webp" />
+                <img
+                  src="assets/img/Natures2_with_fonts.webp"
+                  alt="Orange and Ginger Tea"
+                  width="300"
+                  height="300"
+                  loading="lazy"
+                  itemprop="image"
+                />
+              </picture>
+              <figcaption>Product image</figcaption>
+            </figure>
+
+            <h3 itemprop="name">Orange and Ginger</h3>
+
+            <div
+              class="availability"
+              itemprop="offers"
+              itemscope
+              itemtype="https://schema.org/Offer"
+            >
+              <link itemprop="availability" href="https://schema.org/OutOfStock" />
+              <meta itemprop="priceCurrency" content="AUD" />
+              <p>&#10007; <span itemprop="itemCondition">Out of Stock</span></p>
+            </div>
+
+            <div
+              class="reviews"
+              itemprop="aggregateRating"
+              itemscope
+              itemtype="https://schema.org/AggregateRating"
+            >
+              <span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;</span>
+              <span>( </span>
+            </div>
+          </header>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>

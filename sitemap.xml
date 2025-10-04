@@ -24,6 +24,56 @@
     <changefreq>weekly</changefreq>
   </url>
   <url>
+    <loc>https://www.naturesinfusions.com.au/pages/store/wellness-blends.html</loc>
+    <priority>0.75</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.naturesinfusions.com.au/pages/store/black-tea.html</loc>
+    <priority>0.75</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.naturesinfusions.com.au/pages/store/green-tea.html</loc>
+    <priority>0.70</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.naturesinfusions.com.au/pages/store/herbal-infusions.html</loc>
+    <priority>0.70</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.naturesinfusions.com.au/pages/store/artisan-blends.html</loc>
+    <priority>0.70</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.naturesinfusions.com.au/pages/store/accessories.html</loc>
+    <priority>0.60</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.naturesinfusions.com.au/pages/store/balms.html</loc>
+    <priority>0.60</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.naturesinfusions.com.au/pages/store/creams.html</loc>
+    <priority>0.60</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.naturesinfusions.com.au/pages/store/ice-tea.html</loc>
+    <priority>0.60</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.naturesinfusions.com.au/pages/store/selfcare.html</loc>
+    <priority>0.60</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
     <loc>https://www.naturesinfusions.com.au/pages/about.html</loc>
     <priority>0.70</priority>
     <changefreq>monthly</changefreq>
