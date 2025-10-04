@@ -1,239 +1,123 @@
-<!DOCTYPE html>
+<!doctype html>
+<!-- Refactor: removed duplicate document skeleton fragments and merged inner content into a single page
+	 (see repo HTML5 refactor checklist: single DOCTYPE / single <html lang="en-AU"> / single <head>/<body>) -->
 <html class="no-js" lang="en-AU" dir="ltr" data-theme="light">
-</head>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Terms — Nature's Infusions</title>
+    <link rel="stylesheet" href="/assets/css/main.css" type="text/css" />
+    <script type="module" src="/assets/js/app.js"></script>
+  </head>
+  <body itemscope itemtype="https://schema.org/WebPage">
+    <header id="site-header" itemscope itemtype="https://schema.org/Organization" role="banner">
+      <a class="site-title" href="/">Nature's Infusions</a>
+      <a class="skip-link visually-hidden focusable" href="#main-content">Skip to main content</a>
+    </header>
 
-<!-- Site Header -->
+    <main id="main-content" role="main">
+      <header class="page-hero">
+        <h1>Terms &amp; Conditions</h1>
+      </header>
 
-<body itemscope itemtype="https://schema.org/WebPage">
-	<!-- Site Header with dialog-based mobile menu -->
-	<header id="site-header" itemscope itemtype="https://schema.org/Organization" role="banner">
-		<!-- preserved header / nav -->
-	</header>
+      <!-- Primary Terms Section (merged from duplicate fragments) -->
+      <section id="terms-page" aria-labelledby="terms-heading">
+        <h2 id="terms-heading">Terms, returns and important information</h2>
+        <p>These terms and conditions govern the use of this website. Please review carefully.</p>
+        <p>
+          Please read our terms and conditions before using this website, our services and our
+          products.
+        </p>
+        <p>
+          <a href="terms.txt" download="natures-infusions-terms.txt"
+            >Download Terms and Conditions</a
+          >
+        </p>
+      </section>
 
-	<a class="skip-link visually-hidden focusable" href="#main-content">Skip to main content</a>
+      <!-- Hero / Legal summary merged from appended fragment -->
+      <section id="terms-hero">
+        <figure id="terms-logo">
+          <img
+            src="/assets/img/logo.svg"
+            alt="Nature's Infusions Logo"
+            width="200"
+            height="100"
+            loading="lazy"
+          />
+        </figure>
+        <h2>Terms, Returns and Risk Waiver</h2>
+        <p>Legal information for Nature's Infusions customers and website visitors.</p>
+      </section>
+    </main>
 
-	<main id="main-content" role="main">
-		<header class="page-hero">
-			<h1>Terms and conditions</h1>
-		</header>
+    <footer itemscope itemtype="https://schema.org/WPFooter" role="contentinfo">
+      <h3>Nature's Infusions</h3>
+      <p itemprop="description">
+        Nature's Infusions, your source for premium tea and herbal remedies.
+      </p>
+      <nav aria-label="Footer Quick Links">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/pages/about.html">About</a></li>
+          <li><a href="/pages/store.html">Store</a></li>
+          <li><a href="/pages/stockists.html">Stockists</a></li>
+          <li><a href="/pages/contact.html">Contact &amp; Support</a></li>
+          <li><a href="/pages/social.html">Social</a></li>
+        </ul>
+      </nav>
+      <div>
+        <p>&copy; <time datetime="2025">2025</time> Nature's Infusions. All rights reserved.</p>
+      </div>
+    </footer>
 
-		<!-- Terms Section -->
-		<section id="terms-page" aria-labelledby="terms-heading">
-			<h2 id="terms-heading">Terms, returns and important information</h2>
-			<!-- existing terms content preserved here -->
-		</section>
-	</main>
-
-	<footer itemscope itemtype="https://schema.org/WPFooter" role="contentinfo">
-		<!-- preserved footer -->
-	</footer>
-</body>
-
-</html>
-<!-- Structured Data -->
-<script type="application/ld+json">
-		{
-			"@context": "https://schema.org",
-			"@type": "Organization",
-			"@id": "https://www.naturesinfusions.com.au/#organization",
-			"name": "Nature's Infusions",
-			"url": "https://www.naturesinfusions.com.au/",
-			"logo": "https://www.naturesinfusions.com.au/assets/img/logo.svg",
-			"description": "Perth-based naturopath's passion project offering certified organic teas and herbal infusions",
-			"foundingDate": "2025",
-			"sameAs": [
-				"https://www.facebook.com/naturesinfusions.herbaltea/",
-				"https://www.instagram.com/natures_infusions_au/",
-				"https://au.linkedin.com/in/bree-gallo-75a81518a"
-			],
-			"contactPoint": [
-				{
-					"@type": "ContactPoint",
-					"telephone": "+61 434 947 131",
-					"contactType": "customer service",
-					"email": "tea@naturesinfusions.com.au",
-					"areaServed": "AU",
-					"availableLanguage": "English"
-				}
-			],
-			"address": {
-				"@type": "PostalAddress",
-				"streetAddress": "63 Meadowbrook Drive",
-				"addressLocality": "Parkwood",
-				"addressRegion": "WA",
-				"postalCode": "6147",
-				"addressCountry": "AU"
-			}
-		}
-		</script>
-<script type="application/ld+json">
-		{
-			"@context": "https://schema.org",
-			"@type": "WebSite",
-			"@id": "https://www.naturesinfusions.com.au/#website",
-			"url": "https://www.naturesinfusions.com.au/",
-			"name": "Nature's Infusions",
-			"publisher": { "@id": "https://www.naturesinfusions.com.au/#organization" },
-			"potentialAction": {
-				"@type": "SearchAction",
-				"target": "https://www.naturesinfusions.com.au/search?q={search_term_string}",
-				"query-input": "required name=search_term_string"
-			}
-		}
-		</script>
-<script type="application/ld+json">
-		{
-			"@context": "https://schema.org",
-			"@type": "BreadcrumbList",
-			"itemListElement": [{
-				"@type": "ListItem",
-				"position": 1,
-				"name": "Home",
-				"item": "https://www.naturesinfusions.com.au/"
-			}]
-		}
-		</script>
-<!DOCTYPE html>
-<html class="no-js" lang="en-AU" dir="ltr" data-theme="light">
-
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width,initial-scale=1">
-	<title>Terms — Nature's Infusions</title>
-	<link rel="stylesheet" href="/assets/css/main.css" type="text/css">
-	<!-- Script Loading: load main JS as an ES module so app.js can import smaller modules (modular refactor) -->
-	<script type="module" src="/assets/js/app.js"></script>
-</head>
-
-<body itemscope itemtype="https://schema.org/WebPage">
-	<header id="site-header" role="banner">
-		<a class="site-title" href="/">Nature's Infusions</a>
-		<a class="skip-link" href="#main-content">Skip to main content</a>
-	</header>
-
-	<main id="main-content" role="main">
-		<section id="terms-page">
-			<h1>Terms &amp; Conditions</h1>
-			<p>These terms and conditions govern the use of this website. Please review carefully.</p>
-		</section>
-	</main>
-
-	<footer role="contentinfo">
-		<p>&copy; <time datetime="2025">2025</time> Nature's Infusions</p>
-	</footer>
-</body>
-
-</html>
-<header id="site-header" itemscope itemtype="https://schema.org/Organization">
-	<div id="header">
-	<button id="menu-toggle" type="button" aria-haspopup="dialog" aria-controls="mobile-menu" aria-expanded="false">
-			<span aria-hidden="true">☰</span> <span>Menu</span>
-		</button>
-		<p class="site-title" id="business-name">
-			<a href="#home-page" itemprop="url"><span itemprop="name">Nature's Infusions</span></a>
-		</p>
-		<button id="cart" aria-label="Shopping cart with 0 items" type="button" aria-expanded="false">
-			<span aria-hidden="true">🛒</span> <span class="cart-count">Cart (<span>0</span>)</span>
-		</button>
-	</div>
-
-	<dialog id="mobile-menu" aria-labelledby="menu-heading">
-		<h2 id="menu-heading">Main Menu</h2>
-		<nav id="site-navigation" aria-label="Main" itemscope itemtype="https://schema.org/SiteNavigationElement">
-			<ul>
-				<li itemprop="name"><a href="#home-page" itemprop="url">Home</a></li>
-				<li itemprop="name"><a href="pages/store.html" itemprop="url">Online Store</a></li>
-				<li itemprop="name"><a href="pages/about.html" itemprop="url">About Us</a></li>
-				<li itemprop="name"><a href="pages/stockists.html" itemprop="url">Find Stockists</a></li>
-				<li itemprop="name"><a href="pages/contact.html" itemprop="url">Contact Us</a></li>
-				<li itemprop="name"><a href="pages/social.html" itemprop="url">Find Us on Socials</a></li>
-				<li itemprop="name"><a href="pages/terms.html" itemprop="url">Terms and Conditions</a></li>
-			</ul>
-		</nav>
-	<button type="button" onclick="this.closest('dialog').close()" aria-label="Close menu">✕ Close</button>
-	</dialog>
-
-	<a href="#main-content" class="skip-link">Skip to main content</a>
-</header>
-
-<hr aria-hidden="true">
-
-<!-- Terms Section -->
-<section id="Terms-page">
-	<header id="page-header">
-		<h2>Terms</h2>
-		<!-- Breadcrumb Navigation - now using proper nav element in HTML5 -->
-		<nav id="Terms-breadcrumb" aria-label="Breadcrumb">
-			<ol>
-				<li>
-					<a href="../index.html">Home</a>
-				</li>
-				<li aria-current="page">Terms</li>
-			</ol>
-		</nav>
-	</header>
-
-	<hr />
-
-	<!-- Terms, Returns and Risk Waiver Section -->
-
-	<header id="terms-hero">
-		<figure id="terms-logo">
-			<img src="data:image/svg+xml;base64,logo.svg" alt="Nature's Infusions Logo" width="200" height="100"
-				loading="lazy">
-		</figure>
-		<h2>Terms, Returns and Risk Waiver</h2>
-		<p>Legal information for Nature's Infusions customers and website visitors.</p>
-	</header>
-
-	<article id="terms-content">
-		<h2>Terms and Conditions</h2>
-		<p>Please read our terms and conditions before using this website, our services and our products.</p>
-		<p><a href="terms.txt" download="natures-infusions-terms.txt">Download Terms and Conditions</a></p>
-	</article>
-</section>
-<footer itemscope itemtype="https://schema.org/WPFooter">
-	<h3>Nature's Infusions</h3>
-	<p itemprop="description">Nature's Infusions, your source for premium tea and herbal remedies.</p>
-
-	<section>
-		<h4>Quick Links</h4>
-		<nav aria-label="Quick links">
-			<ul>
-				<li><a href="../index.html" itemprop="url">Home</a></li>
-				<li><a href="pages/about.html" itemprop="url">About</a></li>
-				<li><a href="pages/store.html" itemprop="url">Store</a></li>
-				<li><a href="pages/stockists.html" itemprop="url">Stockists</a></li>
-				<li><a href="pages/contact.html" itemprop="url">Contact &amp; Support</a></li>
-				<li><a href="." itemprop="url">Terms &amp; Conditions</a></li>
-				<li><a href="pages/social.html" itemprop="url">Social</a></li>
-			</ul>
-		</nav>
-	</section>
-
-	<section>
-		<h4>Connect</h4>
-		<nav aria-label="Social media links">
-			<ul>
-				<li><a href="https://www.facebook.com/NaturesInfusions/" rel="noopener noreferrer"
-						itemprop="sameAs">Facebook</a></li>
-				<li><a href="https://www.instagram.com/natures_infusions_au/" rel="noopener noreferrer"
-						itemprop="sameAs">Instagram</a></li>
-			</ul>
-		</nav>
-	</section>
-
-	<div>
-		<p>&copy; <time datetime="2025">2025</time> Nature's Infusions. All rights reserved.</p>
-		<p>Powered by Ultra-Simple Static EStore Framework</p>
-		<p>Author: <span itemprop="author">2MuchC0ff33</span> <a href="https://2muchc0ff33.github.io"
-				itemprop="url">Adrian Gallo (aka 2MuchC0ff33)</a></p>
-		<p>Website generated: <time datetime="2025-07-21" itemprop="datePublished">2025/07/21</time></p>
-	</div>
-</footer>
-</section>
-
-</main>
-</body>
-
+    <!-- Structured data (single copy) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://www.naturesinfusions.com.au/#organization",
+        "name": "Nature's Infusions",
+        "url": "https://www.naturesinfusions.com.au/",
+        "logo": "https://www.naturesinfusions.com.au/assets/img/logo.svg",
+        "contactPoint": [
+          {
+            "@type": "ContactPoint",
+            "telephone": "+61 434 947 131",
+            "contactType": "customer service",
+            "email": "tea@naturesinfusions.com.au",
+            "areaServed": "AU"
+          }
+        ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://www.naturesinfusions.com.au/#website",
+        "url": "https://www.naturesinfusions.com.au/",
+        "name": "Nature's Infusions",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://www.naturesinfusions.com.au/search?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.naturesinfusions.com.au/"
+          }
+        ]
+      }
+    </script>
+  </body>
 </html>
