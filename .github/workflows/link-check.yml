@@ -1,0 +1,21 @@
+name: Link check
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  linkinator:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Start simple server
+        run: |
+          python -m http.server 8000 > server.log 2>&1 &
+          sleep 2
+      - name: Run Linkinator
+        run: npx linkinator http://127.0.0.1:8000 --recursive

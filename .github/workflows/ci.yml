@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  lint-and-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+      - name: Install dependencies
+        run: |
+          if [ -f package-lock.json ]; then npm ci; else npm i --no-audit --no-fund; fi
+      - name: ESLint
+        run: npx eslint "assets/js/**/*.js"
+      - name: Stylelint
+        run: npx stylelint "assets/css/**/*.css"
+      - name: Prettier check
+        run: npx prettier --check .
+      - name: HTML validate
+        run: npx html-validate "pages/**/*.html" "index.html"
+      - name: JSON syntax check
+        run: python -m json.tool products.json
+      - name: JSON schema (if present)
+        run: |
+          if [ -f products.schema.json ]; then npx ajv validate -s products.schema.json -d products.json; else echo "No products.schema.json found; skipping schema validation"; fi

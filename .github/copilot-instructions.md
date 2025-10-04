@@ -1,66 +1,161 @@
-# Copilot instructions — Nature's Infusions (static  EStore)
+# Copilot instructions — Nature's Infusions (static E‑Store)
 
-Purpose: give an AI coding agent the minimal, practical context needed to be productive editing this repo.
+Purpose: give an AI coding agent the minimal, practical context to be productive in this single-page, static storefront.
 
-Checklist for this task
-- Understand this is a static, mobile-first (no build step).
-- Preserve privacy-first and accessibility-first constraints (no analytics, no cookies).
-- Make only minimal, reversible edits; follow repository conventions (single-file HTML pages,  scripts mentioned in docs).
- - Use Australian English (`en-AU`) for all new copy, comments, commit messages and code-facing strings. Prefer Australian spellings (e.g. "colour", "organisation", "labour") and DD/MM/YYYY dates where a format is required.
+Quick facts
 
-Big picture
-- This is an Ultra-Simple  Static EStore: plain HTML, CSS, and vanilla JS. There is no Node/npm build pipeline or tests directory. Edits are direct to files in repo root, `pages/`, `assets/css/`, and `assets/js/`.
-- Data: product metadata appears in `products.json` and `.env` points to CSV paths (e.g. `PRODUCTS_CSV_PATH=data/products.csv`), suggesting small CSV/JSON-based data flows rather than a database.
+- Static site only: plain HTML, CSS and vanilla JS. No Node build, no tests. Edit files directly under repo root, `pages/`, `assets/css/` and `assets/js/`.
+- Product data: `products.json` is the primary machine-readable product file. A `.env` references CSV paths (e.g. `PRODUCTS_CSV_PATH`), and `PAYPAL_EMAIL` appears in `.env` for payments.
 
-Key patterns & conventions (concrete examples)
-- Service worker: dev/no-cache pattern — see `service-worker.js` and registration guards in `assets/js/app.js` (only register on `localhost` or `https:`). Avoid changing caching semantics without verifying offline behavior.
-- PWA manifest and offline shell: `manifest.json`, `offline.html`, `404.html`, `index.html` and `manifest.json` fields control app install behavior.
-- Static server rules: `.htaccess` and `web.config` contain redirects, MIME types and a canonical `index.html` redirect. Keep URL-cleaning rules intact when changing paths.
-- Forms / cart: `pages/store.html` contains notes that product forms submit to a hidden cart form (`/add-to-cart`) and PayPal integration is referenced in `.env` via `PAYPAL_EMAIL`. Changes to forms may affect payment flow; inspect `pages/store.html` and `products.json` first.
-- Accessibility & privacy: repository explicitly disables analytics and tracking (`privacy.txt`, `.well-known/` files). Respect these constraints; do not add third-party trackers.
+## TL;DR (quick scope for automated agents)
 
-Developer workflows
-- There is no build or test command in the repo. Typical workflow is edit -> validate HTML/CSS -> deploy static files. Check `.env` for `DEPLOY_PATH` which documents the intended deploy destination.
-- For local testing: open `index.html` (or pages under `pages/`) in a browser or use a simple static file server (not committed here). Be careful with `service-worker.js` — it registers only on `https:` or `localhost`.
+- Allowed: small HTML5 refactors, accessibility fixes, conservative CSS/JS changes under `assets/`, and documentation or metadata updates.
+- Not allowed without human sign-off: any change that touches payments, product data, service-worker caching strategy, or introduces third‑party telemetry.
+- Why: a short summary helps automated agents make safe, quick decisions and reduces ambiguous prompts.
 
-Where to look first for common edits
-- Global styles: `assets/css/main.css`.
-- Site JS: `assets/js/app.js` (service worker, live-reload helpers).
-- Page templates: `pages/*.html` and root-level `index.html`, `offline.html`, `404.html`.
-- Site metadata & config: `.env`, `manifest.json`, `sitemap.xml`, `opensearch.xml`.
+Primary areas to inspect
 
-Rules for automated edits
-- Do not introduce remote third-party scripts or analytics by default.
-- If adding JS/CSS, place under `assets/js/` or `assets/css/` and reference with relative paths.
-- When modifying payment, cart, or checkout logic, flag it for manual review: these are safety-sensitive changes.
- - Language & style enforcement: when adding or editing UI text or documentation, use Australian English (`en-AU`) and set `<html lang="en-AU">` or `lang="en-AU"` in new/changed pages. Keep tone consistent with existing content (concise, privacy-first).
+- UI & styles: `assets/css/main.css`.
+- Behaviour & registration: `assets/js/app.js` (service-worker registration, dev helpers).
+- Offline & PWA: `service-worker.js`, `manifest.json`, `offline.html`, `404.html`.
+- Store logic: `pages/store.html` (product forms submit to `/add-to-cart`; changing forms or inputs can affect PayPal/cart flow).
+- Hosting rules: `.htaccess` and `web.config` (URL rewrites, canonical index behaviour).
 
-Commit message template (en-AU)
-- Keep commit messages short and in Australian English. Use present-tense verbs and include the affected file(s) or area.
-- Template:
+Project-specific conventions
 
-	<type>(scope): short summary
+- Single-file pages: pages are self-contained HTML files (e.g. `pages/about.html`) — prefer small, targeted edits rather than introducing a global templating system.
+- Assets location: add new CSS under `assets/css/` and JS under `assets/js/` and reference them relatively (never add CDN trackers).
+- Privacy-first: repository intentionally disables analytics and third-party tracking (`privacy.txt`, `.well-known/`). Do not add analytics or third-party cookies.
+- Language/style: use Australian English (`en-AU`) for any UI text or docs and set `<html lang="en-AU">` on new/edited pages.
 
-	Detailed description (why), additional notes, and any manual review required.
+## Allowed edits (examples)
 
-- Example (fix):
+- Update semantic HTML (header/nav/main/footer) and add meta charset/viewport.
+- Add or improve alt text on images and add `<label for="...">` bindings for form controls.
+- Small, reversible CSS utility classes in `assets/css/main.css` and non-invasive JS helpers in `assets/js/app.js` (do not change service-worker guards).
+- Non-functional documentation, README improvements, and `.github/*` repo config changes.
 
-	fix(pages/about.html): remove malformed meta characters and close head tags
+## Forbidden or requires manual review
 
-	Clean up malformed markup in `pages/about.html` head. Ensures valid meta tags and correct `lang` attribute for accessibility. Verified locally.
+- Modifying `pages/store.html`, `products.json` or any `/add-to-cart` handling — Manual review required.
+- Changing service-worker caching logic, registration guards, or offline behaviour without explicit approval.
+- Introducing analytics, trackers, external telemetry beacons or third-party cookies.
 
-- Example (docs):
+Note: When a manual review is required, create a draft PR and include the explicit "Manual review required" line in the commit body (see checklist below).
 
-	docs(.github/copilot-instructions.md): add en-AU language guidance and commit template
+Developer workflows & quick commands
 
-	Add explicit Australian English guidance for UI text, comments and commit messages. Include commit-message example.
+- Local smoke test: serve the repo from a local static server so the service worker can register. Example (PowerShell):
+  - python -m http.server 8000 ; open http://localhost:8000 in a browser
+- Deploy notes: check `.env` for `DEPLOY_PATH` before editing deployment-related assets.
 
-Small examples (what an AI should do)
-- Fix a broken meta tag: update `pages/about.html` head block to remove malformed characters and close tags correctly.
-- Improve dev service-worker error handling by replacing the placeholder `catch(error => {…})` in `service-worker.js` with a minimal network-fallback response. (Make a small, well-commented change and run a browser smoke test.)
+## PR / Commit checklist (copy into PR body)
 
-If something is unclear
-- Ask a short clarifying question and reference the exact file path you inspected.
+- Title format: `chore(refactor-html): short summary`
+- Files changed: list them (mandatory)
+- Smoke test performed: `python -m http.server 8000` and service-worker install/uninstall tested on `localhost` (yes/no)
+- HTML meta & semantics checked: yes/no
+- Accessibility basics verified (labels, alt text, form associations): yes/no
+- Tools used: list MCP servers/tools and key results/links (e.g. `mcp_github_github_search_code` – found SW registration in `assets/js/app.js`)
+- Manual review required: payment/cart changes in `pages/store.html` or `products.json` — do NOT merge without payment-owner approval.
+- Payment owner / reviewer: [payment-owner@example.org] (replace with the actual contact before merge)
 
-Next: request feedback on any unclear or missing sections so we can iterate.
+Small note: If a PR touches payments or service-worker logic, mark it as a draft PR and add the exact manual-review line above.
 
+Safety & manual-review areas
+
+- Payment/cart: changes in `pages/store.html`, `products.json` or any `/add-to-cart` handling must be flagged for manual review — these affect real payments.
+- Service worker & offline: edits to `service-worker.js` can break install/upgrade behaviour. Keep changes minimal and test install/uninstall cycles on `localhost` or `https`.
+
+## HTML5 refactor checklist
+
+Goal: Refactor the repo's HTML so files follow modern HTML5 semantics, improve accessibility, and remain privacy‑first while preserving the project's single‑file page convention and no‑build workflow.
+
+Acceptance criteria
+
+- All edited HTML use a top-line `<!DOCTYPE html>` and `<html lang="en-AU">`.
+- Pages include meta charset and meta viewport (`<meta charset="utf-8">` and `<meta name="viewport" content="width=device-width,initial-scale=1">`).
+- Semantic landmarks are used (header, nav, main, footer, article/section/aside where appropriate).
+- Deprecated tags/attributes are removed (replace with classes + `assets/css/main.css`).
+- Images have meaningful `alt` text or are explicitly decorative (`role="presentation"`), and form controls have associated `<label>`s.
+- ARIA is used only when semantic HTML cannot provide the required semantics.
+- Service-worker and PWA behaviour is preserved (do not change registration guards in `assets/js/app.js` or core caching behaviour in `service-worker.js` without manual review).
+- Any edits touching `pages/store.html`, `products.json` or `/add-to-cart` are flagged for manual review in the commit body.
+- Changes are small, well-commented in-line, and reversible.
+
+Recommended process (step-by-step)
+
+1. Inspect these files first: `index.html`, `pages/*.html`, `offline.html`, `404.html`, and `manifest.json`.
+2. For each HTML file:
+   - Ensure `<!DOCTYPE html>` and `<html lang="en-AU">` are present.
+   - Add or verify `<meta charset="utf-8">` and viewport meta.
+   - Replace presentational markup with semantic elements and CSS classes; update `assets/css/main.css` conservatively.
+   - Ensure forms have `<label for="...">` bound to inputs and include placeholders for accessible error messaging.
+   - Ensure images use descriptive `alt` attributes or explicit decorative roles.
+   - Add brief inline comments describing why the change was made (one line) and reference the acceptance checklist.
+3. Run a local smoke test (PowerShell): `python -m http.server 8000 ; open http://localhost:8000` and exercise service-worker install/uninstall flows on `localhost`.
+4. Validate HTML quickly with a browser inspector or an HTML validator and fix obvious issues.
+5. Keep edits scoped to repo root, `pages/`, `assets/css/`, `assets/js/`, `.github/` and similar config files.
+
+Safe, small examples
+
+- Replace `<div id="nav">` with `<nav id="primary-nav" aria-label="Main navigation">` and use a `<ul>` for links.
+- Replace inline presentational attributes (e.g. `align`, `bgcolor`) with utility classes and update `assets/css/main.css`.
+- Add `<meta name="viewport" content="width=device-width,initial-scale=1">` to any pages missing it.
+- Ensure service-worker registration remains guarded (e.g. `if (location.protocol === 'https:' || location.hostname === 'localhost') { ... }`).
+
+Commit guidance for refactors (en-AU)
+
+- Format: chore(refactor-html): short summary
+- Example: chore(refactor-html): modernise semantics in `pages/about.html` and `index.html`
+- Commit body must list files changed, brief rationale, and include this line if payment/cart touched:
+  - Manual review required: payment/cart changes in `pages/store.html` or `products.json` — do NOT merge without payment-owner approval.
+
+## Use of MCP servers & tools
+
+When available and enabled, use the repository's MCP servers and their specialised tools to gather authoritative, up‑to‑date information and to perform repository operations. Always document which tools were used in the PR/commit body.
+
+Guidance (when to use which tool)
+
+- Microsoft docs tools (mcp*microsoft_doc*\*): use for Azure / Microsoft Learn documentation, samples and canonical API guidance. Prefer `microsoft_docs_search` to discover pages, `microsoft_code_sample_search` when you need concrete code examples, and `microsoft_docs_fetch` to retrieve full pages for step‑by‑step procedures.
+- GitHub tools (mcp*github_github*\*): use for repository interactions (create/update files, create PRs, issues, branches). When creating or updating files programmatically, include a clear commit message and list all changed files. If using the `create_pull_request_with_copilot` option, populate the problem statement and title clearly and follow the manual‑review rules for payment/cart edits.
+- Web search (mcp_github_github_bing_search): use when current web evidence is needed (recent standards, browser behaviour, or newly published guidance). Always cite the returned URLs in PR descriptions.
+- Library docs (mcp*upstash_conte*\*): use `resolve-library-id` then `get-library-docs` to fetch authoritative library documentation before implementing or upgrading library-specific code.
+- Parallel tooling: where applicable, run independent searches (e.g. docs + code search) in parallel to speed discovery; still summarise all sources in your PR.
+
+Operational rules
+
+- Record every automated tool usage in the PR body (tool names and key results or links). This helps reviewers verify sources and decisions.
+- Do not automatically merge or push changes that affect payments, service-worker or privacy behaviour. Create a draft PR and add the "Manual review required" line in the commit body when touching `pages/store.html`, `products.json` or `/add-to-cart`.
+- Respect privacy constraints: do not use tools to inject remote telemetry, third‑party analytics, or external beacons.
+- Required policy: When available and enabled, GitHub Copilot MUST use Context7 (`mcp_upstash_conte`) for library documentation lookups and `mcp_sequentialthi_sequentialthinking` for multi-step planning. Always confirm these servers are enabled before calling them, and record every automated tool usage (including which server/tool was used and a short justification) in the PR body.
+
+## Example Copilot prompts and usage logging
+
+- Safe prompt example (refactor): "Refactor `pages/about.html` to use semantic header/main/footer, add meta charset and viewport, and add labels for all form inputs. Keep service-worker registration unchanged."
+- Unsafe prompt example (disallowed): "Update PayPal email and change checkout flow to use a new third-party provider." (requires human review)
+- Tool usage log (include in PR body):
+  - Tools used: `mcp_github_github_search_code` (searched for service-worker registration), `microsoft_docs_search` (HTML semantics guidance)
+  - Key findings / links: list URLs or results used to make decisions
+
+Why: concrete prompt examples and a short logging template make it easier to audit automated changes and speed reviewer sign-off.
+
+If uncertain which tool to call for a specific question, ask one short clarifying question referencing the file path (e.g. `pages/store.html`) and whether you may use GitHub or Microsoft doc tools for research.
+
+Please review these instructions and call out anything missing or specific you want emphasised.
+
+### Available MCP servers (installed)
+
+This repository has the following MCP servers installed and available. Prefer these servers and their tools when they are enabled:
+
+- Context7 (library docs): mcp*upstash_conte*\* — use `resolve-library-id` then `get-library-docs` to fetch authoritative library documentation before implementing or upgrading library-specific code.
+- GitHub (repo + code): mcp*github_github*\* — use for repository actions (create/update files, branches, PRs), code search (`mcp_github_github_search_code`) and interacting with issues/PRs. Always include a clear commit/PR message and list changed files when making programmatic changes.
+- microsoft.docs.mccp (Microsoft Learn docs): mcp*microsoft_doc*\* — use `microsoft_docs_search`, `microsoft_code_sample_search` and `microsoft_docs_fetch` to ground Azure/Microsoft-related implementation and samples.
+- sequentialthinking (planning): mcp_sequentialthi_sequentialthinking — use for multi-step planning, design breakdowns and verification steps. Use this tool to generate a plan but do not publish internal chain-of-thought in PR descriptions; instead summarise the final decisions and action items in the PR body.
+
+Operational notes
+
+- Always confirm a given MCP server is enabled before calling its tools. If a server is unavailable, ask one short clarifying question referencing the file path you plan to inspect.
+- Record every automated tool usage in the PR body (tool names and key results or links). This helps reviewers verify sources and decisions.
+- Required policy: When available and enabled, GitHub Copilot MUST use Context7 (`mcp_upstash_conte`) for library documentation lookups and `mcp_sequentialthi_sequentialthinking` for multi-step planning. Always confirm these servers are enabled before calling them, and record every automated tool usage (including which server/tool was used and a short justification) in the PR body.
+- When using the sequentialthinking tool, extract the final plan and checklist and include that summary in the PR/commit body rather than raw internal reasoning.

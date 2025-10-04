@@ -1,0 +1,108 @@
+# Nature's Infusions — Static E‑Store
+
+A small, privacy‑first static storefront for Nature's Infusions. This repository is plain HTML, CSS and vanilla JavaScript with no build step. Focus is on accessibility, semantic HTML and a conservative, reviewable workflow.
+
+## Quick links
+
+- Site entry: [index.html](index.html)
+- Store page (products & cart forms — Manual review area): [pages/store.html](pages/store.html)
+- Machine product data: [products.json](products.json)
+- Main stylesheet: [assets/css/main.css](assets/css/main.css)
+- App behaviour & SW registration: [assets/js/app.js](assets/js/app.js)
+- Service worker: [service-worker.js](service-worker.js)
+- PWA manifest: [manifest.json](manifest.json)
+- Offline page: [offline.html](offline.html)
+- Privacy note: [privacy.txt](privacy.txt)
+- Repository Copilot guidance: [.github/copilot-instructions.md](.github/copilot-instructions.md)
+- Contribution prompts: [.github/prompts/refactor-html.prompt.md](.github/prompts/refactor-html.prompt.md)
+- Environment variables: [.env](.env) (contains PAYPAL_EMAIL / deployment paths)
+- License: [LICENSE](LICENSE)
+
+## TL;DR — what you can safely change
+
+- Small HTML5 refactors and accessibility fixes in pages under `pages/` (see [pages/store.html](pages/store.html) note below).
+- Conservative CSS or JS helpers added under `assets/css/` and `assets/js/`.
+- Non‑functional docs, meta and metadata updates.
+
+## Forbidden or requires manual review
+
+- Any modification to payment or cart handling: edits to [pages/store.html](pages/store.html), [products.json](products.json) or `/add-to-cart` form targets — Manual review required.
+- Changes to service‑worker caching strategy or registration guards in [service-worker.js](service-worker.js) or [assets/js/app.js](assets/js/app.js) — Manual review required.
+- Adding analytics, trackers or third‑party telemetry.
+
+If you touch a Manual‑Review area, include this exact line in the commit body:
+Manual review required: payment/cart changes in `pages/store.html` or `products.json` — do NOT merge without payment-owner approval.
+
+## How to run locally (smoke test)
+
+Serve the site from a local static server so the service worker can register (test on `localhost`):
+
+```sh
+# Serve and open (PowerShell / compatible)
+python -m http.server 8000
+# then open http://localhost:8000 in your browser
+```
+
+Verify service‑worker install/uninstall cycles on localhost and check pages:
+
+- [pages/store.html](pages/store.html) (product forms)
+- [offline.html](offline.html) (offline UX)
+- [404.html](404.html)
+
+## Editing & refactor checklist
+
+When editing HTML/CSS/JS follow the repo checklist (see [.github/copilot-instructions.md](.github/copilot-instructions.md)):
+
+- Preserve top-line DOCTYPE and `<html lang="en-AU">` in any edited page.
+- Ensure `<meta charset="utf-8">` and `<meta name="viewport" content="width=device-width,initial-scale=1">` are present.
+- Prefer semantic landmarks: header, nav, main, article, section, footer.
+- Give images meaningful `alt` text (or `role="presentation"` for decorative images).
+- Bind `<label for="...">` to form controls for accessibility.
+- Keep JS changes scoped to `assets/js/` and CSS to `assets/css/`. Do not alter SW guards in [assets/js/app.js](assets/js/app.js) (e.g. `if (location.protocol === 'https:' || location.hostname === 'localhost') { ... }`).
+- Add a one-line inline comment for why a change was made referencing the acceptance checklist.
+
+## Commit & PR guidance (copy into PR body)
+
+- Commit title format: `chore(refactor-html): short summary`
+- Include the files changed (mandatory).
+- Smoke test performed: `python -m http.server 8000` and SW install/uninstall tested on localhost (yes/no)
+- HTML meta & semantics checked: yes/no
+- Accessibility basics verified (labels, alt text, form associations): yes/no
+- Tools used: list MCP/GitHub/Microsoft tools and key results/links (if used) — see [.github/copilot-instructions.md](.github/copilot-instructions.md)
+- Manual review required: payment/cart changes in `pages/store.html` or `products.json` — do NOT merge without payment-owner approval.
+- Payment owner / reviewer: [payment-owner@example.org](mailto:payment-owner@example.org) (replace before merge)
+
+Example commit body (if touching payments):
+
+```text
+Manual review required: payment/cart changes in `pages/store.html` or `products.json` — do NOT merge without payment-owner approval.
+
+Files changed:
+- pages/store.html
+- products.json
+
+Smoke test performed: python -m http.server 8000 (localhost), SW install/uninstall: yes
+HTML semantics checked: yes
+Accessibility basics: yes
+Tools used: mcp_github_github_search_code (found SW registration in assets/js/app.js)
+```
+
+## Accessibility & Privacy
+
+- Project is privacy‑first: no analytics or third‑party trackers. See [privacy.txt](privacy.txt).
+- Follow the HTML5 refactor checklist in [.github/copilot-instructions.md](.github/copilot-instructions.md).
+
+## Contributing
+
+- Keep changes small and reversible. Edit files directly under repo root, `pages/`, `assets/css/` and `assets/js/`.
+- Add new assets only under `assets/` and reference them relatively (no external trackers/CDNs).
+- If in doubt about payments or SW edits, open a draft PR and follow the Manual Review line above.
+
+## Contact & Authors
+
+- Author / generator credit is embedded in pages (site footer).
+- For payment/cart approvals: [payment-owner@example.org](mailto:payment-owner@example.org) (replace with real contact).
+
+## License
+
+This project is released under the terms in [LICENSE](LICENSE).
