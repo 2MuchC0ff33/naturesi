@@ -196,6 +196,8 @@
           </section>
           <form action="/add-to-cart" method="post" class="product-options">
             <fieldset>
+              <!-- Accessibility: add legend to satisfy WCAG H71 (fieldsets MUST have legends) per repo HTML5 refactor checklist -->
+              <legend>Product Options</legend>
               <input type="hidden" name="product_id" value="product-red" />
               <label
                 ><input type="radio" name="variant" value="pouch" /> Pouch — 60 grams — $14</label
