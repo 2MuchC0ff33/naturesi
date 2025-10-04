@@ -3,7 +3,17 @@
 // products.json and product-categories mapping. This runs on pages/search.html
 // and enhances the header search form so results render without a full page reload.
 import { getProducts } from './products-data.js';
-import productCategories from '../data/product-categories.json' assert { type: 'json' };
+
+// Runtime-loaded cache for product-categories.json (replaces import assertion)
+let productCategories = null;
+
+// Small helper to load JSON relative to this module using import.meta.url
+async function loadJSON(relativePath) {
+  const url = new URL(relativePath, import.meta.url).href;
+  const resp = await fetch(url);
+  if (!resp.ok) throw new Error('Failed to load ' + url + ': ' + resp.status);
+  return resp.json();
+}
 
 function slugify(text) {
   return (
@@ -42,6 +52,18 @@ export async function initSearchClient() {
   const input = form.querySelector('input[name="q"]');
   const hiddenCategory = form.querySelector('#search-category');
   const listbox = form.querySelector('.category-dropdown ul[role="listbox"]');
+
+  // Ensure productCategories are loaded once before searches run
+  if (!productCategories) {
+    try {
+      productCategories = await loadJSON('../data/product-categories.json');
+    } catch (e) {
+      /* eslint-disable no-console */
+      console.log('Failed to load product-categories.json:', e);
+      /* eslint-enable no-console */
+      productCategories = {};
+    }
+  }
 
   // Accessible status region
   let status = resultsSection.querySelector('.search-status');

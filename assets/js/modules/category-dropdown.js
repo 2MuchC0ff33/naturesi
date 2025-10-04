@@ -1,14 +1,67 @@
 // Module: Category dropdown wiring for the site search
 // Purpose: decouple the category wiring logic from the main app to make it easier to extend (e.g. populate from products.json later)
-import categoriesData from '../data/categories.json' assert { type: 'json' };
-import productCategories from '../data/product-categories.json' assert { type: 'json' };
+// NOTE: Removed static JSON import assertions (some browsers throw a SyntaxError at the `assert` token).
 import { getProducts } from './products-data.js';
 
-export function initCategoryDropdown() {
+// Module-scoped caches for JSON data that will be loaded at runtime.
+let categoriesData = null;
+let productCategories = null;
+
+// Small browser-safe assert helper (kept minimal and deliberate)
+function assert(condition, message) {
+  if (!condition) {
+    const err = new Error('AssertionError: ' + (message || 'Assertion failed'));
+    err.name = 'AssertionError';
+    throw err;
+  }
+}
+
+// Helper to load JSON relative to this module file using import.meta.url.
+async function loadJSON(relativePath) {
+  const url = new URL(relativePath, import.meta.url).href;
+  const resp = await fetch(url);
+  if (!resp.ok) throw new Error('Failed to load ' + url + ': ' + resp.status);
+  return resp.json();
+}
+
+// Exported function: make async so we can await JSON loading without blocking callers
+export async function initCategoryDropdown() {
   const categoryList = document.querySelector('.category-dropdown ul[role="listbox"]');
   const hiddenCategory = document.getElementById('search-category');
 
   if (!categoryList || !hiddenCategory) return;
+
+  // Ensure categories/productCategories are loaded before we use them
+  if (!categoriesData) {
+    try {
+      categoriesData = await loadJSON('../data/categories.json');
+    } catch (e) {
+      /* eslint-disable no-console */
+      console.log('Failed to load categories.json:', e);
+      /* eslint-enable no-console */
+      categoriesData = { categories: [] }; // safe fallback
+    }
+  }
+
+  if (!productCategories) {
+    try {
+      productCategories = await loadJSON('../data/product-categories.json');
+    } catch (e) {
+      productCategories = {};
+    }
+  }
+
+  // Validate loaded data early to help catch authoring issues during development
+  try {
+    assert(
+      categoriesData && Array.isArray(categoriesData.categories),
+      'categories.json missing or malformed'
+    );
+  } catch (e) {
+    /* eslint-disable no-console */
+    console.log('categories.json validation failed:', e);
+    /* eslint-enable no-console */
+  }
 
   // If the list is empty (authoring omitted it), populate from categories.json
   if (!categoryList.querySelector('li')) {

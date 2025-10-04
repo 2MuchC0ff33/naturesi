@@ -174,3 +174,41 @@ print fallbacks.
     break-after: avoid;
   }
 }
+
+/* Ensure header dropdown content uses the page text colour (overrides header's white colour)
+   Scoped with #site-header .site-nav to be more specific than the generic header rule. */
+#site-header .site-nav .category-dropdown summary,
+#site-header .site-nav .category-dropdown ul,
+#site-header .site-nav .category-dropdown ul a,
+#site-header .site-nav .category-dropdown li,
+#site-header .site-nav .category-dropdown li[role="option"] {
+  color: var(--color-text);
+}
+
+#site-header .site-nav .category-dropdown summary {
+  /* make sure the summary remains visually distinct from the header while matching the
+     site text colour in light/dark modes via variables */
+  background: var(--color-background);
+}
+
+#site-header .site-nav .category-dropdown ul a:hover,
+#site-header .site-nav .category-dropdown ul a:focus {
+  background: color-mix(in srgb, var(--color-accent) 12%, white);
+  color: var(--color-text);
+}
+
+/* Strong override to ensure dropdown text is readable in light mode. Scoped and intentional to avoid wide-use of !important. */
+#site-header.site-nav_override .site-nav .category-dropdown summary,
+#site-header.site-nav_override .site-nav .category-dropdown ul,
+#site-header.site-nav_override .site-nav .category-dropdown ul a,
+#site-header.site-nav_override .site-nav .category-dropdown li,
+#site-header.site-nav_override .site-nav .category-dropdown li[role="option"] {
+  color: var(--color-text) !important;
+}
+
+/* Also address the summary when the header's top-level colour is set by #site-header */
+#site-header .category-dropdown summary,
+#site-header .category-dropdown ul,
+#site-header .category-dropdown ul a {
+  color: var(--color-text) !important;
+}

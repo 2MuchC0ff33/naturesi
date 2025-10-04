@@ -1,12 +1,38 @@
 // Module: Update the category hub on store pages with product counts
 import { getProducts } from './products-data.js';
-import productCategories from '../data/product-categories.json' assert { type: 'json' };
-import categoriesData from '../data/categories.json' assert { type: 'json' };
+
+// Replace static JSON imports (which used `assert { type: 'json' }`) with runtime loaders
+let productCategories = null;
+let categoriesData = null;
+
+async function loadJSON(relativePath) {
+  const url = new URL(relativePath, import.meta.url).href;
+  const resp = await fetch(url);
+  if (!resp.ok) throw new Error('Failed to load ' + url + ': ' + resp.status);
+  return resp.json();
+}
 
 export async function updateCategoryHubCounts() {
   try {
     const hub = document.querySelector('.category-hub');
     if (!hub) return;
+
+    // Ensure productCategories and categoriesData are loaded
+    if (!productCategories) {
+      try {
+        productCategories = await loadJSON('../data/product-categories.json');
+      } catch (e) {
+        productCategories = {};
+      }
+    }
+
+    if (!categoriesData) {
+      try {
+        categoriesData = await loadJSON('../data/categories.json');
+      } catch (e) {
+        categoriesData = { categories: [] };
+      }
+    }
 
     const products = await getProducts();
     const mapping = productCategories && productCategories.mapping ? productCategories.mapping : {};

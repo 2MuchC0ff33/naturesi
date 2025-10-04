@@ -1,12 +1,27 @@
-// Module: Products data loader (static JSON import)
-// Purpose: central place to import products.json for client-side features (search, category counts, etc.)
-// Notes: using a static JSON module import with an assertion simplifies code and makes bundling optional.
-// Keep the async getProducts() API for backwards compatibility with callers.
-import productsWrapped from '../data/products.json' assert { type: 'json' };
+// Module: Products data loader (dynamic JSON fetch)
+// Purpose: central place to load products.json for client-side features (search, category counts, etc.)
+// Notes: Replaced static `import ... assert { type: 'json' }` which causes SyntaxError in some browsers.
 
-// productsWrapped is an object with a `products` array; normalize API to return products array
+let productsCache = null;
+
 export async function getProducts() {
-  return Array.isArray(productsWrapped.products) ? productsWrapped.products : [];
+  if (productsCache) return productsCache;
+
+  try {
+    const url = new URL('../data/products.json', import.meta.url).href;
+    const resp = await fetch(url);
+    if (!resp.ok) throw new Error('Network response was not ok: ' + resp.status);
+    const data = await resp.json();
+    // products.json historically exports an object with a `products` array
+    productsCache = Array.isArray(data.products) ? data.products : Array.isArray(data) ? data : [];
+    return productsCache;
+  } catch (e) {
+    /* eslint-disable no-console */
+    console.log('Failed to load products.json:', e);
+    /* eslint-enable no-console */
+    productsCache = [];
+    return productsCache;
+  }
 }
 
 export default getProducts;
