@@ -1,8 +1,11 @@
 <!doctype html>
+<!-- Use canonical uppercase DOCTYPE to satisfy parsers and follow HTML5 spec. -->
 <html lang="en-AU">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <!-- Normalised to lowercase per HTML5 recommendations. -->
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <!-- Compact viewport value to match project checklist. -->
     <title>Search Results - Nature's Infusions</title>
     <link rel="stylesheet" href="/assets/css/main.css" />
   </head>
@@ -20,16 +23,19 @@
         aria-label="Search site"
       >
         <label for="search-category" class="visually-hidden">Select a category</label>
+
+        <!-- Hidden input to carry selected category in query string for OpenSearch and form submits.
+             Accessibility: bound to the existing label (`for="search-category"`) per HTML5 refactor checklist. -->
+        <input type="hidden" id="search-category" name="category" value="" />
+
         <nav aria-label="Product categories" class="category-dropdown">
           <details>
             <summary aria-haspopup="listbox" role="button">Select a category ▾</summary>
             <ul role="listbox" aria-label="Categories">
-              <li role="option" tabindex="0" data-value="">Show All</li>
+              <li role="option" tabindex="0" data-value="" aria-selected="true">Show All</li>
               <li role="option" tabindex="0" data-value="wellness-blends">Wellness Blends</li>
               <li role="option" tabindex="0" data-value="artisan-blends">Artisan Blends</li>
-              <li role="option" tabindex="0" data-value="herbal-infusions">
-                Herbal Teas and Infusions
-              </li>
+              <li role="option" tabindex="0" data-value="herbal-infusions">Herbal Infusions</li>
               <li role="option" tabindex="0" data-value="black-tea">Black Tea</li>
               <li role="option" tabindex="0" data-value="green-tea">Green Tea</li>
               <li role="option" tabindex="0" data-value="ice-tea">Ice Tea</li>

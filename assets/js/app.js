@@ -94,3 +94,37 @@ window.addEventListener('resize', () => {
   clearTimeout(window.__footerAccordionResizeTimer);
   window.__footerAccordionResizeTimer = setTimeout(initFooterAccordions, 120);
 });
+
+/* Wire category selection into the search form so OpenSearch and regular form submits include category.
+   Small, reversible behaviour enhancement; doesn't touch payments or service-worker logic. */
+document.addEventListener('DOMContentLoaded', function () {
+  var categoryList = document.querySelector('.category-dropdown ul[role="listbox"]');
+  var hiddenCategory = document.getElementById('search-category');
+
+  if (!categoryList || !hiddenCategory) return;
+
+  // Click / tap handler: set hidden input and mark aria-selected for accessibility
+  categoryList.addEventListener('click', function (ev) {
+    var li = ev.target.closest('li[role="option"]');
+    if (!li) return;
+    var value = li.dataset && li.dataset.value ? li.dataset.value : '';
+    hiddenCategory.value = value;
+
+    Array.prototype.forEach.call(
+      categoryList.querySelectorAll('li[role="option"]'),
+      function (opt) {
+        opt.setAttribute('aria-selected', opt === li ? 'true' : 'false');
+      }
+    );
+  });
+
+  // Keyboard support: Enter and Space activate options
+  categoryList.addEventListener('keydown', function (ev) {
+    var li = ev.target.closest('li[role="option"]');
+    if (!li) return;
+    if (ev.key === 'Enter' || ev.key === ' ') {
+      ev.preventDefault();
+      li.click();
+    }
+  });
+});
