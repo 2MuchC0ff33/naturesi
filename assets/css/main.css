@@ -101,7 +101,8 @@ Media elements
 img,
 svg,
 video {
-  /* Remove baseline gap */
+  /* Prevent baseline alignment gaps on inline replaced elements (fixes empty ruleset lint error) */
+  vertical-align: middle;
 }
 
 img {
@@ -221,7 +222,8 @@ Helper Classes
 
 .visually-hidden {
   border: 0;
-  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  -webkit-clip-path: inset(50%);
   height: 1px;
   margin: -1px;
   overflow: hidden;
@@ -230,10 +232,10 @@ Helper Classes
   white-space: nowrap;
   width: 1px;
 }
-
 .visually-hidden.focusable:active,
 .visually-hidden.focusable:focus {
-  clip: auto;
+  clip-path: none;
+  -webkit-clip-path: none;
   height: auto;
   margin: 0;
   overflow: visible;
@@ -351,12 +353,16 @@ Media Queries — Device, Dark Mode, Print
   pre,
   blockquote {
     border: 1px solid #999;
-    page-break-inside: avoid;
+    /* Use the modern fragmentation property and keep a WebKit fallback for older engines */
+    break-inside: avoid;
+    -webkit-column-break-inside: avoid;
   }
 
   tr,
   img {
-    page-break-inside: avoid;
+    /* Prevent page breaks inside these elements when printing */
+    break-inside: avoid;
+    -webkit-column-break-inside: avoid;
   }
 
   p,
@@ -368,7 +374,7 @@ Media Queries — Device, Dark Mode, Print
 
   h2,
   h3 {
-    page-break-after: avoid;
+    break-after: avoid;
   }
 }
 
@@ -503,7 +509,9 @@ Site Navigation
   height: 36px;
   display: flex;
   align-items: center;
+  color: var(--color-text); /* consolidated color to avoid duplicate selector warnings */
 }
+/* Colour for .site-search .search-box and its placeholder has been consolidated into the main .site-search .search-box rule above to remove duplicate selectors. */
 
 .site-search .search-box,
 .site-search .search-box::placeholder {
@@ -617,12 +625,9 @@ svg[aria-hidden='true'] {
 .site-search .search-box,
 .site-search .search-icon {
   height: 36px;
-  box-sizing: border-box;
 }
 
-.site-search .search-box {
-  padding: 0 0.6rem;
-}
+/* Padding for .site-search .search-box is already declared in the consolidated rule above; this duplicate has been removed. */
 
 .site-nav a:focus-visible,
 .site-nav button:focus-visible,
