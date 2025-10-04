@@ -109,7 +109,6 @@ Commit guidance for refactors (en-AU)
 - Format: chore(refactor-html): short summary
 - Example: chore(refactor-html): modernise semantics in `pages/about.html` and `index.html`
 - Commit body must list files changed, brief rationale, and include this line if payment/cart touched:
-  - Manual review required: payment/cart changes in `pages/store.html` or `products.json` — do NOT merge without 2MuchC0ff33 approval.
 
 ## Use of MCP servers & tools
 
@@ -128,7 +127,7 @@ Operational rules
 - Record every automated tool usage in the PR body (tool names and key results or links). This helps reviewers verify sources and decisions.
 - Do not automatically merge or push changes that affect payments, service-worker or privacy behaviour. Create a draft PR and add the "Manual review required" line in the commit body when touching `pages/store.html`, `products.json` or `/add-to-cart`.
 - Respect privacy constraints: do not use tools to inject remote telemetry, third‑party analytics, or external beacons.
-- Required policy: When available and enabled, GitHub Copilot MUST use Context7 (`mcp_upstash_conte`) for library documentation lookups and `mcp_sequentialthi_sequentialthinking` for multi-step planning. Always confirm these servers are enabled before calling them, and record every automated tool usage (including which server/tool was used and a short justification) in the PR body.
+- Required policy: When available and enabled, GitHub Copilot MUST use Context7 (`mcp_upstash_conte`) for library documentation lookups and `mcp_sequentialthinking` for multi-step planning. Always confirm these servers are enabled before calling them, and record every automated tool usage (including which server/tool was used and a short justification) in the PR body.
 
 ## Example Copilot prompts and usage logging
 
@@ -150,12 +149,12 @@ This repository has the following MCP servers installed and available. Prefer th
 
 - Context7 (library docs): mcp*upstash_conte*\* — use `resolve-library-id` then `get-library-docs` to fetch authoritative library documentation before implementing or upgrading library-specific code.
 - GitHub (repo + code): mcp*github_github*\* — use for repository actions (create/update files, branches, PRs), code search (`mcp_github_github_search_code`) and interacting with issues/PRs. Always include a clear commit/PR message and list changed files when making programmatic changes.
-- microsoft.docs.mccp (Microsoft Learn docs): mcp*microsoft_doc*\* — use `microsoft_docs_search`, `microsoft_code_sample_search` and `microsoft_docs_fetch` to ground Azure/Microsoft-related implementation and samples.
-- sequentialthinking (planning): mcp_sequentialthi_sequentialthinking — use for multi-step planning, design breakdowns and verification steps. Use this tool to generate a plan but do not publish internal chain-of-thought in PR descriptions; instead summarise the final decisions and action items in the PR body.
+- microsoft.docs.mcp (Microsoft Learn docs): mcp*microsoft_doc*\* — use `microsoft_docs_search`, `microsoft_code_sample_search` and `microsoft_docs_fetch` to ground Azure/Microsoft-related implementation and samples.
+- sequentialthinking (planning): mcp_sequentialthinking — use for multi-step planning, design breakdowns and verification steps. Use this tool to generate a plan but do not publish internal chain-of-thought in PR descriptions; instead summarise the final decisions and action items in the PR body.
 
 Operational notes
 
 - Always confirm a given MCP server is enabled before calling its tools. If a server is unavailable, ask one short clarifying question referencing the file path you plan to inspect.
 - Record every automated tool usage in the PR body (tool names and key results or links). This helps reviewers verify sources and decisions.
-- Required policy: When available and enabled, GitHub Copilot MUST use Context7 (`mcp_upstash_conte`) for library documentation lookups and `mcp_sequentialthi_sequentialthinking` for multi-step planning. Always confirm these servers are enabled before calling them, and record every automated tool usage (including which server/tool was used and a short justification) in the PR body.
+- Required policy: When available and enabled, GitHub Copilot MUST use Context7 (`mcp_upstash_conte`) for library documentation lookups and `mcp_sequentialthinking` for multi-step planning. Always confirm these servers are enabled before calling them, and record every automated tool usage (including which server/tool was used and a short justification) in the PR body.
 - When using the sequentialthinking tool, extract the final plan and checklist and include that summary in the PR/commit body rather than raw internal reasoning.

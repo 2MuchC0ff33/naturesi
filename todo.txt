@@ -157,3 +157,11 @@ REFERENCES
 - Copilot & repo guidance: [.github/copilot-instructions.md](.github/copilot-instructions.md)
 
 
+
+
+Create category pages under pages/store, e.g. pages/store/wellness-blends.html, pages/store/black-tea.html — copy only the product <article> blocks you want to show for that category (preserve their form HTML exactly to keep checkout behaviour unchanged).
+Replace the large product list in store.html with a lightweight hub that links to the new category pages and optionally shows a small featured-set.
+Add each new page to sitemap.xml.
+Continue to use responsive <picture> + srcset + loading="lazy". Consider adding smaller thumbnail images (assets/img/thumbs/) for catalog views (no JS required) so the full‑size images are only used on product detail/category pages.
+Create the branch and open a draft PR. Commit body must include the manual review line because this touches product pages/forms:
+Manual review required: payment/cart changes in store.html or products.json — do NOT merge without 2MuchC0ff33 approval.
