@@ -31,7 +31,7 @@ A small, privacy‑first static storefront for Nature's Infusions. This reposito
 - Adding analytics, trackers or third‑party telemetry.
 
 If you touch a Manual‑Review area, include this exact line in the commit body:
-Manual review required: payment/cart changes in `pages/store.html` or `products.json` — do NOT merge without payment-owner approval.
+Manual review required: payment/cart changes in `pages/store.html` or `products.json` — do NOT merge without 2MuchC0ff33 approval.
 
 ## How to run locally (smoke test)
 
@@ -69,13 +69,13 @@ When editing HTML/CSS/JS follow the repo checklist (see [.github/copilot-instruc
 - HTML meta & semantics checked: yes/no
 - Accessibility basics verified (labels, alt text, form associations): yes/no
 - Tools used: list MCP/GitHub/Microsoft tools and key results/links (if used) — see [.github/copilot-instructions.md](.github/copilot-instructions.md)
-- Manual review required: payment/cart changes in `pages/store.html` or `products.json` — do NOT merge without payment-owner approval.
-- Payment owner / reviewer: [payment-owner@example.org](mailto:payment-owner@example.org) (replace before merge)
+- Manual review required: payment/cart changes in `pages/store.html` or `products.json` — do NOT merge without 2MuchC0ff33 approval.
+- Payment owner / reviewer: [2MuchC0ff33@example.org](mailto:2MuchC0ff33@example.org) (replace before merge)
 
 Example commit body (if touching payments):
 
 ```text
-Manual review required: payment/cart changes in `pages/store.html` or `products.json` — do NOT merge without payment-owner approval.
+Manual review required: payment/cart changes in `pages/store.html` or `products.json` — do NOT merge without 2MuchC0ff33 approval.
 
 Files changed:
 - pages/store.html
@@ -101,7 +101,7 @@ Tools used: mcp_github_github_search_code (found SW registration in assets/js/ap
 ## Contact & Authors
 
 - Author / generator credit is embedded in pages (site footer).
-- For payment/cart approvals: [payment-owner@example.org](mailto:payment-owner@example.org) (replace with real contact).
+- For payment/cart approvals: [2MuchC0ff33@example.org](mailto:2MuchC0ff33@example.org) (replace with real contact).
 
 ## License
 

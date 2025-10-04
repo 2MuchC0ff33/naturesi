@@ -57,8 +57,8 @@ Developer workflows & quick commands
 - HTML meta & semantics checked: yes/no
 - Accessibility basics verified (labels, alt text, form associations): yes/no
 - Tools used: list MCP servers/tools and key results/links (e.g. `mcp_github_github_search_code` – found SW registration in `assets/js/app.js`)
-- Manual review required: payment/cart changes in `pages/store.html` or `products.json` — do NOT merge without payment-owner approval.
-- Payment owner / reviewer: [payment-owner@example.org] (replace with the actual contact before merge)
+- Manual review required: payment/cart changes in `pages/store.html` or `products.json` — do NOT merge without 2MuchC0ff33 approval.
+- Payment owner / reviewer: [2MuchC0ff33@example.org] (replace with the actual contact before merge)
 
 Small note: If a PR touches payments or service-worker logic, mark it as a draft PR and add the exact manual-review line above.
 
@@ -109,7 +109,7 @@ Commit guidance for refactors (en-AU)
 - Format: chore(refactor-html): short summary
 - Example: chore(refactor-html): modernise semantics in `pages/about.html` and `index.html`
 - Commit body must list files changed, brief rationale, and include this line if payment/cart touched:
-  - Manual review required: payment/cart changes in `pages/store.html` or `products.json` — do NOT merge without payment-owner approval.
+  - Manual review required: payment/cart changes in `pages/store.html` or `products.json` — do NOT merge without 2MuchC0ff33 approval.
 
 ## Use of MCP servers & tools
 

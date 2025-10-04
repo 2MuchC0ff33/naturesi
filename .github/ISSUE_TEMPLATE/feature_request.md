@@ -29,6 +29,6 @@ Add any other context, mockups, or links that will help maintainers evaluate the
 
 ## Security / Payments
 
-If this request involves changes to `products.json`, `pages/store.html`, or `/add-to-cart` behaviour, mark it as requiring manual review and include the payment-owner in the review process.
+If this request involves changes to `products.json`, `pages/store.html`, or `/add-to-cart` behaviour, mark it as requiring manual review and include the 2MuchC0ff33 in the review process.
 
 <!-- Optional: include content from `.github/ISSUE_TEMPLATE/feature_request.md` to guide reporters -->

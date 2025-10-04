@@ -131,9 +131,9 @@
       "id": "product-digestive",
       "name": "Digestive Bliss",
       "description": "A delightful blend of meadowsweet, aniseed, ginger root, and peppermint, thoughtfully crafted to support digestive comfort. This soothing infusion is designed to be a refreshing choice for those seeking gently stomach support and overall digestive well-being.",
-      "images": ["assets/img/digestivebliss.wepb"],
+      "images": ["assets/img/digestivebliss.webp"],
       "inStock": false,
-      "ingredients": ["Meadowsweet", "Aniseed", "Ginger Root", "Perppermint"],
+      "ingredients": ["Meadowsweet", "Aniseed", "Ginger Root", "Peppermint"],
       "origins": "Multiple Origins",
       "options": [
         {
@@ -183,7 +183,7 @@
       "inStock": true,
       "ingredients": [
         "Roobios",
-        "Cardmom",
+        "Cardamom",
         "Honeybush",
         "Cinnamon",
         "Star Anise",
@@ -212,7 +212,7 @@
     {
       "id": "product-red",
       "name": "Nature's Red",
-      "description": "A comforting blend of roobios, honeybush, and cinnamon, this naturally caffeine-free tea highlights the rich flavours and claming qualities of its ingredients. Often chosen by breastfeeding mothers and enjoyed for its soothing character, especially during times of monthly cycle comfort, this tea is a pleasant companion for digestive enjoyment.",
+      "description": "A comforting blend of roobios, honeybush, and cinnamon, this naturally caffeine-free tea highlights the rich flavours and calming qualities of its ingredients. Often chosen by breastfeeding mothers and enjoyed for its soothing character, especially during times of monthly cycle comfort, this tea is a pleasant companion for digestive enjoyment.",
       "images": ["assets/img/naturesred.webp"],
       "inStock": true,
       "ingredients": ["Roobios", "Honeybush", "Cinnamon"],
@@ -284,7 +284,7 @@
     {
       "id": "product-summer",
       "name": "Summer Breeze",
-      "description": "A vibrant pink blend of hibiscus, peppermint, and lemon balm, this tea is perfect for warm days and can be enjoyed hot or cold. Hibiscus brings refreshing qualities, while peppermint and lemon balm and gentle, soothing notes to each sip. Unlike warming spices, this blend's naturally cooling character creates a rejuvenatig and enjoyable experience.",
+      "description": "A vibrant pink blend of hibiscus, peppermint, and lemon balm, this tea is perfect for warm days and can be enjoyed hot or cold. Hibiscus brings refreshing qualities, while peppermint and lemon balm and gentle, soothing notes to each sip. Unlike warming spices, this blend's naturally cooling character creates a rejuvenating and enjoyable experience.",
       "images": ["assets/img/summerbreeze1.webp", "assets/img/summerbreeze2.webp"],
       "inStock": true,
       "ingredients": ["Hibiscus", "Peppermint", "Lemon Balm"],
@@ -320,7 +320,7 @@
           "price": 14.0
         },
         {
-          "type": "Cyliner",
+          "type": "Cylinder",
           "weight": "80 grams",
           "price": 22.0
         }
@@ -394,7 +394,7 @@
     {
       "id": "product-english",
       "name": "English Breakfast",
-      "description": "Start your day with the robust and hearty flavour of our English Breakfast tea. This classic blend combines a selection of premium black teas, delivering a strong and invigorating brew. Perfect with or without milk, it provides a satisying morning experience that prepares you for the day ahead.",
+      "description": "Start your day with the robust and hearty flavour of our English Breakfast tea. This classic blend combines a selection of premium black teas, delivering a strong and invigorating brew. Perfect with or without milk, it provides a satisfying morning experience that prepares you for the day ahead.",
       "images": ["assets/img/Natures2_with_fonts.webp", "assets/img/NAtures2_with_fonts.webp"],
       "inStock": true,
       "ingredients": ["Black Tea"],
@@ -442,7 +442,7 @@
     {
       "id": "product-rainforest",
       "name": "Australian Rainforest and Lemon Myrtle",
-      "description": "Experience the unique flavours of Australia with our Australian Rainforest and Lemon Myrtle tea, crafted from premium Black Tea grown in the tropical regions of Australia. This blend is infused with the refreshing essence of lemon myrtle, known for its bright, citrusy aroma and flavour. Enjoy a comforting cup that captures the essence of the Australian landscape.",
+      "description": "Experience the unique flavours of Australia with our Australian Rainforest and Lemon Myrtle tea, crafted from premium Black Tea grown in the tropical regions of Australia. This blend is infused with the refreshing essence of lemon myrtle, known for its bright, citrus aroma and flavour. Enjoy a comforting cup that captures the essence of the Australian landscape.",
       "images": ["assets/img/rainforest1.webp", "assets/img/rainforest2.webp"],
       "inStock": true,
       "ingredients": ["Black Tea", "Lemon Myrtle"],
@@ -464,10 +464,10 @@
       "disclaimer": "This product is not intended to diagnose, treat, cure, or prevent any disease. Always consult with a healthcare provider before starting any new supplement or wellness regimen."
     },
     {
-      "id": "product-enegerizer",
-      "name": "Energizer",
-      "description": "Ignite your day with our Energizer blend, featuring premium Sencha Green Tea and aromatic Tulsi. This refreshing tea, rich in antioxidants, supports overall wellness and vitality. With its sweet basil twist, Energizer is an ideal choice for a revitalising post-workout beverage, perfect for a refreshing and recharging your body",
-      "images": ["assets/img/energizer1.webp", "assets/img/energizer2.webp"],
+      "id": "product-energiser",
+      "name": "energiser",
+      "description": "Ignite your day with our energiser blend, featuring premium Sencha Green Tea and aromatic Tulsi. This refreshing tea, rich in antioxidants, supports overall wellness and vitality. With its sweet basil twist, energiser is an ideal choice for a revitalising post-workout beverage, perfect for a refreshing and recharging your body",
+      "images": ["assets/img/energiser1.webp", "assets/img/energiser2.webp"],
       "inStock": true,
       "ingredients": ["Sencha Green Tea", "Tulsi", "Basil"],
       "origins": "Multiple Origins",
@@ -490,7 +490,7 @@
     {
       "id": "product-orangeginger",
       "name": "Orange and Ginger",
-      "description": "Savour a light nd refreshing experience with our Orange and Ginger Green Tea, a blend of premium Sencha Green Tea, vibrant sweet organge peel, warming ginger root, invigorating spearmint, and a hint of licorice root or a delightful aftertaste. This subtly flavoured tea is rich in antioxidants, making an enjoyable chance hot or iced, with a touch of honey for added sweetness.",
+      "description": "Savour a light nd refreshing experience with our Orange and Ginger Green Tea, a blend of premium Sencha Green Tea, vibrant sweet orange peel, warming ginger root, invigorating spearmint, and a hint of licorice root or a delightful aftertaste. This subtly flavoured tea is rich in antioxidants, making an enjoyable chance hot or iced, with a touch of honey for added sweetness.",
       "images": ["assets/img/Natures2_with_fonts.wepb"],
       "inStock": false,
       "ingredients": ["Sencha Green Tea", "Orange Peel", "Ginger"],
@@ -542,7 +542,7 @@
       ],
       "origins": "Multiple Origins",
       "price": 12.0,
-      "weight": "20 millilitres",
+      "weight": "20 milliliters",
       "rating": 4,
       "reviewCount": 5,
       "disclaimer": "This product is not intended to diagnose, treat, cure, or prevent any disease. Always consult with a healthcare provider before starting any new supplement or wellness regimen."
@@ -559,7 +559,7 @@
         "Peppermint - Essential Oil (Metha Arvensis)",
         "Coconut Oil",
         "Beeswax",
-        "Coocbutter",
+        "Cocobutter",
         "Sweet Almond Oil",
         "Jojoba Oil",
         "Vitamin E Oil"
@@ -579,7 +579,7 @@
       "inStock": true,
       "ingredients": [
         "Purified Water",
-        "Avacado Oil",
+        "Avocado Oil",
         "Sweet Almond Oil",
         "Soya Bean Oil",
         "Chamomile Flowers (Calendula Officinalus)",
@@ -591,14 +591,14 @@
         "Ethylhexylglycerin",
         "Rosehip Oil",
         "Jojoba Oil",
-        "Chamomile - Essential Oil (Matricaria Chamomila)",
+        "Chamomile - Essential Oil (Matricaria Chamomilla)",
         "Natural Vitamin E",
         "Propanediol",
-        "Rosemary Leaf Extract (Rosmarinus Officinalus"
+        "Rosemary Leaf Extract (Rosemarinus Officinalus"
       ],
       "origins": "Multiple Origins",
       "price": 18.0,
-      "weight": "50 millilitres",
+      "weight": "50 milliliters",
       "rating": 4,
       "reviewCount": 5,
       "disclaimer": "This product is not intended to diagnose, treat, cure, or prevent any disease. Always consult with a healthcare provider before starting any new supplement or wellness regimen."
@@ -611,12 +611,12 @@
       "inStock": true,
       "ingredients": [
         "Purified Water",
-        "Lavender - Essential Oil (Lavendula Angustfolia",
+        "Lavender - Essential Oil (Lavendula Angustifolia",
         "Polysorbate 80"
       ],
       "origins": "Multiple Origins",
       "price": 10.0,
-      "weight": "100 millilitres",
+      "weight": "100 milliliters",
       "rating": 4,
       "reviewCount": 5,
       "disclaimer": "This product is not intended to diagnose, treat, cure, or prevent any disease. Always consult with a healthcare provider before starting any new supplement or wellness regimen."
@@ -637,7 +637,7 @@
     },
     {
       "id": "product-flask",
-      "name": "Vacumn Flask with Infuser",
+      "name": "Vacuum Flask with Infuser",
       "description": "Lorem ipsum.",
       "images": ["assets/img/Natures2_with_fonts.webp"],
       "inStock": true,
@@ -670,7 +670,7 @@
     },
     {
       "id": "product-bag",
-      "name": "Biodegradeable Tea Bag - 10 pack",
+      "name": "Biodegradable Tea Bag - 10 pack",
       "description": "Lorem ipsum.",
       "images": ["assets/img/Natures2_with_fonts.webp"],
       "inStock": true,
