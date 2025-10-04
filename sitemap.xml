@@ -123,7 +123,7 @@
 
   <!-- Public text/data files -->
   <url>
-    <loc>https://www.naturesinfusions.com.au/products.json</loc>
+  <loc>https://www.naturesinfusions.com.au/assets/js/data/products.json</loc>
     <priority>0.50</priority>
     <changefreq>monthly</changefreq>
   </url>

@@ -30,8 +30,8 @@ jobs:
         run: npx prettier --check .
       - name: HTML validate
         run: npx html-validate "pages/**/*.html" "index.html"
-      - name: JSON syntax check
-        run: python -m json.tool products.json
+      - name: JSON syntax check (moved location)
+        run: python -m json.tool assets/js/data/products.json
       - name: JSON schema (if present)
         run: |
-          if [ -f products.schema.json ]; then npx ajv validate -s products.schema.json -d products.json; else echo "No products.schema.json found; skipping schema validation"; fi
+          if [ -f products.schema.json ]; then npx ajv validate -s products.schema.json -d assets/js/data/products.json; else echo "No products.schema.json found; skipping schema validation"; fi

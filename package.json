@@ -22,14 +22,19 @@
     "lint-staged": "^16.2.3",
     "prettier": "^3.6.2",
     "stylelint": "^16.25.0",
-    "stylelint-config-recommended": "^17.0.0"
+    "stylelint-config-recommended": "^17.0.0",
+    "@babel/core": "^7.22.0",
+    "@babel/eslint-parser": "^7.22.0",
+    "@babel/preset-env": "^7.22.0",
+    "@babel/plugin-syntax-import-assertions": "^7.22.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "format": "prettier --write \"**/*.{html,css,js,json,md}\"",
     "prepare": "husky install",
     "stylelint": "stylelint \"**/*.{css,scss}\" --fix",
-    "lint": "eslint \"**/*.js\" --fix"
+    "lint": "eslint \"**/*.js\" --fix",
+    "generate:categories": "node scripts/generate-product-categories.js"
   },
   "lint-staged": {
     "*.{css,scss}": [

@@ -1,0 +1,27 @@
+{
+  "categories": [
+    { "slug": "", "label": "Show All", "href": "/pages/store.html#all" },
+    {
+      "slug": "wellness-blends",
+      "label": "Wellness Blends",
+      "href": "/pages/store.html#wellness-blends"
+    },
+    {
+      "slug": "artisan-blends",
+      "label": "Artisan Blends",
+      "href": "/pages/store.html#artisan-blends"
+    },
+    {
+      "slug": "herbal-infusions",
+      "label": "Herbal Infusions",
+      "href": "/pages/store.html#herbal-infusions"
+    },
+    { "slug": "black-tea", "label": "Black Tea", "href": "/pages/store.html#black-tea" },
+    { "slug": "green-tea", "label": "Green Tea", "href": "/pages/store.html#green-tea" },
+    { "slug": "ice-tea", "label": "Ice Tea", "href": "/pages/store.html#ice-tea" },
+    { "slug": "balms", "label": "Herbal Balms", "href": "/pages/store.html#balms" },
+    { "slug": "creams", "label": "Herbal Creams", "href": "/pages/store.html#creams" },
+    { "slug": "selfcare", "label": "Self Care", "href": "/pages/store.html#selfcare" },
+    { "slug": "accessories", "label": "Accessories", "href": "/pages/store.html#accessories" }
+  ]
+}

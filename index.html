@@ -92,7 +92,7 @@
     <!-- Resource Hints -->
     <link rel="dns-prefetch" href="//www.naturesinfusions.com.au">
     <link rel="preload" href="/assets/css/main.css" as="style">
-    <link rel="prefetch" href="/products.json" as="fetch">
+    <link rel="prefetch" href="/assets/js/data/products.json" as="fetch">
 
     <!-- Cache Control -->
     <meta http-equiv="Cache-Control" content="public, no-cache, must-revalidate">
@@ -179,8 +179,8 @@
 
     <link rel="stylesheet" href="/assets/css/main.css" type="text/css">
 
-    <!-- Script Loading -->
-    <script src="/assets/js/app.js" defer></script>
+    <!-- Script Loading: load main JS as an ES module so app.js can import smaller modules (modular refactor) -->
+    <script type="module" src="/assets/js/app.js"></script>
 </head>
 
 <body itemscope itemtype="https://schema.org/WebPage">
@@ -194,7 +194,7 @@
             </div>
 
 <div class="nav-center">
-    
+
         <nav aria-label="Browse by category" class="category-dropdown">
         <details>
             <summary aria-haspopup="listbox" role="button">Select a category ▾</summary>
@@ -212,7 +212,7 @@
             </ul>
         </details>
     </nav>
-    
+
     <form class="site-search" action="/pages/search.html" method="get" role="search" aria-label="Search site">
         <label for="site-search" class="visually-hidden">Search Nature's Infusions</label>
         <input id="site-search" name="q" type="search" placeholder="Search Nature's Infusions" class="search-box" aria-label="Search site">

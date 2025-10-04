@@ -92,7 +92,7 @@
 	<!-- Resource Hints -->
 	<link rel="dns-prefetch" href="//www.naturesinfusions.com.au">
 	<link rel="preload" href="/assets/css/main.css" as="style">
-	<link rel="prefetch" href="/products.json" as="fetch">
+	<link rel="prefetch" href="/assets/js/data/products.json" as="fetch">
 
 	<!-- Cache Control -->
 	<meta http-equiv="Cache-Control" content="public, no-cache, must-revalidate">
@@ -183,8 +183,8 @@
 	<!-- Styling -->
 	<link rel="stylesheet" href="/assets/css/main.css" type="text/css">
 
-	<!-- Script Loading -->
-	<script src="/assets/js/app.js" defer></script>
+	<!-- Script Loading: load main JS as an ES module so app.js can import smaller modules (modular refactor) -->
+	<script type="module" src="/assets/js/app.js"></script>
 </head>
 
 <body itemscope itemtype="https://schema.org/WebPage">
@@ -234,7 +234,7 @@
 <link rel="stylesheet" href="/assets/css/main.css" type="text/css">
 
 <!-- Script Loading -->
-<script src="/assets/js/app.js" defer></script>
+<script type="module" src="/assets/js/app.js"></script>
 </head>
 
 <!-- Site Header -->
