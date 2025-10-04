@@ -35,20 +35,6 @@ Project-specific conventions
 - Small, reversible CSS utility classes in `assets/css/main.css` and non-invasive JS helpers in `assets/js/app.js` (do not change service-worker guards).
 - Non-functional documentation, README improvements, and `.github/*` repo config changes.
 
-## Forbidden or requires manual review
-
-- Modifying `pages/store.html`, `products.json` or any `/add-to-cart` handling — Manual review required.
-- Changing service-worker caching logic, registration guards, or offline behaviour without explicit approval.
-- Introducing analytics, trackers, external telemetry beacons or third-party cookies.
-
-Note: When a manual review is required, create a draft PR and include the explicit "Manual review required" line in the commit body (see checklist below).
-
-Developer workflows & quick commands
-
-- Local smoke test: serve the repo from a local static server so the service worker can register. Example (PowerShell):
-  - python -m http.server 8000 ; open http://localhost:8000 in a browser
-- Deploy notes: check `.env` for `DEPLOY_PATH` before editing deployment-related assets.
-
 ## PR / Commit checklist (copy into PR body)
 
 - Title format: `chore(refactor-html): short summary`
@@ -57,15 +43,9 @@ Developer workflows & quick commands
 - HTML meta & semantics checked: yes/no
 - Accessibility basics verified (labels, alt text, form associations): yes/no
 - Tools used: list MCP servers/tools and key results/links (e.g. `mcp_github_github_search_code` – found SW registration in `assets/js/app.js`)
-- Manual review required: payment/cart changes in `pages/store.html` or `products.json` — do NOT merge without 2MuchC0ff33 approval.
-- Payment owner / reviewer: [2MuchC0ff33@example.org] (replace with the actual contact before merge)
+- Reviewer: [2MuchC0ff33@example.org] (replace with the actual contact before merge)
 
 Small note: If a PR touches payments or service-worker logic, mark it as a draft PR and add the exact manual-review line above.
-
-Safety & manual-review areas
-
-- Payment/cart: changes in `pages/store.html`, `products.json` or any `/add-to-cart` handling must be flagged for manual review — these affect real payments.
-- Service worker & offline: edits to `service-worker.js` can break install/upgrade behaviour. Keep changes minimal and test install/uninstall cycles on `localhost` or `https`.
 
 ## HTML5 refactor checklist
 
@@ -79,8 +59,6 @@ Acceptance criteria
 - Deprecated tags/attributes are removed (replace with classes + `assets/css/main.css`).
 - Images have meaningful `alt` text or are explicitly decorative (`role="presentation"`), and form controls have associated `<label>`s.
 - ARIA is used only when semantic HTML cannot provide the required semantics.
-- Service-worker and PWA behaviour is preserved (do not change registration guards in `assets/js/app.js` or core caching behaviour in `service-worker.js` without manual review).
-- Any edits touching `pages/store.html`, `products.json` or `/add-to-cart` are flagged for manual review in the commit body.
 - Changes are small, well-commented in-line, and reversible.
 
 Recommended process (step-by-step)
@@ -125,7 +103,6 @@ Guidance (when to use which tool)
 Operational rules
 
 - Record every automated tool usage in the PR body (tool names and key results or links). This helps reviewers verify sources and decisions.
-- Do not automatically merge or push changes that affect payments, service-worker or privacy behaviour. Create a draft PR and add the "Manual review required" line in the commit body when touching `pages/store.html`, `products.json` or `/add-to-cart`.
 - Respect privacy constraints: do not use tools to inject remote telemetry, third‑party analytics, or external beacons.
 - Required policy: When available and enabled, GitHub Copilot MUST use Context7 (`mcp_upstash_conte`) for library documentation lookups and `mcp_sequentialthinking` for multi-step planning. Always confirm these servers are enabled before calling them, and record every automated tool usage (including which server/tool was used and a short justification) in the PR body.
 
