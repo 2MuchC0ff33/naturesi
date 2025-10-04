@@ -539,13 +539,12 @@
 
       <hr aria-hidden="true" >
 
-      <footer
+      <div
         class="site-footer"
         itemscope
         itemtype="https://schema.org/WPFooter"
-
-        aria-label="Site footer"
       >
+        <!-- aria-label removed: this wrapper is for layout only; the native <footer> element below provides the contentinfo landmark -->
         <div class="container">
           <div class="branding">
             <div class="brand-text">
@@ -666,7 +665,10 @@
             </nav>
           </section>
         </div>
-        <div class="legal-bar" role="contentinfo" aria-label="Legal and credits">
+        <!-- Use native footer element for semantics and accessibility; footer has implicit role="contentinfo" -->
+        <!-- Move the legal bar into a native <footer> element to satisfy linters while keeping the outer
+             site wrapper as a div for layout and to avoid ambiguous footer nesting. -->
+        <footer class="legal-bar" aria-label="Legal and credits">
           <div class="legal">
             <p>&copy; <time datetime="2025">2025</time> Nature's Infusions. All rights reserved.</p>
             <p>Powered by Ultra-Simple Static EStore Framework</p>
@@ -702,8 +704,8 @@
               <time datetime="2025-07-21" itemprop="datePublished">21/07/2025</time>
             </p>
           </div>
-        </div>
-      </footer>
+        </footer>
+      </div>
     </main>
   </body>
 </html>
