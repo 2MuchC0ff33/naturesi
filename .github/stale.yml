@@ -1,0 +1,17 @@
+# NOTE: filename 'stale.ym' was requested explicitly; the canonical filename for a stale workflow
+# is usually '.github/workflows/stale.yml'. Below is a suggested stale workflow configuration
+# in YAML format. If you intended a working workflow, add it under '.github/workflows/stale.yml'.
+
+name: 'Stale issues (suggested)'
+
+on:
+  schedule:
+    - cron: '0 2 * * *' # daily at 02:00 UTC
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Mark stale and close'
+        run: |
+          echo "Use actions/stale (or Probot's stale app) in a workflow named .github/workflows/stale.yml to auto-close stale issues. This file is a placeholder named 'stale.ym' as requested."

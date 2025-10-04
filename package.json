@@ -1,0 +1,52 @@
+{
+    "name":  "naturesi",
+    "version":  "1.0.0",
+    "description":  "",
+    "main":  "service-worker.js",
+    "repository":  {
+                       "type":  "git",
+                       "url":  "git+https://github.com/2MuchC0ff33/naturesi.git"
+                   },
+    "keywords":  [
+
+                 ],
+    "author":  "",
+    "license":  "ISC",
+    "bugs":  {
+                 "url":  "https://github.com/2MuchC0ff33/naturesi/issues"
+             },
+    "homepage":  "https://github.com/2MuchC0ff33/naturesi#readme",
+    "devDependencies":  {
+                            "eslint":  "^8.57.1",
+                            "eslint-config-prettier":  "^10.1.8",
+                            "eslint-plugin-prettier":  "^5.5.4",
+                            "husky":  "^9.1.7",
+                            "lint-staged":  "^16.2.3",
+                            "prettier":  "^3.6.2",
+                            "stylelint":  "^16.25.0",
+                            "stylelint-config-recommended":  "^17.0.0"
+                        },
+    "scripts":  {
+                    "test":  "echo \"Error: no test specified\" \u0026\u0026 exit 1",
+                    "format":  "prettier --write \"**/*.{html,css,js,json,md}\"",
+                    "prepare":  "husky install",
+                    "stylelint":  "stylelint \"**/*.{css,scss}\" --fix",
+                    "lint":  "eslint \"**/*.js\" --fix"
+                },
+    "lint-staged":  {
+                        "*.{css,scss}":  [
+                                             "prettier --write",
+                                             "stylelint --fix",
+                                             "git add"
+                                         ],
+                        "*.js":  [
+                                     "eslint --fix",
+                                     "prettier --write",
+                                     "git add"
+                                 ],
+                        "*.{html,md,json}":  [
+                                                 "prettier --write",
+                                                 "git add"
+                                             ]
+                    }
+}

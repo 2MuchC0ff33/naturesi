@@ -114,11 +114,13 @@
       "short_name": "Store",
       "description": "Browse our organic tea collection",
       "url": "/store.html",
-      "icons": [{
-        "src": "/assets/img/logo.svg",
-        "sizes": "48x48",
-        "type": "image/svg+xml"
-      }]
+      "icons": [
+        {
+          "src": "/assets/img/logo.svg",
+          "sizes": "48x48",
+          "type": "image/svg+xml"
+        }
+      ]
     },
     {
       "name": "About Us",
@@ -150,12 +152,14 @@
 
   "prefer_related_applications": false,
 
-  "file_handlers": [{
-    "action": "/index.html",
-    "accept": {
-      "text/html": [".html"]
+  "file_handlers": [
+    {
+      "action": "/index.html",
+      "accept": {
+        "text/html": [".html"]
+      }
     }
-  }],
+  ],
 
   "share_target": {
     "action": "/social.html",
@@ -168,22 +172,26 @@
     }
   },
 
-  "protocol_handlers": [{
-    "protocol": "web+natures",
-    "url": "/index.html?uri=%s"
-  }],
+  "protocol_handlers": [
+    {
+      "protocol": "web+natures",
+      "url": "/index.html?uri=%s"
+    }
+  ],
 
-  "web_accessible_resources": [{
-    "resources": [
-      "/assets/img/*.webp",
-      "/assets/css/*.css",
-      "/assets/js/app.js",
-      "/offline.html",
-      "/404.html",
-      "/pages/*.html"
-    ],
-    "matches": ["*://*/*"]
-  }],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "/assets/img/*.webp",
+        "/assets/css/*.css",
+        "/assets/js/app.js",
+        "/offline.html",
+        "/404.html",
+        "/pages/*.html"
+      ],
+      "matches": ["*://*/*"]
+    }
+  ],
 
   "serviceworker": {
     "src": "/service-worker.js",
@@ -203,14 +211,9 @@
     "client_mode": "focus-existing"
   },
 
-  "permissions": [
-    "clipboard-write",
-    "clipboard-read"
-  ],
+  "permissions": ["clipboard-write", "clipboard-read"],
 
-  "optional_permissions": [
-    "geolocation"
-  ],
+  "optional_permissions": ["geolocation"],
 
   "author": {
     "name": "Nature's Infusions",

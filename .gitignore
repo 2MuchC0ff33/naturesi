@@ -1,0 +1,12 @@
+﻿node_modules/
+package-lock.json
+.vscode/
+.idea/
+.DS_Store
+dist/
+build/
+.cache/
+.env
+.env.local
+*.log
+.sass-cache/

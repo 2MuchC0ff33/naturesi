@@ -1,12 +1,15 @@
 // Development app.js with no caching and live reload helpers
 
 // Only register service worker in production or secure contexts
-if ('serviceWorker' in navigator && (window.location.hostname === 'localhost' || window.location.protocol === 'https:')) {
+if (
+  'serviceWorker' in navigator &&
+  (window.location.hostname === 'localhost' || window.location.protocol === 'https:')
+) {
   window.addEventListener('load', () => {
     // Clear all caches on page load for development
     if ('caches' in window) {
-      caches.keys().then(keys => {
-        keys.forEach(key => {
+      caches.keys().then((keys) => {
+        keys.forEach((key) => {
           caches.delete(key);
           console.log('Cleared cache:', key);
         });
@@ -14,12 +17,13 @@ if ('serviceWorker' in navigator && (window.location.hostname === 'localhost' ||
     }
 
     // Register the no-cache service worker
-    navigator.serviceWorker.register('/service-worker.js')
-      .then(registration => {
+    navigator.serviceWorker
+      .register('/service-worker.js')
+      .then((registration) => {
         console.log('Service Worker registered:', registration);
         registration.update();
       })
-      .catch(error => {
+      .catch((error) => {
         console.log('Service Worker registration failed:', error);
       });
   });
@@ -40,7 +44,7 @@ if (window.location.hostname === 'localhost') {
 // Simple accessible accordion behaviour for footer quick-links
 document.addEventListener('DOMContentLoaded', () => {
   const toggles = document.querySelectorAll('.accordion-toggle[data-controls]');
-  toggles.forEach(button => {
+  toggles.forEach((button) => {
     const panelId = button.getAttribute('data-controls');
     const panel = document.getElementById(panelId);
     if (!panel) return;
@@ -49,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!button.hasAttribute('aria-expanded')) button.setAttribute('aria-expanded', 'false');
     if (!panel.hasAttribute('aria-hidden')) panel.setAttribute('aria-hidden', 'false');
 
-    button.addEventListener('click', (e) => {
+    button.addEventListener('click', () => {
       const expanded = button.getAttribute('aria-expanded') === 'true';
       button.setAttribute('aria-expanded', expanded ? 'false' : 'true');
       // Toggle visibility; small screens will honour CSS display: none when aria-hidden is true
@@ -69,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // Collapse panels by default on very small viewports for ergonomics
 function initFooterAccordions() {
   const small = window.matchMedia('(max-width: 480px)').matches;
-  document.querySelectorAll('.accordion-toggle[data-controls]').forEach(btn => {
+  document.querySelectorAll('.accordion-toggle[data-controls]').forEach((btn) => {
     const panel = document.getElementById(btn.getAttribute('data-controls'));
     if (!panel) return;
     if (small) {
