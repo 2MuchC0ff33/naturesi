@@ -1,0 +1,57 @@
+.category-anchor {
+  display: block;
+  height: 0;
+  width: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+/* ==========================================================================
+Helper and utility classes
+Small, well-scoped utilities (spacing, layout helpers, grid) live here.
+========================================================================== */
+.hidden,
+[hidden] {
+  display: none;
+}
+
+.clearfix::after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+.container {
+  width: 100%;
+  padding-inline: var(--space-md);
+  margin-inline: auto;
+  max-width: var(--max-width);
+}
+
+.grid {
+  display: grid;
+  gap: var(--space-md);
+}
+
+@supports (width: min(250px, 100%)) {
+  .grid-auto-fit {
+    grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+  }
+}
+
+.p-sm {
+  padding: var(--space-sm);
+}
+
+.p-md {
+  padding: var(--space-md);
+}
+
+.mt-sm {
+  margin-top: var(--space-sm);
+}
+
+.mb-md {
+  margin-bottom: var(--space-md);
+}

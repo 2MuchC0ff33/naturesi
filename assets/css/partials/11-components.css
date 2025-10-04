@@ -1,0 +1,87 @@
+/* ==========================================================================
+Small components
+Accordion toggles, social icon variants and other small repeated components.
+========================================================================== */
+.site-nav .logo img,
+.site-nav .all-logo img {
+  max-height: 30px;
+  width: auto;
+  height: auto;
+}
+
+.site-footer nav[aria-label='Social media links'] ul {
+  display: flex;
+  gap: var(--space-xs);
+  align-items: center;
+}
+
+.site-footer nav[aria-label='Social media links'] a svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+  fill: currentColor;
+}
+
+.site-footer nav[aria-label='Social media links'] a.facebook {
+  color: #1877f2;
+}
+
+.site-footer nav[aria-label='Social media links'] a.facebook:focus-visible,
+.site-footer nav[aria-label='Social media links'] a.facebook:hover {
+  background: rgba(24, 119, 242, 0.12);
+  color: #fff;
+  outline-color: rgba(24, 119, 242, 0.36);
+}
+
+.site-footer nav[aria-label='Social media links'] a.instagram {
+  color: #e4405f;
+}
+
+.site-footer nav[aria-label='Social media links'] a.instagram:focus-visible,
+.site-footer nav[aria-label='Social media links'] a.instagram:hover {
+  background: linear-gradient(45deg, rgba(228, 64, 95, 0.12), rgba(252, 175, 69, 0.12));
+  color: #fff;
+  outline-color: rgba(228, 64, 95, 0.36);
+}
+
+.accordion-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  color: var(--footer-text);
+  border: 0;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+}
+
+.accordion-toggle::after {
+  content: '\25be';
+  display: inline-block;
+  transform-origin: center;
+  transition: transform var(--transition-fast) ease;
+  font-size: 0.85rem;
+}
+
+.accordion-toggle[aria-expanded='true']::after {
+  transform: rotate(-180deg);
+}
+
+.links-grid[aria-hidden='true'] {
+  display: none;
+}
+
+@media (max-width: 480px) {
+  .accordion-toggle {
+    width: 100%;
+    justify-content: center;
+    padding: 0.2rem 0;
+  }
+
+  .site-footer .links-grid ul li + li {
+    border-top: 1px solid color-mix(in srgb, var(--footer-text) 6%, transparent);
+    margin-top: 0.15rem;
+    padding-top: 0.35rem;
+  }
+}

@@ -1,0 +1,41 @@
+/* ==========================================================================
+Reset and low-level base rules
+Include box-sizing reset, selection, media element behaviour and a simple hr
+rule. Kept small so it can be audited independently.
+========================================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Selection styles */
+::-moz-selection {
+  background: var(--color-accent);
+  color: white;
+  text-shadow: none;
+}
+
+/* Media elements */
+img,
+svg,
+video {
+  /* Prevent baseline alignment gaps on inline replaced elements */
+  vertical-align: middle;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Horizontal rule */
+hr {
+  border: 0;
+  border-top: 1px solid var(--color-light-background);
+  margin: var(--space-md) auto;
+  width: 80%;
+}

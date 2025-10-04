@@ -1,0 +1,176 @@
+/* ==========================================================================
+Category dropdown and theme/print rules
+Contains header category dropdown specifics, system theme adjustments and
+print fallbacks.
+========================================================================== */
+/* Header Category Dropdown Menu Styles */
+#site-header .category-dropdown,
+#site-header .category-dropdown details {
+  position: relative;
+  z-index: 2000;
+  color: var(--color-text);
+}
+
+#site-header .category-dropdown summary {
+  list-style: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 36px;
+  padding: 0 0.6rem;
+  border-radius: 6px;
+  border: 1px solid var(--color-border);
+  background: var(--color-background);
+  color: var(--color-text);
+  font-size: 0.95rem;
+  line-height: 1;
+  margin: 0;
+  -webkit-tap-highlight-color: transparent;
+  position: relative;
+  z-index: 2001;
+}
+
+#site-header .category-dropdown summary::-webkit-details-marker {
+  display: none;
+}
+
+#site-header .category-dropdown ul {
+  position: absolute;
+  top: calc(100% + 0.35rem);
+  left: 0;
+  min-width: 180px;
+  max-width: 320px;
+  max-height: 16rem;
+  overflow: auto;
+  padding: 0.35rem;
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+  list-style: none;
+  margin: 0;
+  z-index: 2100;
+  pointer-events: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+#site-header .category-dropdown li {
+  margin: 0;
+  padding: 0;
+}
+
+#site-header .category-dropdown a {
+  display: block;
+  padding: 0.35rem 0.5rem;
+  color: var(--color-text);
+  text-decoration: none;
+  border-radius: 4px;
+  pointer-events: auto;
+}
+
+#site-header .category-dropdown a:hover,
+#site-header .category-dropdown a:focus {
+  background: color-mix(in srgb, var(--color-accent) 12%, white);
+  color: var(--color-text);
+  outline: none;
+}
+
+#site-header .category-dropdown,
+#site-header .category-dropdown * {
+  color: inherit;
+}
+
+@media (max-width: 640px) {
+  #site-header .category-dropdown summary {
+    height: 36px;
+    padding: 0 0.45rem;
+  }
+
+  #site-header .category-dropdown ul {
+    min-width: 140px;
+    right: auto;
+    left: 0;
+  }
+}
+
+/* Theme Switch (hidden for now) */
+.theme-switch {
+  display: none;
+}
+
+/* Media Queries — Device, Dark Mode, Print */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background: #121212;
+    --color-text: #f5f5f5;
+    --color-light-background: #2d4d4c;
+    --color-border: #333333;
+  }
+
+  img {
+    filter: brightness(0.9);
+  }
+
+  a {
+    color: color-mix(in srgb, var(--color-accent) 80%, white);
+  }
+}
+
+@media print {
+  *,
+  *::before,
+  *::after {
+    background: #fff;
+    color: #000;
+    box-shadow: none;
+    text-shadow: none;
+  }
+
+  a,
+  a:visited {
+    text-decoration: underline;
+  }
+
+  a[href]::after {
+    content: ' (' attr(href) ')';
+  }
+
+  abbr[title]::after {
+    content: ' (' attr(title) ')';
+  }
+
+  a[href^='#']::after,
+  a[href^='javascript:']::after {
+    content: '';
+  }
+
+  pre {
+    white-space: pre-wrap;
+  }
+
+  pre,
+  blockquote {
+    border: 1px solid #999;
+    break-inside: avoid;
+    -webkit-column-break-inside: avoid;
+  }
+
+  tr,
+  img {
+    break-inside: avoid;
+    -webkit-column-break-inside: avoid;
+  }
+
+  p,
+  h2,
+  h3 {
+    orphans: 3;
+    widows: 3;
+  }
+
+  h2,
+  h3 {
+    break-after: avoid;
+  }
+}
