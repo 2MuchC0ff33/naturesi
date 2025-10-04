@@ -102,8 +102,12 @@
             <fieldset>
               <legend>Product Options</legend>
 
-              <div class="package-options" role="radiogroup" aria-labelledby="package-label">
-                <h4 id="package-label">Select Packaging</h4>
+              <div
+                class="package-options"
+                role="radiogroup"
+                aria-labelledby="package-label-product-energiser"
+              >
+                <h4 id="package-label-product-energiser">Select Packaging</h4>
 
                 <label>
                   <input
@@ -200,6 +204,35 @@
             </div>
           </header>
         </article>
+        <div
+          class="package-options"
+          role="radiogroup"
+          aria-labelledby="package-label-product-orangeginger"
+        >
+          <h4 id="package-label-product-orangeginger">Select Packaging</h4>
+          <label>
+            <input
+              type="radio"
+              name="package"
+              value="pouch"
+              itemprop="price"
+              content="14.00"
+              data-price="14.00"
+            />
+            <span>$14.00 - 50 grams <small>(Pouch)</small></span>
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="package"
+              value="cylinder"
+              itemprop="price"
+              content="22.00"
+              data-price="22.00"
+            />
+            <span>$22.00 - 80 grams <small>(Cylinder)</small></span>
+          </label>
+        </div>
       </section>
     </main>
   </body>
