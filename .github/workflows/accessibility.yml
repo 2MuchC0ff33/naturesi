@@ -18,4 +18,4 @@ jobs:
           python -m http.server 8000 > server.log 2>&1 &
           sleep 2
       - name: Run pa11y on store page
-        run: npx pa11y http://127.0.0.1:8000/pages/store.html --chrome-flags="--no-sandbox"
+        run: npx pa11y http://127.0.0.1:8000/pages/store.html --browser chrome --timeout 60000
