@@ -5,12 +5,28 @@
     "node": true
   },
   "extends": ["eslint:recommended", "plugin:prettier/recommended"],
+  "parser": "@babel/eslint-parser",
   "parserOptions": {
-    "ecmaVersion": 12,
+    "requireConfigFile": false,
+    "babelOptions": {
+      "presets": ["@babel/preset-env"],
+      "plugins": ["@babel/plugin-syntax-import-assertions"]
+    },
+    "ecmaVersion": 13,
     "sourceType": "module"
   },
   "rules": {
     "no-unused-vars": "warn",
     "no-console": "off"
-  }
+  },
+  "plugins": ["html"],
+  "overrides": [
+    {
+      "files": ["*.html"],
+      "parser": "espree",
+      "rules": {
+        // Add specific rules for HTML here
+      }
+    }
+  ]
 }

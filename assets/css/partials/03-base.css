@@ -1,0 +1,36 @@
+/* ==========================================================================
+Base document styles
+This file contains top-level typographic and document-level settings.
+========================================================================== */
+html {
+  color: var(--color-text);
+  font-size: var(--min-font);
+  line-height: var(--line-height);
+  font-family:
+    'Arial',
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    'Noto Sans',
+    'Liberation Sans',
+    sans-serif;
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (min-width: 320px) {
+  html {
+    font-size: calc(
+      var(--min-font) + (var(--max-font) - var(--min-font)) *
+        ((100vw - var(--min-width)) / (var(--max-width) - var(--min-width)))
+    );
+  }
+}
+
+a,
+button {
+  color: var(--color-accent);
+  transition: all var(--transition-medium) ease;
+  cursor: pointer;
+}

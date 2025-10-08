@@ -1,233 +1,124 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en-AU">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Search Results - Nature's Infusions</title>
-    <link rel="stylesheet" href="/assets/css/main.css" />
-  </head>
 
-  <body>
-    <header>
-      <h1>Search Results</h1>
-    </header>
-    <main>
-      <form
-        class="site-search"
-        action="/pages/search.html"
-        method="get"
-        role="search"
-        aria-label="Search site"
-      >
-        <label for="search-category" class="visually-hidden">Select a category</label>
-        <nav aria-label="Product categories" class="category-dropdown">
-          <details>
-            <summary aria-haspopup="listbox" role="button">Select a category ▾</summary>
-            <ul role="listbox" aria-label="Categories">
-              <li role="option" tabindex="0" data-value="">Show All</li>
-              <li role="option" tabindex="0" data-value="wellness-blends">Wellness Blends</li>
-              <li role="option" tabindex="0" data-value="artisan-blends">Artisan Blends</li>
-              <li role="option" tabindex="0" data-value="herbal-infusions">
-                Herbal Teas and Infusions
-              </li>
-              <li role="option" tabindex="0" data-value="black-tea">Black Tea</li>
-              <li role="option" tabindex="0" data-value="green-tea">Green Tea</li>
-              <li role="option" tabindex="0" data-value="ice-tea">Ice Tea</li>
-              <li role="option" tabindex="0" data-value="balms">Herbal Balms</li>
-              <li role="option" tabindex="0" data-value="creams">Herbal Creams</li>
-              <li role="option" tabindex="0" data-value="selfcare">Self Care</li>
-              <li role="option" tabindex="0" data-value="accessories">Accessories</li>
-            </ul>
-          </details>
-        </nav>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Search Results - Nature's Infusions</title>
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="Nature's Infusions">
+</head>
 
-        <label for="site-search" class="visually-hidden">Search Nature's Infusions</label>
-        <input
-          id="site-search"
-          name="q"
-          type="search"
-          placeholder="Search Nature's Infusions"
-          class="search-box"
-          aria-label="Search site"
-        />
-
-        <button class="search-icon" type="submit" aria-label="Submit search">
-          <!-- inline svg magnifier -->
-          <svg
-            width="18"
-            height="18"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            aria-hidden="true"
-            focusable="false"
-          >
-            <path
-              d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79L20 21.49 21.49 20l-5.99-6zM4 9.5a5.5 5.5 0 1111 0 5.5 5.5 0 01-11 0z"
-              fill="currentColor"
-            />
-          </svg>
-        </button>
-      </form>
-      <p>
-        Use Ctrl+F (or Cmd+F on Mac) to search this page for your query after submitting the form.
-      </p>
-      <p>Or browse by category:</p>
+<body>
+  <header>
+    <a class="skip-link visually-hidden focusable" href="#main-content">Skip to main content</a>
+    <h1>Search Results</h1>
+  </header>
+  <main id="main-content">
+    <form class="site-search" action="/pages/search.html" method="get" role="search" aria-label="Search site">
+      <label for="search-category" class="visually-hidden">Select a category</label>
+      <select id="search-category" name="category" class="category-select">
+        <option value="">All categories</option>
+        <option value="wellness-blends">Wellness Blends</option>
+        <option value="artisan-blends">Artisan Blends</option>
+        <option value="herbal-infusions">Herbal Infusions</option>
+        <option value="black-tea">Black Tea</option>
+        <option value="green-tea">Green Tea</option>
+        <option value="ice-tea">Ice Tea</option>
+        <option value="balms">Herbal Balms</option>
+        <option value="creams">Herbal Creams</option>
+        <option value="selfcare">Self Care</option>
+        <option value="accessories">Accessories</option>
+      </select>
+      <label for="site-search" class="visually-hidden">Search Nature's Infusions</label>
+      <input id="site-search" name="q" type="search" placeholder="Search Nature's Infusions" class="search-box"
+        aria-label="Search site">
+      <button class="search-icon" type="submit" aria-label="Submit search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+          <path
+            d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79L20 21.49 21.49 20l-5.99-6zM4 9.5a5.5 5.5 0 1111 0 5.5 5.5 0 01-11 0z"
+            fill="currentColor"></path>
+        </svg>
+      </button>
+    </form>
+    <p>Use Ctrl+F (or Cmd+F on Mac) to search this page for your query after submitting the form.</p>
+    <p>Or browse by category:</p>
+    <ul>
+      <li><a href="/pages/search/wellness-blends.html">Wellness Blends</a></li>
+      <li><a href="/pages/search/artisan-blends.html">Artisan Blends</a></li>
+      <li><a href="/pages/search/herbal-infusions.html">Herbal Infusions</a></li>
+      <li><a href="/pages/search/black-tea.html">Black Tea</a></li>
+      <li><a href="/pages/search/green-tea.html">Green Tea</a></li>
+      <li><a href="/pages/search/ice-tea.html">Ice Tea</a></li>
+      <li><a href="/pages/search/balms.html">Herbal Balms</a></li>
+      <li><a href="/pages/search/creams.html">Herbal Creams</a></li>
+      <li><a href="/pages/search/selfcare.html">Self Care</a></li>
+      <li><a href="/pages/search/accessories.html">Accessories</a></li>
+    </ul>
+    <section id="all-products">
+      <h2>All Products</h2>
       <ul>
-        <li><a href="/pages/search/search-wellness-blends.html">Wellness Blends</a></li>
-        <li><a href="/pages/search/search-artisan-blends.html">Artisan Blends</a></li>
-        <li><a href="/pages/search/search-herbal-infusions.html">Herbal Infusions</a></li>
-        <li><a href="/pages/search/search-black-tea.html">Black Tea</a></li>
-        <li><a href="/pages/search/search-green-tea.html">Green Tea</a></li>
+        <li><a href="/pages/store/wellness-blends.html#enchanted-turmeric">Enchanted Turmeric <small>(Wellness
+              Blends)</small></a></li>
+        <li><a href="/pages/store/herbal-infusions.html#enchanted-turmeric">Enchanted Turmeric <small>(Herbal
+              Infusions)</small></a></li>
+        <li><a href="/pages/store/wellness-blends.html#calming-garden">Calming Garden <small>(Wellness
+              Blends)</small></a></li>
+        <li><a href="/pages/store/wellness-blends.html#sleeping-soundly">Sleeping Soundly <small>(Wellness
+              Blends)</small></a></li>
+        <li><a href="/pages/store/wellness-blends.html#hormone-harmony">Hormone Harmony <small>(Wellness
+              Blends)</small></a></li>
+        <li><a href="/pages/store/wellness-blends.html#natures-detox">Nature's Detox <small>(Wellness
+              Blends)</small></a></li>
+        <li><a href="/pages/store/wellness-blends.html#digestive-bliss">Digestive Bliss <small>(Wellness
+              Blends)</small></a></li>
+        <li><a href="/pages/store/wellness-blends.html#botanic-glow">Botanic Glow <small>(Wellness Blends)</small></a>
+        </li>
+        <li><a href="/pages/store/wellness-blends.html#winter-wellness">Winter Wellness <small>(Wellness
+              Blends)</small></a></li>
+        <li><a href="/pages/store/black-tea.html#ceylon-chai">Ceylon Chai <small>(Black Tea)</small></a></li>
+        <li><a href="/pages/store/black-tea.html#french-earl-grey">French Earl Grey <small>(Black Tea)</small></a></li>
+        <li><a href="/pages/store/black-tea.html#english-breakfast">English Breakfast <small>(Black Tea)</small></a>
+        </li>
+        <li><a href="/pages/store/black-tea.html#lemon-lift">Lemon Lift <small>(Black Tea)</small></a></li>
+        <li><a href="/pages/store/black-tea.html#australian-rainforest">Australian Rainforest <small>(Black
+              Tea)</small></a></li>
+        <li><a href="/pages/store/green-tea.html#energiser">Energiser <small>(Green Tea)</small></a></li>
+        <li><a href="/pages/store/green-tea.html#orange-and-ginger">Orange and Ginger <small>(Green Tea)</small></a>
+        </li>
+        <li><a href="/pages/store/herbal-infusions.html#natures-red">Nature's Red <small>(Herbal Infusions)</small></a>
+        </li>
+        <li><a href="/pages/store/herbal-infusions.html#apple-delight">Apple Delight <small>(Herbal
+              Infusions)</small></a></li>
+        <li><a href="/pages/store/herbal-infusions.html#summer-breeze">Summer Breeze <small>(Herbal
+              Infusions)</small></a></li>
+        <li><a href="/pages/store/herbal-infusions.html#lemongrass-and-ginger">Lemongrass and Ginger <small>(Herbal
+              Infusions)</small></a></li>
+        <li><a href="/pages/store/balms.html#sleep-balm">Sleep Balm <small>(Balms)</small></a></li>
+        <li><a href="/pages/store/balms.html#calm-balm">Calm Balm <small>(Balms)</small></a></li>
+        <li><a href="/pages/store/creams.html#calendula-cream">Calendula Cream <small>(Creams)</small></a></li>
+        <li><a href="/pages/store/selfcare.html#herbal-eye-pillow">Herbal Eye Pillow <small>(Self Care)</small></a></li>
+        <li><a href="/pages/store/selfcare.html#lavender-floral-spray">Lavender Floral Spray <small>(Self
+              Care)</small></a></li>
+        <li><a href="/pages/store/selfcare.html#magnesium-chloride-flakes">Magnesium Chloride Flakes <small>(Self
+              Care)</small></a></li>
+        <li><a href="/pages/store/accessories.html#vacuum-flask-with-infuser">Vacuum Flask with Infuser
+            <small>(Accessories)</small></a></li>
+        <li><a href="/pages/store/accessories.html#glass-tea-pot-800ml">Glass Tea Pot 800ml
+            <small>(Accessories)</small></a></li>
+        <li><a href="/pages/store/accessories.html#biodegradable-tea-bag">Biodegradable Tea Bag
+            <small>(Accessories)</small></a></li>
+        <li><a href="/pages/store/accessories.html#tea-scoop">Tea Scoop <small>(Accessories)</small></a></li>
+        <li><a href="/pages/store/accessories.html#tea-infuser-stick">Tea Infuser Stick <small>(Accessories)</small></a>
+        </li>
+        <!-- Add more products as needed -->
       </ul>
-      <section id="all-products">
-        <h2>All Products</h2>
-        <ul>
-          <li>
-            <strong>Enchanted Turmeric</strong>: A warming blend of turmeric, ginger root, rose
-            petals, licorice root, juniper berries, and cardamom...
-            <a href="/pages/store.html#enchanted-turmeric">View in Store</a>
-          </li>
-          <li>
-            <strong>Calming Garden</strong>: Crafted with a calming blend of rosemary,
-            passionflower, lavender, chamomile, and rose petals...
-            <a href="/pages/store.html#calming-garden">View in Store</a>
-          </li>
-          <li>
-            <strong>Sleeping Soundly</strong>: An evening blend of lemon balm, passionflower, ginger
-            root, and tulsi... <a href="/pages/store.html#sleeping-soundly">View in Store</a>
-          </li>
-          <li>
-            <strong>Hormone Harmony</strong>: A harmonious blend of honeybush, rose petals,
-            chasteberry, fennel, lemon verbena, and sage...
-            <a href="/pages/store.html#hormone-harmony">View in Store</a>
-          </li>
-          <li>
-            <strong>Nature's Detox</strong>: A gentle blend of dandelion root, tulsi, lemon peel,
-            dandelion leaf, lemongrass, and blue cornflower petals...
-            <a href="/pages/store.html#natures-detox">View in Store</a>
-          </li>
-          <li>
-            <strong>Digestive Bliss</strong>: A delightful blend of meadowsweet, aniseed, ginger
-            root, and peppermint... <a href="/pages/store.html#digestive-bliss">View in Store</a>
-          </li>
-          <li>
-            <strong>Botanic Glow</strong>: A revitalising blend of nettle, spearmint, linseed, and
-            echinacea...
-            <a href="/pages/store.html#botanic-glow">View in Store</a>
-          </li>
-          <li>
-            <strong>African Chai</strong>: An aromatic blend of roobios, cardamom, honeybush,
-            cinnamon, star anise, ginger, fennel, clove, and peppercorn...
-            <a href="/pages/store.html#african-chai">View in Store</a>
-          </li>
-          <li>
-            <strong>Nature's Red</strong>: A comforting blend of roobios, honeybush, and cinnamon...
-            <a href="/pages/store.html#natures-red">View in Store</a>
-          </li>
-          <li>
-            <strong>Winter Wellness</strong>: A comforting blend of ginger root, lemon balm, yarrow,
-            echinacea... <a href="/pages/store.html#winter-wellness">View in Store</a>
-          </li>
-          <li>
-            <strong>Apple Delight</strong>: Savour the taste of summer with this refreshing blend of
-            dried apple pieces, rosehip, lemongrass, and spearmint...
-            <a href="/pages/store.html#apple-delight">View in Store</a>
-          </li>
-          <li>
-            <strong>Summer Breeze</strong>: A vibrant pink blend of hibiscus, peppermint, and lemon
-            balm... <a href="/pages/store.html#summer-breeze">View in Store</a>
-          </li>
-          <li>
-            <strong>Lemongrass and Ginger</strong>: A delightful blend of lemongrass and ginger...
-            <a href="/pages/store.html#lemongrass-and-ginger">View in Store</a>
-          </li>
-          <li>
-            <strong>Ceylon Chai</strong>: Enjoy the vibrant warmth of our Ceylon Chai, a delightful
-            fusion of rich Ceylon Black Tea, and aromatic spices...
-            <a href="/pages/store.html#ceylon-chai">View in Store</a>
-          </li>
-          <li>
-            <strong>French Earl Grey</strong>: Indulge in the elegance of our French Earl Grey, a
-            refined blend of classic black tea infused with aromatic bergamot oil...
-            <a href="/pages/store.html#french-earl-grey">View in Store</a>
-          </li>
-          <li>
-            <strong>English Breakfast</strong>: Start your day with the robust and hearty flavour of
-            our English Breakfast tea...
-            <a href="/pages/store.html#english-breakfast">View in Store</a>
-          </li>
-          <li>
-            <strong>Lemon Lift</strong>: Revitalise your senses with our Lemon Lift blend, featuring
-            a delightful combination of robust black tea...
-            <a href="/pages/store.html#lemon-lift">View in Store</a>
-          </li>
-          <li>
-            <strong>Australian Rainforest and Lemon Myrtle</strong>: Experience the unique flavours
-            of Australia with our Australian Rainforest and Lemon Myrtle tea...
-            <a href="/pages/store.html#australian-rainforest-and-lemon-myrtle">View in Store</a>
-          </li>
-          <li>
-            <strong>Energizer</strong>: Ignite your day with our Energizer blend, featuring premium
-            Sencha Green Tea and aromatic Tulsi...
-            <a href="/pages/store.html#energizer">View in Store</a>
-          </li>
-          <li>
-            <strong>Orange and Ginger</strong>: Savour a light and refreshing experience with our
-            Orange and Ginger Green Tea...
-            <a href="/pages/store.html#orange-and-ginger">View in Store</a>
-          </li>
-          <li>
-            <strong>Herbal Eye Pillow</strong>: Washable and refillable...
-            <a href="/pages/store.html#herbal-eye-pillow">View in Store</a>
-          </li>
-          <li>
-            <strong>Sleep Balm</strong>: Soothe your senses and prepare for a restful night's
-            slumber with the aroma of lavender and chamomile...
-            <a href="/pages/store.html#sleep-balm">View in Store</a>
-          </li>
-          <li>
-            <strong>Calm Balm</strong>: Blended purposely to help calm the mind and reduce stress
-            whilst promoting cognitive function...
-            <a href="/pages/store.html#calm-balm">View in Store</a>
-          </li>
-          <li>
-            <strong>Calendula Cream</strong>: Lorem ipsum...
-            <a href="/pages/store.html#calendula-cream">View in Store</a>
-          </li>
-          <li>
-            <strong>Lavender Floral Spray</strong>: Calm your senses with lavender...
-            <a href="/pages/store.html#lavender-floral-spray">View in Store</a>
-          </li>
-          <li>
-            <strong>Magnesium Chloride Flakes</strong>: Soothing bath flakes...
-            <a href="/pages/store.html#magnesium-chloride-flakes">View in Store</a>
-          </li>
-          <li>
-            <strong>Vacuum Flask with Infuser</strong>: Lorem ipsum...
-            <a href="/pages/store.html#vacuum-flask-with-infuser">View in Store</a>
-          </li>
-          <li>
-            <strong>Tea Infuser Stick</strong>: Lorem ipsum...
-            <a href="/pages/store.html#tea-infuser-stick">View in Store</a>
-          </li>
-          <li>
-            <strong>800mL Glass Tea Pot</strong>: Lorem ipsum...
-            <a href="/pages/store.html#800ml-glass-tea-pot">View in Store</a>
-          </li>
-          <li>
-            <strong>Biodegradable Tea Bag - 10 pack</strong>: Lorem ipsum...
-            <a href="/pages/store.html#biodegradable-tea-bag">View in Store</a>
-          </li>
-          <li>
-            <strong>Tea Scoop</strong>: Lorem ipsum...
-            <a href="/pages/store.html#tea-scoop">View in Store</a>
-          </li>
-        </ul>
-      </section>
-    </main>
-    <footer>
-      <p>&copy; 2025 Nature's Infusions</p>
-    </footer>
-  </body>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2025 Nature's Infusions</p>
+  </footer>
+  <!-- No JS except service worker registration -->
+</body>
+
 </html>

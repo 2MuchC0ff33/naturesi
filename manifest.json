@@ -14,7 +14,7 @@
 
   "icons": [
     {
-      "src": "assets/img/logo.webp",
+      "src": "/assets/img/logo.webp",
       "type": "image/webp"
     },
     {
@@ -113,7 +113,7 @@
       "name": "Our Store",
       "short_name": "Store",
       "description": "Browse our organic tea collection",
-      "url": "/store.html",
+      "url": "/pages/store.html",
       "icons": [
         {
           "src": "/assets/img/logo.svg",
@@ -126,25 +126,25 @@
       "name": "About Us",
       "short_name": "About",
       "description": "Learn about our passion",
-      "url": "/about.html"
+      "url": "/pages/about.html"
     },
     {
       "name": "Contact",
       "short_name": "Contact",
       "description": "Get in touch",
-      "url": "/contact.html"
+      "url": "/pages/contact.html"
     },
     {
       "name": "Stockists",
       "short_name": "Stockists",
       "description": "Find our products",
-      "url": "/stockists.html"
+      "url": "/pages/stockists.html"
     },
     {
       "name": "Terms",
       "short_name": "Terms",
       "description": "Terms and conditions",
-      "url": "/terms.html"
+      "url": "/pages/terms.html"
     }
   ],
 
@@ -162,7 +162,7 @@
   ],
 
   "share_target": {
-    "action": "/social.html",
+    "action": "/pages/social.html",
     "method": "GET",
     "enctype": "application/x-www-form-urlencoded",
     "params": {

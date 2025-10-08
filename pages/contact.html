@@ -1,458 +1,146 @@
 <!DOCTYPE html>
+<!-- Refactor: remove duplicate skeleton fragments; keep a single head/body and merge form/support content -->
 <html class="no-js" lang="en-AU" dir="ltr" data-theme="light">
-
-<head>
-  <!-- Character Encoding & Rendering -->
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport"
-    content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
-  <meta name="theme-color" content="#0f1111">
-  <!-- Sets the theme color for mobile browsers (using your accent color) -->
-  <meta name="color-scheme" content="light dark">
-
-  <!-- Primary Meta Tags -->
-  <title>Nature's Infusions | Premium Organic Teas & Herbal Remedies</title>
-  <meta name="description"
-    content="Perth-based Naturopath's passion project offering certified organic teas and herbal infusions for holistic wellness. Australian-made since 2025.">
-  <meta name="keywords"
-    content="organic tea, herbal infusion, naturopath, Perth, wellness, detox, chamomile, peppermint, turmeric">
-  <meta name="author" content="Nature's Infusions">
-  <meta name="copyright" content="© 2025 Nature's Infusions">
-  <meta name="generator" content="Ultra-Simple POSIX StaticEStore Framework">
-  <base href="/">
-
-  <!-- SEO & Indexing -->
-  <meta name="robots" content="index,follow,max-image-preview:large">
-  <meta name="referrer" content="strict-origin-when-cross-origin">
-  <meta name="rating" content="general">
-  <link rel="canonical" href="https://www.naturesinfusions.com.au/">
-  <link rel="sitemap" href="/sitemap.xml" type="application/xml" title="Sitemap">
-
-  <!-- Social Media Meta -->
-  <!-- Open Graph -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://www.naturesinfusions.com.au/">
-  <meta property="og:title" content="Nature's Infusions | Premium Organic Teas and Herbal Infusions">
-  <meta property="og:description" content="Australian-made organic teas and herbal infusions for holistic wellness">
-  <meta property="og:image" content="https://www.naturesinfusions.com.au/assets/img/social-share-og.webp">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:locale" content="en_AU">
-  <meta property="og:site_name" content="Nature's Infusions">
-
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "@id": "https://www.naturesinfusions.com.au/#website",
-      "url": "https://www.naturesinfusions.com.au/",
-      "name": "Nature's Infusions",
-      "publisher": { "@id": "https://www.naturesinfusions.com.au/#organization" },
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://www.naturesinfusions.com.au/search?q={search_term_string}",
-        "query-input": "required name=search_term_string"
-      }
-    }
-    </script>
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [{
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://www.naturesinfusions.com.au/"
-      }]
-    }
-    </script>
-  <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16">
-  <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
-  <link rel="icon" href="/favicon-96x96.png" type="image/png" sizes="96x96">
-  <!-- Android -->
-  <link rel="icon" href="/android-icon-192x192.png" type="image/png" sizes="192x192">
-  <!-- Apple -->
-  <link rel="apple-touch-icon" href="/apple-icon-57x57.png" sizes="57x57">
-  <link rel="apple-touch-icon" href="/apple-icon-60x60.png" sizes="60x60">
-  <link rel="apple-touch-icon" href="/apple-icon-72x72.png" sizes="72x72">
-  <link rel="apple-touch-icon" href="/apple-icon-76x76.png" sizes="76x76">
-  <link rel="apple-touch-icon" href="/apple-icon-114x114.png" sizes="114x114">
-  <link rel="apple-touch-icon" href="/apple-icon-120x120.png" sizes="120x120">
-  <link rel="apple-touch-icon" href="/apple-icon-144x144.png" sizes="144x144">
-  <link rel="apple-touch-icon" href="/apple-icon-152x152.png" sizes="152x152">
-  <link rel="apple-touch-icon" href="/apple-icon-180x180.png" sizes="180x180">
-  <!-- Launch Images -->
-  <link rel="apple-touch-startup-image" href="/launch-640x1136.png"
-    media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)">
-
-  <!-- Web App Manifest -->
-  <link rel="manifest" href="/manifest.json" crossorigin="use-credentials">
-
-  <!-- Resource Hints -->
-  <link rel="dns-prefetch" href="//www.naturesinfusions.com.au">
-  <link rel="preload" href="/assets/css/main.css" as="style">
-  <link rel="prefetch" href="/products.json" as="fetch">
-
-  <!-- Cache Control -->
-  <meta http-equiv="Cache-Control" content="public, no-cache, must-revalidate">
-  <meta http-equiv="Pragma" content="no-cache">
-
-  <!-- Security Headers -->
-  <meta http-equiv="Content-Security-Policy"
-    content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'">
-  <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
-  <meta http-equiv="X-Content-Type-Options" content="nosniff">
-  <meta http-equiv="Strict-Transport-Security" content="max-age=63072000; includeSubDomains; preload">
-  <meta http-equiv="Expect-CT" content="max-age=86400, enforce">
-
-  <!-- Verification -->
-  <meta name="google-site-verification" content="[your-google-verification-code]">
-  <meta name="msvalidate.01" content="B279BB1A64D31F7EC1A04AFAEFE05314">
-  <meta name="yandex-verification" content="7847a6427bfa1388">
-
-  <!-- Structured Data -->
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "@id": "https://www.naturesinfusions.com.au/#organization",
-      "name": "Nature's Infusions",
-      "url": "https://www.naturesinfusions.com.au/",
-      "logo": "https://www.naturesinfusions.com.au/assets/img/logo.svg",
-      "description": "Perth-based naturopath's passion project offering certified organic teas and herbal infusions",
-      "foundingDate": "2025",
-      "sameAs": [
-        "https://www.facebook.com/naturesinfusions.herbaltea/",
-        "https://www.instagram.com/natures_infusions_au/",
-        "https://au.linkedin.com/in/bree-gallo-75a81518a"
-      ],
-      "contactPoint": [
-        {
-          "@type": "ContactPoint",
-          "telephone": "+61 434 947 131",
-          "contactType": "customer service",
-          "email": "tea@naturesinfusions.com.au",
-          "areaServed": "AU",
-          "availableLanguage": "English"
-        }
-      ],
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "63 Meadowbrook Drive",
-        "addressLocality": "Parkwood",
-        "addressRegion": "WA",
-        "postalCode": "6147",
-        "addressCountry": "AU"
-      }
-    }
-    </script>
-
-  <script type="application/ld+json">
-            {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "@id": "https://www.naturesinfusions.com.au/#website",
-        "url": "https://www.naturesinfusions.com.au/",
-        "name": "Nature's Infusions",
-        "potentialAction": {
-            "@type": "SearchAction",
-            "target": "https://www.naturesinfusions.com.au/search?q={search_term_string}",
-            "query-input": "required name=search_term_string"
-        }
-    }
-        </script>
-
-  <script type="application/ld+json">
-            {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [{
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://www.naturesinfusions.com.au/"
-        }]
-    }
-        </script>
-
-  <!-- Site Search -->
-  <link rel="search" href="/opensearch.xml" type="application/opensearchdescription+xml"
-    title="Nature's Infusions Search">
-
-  <!-- Styling -->
-  <link rel="stylesheet" href="/assets/css/main.css" type="text/css">
-
-  <!-- Script Loading -->
-  <script src="/assets/js/app.js" defer></script>
-</head>
-
-<body itemscope itemtype="https://schema.org/WebPage">
-  <header id="site-header" role="banner">
-    <a class="site-title" href="/">Nature's Infusions</a>
-    <a class="skip-link visually-hidden focusable" href="#main-content">Skip to main content</a>
-  </header>
-
-  <main id="main-content" role="main">
-    <section id="contact-page">
-      <h1>Contact & Support</h1>
-      <p>Email: <a href="mailto:tea@naturesinfusions.com.au">tea@naturesinfusions.com.au</a></p>
-      <p>Phone: +61 434 947 131</p>
-      <address>
-        63 Meadowbrook Drive<br>
-        Parkwood WA 6147
-      </address>
-    </section>
-  </main>
-
-  <footer role="contentinfo">
-    <p>&copy; <time datetime="2025">2025</time> Nature's Infusions</p>
-  </footer>
-</body>
-
-</html>
-</script>
-
-<!-- Site Search -->
-<link rel="search" href="/opensearch.xml" type="application/opensearchdescription+xml"
-  title="Nature's Infusions Search">
-
-<!-- Style Loading -->
-<link rel="stylesheet" href="/assets/css/main.css" type="text/css">
-
-<!-- Script Loading -->
-<script src="/assets/js/app.js" defer></script>
-</head>
-
-<!-- Site Header -->
-
-<body itemscope itemtype="https://schema.org/WebPage">
-  <!-- Site Header with dialog-based mobile menu -->
-  <header id="site-header" itemscope itemtype="https://schema.org/Organization">
-    <div id="header">
-      <button id="menu-toggle" aria-haspopup="dialog" aria-controls="mobile-menu" aria-expanded="false">
-        <span aria-hidden="true">☰</span> <span>Menu</span>
-      </button>
-      <p class="site-title" id="business-name">
-        <a href="#home-page" itemprop="url"><span itemprop="name">Nature's Infusions</span></a>
-      </p>
-      <button id="cart" aria-label="Shopping cart with 0 items" type="button" aria-expanded="false">
-        <span aria-hidden="true">🛒</span> <span class="cart-count">Cart (<span>0</span>)</span>
-      </button>
-    </div>
-
-    <dialog id="mobile-menu" aria-labelledby="menu-heading">
-      <h2 id="menu-heading">Main Menu</h2>
-      <nav id="site-navigation" aria-label="Main" itemscope itemtype="https://schema.org/SiteNavigationElement">
-        <ul>
-          <li itemprop="name"><a href="#home-page" itemprop="url">Home</a></li>
-          <li itemprop="name"><a href="pages/store.html" itemprop="url">Online Store</a></li>
-          <li itemprop="name"><a href="pages/about.html" itemprop="url">About Us</a></li>
-          <li itemprop="name"><a href="pages/stockists.html" itemprop="url">Find Stockists</a></li>
-          <li itemprop="name"><a href="pages/contact.html" itemprop="url">Contact Us</a></li>
-          <li itemprop="name"><a href="pages/social.html" itemprop="url">Find Us on Socials</a></li>
-          <li itemprop="name"><a href="pages/terms.html" itemprop="url">Terms and Conditions</a></li>
-        </ul>
-      </nav>
-      <button onclick="this.closest('dialog').close()" aria-label="Close menu">✕ Close</button>
-    </dialog>
-
-    <a href="#main-content" class="skip-link visually-hidden focusable">Skip to main content</a>
-  </header>
-
-  <hr aria-hidden="true">
-
-  <!-- Contact and Support Section -->
-  <section id="contact">
-    <nav aria-label="Breadcrumb" id="contact-breadcrumb">
-      <p><a href="/">Home</a> &gt; Contact &amp; Support</p>
-    </nav>
-
-    <header id="contact-hero">
-      <figure id="contact-logo">
-        <img alt="Nature's Infusions Logo" src="data:image/svg+xml;base64,logo.svg" loading="lazy" />
-      </figure>
-      <h1>Contact &amp; Support</h1>
-      <p>Get help with your Nature's Infusions order.</p>
+  <head>
+    <meta charset="utf-8" >
+    <meta name="viewport" content=" width=device-width,initial-scale=1">
+    <title>Contact &amp; Support — Nature's Infusions</title>
+    <meta
+      name="description"
+      content="Contact Nature's Infusions for support, orders and wholesale enquiries."
+    >
+    <link rel="stylesheet" href="/assets/css/main.css" type="text/css" >
+    <script type="module" src="/assets/js/app.js"></script>
+  </head>
+  <body itemscope itemtype="https://schema.org/WebPage">
+    <header id="site-header">
+      <a class="site-title" href="/">Nature's Infusions</a>
+      <a class="skip-link visually-hidden focusable" href="#main-content">Skip to main content</a>
     </header>
 
-    <article id="contact-info">
-      <h2>Support Information</h2>
-      <ul>
-        <li>Online ticketing system (no phone support)</li>
-        <li>Response within 24-48 hours</li>
-        <li>Support for orders</li>
-      </ul>
-    </article>
+    <main id="main-content">
+      <section id="contact-page">
+        <header id="contact-hero">
+          <figure id="contact-logo">
+            <img alt="Nature's Infusions Logo" src="/assets/img/logo.svg" loading="lazy" >
+          </figure>
+          <h1>Contact &amp; Support</h1>
+          <p>Get help with your Nature's Infusions order.</p>
+        </header>
 
-    <section id="support-type">
-      <h2>Support Request Type</h2>
-      <article id="support-type-order">
-        <h3>Order Support</h3>
-        <ol>
-          <li>Questions about orders, shipping, or returns</li>
-          <li>Order tracking and delivery updates</li>
-          <li>Product information and availability</li>
-        </ol>
-      </article>
+        <article id="contact-info">
+          <h2>Support Information</h2>
+          <p>Email: <a href="mailto:tea@naturesinfusions.com.au">tea@naturesinfusions.com.au</a></p>
+          <p>Phone: +61 434 947 131</p>
+          <address>
+            63 Meadowbrook Drive<br >
+            Parkwood WA 6147
+          </address>
+        </article>
 
-      <article id="support-type-payment">
-        <h3>Payment Support</h3>
-        <ol>
-          <li>PayPal payment problems and questions</li>
-          <li>Refund requests and processing</li>
-          <li>Billing enquiries</li>
-        </ol>
-      </article>
+        <section id="contact-form">
+          <h2>Support Request Form</h2>
+          <!-- Primary HTML5 Form -->
+          <form
+            action="https://api.naturesinfusions.com.au/contact"
+            method="post"
+            enctype="multipart/form-data"
+          >
+            <fieldset>
+              <legend>Personal Information</legend>
+              <div>
+                <label for="form-name">Full Name: <span aria-hidden="true">*</span></label>
+                <input
+                  id="form-name"
+                  name="name"
+                  type="text"
+                  required
+                  autocomplete="name"
+                  minlength="2"
+                  maxlength="100"
+                  placeholder="Your full name"
+                >
+              </div>
+              <div>
+                <label for="form-email">Email: <span aria-hidden="true">*</span></label>
+                <input
+                  id="form-email"
+                  name="email"
+                  type="email"
+                  required
+                  autocomplete="email"
+                  inputmode="email"
+                  placeholder="your@email.com"
+                >
+              </div>
+            </fieldset>
+            <fieldset>
+              <legend>Request Details</legend>
+              <div>
+                <label for="request-type">Request Type: <span aria-hidden="true">*</span></label>
+                <select
+                  id="request-type"
+                  name="request_type"
+                  required
+                  aria-describedby="request-type-hint"
+                >
+                  <option value="">Please select...</option>
+                  <option value="order-support">Order Support</option>
+                  <option value="payment-issues">Payment Support</option>
+                  <option value="stockist-info">Stockist Information</option>
+                  <option value="wholesale-enquiry">Wholesale Enquiry</option>
+                  <option value="other">Other Inquiry</option>
+                </select>
+                <small id="request-type-hint" class="visually-hidden"
+                  >Choose the best matching request type so we can route your enquiry.</small
+                >
+              </div>
+              <div>
+                <label for="message">Message: <span aria-hidden="true">*</span></label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="8"
+                  minlength="20"
+                  maxlength="2000"
+                  required
+                  placeholder="Please describe your issue in detail..."
+                  spellcheck="true"
+                  aria-describedby="message-hint"
+                ></textarea>
+                <small id="message-hint"
+                  >Minimum 20 characters. Provide relevant order or account details where
+                  applicable.</small
+                >
+              </div>
+              <div>
+                <button type="submit">Submit Request</button>
+                <button type="reset">Reset Form</button>
+              </div>
+              <!-- Accessibility: live status region for screen reader users to announce form submission results -->
+              <div
+                id="contact-form-status"
+                role="status"
+                aria-live="polite"
+                aria-atomic="true"
+                class="visually-hidden"
+              ></div>
+            </fieldset>
+          </form>
+        </section>
+      </section>
+    </main>
 
-      <article id="support-type-stockist">
-        <h3>Stockist information</h3>
-        <ol>
-          <li>Find local stockist near you</li>
-          <li>Stockists location update</li>
-          <li>Wholesale enquiries</li>
-        </ol>
-      </article>
-    </section>
-
-    <section id="contact-form">
-      <h2>Support Request Form</h2>
-
-      <!-- Primary HTML5 Form with all advanced features -->
-      <form action="https://api.naturesinfusions.com.au/contact" method="post" enctype="multipart/form-data">
-        <fieldset>
-          <legend>Personal Information</legend>
-
-          <div>
-            <label for="form-name">Full Name: <span aria-hidden="true">*</span></label>
-            <input id="form-name" name="name" type="text" required autocomplete="name" minlength="2" maxlength="100"
-              pattern="[A-Za-z ]+" title="Letters and spaces only" placeholder="Your full name">
-          </div>
-
-          <div>
-            <label for="form-email">Email: <span aria-hidden="true">*</span></label>
-            <input id="form-email" name="email" type="email" required autocomplete="email" inputmode="email"
-              placeholder="your@email.com" multiple> <!-- Allows multiple emails if needed -->
-          </div>
-
-          <div>
-            <label for="form-phone">Phone:</label>
-            <input id="form-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" pattern="[\d\s\+-]{10,20}"
-              title="10-20 digits, + or - allowed" placeholder="+61 123 456 789">
-          </div>
-        </fieldset>
-
-        <fieldset>
-          <legend>Request Details</legend>
-
-          <div>
-            <label for="form-order">Order Number:</label>
-            <input id="form-order" name="order" type="text" pattern="[A-Za-z0-9-]+" title="Alphanumeric with hyphens"
-              placeholder="ORD-12345">
-          </div>
-
-          <div>
-            <label for="request-type">Request Type: <span aria-hidden="true">*</span></label>
-            <select id="request-type" name="request_type" required>
-              <option value="">Please select...</option>
-              <option value="order-support">Order Support</option>
-              <option value="payment-issues">Payment Support</option>
-              <option value="stockist-info">Stockist Information</option>
-              <option value="wholesale-enquiry">Wholesale Enquiry</option>
-              <option value="other">Other Inquiry</option>
-            </select>
-          </div>
-
-          <div>
-            <label for="urgency">Urgency:</label>
-            <input id="urgency" name="urgency" type="range" min="1" max="5" value="3" list="urgency-levels">
-            <datalist id="urgency-levels">
-              <option value="1" label="Low"></option>
-              <option value="2"></option>
-              <option value="3" label="Medium"></option>
-              <option value="4"></option>
-              <option value="5" label="High"></option>
-            </datalist>
-          </div>
-
-          <div>
-            <label for="message">Message: <span aria-hidden="true">*</span></label>
-            <textarea id="message" name="message" rows="8" minlength="20" maxlength="2000" required
-              placeholder="Please describe your issue in detail..." spellcheck="true"></textarea>
-          </div>
-
-          <div>
-            <label for="attachment">Attachments (max 5MB):</label>
-            <input id="attachment" name="attachment" type="file" accept=".pdf,.doc,.docx,.png,.jpg,.jpeg,.txt" multiple>
-          </div>
-
-          <div>
-            <label for="subscribe">
-              <input id="subscribe" name="subscribe" type="checkbox" checked>
-              Subscribe to newsletter
-            </label>
-          </div>
-        </fieldset>
-
-        <div>
-          <button type="submit">Submit Request</button>
-          <button type="reset">Reset Form</button>
-        </div>
-      </form>
-
-      <!-- Mailto Fallback Explanation -->
-      <details>
-        <summary>Alternative Submission Method</summary>
-        <p>If the form doesn't work, you can <a
-            href="mailto:tea@naturesinfusions.com.au?subject=Support%20Request&body=Please%20include%20your%20name,%20order%20number%20(if%20applicable),%20and%20detailed%20description%20of%20your%20issue.">email
-            us directly</a>.</p>
-      </details>
-    </section>
-  </section>
-
-  <footer itemscope itemtype="https://schema.org/WPFooter">
-    <h3>Nature's Infusions</h3>
-    <p itemprop="description">Nature's Infusions, your source for premium tea and herbal remedies.</p>
-
-    <section>
-      <h4>Quick Links</h4>
-      <nav aria-label="Quick links">
+    <footer itemscope itemtype="https://schema.org/WPFooter">
+      <nav aria-label="Footer Quick Links">
         <ul>
-          <li><a href="../index.html" itemprop="url">Home</a></li>
-          <li><a href="pages/about.html" itemprop="url">About</a></li>
-          <li><a href="pages/store.html" itemprop="url">Store</a></li>
-          <li><a href="pages/stockists.html" itemprop="url">Stockists</a></li>
-          <li><a href="." itemprop="url">Contact & Support</a></li>
-          <li><a href="pagesterms.html" itemprop="url">Terms & Conditions</a></li>
-          <li><a href="pages/social.html" itemprop="url">Social</a></li>
+          <li><a href="/">Home</a></li>
+          <li><a href="/pages/about.html">About</a></li>
+          <li><a href="/pages/store.html">Store</a></li>
+          <li><a href="/pages/stockists.html">Stockists</a></li>
         </ul>
       </nav>
-    </section>
-
-    <section>
-      <h4>Connect</h4>
-      <nav aria-label="Social media links">
-        <ul>
-          <li><a href="https://www.facebook.com/NaturesInfusions/" rel="noopener noreferrer"
-              itemprop="sameAs">Facebook</a></li>
-          <li><a href="https://www.instagram.com/natures_infusions_au/" rel="noopener noreferrer"
-              itemprop="sameAs">Instagram</a></li>
-        </ul>
-      </nav>
-    </section>
-
-    <div>
-      <p>&copy; <time datetime="2025">2025</time> Nature's Infusions. All rights reserved.</p>
-      <p>Powered by Ultra-Simple Static EStore Framework</p>
-      <p>Author: <span itemprop="author">2MuchC0ff33</span> <a href="https://2muchc0ff33.github.io"
-          itemprop="url">Adrian Gallo (aka 2MuchC0ff33)</a></p>
-      <p>Website generated: <time datetime="2025-07-21" itemprop="datePublished">2025/07/21</time></p>
-    </div>
-  </footer>
-  </section>
-
-  </main>
-</body>
-
+      <p>&copy; <time datetime="2025">2025</time> Nature's Infusions</p>
+    </footer>
+  </body>
 </html>

@@ -31,7 +31,7 @@ jobs:
 
             NOTE: PRs that modify payments-related files (`pages/store.html`, `products.json`)
             are exempt when labelled `manual-review` or `payments` and must be reviewed by the
-            payment-owner before merging.
+            2MuchC0ff33 before merging.
           days-before-stale: 60
           days-before-close: 14
           stale-issue-label: 'stale'

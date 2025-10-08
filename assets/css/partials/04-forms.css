@@ -1,0 +1,112 @@
+/* ==========================================================================
+Form controls and buttons
+Contains inputs, selects, textarea and button styles as well as the primary
+button look used across the site.
+========================================================================== */
+button,
+input,
+select,
+textarea {
+  padding: var(--space-xs) var(--space-sm);
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+  margin: 0;
+  min-width: 24px;
+  /* WCAG 2.2: Ensure minimum target size */
+  min-height: 24px;
+  /* WCAG 2.2: Ensure minimum target size */
+}
+
+textarea {
+  resize: vertical;
+}
+
+button {
+  background-color: var(--color-accent);
+  color: white;
+  border: none;
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
+  font-weight: 500;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Merged duplicate selector: a:hover, a:focus-visible, button:hover, button:focus-visible
+   Acceptance: removed duplicate, combined all properties */
+a:hover,
+a:focus-visible,
+button:hover,
+button:focus-visible {
+  color: color-mix(in srgb, var(--color-accent) 90%, black);
+  background-color: color-mix(in srgb, var(--color-accent) 90%, black);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+button:hover,
+button:focus-visible {
+  background-color: color-mix(in srgb, var(--color-accent) 90%, black);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+.site-search .search-dropdown {
+  flex: 0 0 130px;
+  box-sizing: border-box;
+  appearance: none;
+  -webkit-appearance: none;
+  border: 1px solid var(--color-border);
+  padding: 0 0.6rem;
+  border-radius: 6px;
+  background: white;
+  font-size: 0.95rem;
+  color: var(--color-text);
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.site-search .search-box {
+  flex: 1 1 auto;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: 0 0.6rem;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  line-height: 1.1;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  color: var(--color-text);
+}
+
+.site-search .search-box,
+.site-search .search-box::placeholder {
+  color: var(--color-text);
+}
+
+.site-search .search-dropdown option {
+  color: var(--color-text);
+  background: white;
+}
+
+/* Ensure the category select shows black text specifically.
+   Using the ID selector ensures higher specificity so it overrides
+   other theme or utility rules that might make the text appear muted. */
+#site-category-select,
+#site-category-select option {
+  color: #000;
+  /* Explicit black for select and its options */
+}
+
+.site-search .search-icon {
+  color: #111;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-highlight);
+  border: 1px solid var(--color-border);
+  padding: 0.18rem;
+  border-radius: 6px;
+}
