@@ -1,12 +1,3 @@
-.category-anchor {
-  display: block;
-  height: 0;
-  width: 0;
-  margin: 0;
-  padding: 0;
-  border: none;
-}
-
 /* ==========================================================================
 Helper and utility classes
 Small, well-scoped utilities (spacing, layout helpers, grid) live here.

@@ -33,7 +33,14 @@ a:focus-visible,
 button:hover,
 button:focus-visible {
   color: color-mix(in srgb, var(--color-accent) 90%, black);
-  outline: none;
+}
+
+a:hover,
+a:focus-visible,
+button:hover,
+button:focus-visible {
+  color: color-mix(in srgb, var(--color-accent) 90%, black);
+}
 }
 
 button:hover,
@@ -88,7 +95,8 @@ button:focus-visible {
    other theme or utility rules that might make the text appear muted. */
 #site-category-select,
 #site-category-select option {
-  color: #000; /* Explicit black for select and its options */
+  color: #000;
+  /* Explicit black for select and its options */
 }
 
 .site-search .search-icon {

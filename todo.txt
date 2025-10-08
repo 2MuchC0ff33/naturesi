@@ -1,6 +1,6 @@
 header
 
-Wire the search controls to an actual search submit (form + action). I can convert .nav-center to a form that hits store.html and submit category & q.
+Wire the search controls to an actual search submit (form + action).
 Add simple JS in app.js to update the .cart-count live.
  want the search form to include category counts in the options dynamically, I can wire a tiny JS to load products.json and populate counts.
  make the header keyboard-navigable with focus styles for the new controls if you'd like further polish.
