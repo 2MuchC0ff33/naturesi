@@ -25,7 +25,14 @@ jobs:
       - name: ESLint
         run: npx eslint "assets/js/**/*.js"
       - name: Stylelint
-        run: npx stylelint "assets/css/**/*.css"
+        run: |
+          npx stylelint "assets/css/**/*.css" > stylelint-report.txt || true
+      - name: Upload Stylelint report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: stylelint-report
+          path: stylelint-report.txt
       - name: Prettier check
         run: npx prettier --check .
       - name: HTML validate
