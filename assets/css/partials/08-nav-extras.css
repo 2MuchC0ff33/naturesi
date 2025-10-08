@@ -1,0 +1,21 @@
+/* ==========================================================================
+Navigation extras and dropdowns
+This partial contains additional nav rules such as the category dropdown and
+small icon sizing rules that extend the header styles.
+========================================================================== */
+/* Removed duplicate .site-search .search-icon style. See 04-forms.css for canonical rules. */
+
+svg[aria-hidden='true'] {
+  display: inline-block;
+  fill: currentColor;
+  max-height: 20px;
+  width: auto;
+}
+
+.site-nav .search-icon,
+.site-nav .cart-option,
+.site-nav .all-logo {
+  min-height: 32px;
+  min-width: 32px;
+  height: 36px;
+}

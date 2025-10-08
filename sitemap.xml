@@ -1,38 +1,152 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Updated to include all primary site pages and key public resources from the repo so the sitemap
+     reflects the current project structure (index, pages/, offline/404, manifest, products.json, opensearch).
+     One-line rationale: keep sitemap.xml aligned with repository pages for discoverability and indexing.
+-->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Home / Index -->
   <url>
-    <loc>https://naturesinfusions.com/index.html</loc>
-    <priority>1.0</priority>
+    <loc>https://www.naturesinfusions.com.au/</loc>
+    <priority>1.00</priority>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://naturesinfusions.com/offline.html</loc>
-    <priority>0.5</priority>
+    <loc>https://www.naturesinfusions.com.au/index.html</loc>
+    <priority>1.00</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+
+  <!-- Primary pages -->
+  <url>
+    <loc>https://www.naturesinfusions.com.au/pages/store.html</loc>
+    <priority>0.90</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.naturesinfusions.com.au/pages/store/wellness-blends.html</loc>
+    <priority>0.75</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.naturesinfusions.com.au/pages/store/black-tea.html</loc>
+    <priority>0.75</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.naturesinfusions.com.au/pages/store/green-tea.html</loc>
+    <priority>0.70</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.naturesinfusions.com.au/pages/store/herbal-infusions.html</loc>
+    <priority>0.70</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.naturesinfusions.com.au/pages/store/artisan-blends.html</loc>
+    <priority>0.70</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.naturesinfusions.com.au/pages/store/accessories.html</loc>
+    <priority>0.60</priority>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://naturesinfusions.com/404.html</loc>
-    <priority>0.1</priority>
+    <loc>https://www.naturesinfusions.com.au/pages/store/balms.html</loc>
+    <priority>0.60</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.naturesinfusions.com.au/pages/store/creams.html</loc>
+    <priority>0.60</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.naturesinfusions.com.au/pages/store/ice-tea.html</loc>
+    <priority>0.60</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.naturesinfusions.com.au/pages/store/selfcare.html</loc>
+    <priority>0.60</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.naturesinfusions.com.au/pages/about.html</loc>
+    <priority>0.70</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.naturesinfusions.com.au/pages/contact.html</loc>
+    <priority>0.70</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.naturesinfusions.com.au/pages/stockists.html</loc>
+    <priority>0.60</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.naturesinfusions.com.au/pages/social.html</loc>
+    <priority>0.60</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.naturesinfusions.com.au/pages/terms.html</loc>
+    <priority>0.50</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+
+  <!-- Site utilities & special pages -->
+  <url>
+    <loc>https://www.naturesinfusions.com.au/offline.html</loc>
+    <priority>0.50</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.naturesinfusions.com.au/404.html</loc>
+    <priority>0.10</priority>
     <changefreq>yearly</changefreq>
   </url>
   <url>
-    <loc>https://naturesinfusions.com/terms.txt</loc>
-    <priority>0.3</priority>
+    <loc>https://www.naturesinfusions.com.au/opensearch.xml</loc>
+    <priority>0.20</priority>
     <changefreq>yearly</changefreq>
   </url>
   <url>
-    <loc>https://naturesinfusions.com/privacy.txt</loc>
-    <priority>0.3</priority>
+    <loc>https://www.naturesinfusions.com.au/manifest.json</loc>
+    <priority>0.20</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+
+  <!-- Public text/data files -->
+  <url>
+  <loc>https://www.naturesinfusions.com.au/assets/js/data/products.json</loc>
+    <priority>0.50</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.naturesinfusions.com.au/privacy.txt</loc>
+    <priority>0.30</priority>
     <changefreq>yearly</changefreq>
   </url>
   <url>
-    <loc>https://naturesinfusions.com/humans.txt</loc>
-    <priority>0.1</priority>
+    <loc>https://www.naturesinfusions.com.au/terms.txt</loc>
+    <priority>0.30</priority>
     <changefreq>yearly</changefreq>
   </url>
   <url>
-    <loc>https://naturesinfusions.com/sitemap.xml</loc>
-    <priority>0.1</priority>
+    <loc>https://www.naturesinfusions.com.au/humans.txt</loc>
+    <priority>0.10</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+
+  <!-- Sitemap itself -->
+  <url>
+    <loc>https://www.naturesinfusions.com.au/sitemap.xml</loc>
+    <priority>0.10</priority>
     <changefreq>yearly</changefreq>
   </url>
 </urlset>

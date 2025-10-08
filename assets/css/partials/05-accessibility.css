@@ -1,0 +1,74 @@
+/* ==========================================================================
+Accessibility helpers
+Focus outlines, skip links and visually-hidden utilities live here.
+========================================================================== */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 0.25rem;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  z-index: 9999;
+  background: rgba(19, 25, 33, 0.9);
+  color: #fff;
+  padding: 0.15rem 0.4rem;
+  border-radius: 0.25rem;
+  font-size: 0.8rem;
+  line-height: 1;
+  text-decoration: none;
+  box-shadow: none;
+  opacity: 0.98;
+  /* WCAG: Ensure skip link is visible on focus for keyboard users */
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+  position: absolute;
+  left: var(--space-md);
+  top: calc(var(--header-height, 3.75rem));
+  outline: 2px solid color-mix(in srgb, var(--color-accent) 80%, white);
+  background: var(--color-accent);
+  color: #fff;
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 640px) {
+  .skip-link {
+    left: calc(var(--space-xs) + 0.25rem);
+    top: calc(var(--header-height, 3.25rem));
+    font-size: 0.72rem;
+  }
+}
+
+.visually-hidden {
+  border: 0;
+  clip-path: inset(50%);
+  -webkit-clip-path: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.visually-hidden.focusable:active,
+.visually-hidden.focusable:focus {
+  clip-path: none;
+  -webkit-clip-path: none;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  white-space: inherit;
+  width: auto;
+}
+
+.invisible {
+  visibility: hidden;
+}

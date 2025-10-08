@@ -35,20 +35,6 @@ Project-specific conventions
 - Small, reversible CSS utility classes in `assets/css/main.css` and non-invasive JS helpers in `assets/js/app.js` (do not change service-worker guards).
 - Non-functional documentation, README improvements, and `.github/*` repo config changes.
 
-## Forbidden or requires manual review
-
-- Modifying `pages/store.html`, `products.json` or any `/add-to-cart` handling — Manual review required.
-- Changing service-worker caching logic, registration guards, or offline behaviour without explicit approval.
-- Introducing analytics, trackers, external telemetry beacons or third-party cookies.
-
-Note: When a manual review is required, create a draft PR and include the explicit "Manual review required" line in the commit body (see checklist below).
-
-Developer workflows & quick commands
-
-- Local smoke test: serve the repo from a local static server so the service worker can register. Example (PowerShell):
-  - python -m http.server 8000 ; open http://localhost:8000 in a browser
-- Deploy notes: check `.env` for `DEPLOY_PATH` before editing deployment-related assets.
-
 ## PR / Commit checklist (copy into PR body)
 
 - Title format: `chore(refactor-html): short summary`
@@ -57,15 +43,9 @@ Developer workflows & quick commands
 - HTML meta & semantics checked: yes/no
 - Accessibility basics verified (labels, alt text, form associations): yes/no
 - Tools used: list MCP servers/tools and key results/links (e.g. `mcp_github_github_search_code` – found SW registration in `assets/js/app.js`)
-- Manual review required: payment/cart changes in `pages/store.html` or `products.json` — do NOT merge without payment-owner approval.
-- Payment owner / reviewer: [payment-owner@example.org] (replace with the actual contact before merge)
+- Reviewer: [2MuchC0ff33@example.org] (replace with the actual contact before merge)
 
 Small note: If a PR touches payments or service-worker logic, mark it as a draft PR and add the exact manual-review line above.
-
-Safety & manual-review areas
-
-- Payment/cart: changes in `pages/store.html`, `products.json` or any `/add-to-cart` handling must be flagged for manual review — these affect real payments.
-- Service worker & offline: edits to `service-worker.js` can break install/upgrade behaviour. Keep changes minimal and test install/uninstall cycles on `localhost` or `https`.
 
 ## HTML5 refactor checklist
 
@@ -79,8 +59,6 @@ Acceptance criteria
 - Deprecated tags/attributes are removed (replace with classes + `assets/css/main.css`).
 - Images have meaningful `alt` text or are explicitly decorative (`role="presentation"`), and form controls have associated `<label>`s.
 - ARIA is used only when semantic HTML cannot provide the required semantics.
-- Service-worker and PWA behaviour is preserved (do not change registration guards in `assets/js/app.js` or core caching behaviour in `service-worker.js` without manual review).
-- Any edits touching `pages/store.html`, `products.json` or `/add-to-cart` are flagged for manual review in the commit body.
 - Changes are small, well-commented in-line, and reversible.
 
 Recommended process (step-by-step)
@@ -109,7 +87,6 @@ Commit guidance for refactors (en-AU)
 - Format: chore(refactor-html): short summary
 - Example: chore(refactor-html): modernise semantics in `pages/about.html` and `index.html`
 - Commit body must list files changed, brief rationale, and include this line if payment/cart touched:
-  - Manual review required: payment/cart changes in `pages/store.html` or `products.json` — do NOT merge without payment-owner approval.
 
 ## Use of MCP servers & tools
 
@@ -126,9 +103,8 @@ Guidance (when to use which tool)
 Operational rules
 
 - Record every automated tool usage in the PR body (tool names and key results or links). This helps reviewers verify sources and decisions.
-- Do not automatically merge or push changes that affect payments, service-worker or privacy behaviour. Create a draft PR and add the "Manual review required" line in the commit body when touching `pages/store.html`, `products.json` or `/add-to-cart`.
 - Respect privacy constraints: do not use tools to inject remote telemetry, third‑party analytics, or external beacons.
-- Required policy: When available and enabled, GitHub Copilot MUST use Context7 (`mcp_upstash_conte`) for library documentation lookups and `mcp_sequentialthi_sequentialthinking` for multi-step planning. Always confirm these servers are enabled before calling them, and record every automated tool usage (including which server/tool was used and a short justification) in the PR body.
+- Required policy: When available and enabled, GitHub Copilot MUST use Context7 (`mcp_upstash_conte`) for library documentation lookups and `mcp_sequentialthinking` for multi-step planning. Always confirm these servers are enabled before calling them, and record every automated tool usage (including which server/tool was used and a short justification) in the PR body.
 
 ## Example Copilot prompts and usage logging
 
@@ -150,12 +126,12 @@ This repository has the following MCP servers installed and available. Prefer th
 
 - Context7 (library docs): mcp*upstash_conte*\* — use `resolve-library-id` then `get-library-docs` to fetch authoritative library documentation before implementing or upgrading library-specific code.
 - GitHub (repo + code): mcp*github_github*\* — use for repository actions (create/update files, branches, PRs), code search (`mcp_github_github_search_code`) and interacting with issues/PRs. Always include a clear commit/PR message and list changed files when making programmatic changes.
-- microsoft.docs.mccp (Microsoft Learn docs): mcp*microsoft_doc*\* — use `microsoft_docs_search`, `microsoft_code_sample_search` and `microsoft_docs_fetch` to ground Azure/Microsoft-related implementation and samples.
-- sequentialthinking (planning): mcp_sequentialthi_sequentialthinking — use for multi-step planning, design breakdowns and verification steps. Use this tool to generate a plan but do not publish internal chain-of-thought in PR descriptions; instead summarise the final decisions and action items in the PR body.
+- microsoft.docs.mcp (Microsoft Learn docs): mcp*microsoft_doc*\* — use `microsoft_docs_search`, `microsoft_code_sample_search` and `microsoft_docs_fetch` to ground Azure/Microsoft-related implementation and samples.
+- sequentialthinking (planning): mcp_sequentialthinking — use for multi-step planning, design breakdowns and verification steps. Use this tool to generate a plan but do not publish internal chain-of-thought in PR descriptions; instead summarise the final decisions and action items in the PR body.
 
 Operational notes
 
 - Always confirm a given MCP server is enabled before calling its tools. If a server is unavailable, ask one short clarifying question referencing the file path you plan to inspect.
 - Record every automated tool usage in the PR body (tool names and key results or links). This helps reviewers verify sources and decisions.
-- Required policy: When available and enabled, GitHub Copilot MUST use Context7 (`mcp_upstash_conte`) for library documentation lookups and `mcp_sequentialthi_sequentialthinking` for multi-step planning. Always confirm these servers are enabled before calling them, and record every automated tool usage (including which server/tool was used and a short justification) in the PR body.
+- Required policy: When available and enabled, GitHub Copilot MUST use Context7 (`mcp_upstash_conte`) for library documentation lookups and `mcp_sequentialthinking` for multi-step planning. Always confirm these servers are enabled before calling them, and record every automated tool usage (including which server/tool was used and a short justification) in the PR body.
 - When using the sequentialthinking tool, extract the final plan and checklist and include that summary in the PR/commit body rather than raw internal reasoning.

@@ -4,6 +4,7 @@
 # Payments and store files -> payment owner
 /pages/store.html @2MuchC0ff33
 /products.json @2MuchC0ff33
+/assets/js/data/products.json @2MuchC0ff33
 /service-worker.js @2MuchC0ff33
 /assets/js/ @2MuchC0ff33
 /assets/css/ @2MuchC0ff33

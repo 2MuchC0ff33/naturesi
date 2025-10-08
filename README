@@ -5,7 +5,7 @@ A small, privacy‑first static storefront for Nature's Infusions. This reposito
 ## Quick links
 
 - Site entry: [index.html](index.html)
-- Store page (products & cart forms — Manual review area): [pages/store.html](pages/store.html)
+- Store page (products & cart forms): [pages/store.html](pages/store.html)
 - Machine product data: [products.json](products.json)
 - Main stylesheet: [assets/css/main.css](assets/css/main.css)
 - App behaviour & SW registration: [assets/js/app.js](assets/js/app.js)
@@ -23,15 +23,6 @@ A small, privacy‑first static storefront for Nature's Infusions. This reposito
 - Small HTML5 refactors and accessibility fixes in pages under `pages/` (see [pages/store.html](pages/store.html) note below).
 - Conservative CSS or JS helpers added under `assets/css/` and `assets/js/`.
 - Non‑functional docs, meta and metadata updates.
-
-## Forbidden or requires manual review
-
-- Any modification to payment or cart handling: edits to [pages/store.html](pages/store.html), [products.json](products.json) or `/add-to-cart` form targets — Manual review required.
-- Changes to service‑worker caching strategy or registration guards in [service-worker.js](service-worker.js) or [assets/js/app.js](assets/js/app.js) — Manual review required.
-- Adding analytics, trackers or third‑party telemetry.
-
-If you touch a Manual‑Review area, include this exact line in the commit body:
-Manual review required: payment/cart changes in `pages/store.html` or `products.json` — do NOT merge without payment-owner approval.
 
 ## How to run locally (smoke test)
 
@@ -69,13 +60,11 @@ When editing HTML/CSS/JS follow the repo checklist (see [.github/copilot-instruc
 - HTML meta & semantics checked: yes/no
 - Accessibility basics verified (labels, alt text, form associations): yes/no
 - Tools used: list MCP/GitHub/Microsoft tools and key results/links (if used) — see [.github/copilot-instructions.md](.github/copilot-instructions.md)
-- Manual review required: payment/cart changes in `pages/store.html` or `products.json` — do NOT merge without payment-owner approval.
-- Payment owner / reviewer: [payment-owner@example.org](mailto:payment-owner@example.org) (replace before merge)
+- Reviewer: [2MuchC0ff33@example.org](mailto:2MuchC0ff33@example.org) (replace before merge)
 
 Example commit body (if touching payments):
 
 ```text
-Manual review required: payment/cart changes in `pages/store.html` or `products.json` — do NOT merge without payment-owner approval.
 
 Files changed:
 - pages/store.html
@@ -96,12 +85,11 @@ Tools used: mcp_github_github_search_code (found SW registration in assets/js/ap
 
 - Keep changes small and reversible. Edit files directly under repo root, `pages/`, `assets/css/` and `assets/js/`.
 - Add new assets only under `assets/` and reference them relatively (no external trackers/CDNs).
-- If in doubt about payments or SW edits, open a draft PR and follow the Manual Review line above.
 
 ## Contact & Authors
 
 - Author / generator credit is embedded in pages (site footer).
-- For payment/cart approvals: [payment-owner@example.org](mailto:payment-owner@example.org) (replace with real contact).
+- For payment/cart approvals: [2MuchC0ff33@example.org](mailto:2MuchC0ff33@example.org) (replace with real contact).
 
 ## License
 

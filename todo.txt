@@ -1,8 +1,132 @@
 header
-Connect the search form to a client-side product search using products.json.
-Wire the search controls to an actual search submit (form + action). I can convert .nav-center to a form that hits store.html and submit category & q.
+
+Wire the search controls to an actual search submit (form + action).
 Add simple JS in app.js to update the .cart-count live.
  want the search form to include category counts in the options dynamically, I can wire a tiny JS to load products.json and populate counts.
  make the header keyboard-navigable with focus styles for the new controls if you'd like further polish.
 
+PLANNED BRANCHED PR WORKFLOW (one branch + one PR per task)
 
+2) Wire search controls to actual search submit (form + action)
+- Branch name:
+  feature/wire-search-submit
+- PR title:
+  feat(search): wire header search controls to store page query submit
+- PR description (template):
+  - Summary: Convert `.nav-center` to an accessible `<form>` or add an explicit form element in [`index.html`](index.html) that submits `q` and `category` query params to [`pages/store.html`](pages/store.html). Ensure labels and keyboard behaviour are present.
+  - Files changed (expected):
+    - [index.html](index.html) (form markup)
+    - [pages/store.html](pages/store.html) (minor query parsing / UI hook to consume `q` and `category`)
+    - [assets/js/app.js](assets/js/app.js) (prevent default / client routing enhancements if needed)
+  - Testing:
+    - Submit form and confirm `pages/store.html` shows filtered results (or pre-fills client-side search)
+    - Run `python -m http.server 8000` and validate navigation and accessibility
+  - Notes / Risks:
+    - Touches `pages/store.html` → Manual review required (payment/cart)
+    - Request review from @2MuchC0ff33
+  - CI expectations: same as above
+- Merge workflow:
+  - Same steps as Task 1; open as Draft PR with `manual-review` label, require 2MuchC0ff33 approval, squash & merge after approval & CI green.
+
+3) Add live cart count update in app.js
+- Branch name:
+  chore/cart-live-count
+- PR title:
+  chore(cart): update .cart-count live in assets/js/app.js
+- PR description (template):
+  - Summary: Add small, non-invasive JS in [`assets/js/app.js`](assets/js/app.js) to update the `.cart-count` node in the header when items are added/removed client-side (no backend change).
+  - Files changed (expected):
+    - [assets/js/app.js](assets/js/app.js)
+    - small markup tweak in [index.html](index.html) if `.cart-count` element needs an ID
+  - Testing:
+    - Unit smoke: simulate add-to-cart actions in the browser and confirm `.cart-count` updates
+    - Run `npm run lint` and `python -m http.server 8000`
+  - Notes / Risks:
+    - Does NOT modify `pages/store.html` or `products.json` payment flow; no manual review required.
+  - CI expectations: pass JS linters
+- Merge workflow:
+  1. git checkout -b chore/cart-live-count
+  2. implement, test locally
+  3. git commit with message: `chore(cart): update .cart-count live`
+  4. push and open PR (not draft)
+  5. Assign reviewers per [.github/CODEOWNERS](.github/CODEOWNERS)
+  6. After approvals and CI green, merge using "Squash and merge" and delete branch
+
+4) Add dynamic category counts to search options
+- Branch name:
+  feature/search-category-counts
+- PR title:
+  feat(search): populate search category options with counts from products.json
+- PR description (template):
+  - Summary: Load [`products.json`](products.json) from the client and populate the search form select/options with categories and counts. Implement in [`assets/js/app.js`](assets/js/app.js) and update search form markup in [`index.html`](index.html).
+  - Files changed (expected):
+    - [assets/js/app.js](assets/js/app.js)
+    - [index.html](index.html)
+    - optionally a small CSS tweak in [assets/css/main.css](assets/css/main.css) for option layout
+  - Testing:
+    - Verify counts match product counts derived from [`products.json`](products.json)
+    - Keyboard navigation & ARIA checks
+  - Notes / Risks:
+    - Reads [`products.json`](products.json) only; if you must change `products.json`, follow Manual-review rules
+  - CI expectations: pass JS & HTML checks
+- Merge workflow:
+  - Regular PR (not draft) unless `pages/store.html` or `products.json` are modified. If either is changed, use Draft PR + manual-review line and ask @2MuchC0ff33 for approval.
+
+5) Make header keyboard-navigable and add focus styles
+- Branch name:
+  chore/header-accessibility-focus
+- PR title:
+  chore(a11y): make header search & nav keyboard-navigable and add focus styles
+- PR description (template):
+  - Summary: Add focus styles in [`assets/css/main.css`](assets/css/main.css), ensure header controls (search form, cart link, primary nav) have logical tab order and visible focus, and update [`index.html`](index.html) markup where necessary to add labels and tabindex.
+  - Files changed (expected):
+    - [assets/css/main.css](assets/css/main.css)
+    - [index.html](index.html)
+  - Testing:
+    - Keyboard-only navigation test; run `npx pa11y http://127.0.0.1:8000/pages/store.html` (CI uses this)
+    - Confirm focus is visible and accessible
+  - Notes / Risks:
+    - Non-payment change; no manual review required
+  - CI expectations: pass Stylelint & accessibility checks
+- Merge workflow:
+  - Regular PR, assign reviewers, merge after CI & approvals via "Squash and merge"
+
+COMMON GIT / PR RULES (apply to all PRs)
+- Branch naming: use lower-case, hyphen-separated prefixes: feature/..., chore/..., fix/...
+- Commit message convention:
+  - Use conventional prefix: feat(...), chore(...), fix(...), docs(...)
+  - Keep body short and include "Files changed:" bullet list where relevant
+- PR checklist (include in PR description):
+  - [ ] Linters run locally: `npm run lint` `npm run stylelint`
+  - [ ] Prettier applied: `npm run format`
+  - [ ] HTML validated: `npx html-validate "pages/**/*.html" "index.html"`
+  - [ ] Smoke test performed: `python -m http.server 8000` (yes/no)
+  - [ ] Accessibility basics verified: yes/no
+  - Tools used: list any MCP or external tools per repo guidance
+  - If PR touches `pages/store.html` or `products.json` add exact line:
+    Manual review required: payment/cart changes in `pages/store.html` or `products.json` — do NOT merge without 2MuchC0ff33 approval.
+- Merging policy:
+  - Prefer "Squash and merge" to keep history tidy (unless instructed otherwise)
+  - Ensure PR is either out of Draft state and has required approvals and CI is green before merging
+  - Include the PR checklist results in the commit body (or PR merge description)
+  - Post-merge: delete remote branch and perform a local `git pull --rebase` to keep main updated
+
+REFERENCES
+- Search data: [products.json](products.json)
+- Store page and search target: [pages/store.html](pages/store.html)
+- App behaviour / place to add JS: [assets/js/app.js](assets/js/app.js)
+- Header / site markup (search form location): [index.html](index.html)
+- Styles (focus / header styles): [assets/css/main.css](assets/css/main.css)
+- Codeowners (request 2MuchC0ff33 review for manual-review): [.github/CODEOWNERS](.github/CODEOWNERS)
+- PR template / required PR checklist: [.github/PULL_REQUEST_TEMPLATE.md](.github/PULL_REQUEST_TEMPLATE.md)
+- Copilot & repo guidance: [.github/copilot-instructions.md](.github/copilot-instructions.md)
+
+
+
+
+Create category pages under pages/store, e.g. pages/store/wellness-blends.html, pages/store/black-tea.html — copy only the product <article> blocks you want to show for that category (preserve their form HTML exactly to keep checkout behaviour unchanged).
+Replace the large product list in store.html with a lightweight hub that links to the new category pages and optionally shows a small featured-set.
+Add each new page to sitemap.xml.
+Continue to use responsive <picture> + srcset + loading="lazy". Consider adding smaller thumbnail images (assets/img/thumbs/) for catalog views (no JS required) so the full‑size images are only used on product detail/category pages.
+Create the branch and open a draft PR. Commit body must include the manual review line because this touches product pages/forms:
+Manual review required: payment/cart changes in store.html or products.json — do NOT merge without 2MuchC0ff33 approval.

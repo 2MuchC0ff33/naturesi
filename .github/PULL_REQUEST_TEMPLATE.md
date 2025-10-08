@@ -9,7 +9,7 @@ Describe the changes in this PR and the problem it solves.
 - [ ] I have tested locally (see testing notes below)
 - [ ] This change does not affect payments or cart flow, or I have requested manual review if it does
 
-Manual review required: changes touching `pages/store.html`, `products.json` or `/add-to-cart` MUST NOT be merged without payment-owner approval.
+Manual review required: changes touching `pages/store.html`, `products.json` or `/add-to-cart` MUST NOT be merged without 2MuchC0ff33 approval.
 
 ## Testing notes
 
