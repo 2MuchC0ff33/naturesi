@@ -32,18 +32,16 @@ button {
   box-shadow: var(--shadow-sm);
 }
 
+/* Merged duplicate selector: a:hover, a:focus-visible, button:hover, button:focus-visible
+   Acceptance: removed duplicate, combined all properties */
 a:hover,
 a:focus-visible,
 button:hover,
 button:focus-visible {
   color: color-mix(in srgb, var(--color-accent) 90%, black);
-}
-
-a:hover,
-a:focus-visible,
-button:hover,
-button:focus-visible {
-  color: color-mix(in srgb, var(--color-accent) 90%, black);
+  background-color: color-mix(in srgb, var(--color-accent) 90%, black);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
 }
 
 button:hover,

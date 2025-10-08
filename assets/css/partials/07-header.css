@@ -99,10 +99,14 @@ Core header bar, logo treatment and colour gradient live here.
   }
 }
 
+/* Merged duplicate selector: .nav-center
+   Acceptance: removed duplicate, combined all properties */
 .nav-center {
   flex: 2 1 280px;
   gap: 0.35rem;
   width: 100%;
+  justify-content: center;
+  align-items: center;
 }
 
 .site-nav .search-icon,
@@ -203,6 +207,8 @@ Core header bar, logo treatment and colour gradient live here.
 /* Add or update in assets/css/main.css or partials/07-header.css */
 /* Ensure the search form is centred within nav-center */
 /* Acceptance: aligns search box and button evenly, vertically and horizontally */
+/* Merged duplicate selector: .site-search
+   Acceptance: removed duplicate, combined all properties */
 .site-search {
   display: flex;
   align-items: center;
@@ -217,6 +223,7 @@ Core header bar, logo treatment and colour gradient live here.
   /* Take full available width */
   max-width: 340px;
   /* Optional: limit width for aesthetics */
+  flex: 1 1 220px;
 }
 
 .site-search .search-box {
@@ -227,12 +234,6 @@ Core header bar, logo treatment and colour gradient live here.
 .site-search .search-icon {
   flex: 0 0 auto;
   margin-left: 0.2rem;
-}
-
-/* If nav-center is not centring its children, add: */
-.nav-center {
-  justify-content: center;
-  align-items: center;
 }
 
 /* Add improved flex wrapper for nav-center grouping */
@@ -257,9 +258,4 @@ Core header bar, logo treatment and colour gradient live here.
 /* Optional: visually separate category and search for clarity */
 .category-dropdown {
   min-width: 160px;
-}
-
-.site-search {
-  flex: 1 1 220px;
-  max-width: 340px;
 }
