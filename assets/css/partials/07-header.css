@@ -234,3 +234,32 @@ Core header bar, logo treatment and colour gradient live here.
   justify-content: center;
   align-items: center;
 }
+
+/* Add improved flex wrapper for nav-center grouping */
+.nav-center-flex {
+  display: flex;
+  flex-direction: row;
+  gap: 1.2rem;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+@media (max-width: 640px) {
+  .nav-center-flex {
+    flex-direction: column;
+    gap: 0.6rem;
+    align-items: stretch;
+    justify-content: center;
+  }
+}
+
+/* Optional: visually separate category and search for clarity */
+.category-dropdown {
+  min-width: 160px;
+}
+
+.site-search {
+  flex: 1 1 220px;
+  max-width: 340px;
+}
