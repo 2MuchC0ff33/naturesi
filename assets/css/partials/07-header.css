@@ -4,11 +4,9 @@ Core header bar, logo treatment and colour gradient live here.
 ========================================================================== */
 #site-header {
   --header-height: 1.9rem;
-  background: linear-gradient(
-    180deg,
-    color-mix(in srgb, var(--color-accent) 72%, white 28%),
-    color-mix(in srgb, var(--color-accent) 60%, black 40%)
-  );
+  background: linear-gradient(180deg,
+      color-mix(in srgb, var(--color-accent) 72%, white 28%),
+      color-mix(in srgb, var(--color-accent) 60%, black 40%));
   color: white;
   border-bottom: 1px solid color-mix(in srgb, var(--color-accent) 20%, black);
 }
@@ -18,13 +16,17 @@ Core header bar, logo treatment and colour gradient live here.
    a white foreground for its contents. This rule must live here
    (after the header colour) so it wins in the cascade. */
 #site-header #site-category-select {
-  color: #000; /* explicit black text for the select */
-  -webkit-text-fill-color: #000; /* help WebKit-based browsers show black text */
-  background: white; /* ensure select shows on white background */
+  color: #000;
+  /* explicit black text for the select */
+  -webkit-text-fill-color: #000;
+  /* help WebKit-based browsers show black text */
+  background: white;
+  /* ensure select shows on white background */
 }
 
 #site-header #site-category-select option {
-  color: #000; /* explicit black for option list items */
+  color: #000;
+  /* explicit black for option list items */
   background: white;
 }
 
@@ -74,6 +76,7 @@ Core header bar, logo treatment and colour gradient live here.
 }
 
 @media (min-width: 640px) {
+
   .site-nav .logo img,
   .site-nav .all-logo img {
     max-height: 34px;
@@ -81,6 +84,7 @@ Core header bar, logo treatment and colour gradient live here.
 }
 
 @media (min-width: 900px) {
+
   .site-nav .logo img,
   .site-nav .all-logo img {
     max-height: 38px;
@@ -88,6 +92,7 @@ Core header bar, logo treatment and colour gradient live here.
 }
 
 @media (min-width: 1200px) {
+
   .site-nav .logo img,
   .site-nav .all-logo img {
     max-height: 44px;
@@ -162,6 +167,7 @@ Core header bar, logo treatment and colour gradient live here.
 }
 
 @media (prefers-color-scheme: dark) {
+
   .site-nav .logo,
   .site-nav .all-logo {
     background: rgba(0, 0, 0, 0.45);
@@ -192,4 +198,39 @@ Core header bar, logo treatment and colour gradient live here.
   .site-nav .logo img {
     max-height: 56px;
   }
+}
+
+/* Add or update in assets/css/main.css or partials/07-header.css */
+/* Ensure the search form is centred within nav-center */
+/* Acceptance: aligns search box and button evenly, vertically and horizontally */
+.site-search {
+  display: flex;
+  align-items: center;
+  /* Vertically centre items */
+  justify-content: center;
+  /* Horizontally centre items */
+  gap: 0.4rem;
+  /* Space between input and button */
+  margin: 0 auto;
+  /* Centre within parent if width is set */
+  width: 100%;
+  /* Take full available width */
+  max-width: 340px;
+  /* Optional: limit width for aesthetics */
+}
+
+.site-search .search-box {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.site-search .search-icon {
+  flex: 0 0 auto;
+  margin-left: 0.2rem;
+}
+
+/* If nav-center is not centring its children, add: */
+.nav-center {
+  justify-content: center;
+  align-items: center;
 }
