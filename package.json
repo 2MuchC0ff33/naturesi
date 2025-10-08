@@ -19,7 +19,7 @@
     "@babel/eslint-parser": "^7.22.0",
     "@babel/plugin-syntax-import-assertions": "^7.22.0",
     "@babel/preset-env": "^7.22.0",
-    "eslint": "^8.57.1",
+    "eslint": "^9.37.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
     "husky": "^9.1.7",
