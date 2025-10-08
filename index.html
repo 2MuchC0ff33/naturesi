@@ -203,39 +203,57 @@
           style="display: flex; flex-direction: row; gap: 1.2rem; align-items: center; width: 100%; justify-content: center;">
           <!-- Category select -->
           <nav aria-label="Browse by category" class="category-dropdown">
-            <label for="site-category-select" class="visually-hidden">Select a product category</label>
-            <select id="site-category-select" name="category" form="site-search-form" aria-label="Product categories">
-              <option value="">All categories</option>
-              <option value="wellness-blends">Wellness Blends</option>
-              <option value="herbal-infusions">Herbal Infusions</option>
-              <option value="black-tea">Black Tea</option>
-              <option value="green-tea">Green Tea</option>
-              <option value="balms">Balms</option>
-              <option value="creams">Creams</option>
-              <option value="selfcare">Self Care</option>
-              <option value="accessories">Accessories</option>
-              <option value="ice-tea">Ice Tea</option>
-              <option value="artisan-blends">Artisan Blends</option>
-            </select>
-            <noscript>
-              <div class="category-fallback">
-                <ul>
-                  <li><a href="/pages/store.html#wellness-blends">Wellness Blends</a></li>
-                  <li><a href="/pages/store.html#herbal-infusions">Herbal Infusions</a></li>
-                  <li><a href="/pages/store.html#black-tea">Black Tea</a></li>
-                  <li><a href="/pages/store.html#green-tea">Green Tea</a></li>
-                  <li><a href="/pages/store.html#balms">Balms</a></li>
-                  <li><a href="/pages/store.html#creams">Creams</a></li>
-                  <li><a href="/pages/store.html#selfcare">Self Care</a></li>
-                  <li><a href="/pages/store.html#accessories">Accessories</a></li>
-                  <li><a href="/pages/store.html#ice-tea">Ice Tea</a></li>
-                  <li><a href="/pages/store.html#artisan-blends">Artisan Blends</a></li>
-                </ul>
-              </div>
-            </noscript>
+            <form action="/pages/store.html" method="get" id="category-nav-form" aria-label="Browse by category">
+              <label for="site-category-select" class="visually-hidden">Select a product category</label>
+              <select id="site-category-select" name="category" aria-label="Product categories" onchange="
+                  var map = {
+                    'wellness-blends': '/pages/store/wellness-blends.html',
+                    'herbal-infusions': '/pages/store/herbal-infusions.html',
+                    'black-tea': '/pages/store/black-tea.html',
+                    'green-tea': '/pages/store/green-tea.html',
+                    'balms': '/pages/store/balms.html',
+                    'creams': '/pages/store/creams.html',
+                    'selfcare': '/pages/store/selfcare.html',
+                    'accessories': '/pages/store/accessories.html',
+                    'ice-tea': '/pages/store/ice-tea.html',
+                    'artisan-blends': '/pages/store/artisan-blends.html',
+                    '': '/pages/store.html'
+                  };
+                  window.location.href = map[this.value] || '/pages/store.html';
+                ">
+                <option value="">All categories</option>
+                <option value="wellness-blends">Wellness Blends</option>
+                <option value="herbal-infusions">Herbal Infusions</option>
+                <option value="black-tea">Black Tea</option>
+                <option value="green-tea">Green Tea</option>
+                <option value="balms">Balms</option>
+                <option value="creams">Creams</option>
+                <option value="selfcare">Self Care</option>
+                <option value="accessories">Accessories</option>
+                <option value="ice-tea">Ice Tea</option>
+                <option value="artisan-blends">Artisan Blends</option>
+              </select>
+              <noscript>
+                <div class="category-fallback">
+                  <ul>
+                    <li><a href="/pages/store/wellness-blends.html">Wellness Blends</a></li>
+                    <li><a href="/pages/store/herbal-infusions.html">Herbal Infusions</a></li>
+                    <li><a href="/pages/store/black-tea.html">Black Tea</a></li>
+                    <li><a href="/pages/store/green-tea.html">Green Tea</a></li>
+                    <li><a href="/pages/store/balms.html">Balms</a></li>
+                    <li><a href="/pages/store/creams.html">Creams</a></li>
+                    <li><a href="/pages/store/selfcare.html">Self Care</a></li>
+                    <li><a href="/pages/store/accessories.html">Accessories</a></li>
+                    <li><a href="/pages/store/ice-tea.html">Ice Tea</a></li>
+                    <li><a href="/pages/store/artisan-blends.html">Artisan Blends</a></li>
+                    <li><a href="/pages/store.html">All categories</a></li>
+                  </ul>
+                </div>
+              </noscript>
+            </form>
           </nav>
 
-          <!-- Search form -->
+          <!-- Search form (pure HTML5, no JS) -->
           <form id="site-search-form" class="site-search" action="/pages/search.html" method="get" role="search"
             aria-label="Search site">
             <label for="site-search" class="visually-hidden">Search Nature's Infusions</label>
@@ -251,6 +269,7 @@
               </svg>
             </button>
           </form>
+          <!-- Inline comment: All JS removed for pure HTML5 search, OpenSearch compatible. -->
         </div>
       </div>
 
