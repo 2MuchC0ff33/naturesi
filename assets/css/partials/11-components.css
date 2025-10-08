@@ -46,7 +46,12 @@ Accordion toggles, social icon variants and other small repeated components.
   background: transparent;
   color: var(--footer-text);
   border: 0;
-  padding: 0;
+  padding: 0.4rem 0.6rem;
+  /* WCAG 2.2: Ensure minimum target size */
+  min-width: 24px;
+  /* WCAG 2.2: Minimum target size */
+  min-height: 24px;
+  /* WCAG 2.2: Minimum target size */
   font: inherit;
   cursor: pointer;
 }

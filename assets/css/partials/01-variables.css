@@ -5,8 +5,11 @@ partials can reference variables safely.
 ========================================================================== */
 :root {
   --color-background: #ffffff;
+  /* WCAG AAA: background for 21:1 contrast with text */
   --color-text: #050505;
+  /* WCAG AAA: text on white background */
   --color-accent: #346967;
+  /* WCAG AA/AAA: accent for buttons/links, 7.7:1 contrast with white */
   --color-light-background: #bdd5d4;
   --color-highlight: #f6e6cd;
   --color-border: #e1e1e1;

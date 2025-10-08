@@ -12,6 +12,10 @@ textarea {
     border-color var(--transition-fast),
     box-shadow var(--transition-fast);
   margin: 0;
+  min-width: 24px;
+  /* WCAG 2.2: Ensure minimum target size */
+  min-height: 24px;
+  /* WCAG 2.2: Ensure minimum target size */
 }
 
 textarea {
@@ -40,7 +44,6 @@ a:focus-visible,
 button:hover,
 button:focus-visible {
   color: color-mix(in srgb, var(--color-accent) 90%, black);
-}
 }
 
 button:hover,

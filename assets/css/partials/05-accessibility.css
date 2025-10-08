@@ -21,6 +21,7 @@ Focus outlines, skip links and visually-hidden utilities live here.
   text-decoration: none;
   box-shadow: none;
   opacity: 0.98;
+  /* WCAG: Ensure skip link is visible on focus for keyboard users */
 }
 
 .skip-link:focus,
@@ -29,6 +30,9 @@ Focus outlines, skip links and visually-hidden utilities live here.
   left: var(--space-md);
   top: calc(var(--header-height, 3.75rem));
   outline: 2px solid color-mix(in srgb, var(--color-accent) 80%, white);
+  background: var(--color-accent);
+  color: #fff;
+  opacity: 1;
   transform: translateY(-1px);
 }
 
@@ -52,6 +56,7 @@ Focus outlines, skip links and visually-hidden utilities live here.
   white-space: nowrap;
   width: 1px;
 }
+
 .visually-hidden.focusable:active,
 .visually-hidden.focusable:focus {
   clip-path: none;

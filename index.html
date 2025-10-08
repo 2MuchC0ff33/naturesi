@@ -188,7 +188,8 @@
 </head>
 
 <body itemscope itemtype="https://schema.org/WebPage">
-  <a class="skip-link visually-hidden focusable" href="#main-content">Skip to main content</a>
+  <!-- WCAG: Skip link for keyboard navigation, visible on focus -->
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   <header id="site-header">
     <nav class="site-nav" aria-label="Site navigation">
       <div class="nav-left">
@@ -294,7 +295,8 @@
     </nav>
   </header>
 
-  <main id="main-content">
+  <!-- WCAG: Main content landmark for skip link target -->
+  <main id="main-content" tabindex="-1">
     <section id="home" itemscope itemtype="https://schema.org/Store">
       <header id="hero">
         <h1 itemprop="name">Nature's Infusions</h1>
@@ -425,11 +427,11 @@
       <section id="newsletter" aria-labelledby="newsletter-heading">
         <h2 id="newsletter-heading">Join Our Wellness Community</h2>
         <form id="newsletter-form" novalidate>
-          <label>
-            Email:
-            <input type="email" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-              placeholder="your@email.com">
-          </label>
+          <label for="newsletter-email">Email:</label>
+          <input id="newsletter-email" type="email" name="email" required
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="your@email.com"
+            aria-describedby="newsletter-error">
+          <span id="newsletter-error" class="visually-hidden" aria-live="polite"></span>
           <button type="submit">Subscribe</button>
         </form>
       </section>
