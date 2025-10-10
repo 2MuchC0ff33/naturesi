@@ -185,13 +185,115 @@
   <!-- Script Loading: load main JS as an ES module so app.js can import smaller modules (modular refactor) -->
   <!-- Cache-busting query added to force clients to fetch latest module during development/debugging -->
   <script type="module" src="/assets/js/app.js"></script>
+
 </head>
 
 <body itemscope itemtype="https://schema.org/WebPage">
-  <header>
-    <a class="skip-link visually-hidden focusable" href="#main-content">Skip to main content</a>
-    <h1>Herbal Infusions</h1>
-    <nav aria-label="Breadcrumb"><a href="/pages/store.html">Store</a> › Herbal Infusions</nav>
+  <!-- WCAG: Skip link for keyboard navigation, visible on focus -->
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header id="site-header">
+    <nav class="site-nav" aria-label="Site navigation">
+      <div class="nav-left">
+        <a class="logo" href="/" aria-label="Nature's Infusions home">
+          <img src="/assets/img/logo.svg" alt="Nature's Infusions logo">
+        </a>
+      </div>
+
+      <!-- Improved nav-center: group category and search in a flex wrapper -->
+      <div class="nav-center">
+        <div class="nav-center-flex"
+          style="display: flex; flex-direction: row; gap: 1.2rem; align-items: center; width: 100%; justify-content: center;">
+          <!-- Category select -->
+          <nav aria-label="Browse by category" class="category-dropdown">
+            <form action="/pages/store.html" method="get" id="category-nav-form" aria-label="Browse by category">
+              <label for="site-category-select" class="visually-hidden">Select a product category</label>
+              <select id="site-category-select" name="category" aria-label="Product categories" onchange="
+                  var map = {
+                    'wellness-blends': '/pages/store/wellness-blends.html',
+                    'herbal-infusions': '/pages/store/herbal-infusions.html',
+                    'black-tea': '/pages/store/black-tea.html',
+                    'green-tea': '/pages/store/green-tea.html',
+                    'balms': '/pages/store/balms.html',
+                    'creams': '/pages/store/creams.html',
+                    'selfcare': '/pages/store/selfcare.html',
+                    'accessories': '/pages/store/accessories.html',
+                    'ice-tea': '/pages/store/ice-tea.html',
+                    'artisan-blends': '/pages/store/artisan-blends.html',
+                    '': '/pages/store.html'
+                  };
+                  window.location.href = map[this.value] || '/pages/store.html';
+                ">
+                <option value="">All categories</option>
+                <option value="wellness-blends">Wellness Blends</option>
+                <option value="herbal-infusions">Herbal Infusions</option>
+                <option value="black-tea">Black Tea</option>
+                <option value="green-tea">Green Tea</option>
+                <option value="balms">Balms</option>
+                <option value="creams">Creams</option>
+                <option value="selfcare">Self Care</option>
+                <option value="accessories">Accessories</option>
+                <option value="ice-tea">Ice Tea</option>
+                <option value="artisan-blends">Artisan Blends</option>
+              </select>
+              <noscript>
+                <div class="category-fallback">
+                  <ul>
+                    <li><a href="/pages/store/wellness-blends.html">Wellness Blends</a></li>
+                    <li><a href="/pages/store/herbal-infusions.html">Herbal Infusions</a></li>
+                    <li><a href="/pages/store/black-tea.html">Black Tea</a></li>
+                    <li><a href="/pages/store/green-tea.html">Green Tea</a></li>
+                    <li><a href="/pages/store/balms.html">Balms</a></li>
+                    <li><a href="/pages/store/creams.html">Creams</a></li>
+                    <li><a href="/pages/store/selfcare.html">Self Care</a></li>
+                    <li><a href="/pages/store/accessories.html">Accessories</a></li>
+                    <li><a href="/pages/store/ice-tea.html">Ice Tea</a></li>
+                    <li><a href="/pages/store/artisan-blends.html">Artisan Blends</a></li>
+                    <li><a href="/pages/store.html">All categories</a></li>
+                  </ul>
+                </div>
+              </noscript>
+            </form>
+          </nav>
+
+          <!-- Search form (pure HTML5, no JS) -->
+          <form id="site-search-form" class="site-search" action="/pages/search.html" method="get" role="search"
+            aria-label="Search site">
+            <label for="site-search" class="visually-hidden">Search Nature's Infusions</label>
+            <input id="site-search" name="q" type="search" placeholder="Search Nature's Infusions" class="search-box"
+              aria-label="Search site">
+            <button class="search-icon" type="submit" aria-label="Submit search">
+              <!-- inline svg magnifier -->
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true" focusable="false">
+                <path
+                  d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79L20 21.49 21.49 20l-5.99-6zM4 9.5a5.5 5.5 0 1111 0 5.5 5.5 0 01-11 0z"
+                  fill="currentColor"></path>
+              </svg>
+            </button>
+          </form>
+          <!-- Inline comment: All JS removed for pure HTML5 search, OpenSearch compatible. -->
+        </div>
+      </div>
+
+      <div class="nav-right">
+        <a class="cart-option" href="/pages/cart.html" aria-label="Cart">
+          <div class="cart-logo" aria-hidden="true">
+            <!-- inline svg cart -->
+            <svg width="20" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true" focusable="false">
+              <!-- Simple cart shape (rectangle body + wheels) -->
+              <rect x="3" y="4" width="14" height="10" rx="1" stroke="currentColor" stroke-width="1.25" fill="none">
+              </rect>
+              <path d="M7 4L6 2H3" stroke="currentColor" stroke-width="1.25" fill="none"></path>
+              <circle cx="8.5" cy="17.5" r="1.25" fill="currentColor"></circle>
+              <circle cx="17.5" cy="17.5" r="1.25" fill="currentColor"></circle>
+            </svg>
+          </div>
+          <span class="cart-text">Cart</span>
+          <span class="cart-count">0</span>
+        </a>
+      </div>
+    </nav>
   </header>
   <main id="main-content">
     <section aria-labelledby="herbal-heading">

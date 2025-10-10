@@ -1,16 +1,16 @@
 (---
-description: "Normalize and propagate canonical <head> across site HTML files. Use the provided head from index.html (lines 1-188) and replace existing heads in pages while normalising resource paths to root-relative where appropriate."
+description: "Normalize and propagate canonical <footer> across site HTML files. Use the provided footers from index.html (lines 450 to 553) and replace existing footerss in pages while normalising resource paths to root-relative where appropriate."
 mode: "edit"
 tools: ["codebase","editFiles","search"]
 ---
 
-# Normalize site head across HTML pages
+# Normalize site footers across HTML pages
 
 Persona:
 - You are an expert front-end web engineer familiar with static HTML sites, PWAs, accessibility basics, and SEO best practices. You have experience refactoring single-file static pages and are conservative about not touching payment or service-worker logic.
 
 Goal:
-- Replace the <head> section of all site HTML files with the canonical head snippet (taken from `index.html`, lines 1-188). Ensure links and resource references are normalised to use root-relative paths (leading `/`) so assets resolve consistently on production. Do not change payment/cart behaviour or service-worker registration logic.
+- Replace the <footer> section of all site HTML files with the canonical footers snippet (taken from `index.html`, lines 450 to 553). Ensure links and resource references are normalised to use root-relative paths (leading `/`) so assets resolve consistently on production. Do not change payment/cart behaviour or service-worker registration logic.
 
 Target files:
 - Top-level HTML files in the repo root (`index.html`)
@@ -22,15 +22,15 @@ Inputs (variables):
 - ${input:confirm_files:Confirm which files to update (comma-separated glob, default: pages/**/*.html, *.html)}
 
 Primary task (explicit):
-1. For each target HTML file, replace everything from the top of the file through the closing </head> tag with the canonical head provided below (the canonical head includes the opening <!DOCTYPE html> and the opening <html ...> tag). The replacement should preserve the remainder of the file (body and any inline scripts after </head>).
+1. For each target HTML file, replace everything from the top of the file through the closing </footers> tag with the canonical footers provided below (the canonical footers includes the opening <!DOCTYPE html> and the opening <html ...> tag). The replacement should preserve the remainder of the file (body and any inline scripts after </footers>).
 2. Ensure that resource references (CSS, JS, images, icons, manifest) use root-relative paths (begin with `/`) unless a file is intentionally local to the same directory; prefer root-relative so the site works from any page. Do not convert absolute external URLs (https://...).
 3. If a file already contains a `<base href="...">`, leave it as `/` or update to `/` if empty or relative.
 
 Constraints & safety:
-- Do not edit offline.html, 404.html, google-site-verification.html and yandex_7847a6427bfa1388.html.
-- Keep edits minimal and conservative. Only touch the file head region (start through </head> inclusive).
+- Do not edit index.html, offline.html, 404.html, google-site-verification.html and yandex_7847a6427bfa1388.html.
+- Keep edits minimal and conservative. Only touch the file footers region (start through </footers> inclusive).
 - Avoid adding any external trackers, analytics, or third-party telemetry.
-- Preserve any inline structured data scripts (JSON-LD) that appear in the canonical head. If a target file already has additional JSON-LD in the body, leave it untouched.
+- Preserve any inline structured data scripts (JSON-LD) that appear in the canonical footers. If a target file already has additional JSON-LD in the body, leave it untouched.
 
 Path normalization rules (explicit):
 - If a resource link/href/src begins with `http://` or `https://`, leave it unchanged.
@@ -42,214 +42,130 @@ Path normalization rules (explicit):
 - Do not attempt to resolve or rewrite links that clearly point to pages (e.g., `pages/search.html` can be `/pages/search.html`) — convert to root-relative.
 
 Step-by-step instructions for Copilot to follow when performing edits:
-1. Read the canonical head provided below (it's the source of truth).
-2. For each target file (default globs: `*.html`, `pages/*.html`, `pages/store/*.html`), open the file and find the first occurrence of `</head>`.
-3. Replace from the top of the file (line 1) up to and including `</head>` with the canonical head block.
-4. Run a light validation: ensure the modified file still contains `<!DOCTYPE html>`, `<html` with `lang="en-AU"`, and a closing `</head>`; ensure `</body>` and `</html>` remain present later in the file. If any of those checks fail, abort the edit for that file and report the issue.
+1. Read the canonical footers provided below (it's the source of truth).
+2. For each target file (default globs: `*.html`, `pages/*.html`, `pages/store/*.html`), open the file and find the first occurrence of `</footers>`.
+3. Replace from the top of the file (line 1) up to and including `</footers>` with the canonical footers block.
+4. Run a light validation: ensure the modified file still contains `<!DOCTYPE html>`, `<html` with `lang="en-AU"`, and a closing `</footers>`; ensure `</body>` and `</html>` remain present later in the file. If any of those checks fail, abort the edit for that file and report the issue.
 
 Edge cases to handle:
 - Files with a different `<base href>`: standardise to `<base href="/">` unless there is an explicit reason not to (e.g., multi-base site); if unsure, leave the existing base href and report it.
-- Minified or one-line HTML files: still detect `</head>` by string match and replace correctly.
+- Minified or one-line HTML files: still detect `</footers>` by string match and replace correctly.
 
 Validation & success criteria:
-- PASS: All targeted files contain the canonical head exactly (except for minor path normalisations). Files still contain `</body>` and `</html>`.
-- FAIL: Any file missing `</head>`, `</body>` or `</html>` after edit, or if edits touched non-head content.
+- PASS: All targeted files contain the canonical footers exactly (except for minor path normalisations). Files still contain `</body>` and `</html>`.
+- FAIL: Any file missing `</footers>`, `</body>` or `</html>` after edit, or if edits touched non-footers content.
 
 Post-edit notes for reviewer (automatically generated checklist to include in commit message):
 - Files changed: list changed file paths
-- Accessibility & meta checks: verify `lang="en-AU"`, `meta charset` and `meta viewport` present in head.
+- Accessibility & meta checks: verify `lang="en-AU"`, `meta charset` and `meta viewport` present in footers.
 
-Canonical head to insert (source-of-truth from index.html, lines 1-188):
+Canonical footers to insert (source-of-truth from index.html, lines 450 to 553):
 
 ```html
-<!DOCTYPE html>
-<html class="no-js" lang="en-AU" dir="ltr" data-theme="light">
 
-<head>
-	<!-- Character Encoding and Rendering -->
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content=" IE=edge">
-	<meta name="viewport" content=" width=device-width,initial-scale=1">
-	<meta name="theme-color" content="#0f1111">
-	<!-- Sets the theme color for mobile browsers (using your accent color) -->
-	<meta name="color-scheme" content="light dark">
+    <hr aria-hidden="true">
 
-	<!-- Primary Meta Tags -->
-	<title>Nature's Infusions | Premium Organic Teas &amp; Herbal Remedies</title>
-	<meta name="description"
-		content="Perth-based Naturopath's passion project offering certified organic teas and herbal infusions for holistic wellness. Australian-made since 2025.">
-	<meta name="keywords"
-		content="organic tea, herbal infusion, naturopath, Perth, wellness, detox, chamomile, peppermint, turmeric">
-	<meta name="author" content="Nature's Infusions">
-	<meta name="copyright" content="© 2025 Nature's Infusions">
-	<meta name="generator" content="Ultra-Simple StaticEStore Framework">
-	<base href="/">
+    <div class="site-footer" itemscope itemtype="https://schema.org/WPFooter">
+      <!-- aria-label removed: this wrapper is for layout only; the native <footer> element below provides the contentinfo landmark -->
+      <div class="container">
+        <div class="branding">
+          <div class="brand-text">
+            <h3>Nature's Infusions</h3>
+            <p itemprop="description">
+              Premium organic teas and herbal remedies — handcrafted in Perth.
+            </p>
+            <a class="logo" href="/" aria-label="Nature's Infusions home">
+              <img src="/assets/img/logo.svg" alt="Nature's Infusions logo">
+            </a>
+          </div>
+        </div>
 
-	<!-- SEO and Indexing -->
-	<meta name="robots" content="index,follow,max-image-preview:large">
-	<meta name="referrer" content="strict-origin-when-cross-origin">
-	<meta name="rating" content="general">
-	<link rel="canonical" href="https://www.naturesinfusions.com.au/">
-	<link rel="sitemap" href="/sitemap.xml" type="application/xml" title="Sitemap">
+        <section class="quick-links-wrapper">
+          <h4>
+            <button type="button" class="accordion-toggle" aria-expanded="false" aria-controls="quick-links-panel"
+              data-controls="quick-links-panel">
+              Quick Links
+            </button>
+          </h4>
+          <nav id="quick-links-panel" class="links-grid" aria-label="Quick links" aria-hidden="false">
+            <ul>
+              <li><a href="." itemprop="url">Home</a></li>
+              <li><a href="pages/about.html" itemprop="url">About</a></li>
+              <li><a href="pages/store.html" itemprop="url">Store</a></li>
+              <li><a href="pages/stockists.html" itemprop="url">Stockists</a></li>
+              <li><a href="pages/contact.html" itemprop="url">Contact &amp; Support</a></li>
+              <li><a href="pages/terms.html" itemprop="url">Terms &amp; Conditions</a></li>
+              <li><a href="pages/social.html" itemprop="url">Social</a></li>
+            </ul>
+          </nav>
+        </section>
 
-	<!-- Social Media Meta -->
-	<!-- Open Graph -->
-	<meta property="og:type" content="website">
-	<meta property="og:url" content="https://www.naturesinfusions.com.au/">
-	<meta property="og:title" content="Nature's Infusions | Premium Organic Teas and Herbal Infusions">
-	<meta property="og:description" content="Australian-made organic teas and herbal infusions for holistic wellness">
-	<meta property="og:image" content="https://www.naturesinfusions.com.au/assets/img/social-share-og.webp">
-	<meta property="og:image:width" content="1200">
-	<meta property="og:image:height" content="630">
-	<meta property="og:locale" content="en_AU">
-	<meta property="og:site_name" content="Nature's Infusions">
+        <section>
+          <h4>Connect</h4>
+          <nav aria-label="Social media links">
+            <ul>
+              <li>
+                <a class="facebook" href="https://www.facebook.com/NaturesInfusions/" rel="noopener noreferrer"
+                  itemprop="sameAs" target="_blank" aria-label="Nature's Infusions on Facebook (opens in new tab)">
+                  <!-- Facebook SVG (uses currentColor) -->
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true" focusable="false">
+                    <path
+                      d="M22 12C22 6.477 17.523 2 12 2S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878V14.89h-2.54v-2.89h2.54V9.845c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.772-1.63 1.562v1.868h2.773l-.443 2.89h-2.33v6.99C18.343 21.128 22 16.991 22 12z"
+                      fill="currentColor" />
+                  </svg>
+                  <span class="visually-hidden">Facebook</span>
+                </a>
+              </li>
+              <li>
+                <a class="instagram" href="https://www.instagram.com/natures_infusions_au/" rel="noopener noreferrer"
+                  itemprop="sameAs" target="_blank" aria-label="Nature's Infusions on Instagram (opens in new tab)">
+                  <!-- Instagram SVG (uses currentColor) -->
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true" focusable="false">
+                    <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.5"
+                      fill="none" />
+                    <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5" fill="none" />
+                    <circle cx="17.5" cy="6.5" r="0.75" fill="currentColor" />
+                  </svg>
+                  <span class="visually-hidden">Instagram</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </section>
+      </div>
+      <!-- Use native footer element for semantics and accessibility; footer has implicit role="contentinfo" -->
+      <!-- Move the legal bar into a native <footer> element to satisfy linters while keeping the outer
+             site wrapper as a div for layout and to avoid ambiguous footer nesting. -->
+      <footer class="legal-bar" aria-label="Legal and credits">
+        <div class="legal">
+          <p>&copy; <time datetime="2025">2025</time> Nature's Infusions. All rights reserved.</p>
+          <p>Powered by Ultra-Simple Static EStore Framework</p>
+          <p>
+            Author: <span itemprop="author">Adrian Gallo (2MuchC0ff33)</span>
+            <a class="github" href="https://2muchc0ff33.github.io" itemprop="url" target="_blank"
+              rel="noopener noreferrer" aria-label="Adrian Gallo on GitHub (opens in new tab)">
+              <!-- GitHub mark (inline SVG) -->
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"
+                xmlns="http://www.w3.org/2000/svg">
+                <path fill="currentColor"
+                  d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.38-3.88-1.38-.53-1.36-1.3-1.72-1.3-1.72-1.06-.73-.01-.73-.01-.73 1.14.08 1.74 1.17 1.74 1.17 1.04 1.78 2.7 1.27 3.36.97.1-.76.4-1.27.72-1.56-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.17-3.1-.12-.29-.51-1.44.11-3 0 0 .95-.31 3.12 1.18A10.94 10.94 0 0112 6.84c.96.005 1.92.13 2.82.38 2.16-1.5 3.11-1.18 3.11-1.18.62 1.56.23 2.71.12 3 .73.81 1.16 1.84 1.16 3.1 0 4.43-2.7 5.4-5.27 5.68.41.36.78 1.07.78 2.16 0 1.56-.01 2.82-.01 3.2 0 .31.21.67.8.56A11.5 11.5 0 0023.5 12C23.5 5.73 18.27.5 12 .5z" />
+              </svg>
+              <span class="visually-hidden">Adrian Gallo (aka 2MuchC0ff33) on GitHub</span>
+            </a>
+          </p>
+          <p>
+            Website generated:
+            <time datetime="2025-07-21" itemprop="datePublished">21/07/2025</time>
+          </p>
+        </div>
+      </footer>
+    </div>
+  </main>
+</body>
 
-	<!-- Twitter Card -->
-	<meta name="twitter:card" content="summary_large_image">
-	<meta name="twitter:site" content="@naturesinfusions">
-	<meta name="twitter:creator" content="@naturesinfusions">
-	<meta name="twitter:title" content="Nature's Infusions | Premium Organic Teas and Herbal Infusions">
-	<meta name="twitter:description" content="Australian-made organic teas and herbal infusions for holistic wellness">
-	<meta name="twitter:image" content="https://www.naturesinfusions.com.au/assets/img/social-share-twitter.webp">
-
-	<!-- PWA Configuration -->
-	<meta name="theme-color" content="#4CAF50">
-	<meta name="application-name" content="Nature's Infusions">
-	<meta name="mobile-web-app-capable" content="yes">
-	<meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name="apple-mobile-web-app-title" content="Nature's Infusions">
-	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-	<meta name="format-detection" content="telephone=yes,email=yes,address=yes">
-	<meta name="full-screen" content="yes">
-	<meta name="browsermode" content="application">
-	<meta name="screen-orientation" content="portrait-primary">
-
-	<!-- Icons and Favicons -->
-	<link rel="icon" href="/favicon.ico" type="image/x-icon">
-	<link rel="icon" href="/favicon.svg" type="image/svg+xml">
-	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#4CAF50">
-	<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-	<!-- Standard Sizes -->
-	<link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16">
-	<link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
-	<link rel="icon" href="/favicon-96x96.png" type="image/png" sizes="96x96">
-	<!-- Android -->
-	<link rel="icon" href="/android-icon-192x192.png" type="image/png" sizes="192x192">
-	<!-- Apple -->
-	<link rel="apple-touch-icon" href="/apple-icon-57x57.png" sizes="57x57">
-	<link rel="apple-touch-icon" href="/apple-icon-60x60.png" sizes="60x60">
-	<link rel="apple-touch-icon" href="/apple-icon-72x72.png" sizes="72x72">
-	<link rel="apple-touch-icon" href="/apple-icon-76x76.png" sizes="76x76">
-	<link rel="apple-touch-icon" href="/apple-icon-114x114.png" sizes="114x114">
-	<link rel="apple-touch-icon" href="/apple-icon-120x120.png" sizes="120x120">
-	<link rel="apple-touch-icon" href="/apple-icon-144x144.png" sizes="144x144">
-	<link rel="apple-touch-icon" href="/apple-icon-152x152.png" sizes="152x152">
-	<link rel="apple-touch-icon" href="/apple-icon-180x180.png" sizes="180x180">
-	<!-- Launch Images -->
-	<link rel="apple-touch-startup-image" href="/launch-640x1136.png"
-		media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)">
-
-	<!-- Web App Manifest -->
-	<link rel="manifest" href="/manifest.json" crossorigin="use-credentials">
-
-	<!-- Resource Hints -->
-	<link rel="dns-prefetch" href="//www.naturesinfusions.com.au">
-	<link rel="preload" href="/assets/css/main.css" as="style">
-	<link rel="prefetch" href="/assets/js/data/products.json" as="fetch">
-
-	<!-- Cache Control -->
-	<meta http-equiv="Cache-Control" content="public, no-cache, must-revalidate">
-	<meta http-equiv="Pragma" content="no-cache">
-
-	<!-- Security Headers -->
-	<meta http-equiv="Content-Security-Policy"
-		content="default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; script-src-elem 'self' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://static.cloudflareinsights.com">
-	<meta http-equiv="Permissions-Policy" content="geolocation=(),microphone=(),camera=()">
-	<meta http-equiv="X-Content-Type-Options" content="nosniff">
-	<meta http-equiv="Strict-Transport-Security" content=" max-age=63072000; includeSubDomains; preload">
-	<meta http-equiv="Expect-CT" content=" max-age=86400, enforce">
-
-	<!-- Verification -->
-	<meta name="google-site-verification" content="[your-google-verification-code]">
-	<meta name="msvalidate.01" content="B279BB1A64D31F7EC1A04AFAEFE05314">
-	<meta name="yandex-verification" content="7847a6427bfa1388">
-
-	<!-- Structured Data -->
-	<script type="application/ld+json">
-			{
-				"@context": "https://schema.org",
-				"@type": "Organization",
-				"@id": "https://www.naturesinfusions.com.au/#organization",
-				"name": "Nature's Infusions",
-				"url": "https://www.naturesinfusions.com.au/",
-				"logo": "https://www.naturesinfusions.com.au/assets/img/logo.svg",
-				"description": "Perth-based naturopath's passion project offering certified organic teas and herbal infusions",
-				"foundingDate": "2025",
-				"sameAs": [
-					"https://www.facebook.com/naturesinfusions.herbaltea/",
-					"https://www.instagram.com/natures_infusions_au/",
-					"https://au.linkedin.com/in/bree-gallo-75a81518a"
-				],
-				"contactPoint": [
-					{
-						"@type": "ContactPoint",
-						"telephone": "+61 434 947 131",
-						"contactType": "customer service",
-						"email": "tea@naturesinfusions.com.au",
-						"areaServed": "AU",
-						"availableLanguage": "English"
-					}
-				],
-				"address": {
-					"@type": "PostalAddress",
-					"streetAddress": "63 Meadowbrook Drive",
-					"addressLocality": "Parkwood",
-					"addressRegion": "WA",
-					"postalCode": "6147",
-					"addressCountry": "AU"
-				}
-			}
-		</script>
-
-	<script type="application/ld+json">
-			{
-				"@context": "https://schema.org",
-				"@type": "WebSite",
-				"@id": "https://www.naturesinfusions.com.au/#website",
-				"url": "https://www.naturesinfusions.com.au/",
-				"name": "Nature's Infusions",
-				"publisher": { "@id": "https://www.naturesinfusions.com.au/#organization" },
-				"potentialAction": {
-					"@type": "SearchAction",
-					"target": "https://www.naturesinfusions.com.au/pages/search.html?q={search_term_string}",
-					"query-input": "required name="search_term_string""
-				}
-			}
-		</script>
-
-	<script type="application/ld+json">
-			{
-				"@context": "https://schema.org",
-				"@type": "BreadcrumbList",
-				"itemListElement": [
-					{
-						"@type": "ListItem",
-						"position": 1,
-						"name": "Home",
-						"item": "https://www.naturesinfusions.com.au/"
-					}
-				]
-			}
-		</script>
-
-	<link rel="stylesheet" href="/assets/css/main.css" type="text/css">
-	<!-- OpenSearch description for browser search providers (matches /opensearch.xml) -->
-	<link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="Nature's Infusions">
-
-	<!-- Script Loading: load main JS as an ES module so app.js can import smaller modules (modular refactor) -->
-	<!-- Cache-busting query added to force clients to fetch latest module during development/debugging -->
-	<script type="module" src="/assets/js/app.js"></script>
-</head>
+</html>
 ```
 
 ---
@@ -257,7 +173,7 @@ Canonical head to insert (source-of-truth from index.html, lines 1-188):
 When using this prompt in Copilot, set the selection or input variable to the list of files to update if you want to limit scope. By default, update `*.html`, `pages/*.html` and `pages/store/*.html`.
 
 Commit message guidance (use in PR):
-- chore(refactor-html): normalise head across site and standardise root-relative asset paths
+- chore(refactor-html): normalise footers across site and standardise root-relative asset paths
 
-If you need me to apply the edits now across the repository, respond with: "apply-head-normalisation" and include the file globs you wish to update (or leave default). 
+If you need me to apply the edits now across the repository, respond with: "apply-footers-normalisation" and include the file globs you wish to update (or leave default). 
 
