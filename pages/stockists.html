@@ -187,208 +187,168 @@
   <script type="module" src="/assets/js/app.js"></script>
 </head>
 
-  <body itemscope itemtype="https://schema.org/WebPage">
-    <a class="skip-link visually-hidden focusable" href="#main-content">Skip to main content</a>
+<body itemscope itemtype="https://schema.org/WebPage">
+  <a class="skip-link visually-hidden focusable" href="#main-content">Skip to main content</a>
 
-    <header id="site-header" itemscope itemtype="https://schema.org/Organization">
-      <!-- Kept existing header structure and accessibility bindings (no behavioural changes). -->
-      <div id="header">
-        <button
-          id="menu-toggle"
-          type="button"
-          aria-haspopup="dialog"
-          aria-controls="mobile-menu"
-          aria-expanded="false"
-        >
-          <span aria-hidden="true">☰</span> <span>Menu</span>
-        </button>
-        <h1 class="site-title" id="business-name">
-          <a href="#home-page" itemprop="url"><span itemprop="name">Nature's Infusions</span></a>
-        </h1>
-        <button id="cart" aria-label="Shopping cart" type="button" aria-expanded="false">
-          <span aria-hidden="true">🛒</span> <span class="cart-count">Cart (<span>0</span>)</span>
-        </button>
-      </div>
+  <header id="site-header" itemscope itemtype="https://schema.org/Organization">
+    <!-- Kept existing header structure and accessibility bindings (no behavioural changes). -->
+    <div id="header">
+      <button id="menu-toggle" type="button" aria-haspopup="dialog" aria-controls="mobile-menu" aria-expanded="false">
+        <span aria-hidden="true">☰</span> <span>Menu</span>
+      </button>
+      <h1 class="site-title" id="business-name">
+        <a href="#home-page" itemprop="url"><span itemprop="name">Nature's Infusions</span></a>
+      </h1>
+      <button id="cart" aria-label="Shopping cart" type="button" aria-expanded="false">
+        <span aria-hidden="true">🛒</span> <span class="cart-count">Cart (<span>0</span>)</span>
+      </button>
+    </div>
 
-      <dialog id="mobile-menu" aria-labelledby="menu-heading">
-        <h2 id="menu-heading">Main Menu</h2>
-        <nav
-          id="site-navigation"
-          aria-label="Main"
-          itemscope
-          itemtype="https://schema.org/SiteNavigationElement"
-        >
-          <ul>
-            <li itemprop="name"><a href="#home-page" itemprop="url">Home</a></li>
-            <li itemprop="name"><a href="pages/store.html" itemprop="url">Online Store</a></li>
-            <li itemprop="name"><a href="pages/about.html" itemprop="url">About Us</a></li>
-            <li itemprop="name">
-              <a href="pages/stockists.html" itemprop="url">Find Stockists</a>
-            </li>
-            <li itemprop="name"><a href="pages/contact.html" itemprop="url">Contact Us</a></li>
-            <li itemprop="name">
-              <a href="pages/social.html" itemprop="url">Find Us on Socials</a>
-            </li>
-            <li itemprop="name">
-              <a href="pages/terms.html" itemprop="url">Terms and Conditions</a>
-            </li>
-          </ul>
-        </nav>
-        <button type="button" onclick="this.closest('dialog').close()" aria-label="Close menu">
-          ✕ Close
-        </button>
-      </dialog>
-    </header>
-
-    <main id="main-content">
-      <!-- Stockists Section: semantic landmarks, headings and breadcrumb preserved for accessibility. -->
-      <section id="stockists-page">
-        <header id="page-header">
-          <h2>Stockists</h2>
-          <nav id="stockists-breadcrumb" aria-label="Breadcrumb">
-            <ol>
-              <li><a href="/">Home</a></li>
-              <li aria-current="page">Stockists</li>
-            </ol>
-          </nav>
-        </header>
-
-        <section id="stockists">
-          <header id="stockists-hero">
-            <figure id="stockists-logo">
-              <img
-                alt="Nature's Infusions Logo"
-                src="/assets/img/logo.svg"
-                loading="lazy"
-                width="200"
-                height="100"
-              >
-            </figure>
-            <h1>Find our stockists</h1>
-            <p>
-              Discover where to buy Nature's Infusions products from our trusted local
-              small-business retail partners.
-            </p>
-          </header>
-
-          <article id="stockist-info">
-            <h2>Four <span aria-hidden="true">(4)</span> locations available</h2>
-
-            <section id="stockist-directory" aria-labelledby="directory-heading">
-              <h3 id="directory-heading">Stockists Directory</h3>
-
-              <article class="stockist" itemscope itemtype="http://schema.org/Store">
-                <h4 itemprop="name">Providore's Pantry</h4>
-                <ul>
-                  <li itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
-                    Address:
-                    <span itemprop="streetAddress"
-                      >Shop 70 - 72 Wanneroo Markets, Prindiville Drive</span
-                    >, <span itemprop="addressLocality">Wangara</span>
-                  </li>
-                  <li
-                    itemprop="openingHoursSpecification"
-                    itemscope
-                    itemtype="http://schema.org/OpeningHoursSpecification"
-                  >
-                    Opening Hours: <span itemprop="dayOfWeek">Fri–Sun</span>,
-                    <span itemprop="opens" content="09:00:00">9am</span> to
-                    <span itemprop="closes" content="16:00:00">4pm</span>
-                  </li>
-                </ul>
-                <figure>
-                  <img
-                    alt="Map location of Providore's Pantry"
-                    src="/assets/img/providores.webp"
-                    loading="lazy"
-                    width="600"
-                    height="400"
-                  >
-                </figure>
-              </article>
-
-              <article class="stockist" itemscope itemtype="http://schema.org/Store">
-                <h4 itemprop="name">The Artisan Store</h4>
-                <ul>
-                  <li itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
-                    Address: <span itemprop="streetAddress">81a High Street</span>,
-                    <span itemprop="addressLocality">Fremantle</span>
-                  </li>
-                </ul>
-                <figure>
-                  <img
-                    alt="Map location of The Artisan Store"
-                    src="/assets/img/artisan.webp"
-                    loading="lazy"
-                    width="600"
-                    height="400"
-                  >
-                </figure>
-              </article>
-
-              <article class="stockist" itemscope itemtype="http://schema.org/Store">
-                <h4 itemprop="name">Flower Central</h4>
-                <ul>
-                  <li itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
-                    Address: <span itemprop="streetAddress">31 Comserv Loop</span>,
-                    <span itemprop="addressLocality">Ellenbrook</span>
-                  </li>
-                </ul>
-                <figure>
-                  <img
-                    alt="Map location of Flower's Central"
-                    src="/assets/img/flowers.webp"
-                    loading="lazy"
-                    width="600"
-                    height="400"
-                  >
-                </figure>
-              </article>
-
-              <article class="stockist" itemscope itemtype="http://schema.org/Store">
-                <h4 itemprop="name">Us and Co. Collective</h4>
-                <ul>
-                  <li itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
-                    Address: <span itemprop="streetAddress">227 Belmont Avenue</span>,
-                    <span itemprop="addressLocality">Cloverdale</span>
-                  </li>
-                </ul>
-                <figure>
-                  <img
-                    alt="Map location of Us and Co. Collective"
-                    src="/assets/img/us.webp"
-                    loading="lazy"
-                    width="600"
-                    height="400"
-                  >
-                </figure>
-              </article>
-            </section>
-          </article>
-        </section>
-      </section>
-    </main>
-
-    <footer itemscope itemtype="https://schema.org/WPFooter">
-      <h3>Nature's Infusions</h3>
-      <p itemprop="description">
-        Nature's Infusions, your source for premium tea and herbal remedies.
-      </p>
-      <nav aria-label="Quick links">
+    <dialog id="mobile-menu" aria-labelledby="menu-heading">
+      <h2 id="menu-heading">Main Menu</h2>
+      <nav id="site-navigation" aria-label="Main" itemscope itemtype="https://schema.org/SiteNavigationElement">
         <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="pages/about.html">About</a></li>
-          <li><a href="pages/store.html">Store</a></li>
-          <li><a href="pages/contact.html">Contact &amp; Support</a></li>
-          <li><a href="pages/terms.html">Terms &amp; Conditions</a></li>
+          <li itemprop="name"><a href="#home-page" itemprop="url">Home</a></li>
+          <li itemprop="name"><a href="pages/store.html" itemprop="url">Online Store</a></li>
+          <li itemprop="name"><a href="pages/about.html" itemprop="url">About Us</a></li>
+          <li itemprop="name">
+            <a href="pages/stockists.html" itemprop="url">Find Stockists</a>
+          </li>
+          <li itemprop="name"><a href="pages/contact.html" itemprop="url">Contact Us</a></li>
+          <li itemprop="name">
+            <a href="pages/social.html" itemprop="url">Find Us on Socials</a>
+          </li>
+          <li itemprop="name">
+            <a href="pages/terms.html" itemprop="url">Terms and Conditions</a>
+          </li>
         </ul>
       </nav>
-      <div>
-        <p>&copy; <time datetime="2025">2025</time> Nature's Infusions. All rights reserved.</p>
-        <p>Author: <span itemprop="author">2MuchC0ff33</span></p>
-      </div>
-    </footer>
+      <button type="button" onclick="this.closest('dialog').close()" aria-label="Close menu">
+        ✕ Close
+      </button>
+    </dialog>
+  </header>
 
-    <!-- End of document: removed duplicated HTML fragments and malformed markup present in the original file. -->
-  </body>
+  <main id="main-content">
+    <!-- Stockists Section: semantic landmarks, headings and breadcrumb preserved for accessibility. -->
+    <section id="stockists-page">
+      <header id="page-header">
+        <h2>Stockists</h2>
+        <nav id="stockists-breadcrumb" aria-label="Breadcrumb">
+          <ol>
+            <li><a href="/">Home</a></li>
+            <li aria-current="page">Stockists</li>
+          </ol>
+        </nav>
+      </header>
+
+      <section id="stockists">
+        <header id="stockists-hero">
+          <figure id="stockists-logo">
+            <img alt="Nature's Infusions Logo" src="/assets/img/logo.svg" loading="lazy" width="200" height="100">
+          </figure>
+          <h1>Find our stockists</h1>
+          <p>
+            Discover where to buy Nature's Infusions products from our trusted local
+            small-business retail partners.
+          </p>
+        </header>
+
+        <article id="stockist-info">
+          <h2>Four <span aria-hidden="true">(4)</span> locations available</h2>
+
+          <section id="stockist-directory" aria-labelledby="directory-heading">
+            <h3 id="directory-heading">Stockists Directory</h3>
+
+            <article class="stockist" itemscope itemtype="http://schema.org/Store">
+              <h4 itemprop="name">Providore's Pantry</h4>
+              <ul>
+                <li itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+                  Address:
+                  <span itemprop="streetAddress">Shop 70 - 72 Wanneroo Markets, Prindiville Drive</span>, <span
+                    itemprop="addressLocality">Wangara</span>
+                </li>
+                <li itemprop="openingHoursSpecification" itemscope
+                  itemtype="http://schema.org/OpeningHoursSpecification">
+                  Opening Hours: <span itemprop="dayOfWeek">Fri–Sun</span>,
+                  <span itemprop="opens" content="09:00:00">9am</span> to
+                  <span itemprop="closes" content="16:00:00">4pm</span>
+                </li>
+              </ul>
+              <figure>
+                <img alt="Map location of Providore's Pantry" src="/assets/img/providores.webp" loading="lazy"
+                  width="600" height="400">
+              </figure>
+            </article>
+
+            <article class="stockist" itemscope itemtype="http://schema.org/Store">
+              <h4 itemprop="name">The Artisan Store</h4>
+              <ul>
+                <li itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+                  Address: <span itemprop="streetAddress">81a High Street</span>,
+                  <span itemprop="addressLocality">Fremantle</span>
+                </li>
+              </ul>
+              <figure>
+                <img alt="Map location of The Artisan Store" src="/assets/img/artisan.webp" loading="lazy" width="600"
+                  height="400">
+              </figure>
+            </article>
+
+            <article class="stockist" itemscope itemtype="http://schema.org/Store">
+              <h4 itemprop="name">Flower Central</h4>
+              <ul>
+                <li itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+                  Address: <span itemprop="streetAddress">31 Comserv Loop</span>,
+                  <span itemprop="addressLocality">Ellenbrook</span>
+                </li>
+              </ul>
+              <figure>
+                <img alt="Map location of Flower's Central" src="/assets/img/flowers.webp" loading="lazy" width="600"
+                  height="400">
+              </figure>
+            </article>
+
+            <article class="stockist" itemscope itemtype="http://schema.org/Store">
+              <h4 itemprop="name">Us and Co. Collective</h4>
+              <ul>
+                <li itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+                  Address: <span itemprop="streetAddress">227 Belmont Avenue</span>,
+                  <span itemprop="addressLocality">Cloverdale</span>
+                </li>
+              </ul>
+              <figure>
+                <img alt="Map location of Us and Co. Collective" src="/assets/img/us.webp" loading="lazy" width="600"
+                  height="400">
+              </figure>
+            </article>
+          </section>
+        </article>
+      </section>
+    </section>
+  </main>
+
+  <footer itemscope itemtype="https://schema.org/WPFooter">
+    <h3>Nature's Infusions</h3>
+    <p itemprop="description">
+      Nature's Infusions, your source for premium tea and herbal remedies.
+    </p>
+    <nav aria-label="Quick links">
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="pages/about.html">About</a></li>
+        <li><a href="pages/store.html">Store</a></li>
+        <li><a href="pages/contact.html">Contact &amp; Support</a></li>
+        <li><a href="pages/terms.html">Terms &amp; Conditions</a></li>
+      </ul>
+    </nav>
+    <div>
+      <p>&copy; <time datetime="2025">2025</time> Nature's Infusions. All rights reserved.</p>
+      <p>Author: <span itemprop="author">2MuchC0ff33</span></p>
+    </div>
+  </footer>
+
+  <!-- End of document: removed duplicated HTML fragments and malformed markup present in the original file. -->
+</body>
+
 </html>
