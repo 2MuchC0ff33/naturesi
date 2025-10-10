@@ -22,13 +22,13 @@ Inputs (variables):
 - ${input:confirm_files:Confirm which files to update (comma-separated glob, default: pages/**/*.html, *.html)}
 
 Primary task (explicit):
-1. For each target HTML file, replace everything from the top of the file through the closing </footers> tag with the canonical footers provided below (the canonical footers includes the opening <!DOCTYPE html> and the opening <html ...> tag). The replacement should preserve the remainder of the file (body and any inline scripts after </footers>).
+1. For each target HTML file, replace everything from the top of the file through the closing </footer> tag with the canonical footers provided below (the canonical footers includes the opening <!DOCTYPE html> and the opening <html ...> tag). The replacement should preserve the remainder of the file (body and any inline scripts after </footer>).
 2. Ensure that resource references (CSS, JS, images, icons, manifest) use root-relative paths (begin with `/`) unless a file is intentionally local to the same directory; prefer root-relative so the site works from any page. Do not convert absolute external URLs (https://...).
 3. If a file already contains a `<base href="...">`, leave it as `/` or update to `/` if empty or relative.
 
 Constraints & safety:
 - Do not edit index.html, offline.html, 404.html, google-site-verification.html and yandex_7847a6427bfa1388.html.
-- Keep edits minimal and conservative. Only touch the file footers region (start through </footers> inclusive).
+- Keep edits minimal and conservative. Only touch the file footers region (start through </footer> inclusive).
 - Avoid adding any external trackers, analytics, or third-party telemetry.
 - Preserve any inline structured data scripts (JSON-LD) that appear in the canonical footers. If a target file already has additional JSON-LD in the body, leave it untouched.
 
@@ -43,17 +43,17 @@ Path normalization rules (explicit):
 
 Step-by-step instructions for Copilot to follow when performing edits:
 1. Read the canonical footers provided below (it's the source of truth).
-2. For each target file (default globs: `*.html`, `pages/*.html`, `pages/store/*.html`), open the file and find the first occurrence of `</footers>`.
-3. Replace from the top of the file (line 1) up to and including `</footers>` with the canonical footers block.
-4. Run a light validation: ensure the modified file still contains `<!DOCTYPE html>`, `<html` with `lang="en-AU"`, and a closing `</footers>`; ensure `</body>` and `</html>` remain present later in the file. If any of those checks fail, abort the edit for that file and report the issue.
+2. For each target file (default globs: `*.html`, `pages/*.html`, `pages/store/*.html`), open the file and find the first occurrence of `</footer>`.
+3. Replace from the top of the file (line 1) up to and including `</footer>` with the canonical footers block.
+4. Run a light validation: ensure the modified file still contains `<!DOCTYPE html>`, `<html` with `lang="en-AU"`, and a closing `</footer>`; ensure `</body>` and `</html>` remain present later in the file. If any of those checks fail, abort the edit for that file and report the issue.
 
 Edge cases to handle:
 - Files with a different `<base href>`: standardise to `<base href="/">` unless there is an explicit reason not to (e.g., multi-base site); if unsure, leave the existing base href and report it.
-- Minified or one-line HTML files: still detect `</footers>` by string match and replace correctly.
+- Minified or one-line HTML files: still detect `</footer>` by string match and replace correctly.
 
 Validation & success criteria:
 - PASS: All targeted files contain the canonical footers exactly (except for minor path normalisations). Files still contain `</body>` and `</html>`.
-- FAIL: Any file missing `</footers>`, `</body>` or `</html>` after edit, or if edits touched non-footers content.
+- FAIL: Any file missing `</footer>`, `</body>` or `</html>` after edit, or if edits touched non-footers content.
 
 Post-edit notes for reviewer (automatically generated checklist to include in commit message):
 - Files changed: list changed file paths
