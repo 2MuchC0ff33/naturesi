@@ -15,7 +15,12 @@ textarea {
   min-width: 24px;
   /* WCAG 2.2: Ensure minimum target size */
   min-height: 24px;
-  /* WCAG 2.2: Ensure minimum target size */
+
+  /* Increase baseline touch area on small screens */
+  @media (max-width: 640px) {
+    min-height: 44px;
+    padding: 0.6rem 0.75rem;
+  }
 }
 
 textarea {
@@ -109,4 +114,15 @@ button:focus-visible {
   border: 1px solid var(--color-border);
   padding: 0.18rem;
   border-radius: 6px;
+}
+
+/* make search dropdown and controls more forgiving on small screens */
+@media (max-width: 640px) {
+  .site-search .search-dropdown {
+    flex: 0 0 140px;
+  }
+
+  .site-search .search-box {
+    height: 44px;
+  }
 }

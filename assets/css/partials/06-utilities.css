@@ -15,7 +15,8 @@ Small, well-scoped utilities (spacing, layout helpers, grid) live here.
 
 .container {
   width: 100%;
-  padding-inline: var(--space-md);
+  /* mobile-first horizontal padding, increases at larger widths */
+  padding-inline: var(--space-inline-sm);
   margin-inline: auto;
   max-width: var(--max-width);
 }
@@ -23,6 +24,12 @@ Small, well-scoped utilities (spacing, layout helpers, grid) live here.
 .grid {
   display: grid;
   gap: var(--space-md);
+}
+
+/* Narrow container variant for tightly packed pages (mobile-first) */
+.container--narrow {
+  padding-inline: var(--space-inline-xs);
+  max-width: 880px;
 }
 
 @supports (width: min(250px, 100%)) {
