@@ -8,6 +8,8 @@
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
+    /* larger hit area on small screens */
+    padding: 0.25rem;
 }
 
 .cart-text {
@@ -24,6 +26,8 @@
     font-size: 0.95rem;
     line-height: 1;
     text-align: center;
+    /* ensure readable badge on small screens */
+    font-weight: 700;
 }
 
 /* Focus-visible styling for keyboard users */
@@ -37,6 +41,11 @@
 @media (max-width: 480px) {
     .cart-text {
         display: none;
+    }
+
+    .cart-option {
+        min-width: 44px;
+        min-height: 44px;
     }
 }
 

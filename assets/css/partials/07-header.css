@@ -157,6 +157,25 @@ Core header bar, logo treatment and colour gradient live here.
   .nav-left {
     order: 1;
   }
+
+  /* increase hit area for icons and interactive nav items */
+  .site-nav .logo,
+  .site-nav .search-icon,
+  .site-nav .cart-option,
+  .site-nav .all-logo,
+  .site-search .search-dropdown {
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0.35rem;
+    border-radius: 0.5rem;
+  }
+
+  /* stack nav-center content to avoid horizontal overflow on small screens */
+  .nav-center-flex {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.6rem;
+  }
 }
 
 .site-nav .logo {
@@ -258,4 +277,20 @@ Core header bar, logo treatment and colour gradient live here.
 /* Optional: visually separate category and search for clarity */
 .category-dropdown {
   min-width: 160px;
+}
+
+/* Ensure touch targets meet WCAG / mobile guidelines on small screens */
+@media (max-width: 640px) {
+
+  /* increase hit area for icons and interactive nav items */
+  .site-nav .logo,
+  .site-nav .search-icon,
+  .site-nav .cart-option,
+  .site-nav .all-logo,
+  .site-search .search-dropdown {
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0.35rem;
+    border-radius: 0.5rem;
+  }
 }
