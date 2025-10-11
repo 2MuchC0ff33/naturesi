@@ -157,7 +157,7 @@
           "@type": "SearchAction",
           "target": "https://www.naturesinfusions.com.au/pages/search.html?q={search_term_string}",
           "query-input": "required name=\"search_term_string\""
-          "query-input": "required name=\\\"search_term_string\\\""
+          "query-input": "required name=\"search_term_string\""
       }
     </script>
 
@@ -188,7 +188,7 @@
 <body itemscope itemtype="https://schema.org/WebPage">
   <header id="site-header" itemscope itemtype="https://schema.org/Organization">
     <a class="site-title" href="/">Nature's Infusions</a>
-    <a class="site-title" href="/">Nature's Infusions</a>
+    <!-- Removed duplicate site title link for accessibility and navigation clarity (HTML5 refactor checklist) -->
     <a class="skip-link visually-hidden focusable" href="#main-content">Skip to main content</a>
     <!-- Removed duplicate <body> tag for valid HTML5 structure (see HTML5 refactor checklist) -->
       <!-- WCAG: Skip link for keyboard navigation, visible on focus -->
@@ -292,7 +292,7 @@
             </a>
           </div>
         </nav>
-      </header>
+      <!-- Removed orphaned closing </header> tag for valid HTML5 structure (see HTML5 refactor checklist) -->
 
       <!-- Primary Terms Section (merged from duplicate fragments) -->
       </header>
@@ -323,11 +323,6 @@
         <hr aria-hidden="true">
       </main>
 
-      <div class="site-footer" itemscope itemtype="https://schema.org/WPFooter">
-            <div class="brand-text">
-              <h3>Nature's Infusions</h3>
-        <hr aria-hidden="true">
-      </main>
       <!-- End main content; moved closing </main> above site-footer for valid HTML5 nesting (see HTML5 refactor checklist) -->
 
       <div class="site-footer" itemscope itemtype="https://schema.org/WPFooter">
@@ -417,7 +412,8 @@
             </p>
           </div>
         </footer>
-      </main>
+        </footer>
 </body>
-</html></body>
+</html>        </footer>
+</body>
 </html>

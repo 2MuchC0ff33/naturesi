@@ -349,8 +349,10 @@
             <legend>Out of Stock Notification</legend>
 
             <div class="email-notification">
-              <label for="customer-email-digestive">Email Address:</label>
-              <input type="email" id="customer-email-digestive" name="email" required placeholder="your@email.com"
+              <!-- Inline comment: Updated input ID for product-specific accessibility (see HTML5 refactor checklist) -->
+              <label for="customer-email-apple">Email Address:</label>
+              <input type="email" id="customer-email-apple" name="email" required placeholder="your@email.com"
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
                 pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
             </div>
 
