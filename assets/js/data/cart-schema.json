@@ -1,0 +1,30 @@
+{
+    "description": "Simple cart item schema used for client-side validation and examples",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string"
+        },
+        "name": {
+            "type": "string"
+        },
+        "size": {
+            "type": "string"
+        },
+        "quantity": {
+            "type": "integer",
+            "minimum": 1
+        },
+        "price": {
+            "type": [
+                "number",
+                "null"
+            ]
+        }
+    },
+    "required": [
+        "id",
+        "name",
+        "quantity"
+    ]
+}

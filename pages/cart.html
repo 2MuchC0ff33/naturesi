@@ -259,7 +259,7 @@
             </svg>
           </div>
           <span class="cart-text">Cart</span>
-          <span class="cart-count">0</span>
+          <output class="cart-count" name="cart-count" aria-live="polite">0</output>
         </a>
       </div>
     </nav>
@@ -270,8 +270,7 @@
     <section id="cart" aria-labelledby="cart-heading" itemscope itemtype="https://schema.org/Order">
       <header>
         <h1 id="cart-heading">Your Cart</h1>
-        <p class="lead">Review items in your cart. This is a placeholder HTML5 example — integrate checkout logic
-          separately.</p>
+        <p class="lead">Review items in your cart. This section dynamically updates based on your selections.</p>
       </header>
 
       <form id="cart-form" action="#" method="post" novalidate aria-describedby="cart-note">
@@ -290,55 +289,7 @@
             </tr>
           </thead>
           <tbody>
-            <!-- Example placeholder item 1 -->
-            <tr>
-              <td>
-                <figure class="cart-item">
-                  <img src="/assets/img/enchantedturmeric2.webp" alt="Enchanted Turmeric Tea package" width="64"
-                    height="64" loading="lazy">
-                  <figcaption>
-                    <strong>Enchanted Turmeric Tea</strong>
-                    <div class="muted">60g</div>
-                  </figcaption>
-                </figure>
-              </td>
-              <td><span class="unit-price" data-price="14.00">AUD $14.00</span></td>
-              <td>
-                <label for="qty-1" class="visually-hidden">Quantity for Enchanted Turmeric Tea</label>
-                <input id="qty-1" name="qty-1" type="number" min="1" max="99" value="1" inputmode="numeric"
-                  aria-label="Quantity">
-              </td>
-              <td><span class="line-total">AUD $14.00</span></td>
-              <td>
-                <button type="button" class="remove-item"
-                  aria-label="Remove Enchanted Turmeric Tea from cart">Remove</button>
-              </td>
-            </tr>
-
-            <!-- Example placeholder item 2 -->
-            <tr>
-              <td>
-                <figure class="cart-item">
-                  <img src="/assets/img/calmingtea.webp" alt="Calming Garden Tea package" width="64" height="64"
-                    loading="lazy">
-                  <figcaption>
-                    <strong>Calming Garden Tea</strong>
-                    <div class="muted">50g</div>
-                  </figcaption>
-                </figure>
-              </td>
-              <td><span class="unit-price" data-price="14.00">AUD $14.00</span></td>
-              <td>
-                <label for="qty-2" class="visually-hidden">Quantity for Calming Garden Tea</label>
-                <input id="qty-2" name="qty-2" type="number" min="1" max="99" value="2" inputmode="numeric"
-                  aria-label="Quantity">
-              </td>
-              <td><span class="line-total">AUD $28.00</span></td>
-              <td>
-                <button type="button" class="remove-item"
-                  aria-label="Remove Calming Garden Tea from cart">Remove</button>
-              </td>
-            </tr>
+            <!-- Removed placeholder items as the cart dynamically updates -->
           </tbody>
         </table>
 
@@ -367,8 +318,6 @@
             <dd><strong id="summary-total">AUD $42.00</strong></dd>
           </div>
         </dl>
-        <p class="muted">Note: This is an example placeholder cart. Do not modify payment provider details here without
-          human review.</p>
       </aside>
     </section>
   </main>
