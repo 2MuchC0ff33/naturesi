@@ -59,8 +59,15 @@ export class CartStore {
     updateQuantity(id, quantity) {
         const idx = this.cart.items.findIndex((it) => it.id === id || `${it.id}` === `${id}`);
         if (idx > -1) {
-            if (quantity <= 0) this.cart.items.splice(idx, 1);
-            else this.cart.items[idx].quantity = quantity;
+            if (quantity <= 0) {
+                // Remove the item if the quantity is zero or less
+                this.cart.items.splice(idx, 1);
+            } else {
+                // Update the item's quantity
+                this.cart.items[idx].quantity = quantity;
+            }
+        } else {
+            console.warn(`Item with id "${id}" not found in the cart.`);
         }
         return this.save();
     }
