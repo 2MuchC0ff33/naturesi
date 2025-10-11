@@ -93,42 +93,29 @@ export async function initCart() {
         }
     });
 
-    // cart page interactions
-    const cartForm = document.getElementById('cart-form');
-    if (cartForm) {
-        cartForm.addEventListener('submit', async (ev) => {
-            ev.preventDefault();
-            const rows = Array.from(cartForm.querySelectorAll('tbody tr'));
-            // sequentially update quantities and await persistence for each
-            for (const row of rows) {
-                const qty = row.querySelector('input[type="number"]');
-                const id = row.dataset.productId;
-                const size = row.dataset.productSize !== undefined ? row.dataset.productSize : (row.dataset.size || '');
-                if (qty && id) {
-                    // await save
-                    // updateQuantity already returns a promise and now accepts size
-                    await cartStore.updateQuantity(id, parseInt(qty.value, 10) || 0, size);
-                }
+    // cart page interactions: attach a delegated submit handler for #cart-form.
+    // We use document-level delegation so the handler works even when this module
+    // executes before the DOM is parsed (scripts in <head> as type=module). This
+    // mirrors the add-to-cart delegated approach used earlier.
+    document.addEventListener('submit', async (ev) => {
+        const form = ev.target;
+        if (!(form && form.id === 'cart-form')) return;
+        ev.preventDefault();
+        const rows = Array.from(form.querySelectorAll('tbody tr'));
+        // sequentially update quantities and await persistence for each
+        for (const row of rows) {
+            const qty = row.querySelector('input[type="number"]');
+            const id = row.dataset.productId;
+            const size = row.dataset.productSize !== undefined ? row.dataset.productSize : (row.dataset.size || '');
+            if (qty && id) {
+                // updateQuantity already returns a promise and now accepts size
+                await cartStore.updateQuantity(id, parseInt(qty.value, 10) || 0, size);
             }
-            const c = cartStore.get();
-            updateCartCountOutputs((c.items || []).reduce((s, it) => s + (parseInt(it.quantity, 10) || 0), 0));
-            renderCartTable(c);
-        });
-
-        cartForm.addEventListener('click', async (ev) => {
-            if (ev.target && ev.target.matches('.remove-item')) {
-                const row = ev.target.closest('tr');
-                const id = row && row.dataset.productId;
-                const size = row && (row.dataset.productSize !== undefined ? row.dataset.productSize : (row.dataset.size || ''));
-                if (id) {
-                    await cartStore.remove(id, size);
-                    const c2 = cartStore.get();
-                    updateCartCountOutputs((c2.items || []).reduce((s, it) => s + (parseInt(it.quantity, 10) || 0), 0));
-                    renderCartTable(c2);
-                }
-            }
-        });
-    }
+        }
+        const c = cartStore.get();
+        updateCartCountOutputs((c.items || []).reduce((s, it) => s + (parseInt(it.quantity, 10) || 0), 0));
+        renderCartTable(c);
+    });
 
     // Global delegated handler so remove buttons work even if the cart table
     // is dynamically created or not inside a #cart-form element.
