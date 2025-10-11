@@ -17,7 +17,27 @@ self.addEventListener('fetch', function (evt) {
     }
 
     // cache-first for other assets
-    evt.respondWith(caches.match(req).then(function (cached) { return cached || fetch(req).then(function (r) { try { caches.open(CACHE_NAME).then(function (c) { c.put(req, r.clone()); }); } catch (e) { } return r; }); }));
+    evt.respondWith(
+        caches.match(req).then(function (cachedResponse) {
+            if (cachedResponse) {
+                return cachedResponse;
+            }
+            // Not in cache, fetch from network
+            return fetch(req).then(function (networkResponse) {
+                // Clone response before caching
+                const responseClone = networkResponse.clone();
+                // Attempt to cache the response
+                try {
+                    caches.open(CACHE_NAME).then(function (cache) {
+                        cache.put(req, responseClone);
+                    });
+                } catch (e) {
+                    // Ignore caching errors
+                }
+                return networkResponse;
+            });
+        })
+    );
 });
 
 // sync handler example for 'sync-cart' tag
