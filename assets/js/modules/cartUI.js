@@ -30,14 +30,37 @@ export function renderCartTable(cart) {
         if (!imgSrc) {
             const candidate = it.sku || it.id || '';
             if (candidate) {
-                // normalise candidate -> simple filename, allow only [a-z0-9-], must start with a letter or digit
-                // Regex pattern to validate and normalize candidate filenames
-                const FILENAME_VALIDATION_REGEX = /^[a-z0-9][a-z0-9-]*$/; // Must start with a letter or digit, allow only [a-z0-9-]
+                // normalise candidate -> simple filename, allow only [a-z0-9-], must start with a letter or digit, length 1-32
+                const FILENAME_VALIDATION_REGEX = /^[a-z0-9][a-z0-9-]{0,31}$/; // 1-32 chars, must start with a letter or digit
                 const PATH_TRAVERSAL_REGEX = /\.\.\//; // Prevent directory traversal patterns
-                const safeMatch = candidate.toString().toLowerCase().match(FILENAME_VALIDATION_REGEX);
-                if (safeMatch && !PATH_TRAVERSAL_REGEX.test(candidate)) {
-                    const fname = safeMatch[0] + '.webp';
-                    imgSrc = `/assets/img/${fname}`;
+                const RESERVED_NAMES = new Set([
+                    "con", "prn", "aux", "nul",
+                    "com1", "com2", "com3", "com4", "com5", "com6", "com7", "com8", "com9",
+                    "lpt1", "lpt2", "lpt3", "lpt4", "lpt5", "lpt6", "lpt7", "lpt8", "lpt9"
+                ]);
+                const safeCandidate = candidate.toString().toLowerCase();
+                const safeMatch = safeCandidate.match(FILENAME_VALIDATION_REGEX);
+                // Check against reserved names and path traversal
+                if (
+                    safeMatch &&
+                    !PATH_TRAVERSAL_REGEX.test(candidate) &&
+                    !RESERVED_NAMES.has(safeCandidate)
+                ) {
+                    // Check against known product image files if PRODUCT_INDEX is available
+                    let knownImage = null;
+                    if (PRODUCT_INDEX) {
+                        // Try to find a product with this SKU or ID and get its image
+                        const prod = PRODUCT_INDEX[candidate] || PRODUCT_INDEX[safeCandidate];
+                        if (prod && prod.image) knownImage = prod.image;
+                    }
+                    // If knownImage is set, use it; otherwise, check if the file exists in a known set (if available)
+                    if (knownImage) {
+                        imgSrc = knownImage;
+                    } else {
+                        // Fallback: construct the image path
+                        const fname = safeMatch[0] + '.webp';
+                        imgSrc = `/assets/img/${fname}`;
+                    }
                 }
             }
         }
