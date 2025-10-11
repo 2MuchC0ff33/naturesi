@@ -35,7 +35,7 @@ export function renderCartTable(cart) {
                 imgSrc = `/assets/img/${fname}`;
             }
         }
-        const escapedName = String(it.name || '').replace(/</g, '&lt;');
+        const escapedName = String(it.name || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
         const desc = String(it.description || '').replace(/</g, '&lt;');
         const sku = it.sku ? String(it.sku).replace(/</g, '&lt;') : '';
         const priceVal = (it.price || 0);
