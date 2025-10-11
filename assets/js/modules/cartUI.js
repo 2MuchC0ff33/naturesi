@@ -14,7 +14,26 @@ export function updateCartCountOutputs(total) {
 
 export function renderCartTable(cart) {
     const tbody = document.querySelector('.cart-table tbody');
-    if (!tbody) return;
+    if (!tbody) {
+        console.warn('Cart table body not found. Creating a placeholder cart table.');
+        const table = document.querySelector('.cart-table');
+        if (!table) {
+            console.error('Cart table not found in the DOM. Creating a placeholder cart table.');
+            const container = document.querySelector('.cart-container') || document.body;
+            const newTable = document.createElement('table');
+            newTable.className = 'cart-table';
+            const thead = document.createElement('thead');
+            thead.innerHTML = '<tr><th>Product</th><th>Price</th><th>Quantity</th><th>Total</th><th>Action</th></tr>';
+            newTable.appendChild(thead);
+            const tbody = document.createElement('tbody');
+            newTable.appendChild(tbody);
+            container.appendChild(newTable);
+            return;
+        }
+        const newTbody = document.createElement('tbody');
+        table.appendChild(newTbody);
+        return;
+    }
     tbody.innerHTML = '';
     (cart.items || []).forEach((it) => {
         const tr = document.createElement('tr');

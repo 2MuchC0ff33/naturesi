@@ -24,7 +24,11 @@ export class CartStore {
     async save() {
         const ok = setLocalCart(this.cart, this.key);
         if (!ok) {
-            await saveCartToIDB(this.cart, this.dbName, this.key);
+            console.error('Failed to save cart to localStorage. Falling back to IndexedDB.');
+            const idbOk = await saveCartToIDB(this.cart, this.dbName, this.key);
+            if (!idbOk) {
+                console.error('Failed to save cart to IndexedDB. Cart persistence may be compromised.');
+            }
         }
         return this.cart;
     }
@@ -70,5 +74,14 @@ export class CartStore {
             // Item with id not found in the cart.
         }
         return this.save();
+    }
+
+    updateCartItemQuantity(existing, newQuantity) {
+        existing.quantity = newQuantity;
+        this.save();
+    }
+
+    getUpdatedQuantity(existing, additionalQuantity) {
+        return (parseInt(existing.quantity, 10) || 0) + (parseInt(additionalQuantity, 10) || 0);
     }
 }

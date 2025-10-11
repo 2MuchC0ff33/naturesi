@@ -65,8 +65,12 @@ export async function initCart() {
             const updated = cartStore.get();
             updateCartCountOutputs((updated.items || []).reduce((s, it) => s + (parseInt(it.quantity, 10) || 0), 0));
             renderCartTable(updated);
+            // Log the updated cart state for debugging
+            console.debug('Cart updated:', updated);
             // best-effort background sync registration
-            requestBackgroundSync('sync-cart').catch(() => { });
+            requestBackgroundSync('sync-cart').catch((err) => {
+                console.error('Background sync registration failed:', err);
+            });
         });
     });
 
