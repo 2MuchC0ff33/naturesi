@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content=" IE=edge">
   <meta name="viewport" content=" width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#0f1111">
+
   <!-- Sets the theme color for mobile browsers (using your accent color) -->
   <meta name="color-scheme" content="light dark">
 
@@ -49,6 +49,7 @@
   <meta name="twitter:image" content="https://www.naturesinfusions.com.au/assets/img/social-share-twitter.webp">
 
   <!-- PWA Configuration -->
+  <!-- automated: kept theme-color from manifest or provided input; see issue #11 -->
   <meta name="theme-color" content="#4CAF50">
   <meta name="application-name" content="Nature's Infusions">
   <meta name="mobile-web-app-capable" content="yes">
@@ -269,11 +270,13 @@
     <section id="cart" aria-labelledby="cart-heading" itemscope itemtype="https://schema.org/Order">
       <header>
         <h1 id="cart-heading">Your Cart</h1>
-        <p class="lead">Review items in your cart. This is a placeholder HTML5 example — integrate checkout logic separately.</p>
+        <p class="lead">Review items in your cart. This is a placeholder HTML5 example — integrate checkout logic
+          separately.</p>
       </header>
 
       <form id="cart-form" action="#" method="post" novalidate aria-describedby="cart-note">
-        <p id="cart-note" class="visually-hidden">Use the quantity inputs to change item quantities, then select Update Cart.</p>
+        <p id="cart-note" class="visually-hidden">Use the quantity inputs to change item quantities, then select Update
+          Cart.</p>
 
         <table class="cart-table" summary="Items in cart">
           <caption class="visually-hidden">Shopping cart contents</caption>
@@ -291,7 +294,8 @@
             <tr>
               <td>
                 <figure class="cart-item">
-                  <img src="/assets/img/enchantedturmeric2.webp" alt="Enchanted Turmeric Tea package" width="64" height="64" loading="lazy">
+                  <img src="/assets/img/enchantedturmeric2.webp" alt="Enchanted Turmeric Tea package" width="64"
+                    height="64" loading="lazy">
                   <figcaption>
                     <strong>Enchanted Turmeric Tea</strong>
                     <div class="muted">60g</div>
@@ -301,11 +305,13 @@
               <td><span class="unit-price" data-price="14.00">AUD $14.00</span></td>
               <td>
                 <label for="qty-1" class="visually-hidden">Quantity for Enchanted Turmeric Tea</label>
-                <input id="qty-1" name="qty-1" type="number" min="1" max="99" value="1" inputmode="numeric" aria-label="Quantity">
+                <input id="qty-1" name="qty-1" type="number" min="1" max="99" value="1" inputmode="numeric"
+                  aria-label="Quantity">
               </td>
               <td><span class="line-total">AUD $14.00</span></td>
               <td>
-                <button type="button" class="remove-item" aria-label="Remove Enchanted Turmeric Tea from cart">Remove</button>
+                <button type="button" class="remove-item"
+                  aria-label="Remove Enchanted Turmeric Tea from cart">Remove</button>
               </td>
             </tr>
 
@@ -313,7 +319,8 @@
             <tr>
               <td>
                 <figure class="cart-item">
-                  <img src="/assets/img/calmingtea.webp" alt="Calming Garden Tea package" width="64" height="64" loading="lazy">
+                  <img src="/assets/img/calmingtea.webp" alt="Calming Garden Tea package" width="64" height="64"
+                    loading="lazy">
                   <figcaption>
                     <strong>Calming Garden Tea</strong>
                     <div class="muted">50g</div>
@@ -323,11 +330,13 @@
               <td><span class="unit-price" data-price="14.00">AUD $14.00</span></td>
               <td>
                 <label for="qty-2" class="visually-hidden">Quantity for Calming Garden Tea</label>
-                <input id="qty-2" name="qty-2" type="number" min="1" max="99" value="2" inputmode="numeric" aria-label="Quantity">
+                <input id="qty-2" name="qty-2" type="number" min="1" max="99" value="2" inputmode="numeric"
+                  aria-label="Quantity">
               </td>
               <td><span class="line-total">AUD $28.00</span></td>
               <td>
-                <button type="button" class="remove-item" aria-label="Remove Calming Garden Tea from cart">Remove</button>
+                <button type="button" class="remove-item"
+                  aria-label="Remove Calming Garden Tea from cart">Remove</button>
               </td>
             </tr>
           </tbody>
@@ -337,7 +346,8 @@
           <button type="submit" class="button" id="update-cart">Update Cart</button>
           <a class="button button-secondary" href="/pages/store.html">Continue Shopping</a>
           <!-- Checkout placeholder: disabled to indicate this is an example and payment integration is out of scope -->
-          <button type="button" class="button primary" id="checkout" aria-disabled="true" disabled title="Checkout button is a placeholder — integrate payment flow in store logic">Checkout</button>
+          <button type="button" class="button primary" id="checkout" aria-disabled="true" disabled
+            title="Checkout button is a placeholder — integrate payment flow in store logic">Checkout</button>
         </div>
       </form>
 
@@ -357,7 +367,8 @@
             <dd><strong id="summary-total">AUD $42.00</strong></dd>
           </div>
         </dl>
-        <p class="muted">Note: This is an example placeholder cart. Do not modify payment provider details here without human review.</p>
+        <p class="muted">Note: This is an example placeholder cart. Do not modify payment provider details here without
+          human review.</p>
       </aside>
     </section>
   </main>
