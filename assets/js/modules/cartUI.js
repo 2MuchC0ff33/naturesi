@@ -13,25 +13,27 @@ export function updateCartCountOutputs(total) {
 }
 
 export function renderCartTable(cart) {
+    // If the DOM is still parsing, defer rendering until DOMContentLoaded to avoid
+    // creating a placeholder table prematurely (scripts are loaded as type=module in <head>).
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => renderCartTable(cart), { once: true });
+        return;
+    }
+
     const tbody = document.querySelector('.cart-table tbody');
     if (!tbody) {
-        console.warn('Cart table body not found. Creating a placeholder cart table.');
+        // If the table element exists but no tbody, create a tbody and re-run render.
         const table = document.querySelector('.cart-table');
-        if (!table) {
-            console.error('Cart table not found in the DOM. Creating a placeholder cart table.');
-            const container = document.querySelector('.cart-container') || document.body;
-            const newTable = document.createElement('table');
-            newTable.className = 'cart-table';
-            const thead = document.createElement('thead');
-            thead.innerHTML = '<tr><th>Product</th><th>Price</th><th>Quantity</th><th>Total</th><th>Action</th></tr>';
-            newTable.appendChild(thead);
-            const tbody = document.createElement('tbody');
-            newTable.appendChild(tbody);
-            container.appendChild(newTable);
+        if (table) {
+            const newTbody = document.createElement('tbody');
+            table.appendChild(newTbody);
+            // call again now that tbody exists
+            renderCartTable(cart);
             return;
         }
-        const newTbody = document.createElement('tbody');
-        table.appendChild(newTbody);
+
+        // If no cart table is present in the DOM, skip rendering quietly.
+        // This avoids noisy console messages on pages that don't include a cart table.
         return;
     }
     tbody.innerHTML = '';
