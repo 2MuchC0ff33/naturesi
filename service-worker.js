@@ -7,7 +7,26 @@
 const basePath = self.location.pathname.substring(0, self.location.pathname.lastIndexOf('/') + 1);
 
 // Validate basePath to ensure it resolves to a trusted location
-if (!basePath.startsWith('/') || basePath.includes('..')) {
+const decodedBasePath = decodeURIComponent(basePath);
+const expectedBaseDir = '/'; // Adjust as needed for your deployment
+function isSafePath(path) {
+  // Check for null bytes
+  if (path.includes('\0')) return false;
+  // Check for directory traversal (plain and encoded)
+  if (path.includes('..') || path.match(/%2e%2e/i)) return false;
+  // Check for encoded slashes
+  if (path.match(/%2f|%5c/i)) return false;
+  // Ensure resolved path is within expected base directory
+  try {
+    // Use URL to resolve path
+    const resolved = new URL(path, 'https://dummy').pathname;
+    if (!resolved.startsWith(expectedBaseDir)) return false;
+  } catch (e) {
+    return false;
+  }
+  return true;
+}
+if (!decodedBasePath.startsWith(expectedBaseDir) || !isSafePath(decodedBasePath)) {
   console.error('Invalid basePath detected. Service Worker initialization aborted for security reasons.');
 } else {
   try {
