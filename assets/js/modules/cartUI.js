@@ -33,8 +33,9 @@ export function renderCartTable(cart) {
                 // normalise candidate -> simple filename, allow only [a-z0-9-], must start with a letter or digit
                 // Regex pattern to validate and normalize candidate filenames
                 const FILENAME_VALIDATION_REGEX = /^[a-z0-9][a-z0-9-]*$/; // Must start with a letter or digit, allow only [a-z0-9-]
+                const PATH_TRAVERSAL_REGEX = /\.\.\//; // Prevent directory traversal patterns
                 const safeMatch = candidate.toString().toLowerCase().match(FILENAME_VALIDATION_REGEX);
-                if (safeMatch) {
+                if (safeMatch && !PATH_TRAVERSAL_REGEX.test(candidate)) {
                     const fname = safeMatch[0] + '.webp';
                     imgSrc = `/assets/img/${fname}`;
                 }
