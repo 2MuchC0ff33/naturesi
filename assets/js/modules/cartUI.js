@@ -1,4 +1,10 @@
 // Cart UI helpers: update header count outputs and render cart table
+let PRODUCT_INDEX = null;
+
+export function setProductIndex(index) {
+    PRODUCT_INDEX = index;
+}
+
 export function updateCartCountOutputs(total) {
     document.querySelectorAll('output[name="cart-count"]').forEach((out) => {
         out.textContent = total;
@@ -14,7 +20,12 @@ export function renderCartTable(cart) {
         const tr = document.createElement('tr');
         tr.dataset.productId = it.id;
         // Build row markup safely
-        let imgSrc = it.image || '';
+        // Prefer canonical product index metadata when available
+        let imgSrc = '';
+        let canonical = null;
+        if (PRODUCT_INDEX && it.id) canonical = PRODUCT_INDEX[it.id] || PRODUCT_INDEX[it.sku] || null;
+        if (canonical && canonical.image) imgSrc = canonical.image;
+        if (!imgSrc && it.image) imgSrc = it.image;
         // Heuristic fallback: try to resolve by sku or id to an image in assets/img
         if (!imgSrc) {
             const candidate = it.sku || it.id || '';

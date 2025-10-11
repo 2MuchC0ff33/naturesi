@@ -1,7 +1,7 @@
 // Module entrypoint: only register service worker for offline/PWA support
 import { registerServiceWorker } from './modules/sw-register.js';
 import { CartStore } from './modules/cartStore.js';
-import { updateCartCountOutputs, renderCartTable, updateCartTableTotals } from './modules/cartUI.js';
+import { updateCartCountOutputs, renderCartTable, updateCartTableTotals, setProductIndex } from './modules/cartUI.js';
 import { requestBackgroundSync } from './modules/sync.js';
 
 registerServiceWorker();
@@ -11,6 +11,20 @@ const cartStore = new CartStore();
 
 async function initCart() {
     await cartStore.init();
+    // load canonical product index (best-effort). We expose it to cart UI so rendering prefers it.
+    try {
+        const res = await fetch('/assets/js/data/products.json', { cache: 'no-store' });
+        if (res && res.ok) {
+            const payload = await res.json();
+            // support either { products: [...] } or [ ... ] formats
+            const list = Array.isArray(payload) ? payload : (payload.products || []);
+            const idx = {};
+            list.forEach((p) => { if (p && p.id) idx[p.id] = p; if (p && p.sku) idx[p.sku] = p; });
+            setProductIndex(idx);
+        }
+    } catch (e) {
+        // ignore errors; fallback to per-page data attributes
+    }
     // initial UI render
     const cart = cartStore.get();
     updateCartCountOutputs((cart.items || []).reduce((s, it) => s + (parseInt(it.quantity, 10) || 0), 0));
