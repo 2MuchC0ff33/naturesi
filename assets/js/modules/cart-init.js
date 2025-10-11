@@ -111,6 +111,25 @@ export async function initCart() {
         });
     }
 
+    // Global delegated handler so remove buttons work even if the cart table
+    // is dynamically created or not inside a #cart-form element.
+    document.addEventListener('click', async (ev) => {
+        const btn = ev.target && (ev.target.matches && ev.target.matches('.remove-item') ? ev.target : ev.target.closest && ev.target.closest('.remove-item'));
+        if (!btn) return;
+        // Find the row and product id
+        const row = btn.closest && btn.closest('tr');
+        const id = row && row.dataset && row.dataset.productId;
+        if (!id) return;
+        try {
+            await cartStore.remove(id);
+            const c2 = cartStore.get();
+            updateCartCountOutputs((c2.items || []).reduce((s, it) => s + (parseInt(it.quantity, 10) || 0), 0));
+            renderCartTable(c2);
+        } catch (e) {
+            console.error('Error removing cart item:', e);
+        }
+    });
+
     // return the store so callers (app.js) can expose a debug API
     return cartStore;
 }

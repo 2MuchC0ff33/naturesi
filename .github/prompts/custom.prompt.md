@@ -4,106 +4,156 @@ mode: "agent"
 tools: ['search/codebase', 'edit/editFiles', 'search', "upstash/context7/*", "sequentialthinking/*", "microsoftdocs/mcp/*", "fetch"]
 ---
 
-# Fix Shopping Cart Persistence Issue
 
-You are an expert JavaScript developer with deep knowledge of browser storage mechanisms (localStorage, IndexedDB), event handling, and debugging. You specialize in identifying and fixing issues in e-commerce applications.
+### 🧩 Task
 
-## Task
+You are an expert web developer focused on building lightweight, accessible, and performant web applications using semantic HTML5, CSS, and native browser APIs. Your goal is to implement a shopping cart for a static e-commerce website with minimal JavaScript, relying primarily on built-in browser capabilities.
 
-Fix the broken shopping cart logic where products are not persisting after being added to the cart. Ensure the following:
+#### 🛒 Shopping Cart Requirements
 
-1. Products persist correctly in the cart after being added.
-2. The cart state is saved and restored reliably using either `localStorage` or `IndexedDB`.
-3. The UI reflects the correct cart state after reload.
-4. Any silent failures in storage are logged or surfaced for debugging.
+1. **Product Selection**  
+   Users can browse products on `pages/store/*.html` and select packaging size and quantity using native form elements.
 
-## Instructions
+2. **Cart State Persistence**  
+   Persist cart data across sessions and page reloads using native APIs:  
+   - `localStorage`  
+   - `sessionStorage`  
+   - `IndexedDB`  
+   - `document.cookie`
 
-1. Analyze the following files to identify potential issues:
-   - `cart-init.js` (lines 1–100)
-   - `cartStore.js`
-   - `storageLocal.js` (lines 1–20)
-   - `storageIDB.js` (lines 1–40)
-   - `cartUI.js` (lines 1–100)
+3. **Cart Page Functionality**  
+   On `cart.html`, users can view, modify, and remove items using accessible form controls and semantic markup.
 
-2. Investigate the following areas:
-   - Cart initialization logic in `cart-init.js`.
-   - `CartStore` methods (`add`, `save`, `get`) in `cartStore.js`.
-   - Local storage and IndexedDB wrappers in `storageLocal.js` and `storageIDB.js`.
-   - UI update functions (`updateCartCountOutputs`, `renderCartTable`) in `cartUI.js`.
+4. **Cart Icon Updates**  
+   Reflect the current item count dynamically in the header using declarative HTML elements such as:  
+   - `<output>`  
+   - `<meter>`  
+   - `<progress>`  
+   - `<data>`
 
-3. Implement the following fixes:
-   - Ensure `CartStore.save()` logs errors when storage operations fail.
-   - Verify that `add-to-cart` forms are correctly bound and processed.
-   - Ensure `renderCartTable` and `updateCartCountOutputs` receive the correct cart state.
+5. **Offline Support**  
+   Integrate with `service-worker.js` to ensure cart functionality persists offline and syncs when back online using:  
+   - `CacheStorage`  
+   - `FetchEvent`  
+   - `Background Sync`  
+   - `navigator.onLine`
 
-4. Test the solution:
-   - Add products to the cart and verify persistence across page reloads.
-   - Check the cart UI for accurate updates.
-   - Simulate storage failures and verify error logging.
+6. **Accessibility**  
+   Ensure all cart-related elements are accessible via keyboard and screen readers using semantic HTML and ARIA roles.
 
-## Context/Input
+7. **Page Coverage**  
+   Cart state must persist across all pages except: `offline.html`, `404.html`, `yandex_7847a6427bfa1388.html`, and `google-site-verification.html`.
 
-- Files: `${workspaceFolder}/assets/js/modules/cart-init.js`, `${workspaceFolder}/assets/js/modules/cartStore.js`, `${workspaceFolder}/assets/js/modules/storageLocal.js`, `${workspaceFolder}/assets/js/modules/storageIDB.js`, `${workspaceFolder}/assets/js/modules/cartUI.js`
-- Variables: `${workspaceFolder}`
+8. **Performance and Maintainability**  
+   Avoid custom JS modules unless necessary. Use native APIs and declarative HTML to reduce script size and complexity.
 
-## Output
+---
 
-- Updated JavaScript files with fixes for cart persistence.
-- Logs or error messages for debugging storage failures.
-- A summary of changes made and their impact.
+### 📘 Instructions
 
-## Quality/Validation
+#### 1. HTML Updates
+- Use semantic HTML5 elements to structure all cart-related content across `index.html`, `pages/*.html`, and `pages/store/*.html`.
+- Implement product selection using native form controls (`<select>`, `<input type="number">`, `<button>`).
+- Use `data-*` attributes to store product metadata for cart operations.
+- Ensure the cart icon in the header reflects item count using declarative HTML (`<output>`, `<meter>`, `<progress>`, `<data>`).
+- Ensure all interactive elements are accessible via keyboard and screen readers using ARIA roles and proper labelling.
+- Exclude cart functionality from `offline.html`, `404.html`, `yandex_7847a6427bfa1388.html`, and `google-site-verification.html`.
 
-- Products persist in the cart across sessions.
-- The cart UI updates correctly after adding/removing products.
-- Errors in storage operations are logged for debugging.
-- The solution is tested and verified in multiple browsers.
+#### 2. CSS Updates
+- Use partial stylesheets in `assets/css/partials/*.css` to style cart components.
+- Apply mobile-first responsive design principles.
+- Use CSS variables for consistent theming.
+- Implement hover/focus states and transitions using CSS only.
+- Ensure accessibility through visual contrast and readable typography.
+- Avoid JS-based animations; use CSS keyframes and transitions.
 
-## Additional Context
+#### 3. JavaScript Usage
+- Minimise JavaScript by relying on native browser APIs:
+  - `localStorage`, `sessionStorage`, `IndexedDB`, `document.cookie` for cart persistence.
+  - `FormData` for form handling.
+  - `CustomEvent`, `EventTarget`, `addEventListener` for lightweight event communication.
+  - `querySelector`, `dataset`, `classList`, `closest`, `matches` for DOM interaction.
+- Avoid creating separate JS modules unless necessary.
+- Centralise minimal JS logic in `app.js` for cart state management and UI updates.
+- Ensure all JS is progressive and enhances functionality without breaking core features.
 
-### Findings from Analysis
+#### 4. Service Worker Integration
+- Update `service-worker.js` to cache cart-related assets and pages.
+- Ensure offline functionality using:
+  - `CacheStorage`
+  - `FetchEvent`
+  - `Background Sync`
+  - `navigator.onLine`
+- Handle offline changes gracefully and sync with server when reconnected.
 
-#### Cart Initialization (`cart-init.js`):
-- The `initCart` function initializes the cart using the `CartStore` class and binds add-to-cart forms to the `add` method of `CartStore`.
-- The `add` method is triggered when a form is submitted, and it updates the cart UI using `updateCartCountOutputs` and `renderCartTable`.
+#### 5. Accessibility
+- Use semantic HTML and ARIA roles to ensure screen reader compatibility.
+- Ensure all form elements are labelled and keyboard-accessible.
+- Implement skip links and focus management using native HTML features.
+- Avoid JS-based accessibility enhancements unless absolutely necessary.
 
-#### Cart Storage (`cartStore.js`):
-- The `CartStore` class uses `localStorage` (via `storageLocal.js`) and falls back to `IndexedDB` (via `storageIDB.js`) for persistence.
-- The `add` method adds items to the cart, and the `save` method ensures the cart is persisted.
+#### 6. Testing
+- Validate cart functionality across all supported pages.
+- Test persistence using browser dev tools (Storage tab).
+- Simulate offline scenarios to verify service worker behaviour.
+- Use tools like Lighthouse or Axe to audit accessibility and performance.
 
-#### Local Storage Wrapper (`storageLocal.js`):
-- The `getLocalCart` and `setLocalCart` functions handle reading and writing the cart to `localStorage`.
-- Errors during `localStorage` operations are caught, and `false` is returned if saving fails.
+---
 
-#### IndexedDB Wrapper (`storageIDB.js`):
-- The `loadCartFromIDB` and `saveCartToIDB` functions handle fallback persistence using `IndexedDB`.
-- If `localStorage` fails, `IndexedDB` should ensure data persistence.
+### 📦 Output
 
-#### Cart UI (`cartUI.js`):
-- The `renderCartTable` function dynamically updates the cart table based on the current cart state.
-- The `updateCartCountOutputs` function updates the cart count displayed in the UI.
+- A fully functional shopping cart integrated into the static website using:
+  - Semantic HTML5 elements for structure and accessibility.
+  - Native browser APIs for cart state management:
+    - `localStorage`, `sessionStorage`, `IndexedDB`, `document.cookie`
+    - `FormData`, `CustomEvent`, `EventTarget`
+    - `CacheStorage`, `FetchEvent`, `Background Sync`, `navigator.onLine`
+  - Minimal JavaScript, centralised in `app.js`, only where enhancement is necessary.
+  - Offline support via `service-worker.js` using native caching and sync strategies.
+  - Accessible markup with ARIA roles, labelled form controls, and keyboard navigation.
 
-### Potential Issues
-1. **Persistence Logic**:
-   - If both `localStorage` and `IndexedDB` fail, the cart will not persist.
-   - Silent failures in `localStorage` and `IndexedDB` operations make debugging difficult.
+- Updated HTML files:
+  - `index.html`, `pages/store/*.html`, `pages/*.html`, and `cart.html` with cart-related markup and form elements.
+  - Exclude updates to `offline.html`, `404.html`, `yandex_7847a6427bfa1388.html`, and `google-site-verification.html`.
 
-2. **Form Binding**:
-   - Ensure that the add-to-cart forms are correctly bound and that the `submit` event is not being blocked by other scripts.
+- Updated CSS partials in `assets/css/partials/` for styling cart components, ensuring responsive and accessible design.
 
-3. **Error Handling**:
-   - Errors during `localStorage` or `IndexedDB` operations are silently ignored. Adding logging or user feedback could help identify issues.
+- Updated `service-worker.js` to support offline cart functionality and sync behaviour.
 
-### Next Steps
-1. **Verify Storage Mechanisms**:
-   - Check if `localStorage` and `IndexedDB` are functioning correctly in the browser.
+- Minimal updates to `assets/js/app.js` to handle cart logic using native APIs.
 
-2. **Debug Form Submission**:
-   - Ensure that the add-to-cart forms are being submitted and processed as expected.
+- All changes documented clearly in code comments and commit messages, following project conventions.
 
-3. **Add Logging**:
-   - Add logging to the `save` method in `CartStore` to debug persistence issues.
+---
 
-4. **UI Debugging**:
-   - Verify that the `renderCartTable` and `updateCartCountOutputs` functions are receiving the correct cart state.
+### ✅ Quality/Validation
+
+#### 🔍 Validation Criteria
+
+- **Functionality**
+  - Verify that the shopping cart works consistently across all supported pages.
+  - Confirm that cart state persists across page reloads and browser sessions using native APIs.
+  - Ensure cart updates (add, modify, delete) reflect immediately in the UI with minimal JS.
+
+- **Offline Support**
+  - Test offline scenarios using browser dev tools and confirm cart functionality remains intact.
+  - Validate that `service-worker.js` correctly caches cart assets and syncs changes when back online.
+
+- **Accessibility**
+  - Use tools like **Lighthouse**, **Axe**, or **NVDA** to audit accessibility.
+  - Confirm all interactive elements are keyboard-accessible and screen reader-friendly.
+  - Validate ARIA roles, labels, and semantic structure.
+
+- **Performance**
+  - Audit page load and interaction performance using browser profiling tools.
+  - Ensure minimal JavaScript footprint and efficient use of native APIs.
+  - Confirm that CSS transitions and layout are optimised for responsiveness and low reflow.
+
+- **Cross-Browser Compatibility**
+  - Test cart functionality on modern browsers (Chrome, Firefox, Safari, Edge).
+  - Ensure graceful degradation on older browsers where native APIs may be limited.
+
+- **Code Quality**
+  - Validate HTML, CSS, and JavaScript using linters and validators.
+  - Ensure code is clean, modular, and well-commented.
+  - Follow project conventions and document all changes in commit messages.
