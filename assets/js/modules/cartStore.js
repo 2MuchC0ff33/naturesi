@@ -34,9 +34,21 @@ export class CartStore {
     add(item) {
         const key = `${item.id}::${item.size}`;
         const existing = this.cart.items.find((it) => `${it.id}::${it.size}` === key);
-        if (existing) existing.quantity = (existing.quantity || 0) + (item.quantity || 1);
-        else this.cart.items.push({ id: item.id, name: item.name, size: item.size, quantity: item.quantity || 1, price: item.price || null });
-        return this.save();
+        if (existing) {
+            this.updateCartItemQuantity(existing, this.getUpdatedQuantity(existing, item.quantity || 1));
+        } else {
+            this.cart.items.push(this.createCartItem(item));
+        }
+    }
+
+    createCartItem(item) {
+        return {
+            id: item.id,
+            name: item.name,
+            size: item.size,
+            quantity: item.quantity || 1,
+            price: item.price || null
+        };
     }
 
     remove(id) {
