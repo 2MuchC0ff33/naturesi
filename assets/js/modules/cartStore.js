@@ -51,8 +51,8 @@ export class CartStore {
         };
     }
 
-    remove(id) {
-        this.cart.items = this.cart.items.filter((it) => it.id !== id && `${it.id}` !== `${id}`);
+    remove(id, size) {
+        this.cart.items = this.cart.items.filter((it) => !(it.id === id && it.size === size));
         return this.save();
     }
 
