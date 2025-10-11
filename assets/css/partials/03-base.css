@@ -4,7 +4,8 @@ This file contains top-level typographic and document-level settings.
 ========================================================================== */
 html {
   color: var(--color-text);
-  font-size: var(--min-font);
+  /* Use a small, robust fluid typography scale via clamp (mobile-first) */
+  font-size: var(--fluid-font);
   line-height: var(--line-height);
   font-family:
     'Arial',
@@ -20,11 +21,10 @@ html {
 }
 
 @media (min-width: 320px) {
+
+  /* kept for legacy support — no change needed because clamp handles fluid sizing */
   html {
-    font-size: calc(
-      var(--min-font) + (var(--max-font) - var(--min-font)) *
-        ((100vw - var(--min-width)) / (var(--max-width) - var(--min-width)))
-    );
+    /* intentionally left empty to preserve older cascade if present */
   }
 }
 

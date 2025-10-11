@@ -21,6 +21,12 @@ partials can reference variables safely.
   --min-width: 320px;
   --max-width: 1200px;
   --line-height: 1.6;
+  /* Mobile-first spacing tokens for responsive padding */
+  --space-inline-xs: 0.5rem;
+  --space-inline-sm: 1rem;
+  --space-inline-md: 1.5rem;
+  /* Fluid typography helper (used by base) */
+  --fluid-font: clamp(var(--min-font), calc(var(--min-font) + (var(--max-font) - var(--min-font)) * ((100vw - var(--min-width)) / (var(--max-width) - var(--min-width)))), var(--max-font));
   --space-unit: 1rem;
   --space-xxs: 0.25rem;
   --space-xs: 0.5rem;
