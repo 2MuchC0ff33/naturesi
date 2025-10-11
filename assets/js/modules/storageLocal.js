@@ -13,6 +13,7 @@ export function setLocalCart(cart, key = 'naturesi-cart') {
         localStorage.setItem(key, JSON.stringify(cart));
         return true;
     } catch (e) {
+        console.error('Error saving cart to localStorage:', e);
         return false;
     }
 }

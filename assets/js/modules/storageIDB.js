@@ -21,7 +21,10 @@ export function loadCartFromIDB(dbName = 'naturesi_cart_db', key = 'naturesi-car
 
 export function saveCartToIDB(cart, dbName = 'naturesi_cart_db', key = 'naturesi-cart') {
     return new Promise((resolve) => {
-        if (!('indexedDB' in window)) return resolve(false);
+        if (!('indexedDB' in window)) {
+            console.error('IndexedDB is not supported in this browser.');
+            return resolve(false);
+        }
         const req = indexedDB.open(dbName, 1);
         req.onupgradeneeded = (evt) => {
             const db = evt.target.result;
@@ -33,8 +36,14 @@ export function saveCartToIDB(cart, dbName = 'naturesi_cart_db', key = 'naturesi
             const store = tx.objectStore('cart');
             const putReq = store.put(cart, key);
             putReq.onsuccess = () => resolve(true);
-            putReq.onerror = () => resolve(false);
+            putReq.onerror = (err) => {
+                console.error('Error saving cart to IndexedDB:', err);
+                resolve(false);
+            };
         };
-        req.onerror = () => resolve(false);
+        req.onerror = (err) => {
+            console.error('Error opening IndexedDB:', err);
+            resolve(false);
+        };
     });
 }
