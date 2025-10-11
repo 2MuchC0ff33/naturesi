@@ -35,14 +35,19 @@ export class CartStore {
 
     get() { return this.cart; }
 
-    add(item) {
+    async add(item) {
         const key = `${item.id}::${item.size}`;
         const existing = this.cart.items.find((it) => `${it.id}::${it.size}` === key);
         if (existing) {
-            this.updateCartItemQuantity(existing, this.getUpdatedQuantity(existing, item.quantity || 1));
+            const newQty = this.getUpdatedQuantity(existing, item.quantity || 1);
+            await this.updateCartItemQuantity(existing, newQty);
         } else {
-            this.cart.items.push(this.createCartItem(item));
+            // Ensure quantity is a number
+            const cartItem = this.createCartItem(item);
+            this.cart.items.push(cartItem);
+            await this.save();
         }
+        return this.cart;
     }
 
     createCartItem(item) {
@@ -77,8 +82,9 @@ export class CartStore {
     }
 
     updateCartItemQuantity(existing, newQuantity) {
-        existing.quantity = newQuantity;
-        this.save();
+        existing.quantity = parseInt(newQuantity, 10) || 0;
+        // return the save promise so callers can await persistence
+        return this.save();
     }
 
     getUpdatedQuantity(existing, additionalQuantity) {

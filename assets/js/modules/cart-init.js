@@ -27,7 +27,9 @@ export async function initCart() {
     renderCartTable(cart);
 
     // bind add-to-cart forms
-    document.querySelectorAll('form.add-to-cart, form.product-options').forEach((form) => {
+    const addForms = document.querySelectorAll('form.add-to-cart, form.product-options');
+    console.debug(`Binding ${addForms.length} add-to-cart forms`);
+    addForms.forEach((form) => {
         form.addEventListener('submit', async (ev) => {
             ev.preventDefault();
             const fd = new FormData(form);
@@ -77,13 +79,19 @@ export async function initCart() {
     // cart page interactions
     const cartForm = document.getElementById('cart-form');
     if (cartForm) {
-        cartForm.addEventListener('submit', (ev) => {
+        cartForm.addEventListener('submit', async (ev) => {
             ev.preventDefault();
-            cartForm.querySelectorAll('tbody tr').forEach(async (row) => {
+            const rows = Array.from(cartForm.querySelectorAll('tbody tr'));
+            // sequentially update quantities and await persistence for each
+            for (const row of rows) {
                 const qty = row.querySelector('input[type="number"]');
                 const id = row.dataset.productId;
-                if (qty && id) await cartStore.updateQuantity(id, parseInt(qty.value, 10) || 0);
-            });
+                if (qty && id) {
+                    // await save
+                    // updateQuantity already returns a promise
+                    await cartStore.updateQuantity(id, parseInt(qty.value, 10) || 0);
+                }
+            }
             const c = cartStore.get();
             updateCartCountOutputs((c.items || []).reduce((s, it) => s + (parseInt(it.quantity, 10) || 0), 0));
             renderCartTable(c);
