@@ -31,7 +31,9 @@ export function renderCartTable(cart) {
             const candidate = it.sku || it.id || '';
             if (candidate) {
                 // normalise candidate -> simple filename, allow only [a-z0-9-], must start with a letter or digit
-                const safeMatch = candidate.toString().toLowerCase().match(/^[a-z0-9][a-z0-9-]*$/);
+                // Regex pattern to validate and normalize candidate filenames
+                const FILENAME_VALIDATION_REGEX = /^[a-z0-9][a-z0-9-]*$/; // Must start with a letter or digit, allow only [a-z0-9-]
+                const safeMatch = candidate.toString().toLowerCase().match(FILENAME_VALIDATION_REGEX);
                 if (safeMatch) {
                     const fname = safeMatch[0] + '.webp';
                     imgSrc = `/assets/img/${fname}`;
