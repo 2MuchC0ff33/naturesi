@@ -67,7 +67,7 @@ export class CartStore {
                 this.cart.items[idx].quantity = quantity;
             }
         } else {
-            console.warn(`Item with id "${id}" not found in the cart.`);
+            // Item with id not found in the cart.
         }
         return this.save();
     }
