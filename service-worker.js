@@ -6,11 +6,15 @@
 // Use the directory portion of the pathname for robust base path resolution.
 const basePath = self.location.pathname.substring(0, self.location.pathname.lastIndexOf('/') + 1);
 
-try {
-  importScripts(`${basePath}assets/js/modules/sw-core.js`);
-  importScripts(`${basePath}assets/js/modules/sw-handlers.js`);
-} catch (e) {
-  console.error('Service Worker importScripts failed:', e);
+// Validate basePath to ensure it resolves to a trusted location
+if (!basePath.startsWith('/') || basePath.includes('..')) {
+  console.error('Invalid basePath detected. Service Worker initialization aborted for security reasons.');
+} else {
+  try {
+    importScripts(`${basePath}assets/js/modules/sw-core.js`);
+    importScripts(`${basePath}assets/js/modules/sw-handlers.js`);
+  } catch (e) {
+    console.error('Service Worker importScripts failed:', e);
 
   // Handle specific error cases
   if (e.name === 'NetworkError') {
