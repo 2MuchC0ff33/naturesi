@@ -35,7 +35,6 @@ export function renderCartTable(cart) {
                 imgSrc = `/assets/img/${fname}`;
             }
         }
-        if (!imgSrc) imgSrc = '/assets/img/placeholder-product.webp';
         const escapedName = String(it.name || '').replace(/</g, '&lt;');
         const desc = String(it.description || '').replace(/</g, '&lt;');
         const sku = it.sku ? String(it.sku).replace(/</g, '&lt;') : '';
@@ -45,7 +44,6 @@ export function renderCartTable(cart) {
         tr.innerHTML = `
       <td>
         <figure class="cart-item">
-          <img src="${imgSrc}" alt="${escapedName}" width="64" height="64" loading="lazy" onerror="this.src='/assets/img/placeholder-product.webp'">
           <figcaption>
             <strong>${escapedName}</strong>
             <div class="muted">${sku}${sku && it.size ? ' · ' : ''}${it.size || ''}</div>
