@@ -6,7 +6,6 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content=" IE=edge">
   <meta name="viewport" content=" width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#0f1111">
   <!-- Sets the theme color for mobile browsers (using your accent color) -->
   <meta name="color-scheme" content="light dark">
 
@@ -49,7 +48,6 @@
   <meta name="twitter:image" content="https://www.naturesinfusions.com.au/assets/img/social-share-twitter.webp">
 
   <!-- PWA Configuration -->
-  <meta name="theme-color" content="#4CAF50">
   <meta name="application-name" content="Nature's Infusions">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -158,8 +156,8 @@
         "potentialAction": {
           "@type": "SearchAction",
           "target": "https://www.naturesinfusions.com.au/pages/search.html?q={search_term_string}",
-          "query-input": "required name="search_term_string""
-        }
+          "query-input": "required name=\"search_term_string\""
+          "query-input": "required name=\\\"search_term_string\\\""
       }
     </script>
 
@@ -190,18 +188,12 @@
 <body itemscope itemtype="https://schema.org/WebPage">
   <header id="site-header" itemscope itemtype="https://schema.org/Organization">
     <a class="site-title" href="/">Nature's Infusions</a>
+    <a class="site-title" href="/">Nature's Infusions</a>
     <a class="skip-link visually-hidden focusable" href="#main-content">Skip to main content</a>
-
-    </head>
-
-    <body itemscope itemtype="https://schema.org/WebPage">
+    <!-- Removed duplicate <body> tag for valid HTML5 structure (see HTML5 refactor checklist) -->
       <!-- WCAG: Skip link for keyboard navigation, visible on focus -->
       <a class="skip-link" href="#main-content">Skip to main content</a>
-      <header id="site-header">
-        <nav class="site-nav" aria-label="Site navigation">
-          <div class="nav-left">
-            <a class="logo" href="/" aria-label="Nature's Infusions home">
-              <img src="/assets/img/logo.svg" alt="Nature's Infusions logo">
+      <nav class="site-nav" aria-label="Site navigation">
             </a>
           </div>
 
@@ -303,33 +295,42 @@
       </header>
 
       <!-- Primary Terms Section (merged from duplicate fragments) -->
-      <section id="terms-page" aria-labelledby="terms-heading">
-        <h2 id="terms-heading">Terms, returns and important information</h2>
-        <p>These terms and conditions govern the use of this website. Please review carefully.</p>
-        <p>
-          Please read our terms and conditions before using this website, our services and our
-          products.
-        </p>
-        <p>
-          <a href="terms.txt" download="natures-infusions-terms.txt">Download Terms and Conditions</a>
-        </p>
-      </section>
+      </header>
 
-      <!-- Hero / Legal summary merged from appended fragment -->
-      <section id="terms-hero">
-        <figure id="terms-logo">
-          <img src="/assets/img/logo.svg" alt="Nature's Infusions Logo" width="200" height="100" loading="lazy">
-        </figure>
-        <h2>Terms, Returns and Risk Waiver</h2>
-        <p>Legal information for Nature's Infusions customers and website visitors.</p>
-      </section>
+      <!-- Removed orphaned closing </header> tag for valid HTML5 structure (see HTML5 refactor checklist) -->
+        <!-- Primary Terms Section (merged from duplicate fragments) -->
+        <section id="terms-page" aria-labelledby="terms-heading">
+          <h2 id="terms-heading">Terms, returns and important information</h2>
+          <p>These terms and conditions govern the use of this website. Please review carefully.</p>
+          <p>
+            Please read our terms and conditions before using this website, our services and our
+            products.
+          </p>
+          <p>
+            <a href="terms.txt" download="natures-infusions-terms.txt">Download Terms and Conditions</a>
+          </p>
+        </section>
 
-      <hr aria-hidden="true">
+        <!-- Hero / Legal summary merged from appended fragment -->
+        <section id="terms-hero">
+          <figure id="terms-logo">
+            <img src="/assets/img/logo.svg" alt="Nature's Infusions Logo" width="200" height="100" loading="lazy">
+          </figure>
+          <h2>Terms, Returns and Risk Waiver</h2>
+          <p>Legal information for Nature's Infusions customers and website visitors.</p>
+        </section>
+
+        <hr aria-hidden="true">
+      </main>
 
       <div class="site-footer" itemscope itemtype="https://schema.org/WPFooter">
-        <!-- aria-label removed: this wrapper is for layout only; the native <footer> element below provides the contentinfo landmark -->
-        <div class="container">
-          <div class="branding">
+            <div class="brand-text">
+              <h3>Nature's Infusions</h3>
+        <hr aria-hidden="true">
+      </main>
+      <!-- End main content; moved closing </main> above site-footer for valid HTML5 nesting (see HTML5 refactor checklist) -->
+
+      <div class="site-footer" itemscope itemtype="https://schema.org/WPFooter">
             <div class="brand-text">
               <h3>Nature's Infusions</h3>
               <p itemprop="description">
@@ -340,12 +341,6 @@
               </a>
             </div>
           </div>
-
-          <section class="quick-links-wrapper">
-            <h4>
-              <button type="button" class="accordion-toggle" aria-expanded="false" aria-controls="quick-links-panel"
-                data-controls="quick-links-panel">
-                Quick Links
               </button>
             </h4>
             <nav id="quick-links-panel" class="links-grid" aria-label="Quick links" aria-hidden="false">
@@ -422,8 +417,7 @@
             </p>
           </div>
         </footer>
-      </div>
       </main>
-    </body>
-
+</body>
+</html></body>
 </html>
