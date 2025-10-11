@@ -6,7 +6,18 @@ try {
   importScripts('/assets/js/modules/sw-core.js');
   importScripts('/assets/js/modules/sw-handlers.js');
 } catch (e) {
-  // If importScripts fails, fallback to a minimal offline handler
+  console.error('Service Worker importScripts failed:', e);
+
+  // Handle specific error cases
+  if (e.name === 'NetworkError') {
+    console.warn('Network error occurred while loading scripts. Falling back to offline handler.');
+  } else if (e.name === 'SecurityError') {
+    console.warn('Security error occurred. Ensure the scripts are served over HTTPS.');
+  } else {
+    console.warn('An unknown error occurred. Falling back to offline handler.');
+  }
+
+  // Fallback to a minimal offline handler
   self.addEventListener('fetch', (evt) => {
     if (evt.request.mode === 'navigate') {
       evt.respondWith(fetch(evt.request).catch(() => caches.match('/offline.html')));
