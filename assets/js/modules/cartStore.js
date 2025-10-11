@@ -36,14 +36,16 @@ export class CartStore {
     get() { return this.cart; }
 
     async add(item) {
-        const key = `${item.id}::${item.size}`;
-        const existing = this.cart.items.find((it) => `${it.id}::${it.size}` === key);
+        // normalize size to empty string when not provided so storage is consistent
+        const size = (item.size !== undefined && item.size !== null) ? item.size : '';
+        const key = `${item.id}::${size}`;
+        const existing = this.cart.items.find((it) => `${it.id}::${(it.size !== undefined && it.size !== null) ? it.size : ''}` === key);
         if (existing) {
             const newQty = this.getUpdatedQuantity(existing, item.quantity || 1);
             await this.updateCartItemQuantity(existing, newQty);
         } else {
             // Ensure quantity is a number
-            const cartItem = this.createCartItem(item);
+            const cartItem = this.createCartItem(Object.assign({}, item, { size }));
             this.cart.items.push(cartItem);
             await this.save();
         }
@@ -54,7 +56,7 @@ export class CartStore {
         return {
             id: item.id,
             name: item.name,
-            size: item.size,
+            size: (item.size !== undefined && item.size !== null) ? item.size : '',
             quantity: item.quantity || 1,
             price: item.price || null
         };
@@ -65,8 +67,10 @@ export class CartStore {
         return this.save();
     }
 
-    updateQuantity(id, quantity) {
-        const idx = this.cart.items.findIndex((it) => it.id === id || `${it.id}` === `${id}`);
+    // Update quantity for a specific item id+size combination. Size defaults to empty string
+    updateQuantity(id, quantity, size = '') {
+        const matchSize = (it) => ((it.size !== undefined && it.size !== null) ? it.size : '') === (size || '');
+        const idx = this.cart.items.findIndex((it) => (it.id === id || `${it.id}` === `${id}`) && matchSize(it));
         if (idx > -1) {
             if (quantity <= 0) {
                 // Remove the item if the quantity is zero or less
@@ -76,7 +80,7 @@ export class CartStore {
                 this.cart.items[idx].quantity = quantity;
             }
         } else {
-            // Item with id not found in the cart.
+            // Item with id and size not found in the cart.
         }
         return this.save();
     }

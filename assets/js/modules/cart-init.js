@@ -103,10 +103,11 @@ export async function initCart() {
             for (const row of rows) {
                 const qty = row.querySelector('input[type="number"]');
                 const id = row.dataset.productId;
+                const size = row.dataset.productSize !== undefined ? row.dataset.productSize : (row.dataset.size || '');
                 if (qty && id) {
                     // await save
-                    // updateQuantity already returns a promise
-                    await cartStore.updateQuantity(id, parseInt(qty.value, 10) || 0);
+                    // updateQuantity already returns a promise and now accepts size
+                    await cartStore.updateQuantity(id, parseInt(qty.value, 10) || 0, size);
                 }
             }
             const c = cartStore.get();
@@ -118,8 +119,9 @@ export async function initCart() {
             if (ev.target && ev.target.matches('.remove-item')) {
                 const row = ev.target.closest('tr');
                 const id = row && row.dataset.productId;
+                const size = row && (row.dataset.productSize !== undefined ? row.dataset.productSize : (row.dataset.size || ''));
                 if (id) {
-                    await cartStore.remove(id);
+                    await cartStore.remove(id, size);
                     const c2 = cartStore.get();
                     updateCartCountOutputs((c2.items || []).reduce((s, it) => s + (parseInt(it.quantity, 10) || 0), 0));
                     renderCartTable(c2);
@@ -136,9 +138,10 @@ export async function initCart() {
         // Find the row and product id
         const row = btn.closest && btn.closest('tr');
         const id = row && row.dataset && row.dataset.productId;
+        const size = row && (row.dataset.productSize !== undefined ? row.dataset.productSize : (row.dataset.size || ''));
         if (!id) return;
         try {
-            await cartStore.remove(id);
+            await cartStore.remove(id, size);
             const c2 = cartStore.get();
             updateCartCountOutputs((c2.items || []).reduce((s, it) => s + (parseInt(it.quantity, 10) || 0), 0));
             renderCartTable(c2);

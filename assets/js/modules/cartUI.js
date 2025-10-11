@@ -38,6 +38,10 @@ export function renderCartTable(cart) {
     (cart.items || []).forEach((it) => {
         const tr = document.createElement('tr');
         tr.dataset.productId = it.id;
+        // expose the item's selected size on the row so delegated handlers can remove the
+        // correct item when multiple sizes/options exist. Keep as empty string when
+        // not provided (matches how items are created elsewhere).
+        tr.dataset.productSize = it.size || '';
         // Build row markup safely
         // Prefer canonical product index metadata when available
         let imgSrc = '';
