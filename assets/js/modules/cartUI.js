@@ -30,9 +30,12 @@ export function renderCartTable(cart) {
         if (!imgSrc) {
             const candidate = it.sku || it.id || '';
             if (candidate) {
-                // normalise candidate -> simple filename
-                const fname = candidate.toString().toLowerCase().replace(/[^a-z0-9-]/g, '') + '.webp';
-                imgSrc = `/assets/img/${fname}`;
+                // normalise candidate -> simple filename, allow only [a-z0-9-], must start with a letter or digit
+                const safeMatch = candidate.toString().toLowerCase().match(/^[a-z0-9][a-z0-9-]*$/);
+                if (safeMatch) {
+                    const fname = safeMatch[0] + '.webp';
+                    imgSrc = `/assets/img/${fname}`;
+                }
             }
         }
         const escapedName = String(it.name || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
