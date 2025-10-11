@@ -2,9 +2,12 @@
 // We can't use ES module imports without a build step, so we use importScripts.
 // The modules under /assets/js/modules/ register event listeners when imported.
 
+// Dynamically resolve the base path for importScripts to ensure portability.
+const basePath = self.location.pathname.replace(/service-worker\.js$/, '');
+
 try {
-  importScripts('/assets/js/modules/sw-core.js');
-  importScripts('/assets/js/modules/sw-handlers.js');
+  importScripts(`${basePath}assets/js/modules/sw-core.js`);
+  importScripts(`${basePath}assets/js/modules/sw-handlers.js`);
 } catch (e) {
   console.error('Service Worker importScripts failed:', e);
 
