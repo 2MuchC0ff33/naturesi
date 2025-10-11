@@ -119,8 +119,21 @@ export async function initCart() {
 
     // Global delegated handler so remove buttons work even if the cart table
     // is dynamically created or not inside a #cart-form element.
+
+    // Helper function to find the remove button from an event target
+    function findRemoveButton(target) {
+        if (!target) return null;
+        if (typeof target.matches === 'function' && target.matches('.remove-item')) {
+            return target;
+        }
+        if (typeof target.closest === 'function') {
+            return target.closest('.remove-item');
+        }
+        return null;
+    }
+
     document.addEventListener('click', async (ev) => {
-        const btn = ev.target && (ev.target.matches && ev.target.matches('.remove-item') ? ev.target : ev.target.closest && ev.target.closest('.remove-item'));
+        const btn = findRemoveButton(ev.target);
         if (!btn) return;
         // Find the row and product id
         const row = btn.closest && btn.closest('tr');
