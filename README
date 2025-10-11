@@ -29,14 +29,10 @@ A small, privacy‑first static storefront for Nature's Infusions. This reposito
 Serve the site from a local static server so the service worker can register (test on `localhost`):
 
 ```sh
-# Serve and open (PowerShell / compatible)
-python -m http.server 8000
-# then open http://localhost:8000 in your browser
 ```
 
 Verify service‑worker install/uninstall cycles on localhost and check pages:
 
-- [pages/store.html](pages/store.html) (product forms)
 - [offline.html](offline.html) (offline UX)
 - [404.html](404.html)
 
@@ -70,7 +66,7 @@ Files changed:
 - pages/store.html
 - products.json
 
-Smoke test performed: python -m http.server 8000 (localhost), SW install/uninstall: yes
+, SW install/uninstall: yes
 HTML semantics checked: yes
 Accessibility basics: yes
 Tools used: mcp_github_github_search_code (found SW registration in assets/js/app.js)
@@ -83,7 +79,7 @@ Tools used: mcp_github_github_search_code (found SW registration in assets/js/ap
 
 ## Contributing
 
-- Keep changes small and reversible. Edit files directly under repo root, `pages/`, `assets/css/` and `assets/js/`.
+- Keep changes small and reversible. Edit files directly under repo root, `pages/`, `pages/store/`, `assets/css/partials/`, `assets/js/data/` and `assets/js/modules/`.
 - Add new assets only under `assets/` and reference them relatively (no external trackers/CDNs).
 
 ## Contact & Authors

@@ -5,26 +5,25 @@ Purpose: give an AI coding agent the minimal, practical context to be productive
 Quick facts
 
 - Static site only: plain HTML, CSS and vanilla JS. No Node build, no tests. Edit files directly under repo root, `pages/`, `assets/css/` and `assets/js/`.
-- Product data: `products.json` is the primary machine-readable product file. A `.env` references CSV paths (e.g. `PRODUCTS_CSV_PATH`), and `PAYPAL_EMAIL` appears in `.env` for payments.
+- Product data: `products.json`, `product-categories.json` and `categories.json` are the primary machine-readable product files. A `.env` references CSV paths (e.g. `PRODUCTS_CSV_PATH`), and `PAYPAL_EMAIL` appears in `.env` for payments.
 
 ## TL;DR (quick scope for automated agents)
 
 - Allowed: small HTML5 refactors, accessibility fixes, conservative CSS/JS changes under `assets/`, and documentation or metadata updates.
-- Not allowed without human sign-off: any change that touches payments, product data, service-worker caching strategy, or introduces third‑party telemetry.
 - Why: a short summary helps automated agents make safe, quick decisions and reduces ambiguous prompts.
 
 Primary areas to inspect
 
-- UI & styles: `assets/css/main.css`.
+- UI & styles: `assets/css/partials/*.css`.
 - Behaviour & registration: `assets/js/app.js` (service-worker registration, dev helpers).
 - Offline & PWA: `service-worker.js`, `manifest.json`, `offline.html`, `404.html`.
-- Store logic: `pages/store.html` (product forms submit to `/add-to-cart`; changing forms or inputs can affect PayPal/cart flow).
+- Store logic: `pages/store/*.html` (product forms submit to `/add-to-cart`; changing forms or inputs can affect PayPal/cart flow).
 - Hosting rules: `.htaccess` and `web.config` (URL rewrites, canonical index behaviour).
 
 Project-specific conventions
 
 - Single-file pages: pages are self-contained HTML files (e.g. `pages/about.html`) — prefer small, targeted edits rather than introducing a global templating system.
-- Assets location: add new CSS under `assets/css/` and JS under `assets/js/` and reference them relatively (never add CDN trackers).
+- Assets location: add new CSS under `assets/css/partials` and JS under `assets/js/modules` and reference them relatively (never add CDN trackers).
 - Privacy-first: repository intentionally disables analytics and third-party tracking (`privacy.txt`, `.well-known/`). Do not add analytics or third-party cookies.
 - Language/style: use Australian English (`en-AU`) for any UI text or docs and set `<html lang="en-AU">` on new/edited pages.
 
@@ -32,7 +31,7 @@ Project-specific conventions
 
 - Update semantic HTML (header/nav/main/footer) and add meta charset/viewport.
 - Add or improve alt text on images and add `<label for="...">` bindings for form controls.
-- Small, reversible CSS utility classes in `assets/css/main.css` and non-invasive JS helpers in `assets/js/app.js` (do not change service-worker guards).
+- Small, reversible CSS utility classes in `assets/css/partials/*.css` and non-invasive JS helpers in `assets/js/modules/*.js`.
 - Non-functional documentation, README improvements, and `.github/*` repo config changes.
 
 ## PR / Commit checklist (copy into PR body)
@@ -45,8 +44,6 @@ Project-specific conventions
 - Tools used: list MCP servers/tools and key results/links (e.g. `mcp_github_github_search_code` – found SW registration in `assets/js/app.js`)
 - Reviewer: [2MuchC0ff33@example.org] (replace with the actual contact before merge)
 
-Small note: If a PR touches payments or service-worker logic, mark it as a draft PR and add the exact manual-review line above.
-
 ## HTML5 refactor checklist
 
 Goal: Refactor the repo's HTML so files follow modern HTML5 semantics, improve accessibility, and remain privacy‑first while preserving the project's single‑file page convention and no‑build workflow.
@@ -56,14 +53,14 @@ Acceptance criteria
 - All edited HTML use a top-line `<!DOCTYPE html>` and `<html lang="en-AU">`.
 - Pages include meta charset and meta viewport (`<meta charset="utf-8">` and `<meta name="viewport" content="width=device-width,initial-scale=1">`).
 - Semantic landmarks are used (header, nav, main, footer, article/section/aside where appropriate).
-- Deprecated tags/attributes are removed (replace with classes + `assets/css/main.css`).
+- Deprecated tags/attributes are removed (replace with classes + `assets/css/partials/*.css`).
 - Images have meaningful `alt` text or are explicitly decorative (`role="presentation"`), and form controls have associated `<label>`s.
 - ARIA is used only when semantic HTML cannot provide the required semantics.
 - Changes are small, well-commented in-line, and reversible.
 
 Recommended process (step-by-step)
 
-1. Inspect these files first: `index.html`, `pages/*.html`, `offline.html`, `404.html`, and `manifest.json`.
+1. Inspect these files first: `index.html`, `pages/*.html`, `pages/store/*.html`, `offline.html`, `404.html`, and `manifest.json`.
 2. For each HTML file:
    - Ensure `<!DOCTYPE html>` and `<html lang="en-AU">` are present.
    - Add or verify `<meta charset="utf-8">` and viewport meta.
@@ -71,9 +68,7 @@ Recommended process (step-by-step)
    - Ensure forms have `<label for="...">` bound to inputs and include placeholders for accessible error messaging.
    - Ensure images use descriptive `alt` attributes or explicit decorative roles.
    - Add brief inline comments describing why the change was made (one line) and reference the acceptance checklist.
-3. Run a local smoke test (PowerShell): `python -m http.server 8000 ; open http://localhost:8000` and exercise service-worker install/uninstall flows on `localhost`.
-4. Validate HTML quickly with a browser inspector or an HTML validator and fix obvious issues.
-5. Keep edits scoped to repo root, `pages/`, `assets/css/`, `assets/js/`, `.github/` and similar config files.
+5. Keep edits scoped to repo root, `pages/`, `pages/store/`, `assets/css/partials/`, `assets/js/modules/`, `assets/js/data/`,`.github/` and similar config files.
 
 Safe, small examples
 

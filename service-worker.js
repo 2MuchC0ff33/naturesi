@@ -1,74 +1,54 @@
-// Development service worker with no caching for immediate updates
-// Improved: avoid noisy logs, bypass analytics/CDN internal endpoints, and provide sensible fallbacks.
+// Lightweight loader service worker that imports modular handlers.
+// We can't use ES module imports without a build step, so we use importScripts.
+// The modules under /assets/js/modules/ register event listeners when imported.
 
-// Install event - skip caching entirely for development
-self.addEventListener('install', () => {
-  // Minimal install flow for dev
-  self.skipWaiting();
-});
+// Dynamically resolve the base path for importScripts to ensure portability.
+// Use the directory portion of the pathname for robust base path resolution.
+const basePath = self.location.pathname.substring(0, self.location.pathname.lastIndexOf('/') + 1);
 
-// Activate event - clear all caches
-self.addEventListener('activate', (event) => {
-  event.waitUntil(caches.keys().then((keys) => Promise.all(keys.map((key) => caches.delete(key)))));
-  self.clients.claim();
-});
-
-// Utility to detect requests we should bypass (analytics, cloudflare internal, cross-origin)
-function shouldBypassRequest(request) {
+// Validate basePath to ensure it resolves to a trusted location
+const decodedBasePath = decodeURIComponent(basePath);
+const expectedBaseDir = '/'; // Adjust as needed for your deployment
+function isSafePath(path) {
+  // Check for null bytes
+  if (path.includes('\0')) return false;
+  // Check for directory traversal (plain and encoded)
+  if (path.includes('..') || path.match(/%2e%2e/i)) return false;
+  // Check for encoded slashes
+  if (path.match(/%2f|%5c/i)) return false;
+  // Ensure resolved path is within expected base directory
   try {
-    const url = new URL(request.url);
-    // Bypass requests to Cloudflare internal endpoints and common analytics static hosts
-    if (url.pathname.startsWith('/cdn-cgi/') || url.hostname.includes('cloudflareinsights.com')) {
-      return true;
-    }
-    // Bypass cross-origin requests (let browser/network handle them)
-    if (url.origin !== self.location.origin) return true;
+    // Use URL to resolve path
+    const resolved = new URL(path, 'https://dummy').pathname;
+    if (!resolved.startsWith(expectedBaseDir)) return false;
   } catch (e) {
-    // If URL parsing fails, don't block - fallback to network
-    return true;
+    return false;
   }
-  return false;
+  return true;
 }
+if (!decodedBasePath.startsWith(expectedBaseDir) || !isSafePath(decodedBasePath)) {
+  console.error('Invalid basePath detected. Service Worker initialization aborted for security reasons.');
+} else {
+  try {
+    importScripts(`${basePath}assets/js/modules/sw-core.js`);
+    importScripts(`${basePath}assets/js/modules/sw-handlers.js`);
+  } catch (e) {
+    console.error('Service Worker importScripts failed:', e);
 
-// Fetch event - network only for same-origin, bypass for analytics/third-party
-self.addEventListener('fetch', (event) => {
-  const req = event.request;
+    // Handle specific error cases
+    if (e.name === 'NetworkError') {
+      console.warn('Network error occurred while loading scripts. Falling back to offline handler.');
+    } else if (e.name === 'SecurityError') {
+      console.warn('Security error occurred. Ensure the scripts are served over HTTPS.');
+    } else {
+      console.warn('An unknown error occurred. Falling back to offline handler.');
+    }
 
-  // Bypass analytics and cross-origin resources entirely to avoid interfering with vendor behaviour
-  if (shouldBypassRequest(req)) {
-    event.respondWith(
-      fetch(req).catch((error) => {
-        // For navigation requests, try to deliver offline page if available
-        if (req.mode === 'navigate') {
-          return fetch('/offline.html', { cache: 'no-store' }).catch(
-            () =>
-              new Response('Offline - Network unavailable', {
-                status: 503,
-                statusText: 'Service Unavailable',
-              })
-          );
-        }
-        // Let the failure bubble for other resources so the page can handle it
-        return Promise.reject(error);
-      })
-    );
-    return;
-  }
-
-  // For same-origin requests, do a network-only fetch with no-store (development behaviour).
-  // Catch network errors for navigations and provide offline fallback.
-  event.respondWith(
-    fetch(req, { cache: 'no-store' }).catch((error) => {
-      if (req.mode === 'navigate') {
-        return fetch('/offline.html', { cache: 'no-store' }).catch(
-          () =>
-            new Response('Offline - Network unavailable', {
-              status: 503,
-              statusText: 'Service Unavailable',
-            })
-        );
+    // Fallback to a minimal offline handler
+    self.addEventListener('fetch', (evt) => {
+      if (evt.request.mode === 'navigate') {
+        evt.respondWith(fetch(evt.request).catch(() => caches.match('/offline.html')));
       }
-      return Promise.reject(error);
-    })
-  );
-});
+    });
+  }
+}
