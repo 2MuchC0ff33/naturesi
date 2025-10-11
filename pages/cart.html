@@ -148,50 +148,19 @@
       }
     </script>
 
-  <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "@id": "https://www.naturesinfusions.com.au/#website",
-        "url": "https://www.naturesinfusions.com.au/",
-        "name": "Nature's Infusions",
-        "publisher": { "@id": "https://www.naturesinfusions.com.au/#organization" },
-        "potentialAction": {
-          "@type": "SearchAction",
-          "target": "https://www.naturesinfusions.com.au/pages/search.html?q={search_term_string}",
-          "query-input": "required name="search_term_string""
-        }
-      }
-    </script>
-
-  <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://www.naturesinfusions.com.au/"
-          }
-        ]
-      }
-    </script>
-
   <link rel="stylesheet" href="/assets/css/main.css" type="text/css">
   <!-- OpenSearch description for browser search providers (matches /opensearch.xml) -->
   <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="Nature's Infusions">
 
   <!-- Script Loading: load main JS as an ES module so app.js can import smaller modules (modular refactor) -->
-  <!-- Cache-busting query added to force clients to fetch latest module during development/debugging -->
   <script type="module" src="/assets/js/app.js"></script>
-
 </head>
 
 <body itemscope itemtype="https://schema.org/WebPage">
   <!-- WCAG: Skip link for keyboard navigation, visible on focus -->
   <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <!-- Header replaced to match index.html for consistency (semantic, accessible, privacy-first) -->
   <header id="site-header">
     <nav class="site-nav" aria-label="Site navigation">
       <div class="nav-left">
@@ -272,7 +241,7 @@
               </svg>
             </button>
           </form>
-          <!-- Inline comment: All JS removed for pure HTML5 search, OpenSearch compatible. -->
+          <!-- Inline comment: header matches index.html for consistency and accessibility -->
         </div>
       </div>
 
@@ -282,7 +251,6 @@
             <!-- inline svg cart -->
             <svg width="20" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
               aria-hidden="true" focusable="false">
-              <!-- Simple cart shape (rectangle body + wheels) -->
               <rect x="3" y="4" width="14" height="10" rx="1" stroke="currentColor" stroke-width="1.25" fill="none">
               </rect>
               <path d="M7 4L6 2H3" stroke="currentColor" stroke-width="1.25" fill="none"></path>
@@ -296,333 +264,118 @@
       </div>
     </nav>
   </header>
-  <main id="main-content">
-    <section aria-labelledby="accessories-heading">
-      <h2 id="accessories-heading">Accessories</h2>
 
-      <a id="vacuum-flask-with-infuser" class="product-anchor slug-anchor" aria-hidden="true"></a>
-      <a id="product-flask-anchor" class="product-anchor"></a>
-      <article id="product-flask" class="product" itemprop="itemListElement" itemscope
-        itemtype="https://schema.org/Product">
-        <header>
-          <figure class="product-gallery">
-            <picture>
-              <source srcset="assets/img/Natures2_with_fonts.webp" type="image/webp">
-              <img src="assets/img/Natures2_with_fonts.webp" alt="Vacuum Flask with Infuser" width="300" height="300"
-                loading="lazy" itemprop="image">
-            </picture>
-            <figcaption>Product image</figcaption>
-          </figure>
+  <!-- Main cart placeholder implementation (HTML5, accessible, no payment logic changed) -->
+  <main id="main-content" tabindex="-1">
+    <section id="cart" aria-labelledby="cart-heading" itemscope itemtype="https://schema.org/Order">
+      <header>
+        <h1 id="cart-heading">Your Cart</h1>
+        <p class="lead">Review items in your cart. This is a placeholder HTML5 example — integrate checkout logic
+          separately.</p>
+      </header>
 
-          <h3 itemprop="name">Vacuum Flask with Infuser</h3>
+      <form id="cart-form" action="#" method="post" novalidate aria-describedby="cart-note">
+        <p id="cart-note" class="visually-hidden">Use the quantity inputs to change item quantities, then select Update
+          Cart.</p>
 
-          <div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-            <link itemprop="availability" href="https://schema.org/InStock">
-            <meta itemprop="priceCurrency" content="AUD">
-            <p>&#10003; <span itemprop="itemCondition">In Stock</span></p>
+        <table class="cart-table" summary="Items in cart">
+          <caption class="visually-hidden">Shopping cart contents</caption>
+          <thead>
+            <tr>
+              <th scope="col">Product</th>
+              <th scope="col">Price</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Line total</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Example placeholder item 1 -->
+            <tr>
+              <td>
+                <figure class="cart-item">
+                  <img src="/assets/img/enchantedturmeric2.webp" alt="Enchanted Turmeric Tea package" width="64"
+                    height="64" loading="lazy">
+                  <figcaption>
+                    <strong>Enchanted Turmeric Tea</strong>
+                    <div class="muted">60g</div>
+                  </figcaption>
+                </figure>
+              </td>
+              <td><span class="unit-price" data-price="14.00">AUD $14.00</span></td>
+              <td>
+                <label for="qty-1" class="visually-hidden">Quantity for Enchanted Turmeric Tea</label>
+                <input id="qty-1" name="qty-1" type="number" min="1" max="99" value="1" inputmode="numeric"
+                  aria-label="Quantity">
+              </td>
+              <td><span class="line-total">AUD $14.00</span></td>
+              <td>
+                <button type="button" class="remove-item"
+                  aria-label="Remove Enchanted Turmeric Tea from cart">Remove</button>
+              </td>
+            </tr>
+
+            <!-- Example placeholder item 2 -->
+            <tr>
+              <td>
+                <figure class="cart-item">
+                  <img src="/assets/img/calmingtea.webp" alt="Calming Garden Tea package" width="64" height="64"
+                    loading="lazy">
+                  <figcaption>
+                    <strong>Calming Garden Tea</strong>
+                    <div class="muted">50g</div>
+                  </figcaption>
+                </figure>
+              </td>
+              <td><span class="unit-price" data-price="14.00">AUD $14.00</span></td>
+              <td>
+                <label for="qty-2" class="visually-hidden">Quantity for Calming Garden Tea</label>
+                <input id="qty-2" name="qty-2" type="number" min="1" max="99" value="2" inputmode="numeric"
+                  aria-label="Quantity">
+              </td>
+              <td><span class="line-total">AUD $28.00</span></td>
+              <td>
+                <button type="button" class="remove-item"
+                  aria-label="Remove Calming Garden Tea from cart">Remove</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="cart-actions" style="display:flex;gap:1rem;align-items:center;margin-top:1rem;">
+          <button type="submit" class="button" id="update-cart">Update Cart</button>
+          <a class="button button-secondary" href="/pages/store.html">Continue Shopping</a>
+          <!-- Checkout placeholder: disabled to indicate this is an example and payment integration is out of scope -->
+          <button type="button" class="button primary" id="checkout" aria-disabled="true" disabled
+            title="Checkout button is a placeholder — integrate payment flow in store logic">Checkout</button>
+        </div>
+      </form>
+
+      <aside class="order-summary" aria-labelledby="summary-heading" style="margin-top:1.5rem;">
+        <h2 id="summary-heading">Order Summary</h2>
+        <dl>
+          <div>
+            <dt>Subtotal</dt>
+            <dd><span id="summary-subtotal">AUD $42.00</span></dd>
           </div>
-
-          <div class="reviews" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
-            <span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;</span>
-            <span>(<span itemprop="ratingCount">1</span> review, Rating:
-              <span itemprop="ratingValue">4</span>/5)</span>
+          <div>
+            <dt>Shipping</dt>
+            <dd><span id="summary-shipping">Calculated at checkout</span></dd>
           </div>
-        </header>
-
-        <section class="product-description" itemprop="description">
-          <p>
-            High-quality vacuum flask with built-in stainless steel tea infuser. Maintains
-            temperature for hours while allowing you to brew loose leaf tea on the go. Perfect for
-            tea enthusiasts who want fresh tea anytime, anywhere.
-          </p>
-
-          <details>
-            <summary>Product Features</summary>
-            <ul>
-              <li>500ml capacity</li>
-              <li>Stainless steel construction</li>
-              <li>Double-walled vacuum insulation</li>
-              <li>Removable infuser basket</li>
-              <li>Leak-proof lid</li>
-              <li>BPA-free materials</li>
-            </ul>
-          </details>
-        </section>
-
-        <section class="product-specs">
-          <h4>Specifications</h4>
-          <dl>
-            <dt>Material</dt>
-            <dd>High Vacuum Insulated Stainless Steel Cup (SUS201/SUS304)</dd>
-            <dd>Food-grade PP (<i>Polypropylene</i>) plastic components</dd>
-            <dd>Food-grade silicone seal</dd>
-            <dd>Stainless Steel (SUS3040) inner layer</dd>
-            <dt>Capacity</dt>
-            <dd>500ml</dd>
-            <dt>Dimensions</dt>
-            <dd>6.5cm diameter × 22.5cm height</dd>
-            <dt>Weight</dt>
-            <dd>380g</dd>
-          </dl>
-        </section>
-
-        <form action="/add-to-cart" method="post" class="product-options">
-          <fieldset>
-            <legend>Product Options</legend>
-
-            <div class="color-options" role="radiogroup" aria-labelledby="color-label">
-              <h4 id="color-label">Select Color</h4>
-
-              <label>
-                <input type="radio" name="color" value="green" checked>
-                <span>Green</span>
-              </label>
-
-              <label>
-                <input type="radio" name="color" value="white">
-                <span>White</span>
-              </label>
-
-              <label>
-                <input type="radio" name="color" value="pink">
-                <span>Pink</span>
-              </label>
-            </div>
-
-            <div class="quantity-selector">
-              <label for="qty-flask">Quantity:</label>
-              <select id="qty-flask" name="quantity" min="1" max="10" required>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-              </select>
-            </div>
-
-            <output name="total-price" for="qty-flask" class="total-price">
-              Total: $30.00
-            </output>
-
-            <button type="submit" class="add-to-cart">Add to Cart</button>
-          </fieldset>
-        </form>
-
-        <footer class="product-care">
-          <details>
-            <summary><small>Care Instructions</small></summary>
-            <p>
-              <small>
-                Hand wash only with mild (neutral) detergent. Do not use abrasive cleaners.
-                Tighten the lid clockwise to prevent leaks. Ensure the silicone ring is properly
-                installed - missing or incorrect installation may cause leakage. Remove infuser
-                when not in use to prevent over-steeping. Keep out of reach of children when
-                filled with hot liquids. Not suitable for microwave or dishwasher.
-              </small>
-            </p>
-          </details>
-        </footer>
-      </article>
-
-      <!-- Additional accessories moved from main store page -->
-      <!-- ID updated to start with a letter to satisfy HTML id naming rules (avoid leading digits) -->
-      <a id="glass-tea-pot-800ml" class="product-anchor slug-anchor" aria-hidden="true"></a>
-      <a id="product-pot-anchor" class="product-anchor"></a>
-      <article id="product-pot" class="product" itemprop="itemListElement" itemscope
-        itemtype="https://schema.org/Product">
-        <header>
-          <figure class="product-gallery">
-            <picture>
-              <source srcset="assets/img/Natures2_with_fonts.webp" type="image/webp">
-              <img src="assets/img/Natures2_with_fonts.webp" alt="800mL Glass Tea Pot" width="300" height="300"
-                loading="lazy" itemprop="image">
-            </picture>
-            <figcaption>Product image</figcaption>
-          </figure>
-
-          <h3 itemprop="name">800mL Glass Tea Pot</h3>
-        </header>
-
-        <section class="product-description" itemprop="description">
-          <p>
-            Elegant borosilicate glass teapot with stainless steel infuser. Perfect for brewing
-            and serving loose leaf tea while watching the leaves unfurl. Heat-resistant and
-            durable.
-          </p>
-        </section>
-
-        <section class="product-specs">
-          <h4>Specifications</h4>
-          <dl>
-            <dt>Material</dt>
-            <dd>Borosilicate glass / Stainless steel filter (SUS304)</dd>
-            <dt>Capacity</dt>
-            <dd>800ml</dd>
-          </dl>
-        </section>
-
-        <form action="/add-to-cart" method="post" class="product-options">
-          <fieldset>
-            <legend class="visually-hidden">Details</legend>
-            <div class="quantity-selector">
-              <label for="qty-pot">Quantity:</label>
-              <select id="qty-pot" name="quantity" min="1" max="5" required>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-              </select>
-            </div>
-            <output name="total-price" for="qty-pot" class="total-price">Total: $30.00</output>
-            <button type="submit" class="add-to-cart">Add to Cart</button>
-          </fieldset>
-        </form>
-        <footer class="product-care">
-          <details>
-            <summary><small>Care Instructions</small></summary>
-            <p>
-              <small>Hand wash recommended. Avoid sudden temperature changes. Not microwave
-                safe.</small>
-            </p>
-          </details>
-        </footer>
-      </article>
-
-      <a id="biodegradable-tea-bag" class="product-anchor slug-anchor" aria-hidden="true"></a>
-      <a id="product-bag-anchor" class="product-anchor"></a>
-      <article id="product-bag" class="product" itemprop="itemListElement" itemscope
-        itemtype="https://schema.org/Product">
-        <header>
-          <figure class="product-gallery">
-            <picture>
-              <source srcset="assets/img/Natures2_with_fonts.webp" type="image/webp">
-              <img src="assets/img/Natures2_with_fonts.webp" alt="Biodegradable Tea Bags - 10 pack" width="300"
-                height="300" loading="lazy" itemprop="image">
-            </picture>
-            <figcaption>Product image</figcaption>
-          </figure>
-          <h3 itemprop="name">Biodegradable Tea Bags - 10 pack</h3>
-        </header>
-        <section class="product-description" itemprop="description">
-          <p>
-            Compostable tea bags made from plant-based materials. 10 pack for convenient
-            single-serving brews.
-          </p>
-        </section>
-        <form action="/add-to-cart" method="post" class="product-options">
-          <fieldset>
-            <legend class="visually-hidden">Details</legend>
-            <div class="quantity-selector">
-              <label for="qty-bag">Quantity:</label>
-              <select id="qty-bag" name="quantity" min="1" max="5" required>
-                <option value="1">1</option>
-                <option value="2">2</option>
-              </select>
-            </div>
-            <output name="total-price" for="qty-bag" class="total-price">Total: $4.00</output>
-            <button type="submit" class="add-to-cart">Add to Cart</button>
-          </fieldset>
-        </form>
-        <footer class="product-eco">
-          <details>
-            <summary><small>Environmental Information</small></summary>
-            <p><small>Certified compostable. Packaging is recyclable paper.</small></p>
-          </details>
-        </footer>
-      </article>
-
-      <!-- Tea Scoop (was commented in main store; now active canonical copy) -->
-      <a id="tea-scoop" class="product-anchor slug-anchor" aria-hidden="true"></a>
-      <a id="product-scoop-anchor" class="product-anchor"></a>
-      <article id="product-scoop" class="product" itemprop="itemListElement" itemscope
-        itemtype="https://schema.org/Product">
-        <header>
-          <figure class="product-gallery">
-            <picture>
-              <source srcset="assets/img/Natures2_with_fonts.webp" type="image/webp">
-              <img src="assets/img/Natures2_with_fonts.webp" alt="Tea Scoop" width="300" height="300" loading="lazy"
-                itemprop="image">
-            </picture>
-            <figcaption>Product image</figcaption>
-          </figure>
-          <h3 itemprop="name">Tea Scoop</h3>
-        </header>
-        <section class="product-description" itemprop="description">
-          <p>
-            Perfectly sized scoop for measuring loose leaf tea. Made from durable materials with a
-            comfortable grip.
-          </p>
-        </section>
-        <form action="/add-to-cart" method="post" class="product-options">
-          <fieldset>
-            <legend class="visually-hidden">Details</legend>
-            <div class="quantity-selector">
-              <label for="qty-scoop">Quantity:</label>
-              <select id="qty-scoop" name="quantity" min="1" max="10" required>
-                <option value="1">1</option>
-                <option value="2">2</option>
-              </select>
-            </div>
-            <output name="total-price" for="qty-scoop" class="total-price">Total: $3.00</output>
-            <button type="submit" class="add-to-cart">Add to Cart</button>
-          </fieldset>
-        </form>
-        <footer class="product-disclaimer">
-          <details>
-            <summary><small>Important Disclaimer</small></summary>
-            <p>
-              <small>This product is not intended to diagnose, treat, cure, or prevent any
-                disease.</small>
-            </p>
-          </details>
-        </footer>
-      </article>
-
-      <a id="tea-infuser-stick" class="product-anchor slug-anchor" aria-hidden="true"></a>
-      <a id="product-infuser-anchor" class="product-anchor"></a>
-      <article id="product-infuser" class="product" itemprop="itemListElement" itemscope
-        itemtype="https://schema.org/Product">
-        <header>
-          <figure class="product-gallery">
-            <picture>
-              <source srcset="assets/img/Natures2_with_fonts.webp" type="image/webp">
-              <img src="assets/img/Natures2_with_fonts.webp" alt="Tea Infuser Stick" width="300" height="300"
-                loading="lazy" itemprop="image">
-            </picture>
-            <figcaption>Product image</figcaption>
-          </figure>
-
-          <h3 itemprop="name">Tea Infuser Stick</h3>
-
-          <div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-            <link itemprop="availability" href="https://schema.org/InStock">
-            <meta itemprop="priceCurrency" content="AUD">
-            <p>&#10007; <span itemprop="itemCondition">Out of Stock</span></p>
+          <div>
+            <dt>Total</dt>
+            <dd><strong id="summary-total">AUD $42.00</strong></dd>
           </div>
-
-          <div class="reviews" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
-            <span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;</span>
-            <span>(<span itemprop="ratingCount">1</span> review, Rating:
-              <span itemprop="ratingValue">4</span>/5)</span>
-          </div>
-        </header>
-
-        <section class="product-description" itemprop="description">
-          <p>
-            Convenient tea infuser stick for brewing loose leaf tea directly in your cup. The fine
-            mesh prevents leaves from escaping while allowing full flavour extraction.
-          </p>
-
-          <details>
-            <summary class="visually-hidden">Details</summary>
-            Made from food-grade stainless steel. Easy to clean and suitable for most cup sizes.
-          </details>
-        </section>
-      </article>
+        </dl>
+        <p class="muted">Note: This is an example placeholder cart. Do not modify payment provider details here without
+          human review.</p>
+      </aside>
     </section>
   </main>
 
   <hr aria-hidden="true">
 
+  <!-- Footer replaced to match index.html for consistency (semantic and accessible) -->
   <div class="site-footer" itemscope itemtype="https://schema.org/WPFooter">
     <div class="container">
       <div class="branding">
@@ -690,7 +443,6 @@
         </nav>
       </section>
     </div>
-    <!-- Use native footer element for semantics and accessibility; footer has implicit role="contentinfo" -->
     <footer class="legal-bar" aria-label="Legal and credits">
       <div class="legal">
         <p>&copy; <time datetime="2025">2025</time> Nature's Infusions. All rights reserved.</p>
@@ -715,6 +467,8 @@
     </footer>
   </div>
 
+  <!-- Small note: This file aligns header/footer with index.html and adds an accessible cart placeholder.
+       Per repo instructions, payment or service-worker logic was not modified here. -->
 </body>
 
 </html>
