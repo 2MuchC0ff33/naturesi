@@ -1,3 +1,18 @@
+/*
+    cart-init.js
+    Minimal cart initialisation using native browser APIs and small CartStore wrapper.
+
+    Native APIs used:
+    - Form handling: FormData, HTMLFormElement.submit()
+    - Storage: localStorage (via storageLocal), IndexedDB (via storageIDB)
+    - Events: addEventListener, CustomEvent (cart:updated)
+    - DOM: querySelector, closest, dataset, classList
+    - Service worker integration: navigator.serviceWorker / Background Sync (best-effort)
+
+    Design goals: keep JS minimal and declarative; use a single delegated submit handler
+    for add-to-cart forms to avoid duplicate listeners and ensure dynamic content works.
+*/
+
 import { CartStore } from './cartStore.js';
 import { updateCartCountOutputs, renderCartTable, setProductIndex } from './cartUI.js';
 import { requestBackgroundSync } from './sync.js';
@@ -26,12 +41,12 @@ export async function initCart() {
     updateCartCountOutputs((cart.items || []).reduce((s, it) => s + (parseInt(it.quantity, 10) || 0), 0));
     renderCartTable(cart);
 
-    // bind add-to-cart forms
-    const addForms = document.querySelectorAll('form.add-to-cart, form.product-options');
-    console.debug(`Binding ${addForms.length} add-to-cart forms`);
-    addForms.forEach((form) => {
-        form.addEventListener('submit', async (ev) => {
-            ev.preventDefault();
+    // Delegated submit handler for add-to-cart forms (uses native FormData)
+    document.addEventListener('submit', async (ev) => {
+        const form = ev.target;
+        if (!form || !form.matches || !form.matches('form.add-to-cart, form.product-options')) return;
+        ev.preventDefault();
+        try {
             const fd = new FormData(form);
             const productEl = form.closest('.product') || form.closest('[itemscope]') || form;
             const id = productEl && (productEl.id || productEl.dataset.sku || productEl.dataset.id) ? (productEl.id || productEl.dataset.sku || productEl.dataset.id) : `i_${Math.random().toString(36).slice(2, 9)}`;
@@ -40,12 +55,12 @@ export async function initCart() {
             const size = fd.get('size') || fd.get('package') || '';
             const quantity = parseInt(fd.get('quantity') || fd.get('qty') || 1, 10) || 1;
 
-            // price extraction
+            // price extraction (prefer data-price attribute)
             let price = null;
             const priceField = productEl && (productEl.querySelector('[data-price]') || productEl.querySelector('[itemprop="price"]'));
             if (priceField) price = parseFloat(priceField.dataset.price || priceField.getAttribute('content') || priceField.textContent.replace(/[^0-9\.]/g, '')) || null;
 
-            // image extraction
+            // image extraction using data attributes or first <img>
             let image = null;
             if (productEl) {
                 if (productEl.dataset && productEl.dataset.image) image = productEl.dataset.image;
@@ -67,13 +82,15 @@ export async function initCart() {
             const updated = cartStore.get();
             updateCartCountOutputs((updated.items || []).reduce((s, it) => s + (parseInt(it.quantity, 10) || 0), 0));
             renderCartTable(updated);
-            // Log the updated cart state for debugging
-            console.debug('Cart updated:', updated);
+            // Dispatch a custom event for other scripts to listen to
+            document.dispatchEvent(new CustomEvent('cart:updated', { detail: { cart: updated } }));
             // best-effort background sync registration
             requestBackgroundSync('sync-cart').catch((err) => {
                 console.error('Background sync registration failed:', err);
             });
-        });
+        } catch (e) {
+            console.error('Error processing add-to-cart form:', e);
+        }
     });
 
     // cart page interactions
