@@ -3,7 +3,8 @@
 // The modules under /assets/js/modules/ register event listeners when imported.
 
 // Dynamically resolve the base path for importScripts to ensure portability.
-const basePath = self.location.pathname.replace(/service-worker\.js$/, '');
+// Use the directory portion of the pathname for robust base path resolution.
+const basePath = self.location.pathname.substring(0, self.location.pathname.lastIndexOf('/') + 1);
 
 try {
   importScripts(`${basePath}assets/js/modules/sw-core.js`);
