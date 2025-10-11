@@ -41,22 +41,74 @@ export function renderCartTable(cart) {
         const priceVal = (it.price || 0);
         const qtyVal = (it.quantity || 1);
 
-        tr.innerHTML = `
-      <td>
-        <figure class="cart-item">
-          <figcaption>
-            <strong>${escapedName}</strong>
-            <div class="muted">${sku}${sku && it.size ? ' · ' : ''}${it.size || ''}</div>
-            <p class="cart-item-desc">${desc}</p>
-          </figcaption>
-        </figure>
-      </td>
-      <td><span class="unit-price" data-price="${priceVal.toFixed ? priceVal.toFixed(2) : priceVal}">AUD $${priceVal.toFixed ? priceVal.toFixed(2) : priceVal}</span></td>
-      <td><label class="visually-hidden">Quantity for ${escapedName}</label><input type="number" min="1" max="99" value="${qtyVal}" inputmode="numeric"></td>
-      <td><span class="line-total">AUD $${(((parseFloat(priceVal) || 0) * (parseInt(qtyVal, 10) || 1))).toFixed(2)}</span></td>
-      <td><button type="button" class="remove-item" aria-label="Remove ${escapedName} from cart">Remove</button></td>
-    `;
+        // Build table row safely using DOM methods
+        // 1st cell: product info
+        const tdInfo = document.createElement('td');
+        const figure = document.createElement('figure');
+        figure.className = 'cart-item';
+        const figcaption = document.createElement('figcaption');
+        const strong = document.createElement('strong');
+        strong.textContent = it.name || '';
+        figcaption.appendChild(strong);
+        const divMuted = document.createElement('div');
+        divMuted.className = 'muted';
+        let skuSizeText = '';
+        if (sku) skuSizeText += sku;
+        if (sku && it.size) skuSizeText += ' · ';
+        if (it.size) skuSizeText += it.size;
+        divMuted.textContent = skuSizeText;
+        figcaption.appendChild(divMuted);
+        const pDesc = document.createElement('p');
+        pDesc.className = 'cart-item-desc';
+        pDesc.textContent = it.description || '';
+        figcaption.appendChild(pDesc);
+        figure.appendChild(figcaption);
+        tdInfo.appendChild(figure);
+        tr.appendChild(tdInfo);
 
+        // 2nd cell: unit price
+        const tdPrice = document.createElement('td');
+        const spanPrice = document.createElement('span');
+        spanPrice.className = 'unit-price';
+        const priceStr = priceVal.toFixed ? priceVal.toFixed(2) : String(priceVal);
+        spanPrice.setAttribute('data-price', priceStr);
+        spanPrice.textContent = `AUD $${priceStr}`;
+        tdPrice.appendChild(spanPrice);
+        tr.appendChild(tdPrice);
+
+        // 3rd cell: quantity input
+        const tdQty = document.createElement('td');
+        const labelQty = document.createElement('label');
+        labelQty.className = 'visually-hidden';
+        labelQty.textContent = `Quantity for ${it.name || ''}`;
+        tdQty.appendChild(labelQty);
+        const inputQty = document.createElement('input');
+        inputQty.type = 'number';
+        inputQty.min = '1';
+        inputQty.max = '99';
+        inputQty.value = String(qtyVal);
+        inputQty.setAttribute('inputmode', 'numeric');
+        tdQty.appendChild(inputQty);
+        tr.appendChild(tdQty);
+
+        // 4th cell: line total
+        const tdLineTotal = document.createElement('td');
+        const spanLineTotal = document.createElement('span');
+        spanLineTotal.className = 'line-total';
+        const lineTotal = (((parseFloat(priceVal) || 0) * (parseInt(qtyVal, 10) || 1))).toFixed(2);
+        spanLineTotal.textContent = `AUD $${lineTotal}`;
+        tdLineTotal.appendChild(spanLineTotal);
+        tr.appendChild(tdLineTotal);
+
+        // 5th cell: remove button
+        const tdRemove = document.createElement('td');
+        const btnRemove = document.createElement('button');
+        btnRemove.type = 'button';
+        btnRemove.className = 'remove-item';
+        btnRemove.setAttribute('aria-label', `Remove ${it.name || ''} from cart`);
+        btnRemove.textContent = 'Remove';
+        tdRemove.appendChild(btnRemove);
+        tr.appendChild(tdRemove);
         tbody.appendChild(tr);
     });
     updateCartTableTotals();
