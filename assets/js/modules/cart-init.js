@@ -1,3 +1,18 @@
+/*
+    cart-init.js
+    Minimal cart initialisation using native browser APIs and small CartStore wrapper.
+
+    Native APIs used:
+    - Form handling: FormData, HTMLFormElement.submit()
+    - Storage: localStorage (via storageLocal), IndexedDB (via storageIDB)
+    - Events: addEventListener, CustomEvent (cart:updated)
+    - DOM: querySelector, closest, dataset, classList
+    - Service worker integration: navigator.serviceWorker / Background Sync (best-effort)
+
+    Design goals: keep JS minimal and declarative; use a single delegated submit handler
+    for add-to-cart forms to avoid duplicate listeners and ensure dynamic content works.
+*/
+
 import { CartStore } from './cartStore.js';
 import { updateCartCountOutputs, renderCartTable, setProductIndex } from './cartUI.js';
 import { requestBackgroundSync } from './sync.js';
@@ -26,10 +41,12 @@ export async function initCart() {
     updateCartCountOutputs((cart.items || []).reduce((s, it) => s + (parseInt(it.quantity, 10) || 0), 0));
     renderCartTable(cart);
 
-    // bind add-to-cart forms
-    document.querySelectorAll('form.add-to-cart, form.product-options').forEach((form) => {
-        form.addEventListener('submit', async (ev) => {
-            ev.preventDefault();
+    // Delegated submit handler for add-to-cart forms (uses native FormData)
+    document.addEventListener('submit', async (ev) => {
+        const form = ev.target;
+        if (!form || !form.matches || !form.matches('form.add-to-cart, form.product-options')) return;
+        ev.preventDefault();
+        try {
             const fd = new FormData(form);
             const productEl = form.closest('.product') || form.closest('[itemscope]') || form;
             const id = productEl && (productEl.id || productEl.dataset.sku || productEl.dataset.id) ? (productEl.id || productEl.dataset.sku || productEl.dataset.id) : `i_${Math.random().toString(36).slice(2, 9)}`;
@@ -38,12 +55,12 @@ export async function initCart() {
             const size = fd.get('size') || fd.get('package') || '';
             const quantity = parseInt(fd.get('quantity') || fd.get('qty') || 1, 10) || 1;
 
-            // price extraction
+            // price extraction (prefer data-price attribute)
             let price = null;
             const priceField = productEl && (productEl.querySelector('[data-price]') || productEl.querySelector('[itemprop="price"]'));
             if (priceField) price = parseFloat(priceField.dataset.price || priceField.getAttribute('content') || priceField.textContent.replace(/[^0-9\.]/g, '')) || null;
 
-            // image extraction
+            // image extraction using data attributes or first <img>
             let image = null;
             if (productEl) {
                 if (productEl.dataset && productEl.dataset.image) image = productEl.dataset.image;
@@ -65,39 +82,73 @@ export async function initCart() {
             const updated = cartStore.get();
             updateCartCountOutputs((updated.items || []).reduce((s, it) => s + (parseInt(it.quantity, 10) || 0), 0));
             renderCartTable(updated);
+            // Dispatch a custom event for other scripts to listen to
+            document.dispatchEvent(new CustomEvent('cart:updated', { detail: { cart: updated } }));
             // best-effort background sync registration
-            requestBackgroundSync('sync-cart').catch(() => { });
-        });
+            requestBackgroundSync('sync-cart').catch((err) => {
+                console.error('Background sync registration failed:', err);
+            });
+        } catch (e) {
+            console.error('Error processing add-to-cart form:', e);
+        }
     });
 
-    // cart page interactions
-    const cartForm = document.getElementById('cart-form');
-    if (cartForm) {
-        cartForm.addEventListener('submit', (ev) => {
-            ev.preventDefault();
-            cartForm.querySelectorAll('tbody tr').forEach(async (row) => {
-                const qty = row.querySelector('input[type="number"]');
-                const id = row.dataset.productId;
-                if (qty && id) await cartStore.updateQuantity(id, parseInt(qty.value, 10) || 0);
-            });
-            const c = cartStore.get();
-            updateCartCountOutputs((c.items || []).reduce((s, it) => s + (parseInt(it.quantity, 10) || 0), 0));
-            renderCartTable(c);
-        });
-
-        cartForm.addEventListener('click', async (ev) => {
-            if (ev.target && ev.target.matches('.remove-item')) {
-                const row = ev.target.closest('tr');
-                const id = row && row.dataset.productId;
-                if (id) {
-                    await cartStore.remove(id);
-                    const c2 = cartStore.get();
-                    updateCartCountOutputs((c2.items || []).reduce((s, it) => s + (parseInt(it.quantity, 10) || 0), 0));
-                    renderCartTable(c2);
-                }
+    // cart page interactions: attach a delegated submit handler for #cart-form.
+    // We use document-level delegation so the handler works even when this module
+    // executes before the DOM is parsed (scripts in <head> as type=module). This
+    // mirrors the add-to-cart delegated approach used earlier.
+    document.addEventListener('submit', async (ev) => {
+        const form = ev.target;
+        if (!(form && form.id === 'cart-form')) return;
+        ev.preventDefault();
+        const rows = Array.from(form.querySelectorAll('tbody tr'));
+        // sequentially update quantities and await persistence for each
+        for (const row of rows) {
+            const qty = row.querySelector('input[type="number"]');
+            const id = row.dataset.productId;
+            const size = row.dataset.productSize !== undefined ? row.dataset.productSize : (row.dataset.size || '');
+            if (qty && id) {
+                // updateQuantity already returns a promise and now accepts size
+                await cartStore.updateQuantity(id, parseInt(qty.value, 10) || 0, size);
             }
-        });
+        }
+        const c = cartStore.get();
+        updateCartCountOutputs((c.items || []).reduce((s, it) => s + (parseInt(it.quantity, 10) || 0), 0));
+        renderCartTable(c);
+    });
+
+    // Global delegated handler so remove buttons work even if the cart table
+    // is dynamically created or not inside a #cart-form element.
+
+    // Helper function to find the remove button from an event target
+    function findRemoveButton(target) {
+        if (!target) return null;
+        if (typeof target.matches === 'function' && target.matches('.remove-item')) {
+            return target;
+        }
+        if (typeof target.closest === 'function') {
+            return target.closest('.remove-item');
+        }
+        return null;
     }
+
+    document.addEventListener('click', async (ev) => {
+        const btn = findRemoveButton(ev.target);
+        if (!btn) return;
+        // Find the row and product id
+        const row = btn.closest && btn.closest('tr');
+        const id = row && row.dataset && row.dataset.productId;
+        const size = row && (row.dataset.productSize !== undefined ? row.dataset.productSize : (row.dataset.size || ''));
+        if (!id) return;
+        try {
+            await cartStore.remove(id, size);
+            const c2 = cartStore.get();
+            updateCartCountOutputs((c2.items || []).reduce((s, it) => s + (parseInt(it.quantity, 10) || 0), 0));
+            renderCartTable(c2);
+        } catch (e) {
+            console.error('Error removing cart item:', e);
+        }
+    });
 
     // return the store so callers (app.js) can expose a debug API
     return cartStore;

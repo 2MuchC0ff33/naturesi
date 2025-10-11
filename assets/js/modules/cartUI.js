@@ -13,12 +13,37 @@ export function updateCartCountOutputs(total) {
 }
 
 export function renderCartTable(cart) {
+    // If the DOM is still parsing, defer rendering until DOMContentLoaded to avoid
+    // creating a placeholder table prematurely (scripts are loaded as type=module in <head>).
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => renderCartTable(cart), { once: true });
+        return;
+    }
+
     const tbody = document.querySelector('.cart-table tbody');
-    if (!tbody) return;
+    if (!tbody) {
+        // If the table element exists but no tbody, create a tbody and re-run render.
+        const table = document.querySelector('.cart-table');
+        if (table) {
+            const newTbody = document.createElement('tbody');
+            table.appendChild(newTbody);
+            // call again now that tbody exists
+            renderCartTable(cart);
+            return;
+        }
+
+        // If no cart table is present in the DOM, skip rendering quietly.
+        // This avoids noisy console messages on pages that don't include a cart table.
+        return;
+    }
     tbody.innerHTML = '';
     (cart.items || []).forEach((it) => {
         const tr = document.createElement('tr');
         tr.dataset.productId = it.id;
+        // expose the item's selected size on the row so delegated handlers can remove the
+        // correct item when multiple sizes/options exist. Keep as empty string when
+        // not provided (matches how items are created elsewhere).
+        tr.dataset.productSize = it.size || '';
         // Build row markup safely
         // Prefer canonical product index metadata when available
         let imgSrc = '';
