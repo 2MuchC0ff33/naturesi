@@ -35,7 +35,7 @@ export class CartStore {
         const key = `${item.id}::${item.size}`;
         const existing = this.cart.items.find((it) => `${it.id}::${it.size}` === key);
         if (existing) existing.quantity = (existing.quantity || 0) + (item.quantity || 1);
-        else this.cart.items.push(Object.assign({ id: item.id, name: item.name, size: item.size, quantity: item.quantity || 1, price: item.price || null }, {}));
+        else this.cart.items.push({ id: item.id, name: item.name, size: item.size, quantity: item.quantity || 1, price: item.price || null });
         return this.save();
     }
 
