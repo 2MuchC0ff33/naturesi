@@ -15,9 +15,14 @@ textarea {
   min-width: 24px;
   /* WCAG 2.2: Ensure minimum target size */
   min-height: 24px;
+}
 
-  /* Increase baseline touch area on small screens */
-  @media (max-width: 640px) {
+/* Increase baseline touch area on small screens */
+@media (max-width: 640px) {
+  button,
+  input,
+  select,
+  textarea {
     min-height: 44px;
     padding: 0.6rem 0.75rem;
   }
