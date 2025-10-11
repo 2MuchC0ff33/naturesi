@@ -45,8 +45,8 @@ self.addEventListener('sync', function (evt) {
     if (evt.tag === 'sync-cart') {
         evt.waitUntil((async function () {
             try {
-                var all = await self.clients.matchAll({ includeUncontrolled: true });
-                for (var i = 0; i < all.length; i++) { all[i].postMessage({ type: 'sync-cart' }); }
+                const all = await self.clients.matchAll({ includeUncontrolled: true });
+                for (const client of all) { client.postMessage({ type: 'sync-cart' }); }
             } catch (e) { }
         })());
     }
