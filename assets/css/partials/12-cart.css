@@ -1,0 +1,64 @@
+/* Cart component styles - accessible, mobile-first, and minimal */
+:root {
+    --cart-badge-bg: var(--color-accent, #4CAF50);
+    --cart-badge-fg: #fff;
+}
+
+.cart-option {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.cart-text {
+    font-weight: 600;
+}
+
+.cart-count {
+    display: inline-block;
+    min-width: 2ch;
+    padding: 0.15rem 0.45rem;
+    border-radius: 999px;
+    background: var(--cart-badge-bg);
+    color: var(--cart-badge-fg);
+    font-size: 0.95rem;
+    line-height: 1;
+    text-align: center;
+}
+
+/* Focus-visible styling for keyboard users */
+.cart-option:focus-within .cart-count,
+.cart-option:focus-visible {
+    outline: 3px solid color-mix(in srgb, var(--cart-badge-bg) 30%, #0000);
+    outline-offset: 3px;
+}
+
+/* Small screens: show only icon and badge */
+@media (max-width: 480px) {
+    .cart-text {
+        display: none;
+    }
+}
+
+/* Cart table styles for cart.html */
+.cart-table img {
+    border-radius: 6px;
+}
+
+.order-summary {
+    border: 1px solid var(--color-border);
+    padding: 0.75rem;
+    border-radius: var(--radius-sm);
+}
+
+/* Ensure high contrast for badge */
+@media (prefers-contrast: high) {
+    .cart-count {
+        box-shadow: none;
+        border: 2px solid var(--cart-badge-fg);
+        color: var(--cart-badge-bg);
+        background: var(--cart-badge-fg);
+    }
+}
+
+/* End of cart partial */

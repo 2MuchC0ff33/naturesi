@@ -5,6 +5,19 @@
 self.addEventListener('install', () => {
   // Minimal install flow for dev
   self.skipWaiting();
+  // Pre-cache minimal cart assets to enable offline cart UX
+  if (self.caches) {
+    const preCache = async () => {
+      const cache = await caches.open('naturesi-static-v1');
+      return cache.addAll([
+        '/assets/css/main.css',
+        '/assets/js/app.js',
+        '/pages/cart.html',
+        '/offline.html'
+      ].filter(Boolean));
+    };
+    event && event.waitUntil ? event.waitUntil(preCache()) : preCache();
+  }
 });
 
 // Activate event - clear all caches
@@ -58,17 +71,41 @@ self.addEventListener('fetch', (event) => {
   // For same-origin requests, do a network-only fetch with no-store (development behaviour).
   // Catch network errors for navigations and provide offline fallback.
   event.respondWith(
-    fetch(req, { cache: 'no-store' }).catch((error) => {
-      if (req.mode === 'navigate') {
-        return fetch('/offline.html', { cache: 'no-store' }).catch(
-          () =>
-            new Response('Offline - Network unavailable', {
-              status: 503,
-              statusText: 'Service Unavailable',
-            })
-        );
-      }
-      return Promise.reject(error);
-    })
+    fetch(req, { cache: 'no-store' })
+      .then((res) => {
+        // Optionally cache GET navigation responses for offline viewing
+        try {
+          if (req.method === 'GET' && req.destination !== 'document') return res;
+          if (res && res.ok && req.mode === 'navigate') {
+            const copy = res.clone();
+            caches.open('naturesi-static-v1').then((cache) => cache.put(req, copy));
+          }
+        } catch (e) { /* ignore caching errors */ }
+        return res;
+      })
+      .catch((error) => {
+        if (req.mode === 'navigate') {
+          return caches.match('/pages/cart.html').then((cached) => cached || fetch('/offline.html').catch(() => new Response('Offline - Network unavailable', { status: 503 })));
+        }
+        return Promise.reject(error);
+      })
   );
+});
+
+// Background sync: attempt to POST pending cart updates to /sync-cart (best-effort)
+self.addEventListener('sync', (event) => {
+  if (event.tag === 'sync-cart') {
+    event.waitUntil(
+      (async () => {
+        try {
+          const cache = await caches.open('naturesi-static-v1');
+          const req = new Request('/sync-cart', { method: 'POST' });
+          // Attempt a fetch to trigger server-side sync; if server unavailable, it will be retried
+          await fetch(req).catch(() => Promise.resolve());
+        } catch (e) {
+          // swallow errors - sync will retry later if supported
+        }
+      })()
+    );
+  }
 });
