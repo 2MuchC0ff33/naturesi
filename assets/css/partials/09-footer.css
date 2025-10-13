@@ -60,12 +60,18 @@ footer[itemscope][itemtype*='WPFooter'] a:hover {
 }
 
 .site-footer .legal-bar {
-  width: 100vw;
+  /* Use full width without forcing 100vw which can create horizontal scrollbar
+     when the page has padding or when scrollbars are present. Keep visual
+     full-bleed using calc() and avoid overflow. */
+  /* Use a safe full-width bar that does not rely on viewport-unit arithmetic
+    which can cause overflow on some mobile browsers. This keeps the bar
+    contained within the page width to avoid creating a horizontal scroll. */
+  width: 100%;
   position: relative;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
+  left: 0;
+  right: 0;
+  margin-left: 0;
+  margin-right: 0;
   box-sizing: border-box;
   padding: var(--space-sm) var(--space-md);
   background: color-mix(in srgb, var(--color-accent) 12%, black 4%);
