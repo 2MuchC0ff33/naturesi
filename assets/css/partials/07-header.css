@@ -294,3 +294,150 @@ Core header bar, logo treatment and colour gradient live here.
     border-radius: 0.5rem;
   }
 }
+
+/* Small-screen header: change grid -> single column, stack center controls
+   Acceptance: header stacks vertically on phones, no horizontal overflow,
+   category select and search become full-width, skip-link placement adjusted. */
+@media (max-width: 640px) {
+
+  /* Make the header a single column so the center controls can't force a wide row */
+  .site-nav {
+    grid-template-columns: 1fr;
+    align-items: start;
+    gap: var(--space-xs);
+  }
+
+  /* Order the regions so logo stays top, centre controls next, actions last */
+  .site-nav .nav-left {
+    order: 1;
+    justify-content: flex-start;
+  }
+
+  .nav-center {
+    order: 2;
+    width: 100%;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+
+  .nav-right {
+    order: 3;
+    justify-content: flex-end;
+    margin-top: 0.25rem;
+  }
+
+  /* Ensure the nav-center internal wrapper stacks and stretches */
+  .nav-center-flex {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.6rem;
+    width: 100%;
+  }
+
+  /* Make search and category controls fill available width */
+  .site-search {
+    max-width: none;
+    width: 100%;
+  }
+
+  .site-search .search-dropdown,
+  .site-search .search-box {
+    flex: 0 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Category select to full width so long option text doesn't cause overflow */
+  #site-category-select {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Prevent logo/cart from stretching the row */
+  .site-nav .logo,
+  .site-nav .cart-option {
+    flex: 0 0 auto;
+  }
+
+  /* Increase header-height variable used by the skip-link so the skip link is placed correctly */
+  #site-header {
+    --header-height: 6.0rem;
+    /* tuned for stacked header height on small screens */
+  }
+}
+
+/* Small-screen overflow safeguards: prevent horizontal scrolling caused by
+   elements with fixed/min-widths or viewport-width calculations. These are
+   conservative rules applied only on small screens. */
+@media (max-width: 640px) {
+
+  /* Ensure header cannot exceed viewport width and allow children to shrink */
+  #site-header,
+  .site-nav {
+    max-width: 100%;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+
+  /* Allow flex children to shrink below their content width to avoid overflow */
+  .site-nav .nav-left,
+  .site-nav .nav-center,
+  .site-nav .nav-right,
+  .nav-center-flex,
+  .site-search,
+  .site-search .search-box,
+  .site-search .search-dropdown,
+  #site-category-select {
+    min-width: 0;
+  }
+
+  /* Constrain any element that might use viewport units elsewhere: keep rules
+     targeted above instead of using a global empty :root block. */
+}
+
+/* Extra strong overrides for small screens to eliminate header overflow */
+@media (max-width: 640px) {
+
+  /* Allow nav sections to wrap content instead of forcing no-wrap */
+  .site-nav .nav-left,
+  .site-nav .nav-center,
+  .site-nav .nav-right {
+    white-space: normal !important;
+    min-width: 0 !important;
+  }
+
+  /* Stack the search controls vertically and force full-width inputs/dropdowns */
+  .site-nav .site-search,
+  .site-search {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 0.5rem !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .site-search .search-box,
+  .site-search .search-dropdown,
+  #site-category-select,
+  .category-dropdown,
+  .category-dropdown summary {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    min-width: 0 !important;
+  }
+
+  /* Ensure any inline icon/button doesn't add extra width when stacked */
+  .site-search .search-icon,
+  .site-nav .search-icon,
+  .site-nav .cart-option {
+    align-self: flex-end !important;
+  }
+
+  /* Make sure the nav center flex wrapper stretches fully and allows children to shrink */
+  .nav-center-flex {
+    align-items: stretch !important;
+    width: 100% !important;
+  }
+}
