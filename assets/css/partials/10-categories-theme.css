@@ -99,25 +99,15 @@ print fallbacks.
   display: none;
 }
 
-/* Media Queries — Device, Dark Mode, Print */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-background: #121212;
-    --color-text: #f5f5f5;
-    --color-light-background: #2d4d4c;
-    --color-border: #333333;
-  }
-
-  img {
-    filter: brightness(0.9);
-  }
-
-  a {
-    color: color-mix(in srgb, var(--color-accent) 80%, white);
-  }
-}
+/* Media Queries — Device, Print / Dark mode intentionally disabled
+   Force light mode: previously there was an @media (prefers-color-scheme: dark)
+   block that changed colours based on the user's system preference. To ensure
+   the site displays in light mode consistently for all users (and the build
+   requirement 'force light mode all the time'), dark-mode styles are intentionally
+   disabled. If dark styling is ever re-enabled, restore the original block. */
 
 @media print {
+
   *,
   *::before,
   *::after {

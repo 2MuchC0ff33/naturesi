@@ -189,14 +189,9 @@ Core header bar, logo treatment and colour gradient live here.
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-
-  .site-nav .logo,
-  .site-nav .all-logo {
-    background: rgba(0, 0, 0, 0.45);
-    color: white;
-  }
-}
+/* Dark mode styling intentionally disabled to force light mode across the site.
+   Previously the logo background and colour were inverted in dark mode; this
+   ensures consistent light appearance regardless of OS preference. */
 
 @media (max-width: 420px) {
   .cart-option .cart-text {
