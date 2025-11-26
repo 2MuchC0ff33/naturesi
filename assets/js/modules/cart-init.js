@@ -171,19 +171,18 @@ export async function initCart() {
     }
 
     const postcodeInput = document.getElementById('checkout-postcode');
-    const parcelSelect = document.getElementById('checkout-parcel-type');
     async function runEstimate() {
         const pc = postcodeInput ? postcodeInput.value : '';
-        const parcel = parcelSelect ? parcelSelect.value : 'satchel';
+        // Parcel type removed from UI; use a sensible default here (satchel)
+        const parcel = 'satchel';
         const res = await displayShippingEstimate(pc, parcel, { storeState: 'WA', storePostcode: '6147' });
         currentShippingRate = (res && res.rate) ? Number(res.rate) : 0;
         updateCartTableTotalsWithShipping(currentShippingRate);
     }
     const debouncedRun = debounce(runEstimate, 300);
     if (postcodeInput) postcodeInput.addEventListener('input', debouncedRun);
-    if (parcelSelect) parcelSelect.addEventListener('change', debouncedRun);
-    // run initial estimate if values present
-    if ((postcodeInput && postcodeInput.value) || (parcelSelect && parcelSelect.value)) {
+    // run initial estimate if postcode value present
+    if (postcodeInput && postcodeInput.value) {
         runEstimate().catch(() => { });
     }
 

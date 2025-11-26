@@ -326,17 +326,7 @@
           <input id="checkout-postcode" name="postcode" type="text" inputmode="numeric" pattern="\d*" maxlength="4"
             placeholder="e.g. 6147" aria-describedby="shipping-help" />
 
-          <label for="checkout-parcel-type">Parcel</label>
-          <select id="checkout-parcel-type" name="parcelType" aria-label="Parcel type">
-            <option value="pouch">Pouch (250g)</option>
-            <option value="satchel">Satchel (500g)</option>
-            <option value="handbag">Handbag (1kg)</option>
-            <option value="shoebox">Shoebox (3kg)</option>
-            <option value="briefcase">Briefcase (5kg)</option>
-            <option value="carryon">Carry-on (10kg)</option>
-            <option value="duffle">Duffle (20kg)</option>
-            <option value="checkin">Check-in (25kg)</option>
-          </select>
+          <!-- Parcel type selection removed; estimator uses a default parcel type. -->
           <p id="shipping-help" class="muted">Enter your postcode to see an estimated Sendle rate (excl. GST &amp; fuel
             surcharge).</p>
         </form>
