@@ -170,20 +170,37 @@ export async function initCart() {
         };
     }
 
-    const postcodeInput = document.getElementById('checkout-postcode');
-    async function runEstimate() {
-        const pc = postcodeInput ? postcodeInput.value : '';
+    // Estimator listener attachment: run after DOM ready so elements exist.
+    const runEstimate = async () => {
+        const pcEl = document.getElementById('checkout-postcode');
+        const pc = pcEl ? pcEl.value : '';
         // Parcel type removed from UI; use a sensible default here (satchel)
         const parcel = 'satchel';
         const res = await displayShippingEstimate(pc, parcel, { storeState: 'WA', storePostcode: '6147' });
         currentShippingRate = (res && res.rate) ? Number(res.rate) : 0;
         updateCartTableTotalsWithShipping(currentShippingRate);
-    }
+    };
+
     const debouncedRun = debounce(runEstimate, 300);
-    if (postcodeInput) postcodeInput.addEventListener('input', debouncedRun);
-    // run initial estimate if postcode value present
-    if (postcodeInput && postcodeInput.value) {
-        runEstimate().catch(() => { });
+
+    function attachEstimatorListeners() {
+        const form = document.getElementById('shipping-estimator');
+        const postcodeEl = document.getElementById('checkout-postcode');
+        if (form) {
+            // Prevent the estimator form from submitting (Enter key) which would reload the page
+            form.addEventListener('submit', (ev) => { ev.preventDefault(); });
+        }
+        if (postcodeEl) {
+            postcodeEl.addEventListener('input', debouncedRun);
+            // run initial estimate if value present
+            if (postcodeEl.value && postcodeEl.value.trim()) runEstimate().catch(() => { });
+        }
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', attachEstimatorListeners, { once: true });
+    } else {
+        attachEstimatorListeners();
     }
 
     // return the store so callers (app.js) can expose a debug API
