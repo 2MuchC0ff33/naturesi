@@ -2,7 +2,7 @@
 let PRODUCT_INDEX = null;
 
 // Shipping UI helpers: display shipping estimate in the cart summary
-import { calculateParcelRate, getPostcodeZone } from './cartStore.js';
+import { calculateParcelRate, calculateShippingByWeight, getPostcodeZone } from './cartStore.js';
 
 export function setProductIndex(index) {
     PRODUCT_INDEX = index;
@@ -213,6 +213,17 @@ export async function displayShippingEstimate(postcode, parcelType, opts = {}) {
     }
 
     try {
+        // If totalWeight is provided, compute shipping based on weight; otherwise use parcelType
+        if (opts && opts.totalWeight) {
+            const res = await calculateShippingByWeight(opts.totalWeight, postcode, opts);
+            if (!res || res.totalRate === null || Number.isNaN(res.totalRate)) {
+                el.textContent = 'Calculated at checkout';
+                return null;
+            }
+            el.textContent = `AUD $${Number(res.totalRate).toFixed(2)} (Type: ${res.parcelType}, Zone: ${res.zone})`;
+            return res;
+        }
+
         const res = await calculateParcelRate(parcelType, postcode, opts);
         if (!res || res.rate === null || Number.isNaN(res.rate)) {
             el.textContent = 'Calculated at checkout';

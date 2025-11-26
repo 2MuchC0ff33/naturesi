@@ -179,3 +179,67 @@ export async function calculateParcelRate(parcelType, postcode, opts = {}) {
     const rate = (typeRates[zone] !== undefined && typeRates[zone] !== null) ? Number(typeRates[zone]) : null;
     return { zone, rate };
 }
+
+// Calculate shipping based on total weight (grams) and postcode.
+// Heuristic mapping of weight -> parcel type is used here. Adjust `PARCEL_SPECS`
+// below to reflect your real Sendle parcel weight limits.
+export async function calculateShippingByWeight(totalWeightGrams, postcode, opts = {}) {
+    const w = Number(totalWeightGrams) || 0;
+    const pc = normalizePostcode(postcode);
+    const postage = await _loadJSON('/assets/js/data/postage.json');
+    const postcodesData = await _loadJSON('/assets/js/data/australian_postcodes.json');
+
+    // Minimal parcel specs (max weight in grams). Tweak to match Sendle's real limits.
+    const PARCEL_SPECS = [
+        { type: 'pouch', maxGrams: 500 },
+        { type: 'satchel', maxGrams: 3000 },
+        { type: 'handbag', maxGrams: 5000 },
+        { type: 'shoebox', maxGrams: 10000 },
+        { type: 'briefcase', maxGrams: 15000 },
+        { type: 'carryon', maxGrams: 20000 },
+        { type: 'duffle', maxGrams: 25000 },
+        { type: 'checkin', maxGrams: Infinity }
+    ];
+
+    // Choose smallest parcel type that can accommodate weight
+    let chosen = PARCEL_SPECS.find((s) => w <= s.maxGrams) || PARCEL_SPECS[PARCEL_SPECS.length - 1];
+    const parcelType = chosen.type;
+
+    // Base rate (uses existing helper)
+    const base = await calculateParcelRate(parcelType, pc, opts);
+    const zone = base.zone;
+    if (!postage) return { parcelType, zone, baseRate: base.rate, totalRate: null };
+
+    let total = (base.rate === null || base.rate === undefined) ? null : Number(base.rate);
+
+    // Determine surcharge level from postcode data heuristically
+    let mmm = null;
+    if (postcodesData && postcodesData.postcodes && postcodesData.postcodes[pc]) {
+        const entry = postcodesData.postcodes[pc];
+        mmm = entry && entry.mmm_2019 ? parseInt(String(entry.mmm_2019).replace(/\D/g, ''), 10) : null;
+    }
+
+    // Apply surcharges: MMM >=5 => remoteSurcharge, MMM ===4 => regionalSurcharge, else none
+    if (total !== null) {
+        if (postage.remoteSurcharge && mmm >= 5) {
+            const extra = postage.remoteSurcharge[parcelType];
+            if (extra) total += Number(extra);
+            // additional W/ANT extra for very remote bulky items
+            if (postage.remoteWaNtExtra && postage.remoteWaNtExtra[parcelType]) {
+                total += Number(postage.remoteWaNtExtra[parcelType]);
+            }
+        } else if (postage.regionalSurcharge && mmm === 4) {
+            const extra = postage.regionalSurcharge[parcelType];
+            if (extra) total += Number(extra);
+        }
+    }
+
+    return {
+        parcelType,
+        zone,
+        baseRate: base.rate,
+        totalRate: total,
+        chosenSpec: chosen,
+        mmm
+    };
+}
