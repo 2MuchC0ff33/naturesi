@@ -187,7 +187,18 @@ export function updateCartTableTotals() {
     const subEl = document.getElementById('summary-subtotal');
     const totalEl = document.getElementById('summary-total');
     if (subEl) subEl.textContent = `AUD $${subtotal.toFixed(2)}`;
-    if (totalEl) totalEl.textContent = `AUD $${subtotal.toFixed(2)}`;
+    // If a shipping value is attached to the function (as an optional second arg), use it.
+    // Default shipping is 0 when not provided.
+}
+
+export function updateCartTableTotalsWithShipping(shipping = 0) {
+    const subEl = document.getElementById('summary-subtotal');
+    const totalEl = document.getElementById('summary-total');
+    // Read subtotal from DOM (keeps calculation source-of-truth in one place)
+    const subtotalText = subEl ? (subEl.textContent || '').replace(/[^0-9\.]/g, '') : '0';
+    const subtotal = parseFloat(subtotalText) || 0;
+    const total = subtotal + (parseFloat(shipping) || 0);
+    if (totalEl) totalEl.textContent = `AUD $${total.toFixed(2)}`;
 }
 
 // Display a shipping estimate for a given postcode and parcel type.

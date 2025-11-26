@@ -14,7 +14,7 @@
 */
 
 import { CartStore } from './cartStore.js';
-import { updateCartCountOutputs, renderCartTable, setProductIndex } from './cartUI.js';
+import { updateCartCountOutputs, renderCartTable, setProductIndex, displayShippingEstimate, updateCartTableTotalsWithShipping } from './cartUI.js';
 import { requestBackgroundSync } from './sync.js';
 
 // initCart - centralised cart initialiser extracted from app.js
@@ -40,6 +40,10 @@ export async function initCart() {
     const cart = cartStore.get();
     updateCartCountOutputs((cart.items || []).reduce((s, it) => s + (parseInt(it.quantity, 10) || 0), 0));
     renderCartTable(cart);
+    // Shipping rate in AUD (excl GST & fuel surcharge). Updated by estimator.
+    let currentShippingRate = 0;
+    // Ensure totals include current shipping (initially 0)
+    updateCartTableTotalsWithShipping(currentShippingRate);
 
     // Delegated submit handler for add-to-cart forms (uses native FormData)
     document.addEventListener('submit', async (ev) => {
@@ -82,6 +86,8 @@ export async function initCart() {
             const updated = cartStore.get();
             updateCartCountOutputs((updated.items || []).reduce((s, it) => s + (parseInt(it.quantity, 10) || 0), 0));
             renderCartTable(updated);
+            // Keep totals in sync with the latest shipping rate
+            updateCartTableTotalsWithShipping(currentShippingRate);
             // Dispatch a custom event for other scripts to listen to
             document.dispatchEvent(new CustomEvent('cart:updated', { detail: { cart: updated } }));
             // best-effort background sync registration
@@ -115,6 +121,8 @@ export async function initCart() {
         const c = cartStore.get();
         updateCartCountOutputs((c.items || []).reduce((s, it) => s + (parseInt(it.quantity, 10) || 0), 0));
         renderCartTable(c);
+        // Keep totals in sync after quantity updates
+        updateCartTableTotalsWithShipping(currentShippingRate);
     });
 
     // Global delegated handler so remove buttons work even if the cart table
@@ -145,10 +153,39 @@ export async function initCart() {
             const c2 = cartStore.get();
             updateCartCountOutputs((c2.items || []).reduce((s, it) => s + (parseInt(it.quantity, 10) || 0), 0));
             renderCartTable(c2);
+            // update totals after removal
+            updateCartTableTotalsWithShipping(currentShippingRate);
         } catch (e) {
             console.error('Error removing cart item:', e);
         }
     });
+
+    // Shipping estimator wiring: live postcode + parcel type
+    // Debounce helper
+    function debounce(fn, wait = 300) {
+        let t = null;
+        return function debounced(...args) {
+            clearTimeout(t);
+            t = setTimeout(() => fn.apply(this, args), wait);
+        };
+    }
+
+    const postcodeInput = document.getElementById('checkout-postcode');
+    const parcelSelect = document.getElementById('checkout-parcel-type');
+    async function runEstimate() {
+        const pc = postcodeInput ? postcodeInput.value : '';
+        const parcel = parcelSelect ? parcelSelect.value : 'satchel';
+        const res = await displayShippingEstimate(pc, parcel, { storeState: 'WA', storePostcode: '6147' });
+        currentShippingRate = (res && res.rate) ? Number(res.rate) : 0;
+        updateCartTableTotalsWithShipping(currentShippingRate);
+    }
+    const debouncedRun = debounce(runEstimate, 300);
+    if (postcodeInput) postcodeInput.addEventListener('input', debouncedRun);
+    if (parcelSelect) parcelSelect.addEventListener('change', debouncedRun);
+    // run initial estimate if values present
+    if ((postcodeInput && postcodeInput.value) || (parcelSelect && parcelSelect.value)) {
+        runEstimate().catch(() => { });
+    }
 
     // return the store so callers (app.js) can expose a debug API
     return cartStore;
