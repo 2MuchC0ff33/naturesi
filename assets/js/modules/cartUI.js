@@ -1,6 +1,9 @@
 // Cart UI helpers: update header count outputs and render cart table
 let PRODUCT_INDEX = null;
 
+// Shipping UI helpers: display shipping estimate in the cart summary
+import { calculateParcelRate, getPostcodeZone } from './cartStore.js';
+
 export function setProductIndex(index) {
     PRODUCT_INDEX = index;
 }
@@ -185,4 +188,30 @@ export function updateCartTableTotals() {
     const totalEl = document.getElementById('summary-total');
     if (subEl) subEl.textContent = `AUD $${subtotal.toFixed(2)}`;
     if (totalEl) totalEl.textContent = `AUD $${subtotal.toFixed(2)}`;
+}
+
+// Display a shipping estimate for a given postcode and parcel type.
+// parcelType should match keys in `assets/js/data/postage.json` (e.g. 'satchel').
+export async function displayShippingEstimate(postcode, parcelType, opts = {}) {
+    const el = document.getElementById('summary-shipping');
+    if (!el) return null;
+
+    if (!postcode) {
+        el.textContent = 'Calculated at checkout';
+        return null;
+    }
+
+    try {
+        const res = await calculateParcelRate(parcelType, postcode, opts);
+        if (!res || res.rate === null || Number.isNaN(res.rate)) {
+            el.textContent = 'Calculated at checkout';
+            return null;
+        }
+        el.textContent = `AUD $${res.rate.toFixed(2)} (Zone: ${res.zone})`;
+        return res;
+    } catch (err) {
+        console.error('Error calculating shipping estimate', err);
+        el.textContent = 'Calculated at checkout';
+        return null;
+    }
 }
