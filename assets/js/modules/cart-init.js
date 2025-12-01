@@ -17,6 +17,45 @@ import { CartStore } from './cartStore.js';
 import { updateCartCountOutputs, renderCartTable, setProductIndex, displayShippingEstimate, updateCartTableTotalsWithShipping } from './cartUI.js';
 import { requestBackgroundSync } from './sync.js';
 
+// Shared utility: parse weight string to grams
+function parseWeightString(wstr) {
+    if (!wstr) return 0;
+    const num = String(wstr).replace(/,/g, '').match(/[0-9]+(?:\.[0-9]+)?/);
+    if (!num) return 0;
+    const val = Number(num[0]);
+    // Heuristic: if unit 'kg' present, convert to grams
+    if (/kg/i.test(wstr)) return Math.round(val * 1000);
+    return Math.round(val);
+}
+
+// Shared utility: calculate total weight from cart items using product index
+function calculateTotalWeight(cartItems, productIndex) {
+    let totalGrams = 0;
+    (cartItems || []).forEach((it) => {
+        let weightPerItem = 0;
+        if (productIndex && it.id && (productIndex[it.id] || productIndex[it.sku])) {
+            const prod = productIndex[it.id] || productIndex[it.sku];
+            // Prefer explicit option match
+            if (it.size && Array.isArray(prod.options)) {
+                const opt = prod.options.find((o) => o.id === it.size || o.label === it.size);
+                if (opt && opt.weight) weightPerItem = parseWeightString(opt.weight);
+            }
+            // Fallback: product-level option or first option
+            if (!weightPerItem && Array.isArray(prod.options) && prod.options.length) {
+                const opt0 = prod.options[0];
+                if (opt0 && opt0.weight) weightPerItem = parseWeightString(opt0.weight);
+            }
+            // Fallback: product-level weight field
+            if (!weightPerItem && prod.weight) weightPerItem = parseWeightString(prod.weight);
+        }
+        // Final fallback: assume 50 grams per item
+        if (!weightPerItem) weightPerItem = 50;
+        const qty = parseInt(it.quantity, 10) || 0;
+        totalGrams += weightPerItem * qty;
+    });
+    return totalGrams;
+}
+
 // initCart - centralised cart initialiser extracted from app.js
 export async function initCart() {
     const cartStore = new CartStore();
@@ -129,27 +168,8 @@ export async function initCart() {
         // Re-run shipping estimator with current postcode and cart
         const postcodeEl = document.getElementById('checkout-postcode');
         if (postcodeEl) {
-            // Use the same estimator logic as in runEstimate
             const pc = postcodeEl.value;
-            let totalGrams = 0;
-            (c.items || []).forEach((it) => {
-                let weightPerItem = 0;
-                if (idx && it.id && (idx[it.id] || idx[it.sku])) {
-                    const prod = idx[it.id] || idx[it.sku];
-                    if (it.size && Array.isArray(prod.options)) {
-                        const opt = prod.options.find((o) => o.id === it.size || o.label === it.size);
-                        if (opt && opt.weight) weightPerItem = parseWeightString(opt.weight);
-                    }
-                    if (!weightPerItem && Array.isArray(prod.options) && prod.options.length) {
-                        const opt0 = prod.options[0];
-                        if (opt0 && opt0.weight) weightPerItem = parseWeightString(opt0.weight);
-                    }
-                    if (!weightPerItem && prod.weight) weightPerItem = parseWeightString(prod.weight);
-                }
-                if (!weightPerItem) weightPerItem = 50;
-                const qty = parseInt(it.quantity, 10) || 0;
-                totalGrams += weightPerItem * qty;
-            });
+            const totalGrams = calculateTotalWeight(c.items, idx);
             displayShippingEstimate(pc, null, { storeState: 'WA', storePostcode: '6147', totalWeight: totalGrams });
         }
     });
@@ -200,45 +220,12 @@ export async function initCart() {
     }
 
     // Estimator listener attachment: run after DOM ready so elements exist.
-    // Compute total weight (grams) for current cart using the local product index `idx`.
-    function parseWeightString(wstr) {
-        if (!wstr) return 0;
-        const num = String(wstr).replace(/,/g, '').match(/[0-9]+(?:\.[0-9]+)?/);
-        if (!num) return 0;
-        const val = Number(num[0]);
-        // Heuristic: if unit 'kg' present, convert to grams
-        if (/kg/i.test(wstr)) return Math.round(val * 1000);
-        return Math.round(val);
-    }
-
     const runEstimate = async () => {
         const pcEl = document.getElementById('checkout-postcode');
         const pc = pcEl ? pcEl.value : '';
-        // Calculate total weight from cart items using `idx` (product index)
+        // Calculate total weight from cart items using shared utility
         const cart = cartStore.get();
-        let totalGrams = 0;
-        (cart.items || []).forEach((it) => {
-            let weightPerItem = 0;
-            if (idx && it.id && (idx[it.id] || idx[it.sku])) {
-                const prod = idx[it.id] || idx[it.sku];
-                // prefer explicit option match
-                if (it.size && Array.isArray(prod.options)) {
-                    const opt = prod.options.find((o) => o.id === it.size || o.label === it.size);
-                    if (opt && opt.weight) weightPerItem = parseWeightString(opt.weight);
-                }
-                // fallback: product-level option or first option
-                if (!weightPerItem && Array.isArray(prod.options) && prod.options.length) {
-                    const opt0 = prod.options[0];
-                    if (opt0 && opt0.weight) weightPerItem = parseWeightString(opt0.weight);
-                }
-                // fallback: product-level weight field
-                if (!weightPerItem && prod.weight) weightPerItem = parseWeightString(prod.weight);
-            }
-            // final fallback: assume 50 grams per item
-            if (!weightPerItem) weightPerItem = 50;
-            const qty = parseInt(it.quantity, 10) || 0;
-            totalGrams += weightPerItem * qty;
-        });
+        const totalGrams = calculateTotalWeight(cart.items, idx);
 
         console.debug('[ShippingEstimator] postcode:', pc, 'totalWeight:', totalGrams, 'cart:', cart.items);
         const res = await displayShippingEstimate(pc, null, { storeState: 'WA', storePostcode: '6147', totalWeight: totalGrams });

@@ -2,7 +2,7 @@
 let PRODUCT_INDEX = null;
 
 // Shipping UI helpers: display shipping estimate in the cart summary
-import { calculateParcelRate, calculateShippingByWeight, getPostcodeZone } from './cartStore.js';
+import { calculateParcelRate, calculateShippingByWeight } from './cartStore.js';
 
 export function setProductIndex(index) {
     PRODUCT_INDEX = index;
@@ -187,8 +187,8 @@ export function updateCartTableTotals() {
     const subEl = document.getElementById('summary-subtotal');
     const totalEl = document.getElementById('summary-total');
     if (subEl) subEl.textContent = `AUD $${subtotal.toFixed(2)}`;
-    // If a shipping value is attached to the function (as an optional second arg), use it.
-    // Default shipping is 0 when not provided.
+    // Update total as subtotal (shipping = 0 by default in this context)
+    if (totalEl) totalEl.textContent = `AUD $${subtotal.toFixed(2)}`;
 }
 
 export function updateCartTableTotalsWithShipping(shipping = 0) {

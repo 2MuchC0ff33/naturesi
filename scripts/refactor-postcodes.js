@@ -42,7 +42,7 @@ for (const item of arr) {
             chargezone: item.chargezone || '',
             region: item.region || '',
             ra_2016: item.RA_2016 || '',
-            MMM_2019: item.MMM_2019 || ''
+            mmm_2019: item.MMM_2019 || ''
         };
     }
 
@@ -65,7 +65,7 @@ for (const item of arr) {
     if (!entry.region && item.region) entry.region = item.region;
     if (!entry.state && item.state) entry.state = item.state;
     if ((!entry.ra_2016 || entry.ra_2016 === '') && (item.RA_2016 || item.RA_2016 === 0)) entry.ra_2016 = item.RA_2016;
-    if ((!entry.MMM_2019 || entry.MMM_2019 === '') && (item.MMM_2019 || item.MMM_2019 === 0)) entry.MMM_2019 = item.MMM_2019;
+    if ((!entry.mmm_2019 || entry.mmm_2019 === '') && (item.MMM_2019 || item.MMM_2019 === 0)) entry.mmm_2019 = item.MMM_2019;
 }
 
 // Build compact structure
@@ -90,7 +90,7 @@ for (const [pc, entry] of Object.entries(map)) {
         chargezone: entry.chargezone || '',
         region: entry.region || '',
         ra_2016: entry.ra_2016 || '',
-        mmm_2019: entry.MMM_2019 || ''
+        mmm_2019: entry.mmm_2019 || ''
     };
 }
 

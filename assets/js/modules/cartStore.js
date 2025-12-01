@@ -101,6 +101,10 @@ export class CartStore {
 // and provide a small mapping from a destination postcode to a Sendle zone.
 // The mapping is intentionally conservative and configurable via `opts`.
 
+// Module-level caches for JSON data
+let cachedPostcodes = null;
+let cachedPostage = null;
+
 export async function _loadJSON(path) {
     try {
         const res = await fetch(path, { cache: 'no-cache' });
@@ -129,7 +133,10 @@ export async function getPostcodeZone(postcode, opts = {}) {
     const storeState = opts.storeState || 'WA';
     const storePc = opts.storePostcode ? normalizePostcode(opts.storePostcode) : null;
 
-    const data = await _loadJSON('/assets/js/data/australian_postcodes.json');
+    if (!cachedPostcodes) {
+        cachedPostcodes = await _loadJSON('/assets/js/data/australian_postcodes.json');
+    }
+    const data = cachedPostcodes;
     if (!data || !data.postcodes) return 'national';
 
     if (storePc && pc === storePc) return 'sameCity';
@@ -171,7 +178,10 @@ export async function getPostcodeZone(postcode, opts = {}) {
 export async function calculateParcelRate(parcelType, postcode, opts = {}) {
     const p = (parcelType || '').toString().toLowerCase();
     const zone = await getPostcodeZone(postcode, opts);
-    const postage = await _loadJSON('/assets/js/data/postage.json');
+    if (!cachedPostage) {
+        cachedPostage = await _loadJSON('/assets/js/data/postage.json');
+    }
+    const postage = cachedPostage;
     if (!postage || !postage.baseRates) return { zone, rate: null };
 
     const typeRates = postage.baseRates[p];
@@ -186,8 +196,16 @@ export async function calculateParcelRate(parcelType, postcode, opts = {}) {
 export async function calculateShippingByWeight(totalWeightGrams, postcode, opts = {}) {
     const w = Number(totalWeightGrams) || 0;
     const pc = normalizePostcode(postcode);
-    const postage = await _loadJSON('/assets/js/data/postage.json');
-    const postcodesData = await _loadJSON('/assets/js/data/australian_postcodes.json');
+    
+    // Load cached data (uses module-level cache)
+    if (!cachedPostage) {
+        cachedPostage = await _loadJSON('/assets/js/data/postage.json');
+    }
+    if (!cachedPostcodes) {
+        cachedPostcodes = await _loadJSON('/assets/js/data/australian_postcodes.json');
+    }
+    const postage = cachedPostage;
+    const postcodesData = cachedPostcodes;
 
     // Minimal parcel specs (max weight in grams). Tweak to match Sendle's real limits.
     const PARCEL_SPECS = [
