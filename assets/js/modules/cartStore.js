@@ -196,7 +196,7 @@ export async function calculateParcelRate(parcelType, postcode, opts = {}) {
 export async function calculateShippingByWeight(totalWeightGrams, postcode, opts = {}) {
     const w = Number(totalWeightGrams) || 0;
     const pc = normalizePostcode(postcode);
-    
+
     // Load cached data (uses module-level cache)
     if (!cachedPostage) {
         cachedPostage = await _loadJSON('/assets/js/data/postage.json');
