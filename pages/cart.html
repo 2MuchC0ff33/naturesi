@@ -8,7 +8,7 @@
   <meta name="viewport" content=" width=device-width,initial-scale=1">
 
   <!-- Sets the theme color for mobile browsers (using your accent color) -->
-  <meta name="color-scheme" content="light dark">
+  <meta name="color-scheme" content="light">
 
   <!-- Primary Meta Tags -->
   <title>Nature's Infusions | Premium Organic Teas &amp; Herbal Remedies</title>
@@ -171,8 +171,7 @@
 
       <!-- Improved nav-center: group category and search in a flex wrapper -->
       <div class="nav-center">
-        <div class="nav-center-flex"
-          style="display: flex; flex-direction: row; gap: 1.2rem; align-items: center; width: 100%; justify-content: center;">
+        <div class="nav-center-flex">
           <!-- Category select -->
           <nav aria-label="Browse by category" class="category-dropdown">
             <form action="/pages/store.html" method="get" id="category-nav-form" aria-label="Browse by category">
@@ -293,7 +292,7 @@
           </tbody>
         </table>
 
-        <div class="cart-actions" style="display:flex;gap:1rem;align-items:center;margin-top:1rem;">
+        <div class="cart-actions">
           <button type="submit" class="button" id="update-cart">Update Cart</button>
           <a class="button button-secondary" href="/pages/store.html">Continue Shopping</a>
           <!-- Checkout placeholder: disabled to indicate this is an example and payment integration is out of scope -->
@@ -302,7 +301,7 @@
         </div>
       </form>
 
-      <aside class="order-summary" aria-labelledby="summary-heading" style="margin-top:1.5rem;">
+      <aside class="order-summary" aria-labelledby="summary-heading">
         <h2 id="summary-heading">Order Summary</h2>
         <dl>
           <div>
@@ -311,13 +310,26 @@
           </div>
           <div>
             <dt>Shipping</dt>
-            <dd><span id="summary-shipping">Calculated at checkout</span></dd>
+            <dd>
+              <span id="summary-shipping">Calculated at checkout</span>
+            </dd>
           </div>
           <div>
             <dt>Total</dt>
             <dd><strong id="summary-total">AUD $42.00</strong></dd>
           </div>
         </dl>
+
+        <!-- Live shipping estimator controls -->
+        <form id="shipping-estimator" aria-label="Shipping estimator">
+          <label for="checkout-postcode">Postcode</label>
+          <input id="checkout-postcode" name="postcode" type="text" inputmode="numeric" pattern="\d*" maxlength="4"
+            placeholder="e.g. 6147" aria-describedby="shipping-help" />
+
+          <!-- Parcel type selection removed; estimator uses a default parcel type. -->
+          <p id="shipping-help" class="muted">Optional: Enter your postcode to see an estimated Sendle rate (excluding GST &amp; fuel
+            surcharge).</p>
+        </form>
       </aside>
     </section>
   </main>

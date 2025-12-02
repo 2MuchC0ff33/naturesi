@@ -60,6 +60,18 @@
     border-radius: var(--radius-sm);
 }
 
+/* Move inline spacing from pages/cart.html into CSS */
+.order-summary {
+    margin-top: 1.5rem;
+}
+
+.cart-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-top: 1rem;
+}
+
 /* Ensure high contrast for badge */
 @media (prefers-contrast: high) {
     .cart-count {
@@ -71,3 +83,34 @@
 }
 
 /* End of cart partial */
+
+/* Shipping estimator controls (moved from inline markup) */
+#shipping-estimator {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+}
+
+#shipping-estimator label {
+    font-size: 0.95rem;
+    margin-right: 0.25rem;
+}
+
+#checkout-postcode {
+    width: 7ch;
+    padding: 0.35rem 0.5rem;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    font-size: 0.95rem;
+}
+
+/* parcel type dropdown removed from markup; no styles required */
+
+#shipping-help {
+    flex-basis: 100%;
+    margin: 0.25rem 0 0 0;
+    font-size: 0.9rem;
+    color: var(--muted-color, #6b7280);
+}
