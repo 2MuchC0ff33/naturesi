@@ -47,78 +47,8 @@ export function renderCartTable(cart) {
     // correct item when multiple sizes/options exist. Keep as empty string when
     // not provided (matches how items are created elsewhere).
     tr.dataset.productSize = it.size || '';
-    // Build row markup safely
-    // Prefer canonical product index metadata when available
-    let imgSrc = '';
-    let canonical = null;
-    if (PRODUCT_INDEX && it.id) canonical = PRODUCT_INDEX[it.id] || PRODUCT_INDEX[it.sku] || null;
-    if (canonical && canonical.image) imgSrc = canonical.image;
-    if (!imgSrc && it.image) imgSrc = it.image;
-    // Heuristic fallback: try to resolve by sku or id to an image in assets/img
-    if (!imgSrc) {
-      const candidate = it.sku || it.id || '';
-      if (candidate) {
-        // normalise candidate -> simple filename, allow only [a-z0-9-], must start with a letter or digit, length 1-32
-        const FILENAME_VALIDATION_REGEX = /^[a-z0-9][a-z0-9-]{0,31}$/; // 1-32 chars, must start with a letter or digit
-        const PATH_TRAVERSAL_REGEX = /\.\.\//; // Prevent directory traversal patterns
-        const RESERVED_NAMES = new Set([
-          'con',
-          'prn',
-          'aux',
-          'nul',
-          'com1',
-          'com2',
-          'com3',
-          'com4',
-          'com5',
-          'com6',
-          'com7',
-          'com8',
-          'com9',
-          'lpt1',
-          'lpt2',
-          'lpt3',
-          'lpt4',
-          'lpt5',
-          'lpt6',
-          'lpt7',
-          'lpt8',
-          'lpt9',
-        ]);
-        const safeCandidate = candidate.toString().toLowerCase();
-        const safeMatch = safeCandidate.match(FILENAME_VALIDATION_REGEX);
-        // Check against reserved names and path traversal
-        if (
-          safeMatch &&
-          !PATH_TRAVERSAL_REGEX.test(candidate) &&
-          !RESERVED_NAMES.has(safeCandidate)
-        ) {
-          // Check against known product image files if PRODUCT_INDEX is available
-          let knownImage = null;
-          if (PRODUCT_INDEX) {
-            // Try to find a product with this SKU or ID and get its image
-            const prod = PRODUCT_INDEX[candidate] || PRODUCT_INDEX[safeCandidate];
-            if (prod && prod.image) knownImage = prod.image;
-          }
-          // If knownImage is set, use it; otherwise, check if the file exists in a known set (if available)
-          if (knownImage) {
-            imgSrc = knownImage;
-          } else {
-            // Fallback: construct the image path
-            const fname = safeMatch[0] + '.webp';
-            imgSrc = `/assets/img/${fname}`;
-          }
-        }
-      }
-    }
-    const escapedName = String(it.name || '')
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#39;');
-    const desc = String(it.description || '').replace(/</g, '&lt;');
-    const sku = it.sku ? String(it.sku).replace(/</g, '&lt;') : '';
+    // Build row markup safely using DOM methods (auto-escapes text content)
+    const sku = it.sku ? String(it.sku) : '';
     const priceVal = it.price || 0;
     const qtyVal = it.quantity || 1;
 
@@ -210,7 +140,7 @@ export function updateCartTableTotals() {
     const line = row.querySelector('.line-total');
     const price = unit
       ? parseFloat((unit.dataset.price || '').toString()) ||
-        parseFloat(unit.textContent.replace(/[^0-9\.]/g, '')) ||
+        parseFloat(unit.textContent.replace(/[^0-9.]/g, '')) ||
         0
       : 0;
     const q = qty ? parseInt(qty.value, 10) || 0 : 0;
@@ -245,7 +175,7 @@ export function updateCartTableTotalsWithShipping(shipping = 0, subtotal = null)
   if (sub === null && subEl && subEl.dataset.subtotal) {
     sub = parseFloat(subEl.dataset.subtotal) || 0;
   } else if (sub === null && subEl) {
-    sub = parseFloat((subEl.textContent || '').replace(/[^0-9\.]/g, '')) || 0;
+    sub = parseFloat((subEl.textContent || '').replace(/[^0-9.]/g, '')) || 0;
   }
   sub = sub || 0;
   const total = sub + (parseFloat(shipping) || 0);
