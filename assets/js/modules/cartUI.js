@@ -195,6 +195,12 @@ export function renderCartTable(cart) {
   updateCartTableTotals();
 }
 
+/**
+ * Update cart table line totals and summary subtotal.
+ * Iterates through cart rows, calculates line totals, and updates the summary.
+ * Stores the subtotal in a data-subtotal attribute for reliable retrieval.
+ * @returns {number} The calculated subtotal value.
+ */
 export function updateCartTableTotals() {
   const rows = document.querySelectorAll('.cart-table tbody tr');
   let subtotal = 0;
@@ -224,8 +230,13 @@ export function updateCartTableTotals() {
   return subtotal;
 }
 
-// Update total with shipping. Accepts optional subtotal parameter to avoid parsing DOM text.
-// If subtotal is not provided, reads from data-subtotal attribute set by updateCartTableTotals.
+/**
+ * Update the cart total with shipping cost.
+ * Accepts optional subtotal parameter to avoid parsing DOM text.
+ * Fallback chain: parameter → data-subtotal attribute → parse text content.
+ * @param {number} [shipping=0] - The shipping cost to add to the subtotal.
+ * @param {number|null} [subtotal=null] - Optional subtotal value. If not provided, reads from data attribute or DOM.
+ */
 export function updateCartTableTotalsWithShipping(shipping = 0, subtotal = null) {
   const subEl = document.getElementById('summary-subtotal');
   const totalEl = document.getElementById('summary-total');
