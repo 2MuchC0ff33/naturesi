@@ -35,6 +35,7 @@
     "stylelint": "stylelint \"**/*.{css,scss}\" --fix",
     "lint": "eslint \"**/*.js\" --fix",
     "generate:categories": "node scripts/generate-product-categories.js",
+    "refactor:postcodes": "node scripts/refactor-postcodes.js",
     "serve": "python -m http.server 8000",
     "pa11y": "node scripts/run-pa11y.js"
   },

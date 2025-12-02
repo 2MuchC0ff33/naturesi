@@ -8,7 +8,7 @@
   <meta name="viewport" content=" width=device-width,initial-scale=1">
 
   <!-- Sets the theme color for mobile browsers (using your accent color) -->
-  <meta name="color-scheme" content="light dark">
+  <meta name="color-scheme" content="light">
 
   <!-- Primary Meta Tags -->
   <title>Nature's Infusions | Premium Organic Teas &amp; Herbal Remedies</title>
@@ -191,7 +191,8 @@
 <body itemscope itemtype="https://schema.org/WebPage">
   <!-- WCAG: Skip link for keyboard navigation, visible on focus -->
   <a class="skip-link" href="#main-content">Skip to main content</a>
-  <header id="site-header">
+  <!-- Site-level header with role="banner" to distinguish from page-level headers -->
+  <header id="site-header" role="banner">
     <nav class="site-nav" aria-label="Site navigation">
       <div class="nav-left">
         <a class="logo" href="/" aria-label="Nature's Infusions home">
@@ -295,12 +296,16 @@
       </div>
     </nav>
   </header>
-      <ol>
-        <li><a href="/">Home</a></li>
-        <li aria-current="page">Social</li>
-      </ol>
+
+  <main id="social-page">
+    <header id="page-header">
+      <nav aria-label="Breadcrumb">
+        <ol>
+          <li><a href="/">Home</a></li>
+          <li aria-current="page">Social</li>
+        </ol>
       </nav>
-  </header>
+    </header>
 
   <article id="social-hero">
     <figure id="social-logo">
