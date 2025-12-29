@@ -126,15 +126,18 @@ export function parseWeightString(wstr) {
 }
 
 // Minimal parcel specs (max weight in grams). Moved to module level to avoid recreation on each call.
+// Updated to match Sendle's domestic parcel size thresholds (grams):
+// pouch 250g, satchel 500g, handbag 1000g, shoebox 3000g, briefcase 5000g,
+// carryon 10000g, duffle 20000g, checkin 25000g
 const PARCEL_SPECS = [
-  { type: 'pouch', maxGrams: 500 },
-  { type: 'satchel', maxGrams: 3000 },
-  { type: 'handbag', maxGrams: 5000 },
-  { type: 'shoebox', maxGrams: 10000 },
-  { type: 'briefcase', maxGrams: 15000 },
-  { type: 'carryon', maxGrams: 20000 },
-  { type: 'duffle', maxGrams: 25000 },
-  { type: 'checkin', maxGrams: Infinity },
+  { type: 'pouch', maxGrams: 250 },      // up to 250 g
+  { type: 'satchel', maxGrams: 500 },    // up to 500 g
+  { type: 'handbag', maxGrams: 1000 },   // up to 1 kg
+  { type: 'shoebox', maxGrams: 3000 },   // up to 3 kg
+  { type: 'briefcase', maxGrams: 5000 }, // up to 5 kg
+  { type: 'carryon', maxGrams: 10000 },  // up to 10 kg
+  { type: 'duffle', maxGrams: 20000 },   // up to 20 kg
+  { type: 'checkin', maxGrams: 25000 },  // up to 25 kg
 ];
 
 export async function loadJSONResource(path) {
@@ -245,25 +248,35 @@ export async function calculateShippingByWeight(totalWeightGrams, postcode, opts
 
   let total = base.rate === null || base.rate === undefined ? null : Number(base.rate);
 
-  // Determine surcharge level from postcode data heuristically
+  // Determine destination postcode meta (mmm band and destination state)
   let mmm = null;
+  let destState = null;
   if (postcodesData && postcodesData.postcodes && postcodesData.postcodes[pc]) {
     const entry = postcodesData.postcodes[pc];
     mmm = entry && entry.mmm_2019 ? parseInt(String(entry.mmm_2019).replace(/\D/g, ''), 10) : null;
+    destState = (entry.state || '').toString().toUpperCase();
   }
 
-  // Apply surcharges: MMM >=5 => remoteSurcharge, MMM ===4 => regionalSurcharge, else none
+  // Apply surcharges:
+  // - MMM >= 5 => remote surcharge (applies to remote locations)
+  // - MMM === 4 => regional surcharge
+  // - Additionally, if destination is WA or NT and MMM >=5, add remote WA/NT extra (per Sendle rules)
   if (total !== null) {
     if (postage.remoteSurcharge && mmm >= 5) {
       const extra = postage.remoteSurcharge[parcelType];
       if (extra) total += Number(extra);
-      // additional W/ANT extra for very remote bulky items
-      if (postage.remoteWaNtExtra && postage.remoteWaNtExtra[parcelType]) {
+      // Add WA/NT extra only when destination state is WA or NT
+      if ((destState === 'WA' || destState === 'NT') && postage.remoteWaNtExtra && postage.remoteWaNtExtra[parcelType]) {
         total += Number(postage.remoteWaNtExtra[parcelType]);
       }
     } else if (postage.regionalSurcharge && mmm === 4) {
       const extra = postage.regionalSurcharge[parcelType];
       if (extra) total += Number(extra);
+    }
+
+    // Apply over-length surcharge if requested (either explicit flag or lengthCm > 105)
+    if (opts && (opts.overLength === true || (opts.lengthCm && Number(opts.lengthCm) > 105))) {
+      if (postage.overLengthSurcharge) total += Number(postage.overLengthSurcharge);
     }
   }
 
@@ -275,4 +288,16 @@ export async function calculateShippingByWeight(totalWeightGrams, postcode, opts
     chosenSpec: chosen,
     mmm,
   };
+}
+
+// Testing hooks: allow injecting caches for unit tests / debug
+export function __setCachedPostcodes(data) {
+  cachedPostcodes = data;
+}
+export function __setCachedPostage(data) {
+  cachedPostage = data;
+}
+export function __resetCaches() {
+  cachedPostcodes = null;
+  cachedPostage = null;
 }

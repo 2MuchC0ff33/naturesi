@@ -1,57 +1,57 @@
 {
     "meta": {
         "version": "1.0.0",
-        "source": "Sendle Standard",
-        "lastUpdated": "2024-01-15"
+        "source": "Sendle Standard (Perth)",
+        "lastUpdated": "2025-12-29"
     },
     "baseRates": {
         "pouch": {
-            "sameCity": 5.92,
-            "nearMetro": 6.22,
-            "outerPerth": 7.32,
-            "national": 7.32
+            "sameCity": 6.51,
+            "nearMetro": 6.84,
+            "outerPerth": 8.05,
+            "national": 8.05
         },
         "satchel": {
-            "sameCity": 7.53,
-            "nearMetro": 8.08,
-            "outerPerth": 9.49,
-            "national": 9.49
+            "sameCity": 8.28,
+            "nearMetro": 8.89,
+            "outerPerth": 10.44,
+            "national": 10.44
         },
         "handbag": {
-            "sameCity": 10.35,
-            "nearMetro": 10.45,
-            "outerPerth": 12.52,
-            "national": 12.52
+            "sameCity": 11.39,
+            "nearMetro": 11.5,
+            "outerPerth": 13.77,
+            "national": 13.77
         },
         "shoebox": {
-            "sameCity": 12.65,
-            "nearMetro": 13.13,
-            "outerPerth": 15.75,
-            "national": 15.75
+            "sameCity": 13.92,
+            "nearMetro": 14.44,
+            "outerPerth": 17.33,
+            "national": 17.33
         },
         "briefcase": {
-            "sameCity": 12.76,
-            "nearMetro": 15.97,
-            "outerPerth": 19.34,
-            "national": 19.34
+            "sameCity": 14.04,
+            "nearMetro": 17.57,
+            "outerPerth": 21.27,
+            "national": 21.27
         },
         "carryon": {
-            "sameCity": 13.02,
-            "nearMetro": 22.99,
-            "outerPerth": 27.85,
-            "national": 27.85
+            "sameCity": 14.32,
+            "nearMetro": 25.29,
+            "outerPerth": 30.64,
+            "national": 30.64
         },
         "duffle": {
-            "sameCity": 14.42,
-            "nearMetro": 31.49,
-            "outerPerth": 38.15,
-            "national": 38.15
+            "sameCity": 15.86,
+            "nearMetro": 34.64,
+            "outerPerth": 41.97,
+            "national": 41.97
         },
         "checkin": {
-            "sameCity": 16.43,
-            "nearMetro": 37.31,
-            "outerPerth": 45.23,
-            "national": 45.23
+            "sameCity": 18.07,
+            "nearMetro": 41.04,
+            "outerPerth": 49.75,
+            "national": 49.75
         }
     },
     "regionalSurcharge": {

@@ -118,8 +118,8 @@ export async function initCart() {
         price =
           parseFloat(
             priceField.dataset.price ||
-              priceField.getAttribute('content') ||
-              priceField.textContent.replace(/[^0-9\.]/g, '')
+            priceField.getAttribute('content') ||
+            priceField.textContent.replace(/[^0-9\.]/g, '')
           ) || null;
 
       // image extraction using data attributes or first <img>
@@ -243,6 +243,8 @@ export async function initCart() {
       renderCartTable(c2);
       // update totals after removal
       updateCartTableTotalsWithShipping(currentShippingRate);
+      // Re-run shipping estimator since the cart weight changed
+      if (typeof debouncedRun === 'function') debouncedRun();
     } catch (e) {
       console.error('Error removing cart item:', e);
     }
