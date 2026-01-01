@@ -275,7 +275,9 @@ export async function calculateShippingByWeight(totalWeightGrams, postcode, opts
     }
 
     // Apply over-length surcharge if requested (either explicit flag or lengthCm > 105)
-    if (opts && (opts.overLength === true || (opts.lengthCm && Number(opts.lengthCm) > 105))) {
+    const lengthCm = opts && opts.lengthCm != null ? Number(opts.lengthCm) : null;
+    const isOverLengthByValue = Number.isFinite(lengthCm) && lengthCm > 105;
+    if (opts && (opts.overLength === true || isOverLengthByValue)) {
       if (postage.overLengthSurcharge) total += Number(postage.overLengthSurcharge);
     }
   }
