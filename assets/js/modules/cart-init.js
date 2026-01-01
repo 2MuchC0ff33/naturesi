@@ -243,8 +243,10 @@ export async function initCart() {
       renderCartTable(c2);
       // update totals after removal
       updateCartTableTotalsWithShipping(currentShippingRate);
-      // Re-run shipping estimator since the cart weight changed
-      if (typeof debouncedRun === 'function') debouncedRun();
+      // Notify listeners (e.g. shipping estimator) that the cart has changed
+      document.dispatchEvent(
+        new CustomEvent('cart:updated', { detail: { source: 'remove-item' } })
+      );
     } catch (e) {
       console.error('Error removing cart item:', e);
     }
