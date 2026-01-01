@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { calculateShippingByWeight, calculateParcelRate, getPostcodeZone, __setCachedPostcodes, __setCachedPostage, __resetCaches } from '../assets/js/modules/cartStore.js';
+import { calculateShippingByWeight, __setCachedPostcodes, __setCachedPostage, __resetCaches } from '../assets/js/modules/cartStore.js';
 
 async function run() {
   // Mock postage data (reflecting Sendle Standard example rates)
