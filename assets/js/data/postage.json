@@ -2,82 +2,82 @@
     "meta": {
         "version": "1.0.0",
         "source": "Sendle Standard (Perth)",
-        "lastUpdated": "2025-12-29"
+        "lastUpdated": "2026-01-02"
     },
     "baseRates": {
         "pouch": {
-            "sameCity": 6.51,
-            "nearMetro": 6.84,
-            "outerPerth": 8.05,
-            "national": 8.05
+            "sameCity": 8.00,
+            "nearMetro": 8.00,
+            "outerPerth": 9.00,
+            "national": 9.00
         },
         "satchel": {
-            "sameCity": 8.28,
-            "nearMetro": 8.89,
-            "outerPerth": 10.44,
-            "national": 10.44
+            "sameCity": 10.00,
+            "nearMetro": 10.00,
+            "outerPerth": 12.00,
+            "national": 12.00
         },
         "handbag": {
-            "sameCity": 11.39,
-            "nearMetro": 11.5,
-            "outerPerth": 13.77,
-            "national": 13.77
+            "sameCity": 13.00,
+            "nearMetro": 13.00,
+            "outerPerth": 16.00,
+            "national": 16.00
         },
         "shoebox": {
-            "sameCity": 13.92,
-            "nearMetro": 14.44,
-            "outerPerth": 17.33,
-            "national": 17.33
+            "sameCity": 16.00,
+            "nearMetro": 17.00,
+            "outerPerth": 20.00,
+            "national": 20.00
         },
         "briefcase": {
-            "sameCity": 14.04,
-            "nearMetro": 17.57,
-            "outerPerth": 21.27,
-            "national": 21.27
+            "sameCity": 16.00,
+            "nearMetro": 20.00,
+            "outerPerth": 24.00,
+            "national": 24.00
         },
         "carryon": {
-            "sameCity": 14.32,
-            "nearMetro": 25.29,
-            "outerPerth": 30.64,
-            "national": 30.64
+            "sameCity": 16.00,
+            "nearMetro": 29.00,
+            "outerPerth": 35.00,
+            "national": 35.00
         },
         "duffle": {
-            "sameCity": 15.86,
-            "nearMetro": 34.64,
-            "outerPerth": 41.97,
-            "national": 41.97
+            "sameCity": 18.00,
+            "nearMetro": 39.00,
+            "outerPerth": 47.00,
+            "national": 47.00
         },
         "checkin": {
-            "sameCity": 18.07,
-            "nearMetro": 41.04,
-            "outerPerth": 49.75,
-            "national": 49.75
+            "sameCity": 21.00,
+            "nearMetro": 46.00,
+            "outerPerth": 56.00,
+            "national": 56.00
         }
     },
     "regionalSurcharge": {
-        "pouch": 3,
-        "satchel": 1.5,
-        "handbag": 2.5,
-        "shoebox": 3.5,
-        "briefcase": 5.5,
-        "carryon": 7.5,
-        "duffle": 10,
-        "checkin": 15
+        "pouch": 4.00,
+        "satchel": 2.00,
+        "handbag": 3.00,
+        "shoebox": 4.00,
+        "briefcase": 7.00,
+        "carryon": 9.00,
+        "duffle": 12.00,
+        "checkin": 17.00
     },
     "remoteSurcharge": {
-        "pouch": 8,
-        "satchel": 9,
-        "handbag": 10,
-        "shoebox": 12,
-        "briefcase": 14,
-        "carryon": 17,
-        "duffle": 22,
-        "checkin": 25
+        "pouch": 9.00,
+        "satchel": 10.00,
+        "handbag": 12.00,
+        "shoebox": 14.00,
+        "briefcase": 16.00,
+        "carryon": 19.00,
+        "duffle": 25.00,
+        "checkin": 28.00
     },
     "remoteWaNtExtra": {
-        "briefcase": 5,
-        "carryon": 10,
-        "checkin": 20
+        "briefcase": 6.00,
+        "carryon": 12.00,
+        "checkin": 23.00
     },
-    "overLengthSurcharge": 16.5
+    "overLengthSurcharge": 19.00
 }
