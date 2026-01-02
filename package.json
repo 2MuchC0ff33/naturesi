@@ -30,6 +30,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "test:shipping": "node scripts/test-shipping.mjs",
     "format": "prettier --write \"**/*.{html,css,js,json,md}\"",
     "prepare": "husky install",
     "stylelint": "stylelint \"**/*.{css,scss}\" --fix",
