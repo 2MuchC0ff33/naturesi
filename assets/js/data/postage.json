@@ -1,83 +1,68 @@
 {
-    "meta": {
-        "version": "1.0.0",
-        "source": "Sendle Standard (Perth)",
-        "lastUpdated": "2026-01-02"
+  "meta": {
+    "version": "1.0.0",
+    "source": "Australia Post (Flat Rate, Parkwood WA)",
+    "lastUpdated": "2026-01-21"
+  },
+  "baseRates": {
+    "pouch": {
+      "sameCity": 13,
+      "nearMetro": 13,
+      "outerPerth": 13,
+      "national": 13
     },
-    "baseRates": {
-        "pouch": {
-            "sameCity": 8.00,
-            "nearMetro": 8.00,
-            "outerPerth": 9.00,
-            "national": 9.00
-        },
-        "satchel": {
-            "sameCity": 10.00,
-            "nearMetro": 10.00,
-            "outerPerth": 12.00,
-            "national": 12.00
-        },
-        "handbag": {
-            "sameCity": 13.00,
-            "nearMetro": 13.00,
-            "outerPerth": 16.00,
-            "national": 16.00
-        },
-        "shoebox": {
-            "sameCity": 16.00,
-            "nearMetro": 17.00,
-            "outerPerth": 20.00,
-            "national": 20.00
-        },
-        "briefcase": {
-            "sameCity": 16.00,
-            "nearMetro": 20.00,
-            "outerPerth": 24.00,
-            "national": 24.00
-        },
-        "carryon": {
-            "sameCity": 16.00,
-            "nearMetro": 29.00,
-            "outerPerth": 35.00,
-            "national": 35.00
-        },
-        "duffle": {
-            "sameCity": 18.00,
-            "nearMetro": 39.00,
-            "outerPerth": 47.00,
-            "national": 47.00
-        },
-        "checkin": {
-            "sameCity": 21.00,
-            "nearMetro": 46.00,
-            "outerPerth": 56.00,
-            "national": 56.00
-        }
+    "satchel": {
+      "sameCity": 15,
+      "nearMetro": 15,
+      "outerPerth": 15,
+      "national": 15
     },
-    "regionalSurcharge": {
-        "pouch": 4.00,
-        "satchel": 2.00,
-        "handbag": 3.00,
-        "shoebox": 4.00,
-        "briefcase": 7.00,
-        "carryon": 9.00,
-        "duffle": 12.00,
-        "checkin": 17.00
+    "handbag": {
+      "sameCity": 19,
+      "nearMetro": 19,
+      "outerPerth": 19,
+      "national": 19
     },
-    "remoteSurcharge": {
-        "pouch": 9.00,
-        "satchel": 10.00,
-        "handbag": 12.00,
-        "shoebox": 14.00,
-        "briefcase": 16.00,
-        "carryon": 19.00,
-        "duffle": 25.00,
-        "checkin": 28.00
+    "shoebox": {
+      "sameCity": 24,
+      "nearMetro": 24,
+      "outerPerth": 24,
+      "national": 24
     },
-    "remoteWaNtExtra": {
-        "briefcase": 6.00,
-        "carryon": 12.00,
-        "checkin": 23.00
+    "briefcase": {
+      "sameCity": 29,
+      "nearMetro": 29,
+      "outerPerth": 29,
+      "national": 29
     },
-    "overLengthSurcharge": 19.00
+    "carryon": null,
+    "duffle": null,
+    "checkin": null
+  },
+  "regionalSurcharge": {
+    "pouch": 0.0,
+    "satchel": 0.0,
+    "handbag": 0.0,
+    "shoebox": 0.0,
+    "briefcase": 0.0,
+    "carryon": null,
+    "duffle": null,
+    "checkin": null
+  },
+  "remoteSurcharge": {
+    "pouch": 0.0,
+    "satchel": 0.0,
+    "handbag": 0.0,
+    "shoebox": 0.0,
+    "briefcase": 0.0,
+    "carryon": null,
+    "duffle": null,
+    "checkin": null
+  },
+  "remoteWaNtExtra": {
+    "briefcase": null,
+    "carryon": null,
+    "checkin": null
+  },
+  "overLengthSurcharge": null
 }
