@@ -3,6 +3,7 @@
 Quick guide to run and debug the project's automated tests locally.
 
 Prerequisites
+
 - Node.js (18+ recommended)
 - Cygwin Bash (used as VS Code integrated terminal)
 - Google Chrome installed (path: `C:\Program Files\Google\Chrome\Application\chrome.exe`)
@@ -53,15 +54,18 @@ npm run test:perf
 ```
 
 Debugging in VS Code
+
 - Ensure VS Code terminal uses Cygwin Bash (see `.vscode/settings.json` which sets `terminal.integrated.shell.windows`).
 - Set `TEST_CHROME_PATH` environment variable as shown above or in the launch config.
 - Use the 'Debug Vitest - Current File' launch configuration to debug unit tests.
 - Use the 'Debug Playwright Test (Chromium)' launch configuration to debug a Playwright run (headed).
 
 CI
+
 - A simple GitHub Actions job (`.github/workflows/test.yml`) runs unit tests, Playwright E2E, and Lighthouse CI in a matrix for Chromium and Firefox.
 
 Notes
+
 - Visual snapshot baselines are created on the first run and must be reviewed before committing.
 - Some tests are tolerant to network or config fetch failures; in CI you may want stricter assertions.
 - Do not commit PayPal live secrets; use `assets/js/data/paypal.json` sandbox values or inject secrets during CI.
