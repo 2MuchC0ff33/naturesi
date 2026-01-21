@@ -30,4 +30,4 @@ Security
 Optional enhancements
 
 - Add serverless endpoints to create and capture orders using PayPal Orders API.
-- Add automated E2E tests for PayPal flows (requires NativeNodeModules/ZombieJS/QuickJS/wkhtmltoimage/whtmltopdf).
+- Add automated E2E tests for PayPal flows (requires Chrome Dev Tools MCP Server and Playwright MCP Server).

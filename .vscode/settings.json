@@ -25,5 +25,13 @@
     "**/.DS_Store": true,
     "**/node_modules": true,
     "**/.vscode": false
-  }
+  },
+  "terminal.integrated.shell.windows": "C:\\Windows\\System32\\bash.exe",
+  "terminal.integrated.profiles.windows": {
+    "Cygwin Bash": {
+      "path": "C:\\Windows\\System32\\bash.exe",
+      "args": ["-lc"]
+    }
+  },
+  "playwright.cliPath": "${workspaceFolder}/node_modules/.bin/playwright"
 }

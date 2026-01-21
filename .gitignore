@@ -12,5 +12,12 @@ build/
 test-artifacts/
 .sass-cache/
 
+# Test artifacts & baselines
+tests/visual/baseline/
+reports/
+.lighthouseci/
+.playwright/
+coverage/
+
 # Optional tool binaries (downloaded by `npm run tools:install`)
 .tools/

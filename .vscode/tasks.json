@@ -35,6 +35,27 @@
       "command": "npx live-server --port=5500",
       "group": "none",
       "isBackground": true
+    },
+    {
+      "label": "Start Static Server",
+      "type": "shell",
+      "command": "npm run start:static",
+      "group": "none",
+      "isBackground": true,
+      "presentation": { "reveal": "always", "panel": "dedicated" }
+    },
+    {
+      "label": "Run Unit Tests (watch)",
+      "type": "shell",
+      "command": "npm run test:unit:watch",
+      "presentation": { "echo": true, "reveal": "always" }
+    },
+    {
+      "label": "Run E2E (headed)",
+      "type": "shell",
+      "command": "npm run test:e2e:headed",
+      "presentation": { "panel": "shared" },
+      "problemMatcher": []
     }
   ]
 }

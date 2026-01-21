@@ -144,7 +144,7 @@ Optional future enhancements (opt-in, later)
 
 - Add serverless endpoints for Orders API and webhook verification.
 - Add PayPal JS SDK (opt-in) once server-assisted order creation is in place.
-- Add automated NativeNodeModules/ZombieJS/QuickJS/wkhtmltoimage/whtmltopdf for cart → checkout rendering and form population (do not follow external redirect).
+- Add automated Chrome Dev Tools MCP Server and Playwright MCP Server for cart → checkout rendering and form population (do not follow external redirect).
 
 PR checklist (include in PR body)
 
@@ -274,11 +274,10 @@ B — Automated tests (suggestions)
 - Unit tests for cart normalization / total calculation functions:
   - Test normalizeItem() with missing fields, wrong types, negative qtys.
   - Test computeTotal() with decimal rounding behavior.
-- Integration/E2E tests (NativeNodeModules/ZombieJS/QuickJS/wkhtmltoimage/whtmltopdf):
+- Integration/E2E tests (Chrome Dev Tools MCP Server and Playwright MCP Server):
   - Script: add item -> cart -> confirm -> checkout -> assert localStorage and page DOM for total.
   - For PayPal redirect, assert the form `action` and hidden inputs; do not follow external redirect.
-- Example NativeNodeModules/ZombieJS/QuickJS/wkhtmltoimage/whtmltopdf test (pseudo):
-
+- Example Chrome Dev Tools MCP Server and Playwright MCP Server test (pseudo):
 
 Phase 9 — Production hardening & monitoring
 

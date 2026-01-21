@@ -10,6 +10,8 @@
     "htmlhint.vscode-htmlhint",
     "esbenp.prettier-vscode",
     "stylelint.vscode-stylelint",
-    "davidanson.vscode-markdownlint"
+    "davidanson.vscode-markdownlint",
+    "ms-playwright.playwright",
+    "vitest.explorer"
   ]
 }
