@@ -370,22 +370,25 @@
           <div class="cart-actions">
             <button type="submit" class="button" id="update-cart">Update Cart</button>
             <a class="button button-secondary" href="/pages/store.html">Continue Shopping</a>
-
-            <!-- new minimal confirm form used by assets/js/modules/cart.js -->
-            <form
-              id="confirm-cart-form"
-              action="/pages/checkout.html"
-              method="get"
-              aria-label="Confirm items and proceed to checkout"
-              class="inline-form"
-              style="display: inline-block"
-            >
-              <button type="submit" id="btn-proceed-checkout" class="btn btn-primary">
-                Proceed to checkout
-              </button>
-            </form>
           </div>
         </form>
+
+        <!-- Confirm form placed outside #cart-form to avoid nested form issues.
+             Keeps visual layout intact using same classes. -->
+        <div class="cart-actions-external">
+          <form
+            id="confirm-cart-form"
+            action="/pages/checkout.html"
+            method="get"
+            aria-label="Confirm items and proceed to checkout"
+            class="inline-form"
+            style="display: inline-block"
+          >
+            <button type="submit" id="btn-proceed-checkout" class="btn btn-primary">
+              Proceed to checkout
+            </button>
+          </form>
+        </div>
 
         <aside class="order-summary" aria-labelledby="summary-heading">
           <h2 id="summary-heading">Order Summary</h2>

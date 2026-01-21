@@ -12,6 +12,7 @@ export default defineConfig({
     port: 8080,
     reuseExistingServer: !process.env.CI,
   },
+  workers: 1, // Restrict Playwright to use only one worker
   projects: [
     {
       name: 'chromium',

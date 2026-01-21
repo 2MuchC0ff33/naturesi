@@ -5,7 +5,7 @@ const DEFAULT = { items: [] };
 
 export class CartStore {
   constructor(opts = {}) {
-    this.key = opts.key || 'naturesi-cart';
+    this.key = opts.key || 'naturesi_cart';
     this.dbName = opts.dbName || 'naturesi_cart_db';
     this.cart = DEFAULT;
   }
@@ -130,14 +130,14 @@ export function parseWeightString(wstr) {
 // pouch 250g, satchel 500g, handbag 1000g, shoebox 3000g, briefcase 5000g,
 // carryon 10000g, duffle 20000g, checkin 25000g
 const PARCEL_SPECS = [
-  { type: 'pouch', maxGrams: 250 },      // up to 250 g
-  { type: 'satchel', maxGrams: 500 },    // up to 500 g
-  { type: 'handbag', maxGrams: 1000 },   // up to 1 kg
-  { type: 'shoebox', maxGrams: 3000 },   // up to 3 kg
+  { type: 'pouch', maxGrams: 250 }, // up to 250 g
+  { type: 'satchel', maxGrams: 500 }, // up to 500 g
+  { type: 'handbag', maxGrams: 1000 }, // up to 1 kg
+  { type: 'shoebox', maxGrams: 3000 }, // up to 3 kg
   { type: 'briefcase', maxGrams: 5000 }, // up to 5 kg
-  { type: 'carryon', maxGrams: 10000 },  // up to 10 kg
-  { type: 'duffle', maxGrams: 20000 },   // up to 20 kg
-  { type: 'checkin', maxGrams: 25000 },  // up to 25 kg
+  { type: 'carryon', maxGrams: 10000 }, // up to 10 kg
+  { type: 'duffle', maxGrams: 20000 }, // up to 20 kg
+  { type: 'checkin', maxGrams: 25000 }, // up to 25 kg
 ];
 
 export async function loadJSONResource(path) {
@@ -266,7 +266,11 @@ export async function calculateShippingByWeight(totalWeightGrams, postcode, opts
       const extra = postage.remoteSurcharge[parcelType];
       if (extra) total += Number(extra);
       // Add WA/NT extra only when destination state is WA or NT
-      if ((destState === 'WA' || destState === 'NT') && postage.remoteWaNtExtra && postage.remoteWaNtExtra[parcelType]) {
+      if (
+        (destState === 'WA' || destState === 'NT') &&
+        postage.remoteWaNtExtra &&
+        postage.remoteWaNtExtra[parcelType]
+      ) {
         total += Number(postage.remoteWaNtExtra[parcelType]);
       }
     } else if (postage.regionalSurcharge && mmm === 4) {

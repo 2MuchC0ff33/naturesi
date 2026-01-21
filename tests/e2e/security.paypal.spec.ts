@@ -22,7 +22,10 @@ test('checkout form amount is computed from cart and overrides tampering', async
 
   // Tamper the amount and then reload the page to trigger the script to re-run
   await page.evaluate(() => (document.getElementById('pp-amount').value = '1000.00'));
-  // Ensure tampering took place
+  // Ensure tampering took place (wait for the value to be applied)
+  await page.waitForFunction(() => document.getElementById('pp-amount')?.value === '1000.00', {
+    timeout: 2000,
+  });
   const tampered = Number(await page.locator('#pp-amount').inputValue());
   expect(tampered).toBe(1000);
 

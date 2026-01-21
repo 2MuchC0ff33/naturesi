@@ -81,6 +81,34 @@ export function attachFormHandler({
       console.error('Save cart failed', err);
     }
   });
+
+  // Attach a click fallback to the proceed button so that in case form submission is
+  // prevented by outer handlers (or browser edge cases), we still persist cart and navigate.
+  const btn = documentRoot.getElementById('btn-proceed-checkout');
+  if (btn) {
+    btn.addEventListener('click', (ev) => {
+      try {
+        const cart = collect({ documentRoot });
+        if (storage) storage.setItem(key, JSON.stringify(cart));
+        // If the click did not cause navigation (e.g. outer preventDefault), enforce it after a short delay
+        setTimeout(() => {
+          try {
+            if (typeof window !== 'undefined' && window.location) {
+              // If we're still on the cart page, navigate
+              const path = window.location.pathname || '';
+              if (path.endsWith('/cart.html') || path.endsWith('/')) {
+                window.location.href = '/pages/checkout.html';
+              }
+            }
+          } catch (ex) {
+            // ignore
+          }
+        }, 50);
+      } catch (err) {
+        console.error('Save on proceed failed', err);
+      }
+    });
+  }
 }
 
 // Auto-run in browser if present
