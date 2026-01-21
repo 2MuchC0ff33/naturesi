@@ -1,0 +1,22 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Open with Live Server",
+      "url": "http://localhost:5500",
+      "webRoot": "${workspaceFolder}"
+    },
+    {
+      "type": "bash",
+      "request": "launch",
+      "name": "Cygwin Script",
+      "program": "C:/Users/galloa/scoop/apps/cygwin/current/bin/bash.exe",
+      "args": ["${file}"],
+      "windows": {
+        "program": "C:/Users/galloa/scoop/apps/cygwin/current/bin/bash.exe"
+      }
+    }
+  ]
+}

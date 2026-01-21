@@ -1,0 +1,40 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Lint JS with ESLint",
+      "type": "shell",
+      "command": "npx eslint .",
+      "group": "test",
+      "problemMatcher": ["$eslint-stylish"]
+    },
+    {
+      "label": "Format with Prettier",
+      "type": "shell",
+      "command": "npx prettier --write .",
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Lint CSS with Stylelint",
+      "type": "shell",
+      "command": "npx stylelint \"assets/css/**/*.css\"",
+      "group": "test",
+      "problemMatcher": []
+    },
+    {
+      "label": "Lint HTML with HTMLHint",
+      "type": "shell",
+      "command": "npx htmlhint \"pages/**/*.html\"",
+      "group": "test",
+      "problemMatcher": []
+    },
+    {
+      "label": "Start Live Server",
+      "type": "shell",
+      "command": "npx live-server --port=5500",
+      "group": "none",
+      "isBackground": true
+    }
+  ]
+}

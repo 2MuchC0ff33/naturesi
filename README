@@ -1,92 +1,93 @@
 # Nature's Infusions — Static E‑Store
 
-A small, privacy‑first static storefront for Nature's Infusions. This repository is plain HTML, CSS and vanilla JavaScript with no build step. Focus is on accessibility, semantic HTML and a conservative, reviewable workflow.
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Privacy First](https://img.shields.io/badge/privacy-first-green.svg)](privacy.txt)
 
-## Quick links
+## Description
 
-- Site entry: [index.html](index.html)
-- Store page (products & cart forms): [pages/store.html](pages/store.html)
-- Machine product data: [products.json](products.json)
-- Main stylesheet: [assets/css/main.css](assets/css/main.css)
-- App behaviour & SW registration: [assets/js/app.js](assets/js/app.js)
-- Service worker: [service-worker.js](service-worker.js)
-- PWA manifest: [manifest.json](manifest.json)
-- Offline page: [offline.html](offline.html)
-- Privacy note: [privacy.txt](privacy.txt)
-- Repository Copilot guidance: [.github/copilot-instructions.md](.github/copilot-instructions.md)
-- Contribution prompts: [.github/prompts/refactor-html.prompt.md](.github/prompts/refactor-html.prompt.md)
-- Environment variables: [.env](.env) (contains PAYPAL_EMAIL / deployment paths)
-- License: [LICENSE](LICENSE)
+A small, privacy‑first static storefront for Nature's Infusions. Built with plain HTML, CSS, and vanilla JavaScript. No build step. Focus on accessibility, semantic HTML, and a conservative, reviewable workflow.
 
-## TL;DR — what you can safely change
+## Technology Stack
 
-- Small HTML5 refactors and accessibility fixes in pages under `pages/` (see [pages/store.html](pages/store.html) note below).
-- Conservative CSS or JS helpers added under `assets/css/` and `assets/js/`.
-- Non‑functional docs, meta and metadata updates.
+- HTML5
+- CSS3
+- Vanilla JavaScript (ES6+)
+- No build tools, no frameworks
 
-## How to run locally (smoke test)
+## Architecture
 
-Serve the site from a local static server so the service worker can register (test on `localhost`):
+- Static site, single-page structure
+- Pages in `/pages/` and `/pages/store/`
+- Assets in `/assets/css/`, `/assets/js/`, `/assets/img/`
+- Product data in JSON under `/assets/js/data/`
+- Service worker for offline/PWA support
+
+## Features
+
+- Accessibility-first design
+- Privacy-first (no analytics, no trackers)
+- Progressive Web App (PWA) with offline support
+- Semantic HTML5 structure
+- Machine-readable product data
+- Simple, reversible workflow
+
+## Quick Links
+
+**Pages**
+
+- [Site entry](index.html)
+- [Store page](pages/store.html)
+- [Offline page](offline.html)
+- [404 page](404.html)
+
+**Data**
+
+- [products.json](assets/js/data/products.json)
+- [categories.json](assets/js/data/categories.json)
+- [product-categories.json](assets/js/data/product-categories.json)
+
+**Assets**
+
+- [Main stylesheet](assets/css/main.css)
+- [App JS](assets/js/app.js)
+- [Service worker](service-worker.js)
+- [PWA manifest](manifest.json)
+
+**Docs & Config**
+
+- [Privacy note](privacy.txt)
+- [Copilot guidance](.github/copilot-instructions.md)
+- [Contribution prompts](.github/prompts/refactor-html.prompt.md)
+- [Environment variables](.env)
+- [License](LICENSE)
+
+## Getting Started
+
+Serve the site from a local static server (e.g., Python's http.server) to test service worker registration:
 
 ```sh
+python -m http.server 8000
 ```
 
-Verify service‑worker install/uninstall cycles on localhost and check pages:
+Test offline and 404 pages on localhost.
 
-- [offline.html](offline.html) (offline UX)
-- [404.html](404.html)
+## Testing
 
-## Editing & refactor checklist
-
-When editing HTML/CSS/JS follow the repo checklist (see [.github/copilot-instructions.md](.github/copilot-instructions.md)):
-
-- Preserve top-line DOCTYPE and `<html lang="en-AU">` in any edited page.
-- Ensure `<meta charset="utf-8">` and `<meta name="viewport" content="width=device-width,initial-scale=1">` are present.
-- Prefer semantic landmarks: header, nav, main, article, section, footer.
-- Give images meaningful `alt` text (or `role="presentation"` for decorative images).
-- Bind `<label for="...">` to form controls for accessibility.
-- Keep JS changes scoped to `assets/js/` and CSS to `assets/css/`. Do not alter SW guards in [assets/js/app.js](assets/js/app.js) (e.g. `if (location.protocol === 'https:' || location.hostname === 'localhost') { ... }`).
-- Add a one-line inline comment for why a change was made referencing the acceptance checklist.
-
-## Commit & PR guidance (copy into PR body)
-
-- Commit title format: `chore(refactor-html): short summary`
-- Include the files changed (mandatory).
-- Smoke test performed: `python -m http.server 8000` and SW install/uninstall tested on localhost (yes/no)
-- HTML meta & semantics checked: yes/no
-- Accessibility basics verified (labels, alt text, form associations): yes/no
-- Tools used: list MCP/GitHub/Microsoft tools and key results/links (if used) — see [.github/copilot-instructions.md](.github/copilot-instructions.md)
-- Reviewer: [2MuchC0ff33@example.org](mailto:2MuchC0ff33@example.org) (replace before merge)
-
-Example commit body (if touching payments):
-
-```text
-
-Files changed:
-- pages/store.html
-- products.json
-
-, SW install/uninstall: yes
-HTML semantics checked: yes
-Accessibility basics: yes
-Tools used: mcp_github_github_search_code (found SW registration in assets/js/app.js)
-```
-
-## Accessibility & Privacy
-
-- Project is privacy‑first: no analytics or third‑party trackers. See [privacy.txt](privacy.txt).
-- Follow the HTML5 refactor checklist in [.github/copilot-instructions.md](.github/copilot-instructions.md).
+- Manual smoke test: run locally, verify service worker install/uninstall, check offline and 404 pages.
+- No automated tests.
 
 ## Contributing
 
-- Keep changes small and reversible. Edit files directly under repo root, `pages/`, `pages/store/`, `assets/css/partials/`, `assets/js/data/` and `assets/js/modules/`.
-- Add new assets only under `assets/` and reference them relatively (no external trackers/CDNs).
-
-## Contact & Authors
-
-- Author / generator credit is embedded in pages (site footer).
-- For payment/cart approvals: [2MuchC0ff33@example.org](mailto:2MuchC0ff33@example.org) (replace with real contact).
+- Keep changes small and reversible.
+- Edit files directly under repo root, `pages/`, `pages/store/`, `assets/css/partials/`, `assets/js/data/`, `assets/js/modules/`.
+- Add new assets only under `assets/` and reference them relatively.
+- See [Copilot instructions](.github/copilot-instructions.md) and [Contribution prompts](.github/prompts/refactor-html.prompt.md).
 
 ## License
 
-This project is released under the terms in [LICENSE](LICENSE).
+Released under the terms in [LICENSE](LICENSE).
+
+## Contact & Authors
+
+- Author credit in site footer.
+- For payment/cart approvals: [2MuchC0ff33@example.org](mailto:2MuchC0ff33@example.org) (replace before merge).

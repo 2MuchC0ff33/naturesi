@@ -1,0 +1,16 @@
+{
+    "recommendations": [
+        "github.copilot-chat",
+        "github.vscode-pull-request-github",
+        "elijah-potter.harper",
+        "ritwickdey.liveserver",
+        "paypal.vscode-paypal",
+        "ms-vscode.powershell",
+        "editorconfig.editorconfig",
+        "dbaeumer.vscode-eslint",
+        "htmlhint.vscode-htmlhint",
+        "esbenp.prettier-vscode",
+        "stripe.vscode-stripe",
+        "stylelint.vscode-stylelint"
+    ]
+}
