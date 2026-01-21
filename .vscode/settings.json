@@ -20,9 +20,6 @@
   "liveServer.settings.port": 5500,
   "liveServer.settings.root": "/",
   "liveServer.settings.ignoreFiles": [".vscode/**", "node_modules/**", ".git/**"],
-  "testing.enableNativeTesting": true,
-  "testing.testFramework": "node",
-  "testing.nodeTestPattern": "**/tests/**/*.test.js",
   "files.exclude": {
     "**/.git": true,
     "**/.DS_Store": true,

@@ -3,11 +3,14 @@
 import fs from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname } from 'node:path';
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const toolsDir = new URL('../.tools/', import.meta.url);
+import { join } from 'node:path';
 
 function findInTools(filenames) {
-  const root = new URL('../.tools/', import.meta.url).pathname;
+  const root = fileURLToPath(toolsDir);
   const queue = [root];
   const seen = new Set();
   while (queue.length) {
@@ -21,7 +24,7 @@ function findInTools(filenames) {
       continue;
     }
     for (const ent of entries) {
-      const p = `${cur}${process.platform === 'win32' ? '\\' : '/'}${ent.name}`;
+      const p = join(cur, ent.name);
       if (ent.isFile()) {
         for (const f of filenames) {
           if (ent.name.toLowerCase() === f.toLowerCase()) return true;
@@ -46,9 +49,15 @@ const checks = [
     },
   },
   {
-    name: 'wkhtmltox (portable binary)',
+    name: 'wkhtmltox (portable binary or installer)',
     check: () =>
-      findInTools(['wkhtmltoimage.exe', 'wkhtmltoimage', 'wkhtmltopdf.exe', 'wkhtmltopdf']),
+      findInTools([
+        'wkhtmltoimage.exe',
+        'wkhtmltoimage',
+        'wkhtmltopdf.exe',
+        'wkhtmltopdf',
+        'wkhtmltox-0.12.6-1.msvc2015-win64.exe',
+      ]),
   },
   {
     name: 'quickjs (portable)',

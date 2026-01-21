@@ -35,39 +35,6 @@
       "command": "npx live-server --port=5500",
       "group": "none",
       "isBackground": true
-    },
-    {
-      "label": "Serve (local)",
-      "type": "shell",
-      "command": "node",
-      "args": ["scripts/serve.js", "8000"],
-      "isBackground": true,
-      "problemMatcher": []
-    },
-    {
-      "label": "Run tests",
-      "type": "shell",
-      "command": "node",
-      "args": ["--test"],
-      "presentation": { "reveal": "always" },
-      "problemMatcher": []
-    },
-    {
-      "label": "Run unit tests",
-      "type": "shell",
-      "command": "node",
-      "args": ["--test", "tests/unit"],
-      "presentation": { "reveal": "always" },
-      "problemMatcher": []
-    },
-    {
-      "label": "Sanity: Smoke server & pages",
-      "dependsOn": ["Serve (local)"],
-      "type": "shell",
-      "command": "node",
-      "args": ["--test", "tests/sanity"],
-      "presentation": { "reveal": "always" },
-      "problemMatcher": []
     }
   ]
 }

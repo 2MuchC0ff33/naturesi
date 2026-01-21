@@ -18,10 +18,13 @@ const tools = [
     note: 'Please run `npm install` to install devDependencies (zombie).',
   },
   {
-    // prefer portable archive (7z) so we can extract a runnable binary into .tools/
+    // prefer portable archive (7z) but fallback to installer exe if archive is unavailable
     name: 'wkhtmltox',
     url: 'https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox-0.12.6-1.mxe-cross-win64.7z',
     filename: 'wkhtmltox-0.12.6-1.mxe-cross-win64.7z',
+    fallbackUrl:
+      'https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox-0.12.6-1.msvc2015-win64.exe',
+    fallbackFilename: 'wkhtmltox-0.12.6-1.msvc2015-win64.exe',
     expectedExecutables: ['wkhtmltoimage.exe', 'wkhtmltopdf.exe'],
   },
   {
@@ -103,22 +106,46 @@ function download(url, dest) {
       console.log(`- ${t.name}: npm devDependency; run 'npm install' if not installed.`);
       continue;
     }
-    const dest = new URL(t.filename, toolsDir).pathname;
+    const dest = fileURLToPath(new URL(t.filename, toolsDir));
     if (fs.existsSync(dest)) {
-      console.log(`- ${t.name}: already present (${t.filename})`);
-      continue;
+      const st = fs.statSync(dest);
+      if (st.size > 128) {
+        console.log(`- ${t.name}: already present (${t.filename})`);
+        continue;
+      }
+      console.log(
+        `- ${t.name}: found ${t.filename} but it looks incomplete (${st.size} bytes); attempting fallback`
+      );
+      try {
+        await fs.promises.unlink(dest);
+      } catch (e) {
+        // ignore
+      }
     }
     try {
       console.log(`- downloading ${t.name} -> ${dest}`);
       await download(t.url, dest);
       console.log(`  downloaded: ${t.filename}`);
 
+      // if the file is suspiciously small (empty download), try fallback url
+      try {
+        const st = fs.statSync(dest);
+        if (st.size < 128 && t.fallbackUrl && t.fallbackFilename) {
+          console.warn(`  downloaded file is very small (${st.size} bytes); trying fallback url`);
+          const fallbackDest = fileURLToPath(new URL(t.fallbackFilename, toolsDir));
+          await download(t.fallbackUrl, fallbackDest);
+          console.log(`  downloaded fallback: ${t.fallbackFilename}`);
+        }
+      } catch (e) {
+        // ignore
+      }
+
       // If the downloaded artifact looks like an archive and the tool
       // exposes expected executables, try to extract so the binary can be
       // invoked directly from .tools/ (portable usage).
       if (t.expectedExecutables && t.expectedExecutables.length > 0) {
         const extracted = await (async () => {
-          const destDir = new URL(`./${t.name}/`, toolsDir).pathname;
+          const destDir = fileURLToPath(new URL(`./${t.name}/`, toolsDir));
           const ok = await tryExtract(dest, destDir);
           if (ok) {
             console.log(`  extracted ${t.filename} to ${destDir}`);
