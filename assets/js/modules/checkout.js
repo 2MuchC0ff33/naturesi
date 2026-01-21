@@ -1,108 +1,153 @@
-// javascript
-// Minimal checkout: read canonical cart, render summary, populate PayPal form and set action.
-(async function () {
-  const summary = document.getElementById('summary-content');
-  const form = document.getElementById('paypal-form');
-  const errorEl = document.getElementById('checkout-error');
-  const payBtn = document.getElementById('pay-now');
-  if (!summary || !form) return;
+// Checkout helpers exported for testing + guarded browser runner
+export function parseCartRaw(raw) {
+  try {
+    if (!raw) return [];
+    const parsed = typeof raw === 'string' ? JSON.parse(raw) : raw;
+    if (!Array.isArray(parsed)) return [];
+    return parsed
+      .map((it) => ({
+        id: String(it.id ?? '').trim(),
+        title: String(it.title ?? it.name ?? '').trim(),
+        price: Number(it.price ?? 0),
+        qty: Math.max(0, Math.trunc(Number(it.qty ?? it.quantity ?? 0))),
+      }))
+      .filter((i) => i.id && i.title && i.qty > 0);
+  } catch (e) {
+    return null;
+  }
+}
 
+export function computeGrandTotal(cart) {
+  return cart.reduce((s, x) => s + x.price * x.qty, 0);
+}
+
+export function computeItemLabel(cart) {
+  const itemLabel = cart.map((i) => `${i.qty}×${i.title}`).join(', ');
+  return itemLabel.length > 127 ? itemLabel.slice(0, 124) + '...' : itemLabel;
+}
+
+export async function loadPayPalConfig(path = '/assets/js/data/paypal.json') {
+  try {
+    const r = await fetch(path, { cache: 'no-store' });
+    if (r.ok) return await r.json();
+  } catch (e) {
+    // fall through
+  }
+  return null;
+}
+
+export function buildPayPalPayload(cfg, cart) {
+  const errors = [];
+  if (!cfg) errors.push('missing_config');
+  if (!cfg?.business || !String(cfg.business).includes('@')) errors.push('invalid_business');
+  const grand = computeGrandTotal(cart);
+  const payload = {
+    business: cfg?.business ?? '',
+    item_name: computeItemLabel(cart),
+    amount: Number(grand.toFixed(2)).toFixed(2),
+    currency_code: cfg?.currency ?? 'AUD',
+    return: cfg?.return_path ?? '',
+    cancel_return: cfg?.cancel_path ?? '',
+    action: cfg?.env && String(cfg.env).toLowerCase() === 'live' ? cfg?.live_url : cfg?.sandbox_url,
+  };
+  return { payload, errors };
+}
+
+export function renderSummaryToString(cart) {
+  if (!cart || !cart.length) return { html: '<p>Your cart is empty.</p>', total: 0 };
+  const items = cart.map((it) => ({
+    title: it.title,
+    qty: it.qty,
+    price: it.price.toFixed(2),
+    lineTotal: (it.price * it.qty).toFixed(2),
+  }));
+  const grand = computeGrandTotal(cart);
+  let html = '<ul class="checkout-line-items">';
+  items.forEach((i) => {
+    html += `<li class="checkout-line-item"><span class="line-title">${i.title}</span><span class="line-meta">${i.qty} × ${i.price}</span><span class="line-total">${i.lineTotal}</span></li>`;
+  });
+  html += `</ul><p class="grand-total">Total: <strong>${grand.toFixed(2)}</strong></p>`;
+  return { html, total: grand };
+}
+
+export async function runCheckout({
+  documentRoot = typeof document !== 'undefined' ? document : null,
+  fetchPath = '/assets/js/data/paypal.json',
+} = {}) {
+  if (!documentRoot) return;
+  const summary = documentRoot.getElementById('summary-content');
+  const form = documentRoot.getElementById('paypal-form');
+  const errorEl = documentRoot.getElementById('checkout-error');
+  const payBtn = documentRoot.getElementById('pay-now');
+  if (!summary || !form) return;
   const showError = (msg) => {
-    if (errorEl) { errorEl.textContent = msg; errorEl.classList.remove('hidden'); }
+    if (errorEl) {
+      errorEl.textContent = msg;
+      errorEl.classList.remove('hidden');
+    }
     if (payBtn) payBtn.disabled = true;
   };
   const clearError = () => {
-    if (errorEl) { errorEl.textContent = ''; errorEl.classList.add('hidden'); }
+    if (errorEl) {
+      errorEl.textContent = '';
+      errorEl.classList.add('hidden');
+    }
     if (payBtn) payBtn.disabled = false;
   };
 
-  const readCart = () => {
-    try {
-      const raw = localStorage.getItem('naturesi_cart');
-      if (!raw) return [];
-      const parsed = JSON.parse(raw);
-      if (!Array.isArray(parsed)) return [];
-      return parsed.map((it) => ({
-        id: String(it.id ?? '').trim(),
-        title: String(it.title ?? '').trim(),
-        price: Number(it.price ?? 0),
-        qty: Math.max(0, Math.trunc(Number(it.qty ?? 0)))
-      })).filter((i) => i.id && i.title && i.qty > 0);
-    } catch {
-      return null;
-    }
-  };
-
-  const render = (cart) => {
-    summary.innerHTML = '';
-    if (!cart || !cart.length) {
-      summary.textContent = 'Your cart is empty.';
-      return 0;
-    }
-    const ul = document.createElement('ul');
-    ul.className = 'checkout-line-items';
-    cart.forEach((it) => {
-      const li = document.createElement('li');
-      li.className = 'checkout-line-item';
-      const title = document.createElement('span');
-      title.className = 'line-title';
-      title.textContent = it.title;
-      const meta = document.createElement('span');
-      meta.className = 'line-meta';
-      meta.textContent = `${it.qty} × ${it.price.toFixed(2)}`;
-      const total = document.createElement('span');
-      total.className = 'line-total';
-      total.textContent = (it.qty * it.price).toFixed(2);
-      li.append(title, meta, total);
-      ul.appendChild(li);
-    });
-    const grand = cart.reduce((s, x) => s + x.price * x.qty, 0);
-    const p = document.createElement('p');
-    p.className = 'grand-total';
-    p.innerHTML = `Total: <strong>${grand.toFixed(2)}</strong>`;
-    summary.appendChild(ul);
-    summary.appendChild(p);
-    return grand;
-  };
-
-  let cfg = null;
-  try {
-    const r = await fetch('/assets/js/data/paypal.json', { cache: 'no-store' });
-    if (r.ok) cfg = await r.json();
-  } catch (e) {
-    console.error('Load config failed', e);
+  const raw = typeof localStorage !== 'undefined' ? localStorage.getItem('naturesi_cart') : null;
+  const cart = parseCartRaw(raw);
+  if (cart === null) {
+    showError('Your cart is invalid.');
+    return;
   }
-  if (!cfg) { showError('Payment configuration unavailable.'); return; }
+  if (!cart.length) {
+    showError('Your cart is empty.');
+    return;
+  }
 
-  const cart = readCart();
-  if (cart === null) { showError('Your cart is invalid.'); return; }
-  if (!cart.length) { showError('Your cart is empty.'); return; }
+  const { html, total } = renderSummaryToString(cart);
+  summary.innerHTML = html;
 
-  const grand = render(cart);
+  const cfg = await loadPayPalConfig(fetchPath);
+  const { payload, errors } = buildPayPalPayload(cfg, cart);
 
-  const businessEl = document.getElementById('pp-business');
-  const itemEl = document.getElementById('pp-item_name');
-  const amountEl = document.getElementById('pp-amount');
-  const currencyEl = document.getElementById('pp-currency');
-  const returnEl = document.getElementById('pp-return');
-  const cancelEl = document.getElementById('pp-cancel');
+  if (errors.length) {
+    showError('Invalid payment configuration.');
+    return;
+  }
 
-  if (!cfg.business || !cfg.business.includes('@')) { showError('Merchant account not configured.'); return; }
+  const businessEl = documentRoot.getElementById('pp-business');
+  const itemEl = documentRoot.getElementById('pp-item_name');
+  const amountEl = documentRoot.getElementById('pp-amount');
+  const currencyEl = documentRoot.getElementById('pp-currency');
+  const returnEl = documentRoot.getElementById('pp-return');
+  const cancelEl = documentRoot.getElementById('pp-cancel');
 
   clearError();
-  if (businessEl) businessEl.value = String(cfg.business);
-  if (currencyEl && cfg.currency) currencyEl.value = String(cfg.currency);
-  if (returnEl) returnEl.value = String(cfg.return_path);
-  if (cancelEl) cancelEl.value = String(cfg.cancel_path);
+  if (businessEl) businessEl.value = String(payload.business);
+  if (currencyEl) currencyEl.value = String(payload.currency_code);
+  if (returnEl) returnEl.value = String(payload.return);
+  if (cancelEl) cancelEl.value = String(payload.cancel_return);
+  if (itemEl) itemEl.value = payload.item_name;
+  if (amountEl) amountEl.value = payload.amount;
 
-  const itemLabel = cart.map((i) => `${i.qty}×${i.title}`).join(', ');
-  if (itemEl) itemEl.value = itemLabel.length > 127 ? itemLabel.slice(0, 124) + '...' : itemLabel;
+  form.action = payload.action;
+  if (!form.action || !businessEl.value) {
+    showError('Invalid payment configuration.');
+    return;
+  }
 
-  if (amountEl) amountEl.value = Number(grand.toFixed(2)).toFixed(2);
+  const note = documentRoot.getElementById('checkout-note');
+  if (note)
+    note.textContent = `You will be redirected to PayPal to complete payment (currency: ${payload.currency_code}).`;
+}
 
-  form.action = cfg.env && cfg.env.toLowerCase() === 'live' ? cfg.live_url : cfg.sandbox_url;
-  if (!form.action || !businessEl.value) { showError('Invalid payment configuration.'); return; }
-
-  const note = document.getElementById('checkout-note');
-  if (note) note.textContent = `You will be redirected to PayPal to complete payment (currency: ${currencyEl.value}).`;
-})();
+// Auto-run only in browser
+if (typeof document !== 'undefined') {
+  (async () => {
+    try {
+      await runCheckout();
+    } catch (e) {}
+  })();
+}

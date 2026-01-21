@@ -11,3 +11,6 @@ build/
 *.log
 test-artifacts/
 .sass-cache/
+
+# Optional tool binaries (downloaded by `npm run tools:install`)
+.tools/

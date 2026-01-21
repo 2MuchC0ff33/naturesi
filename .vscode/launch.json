@@ -17,6 +17,29 @@
       "windows": {
         "program": "C:/Users/galloa/scoop/apps/cygwin/current/bin/bash.exe"
       }
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug Node Tests (current file)",
+      "program": "${workspaceFolder}/node_modules/.bin/node",
+      "args": ["--test", "${file}"],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug All Tests",
+      "program": "${workspaceFolder}/node_modules/.bin/node",
+      "args": ["--test", "tests"],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Start server then run tests (compound)",
+      "configurations": ["Debug All Tests"],
+      "preLaunchTask": "Serve (local)"
     }
   ]
 }

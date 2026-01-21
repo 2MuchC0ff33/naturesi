@@ -73,8 +73,9 @@ Test offline and 404 pages on localhost.
 
 ## Testing
 
+- Automated tests: run `npm test` (`node --test`) to execute unit, integration and security tests. Use `npm run test:unit` for fast unit tests and `npm run test:ci` for the CI subset.
 - Manual smoke test: run locally, verify service worker install/uninstall, check offline and 404 pages.
-- No automated tests.
+- Optional browser E2E/visual tests (NativeNodeModules/ZombieJS/QuickJS/wkhtmltoimage/whtmltopdf) are documented but opt-in and gated in CI.
 
 ## Contributing
 

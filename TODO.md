@@ -144,7 +144,7 @@ Optional future enhancements (opt-in, later)
 
 - Add serverless endpoints for Orders API and webhook verification.
 - Add PayPal JS SDK (opt-in) once server-assisted order creation is in place.
-- Add automated Playwright test(s) for cart → checkout rendering and form population (do not follow external redirect).
+- Add automated NativeNodeModules/ZombieJS/QuickJS/wkhtmltoimage/whtmltopdf for cart → checkout rendering and form population (do not follow external redirect).
 
 PR checklist (include in PR body)
 
@@ -274,29 +274,11 @@ B — Automated tests (suggestions)
 - Unit tests for cart normalization / total calculation functions:
   - Test normalizeItem() with missing fields, wrong types, negative qtys.
   - Test computeTotal() with decimal rounding behavior.
-- Integration/E2E tests (Playwright/Puppeteer):
+- Integration/E2E tests (NativeNodeModules/ZombieJS/QuickJS/wkhtmltoimage/whtmltopdf):
   - Script: add item -> cart -> confirm -> checkout -> assert localStorage and page DOM for total.
   - For PayPal redirect, assert the form `action` and hidden inputs; do not follow external redirect.
-- Example Playwright test (pseudo):
+- Example NativeNodeModules/ZombieJS/QuickJS/wkhtmltoimage/whtmltopdf test (pseudo):
 
-  ```javascript
-  const { test, expect } = require('@playwright/test');
-
-  test('checkout page renders totals from cart', async ({ page }) => {
-    // Prepare cart in localStorage directly
-    await page.addInitScript(() => {
-      localStorage.setItem(
-        'naturesi_cart',
-        JSON.stringify([{ id: 'sku-1', title: 'T1', price: 9.95, qty: 2 }])
-      );
-    });
-    await page.goto('http://localhost:8000/pages/checkout.html');
-    const total = await page.textContent('#summary-content p strong');
-    expect(total).toContain('19.90');
-    // Check form fields
-    expect(await page.getAttribute('#pp-amount', 'value')).toBe('19.90');
-  });
-  ```
 
 Phase 9 — Production hardening & monitoring
 
