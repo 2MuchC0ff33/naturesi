@@ -9,4 +9,5 @@ build/
 .env
 .env.local
 *.log
+test-artifacts/
 .sass-cache/

@@ -1,427 +1,191 @@
-# TODO: Complete, Detailed Implementation Plan — Minimal PayPal Redirect Checkout
-Last updated: 2026-01-10  
-Repository: 2MuchC0ff33/naturesi
+## TODO: Minimal PayPal Redirect Checkout — HTML‑First, Minimal JS
 
-Overview
-- Goal: Add a mobile-first, HTML-first checkout flow that redirects customers to PayPal for payment and returns them to:
-  - success: `pages/payment/success.html`
-  - cancel/fail: `pages/payment/fail.html`
-- Keep the integration minimal and modular:
-  - HTML5 first, then CSS partials, then native Web APIs, and only minimal JS.
-  - No inline CSS or inline JS in any HTML.
-  - All new CSS partials must be placed under `assets/css/partials/*.css` and imported into `assets/css/main.css`.
-  - All new JS modules must be placed under `assets/js/modules/*.js` and imported/bootstrapped via `assets/js/app.js`.
-  - Configuration JSON files must be under `assets/js/data/*.json`.
-- Ensure `pages/cart.html` stores the confirmed cart in localStorage under the key `naturesi_cart` in the canonical format so the checkout page can reliably consume it.
-- Provide an optional, documented client-side PayPal JS SDK integration (opt-in) for improved UX.
-- Produce `.github/PAYPAL_INTEGRATION.md` (or update README) with instructions for switching sandbox/live and provisioning secrets through CI/hosting.
+_Last updated: 2026-01-21_
 
-Contents of this TODO
-- Implementation roadmap (phases, tasks, file map)
-- Precise canonical cart contract (schema)
-- Exact HTML/CSS/JS placement rules
-- Concrete sample snippets (HTML form, JSON config, minimal JS pseudocode)
-- Optional PayPal JS SDK flow (client-only and server-assisted)
-- Server-side / serverless examples (create-order, verify-webhook)
-- CI / hosting secret-injection templates (GitHub Actions, Netlify, Vercel)
-- Manual QA and automated testing examples (Playwright sample)
-- Security, privacy, and production checklist
-- Monitoring, logging, rollback, post-deploy tasks
-- PR template and reviewer checklist
-- PayPal reference URLs
+Summary
 
-IMPLEMENTATION ROADMAP — PHASED
+- Goal: Add the simplest possible PayPal redirect checkout (aggregate amount) that redirects customers to PayPal and returns them to:
+  - success: `/pages/payment/success.html`
+  - cancel/fail: `/pages/payment/fail.html`
+- Philosophy: **HTML5 first → CSS next → native Web APIs → JSON config → JavaScript only when necessary**. No inline JS/CSS.
 
-Phase 0 — Prep & account setup (developer)
-- Create/verify a PayPal Developer account: https://developer.paypal.com/home/
-- In Developer Dashboard:
-  - Create or note a Sandbox Business account (merchant) email.
-  - Create Sandbox buyer accounts for manual testing.
-  - Note `Sandbox Client ID` (for optional client-side SDK testing). Client ID is not a secret.
-  - For production, generate `Live Client ID` and `Live Client Secret` and keep them in secure vaults (CI secrets, host env vars).
-- Collect required information:
-  - sandbox_business_email
-  - sandbox_client_id
-  - live_business_email (do NOT commit)
-  - live_client_id (do NOT commit)
-  - live_client_secret (do NOT commit)
+Scope (MVP)
 
-Phase 1 — Configuration scaffolding (safe static files)
-Files to add:
-- `assets/js/data/paypal.json` — configuration and placeholders.
-  - Purpose: single source for env, endpoints, business emails, client IDs, currency and return paths.
-  - Template (placeholders must be replaced via CI / build step for production):
-    ```json
-    {
-      "env": "sandbox",
-      "business": "sandbox-business@example.com",
-      "currency": "AUD",
-      "sandbox_url": "https://www.sandbox.paypal.com/cgi-bin/webscr",
-      "live_url": "https://www.paypal.com/cgi-bin/webscr",
-      "return_path": "/pages/payment/success.html",
-      "cancel_path": "/pages/payment/fail.html",
-      "sdk_client_id_sandbox": "REPLACE_WITH_SANDBOX_CLIENT_ID",
-      "sdk_client_id_live": "REPLACE_WITH_LIVE_CLIENT_ID",
-      "sdk_enabled": false
-    }
-    ```
-- `.github/PAYPAL_INTEGRATION.md` — initial placeholder (detailed content expanded later).
+- Redirect-only flow (no server endpoints, no PayPal JS SDK).
+- Client computes an aggregate total, posts a single PayPal form (`cmd=_xclick`) to PayPal sandbox or live.
+- Keep configuration in `assets/js/data/paypal.json` (placeholders — replaced at build/deploy time for production).
 
-Phase 2 — Cart page changes (HTML-first, then JS)
-Goal: Make `pages/cart.html` produce canonical `naturesi_cart` localStorage entry when user confirms cart/postage and chooses to proceed.
+Files to add / modify
 
-A — HTML (cart page)
-- Add a semantic form or accessible button to finalize and proceed:
-  - Prefer `<form id="confirm-cart-form" method="post" action="/pages/checkout.html">` where the `<button type="submit">` triggers the normal flow. If your cart page uses JS to manage cart, use a button with id `btn-proceed-checkout`.
-- Example HTML snippet (for `pages/cart.html`):
-  ```html
-  <form id="confirm-cart-form" aria-label="Confirm items and proceed to checkout">
-    <!-- existing cart UI elements here -->
-    <button type="submit" id="btn-proceed-checkout" class="btn btn-primary">Proceed to checkout</button>
-  </form>
-  ```
-- Note: The form does not need inline JS. We'll attach behavior via `assets/js/modules/cart.js`.
+- Create:
+  - `assets/js/data/paypal.json` (config template, placeholders)
+  - `assets/js/modules/cart.js` (collect canonical cart, write `localStorage`)
+  - `assets/js/modules/checkout.js` (render summary, populate PayPal form)
+  - `pages/checkout.html` (order summary + `#paypal-form`)
+  - `pages/payment/success.html` (minimal confirmation page)
+  - `pages/payment/fail.html` (minimal cancel page)
+  - `assets/css/partials/checkout.css` (mobile-first styles)
+  - `.github/PAYPAL_INTEGRATION.md` (short instructions + CI note)
+- Modify:
+  - `pages/cart.html` — add confirm/submit form/button (no inline JS)
+  - `assets/js/app.js` — conditionally import modules when DOM markers exist
+  - `assets/css/main.css` — import the new partial
 
-B — JS (cart module)
-- File: `assets/js/modules/cart.js`
-- Responsibilities:
-  - On submit, collect the confirmed cart data from canonical source (preferably an in-memory cart object on the page; fallback to DOM).
-  - Normalize and validate the cart into canonical shape (see "Cart contract" below).
-  - Save to localStorage key `naturesi_cart`.
-  - Optionally save shipping/postage summary to `naturesi_cart_meta` (or similar).
-  - Redirect to `/pages/checkout.html`.
-- Minimal structure example (to be placed inside `assets/js/modules/cart.js`):
-  ```javascript
-  (function () {
-    const CART_KEY = 'naturesi_cart';
-    const form = document.getElementById('confirm-cart-form');
-    if (!form) return;
+Canonical cart contract (localStorage)
 
-    function collectCart() {
-      // Try to read from global JS cart if available:
-      if (window.appCart && Array.isArray(window.appCart)) {
-        return window.appCart.map(normalizeItem);
-      }
-      // Otherwise parse DOM elements (find .cart-item elements with data attributes)
-      // Implementation depends on your cart markup; this is pseudo-code
-      const items = [];
-      document.querySelectorAll('.cart-item').forEach(el => {
-        const id = el.dataset.id;
-        const title = el.querySelector('.item-title').textContent.trim();
-        const price = parseFloat(el.querySelector('.item-price').dataset.value);
-        const qty = parseInt(el.querySelector('.item-qty').value, 10) || 1;
-        items.push({id, title, price, qty});
-      });
-      return items.map(normalizeItem);
-    }
+- Key: `naturesi_cart`
+- Type: JSON array of objects
+- Item schema:
+  - `id`: string
+  - `title`: string
+  - `price`: number (per-unit)
+  - `qty`: integer
+- Example:
 
-    function normalizeItem(item) {
-      return {
-        id: String(item.id || ''),
-        title: String(item.title || 'Item'),
-        price: Number(item.price || 0),
-        qty: parseInt(item.qty || 1, 10)
-      };
-    }
+```json
+[{ "id": "sku-100", "title": "Chamomile Infusion 50g", "price": 9.95, "qty": 2 }]
+```
 
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      const items = collectCart();
-      if (!items.length) {
-        // display accessible error and abort
-        alert('Your cart is empty');
-        return;
-      }
-      localStorage.setItem(CART_KEY, JSON.stringify(items));
-      window.location.href = '/pages/checkout.html';
-    });
-  })();
-  ```
-- Loading:
-  - `assets/js/app.js` must dynamically import `assets/js/modules/cart.js` only when `#confirm-cart-form` exists to keep runtime minimal.
+- Shipping option: either include a shipping line item (`id: 'shipping'`) or store meta in `naturesi_cart_meta` — pick one and document it.
 
-Phase 3 — Checkout page (HTML-first)
-Goal: `pages/checkout.html` must be fully accessible and functional. The page uses minimal JS to render the order summary and populate the PayPal redirect form (no inline JS).
+Config template (`assets/js/data/paypal.json`)
 
-A — HTML (pages/checkout.html)
-- Create the page with:
-  - Header, navigation, main, footer.
-  - Order summary section (id `order-summary` with inner `#summary-content`).
-  - Payment section containing the minimal PayPal redirect form.
-- PayPal form specifics (MVP single-item aggregate approach):
-  - Form method = POST.
-  - `id="paypal-form"`
-  - hidden inputs:
-    - `cmd = _xclick` (single aggregate item)
-    - `business` (populated by JS)
-    - `item_name` (populated by JS)
-    - `amount` (populated by JS)
-    - `currency_code` (default from config)
-    - `return` and `cancel_return` populated from config
-- Example snippet:
-  ```html
-  <form id="paypal-form" method="post" action="https://www.sandbox.paypal.com/cgi-bin/webscr" novalidate>
-    <input type="hidden" name="cmd" value="_xclick">
-    <input type="hidden" name="business" id="pp-business" value="">
-    <input type="hidden" name="item_name" id="pp-item_name" value="">
-    <input type="hidden" name="amount" id="pp-amount" value="">
-    <input type="hidden" name="currency_code" id="pp-currency" value="AUD">
-    <input type="hidden" name="return" id="pp-return" value="/pages/payment/success.html">
-    <input type="hidden" name="cancel_return" id="pp-cancel" value="/pages/payment/fail.html">
-    <button type="submit" id="pay-now" class="btn btn-primary">Pay with PayPal</button>
-  </form>
-  ```
-- Accessibility:
-  - Provide explanatory text about redirection and privacy (no payment data stored on site).
-  - Provide fallback message in `<noscript>`.
+```json
+{
+  "env": "sandbox",
+  "business": "sandbox-business@example.com",
+  "currency": "AUD",
+  "sandbox_url": "https://www.sandbox.paypal.com/cgi-bin/webscr",
+  "live_url": "https://www.paypal.com/cgi-bin/webscr",
+  "return_path": "/pages/payment/success.html",
+  "cancel_path": "/pages/payment/fail.html",
+  "sdk_enabled": false
+}
+```
 
-B — JS (checkout module)
-- File: `assets/js/modules/checkout.js`
-- Responsibilities:
-  - Load `assets/js/data/paypal.json` (fetch) to determine environment (sandbox/live), business email, currency, endpoints and SDK settings.
-  - Read `naturesi_cart` from localStorage and parse it.
-  - Validate and normalize items (enforce numbers, integer qty).
-  - Render accessible order summary into `#summary-content`.
-  - Compute total: sum(price * qty) (prefer fixed 2 decimals).
-  - Populate the PayPal form hidden inputs:
-    - `#pp-business` = config.business
-    - `#pp-item_name` = concise string (join first few item titles with qtys)
-    - `#pp-amount` = total.toFixed(2)
-    - `#pp-currency` = config.currency
-    - Set `#paypal-form.action` to sandbox_url or live_url based on env
-    - `#pp-return` and `#pp-cancel` updated to config.return_path and config.cancel_path
-  - If `business` missing or cart invalid:
-    - Render clear message and disable submit button.
-- Minimal code example (for guidance, adapted to your environment; place in modules):
-  ```javascript
-  (async function () {
-    const CART_KEY = 'naturesi_cart';
-    const form = document.getElementById('paypal-form');
-    const summaryEl = document.getElementById('summary-content');
-    if (!form || !summaryEl) return;
+- **Do not commit live secrets**. Replace placeholders at build time using CI or host env vars.
 
-    // Load config
-    let cfg = { env: 'sandbox', business: '', currency: 'AUD', sandbox_url: '', live_url: '', return_path: '/pages/payment/success.html', cancel_path: '/pages/payment/fail.html' };
-    try {
-      const res = await fetch('/assets/js/data/paypal.json', {cache: 'no-store'});
-      if (res.ok) cfg = await res.json();
-    } catch (err) { console.warn(err); }
+HTML snippets (no inline JS/CSS)
 
-    // Set endpoint
-    if (cfg.env === 'live' && cfg.live_url) form.action = cfg.live_url;
-    else if (cfg.sandbox_url) form.action = cfg.sandbox_url;
+- Cart proceed button (add to `pages/cart.html`):
 
-    // Parse cart
-    let cart = [];
-    try { cart = JSON.parse(localStorage.getItem(CART_KEY) || '[]'); } catch(e) { cart = []; }
-    if (!Array.isArray(cart) || cart.length === 0) {
-      summaryEl.innerHTML = '<p class="muted">Your cart is empty. <a href="/pages/store/index.html">Continue shopping</a>.</p>';
-      form.querySelector('button[type="submit"]').disabled = true;
-      return;
-    }
+```html
+<form
+  id="confirm-cart-form"
+  aria-label="Confirm items and proceed to checkout"
+  action="/pages/checkout.html"
+  method="get"
+>
+  <button type="submit" id="btn-proceed-checkout" class="btn btn-primary">
+    Proceed to checkout
+  </button>
+</form>
+```
 
-    // Render summary & compute total
-    let total = 0;
-    const ul = document.createElement('ul');
-    ul.setAttribute('aria-label', 'Order items');
-    cart.forEach(item => {
-      const price = Number(item.price || 0);
-      const qty = parseInt(item.qty || 1, 10);
-      const line = price * qty;
-      total += line;
-      const li = document.createElement('li');
-      li.textContent = `${item.title} × ${qty} — ${line.toFixed(2)} ${cfg.currency}`;
-      ul.appendChild(li);
-    });
-    const totalEl = document.createElement('p');
-    totalEl.innerHTML = `<strong>Total: ${total.toFixed(2)} ${cfg.currency}</strong>`;
-    summaryEl.innerHTML = '';
-    summaryEl.appendChild(ul);
-    summaryEl.appendChild(totalEl);
+- Checkout PayPal redirect form (`pages/checkout.html`):
 
-    // Populate form
-    document.getElementById('pp-business').value = cfg.business || '';
-    document.getElementById('pp-amount').value = total.toFixed(2);
-    document.getElementById('pp-item_name').value = cart.map(i => `${i.qty}× ${i.title}`).join(' • ').slice(0, 127) || "Nature's Infusions Order";
-    document.getElementById('pp-currency').value = cfg.currency || 'AUD';
-    document.getElementById('pp-return').value = cfg.return_path || '/pages/payment/success.html';
-    document.getElementById('pp-cancel').value = cfg.cancel_path || '/pages/payment/fail.html';
+```html
+<form
+  id="paypal-form"
+  method="post"
+  action="https://www.sandbox.paypal.com/cgi-bin/webscr"
+  novalidate
+>
+  <input type="hidden" name="cmd" value="_xclick" />
+  <input type="hidden" name="business" id="pp-business" value="" />
+  <input type="hidden" name="item_name" id="pp-item_name" value="" />
+  <input type="hidden" name="amount" id="pp-amount" value="" />
+  <input type="hidden" name="currency_code" id="pp-currency" value="AUD" />
+  <input type="hidden" name="return" id="pp-return" value="/pages/payment/success.html" />
+  <input type="hidden" name="cancel_return" id="pp-cancel" value="/pages/payment/fail.html" />
+  <button type="submit" id="pay-now" class="btn btn-primary">Pay with PayPal</button>
+</form>
+```
 
-    if (!cfg.business) {
-      const warn = document.createElement('p');
-      warn.className = 'error';
-      warn.textContent = 'Payment gateway not configured. Please contact support.';
-      summaryEl.appendChild(warn);
-      form.querySelector('button[type="submit"]').disabled = true;
-    }
-  })();
-  ```
-- Loading:
-  - `assets/js/app.js` should detect `#paypal-form` and dynamic import checkout module.
+- Add an explanatory paragraph about redirection and a `<noscript>` fallback.
 
-Phase 4 — Styling (CSS partials)
-- Create `assets/css/partials/checkout.css` for checkout page styles (mobile-first, accessible).
-- Create `assets/css/partials/cart.css` if cart UI needs style changes.
-- Ensure `assets/css/main.css` imports the partials:
-  ```css
-  /* assets/css/main.css */
-  @import url('partials/checkout.css');
-  @import url('partials/cart.css'); /* optional */
-  ```
-- Keep styles simple, responsive, and prefer system fonts. Use CSS variables for colors to match site theme.
+JavaScript responsibilities (minimal, defensive)
 
-Phase 5 — Optional: Client-side PayPal JS SDK integration (opt-in)
-- Rationale: SDK produces an in-context hosted experience and can perform authorizations/captures with better UX. For production you should still create orders server-side to avoid price tampering.
-- Toggle:
-  - Add `sdk_enabled` boolean in `assets/js/data/paypal.json`.
-  - Add `sdk_client_id_sandbox` and `sdk_client_id_live` fields (client-id is not secret).
-- Two implementation modes:
-  - Client-only (sandbox/demo only) — quick and insecure for production.
-  - Server-assisted (recommended) — create order on the server, return orderID to client SDK.
-- Files:
-  - `assets/js/modules/paypal-sdk.js` — dynamically load `https://www.paypal.com/sdk/js?client-id=...&currency=AUD` and render `paypal.Buttons(...)`.
-- Minimal client-only example (for sandbox/demo only):
-  ```javascript
-  // Load SDK dynamically in paypal-sdk.js
-  (async function () {
-    const cfg = await fetch('/assets/js/data/paypal.json').then(r => r.json());
-    if (!cfg.sdk_enabled) return;
-    const clientId = cfg.env === 'live' ? cfg.sdk_client_id_live : cfg.sdk_client_id_sandbox;
-    const script = document.createElement('script');
-    script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}&currency=${cfg.currency || 'AUD'}`;
-    script.async = true;
-    document.head.appendChild(script);
-    script.onload = () => {
-      paypal.Buttons({
-        createOrder: (data, actions) => {
-          // Use local cart summary to compute total
-          const cart = JSON.parse(localStorage.getItem('naturesi_cart') || '[]');
-          const total = cart.reduce((s, i) => s + (Number(i.price || 0) * Number(i.qty || 1)), 0).toFixed(2);
-          return actions.order.create({ purchase_units: [{ amount: { value: total } }] });
-        },
-        onApprove: (data, actions) => actions.order.capture().then(() => window.location.href = cfg.return_path),
-        onCancel: () => window.location.href = cfg.cancel_path
-      }).render('#paypal-button-container');
-    };
-  })();
-  ```
-- Recommended server-assisted SDK flow (production):
-  1. Client calls `/api/create-paypal-order` with order details (or order id).
-  2. Server uses PayPal Orders API with server-side credentials to create an order and returns `orderID`.
-  3. Client uses `paypal.Buttons({ createOrder: () => orderID })` or calls `actions.order.create({})` with returned ID.
-  4. On `onApprove`, client calls server `/api/capture-paypal-order` to capture and verify or the server captures immediately upon webhook .
-  5. Server verifies capture and finalizes order (send email, update DB, etc).
-- Note: Server-assisted approach requires server-side secrets (client_secret). See Phase 7 for serverless examples.
+- `assets/js/modules/cart.js`:
+  - On submit: collect cart from global JS or DOM, normalize items to canonical schema, store in `localStorage.naturesi_cart`, and navigate to `/pages/checkout.html`.
+- `assets/js/modules/checkout.js`:
+  - Fetch `/assets/js/data/paypal.json` (cache: no-store).
+  - Read and validate `localStorage.naturesi_cart`.
+  - Render accessible itemised summary in `#summary-content` using `textContent` and DOM APIs.
+  - Compute grand total (numeric) and populate hidden form inputs (`business`, `item_name`, `amount`, `currency_code`, `return`, `cancel_return`).
+  - Set form `action` to sandbox or live URL based on `env` in config.
+  - If cart empty or `business` missing: show error and disable submit.
+- Keep modules small, import conditionally from `assets/js/app.js` only when relevant DOM markers exist.
 
-Phase 6 — Server-side / serverless examples (order creation & webhook verification)
-- These steps are recommended for production. They require serverless functions or a backend (e.g., Netlify Functions, Vercel Serverless, AWS Lambda, Express app).
+CSS
 
-A — Create order endpoint (server)
-- POST `/api/create-paypal-order`
-- Body: order summary or order id referencing your server-side DB
-- Sample Node.js (serverless) using fetch (v2/orders):
-  ```javascript
-  // create-order.js (serverless)
-  import fetch from 'node-fetch';
+- Add `assets/css/partials/checkout.css` (mobile-first, accessible contrast, focus states).
+- Import into `assets/css/main.css`.
 
-  async function getAccessToken(clientId, clientSecret) {
-    const tokenRes = await fetch(`https://api-m.${isLive ? 'paypal.com' : 'sandbox.paypal.com'}/v1/oauth2/token`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: 'grant_type=client_credentials',
-      auth: `${clientId}:${clientSecret}` // Or use basic auth header
-    });
-    const tokenJson = await tokenRes.json();
-    return tokenJson.access_token;
-  }
+QA / Acceptance Criteria
 
-  export default async function handler(req, res) {
-    const { cart } = req.body; // validate server-side
-    const clientId = process.env.PAYPAL_CLIENT_ID;
-    const clientSecret = process.env.PAYPAL_CLIENT_SECRET;
-    const isLive = process.env.PAYPAL_ENV === 'live';
+- `pages/cart.html` writes valid JSON to `localStorage.naturesi_cart` (numeric `price`, integer `qty`).
+- `pages/checkout.html` displays line items and grand total correctly.
+- Hidden PayPal form fields populated; `form.action` points to sandbox when `env: sandbox`.
+- Clicking "Pay with PayPal" redirects to PayPal and shows the correct total; sandbox completes to success page and cancel returns to fail page.
+- If cart empty or `business` missing: clear UI message and disabled submit.
 
-    const accessToken = await getAccessToken(clientId, clientSecret);
-    const orderRes = await fetch(`https://api-m.${isLive ? 'paypal.com' : 'sandbox.paypal.com'}/v2/checkout/orders`, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        intent: 'CAPTURE',
-        purchase_units: [{
-          amount: {
-            currency_code: 'AUD',
-            value: computeTotal(cart).toFixed(2)
-          }
-        }],
-        application_context: {
-          return_url: 'https://your-site/pages/payment/success.html',
-          cancel_url: 'https://your-site/pages/payment/fail.html'
-        }
-      })
-    });
-    const order = await orderRes.json();
-    res.json(order);
-  }
-  ```
-- Note: In serverless functions use `Authorization` header for OAuth token retrieval via Basic auth:
-  - `Authorization: 'Basic ' + Buffer.from(clientId + ':' + clientSecret).toString('base64')`.
+Security note (production)
 
-B — Capture/verify endpoint or webhook processing
-- Preferred: Use PayPal Webhooks for event verification and reliability.
-- Webhook verification endpoint sample using Verify Webhook Signature:
-  1. Receive webhook HTTP POST from PayPal with headers:
-     - `paypal-transmission-id`
-     - `paypal-transmission-time`
-     - `paypal-transmission-sig`
-     - `paypal-cert-url`
-     - `paypal-auth-algo`
-     - `webhook-id` (the webhook id registered in your PayPal app)
-  2. Call `POST /v1/notifications/verify-webhook-signature` with JSON payload containing the values above and the raw webhook body to confirm PayPal signature.
-  3. If verification returns `VERIFIED`, process the event (e.g., `PAYMENT.CAPTURE.COMPLETED`).
-- Sample Node.js (serverless) verify call:
-  ```javascript
-  // verify-webhook.js (serverless)
-  import fetch from 'node-fetch';
+- Client-side totals can be tampered with — acceptable for sandbox/demo. For production **implement server-assisted order creation and webhook verification** before fulfilling orders.
+- Never commit `client_secret` or other live secrets. Use CI or host environment variables for injection.
 
-  async function getAccessToken(clientId, clientSecret) { /* same as above */ }
+CI / Deployment notes
 
-  export default async function handler(req, res) {
-    const clientId = process.env.PAYPAL_CLIENT_ID;
-    const clientSecret = process.env.PAYPAL_CLIENT_SECRET;
-    const isLive = process.env.PAYPAL_ENV === 'live';
-    const accessToken = await getAccessToken(clientId, clientSecret);
+- Build-time injection example: use a small Node script or `jq` in GitHub Actions / Netlify / Vercel to replace placeholders in `assets/js/data/paypal.json` with `env=live`, `business=LIVE_EMAIL`, and `sdk_client_id_live` when deploying to production.
+- GitHub Pages: perform placeholder injection in CI before publishing.
 
-    const verifyRes = await fetch(`https://api-m.${isLive ? 'paypal.com' : 'sandbox.paypal.com'}/v1/notifications/verify-webhook-signature`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${accessToken}`
-      },
-      body: JSON.stringify({
-        auth_algo: req.headers['paypal-auth-algo'],
-        cert_url: req.headers['paypal-cert-url'],
-        transmission_id: req.headers['paypal-transmission-id'],
-        transmission_sig: req.headers['paypal-transmission-sig'],
-        transmission_time: req.headers['paypal-transmission-time'],
-        webhook_id: process.env.PAYPAL_WEBHOOK_ID,
-        webhook_event: req.body
-      })
-    });
-    const verifyJson = await verifyRes.json();
-    if (verifyJson.verification_status === 'SUCCESS') {
-      // process event: req.body.event_type e.g. PAYMENT.CAPTURE.COMPLETED
-      res.status(200).send('OK');
-    } else {
-      res.status(400).send('Invalid webhook signature');
-    }
-  }
-  ```
+Optional future enhancements (opt-in, later)
+
+- Add serverless endpoints for Orders API and webhook verification.
+- Add PayPal JS SDK (opt-in) once server-assisted order creation is in place.
+- Add automated Playwright test(s) for cart → checkout rendering and form population (do not follow external redirect).
+
+PR checklist (include in PR body)
+
+- Title: `feat(payment): add minimal PayPal redirect checkout`
+- Files added/modified list
+- Smoke test steps & results (local server + sandbox flows)
+- Confirm no secrets committed
+- Confirm no inline JS/CSS
+- Confirm `assets/js/data/paypal.json` contains placeholders only
+
+Estimated effort
+
+- MVP redirect-only: 4–8 hours (implementation + sandbox QA)
+- Docs and CI examples: +1–2 hours
+
+If you confirm, I'll implement the files now (cart.js, checkout.js, pages, config template, CSS partial, and app.js wiring) and open a PR with the changes and tests.
+
+---
+
+**Note:** This document is intentionally compact and prescriptive to keep the initial implementation minimal, auditable, and safe. Production-ready payment handling requires server-side verification which is listed under Optional future enhancements.
+cert_url: req.headers['paypal-cert-url'],
+transmission_id: req.headers['paypal-transmission-id'],
+transmission_sig: req.headers['paypal-transmission-sig'],
+transmission_time: req.headers['paypal-transmission-time'],
+webhook_id: process.env.PAYPAL_WEBHOOK_ID,
+webhook_event: req.body
+})
+});
+const verifyJson = await verifyRes.json();
+if (verifyJson.verification_status === 'SUCCESS') {
+// process event: req.body.event_type e.g. PAYMENT.CAPTURE.COMPLETED
+res.status(200).send('OK');
+} else {
+res.status(400).send('Invalid webhook signature');
+}
+}
+
+````
 - Important:
-  - `PAYPAL_WEBHOOK_ID` is the webhook ID in your PayPal app - store it in env vars.
-  - Validate the event type and order IDs match your records before fulfilling orders.
+- `PAYPAL_WEBHOOK_ID` is the webhook ID in your PayPal app - store it in env vars.
+- Validate the event type and order IDs match your records before fulfilling orders.
 
 Phase 7 — CI / Hosting secret injection examples
 - Goal: Replace placeholder values in `assets/js/data/paypal.json` during build with secrets from CI/host.
@@ -429,37 +193,39 @@ Phase 7 — CI / Hosting secret injection examples
 A — GitHub Actions example (inject production values during build)
 - Replace placeholders using `jq` (recommended) or a small Node script.
 - Workflow snippet:
-  ```yaml
-  name: Deploy
-  on: [push]
-  jobs:
-    build:
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v4
-        - name: Setup jq
-          run: sudo apt-get update && sudo apt-get install -y jq
-        - name: Inject PayPal production config
-          if: github.ref == 'refs/heads/main'
-          env:
-            PAYPAL_ENV: live
-            PAYPAL_BUSINESS_EMAIL: ${{ secrets.PAYPAL_BUSINESS_EMAIL }}
-            PAYPAL_SDK_CLIENT_ID_LIVE: ${{ secrets.PAYPAL_SDK_CLIENT_ID_LIVE }}
-          run: |
-            jq --arg env "$PAYPAL_ENV" \
-               --arg business "$PAYPAL_BUSINESS_EMAIL" \
-               --arg clientid "$PAYPAL_SDK_CLIENT_ID_LIVE" \
-               '.env=$env | .business=$business | .sdk_client_id_live=$clientid' \
-               assets/js/data/paypal.json > assets/js/data/paypal.json.tmp && mv assets/js/data/paypal.json.tmp assets/js/data/paypal.json
-        - name: Build & Deploy
-          run: |
-            # your build and deploy commands
-  ```
+```yaml
+name: Deploy
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup jq
+        run: sudo apt-get update && sudo apt-get install -y jq
+      - name: Inject PayPal production config
+        if: github.ref == 'refs/heads/main'
+        env:
+          PAYPAL_ENV: live
+          PAYPAL_BUSINESS_EMAIL: ${{ secrets.PAYPAL_BUSINESS_EMAIL }}
+          PAYPAL_SDK_CLIENT_ID_LIVE: ${{ secrets.PAYPAL_SDK_CLIENT_ID_LIVE }}
+        run: |
+          jq --arg env "$PAYPAL_ENV" \
+             --arg business "$PAYPAL_BUSINESS_EMAIL" \
+             --arg clientid "$PAYPAL_SDK_CLIENT_ID_LIVE" \
+             '.env=$env | .business=$business | .sdk_client_id_live=$clientid' \
+             assets/js/data/paypal.json > assets/js/data/paypal.json.tmp && mv assets/js/data/paypal.json.tmp assets/js/data/paypal.json
+      - name: Build & Deploy
+        run: |
+          # your build and deploy commands
+````
+
 - Notes:
   - Keep `PAYPAL_BUSINESS_EMAIL` and `PAYPAL_SDK_CLIENT_ID_LIVE` in GitHub Secrets.
   - If using serverless endpoints, set `PAYPAL_CLIENT_ID` and `PAYPAL_CLIENT_SECRET` as repo/organization secrets and pipeline env vars.
 
 B — Netlify
+
 - Netlify supports Build Environment Variables. Use a build script to generate `assets/js/data/paypal.json` at build time.
 - Example build script (Node):
   ```js
@@ -475,14 +241,17 @@ B — Netlify
 - Add `npm run inject-paypal` to build command in Netlify settings.
 
 C — Vercel
+
 - Vercel env vars can be referenced in serverless functions. For static build-time injection, use a build script similar to Netlify and set Vercel Environment Variables.
 
 D — Note on GitHub Pages
+
 - GitHub Pages does not support runtime env vars. You must perform build-time injection in CI (Actions) before deploying.
 
 Phase 8 — QA, testing, and automation
 
 A — Manual QA checklist (detailed)
+
 1. Confirm `pages/cart.html`:
    - Add multiple items and vary qty, ensure totals are correct.
    - Click "Proceed to checkout".
@@ -501,6 +270,7 @@ A — Manual QA checklist (detailed)
    - Malformed item: missing price => treated as 0; display visually and probably block checkout depending on policy.
 
 B — Automated tests (suggestions)
+
 - Unit tests for cart normalization / total calculation functions:
   - Test normalizeItem() with missing fields, wrong types, negative qtys.
   - Test computeTotal() with decimal rounding behavior.
@@ -508,13 +278,17 @@ B — Automated tests (suggestions)
   - Script: add item -> cart -> confirm -> checkout -> assert localStorage and page DOM for total.
   - For PayPal redirect, assert the form `action` and hidden inputs; do not follow external redirect.
 - Example Playwright test (pseudo):
+
   ```javascript
   const { test, expect } = require('@playwright/test');
 
   test('checkout page renders totals from cart', async ({ page }) => {
     // Prepare cart in localStorage directly
     await page.addInitScript(() => {
-      localStorage.setItem('naturesi_cart', JSON.stringify([{id:'sku-1',title:'T1',price:9.95,qty:2}]));
+      localStorage.setItem(
+        'naturesi_cart',
+        JSON.stringify([{ id: 'sku-1', title: 'T1', price: 9.95, qty: 2 }])
+      );
     });
     await page.goto('http://localhost:8000/pages/checkout.html');
     const total = await page.textContent('#summary-content p strong');
@@ -525,12 +299,14 @@ B — Automated tests (suggestions)
   ```
 
 Phase 9 — Production hardening & monitoring
+
 - Add server-side verification (webhooks) and preferably server-assisted order creation/capture for production to prevent fraud.
 - Track webhook events, log verification results, monitor failures.
 - Implement monitoring metrics: transactions per minute, webhook verification failures, mismatched order totals.
 - Log enough metadata to debug issues (order id, cart hash, timestamp, event type). Do not log PII.
 
 Phase 10 — Rollout & rollback
+
 - Deploy to staging (sandbox) first.
 - Smoke test real flows with sandbox accounts.
 - When ready:
@@ -540,6 +316,7 @@ Phase 10 — Rollout & rollback
   - If payment failures occur, revert to previous tag or re-deploy with `env=sandbox` configuration while investigating.
 
 FILE MAP — EXACT FILES TO CREATE OR MODIFY
+
 - pages/
   - `pages/checkout.html` (NEW)
   - `pages/payment/success.html` (NEW)
@@ -562,6 +339,7 @@ FILE MAP — EXACT FILES TO CREATE OR MODIFY
   - `/api/capture-paypal-order` or `/api/paypal/webhook` (serverless)
 
 CART CONTRACT — EXACT SCHEMA (MUST BE FOLLOWED)
+
 - localStorage key: `naturesi_cart`
 - JSON value: array of objects
 - Each object:
@@ -572,8 +350,8 @@ CART CONTRACT — EXACT SCHEMA (MUST BE FOLLOWED)
 - Example (canonical):
   ```json
   [
-    {"id":"sku-100","title":"Chamomile Infusion 50g","price":9.95,"qty":2},
-    {"id":"sku-101","title":"Eucalyptus Steam 30g","price":6.50,"qty":1}
+    { "id": "sku-100", "title": "Chamomile Infusion 50g", "price": 9.95, "qty": 2 },
+    { "id": "sku-101", "title": "Eucalyptus Steam 30g", "price": 6.5, "qty": 1 }
   ]
   ```
 - If postage/shipping is needed, either:
@@ -581,6 +359,7 @@ CART CONTRACT — EXACT SCHEMA (MUST BE FOLLOWED)
   - Include shipping as an item in cart with `id: 'shipping', title: 'Shipping - Standard', price: 4.5, qty: 1` — document which approach is used.
 
 PAYPAL REDIRECT FORM OPTIONS — CHOICES EXPLAINED
+
 - Aggregate single-item (`cmd=_xclick`):
   - Simpler: compute the total on client, set `amount` to grand total and use `item_name` as a descriptive string.
   - Downside: relies on client-calculated total for the PayPal UI; server-side verification recommended.
@@ -590,6 +369,7 @@ PAYPAL REDIRECT FORM OPTIONS — CHOICES EXPLAINED
 - For MVP choose aggregate (`_xclick`) to minimise complexity.
 
 PRODUCTION SECURITY CHECKLIST
+
 - Never commit live secrets (`client_secret`, live business email if not public) to the repository.
 - Use CI secret injection or host env vars for serverless functions.
 - For production, implement server-assisted order creation and webhook verification.
@@ -599,11 +379,13 @@ PRODUCTION SECURITY CHECKLIST
 - Implement replay protection for webhooks (track `paypal-transmission-id`).
 
 CI/DEPLOY EXAMPLES (SUMMARIZED)
+
 - GitHub Actions: use `jq` or Node script to replace placeholders before build.
 - Netlify: use environment variables and build script to write config file during `npm run build`.
 - Vercel: use build script with Vercel Environment Vars (or serverless functions for secret operations).
 
 EXTRA DEBUGGING & DEV NOTES
+
 - If checkout shows incorrect total:
   - Inspect `localStorage.naturesi_cart` for numeric types (use devtools console).
   - Check `assets/js/modules/checkout.js` rounding (use toFixed(2) only on display or form values; compute totals with Number not string concatenation).
@@ -615,6 +397,7 @@ EXTRA DEBUGGING & DEV NOTES
   - Ensure public URL is reachable and returns 200 before registering.
 
 EXHAUSTIVE QA TEST CASES (matrix)
+
 - Functional:
   - Single item, qty 1
   - Single item, qty > 1
@@ -632,6 +415,7 @@ EXHAUSTIVE QA TEST CASES (matrix)
   - Simulate replay webhook with reused `transmission-id` -> handler must prevent duplicate fulfilment
 
 PR TEMPLATE & REVIEWER CHECKLIST
+
 - PR title: `feat(payment): add minimal PayPal redirect checkout`
 - Description must include:
   - Files added/modified list
@@ -649,6 +433,7 @@ PR TEMPLATE & REVIEWER CHECKLIST
   - [ ] QA steps performed & logged in PR comments
 
 LONG-TERM ENHANCEMENTS (post-MVP)
+
 - Implement server-side order store with unique order id and server-side order verification.
 - Support PayPal Orders API fully (create, approve, capture) with a serverless backend.
 - Add invoices / receipts and send transactional emails on verified payments.
@@ -657,6 +442,7 @@ LONG-TERM ENHANCEMENTS (post-MVP)
 - Add tests for webhook verification and order lifecycle.
 
 REFERENCES
+
 - PayPal Developer Home: https://developer.paypal.com/home/
 - PayPal Checkout docs: https://developer.paypal.com/docs/checkout/
 - PayPal JS SDK: https://developer.paypal.com/sdk/js/
@@ -666,6 +452,7 @@ REFERENCES
 - PayPal Invoicing: https://developer.paypal.com/docs/invoicing/
 
 ESTIMATES (single developer)
+
 - MVP redirect-only: 4–8 hours (including sandbox QA)
 - Documentation and CI secret injection examples: +1–2 hours
 - Optional SDK + serverless order creation + webhook verification: 1–3 days depending on host and complexity
