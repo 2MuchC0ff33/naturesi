@@ -40,6 +40,21 @@ export async function loadPayPalConfig(path = '/assets/js/data/paypal.json', ret
   return null;
 }
 
+export function toAbsoluteUrl(path) {
+  if (!path) return '';
+  // Already absolute (http(s) or protocol-relative)
+  if (/^(https?:)?\/\//i.test(path)) return path;
+  try {
+    if (globalThis && globalThis.location && globalThis.location.origin) {
+      if (path.startsWith('/')) return `${globalThis.location.origin}${path}`;
+      return new URL(path, `${globalThis.location.origin}/`).toString();
+    }
+  } catch (e) {
+    // fall through
+  }
+  return path;
+}
+
 export function buildPayPalPayload(cfg, cart) {
   const errors = [];
   if (!cfg) errors.push('missing_config');
@@ -50,8 +65,8 @@ export function buildPayPalPayload(cfg, cart) {
     item_name: computeItemLabel(cart),
     amount: Number(grand.toFixed(2)).toFixed(2),
     currency_code: cfg?.currency ?? 'AUD',
-    return: cfg?.return_path ?? '',
-    cancel_return: cfg?.cancel_path ?? '',
+    return: toAbsoluteUrl(cfg?.return_path ?? cfg?.return ?? ''),
+    cancel_return: toAbsoluteUrl(cfg?.cancel_path ?? cfg?.cancel ?? ''),
     action: cfg?.env && String(cfg.env).toLowerCase() === 'live' ? cfg?.live_url : cfg?.sandbox_url,
   };
   return { payload, errors };

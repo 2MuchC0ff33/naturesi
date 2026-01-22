@@ -170,8 +170,20 @@ export function attachFormHandler({
         addField('item_name', itemName);
         addField('amount', amount);
         addField('currency_code', cfg.currency ?? 'AUD');
-        addField('return', cfg.return_path ?? cfg.return ?? '');
-        addField('cancel_return', cfg.cancel_path ?? cfg.cancel ?? '');
+        // Ensure return/cancel are absolute URLs so PayPal returns to our site rather than PayPal's domain
+        const toAbsolute = (p) => {
+          if (!p) return '';
+          try {
+            if (/^(https?:)?\/\//i.test(p)) return p;
+            if (globalThis && globalThis.location && globalThis.location.origin) {
+              if (p.startsWith('/')) return `${globalThis.location.origin}${p}`;
+              return new URL(p, `${globalThis.location.origin}/`).toString();
+            }
+          } catch (e) {}
+          return p;
+        };
+        addField('return', toAbsolute(cfg.return_path ?? cfg.return ?? ''));
+        addField('cancel_return', toAbsolute(cfg.cancel_path ?? cfg.cancel ?? ''));
 
         document.body.appendChild(form);
 

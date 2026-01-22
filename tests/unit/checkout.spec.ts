@@ -39,6 +39,38 @@ describe('checkout helpers', () => {
     expect(result.payload.amount).toBe('2.00');
   });
 
+  it('converts relative return/cancel to absolute using location.origin when available', () => {
+    // Temporarily define a location origin for the test
+    const oldLoc = globalThis.location;
+    try {
+      Object.defineProperty(globalThis, 'location', {
+        value: { origin: 'https://example.com' },
+        configurable: true,
+      });
+      const cfg = {
+        env: 'sandbox',
+        business: 'sandbox@example.com',
+        sandbox_url: 'https://s',
+        return_path: '/pages/payment/success.html',
+        cancel_path: '/pages/payment/fail.html',
+      };
+      const { payload, errors } = buildPayPalPayload(cfg, [
+        { id: 'x', title: 'X', price: 1, qty: 1 },
+      ]);
+      expect(errors).toEqual([]);
+      expect(payload.return).toBe('https://example.com/pages/payment/success.html');
+      expect(payload.cancel_return).toBe('https://example.com/pages/payment/fail.html');
+
+      // Absolute URLs stay absolute
+      const cfg2 = Object.assign({}, cfg, { return_path: 'https://my.site/ok' });
+      const r2 = buildPayPalPayload(cfg2, [{ id: 'x', title: 'X', price: 1, qty: 1 }]);
+      expect(r2.payload.return).toBe('https://my.site/ok');
+    } finally {
+      // Restore original location
+      Object.defineProperty(globalThis, 'location', { value: oldLoc, configurable: true });
+    }
+  });
+
   it('renderSummaryToString returns empty message for empty cart', () => {
     const { html, total } = renderSummaryToString([]);
     expect(total).toBe(0);
