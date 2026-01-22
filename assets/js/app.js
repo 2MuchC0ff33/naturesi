@@ -52,10 +52,19 @@ if (typeof document !== 'undefined') {
       } catch (err) {
         console.error('Payment module init failed', err);
       }
+
+      // Initialize category select behavior only when present (keeps no-JS and HTML-first fallback intact)
+      try {
+        if (document.getElementById('site-category-select')) {
+          const m = await import('./modules/category-select.js');
+          if (m && typeof m.initCategorySelect === 'function') m.initCategorySelect(document);
+        }
+      } catch (err) {
+        console.error('Category select init failed', err);
+      }
     } catch (err) {
       console.error('Deferred module load failed', err);
     }
   })();
-
-  // Category select change handler removed in HTML-first migration; prefer native links and form submissions for accessibility and no-JS navigation.
 }
+
