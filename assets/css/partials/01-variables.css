@@ -26,7 +26,14 @@ partials can reference variables safely.
   --space-inline-sm: 1rem;
   --space-inline-md: 1.5rem;
   /* Fluid typography helper (used by base) */
-  --fluid-font: clamp(var(--min-font), calc(var(--min-font) + (var(--max-font) - var(--min-font)) * ((100vw - var(--min-width)) / (var(--max-width) - var(--min-width)))), var(--max-font));
+  --fluid-font: clamp(
+    var(--min-font),
+    calc(
+      var(--min-font) + (var(--max-font) - var(--min-font)) *
+        ((100vw - var(--min-width)) / (var(--max-width) - var(--min-width)))
+    ),
+    var(--max-font)
+  );
   --space-unit: 1rem;
   --space-xxs: 0.25rem;
   --space-xs: 0.5rem;

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://unpkg.com/@stryker-mutator/core/dist/stryker-schema.json",
+  "mutate": [
+    "assets/js/modules/cartStore.js",
+    "assets/js/modules/storageLocal.js",
+    "assets/js/modules/storageIDB.js",
+    "assets/js/modules/checkout.js",
+    "assets/js/modules/cart.js",
+    "assets/js/modules/cartUI.js"
+  ],
+  "testRunner": "command",
+  "commandRunner": {
+    "command": "npx vitest run"
+  },
+  "reporters": ["html", "clear-text", "progress"],
+  "concurrency": 2,
+  "timeoutMS": 10000,
+  "thresholds": {
+    "break": 80,
+    "high": 85
+  },
+  "coverageAnalysis": "off"
+}

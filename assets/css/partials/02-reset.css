@@ -36,7 +36,6 @@ img {
    This is intentionally scoped to narrow viewports only to avoid hiding
    legitimate overflow on larger screens during development. */
 @media (max-width: 640px) {
-
   html,
   body {
     overflow-x: hidden;

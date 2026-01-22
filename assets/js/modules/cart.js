@@ -1,6 +1,8 @@
 // Minimal cart helpers (exported) — pure helpers + guarded browser runner
 export const toNumber = (v, fallback = 0) => {
-  const n = Number(String(v ?? '').trim());
+  const s = String(v ?? '').trim();
+  if (s === '') return fallback;
+  const n = Number(s);
   return Number.isFinite(n) ? n : fallback;
 };
 
@@ -135,14 +137,14 @@ export function attachFormHandler({
         if (storage) storage.setItem(key, JSON.stringify(cart));
         // Optionally show a non-blocking status message for users with JS enabled.
         const noticeId = 'checkout-save-note';
-        if (!document.getElementById(noticeId)) {
-          const note = document.createElement('p');
+        if (!documentRoot.getElementById(noticeId)) {
+          const note = documentRoot.createElement('p');
           note.id = noticeId;
           note.className = 'muted';
           note.setAttribute('role', 'status');
           note.setAttribute('aria-live', 'polite');
           note.textContent = 'Preparing checkout… You will be redirected to the next step.';
-          const container = document.querySelector('#main-content') || document.body;
+          const container = documentRoot.querySelector('#main-content') || documentRoot.body;
           container.insertBefore(note, container.firstChild);
         }
         // Let the navigation proceed naturally (no preventDefault).

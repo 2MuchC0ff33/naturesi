@@ -6,8 +6,8 @@ describe('cart helpers', () => {
   it('toNumber converts strings to numbers and falls back', () => {
     expect(toNumber(' 12.34 ')).toBe(12.34);
     expect(toNumber('x', 5)).toBe(5);
-    // per implementation, null -> '' -> Number('') === 0
-    expect(toNumber(null, 7)).toBe(0);
+    // null should use the provided fallback value
+    expect(toNumber(null, 7)).toBe(7);
   });
 
   it('normalizeItem returns undefined for missing fields and normalizes valid item', () => {

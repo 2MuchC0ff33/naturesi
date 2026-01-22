@@ -219,16 +219,6 @@
             <form action="/pages/store.html" method="get" id="category-nav-form" aria-label="Browse by category">
               <label for="site-category-select" class="visually-hidden">Select a product category</label>
               <select id="site-category-select" name="category" aria-label="Product categories">
-                    'balms': '/pages/store/balms.html',
-                    'creams': '/pages/store/creams.html',
-                    'selfcare': '/pages/store/selfcare.html',
-                    'accessories': '/pages/store/accessories.html',
-                    'ice-tea': '/pages/store/ice-tea.html',
-                    'artisan-blends': '/pages/store/artisan-blends.html',
-                    '': '/pages/store.html'
-                  };
-                  window.location.href = map[this.value] || '/pages/store.html';
-                ">
                 <option value="">All categories</option>
                 <option value="wellness-blends">Wellness Blends</option>
                 <option value="herbal-infusions">Herbal Infusions</option>
@@ -302,6 +292,8 @@
     </nav>
   </header>
 
+  <main id="main-content">
+
   <article id="contact-info">
     <h2>Support Information</h2>
     <p>Email: <a href="mailto:tea@naturesinfusions.com.au">tea@naturesinfusions.com.au</a></p>
@@ -361,7 +353,6 @@
         </div>
       </fieldset>
     </form>
-  </section>
   </section>
   </main>
 
@@ -464,5 +455,5 @@
       </div>
     </footer>
   </div>
-  </main>
 </body>
+</html>

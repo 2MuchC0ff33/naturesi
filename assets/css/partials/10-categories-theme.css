@@ -107,7 +107,6 @@ print fallbacks.
    disabled. If dark styling is ever re-enabled, restore the original block. */
 
 @media print {
-
   *,
   *::before,
   *::after {
@@ -171,7 +170,7 @@ print fallbacks.
 #site-header .site-nav .category-dropdown ul,
 #site-header .site-nav .category-dropdown ul a,
 #site-header .site-nav .category-dropdown li,
-#site-header .site-nav .category-dropdown li[role="option"] {
+#site-header .site-nav .category-dropdown li[role='option'] {
   color: var(--color-text);
 }
 
@@ -192,7 +191,7 @@ print fallbacks.
 #site-header.site-nav_override .site-nav .category-dropdown ul,
 #site-header.site-nav_override .site-nav .category-dropdown ul a,
 #site-header.site-nav_override .site-nav .category-dropdown li,
-#site-header.site-nav_override .site-nav .category-dropdown li[role="option"] {
+#site-header.site-nav_override .site-nav .category-dropdown li[role='option'] {
   color: var(--color-text) !important;
 }
 

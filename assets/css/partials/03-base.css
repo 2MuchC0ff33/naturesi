@@ -21,7 +21,6 @@ html {
 }
 
 @media (min-width: 320px) {
-
   /* kept for legacy support — no change needed because clamp handles fluid sizing */
   html {
     /* intentionally left empty to preserve older cascade if present */

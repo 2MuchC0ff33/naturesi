@@ -6,7 +6,17 @@ export default defineConfig({
     environment: 'jsdom',
     include: ['tests/unit/**/*.spec.ts'],
     coverage: {
-      reporter: ['text', 'lcov'],
+      provider: 'c8',
+      reporter: ['text', 'lcov', 'json'],
+      reportsDirectory: './coverage',
+      threshold: {
+        global: {
+          statements: 85,
+          branches: 80,
+          functions: 85,
+          lines: 85,
+        },
+      },
     },
   },
 });

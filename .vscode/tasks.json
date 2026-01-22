@@ -30,6 +30,48 @@
       "problemMatcher": []
     },
     {
+      "label": "Typecheck (tsc)",
+      "type": "shell",
+      "command": "npm run typecheck",
+      "group": "test",
+      "problemMatcher": ["$tsc"],
+      "presentation": { "reveal": "always" }
+    },
+    {
+      "label": "Security Audit",
+      "type": "shell",
+      "command": "npm run test:security",
+      "group": "test",
+      "presentation": { "reveal": "always" }
+    },
+    {
+      "label": "ZAP Diagnose",
+      "type": "shell",
+      "command": "npm run test:zap:diagnose",
+      "group": "test",
+      "presentation": { "reveal": "always" }
+    },
+    {
+      "label": "Run Unit Tests (single)",
+      "type": "shell",
+      "command": "npm run test:unit",
+      "presentation": { "echo": true, "reveal": "always" }
+    },
+    {
+      "label": "Lighthouse Smoke",
+      "type": "shell",
+      "command": "npm run test:perf:smoke",
+      "group": "test",
+      "presentation": { "reveal": "always" }
+    },
+    {
+      "label": "Run Mutation Tests (Stryker)",
+      "type": "shell",
+      "command": "npm run test:mutation",
+      "group": "test",
+      "presentation": { "reveal": "always" }
+    },
+    {
       "label": "Start Live Server",
       "type": "shell",
       "command": "npx live-server --port=5500",

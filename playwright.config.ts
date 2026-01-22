@@ -6,14 +6,37 @@ export default defineConfig({
   expect: { timeout: 5000 },
   fullyParallel: false,
   retries: process.env.CI ? 1 : 0,
-  reporter: [['list'], ['html', { open: 'never' }]],
+  reporter: [
+    ['list'],
+    ['junit', { outputFile: 'reports/playwright-junit.xml' }],
+    ['html', { open: 'never', outputFolder: 'playwright-report' }],
+  ],
   webServer: {
     command: 'npm run start:static',
     port: 8080,
     reuseExistingServer: !process.env.CI,
   },
-  workers: 1, // Restrict Playwright to use only one worker
+  workers: 1, // Restrict Playwright to use only one worker in CI
   projects: [
+    // JS-disabled projects (validate HTML-first behaviour)
+    {
+      name: 'chromium-js-off',
+      use: {
+        ...devices['Desktop Chrome'],
+        javaScriptEnabled: false,
+        headless: true,
+      },
+    },
+    {
+      name: 'webkit-js-off',
+      use: {
+        ...devices['Desktop Safari'],
+        javaScriptEnabled: false,
+        headless: true,
+      },
+    },
+
+    // JS-enabled browsers (progressive enhancement checks)
     {
       name: 'chromium',
       use: {
@@ -22,15 +45,12 @@ export default defineConfig({
       },
     },
     {
-      name: 'chromium-headless',
-      use: {
-        ...devices['Desktop Chrome'],
-        headless: true,
-      },
-    },
-    {
       name: 'firefox',
       use: { ...devices['Desktop Firefox'] },
+    },
+    {
+      name: 'webkit',
+      use: { ...devices['Desktop Safari'] },
     },
   ],
 });

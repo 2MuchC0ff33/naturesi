@@ -31,8 +31,8 @@ describe('attachFormHandler behavior', () => {
     }
 
     // Note should be inserted
-    const note = doc.getElementById('checkout-deprecated-note');
+    const note = doc.getElementById('checkout-save-note');
     expect(note).not.toBeNull();
-    expect(note.textContent).toMatch(/Aggregate checkout is deprecated/);
+    expect(note.textContent).toMatch(/Preparing checkout/);
   });
 });

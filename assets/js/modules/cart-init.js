@@ -118,8 +118,8 @@ export async function initCart() {
         price =
           parseFloat(
             priceField.dataset.price ||
-            priceField.getAttribute('content') ||
-            priceField.textContent.replace(/[^0-9\.]/g, '')
+              priceField.getAttribute('content') ||
+              priceField.textContent.replace(/[^0-9\.]/g, '')
           ) || null;
 
       // image extraction using data attributes or first <img>

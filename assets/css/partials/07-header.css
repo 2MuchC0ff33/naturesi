@@ -4,9 +4,11 @@ Core header bar, logo treatment and colour gradient live here.
 ========================================================================== */
 #site-header {
   --header-height: 1.9rem;
-  background: linear-gradient(180deg,
-      color-mix(in srgb, var(--color-accent) 72%, white 28%),
-      color-mix(in srgb, var(--color-accent) 60%, black 40%));
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--color-accent) 72%, white 28%),
+    color-mix(in srgb, var(--color-accent) 60%, black 40%)
+  );
   color: white;
   border-bottom: 1px solid color-mix(in srgb, var(--color-accent) 20%, black);
 }
@@ -76,7 +78,6 @@ Core header bar, logo treatment and colour gradient live here.
 }
 
 @media (min-width: 640px) {
-
   .site-nav .logo img,
   .site-nav .all-logo img {
     max-height: 34px;
@@ -84,7 +85,6 @@ Core header bar, logo treatment and colour gradient live here.
 }
 
 @media (min-width: 900px) {
-
   .site-nav .logo img,
   .site-nav .all-logo img {
     max-height: 38px;
@@ -92,7 +92,6 @@ Core header bar, logo treatment and colour gradient live here.
 }
 
 @media (min-width: 1200px) {
-
   .site-nav .logo img,
   .site-nav .all-logo img {
     max-height: 44px;
@@ -276,7 +275,6 @@ Core header bar, logo treatment and colour gradient live here.
 
 /* Ensure touch targets meet WCAG / mobile guidelines on small screens */
 @media (max-width: 640px) {
-
   /* increase hit area for icons and interactive nav items */
   .site-nav .logo,
   .site-nav .search-icon,
@@ -294,7 +292,6 @@ Core header bar, logo treatment and colour gradient live here.
    Acceptance: header stacks vertically on phones, no horizontal overflow,
    category select and search become full-width, skip-link placement adjusted. */
 @media (max-width: 640px) {
-
   /* Make the header a single column so the center controls can't force a wide row */
   .site-nav {
     grid-template-columns: 1fr;
@@ -356,7 +353,7 @@ Core header bar, logo treatment and colour gradient live here.
 
   /* Increase header-height variable used by the skip-link so the skip link is placed correctly */
   #site-header {
-    --header-height: 6.0rem;
+    --header-height: 6rem;
     /* tuned for stacked header height on small screens */
   }
 }
@@ -365,7 +362,6 @@ Core header bar, logo treatment and colour gradient live here.
    elements with fixed/min-widths or viewport-width calculations. These are
    conservative rules applied only on small screens. */
 @media (max-width: 640px) {
-
   /* Ensure header cannot exceed viewport width and allow children to shrink */
   #site-header,
   .site-nav {
@@ -392,7 +388,6 @@ Core header bar, logo treatment and colour gradient live here.
 
 /* Extra strong overrides for small screens to eliminate header overflow */
 @media (max-width: 640px) {
-
   /* Allow nav sections to wrap content instead of forcing no-wrap */
   .site-nav .nav-left,
   .site-nav .nav-center,

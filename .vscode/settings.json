@@ -10,7 +10,13 @@
   "files.encoding": "utf8",
   "files.eol": "\n",
   "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true,
+    "source.fixAll.eslint": true
+  },
   "eslint.enable": true,
+  "eslint.run": "onSave",
+  "eslint.alwaysShowStatus": true,
   "eslint.validate": ["javascript", "javascriptreact", "html"],
   "prettier.requireConfig": true,
   "prettier.useEditorConfig": true,
@@ -26,6 +32,7 @@
     "**/node_modules": true,
     "**/.vscode": false
   },
+  "terminal.integrated.defaultProfile.windows": "Cygwin Bash",
   "terminal.integrated.shell.windows": "C:\\Windows\\System32\\bash.exe",
   "terminal.integrated.profiles.windows": {
     "Cygwin Bash": {

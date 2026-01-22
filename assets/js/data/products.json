@@ -6,10 +6,7 @@
       "name": "Enchanted Turmeric",
       "image": "/assets/img/enchantedturmeric2.webp",
       "imageAlt": "Enchanted Turmeric Dream Tea",
-      "images": [
-        "/assets/img/enchantedturmeric1.webp",
-        "/assets/img/enchantedturmeric2.webp"
-      ],
+      "images": ["/assets/img/enchantedturmeric1.webp", "/assets/img/enchantedturmeric2.webp"],
       "description": "A warming turmeric and spice infusion to support wellbeing.",
       "ingredients": [
         "Turmeric",
@@ -25,16 +22,16 @@
           "id": "60g-pouch",
           "label": "Pouch — 60 g",
           "weight": "60 g",
-          "price": 14.00
+          "price": 14.0
         },
         {
           "id": "100g-cylinder",
           "label": "Cylinder — 100 g",
           "weight": "100 g",
-          "price": 22.00
+          "price": 22.0
         }
       ],
-      "price": 14.00,
+      "price": 14.0,
       "rating": 5,
       "reviewCount": 12
     },
@@ -44,33 +41,25 @@
       "name": "Calming Garden",
       "image": "/assets/img/calmingtea.webp",
       "imageAlt": "Calming Garden Tea",
-      "images": [
-        "/assets/img/calmingtea.webp"
-      ],
+      "images": ["/assets/img/calmingtea.webp"],
       "description": "A soothing floral blend of rosemary, lavender and chamomile.",
-      "ingredients": [
-        "Rosemary",
-        "Passionflower",
-        "Lavender",
-        "Chamomile",
-        "Rose Petals"
-      ],
+      "ingredients": ["Rosemary", "Passionflower", "Lavender", "Chamomile", "Rose Petals"],
       "inStock": true,
       "options": [
         {
           "id": "50g-pouch",
           "label": "Pouch — 50 g",
           "weight": "50 g",
-          "price": 14.00
+          "price": 14.0
         },
         {
           "id": "70g-cylinder",
           "label": "Cylinder — 70 g",
           "weight": "70 g",
-          "price": 22.00
+          "price": 22.0
         }
       ],
-      "price": 14.00,
+      "price": 14.0,
       "rating": 4,
       "reviewCount": 5
     },
@@ -80,33 +69,25 @@
       "name": "Sleeping Soundly",
       "image": "/assets/img/sleepingsoundly1.webp",
       "imageAlt": "Sleeping Soundly Tea",
-      "images": [
-        "/assets/img/sleepingsoundly1.webp",
-        "/assets/img/sleepingsoundly2.webp"
-      ],
+      "images": ["/assets/img/sleepingsoundly1.webp", "/assets/img/sleepingsoundly2.webp"],
       "description": "An evening blend to help calm the mind and support restful sleep.",
-      "ingredients": [
-        "Lemon Balm",
-        "Passionflower",
-        "Ginger Root",
-        "Tulsi"
-      ],
+      "ingredients": ["Lemon Balm", "Passionflower", "Ginger Root", "Tulsi"],
       "inStock": true,
       "options": [
         {
           "id": "50g-pouch",
           "label": "Pouch — 50 g",
           "weight": "50 g",
-          "price": 14.00
+          "price": 14.0
         },
         {
           "id": "80g-cylinder",
           "label": "Cylinder — 80 g",
           "weight": "80 g",
-          "price": 22.00
+          "price": 22.0
         }
       ],
-      "price": 14.00,
+      "price": 14.0,
       "rating": 5,
       "reviewCount": 6
     },
@@ -116,10 +97,7 @@
       "name": "Hormone Harmony",
       "image": "/assets/img/hormoneharmony1.webp",
       "imageAlt": "Hormone Harmony Tea",
-      "images": [
-        "/assets/img/hormoneharmony1.webp",
-        "/assets/img/hormoneharmony2.webp"
-      ],
+      "images": ["/assets/img/hormoneharmony1.webp", "/assets/img/hormoneharmony2.webp"],
       "description": "A balanced blend of honeybush, chasteberry and lemon verbena.",
       "inStock": true,
       "options": [
@@ -127,16 +105,16 @@
           "id": "50g-pouch",
           "label": "Pouch — 50 g",
           "weight": "50 g",
-          "price": 14.00
+          "price": 14.0
         },
         {
           "id": "80g-cylinder",
           "label": "Cylinder — 80 g",
           "weight": "80 g",
-          "price": 22.00
+          "price": 22.0
         }
       ],
-      "price": 14.00,
+      "price": 14.0,
       "rating": 5,
       "reviewCount": 20
     },
@@ -146,9 +124,7 @@
       "name": "Digestive Bliss",
       "image": "/assets/img/digestivebliss.webp",
       "imageAlt": "Digestive Bliss Tea",
-      "images": [
-        "/assets/img/digestivebliss.webp"
-      ],
+      "images": ["/assets/img/digestivebliss.webp"],
       "description": "A warming blend to support digestive comfort.",
       "inStock": true,
       "options": [
@@ -156,10 +132,10 @@
           "id": "50g-pouch",
           "label": "Pouch — 50 g",
           "weight": "50 g",
-          "price": 14.00
+          "price": 14.0
         }
       ],
-      "price": 14.00,
+      "price": 14.0,
       "rating": 4,
       "reviewCount": 1
     }
