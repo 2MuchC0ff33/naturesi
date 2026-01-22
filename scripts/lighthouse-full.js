@@ -1,10 +1,11 @@
 import lighthouse from 'lighthouse';
-import chromeLauncher from 'chrome-launcher';
+import * as chromeLauncher from 'chrome-launcher';
 import fs from 'fs';
 import path from 'path';
 
 const URLS = [
   { url: 'http://127.0.0.1:8080/index.html', name: 'index' },
+  { url: 'http://127.0.0.1:8080/pages/store.html', name: 'store' },
   { url: 'http://127.0.0.1:8080/pages/checkout.html', name: 'checkout' },
 ];
 
@@ -15,37 +16,45 @@ if (!fs.existsSync(REPORT_DIR)) fs.mkdirSync(REPORT_DIR, { recursive: true });
   const chrome = await chromeLauncher.launch({ chromeFlags: ['--headless', '--no-sandbox'] });
   try {
     for (const p of URLS) {
-      console.log('Running Lighthouse for', p.url);
-      const result = await lighthouse(p.url, { port: chrome.port, output: 'html' });
+      console.log('Running Lighthouse on', p.url);
+      const result = await lighthouse(p.url, {
+        port: chrome.port,
+        onlyCategories: ['performance', 'accessibility', 'best-practices', 'seo'],
+        output: 'html',
+      });
       const lhr = result.lhr;
-      const html = result.report || '';
-      const json = JSON.stringify(lhr, null, 2);
-      const htmlPath = path.join(REPORT_DIR, `lighthouse-${p.name}.html`);
+
       const jsonPath = path.join(REPORT_DIR, `lighthouse-${p.name}.json`);
-      fs.writeFileSync(htmlPath, html);
-      fs.writeFileSync(jsonPath, json);
+      const htmlPath = path.join(REPORT_DIR, `lighthouse-${p.name}.html`);
+      fs.writeFileSync(jsonPath, JSON.stringify(lhr, null, 2), 'utf8');
 
-      console.log(`${p.name} scores:`);
-      for (const [k, v] of Object.entries(lhr.categories)) {
-        console.log(`  ${k}: ${Math.round(v.score * 100) || 0}`);
+      // Generate a simple HTML report using lighthouse's report generator
+      try {
+        const reportHtml = result.report; // by default using json output returns report too
+        fs.writeFileSync(htmlPath, reportHtml, 'utf8');
+      } catch (e) {
+        // Fallback: create a minimal HTML summary
+        const summary = `<html><body><h1>Lighthouse report: ${p.name}</h1><pre>${JSON.stringify(
+          { score: lhr.categories },
+          null,
+          2
+        )}</pre></body></html>`;
+        fs.writeFileSync(htmlPath, summary, 'utf8');
       }
 
-      // Collect low-score audits to review
-      const issues = [];
-      for (const [id, audit] of Object.entries(lhr.audits || {})) {
-        if (audit.score !== null && typeof audit.score === 'number' && audit.score < 0.5) {
-          issues.push({ id, title: audit.title, score: audit.score, details: audit.details });
-        }
-      }
+      console.log(`Saved reports: ${jsonPath}, ${htmlPath}`);
 
-      if (issues.length) {
-        console.error(`Found ${issues.length} low-score audits for ${p.name}:`);
-        for (const it of issues) console.error(` - ${it.id}: ${it.title} (score ${it.score})`);
-      } else {
-        console.log('No major low-score audits found for', p.name);
+      // Quick checks to fail CI on very poor scores
+      const perfScore = Math.round((lhr.categories.performance.score || 0) * 100);
+      const a11yScore = Math.round((lhr.categories.accessibility.score || 0) * 100);
+      console.log(`${p.name} scores — Performance: ${perfScore}, Accessibility: ${a11yScore}`);
+
+      if (perfScore < 50 || a11yScore < 80) {
+        console.error('Lighthouse critical thresholds breached for', p.name);
+        // Do not exit here — we will collect all reports and then fail with non-zero
+        process.exitCode = 2;
       }
     }
-    console.log('Lighthouse full audits complete. Reports in ./reports/');
   } finally {
     await chrome.kill();
   }

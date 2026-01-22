@@ -1,7 +1,8 @@
 #!/usr/bin/env node
-const { spawn } = require('child_process');
-const { existsSync } = require('fs');
-const path = require('path');
+import { spawn } from 'child_process';
+import { existsSync } from 'fs';
+import path from 'path';
+const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
 // Purpose: attempt to run zap-baseline.py from PATH. This avoids Docker; users must install ZAP locally.
 // On Windows, users can install ZAP and ensure zap-baseline.py is on the PATH, or run the full ZAP GUI and then use the script.
