@@ -13,7 +13,12 @@ export class CartStore {
   async init() {
     const local = getLocalCart(this.key);
     if (local) {
-      this.cart = local;
+      // Accept legacy array shape and normalise to { items: [...] }
+      if (Array.isArray(local)) {
+        this.cart = { items: local.map((it) => ({ id: it.id, name: it.title || it.name || '', size: it.size || '', quantity: it.qty || it.quantity || 1, price: it.price || null })) };
+      } else {
+        this.cart = local;
+      }
     } else {
       const idb = await loadCartFromIDB(this.dbName, this.key);
       this.cart = idb || DEFAULT;

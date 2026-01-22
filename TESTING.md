@@ -52,6 +52,16 @@ Performance (Lighthouse):
 # Requires Chrome available. This command runs Lighthouse for configured pages and stores JSON reports in ./reports
 npm run test:perf
 ```
+## PayPal / Payments (staging)
+
+- Ensure `assets/js/data/paypal.json` is set to `env: "sandbox"` and `business` equals your sandbox merchant email, or set `.env` and update `paypal.json` during your deploy step.
+- Quick staging test:
+  1. `npm run start:static` and open http://localhost:8080
+  2. Add a product to cart and go to Cart
+  3. Click **Proceed to checkout** — site will attempt to fetch `paypal.json` and then submit a PayPal `cmd=_xclick` form.
+  4. For automated tests we intercept the form submit to verify payload rather than navigating to PayPal.
+
+**Security note:** Client-only redirect is not authoritative proof of payment. Manually verify transactions in PayPal until server-side verification is implemented.
 
 Debugging in VS Code
 

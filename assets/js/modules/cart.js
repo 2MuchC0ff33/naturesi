@@ -15,13 +15,30 @@ export const normalizeItem = (s) => {
 
 export function readFromDOM(documentRoot = typeof document !== 'undefined' ? document : null) {
   if (!documentRoot) return null;
+
+  // Prefer structured cart table rows when present
+  const rows = documentRoot.querySelectorAll('.cart-table tbody tr');
+  if (rows && rows.length) {
+    return Array.from(rows).map((row) => {
+      const id = row.dataset.productId || row.getAttribute('data-id') || '';
+      const title =
+        row.querySelector('figure strong')?.textContent?.trim() || row.querySelector('.item-title')?.textContent?.trim() || '';
+      const priceRaw =
+        row.querySelector('.unit-price')?.dataset?.price || row.querySelector('.unit-price')?.textContent || row.querySelector('[data-price]')?.getAttribute('data-price') || row.getAttribute('data-price') || '0';
+      const price = String(priceRaw).replace(/[^\d.-]/g, '') || '0';
+      const qtyEl = row.querySelector('input[type="number"]') || row.querySelector('input[name*="qty"]') || row.querySelector('.item-qty');
+      const qty = qtyEl ? (qtyEl.value ?? qtyEl.textContent) : row.getAttribute('data-qty') || '0';
+      return { id, title, price, qty };
+    });
+  }
+
+  // Fallback to legacy .cart-item nodes
   const nodes = documentRoot.querySelectorAll('.cart-item');
   if (!nodes.length) return null;
   return Array.from(nodes).map((node) => {
     const id = node.getAttribute('data-id') || '';
     const title = node.querySelector('.item-title')?.textContent?.trim() || '';
-    const priceRaw =
-      node.querySelector('.item-price')?.textContent || node.getAttribute('data-price') || '0';
+    const priceRaw = node.querySelector('.item-price')?.textContent || node.getAttribute('data-price') || '0';
     const price = String(priceRaw).replace(/[^\d.-]/g, '') || '0';
     const qtyEl = node.querySelector('input[name*="qty"]') || node.querySelector('.item-qty');
     const qty = qtyEl ? (qtyEl.value ?? qtyEl.textContent) : node.getAttribute('data-qty') || '0';
@@ -29,9 +46,14 @@ export function readFromDOM(documentRoot = typeof document !== 'undefined' ? doc
   });
 }
 
+import { loadPayPalConfig } from './checkout.js';
+
 export function readFromGlobal(globalObj = typeof globalThis !== 'undefined' ? globalThis : {}) {
   if (Array.isArray(globalObj.naturesi_cart)) return globalObj.naturesi_cart;
+  // support legacy/object shape: { items: [...] }
+  if (globalObj.naturesi_cart && Array.isArray(globalObj.naturesi_cart.items)) return globalObj.naturesi_cart.items;
   if (Array.isArray(globalObj.__SAMPLE_CART__)) return globalObj.__SAMPLE_CART__;
+  if (globalObj.__SAMPLE_CART__ && Array.isArray(globalObj.__SAMPLE_CART__.items)) return globalObj.__SAMPLE_CART__.items;
   return null;
 }
 
@@ -57,7 +79,9 @@ export function saveCart(
 ) {
   try {
     if (!storage) return false;
-    storage.setItem(key, JSON.stringify(cart));
+    const srcArr = Array.isArray(cart) ? cart : cart?.items ?? [];
+    const out = (srcArr || []).map(normalizeItem).filter(Boolean);
+    storage.setItem(key, JSON.stringify(out));
     return true;
   } catch (e) {
     console.error('Error saving cart', e);
@@ -82,30 +106,77 @@ export function attachFormHandler({
     }
   });
 
-  // Attach a click fallback to the proceed button so that in case form submission is
-  // prevented by outer handlers (or browser edge cases), we still persist cart and navigate.
+  // Attach a click fallback to the proceed button so that we persist the canonical cart and
+  // immediately redirect the user to PayPal via a single-total (cmd=_xclick) form submission.
   const btn = documentRoot.getElementById('btn-proceed-checkout');
   if (btn) {
-    btn.addEventListener('click', (ev) => {
+    btn.addEventListener('click', async (ev) => {
       try {
+        ev.preventDefault();
         const cart = collect({ documentRoot });
+        // Persist canonical array synchronously
         if (storage) storage.setItem(key, JSON.stringify(cart));
-        // If the click did not cause navigation (e.g. outer preventDefault), enforce it after a short delay
-        setTimeout(() => {
-          try {
-            if (typeof window !== 'undefined' && window.location) {
-              // If we're still on the cart page, navigate
-              const path = window.location.pathname || '';
-              if (path.endsWith('/cart.html') || path.endsWith('/')) {
-                window.location.href = '/pages/checkout.html';
-              }
-            }
-          } catch (ex) {
-            // ignore
+
+        // Load PayPal config (with retries handled by loadPayPalConfig)
+        let cfg = null;
+        try {
+          cfg = await loadPayPalConfig('/assets/js/data/paypal.json');
+        } catch (e) {
+          cfg = null;
+        }
+
+        // If config missing, redirect to checkout page to show summary & error
+        if (!cfg || !cfg.business) {
+          if (typeof window !== 'undefined' && window.location) {
+            window.location.href = '/pages/checkout.html';
           }
-        }, 50);
+          return;
+        }
+
+        const grand = cart.reduce((s, x) => s + x.price * x.qty, 0);
+        const amount = Number(grand.toFixed(2)).toFixed(2);
+        const itemName = (cart || []).map((i) => `${i.qty}×${i.title}`).join(', ');
+        const action = String(cfg.env).toLowerCase() === 'live' ? cfg.live_url : cfg.sandbox_url;
+
+        // Build and submit the PayPal form
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = action;
+        form.style.display = 'none';
+        form.id = 'pp-redirect-form';
+
+        const addField = (name, value) => {
+          const i = document.createElement('input');
+          i.type = 'hidden';
+          i.name = name;
+          i.value = String(value ?? '');
+          form.appendChild(i);
+        };
+
+        addField('cmd', '_xclick');
+        addField('business', cfg.business);
+        addField('item_name', itemName);
+        addField('amount', amount);
+        addField('currency_code', cfg.currency ?? 'AUD');
+        addField('return', cfg.return_path ?? cfg.return ?? '');
+        addField('cancel_return', cfg.cancel_path ?? cfg.cancel ?? '');
+
+        document.body.appendChild(form);
+
+        // Allow tests to intercept the submit event by giving them a chance to add listeners.
+        // Dispatch a submit event; default action will be to submit the form.
+        const evt = new Event('submit', { bubbles: true, cancelable: true });
+        const prevented = !form.dispatchEvent(evt);
+        if (!prevented) {
+          form.submit();
+        }
       } catch (err) {
-        console.error('Save on proceed failed', err);
+        console.error('Proceed to PayPal failed', err);
+        try {
+          if (typeof window !== 'undefined' && window.location) {
+            window.location.href = '/pages/checkout.html';
+          }
+        } catch (e) {}
       }
     });
   }

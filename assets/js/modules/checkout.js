@@ -26,12 +26,16 @@ export function computeItemLabel(cart) {
   return itemLabel.length > 127 ? itemLabel.slice(0, 124) + '...' : itemLabel;
 }
 
-export async function loadPayPalConfig(path = '/assets/js/data/paypal.json') {
-  try {
-    const r = await fetch(path, { cache: 'no-store' });
-    if (r.ok) return await r.json();
-  } catch (e) {
-    // fall through
+export async function loadPayPalConfig(path = '/assets/js/data/paypal.json', retries = 1) {
+  const sleep = (ms) => new Promise((res) => setTimeout(res, ms));
+  for (let i = 0; i <= retries; i++) {
+    try {
+      const r = await fetch(path, { cache: 'no-store' });
+      if (r.ok) return await r.json();
+    } catch (e) {
+      // fall through to retry
+    }
+    if (i < retries) await sleep(150 * (i + 1));
   }
   return null;
 }

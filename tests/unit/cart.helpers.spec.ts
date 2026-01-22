@@ -32,4 +32,30 @@ describe('cart helpers', () => {
       { id: 's', title: 't', price: 4.5, qty: 1 },
     ]);
   });
+
+  it('collect accepts object-shaped global cart with items array', () => {
+    const sampleGlobalObj = { naturesi_cart: { items: [{ id: 'o', title: 'obj', price: 3, qty: 2 }] } };
+    expect(collect({ globalObj: sampleGlobalObj })).toEqual([
+      { id: 'o', title: 'obj', price: 3, qty: 2 },
+    ]);
+  });
+
+  it('saveCart writes canonical array to storage when given object or array', () => {
+    const calls = {} as any;
+    const mockStorage = {
+      setItem(k, v) {
+        calls.key = k;
+        calls.value = v;
+      },
+    };
+    const objShape = { items: [{ id: 'x', title: 'X', price: '4.5', qty: '3' }] };
+    const { saveCart } = require('../../assets/js/modules/cart.js');
+    // @ts-ignore call
+    const ok = saveCart(objShape, { storage: mockStorage, key: 'naturesi_cart' });
+    expect(ok).toBe(true);
+    expect(calls.key).toBe('naturesi_cart');
+    const parsed = JSON.parse(calls.value);
+    expect(Array.isArray(parsed)).toBe(true);
+    expect(parsed[0]).toEqual({ id: 'x', title: 'X', price: 4.5, qty: 3 });
+  });
 });

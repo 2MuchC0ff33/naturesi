@@ -19,11 +19,33 @@ test.describe('Proceed to checkout', () => {
     await page.waitForSelector('.cart-table tbody tr', { timeout: 5000 });
     await page.waitForSelector('#btn-proceed-checkout');
 
-    // Click and wait for navigation to checkout (use waitForURL to be tolerant of query params)
-    await page.click('#btn-proceed-checkout');
-    await page.waitForURL('**/pages/checkout.html**', { timeout: 5000 });
+    // Add a listener to capture form submit (so we can assert PayPal payload) and prevent navigation
+    await page.evaluate(() => {
+      (window as any).__lastPayPalForm = null;
+      document.addEventListener(
+        'submit',
+        (e) => {
+          try {
+            e.preventDefault();
+            const form = e.target as HTMLFormElement;
+            const data = Array.from(form.elements).reduce((acc: any, el: any) => {
+              if (el && el.name) acc[el.name] = el.value;
+              return acc;
+            }, {});
+            (window as any).__lastPayPalForm = data;
+          } catch (err) {
+            // ignore
+          }
+        },
+        true
+      );
+    });
 
-    // Ensure cart was saved (or the checkout summary is populated) and checkout UI loads
+    // Click and wait for captured PayPal form submit or navigation to checkout as fallback
+    await page.click('#btn-proceed-checkout');
+    await page.waitForFunction(() => (window as any).__lastPayPalForm !== null || location.pathname.endsWith('/pages/checkout.html'), { timeout: 5000 });
+
+    // If we captured a PayPal redirect form, assert expected fields
     await page.waitForFunction(
       () => {
         try {
@@ -50,7 +72,19 @@ test.describe('Proceed to checkout', () => {
     const cart = JSON.parse(cartStr || 'null');
     expect(Array.isArray(cart)).toBe(true);
 
-    // Wait for either the summary to be populated or an error to be shown
+    // If a PayPal form submit was captured, assert it contains expected params
+    const lastForm = await page.evaluate(() => (window as any).__lastPayPalForm || null);
+    if (lastForm) {
+      expect(lastForm.cmd).toBe('_xclick');
+      expect(lastForm.business).toMatch(/@/);
+      expect(Number(lastForm.amount)).toBeGreaterThan(0);
+      expect(lastForm.return).toBeDefined();
+      expect(lastForm.cancel_return).toBeDefined();
+      // stop here — we captured a PayPal redirect
+      return;
+    }
+
+    // Otherwise fall back to checkout page expectations
     await page.waitForFunction(
       () => {
         const s = document.getElementById('summary-content');
@@ -92,10 +126,40 @@ test.describe('Proceed to checkout', () => {
     await page.goto('/pages/cart.html');
     await page.waitForSelector('#btn-proceed-checkout');
 
-    await page.click('#btn-proceed-checkout');
-    await page.waitForURL('**/pages/checkout.html**', { timeout: 5000 });
+    // Add a submit listener to capture PayPal redirect and prevent navigation
+    await page.evaluate(() => {
+      (window as any).__lastPayPalForm = null;
+      document.addEventListener(
+        'submit',
+        (e) => {
+          try {
+            e.preventDefault();
+            const form = e.target as HTMLFormElement;
+            const data = Array.from(form.elements).reduce((acc: any, el: any) => {
+              if (el && el.name) acc[el.name] = el.value;
+              return acc;
+            }, {});
+            (window as any).__lastPayPalForm = data;
+          } catch (err) {
+            // ignore
+          }
+        },
+        true
+      );
+    });
 
-    // Wait for either the summary to be populated or an error to be shown
+    await page.click('#btn-proceed-checkout');
+    await page.waitForFunction(() => (window as any).__lastPayPalForm !== null || location.pathname.endsWith('/pages/checkout.html'), { timeout: 5000 });
+
+    const lastForm2 = await page.evaluate(() => (window as any).__lastPayPalForm || null);
+    if (lastForm2) {
+      expect(lastForm2.cmd).toBe('_xclick');
+      expect(lastForm2.business).toMatch(/@/);
+      expect(Number(lastForm2.amount)).toBeGreaterThan(0);
+      return;
+    }
+
+    // Fallback to original behaviour when PayPal redirection did not occur
     await page.waitForFunction(
       () => {
         const s = document.getElementById('summary-content');
