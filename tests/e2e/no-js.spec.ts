@@ -33,6 +33,11 @@ test.describe('No-JS smoke tests', () => {
       await expect(page.locator('form.paypal-buynow').first()).toBeVisible();
     }
 
+    // Confirm at least one product with packaging variants shows multiple Buy Now forms (artisan-blends)
+    await page.goto('/pages/store/artisan-blends.html');
+    const product = await page.locator('article.product').first();
+    await expect(product.locator('form.paypal-buynow')).toHaveCount(2);
+
     // Cart page should render and show helpful message (no aggregate checkout)
     await page.goto('/pages/cart.html');
     await expect(page.locator('#btn-proceed-checkout')).toBeVisible();

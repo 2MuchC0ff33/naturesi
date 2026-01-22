@@ -44,6 +44,8 @@
     "test:perf": "mkdir -p reports && lighthouse http://127.0.0.1:8080/index.html --output=json --output-path=./reports/lighthouse-index.json --chrome-flags=\"--headless\" && lighthouse http://127.0.0.1:8080/pages/checkout.html --output=json --output-path=./reports/lighthouse-checkout.json --chrome-flags=\"--headless\"",
     "test:security": "npm run audit && semgrep --config=auto",
     "audit": "npm audit --audit-level=high",
+    "generate-paypal-config": "node scripts/generate-paypal-config.js",
+    "prestart:static": "node scripts/generate-paypal-config.js",
     "test": "npm run test:unit && npm run test:e2e && npm run test:perf",
     "format": "npx prettier --write ."
   },

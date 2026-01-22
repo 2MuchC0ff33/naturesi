@@ -624,6 +624,24 @@
             <input type="hidden" name="cancel_return" value="/pages/payment/fail.html" />
             <button type="submit" class="btn btn-paypal">Buy Now (PayPal)</button>
           </form>
+
+          <!-- PayPal Buy Now form for Cylinder variant -->
+          <form
+            class="paypal-buynow"
+            action="https://www.sandbox.paypal.com/cgi-bin/webscr"
+            method="post"
+            target="_top"
+            aria-label="Buy Apple Delight — Cylinder on PayPal"
+          >
+            <input type="hidden" name="cmd" value="_xclick" />
+            <input type="hidden" name="business" value="tea@naturesinfusions.com.au" />
+            <input type="hidden" name="item_name" value="Apple Delight — Cylinder" />
+            <input type="hidden" name="amount" value="22.00" />
+            <input type="hidden" name="currency_code" value="AUD" />
+            <input type="hidden" name="return" value="/pages/payment/success.html" />
+            <input type="hidden" name="cancel_return" value="/pages/payment/fail.html" />
+            <button type="submit" class="btn btn-paypal">Buy Now (Cylinder)</button>
+          </form>
         </article>
         <a id="lemongrass-and-ginger" class="product-anchor slug-anchor" aria-hidden="true"></a>
         <a id="product-lemonginger-anchor" class="product-anchor"></a>

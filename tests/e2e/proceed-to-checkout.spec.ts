@@ -57,6 +57,24 @@ test.describe('Proceed to checkout (Buy Now forms)', () => {
     await context.close();
   });
 
+  test('product variant Buy Now forms exist and amounts are correct', async ({ page }) => {
+    // Pick a store category page that has package variants (artisan-blends)
+    await page.goto('/pages/store/artisan-blends.html');
+    const firstProduct = page.locator('article.product').first();
+    const forms = await firstProduct.locator('form.paypal-buynow').elementHandles();
+    expect(forms.length).toBeGreaterThanOrEqual(2);
+
+    // Check amounts for the two variant forms (14.00 and 22.00 expected)
+    const amounts = await Promise.all(
+      forms.map(async (f) => {
+        const el = await f.$('input[name="amount"]');
+        return el ? await el.getAttribute('value') : null;
+      })
+    );
+    expect(amounts).toContain('14.00');
+    expect(amounts).toContain('22.00');
+  });
+
   test('with localStorage set directly, clicking proceed shows deprecation note', async ({
     page,
   }) => {

@@ -31,6 +31,13 @@ if (typeof document !== 'undefined') {
         await import('./modules/checkout.js');
       }
 
+      // Initialize PayPal business/env config (overrides form business inputs when configured)
+      try {
+        await import('./modules/paypal-init.js');
+      } catch (err) {
+        // ignore if config module isn't available
+      }
+
       // Initialize payment page handlers (moved from inline scripts to modules)
       const path = (location && location.pathname) || '';
       try {
