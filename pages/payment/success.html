@@ -5,44 +5,13 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Payment success</title>
     <link rel="stylesheet" href="/assets/css/main.css" />
+    <script type="module" src="/assets/js/app.js"></script>
   </head>
   <body>
     <main class="container">
       <h1>Payment completed</h1>
       <p>Thank you — your payment has been completed. If you need assistance, contact support.</p>
       <p><a href="/pages/store.html" class="btn">Continue shopping</a></p>
-      <script>
-        (function () {
-          function hasPayPalReturnParams() {
-            try {
-              const params = new URLSearchParams(location.search);
-              return ['PayerID', 'tx', 'paymentId', 'token'].some((k) => params.has(k));
-            } catch (e) {
-              return false;
-            }
-          }
-          if (hasPayPalReturnParams()) {
-            try {
-              // Clear both current and legacy cart keys
-              localStorage.removeItem('naturesi_cart');
-              localStorage.removeItem('naturesi-cart');
-              // Emit an event so other scripts can react
-              document.dispatchEvent(new CustomEvent('cart:cleared:payment'));
-              // Show a status note for the user
-              const main = document.querySelector('main.container') || document.body;
-              const note = document.createElement('p');
-              note.id = 'cart-cleared-note';
-              note.className = 'muted';
-              note.setAttribute('role', 'status');
-              note.setAttribute('aria-live', 'polite');
-              note.textContent = 'Your cart has been cleared.';
-              main.appendChild(note);
-            } catch (err) {
-              console.error('Error clearing cart after PayPal return', err);
-            }
-          }
-        })();
-      </script>
     </main>
   </body>
 </html>

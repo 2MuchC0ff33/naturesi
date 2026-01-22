@@ -201,22 +201,12 @@
 
       <!-- Improved nav-center: group category and search in a flex wrapper -->
       <div class="nav-center">
-        <div class="nav-center-flex"
-          style="display: flex; flex-direction: row; gap: 1.2rem; align-items: center; width: 100%; justify-content: center;">
+        <div class="nav-center-flex center-row">
           <!-- Category select -->
           <nav aria-label="Browse by category" class="category-dropdown">
             <form action="/pages/store.html" method="get" id="category-nav-form" aria-label="Browse by category">
               <label for="site-category-select" class="visually-hidden">Select a product category</label>
               <select id="site-category-select" name="category" aria-label="Product categories">
-                    'creams': '/pages/store/creams.html',
-                    'selfcare': '/pages/store/selfcare.html',
-                    'accessories': '/pages/store/accessories.html',
-                    'ice-tea': '/pages/store/ice-tea.html',
-                    'artisan-blends': '/pages/store/artisan-blends.html',
-                    '': '/pages/store.html'
-                  };
-                  window.location.href = map[this.value] || '/pages/store.html';
-                ">
                 <option value="">All categories</option>
                 <option value="wellness-blends">Wellness Blends</option>
                 <option value="herbal-infusions">Herbal Infusions</option>

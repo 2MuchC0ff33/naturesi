@@ -60,3 +60,17 @@ Small, well-scoped utilities (spacing, layout helpers, grid) live here.
   padding: 0;
   margin: 0;
 }
+
+/* Layout helpers moved from inline style attributes */
+.center-row {
+  display: flex;
+  flex-direction: row;
+  gap: 1.2rem;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+}
+
+.inline-block {
+  display: inline-block;
+}

@@ -30,6 +30,21 @@ if (typeof document !== 'undefined') {
       if (document.getElementById('paypal-form') || document.getElementById('summary-content')) {
         await import('./modules/checkout.js');
       }
+
+      // Initialize payment page handlers (moved from inline scripts to modules)
+      const path = (location && location.pathname) || '';
+      try {
+        if (path.endsWith('/pages/payment/success.html')) {
+          const m = await import('./modules/payment-return.js');
+          if (m && typeof m.initPaymentReturn === 'function') m.initPaymentReturn();
+        }
+        if (path.endsWith('/pages/payment/fail.html')) {
+          const m2 = await import('./modules/payment-cancel.js');
+          if (m2 && typeof m2.initPaymentCancel === 'function') m2.initPaymentCancel();
+        }
+      } catch (err) {
+        console.error('Payment module init failed', err);
+      }
     } catch (err) {
       console.error('Deferred module load failed', err);
     }
