@@ -10,6 +10,7 @@ const IGNORED_DIRS = new Set([
   'tests',
   'scripts',
   'coverage',
+  'reports', // generated reports (lighthouse, etc.)
 ]);
 
 async function* walk(dir: string): AsyncGenerator<string> {

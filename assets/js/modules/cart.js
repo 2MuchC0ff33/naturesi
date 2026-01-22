@@ -147,17 +147,29 @@ export function attachFormHandler({
           const container = documentRoot.querySelector('#main-content') || documentRoot.body;
           container.insertBefore(note, container.firstChild);
         }
-        // Force navigation to checkout as a robust fallback in environments where form
-        // submission may not trigger navigation (e.g., some headless/test environments).
-        // Use a short timeout to allow storage writes and accessibility status announcement.
-        setTimeout(() => {
-          try {
-            if (globalThis && globalThis.location) globalThis.location.href = '/pages/checkout.html';
-          } catch (e) {
-            // ignore
+        // Use a single, controlled navigation flow to avoid duplicate history entries
+        // and back-button flicker. Prevent the default click submit and request the
+        // form to submit programmatically so the submit handler runs exactly once.
+        try {
+          ev.preventDefault();
+        } catch (e) {
+          // ignore if event isn't cancelable in some environments
+        }
+        try {
+          if (typeof form.requestSubmit === 'function') {
+            form.requestSubmit();
+          } else if (typeof form.submit === 'function') {
+            // submit() does not fire submit event handlers in older browsers, but
+            // it's an acceptable fallback for environments lacking requestSubmit.
+            form.submit();
+          } else {
+            // final fallback: assign location (adds history entry so Back returns correctly)
+            if (globalThis && globalThis.location) globalThis.location.assign('/pages/checkout.html');
           }
-        }, 50);
-        // Let the navigation proceed naturally (no preventDefault).
+        } catch (navErr) {
+          console.error('Navigation to checkout failed, falling back to assign:', navErr);
+          if (globalThis && globalThis.location) globalThis.location.assign('/pages/checkout.html');
+        }
       } catch (err) {
         console.error('Proceed click handler failed', err);
       }
