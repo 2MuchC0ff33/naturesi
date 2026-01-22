@@ -1,40 +1,47 @@
 <!doctype html>
 <html lang="en-AU">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Checkout — Pay with PayPal</title>
-  <link rel="stylesheet" href="/assets/css/main.css">
-</head>
-<body>
-  <main class="container">
-    <h1>Checkout</h1>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Checkout — Pay with PayPal</title>
+    <link rel="stylesheet" href="/assets/css/main.css" />
+  </head>
+  <body>
+    <main class="container">
+      <h1>Checkout</h1>
 
-    <section id="order-summary" aria-labelledby="summary-heading">
-      <h2 id="summary-heading">Order summary</h2>
-      <div id="summary-content" aria-live="polite"></div>
-      <p id="checkout-note" class="muted"></p>
-      <p id="checkout-error" class="error hidden" role="alert"></p>
-    </section>
+      <section id="order-summary" aria-labelledby="summary-heading">
+        <h2 id="summary-heading">Order summary</h2>
+        <div id="summary-content" aria-live="polite"></div>
+        <p id="checkout-note" class="muted"></p>
+        <p id="checkout-error" class="error hidden" role="alert"></p>
+      </section>
 
-    <section id="payment">
-      <form id="paypal-form" method="post" action="https://www.sandbox.paypal.com/cgi-bin/webscr" novalidate>
-        <input type="hidden" name="cmd" value="_xclick">
-        <input type="hidden" name="business" id="pp-business" value="">
-        <input type="hidden" name="item_name" id="pp-item_name" value="">
-        <input type="hidden" name="amount" id="pp-amount" value="">
-        <input type="hidden" name="currency_code" id="pp-currency" value="AUD">
-        <input type="hidden" name="return" id="pp-return" value="/pages/payment/success.html">
-        <input type="hidden" name="cancel_return" id="pp-cancel" value="/pages/payment/fail.html">
-        <button type="submit" id="pay-now" class="btn btn-primary">Pay with PayPal</button>
-      </form>
+      <section id="payment">
+        <div class="muted" role="status">
+          <p>
+            <strong>Note:</strong> Aggregate checkout (paying for multiple items in a single
+            request) is deprecated on this site.
+          </p>
+          <p>
+            To buy an item, use the <em>Buy Now (PayPal)</em> buttons on the individual product
+            pages. This provides a simple, reliable PayPal checkout without requiring JavaScript.
+          </p>
+          <p>
+            If you need help completing an order for multiple items,
+            <a href="/pages/contact.html">contact support</a> and we can assist with a manual
+            invoice.
+          </p>
+        </div>
 
-      <noscript>
-        <p>Please enable JavaScript to complete checkout, or contact us to arrange payment.</p>
-      </noscript>
-    </section>
-  </main>
+        <noscript>
+          <p class="muted">
+            No JavaScript required for product purchases — use the Buy Now buttons on product pages.
+          </p>
+        </noscript>
+      </section>
+    </main>
 
-  <script type="module" src="/assets/js/app.js"></script>
-</body>
+    <script type="module" src="/assets/js/app.js"></script>
+  </body>
 </html>

@@ -120,87 +120,34 @@ export function attachFormHandler({
 
   // Attach a click fallback to the proceed button so that we persist the canonical cart and
   // immediately redirect the user to PayPal via a single-total (cmd=_xclick) form submission.
+  // Note: Proceed-to-PayPal aggregate redirect removed in HTML-first migration.
+  // The site now provides per-product PayPal "Buy Now" HTML forms on product pages.
+  // The confirm-cart form persists the canonical cart to localStorage for progressive enhancement,
+  // but it no longer builds or submits an aggregated PayPal form from the client.
+
+  // Persist cart when confirm form submitted (no redirect)
   const btn = documentRoot.getElementById('btn-proceed-checkout');
   if (btn) {
-    btn.addEventListener('click', async (ev) => {
+    btn.addEventListener('click', (ev) => {
       try {
+        // Prevent default navigation; we want the user to use per-product Buy Now flows.
         ev.preventDefault();
         const cart = collect({ documentRoot });
-        // Persist canonical array synchronously
         if (storage) storage.setItem(key, JSON.stringify(cart));
-
-        // Load PayPal config (with retries handled by loadPayPalConfig)
-        let cfg = null;
-        try {
-          cfg = await loadPayPalConfig('/assets/js/data/paypal.json');
-        } catch (e) {
-          cfg = null;
-        }
-
-        // If config missing, redirect to checkout page to show summary & error
-        if (!cfg || !cfg.business) {
-          if (typeof window !== 'undefined' && window.location) {
-            window.location.href = '/pages/checkout.html';
-          }
-          return;
-        }
-
-        const grand = cart.reduce((s, x) => s + x.price * x.qty, 0);
-        const amount = Number(grand.toFixed(2)).toFixed(2);
-        const itemName = (cart || []).map((i) => `${i.qty}×${i.title}`).join(', ');
-        const action = String(cfg.env).toLowerCase() === 'live' ? cfg.live_url : cfg.sandbox_url;
-
-        // Build and submit the PayPal form
-        const form = document.createElement('form');
-        form.method = 'POST';
-        form.action = action;
-        form.style.display = 'none';
-        form.id = 'pp-redirect-form';
-
-        const addField = (name, value) => {
-          const i = document.createElement('input');
-          i.type = 'hidden';
-          i.name = name;
-          i.value = String(value ?? '');
-          form.appendChild(i);
-        };
-
-        addField('cmd', '_xclick');
-        addField('business', cfg.business);
-        addField('item_name', itemName);
-        addField('amount', amount);
-        addField('currency_code', cfg.currency ?? 'AUD');
-        // Ensure return/cancel are absolute URLs so PayPal returns to our site rather than PayPal's domain
-        const toAbsolute = (p) => {
-          if (!p) return '';
-          try {
-            if (/^(https?:)?\/\//i.test(p)) return p;
-            if (globalThis && globalThis.location && globalThis.location.origin) {
-              if (p.startsWith('/')) return `${globalThis.location.origin}${p}`;
-              return new URL(p, `${globalThis.location.origin}/`).toString();
-            }
-          } catch (e) {}
-          return p;
-        };
-        addField('return', toAbsolute(cfg.return_path ?? cfg.return ?? ''));
-        addField('cancel_return', toAbsolute(cfg.cancel_path ?? cfg.cancel ?? ''));
-
-        document.body.appendChild(form);
-
-        // Allow tests to intercept the submit event by giving them a chance to add listeners.
-        // Dispatch a submit event; default action will be to submit the form.
-        const evt = new Event('submit', { bubbles: true, cancelable: true });
-        const prevented = !form.dispatchEvent(evt);
-        if (!prevented) {
-          form.submit();
+        // Show a helpful notice inline (progressive enhancement):
+        const noticeId = 'checkout-deprecated-note';
+        if (!documentRoot.getElementById(noticeId)) {
+          const note = document.createElement('p');
+          note.id = noticeId;
+          note.className = 'muted';
+          note.setAttribute('role', 'status');
+          note.textContent =
+            'Aggregate checkout is deprecated. Use the Buy Now buttons on product pages to complete payment via PayPal.';
+          const container = documentRoot.querySelector('#main-content') || documentRoot.body;
+          container.insertBefore(note, container.firstChild);
         }
       } catch (err) {
-        console.error('Proceed to PayPal failed', err);
-        try {
-          if (typeof window !== 'undefined' && window.location) {
-            window.location.href = '/pages/checkout.html';
-          }
-        } catch (e) {}
+        console.error('Proceed click handler failed', err);
       }
     });
   }

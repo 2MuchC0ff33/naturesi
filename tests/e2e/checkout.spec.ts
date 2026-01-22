@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
-test('checkout loads cart from localStorage and PayPal form is populated', async ({ page }) => {
-  // Simulate a client-side cart (server-side add-to-cart isn't intercepted)
+test('checkout shows deprecation note and instructs using Buy Now buttons', async ({ page }) => {
+  // Simulate a client-side cart (for progressive enhancement)
   await page.goto('/');
   await page.evaluate(() => {
     window.localStorage.setItem(
@@ -12,22 +12,18 @@ test('checkout loads cart from localStorage and PayPal form is populated', async
 
   // Navigate directly to checkout
   await page.goto('/pages/checkout.html');
-  await page.waitForSelector('#summary-content');
-  await expect(page.locator('#summary-content')).toContainText('Total');
+  await expect(page.locator('#payment')).toContainText(
+    'Aggregate checkout (paying for multiple items in a single request) is deprecated'
+  );
 
-  const amount = await page.locator('#pp-amount').inputValue();
-  const amountNum = Number(amount);
-  if (amountNum <= 0) {
-    // In some browsers or test runs the config fetch may fail; ensure either an error is shown
-    // or the hidden pp amount input is still attached to the document
-    const errVisible = await page.locator('#checkout-error').isVisible();
-    const amountCount = await page.locator('#pp-amount').count();
-    const amountAttached = amountCount > 0;
-    expect(errVisible || amountAttached).toBe(true);
-  } else {
-    expect(amountNum).toBeCloseTo(9.98, 2);
-  }
+  // Ensure Buy Now buttons exist on the store index as the recommended flow
+  await page.goto('/');
+  const buyNow = page.locator('form.paypal-buynow button[type="submit"]').first();
+  await expect(buyNow).toBeVisible();
 
-  const business = await page.locator('#pp-business').inputValue();
-  expect(business).toContain('@');
+  // The presence of Buy Now forms means users can complete purchase without JS
+  // Also verify that localStorage is still populated (progressive enhancement case)
+  const cartStr = await page.evaluate(() => window.localStorage.getItem('naturesi_cart'));
+  const cart = JSON.parse(cartStr || 'null');
+  expect(Array.isArray(cart)).toBe(true);
 });

@@ -10,33 +10,7 @@ test('checkout form amount is computed from cart and overrides tampering', async
   });
 
   await page.goto('/pages/checkout.html');
-  // pp-amount is a hidden input; wait for it to be attached
-  await page.locator('#pp-amount').waitFor({ state: 'attached' });
-  const amount1 = Number(await page.locator('#pp-amount').inputValue());
-  if (amount1 <= 0) {
-    // Payment config fetch may fail in some environments; allow test to continue but ensure the input exists
-    await expect(page.locator('#pp-amount')).toBeAttached();
-  } else {
-    expect(amount1).toBeCloseTo(9.98, 2);
-  }
-
-  // Tamper the amount and then reload the page to trigger the script to re-run
-  await page.evaluate(() => (document.getElementById('pp-amount').value = '1000.00'));
-  // Ensure tampering took place (wait for the value to be applied)
-  await page.waitForFunction(() => document.getElementById('pp-amount')?.value === '1000.00', {
-    timeout: 2000,
-  });
-  const tampered = Number(await page.locator('#pp-amount').inputValue());
-  expect(tampered).toBe(1000);
-
-  await page.reload();
-  await page.locator('#pp-amount').waitFor({ state: 'attached' });
-  const amount2 = Number(await page.locator('#pp-amount').inputValue());
-  // After reload, script should re-populate amount from cart, overriding tampered value
-  if (amount2 <= 0) {
-    // If reload didn't populate amount (config fetch failed), ensure input remains attached
-    await expect(page.locator('#pp-amount')).toBeAttached();
-  } else {
-    expect(amount2).toBeCloseTo(9.98, 2);
-  }
+  // Aggregate checkout is deprecated; ensure the page shows guidance and no aggregated PayPal inputs are present
+  await expect(page.locator('#payment')).toContainText('Aggregate checkout');
+  await expect(page.locator('#pp-amount')).toHaveCount(0);
 });

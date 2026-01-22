@@ -1,6 +1,6 @@
 # Payments — PayPal (Simple redirect)
 
-This project uses a minimal PayPal "redirect" integration (cmd=\_xclick single-total). This is intentionally simple and requires manual reconciliation until a server-side verification endpoint is implemented.
+This project uses a simple PayPal "Buy Now" HTML integration on each product page. Each product has a static PayPal form that submits directly to PayPal (sandbox by default). The previous client-side aggregated checkout (single-total) is deprecated in favor of a per-product HTML-first checkout. Manual reconciliation is still required until server-side verification (IPN/webhooks or REST Orders) is implemented.
 
 ## Environment (deployment)
 
