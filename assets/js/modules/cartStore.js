@@ -15,7 +15,15 @@ export class CartStore {
     if (local) {
       // Accept legacy array shape and normalise to { items: [...] }
       if (Array.isArray(local)) {
-        this.cart = { items: local.map((it) => ({ id: it.id, name: it.title || it.name || '', size: it.size || '', quantity: it.qty || it.quantity || 1, price: it.price || null })) };
+        this.cart = {
+          items: local.map((it) => ({
+            id: it.id,
+            name: it.title || it.name || '',
+            size: it.size || '',
+            quantity: it.qty || it.quantity || 1,
+            price: it.price || null,
+          })),
+        };
       } else {
         this.cart = local;
       }

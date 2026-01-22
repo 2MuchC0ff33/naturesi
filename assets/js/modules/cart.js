@@ -22,11 +22,20 @@ export function readFromDOM(documentRoot = typeof document !== 'undefined' ? doc
     return Array.from(rows).map((row) => {
       const id = row.dataset.productId || row.getAttribute('data-id') || '';
       const title =
-        row.querySelector('figure strong')?.textContent?.trim() || row.querySelector('.item-title')?.textContent?.trim() || '';
+        row.querySelector('figure strong')?.textContent?.trim() ||
+        row.querySelector('.item-title')?.textContent?.trim() ||
+        '';
       const priceRaw =
-        row.querySelector('.unit-price')?.dataset?.price || row.querySelector('.unit-price')?.textContent || row.querySelector('[data-price]')?.getAttribute('data-price') || row.getAttribute('data-price') || '0';
+        row.querySelector('.unit-price')?.dataset?.price ||
+        row.querySelector('.unit-price')?.textContent ||
+        row.querySelector('[data-price]')?.getAttribute('data-price') ||
+        row.getAttribute('data-price') ||
+        '0';
       const price = String(priceRaw).replace(/[^\d.-]/g, '') || '0';
-      const qtyEl = row.querySelector('input[type="number"]') || row.querySelector('input[name*="qty"]') || row.querySelector('.item-qty');
+      const qtyEl =
+        row.querySelector('input[type="number"]') ||
+        row.querySelector('input[name*="qty"]') ||
+        row.querySelector('.item-qty');
       const qty = qtyEl ? (qtyEl.value ?? qtyEl.textContent) : row.getAttribute('data-qty') || '0';
       return { id, title, price, qty };
     });
@@ -38,7 +47,8 @@ export function readFromDOM(documentRoot = typeof document !== 'undefined' ? doc
   return Array.from(nodes).map((node) => {
     const id = node.getAttribute('data-id') || '';
     const title = node.querySelector('.item-title')?.textContent?.trim() || '';
-    const priceRaw = node.querySelector('.item-price')?.textContent || node.getAttribute('data-price') || '0';
+    const priceRaw =
+      node.querySelector('.item-price')?.textContent || node.getAttribute('data-price') || '0';
     const price = String(priceRaw).replace(/[^\d.-]/g, '') || '0';
     const qtyEl = node.querySelector('input[name*="qty"]') || node.querySelector('.item-qty');
     const qty = qtyEl ? (qtyEl.value ?? qtyEl.textContent) : node.getAttribute('data-qty') || '0';
@@ -51,9 +61,11 @@ import { loadPayPalConfig } from './checkout.js';
 export function readFromGlobal(globalObj = typeof globalThis !== 'undefined' ? globalThis : {}) {
   if (Array.isArray(globalObj.naturesi_cart)) return globalObj.naturesi_cart;
   // support legacy/object shape: { items: [...] }
-  if (globalObj.naturesi_cart && Array.isArray(globalObj.naturesi_cart.items)) return globalObj.naturesi_cart.items;
+  if (globalObj.naturesi_cart && Array.isArray(globalObj.naturesi_cart.items))
+    return globalObj.naturesi_cart.items;
   if (Array.isArray(globalObj.__SAMPLE_CART__)) return globalObj.__SAMPLE_CART__;
-  if (globalObj.__SAMPLE_CART__ && Array.isArray(globalObj.__SAMPLE_CART__.items)) return globalObj.__SAMPLE_CART__.items;
+  if (globalObj.__SAMPLE_CART__ && Array.isArray(globalObj.__SAMPLE_CART__.items))
+    return globalObj.__SAMPLE_CART__.items;
   return null;
 }
 
@@ -79,7 +91,7 @@ export function saveCart(
 ) {
   try {
     if (!storage) return false;
-    const srcArr = Array.isArray(cart) ? cart : cart?.items ?? [];
+    const srcArr = Array.isArray(cart) ? cart : (cart?.items ?? []);
     const out = (srcArr || []).map(normalizeItem).filter(Boolean);
     storage.setItem(key, JSON.stringify(out));
     return true;

@@ -34,7 +34,9 @@ describe('cart helpers', () => {
   });
 
   it('collect accepts object-shaped global cart with items array', () => {
-    const sampleGlobalObj = { naturesi_cart: { items: [{ id: 'o', title: 'obj', price: 3, qty: 2 }] } };
+    const sampleGlobalObj = {
+      naturesi_cart: { items: [{ id: 'o', title: 'obj', price: 3, qty: 2 }] },
+    };
     expect(collect({ globalObj: sampleGlobalObj })).toEqual([
       { id: 'o', title: 'obj', price: 3, qty: 2 },
     ]);

@@ -43,7 +43,12 @@ test.describe('Proceed to checkout', () => {
 
     // Click and wait for captured PayPal form submit or navigation to checkout as fallback
     await page.click('#btn-proceed-checkout');
-    await page.waitForFunction(() => (window as any).__lastPayPalForm !== null || location.pathname.endsWith('/pages/checkout.html'), { timeout: 5000 });
+    await page.waitForFunction(
+      () =>
+        (window as any).__lastPayPalForm !== null ||
+        location.pathname.endsWith('/pages/checkout.html'),
+      { timeout: 5000 }
+    );
 
     // If we captured a PayPal redirect form, assert expected fields
     await page.waitForFunction(
@@ -149,7 +154,12 @@ test.describe('Proceed to checkout', () => {
     });
 
     await page.click('#btn-proceed-checkout');
-    await page.waitForFunction(() => (window as any).__lastPayPalForm !== null || location.pathname.endsWith('/pages/checkout.html'), { timeout: 5000 });
+    await page.waitForFunction(
+      () =>
+        (window as any).__lastPayPalForm !== null ||
+        location.pathname.endsWith('/pages/checkout.html'),
+      { timeout: 5000 }
+    );
 
     const lastForm2 = await page.evaluate(() => (window as any).__lastPayPalForm || null);
     if (lastForm2) {

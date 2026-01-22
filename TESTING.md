@@ -52,6 +52,7 @@ Performance (Lighthouse):
 # Requires Chrome available. This command runs Lighthouse for configured pages and stores JSON reports in ./reports
 npm run test:perf
 ```
+
 ## PayPal / Payments (staging)
 
 - Ensure `assets/js/data/paypal.json` is set to `env: "sandbox"` and `business` equals your sandbox merchant email, or set `.env` and update `paypal.json` during your deploy step.
