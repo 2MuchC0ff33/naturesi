@@ -10,11 +10,24 @@ test('checkout shows deprecation note and instructs using Buy Now buttons', asyn
     );
   });
 
-  // Navigate directly to checkout
-  await page.goto('/pages/checkout.html');
-  await expect(page.locator('#payment')).toContainText(
-    'Aggregate checkout (paying for multiple items in a single request) is deprecated'
+  // Route PayPal config that allows aggregate checkout and navigate to checkout
+  await page.route('**/assets/js/data/paypal.json', (route) =>
+    route.fulfill({
+      status: 200,
+      contentType: 'application/json',
+      body: JSON.stringify(Object.assign(require('../fixtures/paypal.json'), { allow_aggregate: true })),
+    })
   );
+  await page.goto('/pages/checkout.html');
+
+  // Create and populate the aggregated PayPal form
+  await page.evaluate(async () => {
+    const p = '/assets/js/modules/' + 'checkout.js';
+    const m = await import(p as any);
+    await m.runCheckout({ fetchPath: '/assets/js/data/paypal.json' });
+  });
+
+  await expect(page.locator('#paypal-form')).toHaveCount(1);
 
   // Ensure Buy Now buttons exist on the store index as the recommended flow
   await page.goto('/');

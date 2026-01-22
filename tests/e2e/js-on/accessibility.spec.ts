@@ -14,8 +14,8 @@ test('JS-enabled checkout accessibility scan @a11y', async ({ page }) => {
   await page.evaluate((c) => localStorage.setItem('naturesi_cart', JSON.stringify(c)), SAMPLE_CART);
   await page.goto('/pages/checkout.html');
   await page.evaluate(async () => {
-    // @ts-ignore - dynamic import with absolute path resolved in browser runtime
-    const m = await import('/assets/js/modules/checkout.js');
+    const p = '/assets/js/modules/' + 'checkout.js';
+    const m = await import(p as any);
     await m.runCheckout({ fetchPath: '/assets/js/data/paypal.json' });
   });
 

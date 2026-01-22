@@ -6,5 +6,6 @@
   "live_url": "https://www.paypal.com/cgi-bin/webscr",
   "return_path": "/pages/payment/success.html",
   "cancel_path": "/pages/payment/fail.html",
-  "sdk_enabled": false
+  "sdk_enabled": false,
+  "allow_aggregate": true
 }

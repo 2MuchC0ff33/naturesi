@@ -95,15 +95,16 @@ export async function runCheckout({
 } = {}) {
   if (!documentRoot) return;
   const summary = documentRoot.getElementById('summary-content');
-  const form = documentRoot.getElementById('paypal-form');
+  const paymentSection = documentRoot.getElementById('payment');
   const errorEl = documentRoot.getElementById('checkout-error');
-  const payBtn = documentRoot.getElementById('pay-now');
-  if (!summary || !form) return;
+  if (!summary || !paymentSection) return;
+
   const showError = (msg) => {
     if (errorEl) {
       errorEl.textContent = msg;
       errorEl.classList.remove('hidden');
     }
+    const payBtn = documentRoot.getElementById('pay-now');
     if (payBtn) payBtn.disabled = true;
   };
   const clearError = () => {
@@ -111,6 +112,7 @@ export async function runCheckout({
       errorEl.textContent = '';
       errorEl.classList.add('hidden');
     }
+    const payBtn = documentRoot.getElementById('pay-now');
     if (payBtn) payBtn.disabled = false;
   };
 
@@ -129,8 +131,45 @@ export async function runCheckout({
   summary.innerHTML = html;
 
   const cfg = await loadPayPalConfig(fetchPath);
-  const { payload, errors } = buildPayPalPayload(cfg, cart);
+  if (!cfg) {
+    showError('Invalid payment configuration.');
+    return;
+  }
 
+  // If aggregate checkout is not allowed, keep the existing guidance and do not create the aggregated form
+  if (!cfg.allow_aggregate) {
+    // Make sure the deprecation message remains visible (static content in page)
+    // No aggregated PayPal form will be created
+    const note = documentRoot.getElementById('checkout-note');
+    if (note)
+      note.textContent = 'Aggregate checkout is not enabled. Use Buy Now buttons on product pages for single-item purchases.';
+    return;
+  }
+
+  // Aggregate checkout is allowed — remove any deprecation/muted guidance and create the aggregated PayPal form if missing
+  const existingNotice = paymentSection.querySelector('.muted');
+  if (existingNotice) existingNotice.remove();
+
+  let form = documentRoot.getElementById('paypal-form');
+  if (!form) {
+    form = documentRoot.createElement('form');
+    form.id = 'paypal-form';
+    form.method = 'POST';
+    form.className = 'paypal-aggregate';
+    form.innerHTML = `
+      <input type="hidden" name="cmd" value="_xclick" />
+      <input type="hidden" id="pp-business" name="business" />
+      <input type="hidden" id="pp-item_name" name="item_name" />
+      <input type="hidden" id="pp-amount" name="amount" />
+      <input type="hidden" id="pp-currency" name="currency_code" />
+      <input type="hidden" id="pp-return" name="return" />
+      <input type="hidden" id="pp-cancel" name="cancel_return" />
+      <button type="submit" id="pay-now" class="btn btn-paypal">Pay with PayPal</button>
+    `;
+    paymentSection.appendChild(form);
+  }
+
+  const { payload, errors } = buildPayPalPayload(cfg, cart);
   if (errors.length) {
     showError('Invalid payment configuration.');
     return;
@@ -142,6 +181,7 @@ export async function runCheckout({
   const currencyEl = documentRoot.getElementById('pp-currency');
   const returnEl = documentRoot.getElementById('pp-return');
   const cancelEl = documentRoot.getElementById('pp-cancel');
+  const payBtn = documentRoot.getElementById('pay-now');
 
   clearError();
   if (businessEl) businessEl.value = String(payload.business);
@@ -157,9 +197,10 @@ export async function runCheckout({
     return;
   }
 
+  if (payBtn) payBtn.disabled = false;
+
   const note = documentRoot.getElementById('checkout-note');
-  if (note)
-    note.textContent = `You will be redirected to PayPal to complete payment (currency: ${payload.currency_code}).`;
+  if (note) note.textContent = `You will be redirected to PayPal to complete payment (currency: ${payload.currency_code}).`;
 }
 
 // Note: runCheckout is now opt-in and should be invoked by the page script when progressive enhancement is desired.

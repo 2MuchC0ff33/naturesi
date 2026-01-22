@@ -42,9 +42,10 @@ test.describe('No-JS smoke tests', () => {
     await page.goto('/pages/cart.html');
     await expect(page.locator('#btn-proceed-checkout')).toBeVisible();
 
-    // Checkout page should indicate deprecation and give guidance
+    // Checkout page should contain a noscript guidance message when JS is disabled
     await page.goto('/pages/checkout.html');
-    await expect(page.locator('#payment')).toContainText('Aggregate checkout');
+    // Ensure the noscript guidance is present when JS is disabled
+    await expect(page.locator('#payment noscript')).toHaveCount(1);
 
     await context.close();
   });

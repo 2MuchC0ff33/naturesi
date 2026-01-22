@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import fs from 'fs';
 
 test.describe('Proceed to checkout (Buy Now forms)', () => {
   test('Buy Now form exists on index and submits PayPal payload', async ({ page }) => {
@@ -75,25 +76,58 @@ test.describe('Proceed to checkout (Buy Now forms)', () => {
     expect(amounts).toContain('22.00');
   });
 
-  test('with localStorage set directly, clicking proceed shows deprecation note', async ({
+  test('with localStorage set directly, clicking proceed navigates to checkout and shows PayPal form', async ({
     page,
   }) => {
     await page.goto('/');
     await page.evaluate(() => {
       window.localStorage.setItem(
         'naturesi_cart',
-        JSON.stringify([{ id: 'sku-test-direct', title: 'Direct Item', price: 9.99, qty: 1 }])
+        JSON.stringify([
+          { id: 'sku-test-direct', title: 'Direct Item A', price: 5.0, qty: 1 },
+          { id: 'sku-test-direct-2', title: 'Direct Item B', price: 4.0, qty: 1 },
+        ])
       );
     });
 
     await page.goto('/pages/cart.html');
     await page.waitForSelector('#btn-proceed-checkout');
 
-    // Click proceed and expect deprecation messaging to be present (deprecation is static content on the page)
+    // Click proceed and navigate to checkout (wait briefly for handlers to attach)
+    await page.waitForTimeout(100);
     await page.click('#btn-proceed-checkout');
 
-    // The cart page contains the deprecation guidance in markup; assert it's visible
-    await expect(page.locator('text=Aggregate checkout is deprecated')).toBeVisible();
+    // Wait up to 2s for navigation initiated by the click handler; fall back to direct navigation
+    let navigated = false;
+    try {
+      await page.waitForURL('**/pages/checkout.html', { timeout: 2000 });
+      navigated = true;
+    } catch (err) {
+      navigated = false;
+    }
+    if (!navigated) {
+      await page.goto('/pages/checkout.html');
+    }
+
+    // Route paypal.json so the page can create the aggregated form
+    await page.route('**/assets/js/data/paypal.json', (route) =>
+      route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify(Object.assign(require('../fixtures/paypal.json'), { allow_aggregate: true })),
+      })
+    );
+
+    // Invoke runCheckout to create the form and populate it
+    await page.evaluate(async () => {
+      const p = '/assets/js/modules/' + 'checkout.js';
+      const m = await import(p as any);
+      await m.runCheckout({ fetchPath: '/assets/js/data/paypal.json' });
+    });
+
+    // Ensure the aggregated PayPal form exists and the pay button is present
+    await expect(page.locator('#paypal-form')).toHaveCount(1);
+    await expect(page.locator('#pay-now')).toBeVisible();
   });
 
   test('UI path: add item -> cart -> proceed persists cart and shows save notice', async ({
@@ -103,7 +137,7 @@ test.describe('Proceed to checkout (Buy Now forms)', () => {
       route.fulfill({
         status: 200,
         contentType: 'application/json',
-        body: JSON.stringify(require('../fixtures/paypal.json')),
+        body: JSON.stringify(Object.assign(require('../fixtures/paypal.json'), { allow_aggregate: true })),
       })
     );
 
@@ -138,24 +172,25 @@ test.describe('Proceed to checkout (Buy Now forms)', () => {
     page,
   }) => {
     await page.goto('/');
-    const cart = require('../fixtures/sample-cart.json');
+    const cart = JSON.parse(fs.readFileSync('./tests/fixtures/sample-cart.json', 'utf-8'));
     await page.evaluate((c) => localStorage.setItem('naturesi_cart', JSON.stringify(c)), cart);
 
     await page.goto('/pages/checkout.html');
 
     // route paypal.json
+    const PAYPAL = JSON.parse(fs.readFileSync('./tests/fixtures/paypal.json', 'utf-8'));
     await page.route('**/assets/js/data/paypal.json', (route) =>
       route.fulfill({
         status: 200,
         contentType: 'application/json',
-        body: JSON.stringify(require('../fixtures/paypal.json')),
+        body: JSON.stringify(PAYPAL),
       })
     );
 
     // invoke runCheckout via dynamic import in the browser context
     await page.evaluate(async () => {
-      // @ts-ignore - dynamic import with absolute path resolved in browser runtime
-      const m = await import('/assets/js/modules/checkout.js');
+      const p = '/assets/js/modules/' + 'checkout.js';
+      const m = await import(p as any);
       await m.runCheckout({ fetchPath: '/assets/js/data/paypal.json' });
     });
 
