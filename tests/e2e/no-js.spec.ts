@@ -16,6 +16,23 @@ test.describe('No-JS smoke tests', () => {
     await page.goto('/pages/store.html');
     await expect(page.locator('.nav-center')).toBeVisible();
 
+    // Check a selection of store category pages render Buy Now forms without JS
+    const storePages = [
+      '/pages/store/wellness-blends.html',
+      '/pages/store/selfcare.html',
+      '/pages/store/ice-tea.html',
+      '/pages/store/herbal-infusions.html',
+      '/pages/store/green-tea.html',
+      '/pages/store/creams.html',
+      '/pages/store/black-tea.html',
+      '/pages/store/balms.html',
+    ];
+
+    for (const p of storePages) {
+      await page.goto(p);
+      await expect(page.locator('form.paypal-buynow').first()).toBeVisible();
+    }
+
     // Cart page should render and show helpful message (no aggregate checkout)
     await page.goto('/pages/cart.html');
     await expect(page.locator('#btn-proceed-checkout')).toBeVisible();

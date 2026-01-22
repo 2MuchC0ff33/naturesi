@@ -499,6 +499,24 @@
               <button type="submit" class="add-to-cart">Add to Cart</button>
             </fieldset>
           </form>
+
+          <!-- PayPal Buy Now form (HTML-first, no-JS checkout) -->
+          <form
+            class="paypal-buynow"
+            action="https://www.sandbox.paypal.com/cgi-bin/webscr"
+            method="post"
+            target="_top"
+            aria-label="Buy Energiser on PayPal"
+          >
+            <input type="hidden" name="cmd" value="_xclick" />
+            <input type="hidden" name="business" value="tea@naturesinfusions.com.au" />
+            <input type="hidden" name="item_name" value="Energiser" />
+            <input type="hidden" name="amount" value="14.00" />
+            <input type="hidden" name="currency_code" value="AUD" />
+            <input type="hidden" name="return" value="/pages/payment/success.html" />
+            <input type="hidden" name="cancel_return" value="/pages/payment/fail.html" />
+            <button type="submit" class="btn btn-paypal">Buy Now (PayPal)</button>
+          </form>
         </article>
 
         <a id="orange-and-ginger" class="product-anchor slug-anchor" aria-hidden="true"></a>
