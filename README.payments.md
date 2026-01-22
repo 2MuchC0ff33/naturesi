@@ -36,3 +36,5 @@ Note: this static repo reads `assets/js/data/paypal.json` at runtime. During dep
 
 - If `paypal.json` fails to load the checkout falls back to the local checkout page and shows an error in `#checkout-error`. Check network logs and ensure `assets/js/data/paypal.json` is present and valid.
 - For sandbox testing use PayPal Sandbox accounts and the PayPal developer dashboard.
+
+- Cancel returns: when a buyer cancels or fails to complete payment and PayPal redirects to the `cancel_return` URL, the site intentionally preserves the cart so the buyer can retry payment. The fail page will show a message informing the customer the payment was not completed and their cart has been left intact.
