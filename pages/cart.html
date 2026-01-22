@@ -343,6 +343,28 @@
             Review items in your cart. This section dynamically updates based on your selections.
           </p>
         </header>
+        <noscript>
+          <div class="muted">
+            <p>
+              <strong>No JavaScript:</strong> This site uses per-product PayPal
+              <em>Buy Now</em> buttons. To purchase, visit the product pages and use the Buy Now
+              button. For multi-item orders, <a href="/pages/contact.html">contact support</a> and
+              we can assist with a manual invoice.
+            </p>
+            <p>
+              For shipping guidance, see
+              <a href="/pages/shipping-estimate.html">Shipping &amp; Postage</a>.
+            </p>
+          </div>
+        </noscript>
+
+        <div class="muted" role="status">
+          <p>
+            <strong>Note:</strong> Aggregate checkout (paying for multiple items in a single
+            request) is deprecated. Use the Buy Now buttons on individual product pages for a simple
+            PayPal checkout.
+          </p>
+        </div>
 
         <form id="cart-form" action="#" method="post" novalidate aria-describedby="cart-note">
           <p id="cart-note" class="visually-hidden">
@@ -364,6 +386,17 @@
             </thead>
             <tbody>
               <!-- Removed placeholder items as the cart dynamically updates -->
+              <noscript>
+                <tr>
+                  <td colspan="5">
+                    <div class="muted">
+                      With JavaScript disabled, the cart is not editable here. Use the Buy Now
+                      buttons on product pages to make purchases. For multi-item orders,
+                      <a href="/pages/contact.html">contact support</a>.
+                    </div>
+                  </td>
+                </tr>
+              </noscript>
             </tbody>
           </table>
 

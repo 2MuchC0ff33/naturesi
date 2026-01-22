@@ -162,11 +162,5 @@ export async function runCheckout({
     note.textContent = `You will be redirected to PayPal to complete payment (currency: ${payload.currency_code}).`;
 }
 
-// Auto-run only in browser
-if (typeof document !== 'undefined') {
-  (async () => {
-    try {
-      await runCheckout();
-    } catch (e) {}
-  })();
-}
+// Note: runCheckout is now opt-in and should be invoked by the page script when progressive enhancement is desired.
+// This prevents the checkout page from relying on JS for basic usability.

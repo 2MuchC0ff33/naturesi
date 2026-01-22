@@ -57,24 +57,5 @@ if (typeof document !== 'undefined') {
     }
   })();
 
-  (function attachNonInlineHandlers() {
-    const select = document.getElementById('site-category-select');
-    if (!select) return;
-    select.addEventListener('change', () => {
-      const map = {
-        'wellness-blends': '/pages/store/wellness-blends.html',
-        'herbal-infusions': '/pages/store/herbal-infusions.html',
-        'black-tea': '/pages/store/black-tea.html',
-        'green-tea': '/pages/store/green-tea.html',
-        balms: '/pages/store/balms.html',
-        creams: '/pages/store/creams.html',
-        selfcare: '/pages/store/selfcare.html',
-        accessories: '/pages/store/accessories.html',
-        'ice-tea': '/pages/store/ice-tea.html',
-        'artisan-blends': '/pages/store/artisan-blends.html',
-        '': '/pages/store.html',
-      };
-      window.location.href = map[select.value] || '/pages/store.html';
-    });
-  })();
+  // Category select change handler removed in HTML-first migration; prefer native links and form submissions for accessibility and no-JS navigation.
 }

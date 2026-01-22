@@ -130,22 +130,22 @@ export function attachFormHandler({
   if (btn) {
     btn.addEventListener('click', (ev) => {
       try {
-        // Prevent default navigation; we want the user to use per-product Buy Now flows.
-        ev.preventDefault();
+        // Persist the user's selected cart as a convenience, but do not block navigation.
         const cart = collect({ documentRoot });
         if (storage) storage.setItem(key, JSON.stringify(cart));
-        // Show a helpful notice inline (progressive enhancement):
-        const noticeId = 'checkout-deprecated-note';
-        if (!documentRoot.getElementById(noticeId)) {
+        // Optionally show a non-blocking status message for users with JS enabled.
+        const noticeId = 'checkout-save-note';
+        if (!document.getElementById(noticeId)) {
           const note = document.createElement('p');
           note.id = noticeId;
           note.className = 'muted';
           note.setAttribute('role', 'status');
-          note.textContent =
-            'Aggregate checkout is deprecated. Use the Buy Now buttons on product pages to complete payment via PayPal.';
-          const container = documentRoot.querySelector('#main-content') || documentRoot.body;
+          note.setAttribute('aria-live', 'polite');
+          note.textContent = 'Preparing checkout… You will be redirected to the next step.';
+          const container = document.querySelector('#main-content') || document.body;
           container.insertBefore(note, container.firstChild);
         }
+        // Let the navigation proceed naturally (no preventDefault).
       } catch (err) {
         console.error('Proceed click handler failed', err);
       }
