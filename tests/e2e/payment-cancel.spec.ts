@@ -18,7 +18,9 @@ test.describe('Payment cancel handling', () => {
 
     // Wait for either the visible note or for storage to remain present
     await page.waitForFunction(
-      () => document.getElementById('cart-cancelled-note') !== null || window.localStorage.getItem('naturesi_cart') !== null,
+      () =>
+        document.getElementById('cart-cancelled-note') !== null ||
+        window.localStorage.getItem('naturesi_cart') !== null,
       { timeout: 3000 }
     );
 

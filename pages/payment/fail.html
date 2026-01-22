@@ -1,50 +1,51 @@
 <!doctype html>
 <html lang="en-AU">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Payment cancelled</title>
-  <link rel="stylesheet" href="/assets/css/main.css">
-</head>
-<body>
-  <main class="container">
-    <h1>Payment cancelled</h1>
-    <p>Your payment was cancelled or not completed. Your order was not placed.</p>
-    <p><a href="/pages/cart.html" class="btn">Return to cart</a></p>
-    <script>
-      (function () {
-        // If PayPal returned with cancel/return params, show a friendly message and
-        // emit a `cart:payment-cancelled` event. Do not clear the cart so the user can retry.
-        function hasPayPalReturnParams() {
-          try {
-            const params = new URLSearchParams(location.search);
-            return ['PayerID', 'tx', 'paymentId', 'token'].some((k) => params.has(k));
-          } catch (e) {
-            return false;
-          }
-        }
-        if (hasPayPalReturnParams()) {
-          try {
-            const params = new URLSearchParams(location.search);
-            const detail = Object.fromEntries([...params.entries()]);
-            window.dispatchEvent(new CustomEvent('cart:payment-cancelled', { detail }));
-
-            if (!document.getElementById('cart-cancelled-note')) {
-              const main = document.querySelector('main.container') || document.body;
-              const note = document.createElement('p');
-              note.id = 'cart-cancelled-note';
-              note.className = 'muted';
-              note.setAttribute('role', 'status');
-              note.setAttribute('aria-live', 'polite');
-              note.textContent = 'Your payment was not completed; your cart has been left intact.';
-              main.appendChild(note);
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Payment cancelled</title>
+    <link rel="stylesheet" href="/assets/css/main.css" />
+  </head>
+  <body>
+    <main class="container">
+      <h1>Payment cancelled</h1>
+      <p>Your payment was cancelled or not completed. Your order was not placed.</p>
+      <p><a href="/pages/cart.html" class="btn">Return to cart</a></p>
+      <script>
+        (function () {
+          // If PayPal returned with cancel/return params, show a friendly message and
+          // emit a `cart:payment-cancelled` event. Do not clear the cart so the user can retry.
+          function hasPayPalReturnParams() {
+            try {
+              const params = new URLSearchParams(location.search);
+              return ['PayerID', 'tx', 'paymentId', 'token'].some((k) => params.has(k));
+            } catch (e) {
+              return false;
             }
-          } catch (err) {
-            console.error('Error handling cancelled PayPal return', err);
           }
-        }
-      })();
-    </script>
-  </main>
-</body>
+          if (hasPayPalReturnParams()) {
+            try {
+              const params = new URLSearchParams(location.search);
+              const detail = Object.fromEntries([...params.entries()]);
+              window.dispatchEvent(new CustomEvent('cart:payment-cancelled', { detail }));
+
+              if (!document.getElementById('cart-cancelled-note')) {
+                const main = document.querySelector('main.container') || document.body;
+                const note = document.createElement('p');
+                note.id = 'cart-cancelled-note';
+                note.className = 'muted';
+                note.setAttribute('role', 'status');
+                note.setAttribute('aria-live', 'polite');
+                note.textContent =
+                  'Your payment was not completed; your cart has been left intact.';
+                main.appendChild(note);
+              }
+            } catch (err) {
+              console.error('Error handling cancelled PayPal return', err);
+            }
+          }
+        })();
+      </script>
+    </main>
+  </body>
 </html>
