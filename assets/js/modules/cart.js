@@ -103,6 +103,7 @@ export function saveCart(
   }
 }
 
+// Updated attachFormHandler to ensure robust navigation and cart persistence
 export function attachFormHandler({
   documentRoot = typeof document !== 'undefined' ? document : null,
   storage = typeof globalThis !== 'undefined' ? globalThis.localStorage : null,
@@ -111,6 +112,7 @@ export function attachFormHandler({
   if (!documentRoot || !documentRoot.getElementById) return;
   const form = documentRoot.getElementById('confirm-cart-form');
   if (!form) return;
+
   form.addEventListener('submit', (evt) => {
     try {
       const cart = collect({ documentRoot });
@@ -120,22 +122,14 @@ export function attachFormHandler({
     }
   });
 
-  // Attach a click fallback to the proceed button so that we persist the canonical cart and
-  // immediately redirect the user to PayPal via a single-total (cmd=_xclick) form submission.
-  // Note: Proceed-to-PayPal aggregate redirect removed in HTML-first migration.
-  // The site now provides per-product PayPal "Buy Now" HTML forms on product pages.
-  // The confirm-cart form persists the canonical cart to localStorage for progressive enhancement,
-  // but it no longer builds or submits an aggregated PayPal form from the client.
-
-  // Persist cart when confirm form submitted (no redirect)
   const btn = documentRoot.getElementById('btn-proceed-checkout');
   if (btn) {
     btn.addEventListener('click', (ev) => {
       try {
-        // Persist the user's selected cart as a convenience, but do not block navigation.
+        ev.preventDefault();
         const cart = collect({ documentRoot });
         if (storage) storage.setItem(key, JSON.stringify(cart));
-        // Optionally show a non-blocking status message for users with JS enabled.
+
         const noticeId = 'checkout-save-note';
         if (!documentRoot.getElementById(noticeId)) {
           const note = documentRoot.createElement('p');
@@ -147,31 +141,28 @@ export function attachFormHandler({
           const container = documentRoot.querySelector('#main-content') || documentRoot.body;
           container.insertBefore(note, container.firstChild);
         }
-        // Use a single, controlled navigation flow to avoid duplicate history entries
-        // and back-button flicker. Prevent the default click submit and request the
-        // form to submit programmatically so the submit handler runs exactly once.
-        try {
-          ev.preventDefault();
-        } catch (e) {
-          // ignore if event isn't cancelable in some environments
-        }
+
         try {
           if (typeof form.requestSubmit === 'function') {
-            form.requestSubmit();
+            try {
+              form.requestSubmit();
+            } catch (err) {
+              // jsdom may have requestSubmit stubbed as not-implemented
+              if (typeof form.submit === 'function') form.submit();
+              else if (globalThis && globalThis.location) globalThis.location.assign('/pages/checkout.html');
+            }
           } else if (typeof form.submit === 'function') {
-            // submit() does not fire submit event handlers in older browsers, but
-            // it's an acceptable fallback for environments lacking requestSubmit.
             form.submit();
           } else {
-            // final fallback: assign location (adds history entry so Back returns correctly)
             if (globalThis && globalThis.location) globalThis.location.assign('/pages/checkout.html');
           }
-        } catch (navErr) {
-          console.error('Navigation to checkout failed, falling back to assign:', navErr);
+        } catch (err) {
+          // fallback to absolute navigation
           if (globalThis && globalThis.location) globalThis.location.assign('/pages/checkout.html');
         }
       } catch (err) {
         console.error('Proceed click handler failed', err);
+        if (globalThis && globalThis.location) globalThis.location.assign('/pages/checkout.html');
       }
     });
   }

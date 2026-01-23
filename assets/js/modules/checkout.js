@@ -55,11 +55,11 @@ export function toAbsoluteUrl(path) {
   return path;
 }
 
-export function buildPayPalPayload(cfg, cart) {
+export function buildPayPalPayload(cfg, cart, shipping = 0) {
   const errors = [];
   if (!cfg) errors.push('missing_config');
   if (!cfg?.business || !String(cfg.business).includes('@')) errors.push('invalid_business');
-  const grand = computeGrandTotal(cart);
+  const grand = computeGrandTotal(cart) + Number(Number(shipping || 0).toFixed(2));
   const payload = {
     business: cfg?.business ?? '',
     item_name: computeItemLabel(cart),
@@ -72,7 +72,7 @@ export function buildPayPalPayload(cfg, cart) {
   return { payload, errors };
 }
 
-export function renderSummaryToString(cart) {
+export function renderSummaryToString(cart, shipping = 0) {
   if (!cart || !cart.length) return { html: '<p>Your cart is empty.</p>', total: 0 };
   const items = cart.map((it) => ({
     title: it.title,
@@ -80,12 +80,14 @@ export function renderSummaryToString(cart) {
     price: it.price.toFixed(2),
     lineTotal: (it.price * it.qty).toFixed(2),
   }));
-  const grand = computeGrandTotal(cart);
+  const subtotal = computeGrandTotal(cart);
+  const ship = Number(Number(shipping || 0).toFixed(2));
+  const grand = subtotal + ship;
   let html = '<ul class="checkout-line-items">';
   items.forEach((i) => {
     html += `<li class="checkout-line-item"><span class="line-title">${i.title}</span><span class="line-meta">${i.qty} × ${i.price}</span><span class="line-total">${i.lineTotal}</span></li>`;
   });
-  html += `</ul><p class="grand-total">Total: <strong>${grand.toFixed(2)}</strong></p>`;
+  html += `</ul><dl class="checkout-totals"><div><dt>Subtotal</dt><dd>${subtotal.toFixed(2)}</dd></div><div><dt>Shipping</dt><dd>${ship.toFixed(2)}</dd></div></dl><p class="grand-total">Total: <strong>${grand.toFixed(2)}</strong></p>`;
   return { html, total: grand };
 }
 
@@ -127,13 +129,33 @@ export async function runCheckout({
     return;
   }
 
-  const { html, total } = renderSummaryToString(cart);
+  // Try to detect shipping amount from the page (data attribute or textual currency value), fallback to config
+  let shipping = 0;
+  try {
+    const shipEl = documentRoot.getElementById('summary-shipping');
+    if (shipEl) {
+      const ds = shipEl.dataset && shipEl.dataset.shipping;
+      const txt = String(ds ?? shipEl.textContent ?? '').trim();
+      const parsed = String(txt).replace(/[^\d.-]+/g, '');
+      const n = Number(parsed || 0);
+      if (Number.isFinite(n)) shipping = n;
+    }
+  } catch (e) {
+    // ignore
+  }
+
+  const { html, total } = renderSummaryToString(cart, shipping);
   summary.innerHTML = html;
 
   const cfg = await loadPayPalConfig(fetchPath);
   if (!cfg) {
     showError('Invalid payment configuration.');
     return;
+  }
+
+  // Allow config to provide a default shipping amount if it makes sense
+  if (!shipping && cfg && cfg.shipping_amount) {
+    shipping = Number(cfg.shipping_amount) || 0;
   }
 
   // If aggregate checkout is not allowed, keep the existing guidance and do not create the aggregated form
@@ -169,7 +191,7 @@ export async function runCheckout({
     paymentSection.appendChild(form);
   }
 
-  const { payload, errors } = buildPayPalPayload(cfg, cart);
+  const { payload, errors } = buildPayPalPayload(cfg, cart, shipping);
   if (errors.length) {
     showError('Invalid payment configuration.');
     return;

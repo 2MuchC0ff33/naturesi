@@ -9,6 +9,17 @@ import {
   attachFormHandler,
 } from '../../assets/js/modules/cart.js';
 
+// Mock HTMLFormElement.prototype.requestSubmit directly in the test file
+import { vi } from 'vitest';
+
+beforeAll(() => {
+  HTMLFormElement.prototype.requestSubmit = vi.fn(function () {
+    if (this.tagName === 'FORM') {
+      this.dispatchEvent(new Event('submit', { cancelable: true }));
+    }
+  });
+});
+
 describe('cart module helpers', () => {
   beforeEach(() => {
     // reset DOM

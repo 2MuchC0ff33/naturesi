@@ -76,4 +76,11 @@ describe('checkout helpers', () => {
     expect(total).toBe(0);
     expect(html).toContain('Your cart is empty');
   });
+
+  it('buildPayPalPayload includes shipping when provided', () => {
+    const cfg = { env: 'sandbox', business: 'sandbox@example.com', sandbox_url: 'https://s' };
+    const result = buildPayPalPayload(cfg, [{ id: 'x', title: 'X', price: 1, qty: 2 }], 1.5);
+    expect(result.errors).toEqual([]);
+    expect(result.payload.amount).toBe('3.50'); // 2.00 + 1.50 shipping
+  });
 });

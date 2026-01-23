@@ -1,9 +1,51 @@
 # TODO — Proceed-to-Checkout & PayPal flow (detailed handoff)
 
+#
+
+# Plan: Finalise TODO.md, Add Tests, Debug & Iterate
+
+#
+
+# This plan will review the new additions in TODO.md, update the rest of the file for clarity and completeness, and ensure all actionable steps are resolved. It will also outline the creation of all possible tests (unit, E2E), debugging, and iteration until the fix is fully resolved, following the uninterrupted workflow requested
+
+#
+
+# Steps
+
+# 1. Review and summarise new additions in [TODO.md](TODO.md) for accuracy and completeness
+
+# 2. Update and reorganise [TODO.md](TODO.md) to resolve all open items, clarify next steps, and remove any ambiguity
+
+# 3. List and describe all possible tests to create
+
+# - E2E tests for UI and localStorage cart flows ([tests/e2e/proceed-to-checkout.spec.ts](tests/e2e/proceed-to-checkout.spec.ts))
+
+# - Unit tests for `cart.js` (`attachFormHandler`, `collect`) ([assets/js/modules/cart.js](assets/js/modules/cart.js))
+
+# - Robustness tests for checkout and PayPal config ([tests/e2e/checkout.spec.ts](tests/e2e/checkout.spec.ts), [tests/e2e/security.paypal.spec.ts](tests/e2e/security.paypal.spec.ts))
+
+# 4. Outline debugging steps and iteration process
+
+# - Manual browser verification (DevTools, Console, DOM inspection)
+
+# - Playwright trace and report usage
+
+# - Flakiness mitigation (timeouts, retries, cross-browser matrix)
+
+# 5. Update acceptance criteria and PR guidance in [TODO.md](TODO.md) to reflect resolved state and next actions
+
 ## Problem Summary (what failed) ⚠️
 
 - The "Proceed to checkout" button (`#btn-proceed-checkout`) on the cart page did not reliably navigate to `/pages/checkout.html` when clicked during manual testing.
 - Root cause: the confirm form (`#confirm-cart-form`) that contained the button was nested inside the main `#cart-form`. Nested forms are invalid HTML and in this layout the parent `#cart-form` had a delegated `submit` handler which calls `ev.preventDefault()` and therefore blocked the default navigation when the submit bubbled in some browsers.
+- **NEW:** When redirecting to PayPal, only the product price is being carried over. The shipping/postage costs (i.e., the grand total: product costs + shipping/postage) are not included in the PayPal payment amount.
+  - **Expected result:** The total amount (product price + shipping/postage) should be carried over to the PayPal redirect so the customer pays the correct grand total.
+- **NEW:** Not all products have a PayPal "Buy Now" button for the pouch, and the PayPal "Buy Now" cylinder button is also missing.
+  - **Expected result:** Add both the PayPal "Buy Now" pouch and cylinder buttons to all products listed in all `pages/store/*.html` files for each category.
+- **NEW:** Clicking the PayPal "Buy Now" button redirects to a page that does not work.
+  - **Expected result:** Map the correct PayPal business email using `.env` and a small JS module to manage (or use native Web API if possible). For now, map to the PayPal business sandbox email.
+- **NEW:** Ensure correct mapping of environment variables via `.env` for PayPal and other config.
+  - **Expected result:** Generate a JS module (or preferably use native Web API if available) to read and apply environment variables for payment and config mapping.
 
 ## Goal ✅
 
@@ -45,7 +87,7 @@ Tests run & results:
 
 - Start a local static server (Playwright uses this in the config automatically):
   - npm run start:static
-  - The site will be available at http://localhost:8080
+  - The site will be available at <http://localhost:8080>
 - Run the E2E tests (recommended):
   - npx playwright test --config=playwright.config.ts
   - Or run a single test file (fast feedback):
@@ -61,7 +103,7 @@ Tests run & results:
 ## Manual verification steps (quick checklist) 🧭
 
 1. Start server: npm run start:static
-2. Open http://localhost:8080 in Chrome
+2. Open <http://localhost:8080> in Chrome
 3. Add an item to cart (click a product's "Add to Cart")
 4. Click the cart link (header) to open the cart page
 5. Click "Proceed to checkout" and confirm you are taken to `/pages/checkout.html`
@@ -77,10 +119,12 @@ Tests run & results:
 
 ## Suggested next steps (what still needs doing) ➕
 
-- Code review: create a focused PR with the changes above and include CI run logs (I have not opened a PR per your request). Title suggestion: `fix(cart): ensure proceed-to-checkout navigates reliably and add E2E tests`.
-- Add a small unit test for `cart.js`'s `attachFormHandler`/`collect()` behaviour (mock `document` in jsdom) to verify it persists the expected cart format.
-- Consider removing the forced `setTimeout` navigation fallback and using a more explicit navigation strategy (for example, call `form.submit()` when safe) if you prefer strict form semantics instead of forced location change.
-- Add a small note to `CONTRIBUTING` or `TESTING.md` describing the Playwright environment tips (PWDEBUG, trace usage) for future contributors.
+- Implement the simplest HTML or native Web API fallback for navigation from the cart to checkout:
+  - Prefer using a plain HTML `<form action="/pages/checkout.html" method="get">` for navigation.
+  - If JavaScript is required, use `form.submit()` as the first fallback, and only use `window.location.href` if form submission is blocked.
+  - Update the code and documentation to reflect this, marking the navigation fix as resolved.
+  - Proceed to add unit tests for `cart.js`'s `attachFormHandler`/`collect()` behaviour (mock `document` in jsdom) to verify cart persistence.
+  - Add a short note to `CONTRIBUTING` or `TESTING.md` describing Playwright environment tips (PWDEBUG, trace usage) for future contributors.
 
 ## Troubleshooting (if something breaks) 🛠️
 
@@ -131,7 +175,7 @@ This section contains all the low-level details, exact commands and snippets you
 
 1. Start the app:
    - npm run start:static
-   - Open http://localhost:8080 in a browser (Chrome recommended for debugging).
+   - Open <http://localhost:8080> in a browser (Chrome recommended for debugging).
 2. Verify the confirm form is NOT nested inside another `<form>`:
    - Open DevTools Console and run:
      - `document.getElementById('confirm-cart-form').closest('form')` → should return the confirm form element itself or `null` if not nested. If it returns a different form id `cart-form`, the form is still nested.

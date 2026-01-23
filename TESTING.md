@@ -107,7 +107,7 @@ Fixtures & deterministic test data
 Proceed-to-checkout & Checkout tests
 
 - `tests/e2e/proceed-to-checkout.spec.ts` implements both UI-driven and localStorage-driven checkout flows and simulates the `runCheckout` invocation on the checkout page to validate PayPal payloads (without performing real PayPal redirects).
-- When debugging these tests locally, use `PWDEBUG=1 npx playwright test tests/e2e/proceed-to-checkout.spec.ts --project=chromium --debug` to run headed and inspect behaviour.
+- When debugging these tests locally, use `PWDEBUG=1 npx playwright test tests/e2e/proceed-to-checkout.spec.ts --project=chromium --debug` to run headed and inspect behaviour. For trace-based debugging capture a run with `npx playwright test --trace on` and then inspect it with `npx playwright show-trace <path-to-trace.zip>`.
 
 ---
 

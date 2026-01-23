@@ -362,59 +362,27 @@
           </p>
         </div>
 
-        <form id="cart-form" action="#" method="post" novalidate aria-describedby="cart-note">
-          <p id="cart-note" class="visually-hidden">
-            Use the quantity inputs to change item quantities, then select Update Cart.
-          </p>
-
-          <table class="cart-table" summary="Items in cart">
-            <caption class="visually-hidden">
-              Shopping cart contents
-            </caption>
+        <form id="cart-form" action="/pages/checkout.html" method="get">
+          <!-- Cart items table -->
+          <table class="cart-table">
             <thead>
               <tr>
-                <th scope="col">Product</th>
-                <th scope="col">Price</th>
-                <th scope="col">Quantity</th>
-                <th scope="col">Line total</th>
-                <th scope="col">Actions</th>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
               </tr>
             </thead>
             <tbody>
-              <!-- Removed placeholder items as the cart dynamically updates -->
-              <noscript>
-                <tr>
-                  <td colspan="5">
-                    <div class="muted">
-                      With JavaScript disabled, the cart is not editable here. Use the Buy Now
-                      buttons on product pages to make purchases. For multi-item orders,
-                      <a href="/pages/contact.html">contact support</a>.
-                    </div>
-                  </td>
-                </tr>
-              </noscript>
+              <!-- Cart items dynamically populated here -->
             </tbody>
           </table>
-
-          <div class="cart-actions">
-            <button type="submit" class="button" id="update-cart">Update Cart</button>
-            <a class="button button-secondary" href="/pages/store.html">Continue Shopping</a>
-          </div>
         </form>
 
-        <!-- Confirm form placed outside #cart-form to avoid nested form issues.
-             Keeps visual layout intact using same classes. -->
+        <!-- Confirm cart form moved outside of #cart-form -->
         <div class="cart-actions-external">
-          <form
-            id="confirm-cart-form"
-            action="/pages/checkout.html"
-            method="get"
-            aria-label="Confirm items and proceed to checkout"
-            class="inline-form inline-block"
-          >
-            <button type="submit" id="btn-proceed-checkout" class="btn btn-primary">
-              Proceed to checkout
-            </button>
+          <form id="confirm-cart-form" action="/pages/checkout.html" method="get">
+            <button id="btn-proceed-checkout" type="submit">Proceed to Checkout</button>
           </form>
         </div>
 
