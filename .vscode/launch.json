@@ -1,15 +1,15 @@
 {
-  "version": "0.2.0",
+  "version": "1.0.0",
   "configurations": [
     {
-      "name": "Launch Node",
-      "type": "node",
+      "name": "Launch Chrome",
       "request": "launch",
-      "program": "${workspaceFolder}/assets/js/app.js",
-      "env": {
-        "BASH": "/usr/bin/bash",
-        "PATH": "/cygdrive/c/Users/galloa/scoop/apps/nodejs/current:/cygdrive/c/Users/galloa/scoop/apps/nodejs/current/bin:$PATH"
-      }
+      "type": "chrome",
+      "url": "http://localhost:8000",
+      "webRoot": "${workspaceFolder}",
+      "runtimeArgs": [
+        "--incognito"
+      ]
     }
   ]
 }

@@ -1,5 +1,7 @@
 {
-  "editor.rulers": [80],
+  "editor.rulers": [
+    80
+  ],
   "editor.wordWrap": "wordWrapColumn",
   "editor.wordWrapColumn": 80,
   "editor.formatOnSave": true,
@@ -19,11 +21,18 @@
   "terminal.integrated.profiles.windows": {
     "Cygwin": {
       "path": "C:\\Users\\galloa\\scoop\\shims\\cygwin.exe",
-      "args": ["--login", "-i"],
+      "args": [
+        "-i"
+      ],
       "env": {
         "BASH": "/usr/bin/bash",
         "PATH": "/cygdrive/c/Users/galloa/scoop/apps/nodejs/current:/cygdrive/c/Users/galloa/scoop/apps/nodejs/current/bin:$PATH"
       }
     }
-  }
+  },
+  "terminal.integrated.shell.windows": "C:\\Users\\galloa\\scoop\\persist\\cygwin\\root\\bin\\bash.exe",
+  "terminal.integrated.shellArgs.windows": [
+    "--login",
+    "-c"
+  ]
 }
