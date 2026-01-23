@@ -32,4 +32,3 @@ assets/** text eol=lf working-tree-encoding=UTF-8
 
 # Ensure scripts use LF
 *.sh text eol=lf working-tree-encoding=UTF-8
-*.ps1 text eol=lf working-tree-encoding=UTF-8

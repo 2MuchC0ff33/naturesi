@@ -12,29 +12,19 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "eslint.enable": true,
   "eslint.run": "onSave",
-  "eslint.alwaysShowStatus": true,
   "eslint.validate": ["javascript", "javascriptreact", "html"],
   "prettier.requireConfig": true,
   "prettier.useEditorConfig": true,
   "stylelint.enable": true,
   "stylelint.validate": ["css", "scss"],
   "htmlhint.enable": true,
-  "liveServer.settings.port": 5500,
-  "liveServer.settings.root": "/",
-  "liveServer.settings.ignoreFiles": [".vscode/**", "node_modules/**", ".git/**"],
   "files.exclude": {
     "**/.git": true,
     "**/.DS_Store": true,
     "**/node_modules": true,
     "**/.vscode": false
   },
-  "terminal.integrated.defaultProfile.windows": "Cygwin Bash",
-  "terminal.integrated.shell.windows": "C:\\Windows\\System32\\bash.exe",
-  "terminal.integrated.profiles.windows": {
-    "Cygwin Bash": {
-      "path": "C:\\Windows\\System32\\bash.exe",
-      "args": ["-lc"]
-    }
-  },
-  "playwright.cliPath": "${workspaceFolder}/node_modules/.bin/playwright"
+  "terminal.integrated.defaultProfile.windows": "Cygwin",
+  "terminal.integrated.profiles.windows": {},
+  "terminal.integrated.env.windows": {}
 }

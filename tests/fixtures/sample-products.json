@@ -1,4 +1,0 @@
-[
-  { "id": "p1", "sku": "P001", "title": "Chamomile", "price": 4.5, "weight": "50g" },
-  { "id": "p2", "sku": "P002", "title": "Peppermint", "price": 3.5, "weight": "40g" }
-]

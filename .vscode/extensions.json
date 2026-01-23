@@ -4,15 +4,12 @@
     "github.copilot",
     "github.vscode-pull-request-github",
     "elijah-potter.harper",
-    "ritwickdey.liveserver",
     "paypal.vscode-paypal",
     "editorconfig.editorconfig",
     "dbaeumer.vscode-eslint",
     "htmlhint.vscode-htmlhint",
     "esbenp.prettier-vscode",
     "stylelint.vscode-stylelint",
-    "davidanson.vscode-markdownlint",
-    "ms-playwright.playwright",
-    "vitest.explorer"
+    "davidanson.vscode-markdownlint"
   ]
 }
