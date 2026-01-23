@@ -73,9 +73,6 @@ Test offline and 404 pages on localhost.
 
 ## Testing
 
-- Automated tests: run `npm run test:unit` for unit tests (Vitest) and `npx playwright test` for E2E tests. See `TESTING.md` for details on running the full suite including accessibility, visual snapshots, and performance audits.
-- Manual smoke test: run locally, verify service worker install/uninstall, check offline and 404 pages.
-- Optional browser E2E/visual tests (Playwright + Chrome DevTools) are documented in `TESTING.md` and gated in CI.
 
 ## Contributing
 

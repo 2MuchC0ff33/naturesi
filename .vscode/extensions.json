@@ -5,11 +5,6 @@
     "github.vscode-pull-request-github",
     "elijah-potter.harper",
     "paypal.vscode-paypal",
-    "editorconfig.editorconfig",
-    "dbaeumer.vscode-eslint",
-    "htmlhint.vscode-htmlhint",
-    "esbenp.prettier-vscode",
-    "stylelint.vscode-stylelint",
-    "davidanson.vscode-markdownlint"
+    "editorconfig.editorconfig"
   ]
 }

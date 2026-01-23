@@ -1,4 +1,17 @@
 {
-  "version": "0.0.0",
-  "tasks": []
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "run command",
+      "type": "shell",
+      "command": "echo",
+      "args": ["Hello World"],
+      "options": {
+        "env": {
+          "BASH": "/usr/bin/bash",
+          "PATH": "/cygdrive/c/Users/galloa/scoop/apps/nodejs/current:/cygdrive/c/Users/galloa/scoop/apps/nodejs/current/bin:$PATH"
+        }
+      }
+    }
+  ]
 }

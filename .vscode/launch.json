@@ -1,4 +1,15 @@
 {
-  "version": "0.0.0",
-  "configurations": []
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Launch Node",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/assets/js/app.js",
+      "env": {
+        "BASH": "/usr/bin/bash",
+        "PATH": "/cygdrive/c/Users/galloa/scoop/apps/nodejs/current:/cygdrive/c/Users/galloa/scoop/apps/nodejs/current/bin:$PATH"
+      }
+    }
+  ]
 }

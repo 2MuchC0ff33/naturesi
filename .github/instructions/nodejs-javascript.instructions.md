@@ -1,5 +1,5 @@
 ---
-description: 'Guidelines for writing Node.js and JavaScript code with Vitest testing'
+description: 'Guidelines for writing Node.js and JavaScript code with Node testing'
 applyTo: '**/*.js, **/*.mjs, **/*.cjs'
 ---
 

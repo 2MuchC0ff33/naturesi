@@ -9,15 +9,6 @@
   "files.insertFinalNewline": true,
   "files.encoding": "utf8",
   "files.eol": "\n",
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "eslint.enable": true,
-  "eslint.run": "onSave",
-  "eslint.validate": ["javascript", "javascriptreact", "html"],
-  "prettier.requireConfig": true,
-  "prettier.useEditorConfig": true,
-  "stylelint.enable": true,
-  "stylelint.validate": ["css", "scss"],
-  "htmlhint.enable": true,
   "files.exclude": {
     "**/.git": true,
     "**/.DS_Store": true,
@@ -25,6 +16,14 @@
     "**/.vscode": false
   },
   "terminal.integrated.defaultProfile.windows": "Cygwin",
-  "terminal.integrated.profiles.windows": {},
-  "terminal.integrated.env.windows": {}
+  "terminal.integrated.profiles.windows": {
+    "Cygwin": {
+      "path": "C:\\Users\\galloa\\scoop\\shims\\cygwin.exe",
+      "args": ["--login", "-i"],
+      "env": {
+        "BASH": "/usr/bin/bash",
+        "PATH": "/cygdrive/c/Users/galloa/scoop/apps/nodejs/current:/cygdrive/c/Users/galloa/scoop/apps/nodejs/current/bin:$PATH"
+      }
+    }
+  }
 }

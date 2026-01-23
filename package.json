@@ -2,20 +2,8 @@
   "name": "naturesi",
   "version": "1.0.0",
   "type": "module",
-  "description": "",
-  "main": "service-worker.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/2MuchC0ff33/naturesi.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/2MuchC0ff33/naturesi/issues"
-  },
-  "homepage": "https://github.com/2MuchC0ff33/naturesi#readme",
-  "devDependencies": {
-  },
+  "description": "Nature's Infusions static e-commerce site",
+  "author": "2MuchC0ff33",
+  "devDependencies": {},
   "scripts": {}
 }
