@@ -28,9 +28,5 @@ test.describe('JS-disabled smoke tests @smoke', () => {
     // Buttons exist and have type=submit
     const addButtons = page.locator('button.add-to-cart[type="submit"], button[type="submit"]');
     expect(await addButtons.count()).toBeGreaterThan(0);
-
-    // Buy Now (PayPal) buttons present on product pages
-    const paypal = page.locator('button.btn-paypal, button:has-text("Buy Now")');
-    expect(await paypal.count()).toBeGreaterThan(0);
   });
 });

@@ -21,3 +21,5 @@ coverage/
 
 # Optional tool binaries (downloaded by `npm run tools:install`)
 .tools/
+.test-results/
+playwright-report/

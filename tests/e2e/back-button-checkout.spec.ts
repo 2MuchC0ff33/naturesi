@@ -2,21 +2,13 @@ import { test, expect } from '@playwright/test';
 import fs from 'fs';
 
 test.describe('Back button behaviour on checkout', () => {
-  test('proceed -> checkout, back should return to cart and not auto-redirect', async ({ page }) => {
-    // Prepare cart in localStorage and route paypal config
+  test('proceed -> checkout, back should return to cart and not auto-redirect', async ({
+    page,
+  }) => {
+    // Prepare cart in localStorage
     const cart = JSON.parse(fs.readFileSync('./tests/fixtures/sample-cart.json', 'utf-8'));
     await page.goto('/');
     await page.evaluate((c) => localStorage.setItem('naturesi_cart', JSON.stringify(c)), cart);
-
-    // Intercept paypal.json to ensure aggregate form builds
-    const PAYPAL = JSON.parse(fs.readFileSync('./tests/fixtures/paypal.json', 'utf-8'));
-    await page.route('**/assets/js/data/paypal.json', (route) =>
-      route.fulfill({
-        status: 200,
-        contentType: 'application/json',
-        body: JSON.stringify(Object.assign(PAYPAL, { allow_aggregate: true })),
-      })
-    );
 
     // Go to cart and click proceed
     await page.goto('/pages/cart.html');
@@ -30,7 +22,7 @@ test.describe('Back button behaviour on checkout', () => {
       await page.goto('/pages/checkout.html');
     }
 
-    // Wait briefly for runCheckout to populate the DOM
+    // Wait briefly for page to load
     await page.waitForTimeout(200);
 
     // Ensure we are on checkout
@@ -63,12 +55,6 @@ test.describe('Back button behaviour on checkout', () => {
 
     const cart = JSON.parse(fs.readFileSync('./tests/fixtures/sample-cart.json', 'utf-8'));
     await page.evaluate((c) => localStorage.setItem('naturesi_cart', JSON.stringify(c)), cart);
-
-    // route paypal.json again
-    const PAYPAL = JSON.parse(fs.readFileSync('./tests/fixtures/paypal.json', 'utf-8'));
-    await page.route('**/assets/js/data/paypal.json', (route) =>
-      route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(Object.assign(PAYPAL, { allow_aggregate: true })) })
-    );
 
     await page.goto('/pages/cart.html');
     await page.click('#btn-proceed-checkout');

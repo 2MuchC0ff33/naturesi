@@ -25,11 +25,11 @@ export class CartStore {
           })),
         };
       } else {
-        this.cart = local;
+        this.cart = { items: [], ...local };
       }
     } else {
       const idb = await loadCartFromIDB(this.dbName, this.key);
-      this.cart = idb || DEFAULT;
+      this.cart = idb ? { items: [], ...idb } : DEFAULT;
     }
     return this.cart;
   }
