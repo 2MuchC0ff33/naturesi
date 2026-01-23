@@ -4,7 +4,11 @@ import { loadPayPalConfig } from './checkout.js';
 async function initPayPalForms(overrideCfg) {
   try {
     // Prefer runtime config from the data file (which your deploy can update from .env)
-    const cfg = overrideCfg || (await loadPayPalConfig('/assets/js/data/paypal.json', 1)) || PAYPAL_CONFIG || {};
+    const cfg =
+      overrideCfg ||
+      (await loadPayPalConfig('/assets/js/data/paypal.json', 1)) ||
+      PAYPAL_CONFIG ||
+      {};
     const business = cfg && cfg.business && cfg.business.trim();
     const env = (cfg.env || 'sandbox').toLowerCase();
     const liveAction = 'https://www.paypal.com/cgi-bin/webscr';
@@ -13,14 +17,21 @@ async function initPayPalForms(overrideCfg) {
     // Update or create PayPal forms for each product variant
     document.querySelectorAll('article.product').forEach((product) => {
       // Determine product name
-      let title = (product.querySelector('[itemprop="name"]') || product.querySelector('h2,h3,h4'))?.textContent?.trim();
+      let title = (
+        product.querySelector('[itemprop="name"]') || product.querySelector('h2,h3,h4')
+      )?.textContent?.trim();
       if (!title) title = product.getAttribute('data-sku') || 'Item';
 
       // Find package options (radios or labelled prices)
-      const packageInputs = Array.from(product.querySelectorAll('.package-options input[type="radio"]'));
+      const packageInputs = Array.from(
+        product.querySelectorAll('.package-options input[type="radio"]')
+      );
       // If no radios, try to infer price from existing PayPal form
       const packages = packageInputs.length
-        ? packageInputs.map((i) => ({ name: i.value, price: i.dataset?.price || i.getAttribute('content') || i.value }))
+        ? packageInputs.map((i) => ({
+            name: i.value,
+            price: i.dataset?.price || i.getAttribute('content') || i.value,
+          }))
         : [];
 
       // If there are no package radios, ensure existing forms are updated

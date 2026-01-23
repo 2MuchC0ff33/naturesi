@@ -149,12 +149,14 @@ export function attachFormHandler({
             } catch (err) {
               // jsdom may have requestSubmit stubbed as not-implemented
               if (typeof form.submit === 'function') form.submit();
-              else if (globalThis && globalThis.location) globalThis.location.assign('/pages/checkout.html');
+              else if (globalThis && globalThis.location)
+                globalThis.location.assign('/pages/checkout.html');
             }
           } else if (typeof form.submit === 'function') {
             form.submit();
           } else {
-            if (globalThis && globalThis.location) globalThis.location.assign('/pages/checkout.html');
+            if (globalThis && globalThis.location)
+              globalThis.location.assign('/pages/checkout.html');
           }
         } catch (err) {
           // fallback to absolute navigation

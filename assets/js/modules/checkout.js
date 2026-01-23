@@ -164,7 +164,8 @@ export async function runCheckout({
     // No aggregated PayPal form will be created
     const note = documentRoot.getElementById('checkout-note');
     if (note)
-      note.textContent = 'Aggregate checkout is not enabled. Use Buy Now buttons on product pages for single-item purchases.';
+      note.textContent =
+        'Aggregate checkout is not enabled. Use Buy Now buttons on product pages for single-item purchases.';
     return;
   }
 
@@ -222,7 +223,8 @@ export async function runCheckout({
   if (payBtn) payBtn.disabled = false;
 
   const note = documentRoot.getElementById('checkout-note');
-  if (note) note.textContent = `You will be redirected to PayPal to complete payment (currency: ${payload.currency_code}).`;
+  if (note)
+    note.textContent = `You will be redirected to PayPal to complete payment (currency: ${payload.currency_code}).`;
 }
 
 // Note: runCheckout is now opt-in and should be invoked by the page script when progressive enhancement is desired.

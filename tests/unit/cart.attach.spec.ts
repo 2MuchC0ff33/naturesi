@@ -37,12 +37,16 @@ describe('attachFormHandler behavior', () => {
   });
 
   it('calls form.requestSubmit when available and saves cart before submit', () => {
-    const dom = new JSDOM(`<!doctype html><html><body><main id="main-content"><form id="confirm-cart-form"></form><button id="btn-proceed-checkout">Proceed</button></main></body></html>`);
+    const dom = new JSDOM(
+      `<!doctype html><html><body><main id="main-content"><form id="confirm-cart-form"></form><button id="btn-proceed-checkout">Proceed</button></main></body></html>`
+    );
     const doc = dom.window.document;
     let requested = false;
     const form = doc.getElementById('confirm-cart-form');
     // @ts-ignore
-    form.requestSubmit = () => { requested = true; };
+    form.requestSubmit = () => {
+      requested = true;
+    };
 
     const calls: any = { saved: false };
     const mockStorage = {
@@ -69,7 +73,9 @@ describe('attachFormHandler behavior', () => {
   });
 
   it('falls back to location.assign when submit fails', () => {
-    const dom = new JSDOM(`<!doctype html><html><body><main id="main-content"><form id="confirm-cart-form"></form><button id="btn-proceed-checkout">Proceed</button></main></body></html>`);
+    const dom = new JSDOM(
+      `<!doctype html><html><body><main id="main-content"><form id="confirm-cart-form"></form><button id="btn-proceed-checkout">Proceed</button></main></body></html>`
+    );
     const doc = dom.window.document;
 
     // test submit called when requestSubmit missing
@@ -79,7 +85,9 @@ describe('attachFormHandler behavior', () => {
     // @ts-ignore
     form.requestSubmit = undefined;
     // @ts-ignore
-    form.submit = () => { submitted = true; };
+    form.submit = () => {
+      submitted = true;
+    };
 
     const mockStorage = {
       setItem(k: string, v: string) {
@@ -104,7 +112,9 @@ describe('attachFormHandler behavior', () => {
     // Now simulate failing submit; ensure handler completes without throwing (fallback attempted)
     submitted = false;
     // @ts-ignore
-    form.submit = () => { throw new Error('submit failed'); };
+    form.submit = () => {
+      throw new Error('submit failed');
+    };
 
     if (btn) {
       const evt = doc.createEvent('Event');

@@ -5,7 +5,8 @@ import { initPayPalForms } from '../../assets/js/modules/paypal-init.js';
 // Simple smoke test for PayPal init: it should create/update forms for product variants
 describe('paypal-init', () => {
   it('creates variant forms and sets business from config', async () => {
-    const dom = new JSDOM(`<!doctype html><html><body>
+    const dom = new JSDOM(
+      `<!doctype html><html><body>
       <article class="product" data-sku="sku-1">
         <form class="product-options">
           <div class="package-options">
@@ -14,7 +15,9 @@ describe('paypal-init', () => {
           </div>
         </form>
       </article>
-    </body></html>`, { runScripts: 'dangerously' });
+    </body></html>`,
+      { runScripts: 'dangerously' }
+    );
     const doc = dom.window.document;
 
     // Make jsdom's document available to the module under test
@@ -24,7 +27,12 @@ describe('paypal-init', () => {
     global.window = dom.window;
 
     // stub loadPayPalConfig by creating a minimal global fetchable file - since initPayPalForms uses loadPayPalConfig which uses fetch, we patch globalThis.fetch
-    const fakeCfg = { env: 'sandbox', business: 'sandbox-test@example.com', sandbox_url: 'https://sandbox.paypal', currency: 'AUD' };
+    const fakeCfg = {
+      env: 'sandbox',
+      business: 'sandbox-test@example.com',
+      sandbox_url: 'https://sandbox.paypal',
+      currency: 'AUD',
+    };
     // stub global fetch which loadPayPalConfig uses
     // @ts-ignore
     global.fetch = async () => ({ ok: true, json: async () => fakeCfg });
@@ -44,7 +52,9 @@ describe('paypal-init', () => {
     });
 
     // Check one form amount values
-    const amounts = Array.from(forms).map((f) => (f.querySelector('input[name="amount"]') as HTMLInputElement)?.value);
+    const amounts = Array.from(forms).map(
+      (f) => (f.querySelector('input[name="amount"]') as HTMLInputElement)?.value
+    );
     expect(amounts).toContain('14.00');
     expect(amounts).toContain('22.00');
   });

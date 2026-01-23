@@ -114,7 +114,9 @@ test.describe('Proceed to checkout (Buy Now forms)', () => {
       route.fulfill({
         status: 200,
         contentType: 'application/json',
-        body: JSON.stringify(Object.assign(require('../fixtures/paypal.json'), { allow_aggregate: true })),
+        body: JSON.stringify(
+          Object.assign(require('../fixtures/paypal.json'), { allow_aggregate: true })
+        ),
       })
     );
 
@@ -137,7 +139,11 @@ test.describe('Proceed to checkout (Buy Now forms)', () => {
       route.fulfill({
         status: 200,
         contentType: 'application/json',
-        body: JSON.stringify(Object.assign(JSON.parse(fs.readFileSync('./tests/fixtures/paypal.json', 'utf-8')), { allow_aggregate: true })),
+        body: JSON.stringify(
+          Object.assign(JSON.parse(fs.readFileSync('./tests/fixtures/paypal.json', 'utf-8')), {
+            allow_aggregate: true,
+          })
+        ),
       })
     );
 
@@ -231,7 +237,11 @@ test.describe('Proceed to checkout (Buy Now forms)', () => {
       route.fulfill({
         status: 200,
         contentType: 'application/json',
-        body: JSON.stringify({ env: 'sandbox', business: 'mapped-sandbox@example.com', currency: 'AUD' }),
+        body: JSON.stringify({
+          env: 'sandbox',
+          business: 'mapped-sandbox@example.com',
+          currency: 'AUD',
+        }),
       })
     );
 
@@ -240,12 +250,25 @@ test.describe('Proceed to checkout (Buy Now forms)', () => {
     // Ensure paypal-init has run and then explicitly call it with our mapped config to guarantee mapping (helps in different load orders)
     await page.evaluate(async () => {
       const m = await import('/assets/js/modules/paypal-init.js');
-      await m.initPayPalForms({ env: 'sandbox', business: 'mapped-sandbox@example.com', currency: 'AUD' });
+      await m.initPayPalForms({
+        env: 'sandbox',
+        business: 'mapped-sandbox@example.com',
+        currency: 'AUD',
+      });
     });
 
     // Wait for variant forms (created by init) to be attached and validate their business and amounts
-    await page.waitForSelector('form.paypal-buynow[data-package]', { timeout: 2000, state: 'attached' });
-    const variantForms = await page.$$eval('form.paypal-buynow[data-package]', (els) => els.map((f: any) => ({ pkg: f.getAttribute('data-package'), business: (f.querySelector('input[name="business"]') as HTMLInputElement)?.value || null, amount: (f.querySelector('input[name="amount"]') as HTMLInputElement)?.value || null })));
+    await page.waitForSelector('form.paypal-buynow[data-package]', {
+      timeout: 2000,
+      state: 'attached',
+    });
+    const variantForms = await page.$$eval('form.paypal-buynow[data-package]', (els) =>
+      els.map((f: any) => ({
+        pkg: f.getAttribute('data-package'),
+        business: (f.querySelector('input[name="business"]') as HTMLInputElement)?.value || null,
+        amount: (f.querySelector('input[name="amount"]') as HTMLInputElement)?.value || null,
+      }))
+    );
     // We expect forms for pouch and cylinder packages
     const pkgNames = variantForms.map((v) => v.pkg);
     expect(pkgNames).toContain('pouch');
