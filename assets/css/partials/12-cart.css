@@ -114,3 +114,14 @@
   font-size: 0.9rem;
   color: var(--muted-color, #6b7280);
 }
+
+/* Error message styling */
+.error-message {
+  color: var(--color-error, #dc2626);
+  background-color: var(--color-error-bg, #fef2f2);
+  border: 1px solid var(--color-error-border, #fecaca);
+  border-radius: 4px;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}

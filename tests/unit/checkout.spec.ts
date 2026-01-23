@@ -9,9 +9,12 @@ import {
 
 describe('checkout helpers', () => {
   it('parseCartRaw handles strings and malformed JSON', () => {
-    expect(parseCartRaw('[{"id":"a","title":"A","price":5,"qty":2}]')).toHaveLength(1);
-    expect(parseCartRaw('not json')).toBeNull();
-    expect(parseCartRaw([])).toEqual([]);
+    expect(parseCartRaw('[{"id":"a","title":"A","price":5,"qty":2}]')).toEqual({
+      cart: [{ id: 'a', title: 'A', price: 5, qty: 2 }],
+      shipping: 0,
+    });
+    expect(parseCartRaw('not json')).toEqual({ cart: [], shipping: 0 });
+    expect(parseCartRaw([])).toEqual({ cart: [], shipping: 0 });
   });
 
   it('computeGrandTotal sums correctly', () => {

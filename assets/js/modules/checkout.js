@@ -1,19 +1,20 @@
 // Checkout helpers exported for testing + guarded browser runner
 export function parseCartRaw(raw) {
   try {
-    if (!raw) return [];
+    if (!raw) return { cart: [], shipping: 0 };
     const parsed = typeof raw === 'string' ? JSON.parse(raw) : raw;
-    if (!Array.isArray(parsed)) return [];
-    return parsed
-      .map((it) => ({
-        id: String(it.id ?? '').trim(),
-        title: String(it.title ?? it.name ?? '').trim(),
-        price: Number(it.price ?? 0),
-        qty: Math.max(0, Math.trunc(Number(it.qty ?? it.quantity ?? 0))),
-      }))
-      .filter((i) => i.id && i.title && i.qty > 0);
+    if (Array.isArray(parsed)) {
+      // Legacy format: just cart array
+      return { cart: parsed, shipping: 0 };
+    }
+    if (parsed && typeof parsed === 'object') {
+      const cart = Array.isArray(parsed.cart) ? parsed.cart : [];
+      const shipping = typeof parsed.shipping === 'number' ? parsed.shipping : 0;
+      return { cart, shipping };
+    }
+    return { cart: [], shipping: 0 };
   } catch (e) {
-    return null;
+    return { cart: [], shipping: 0 };
   }
 }
 
@@ -119,29 +120,27 @@ export async function runCheckout({
   };
 
   const raw = typeof localStorage !== 'undefined' ? localStorage.getItem('naturesi_cart') : null;
-  const cart = parseCartRaw(raw);
-  if (cart === null) {
-    showError('Your cart is invalid.');
-    return;
-  }
+  const { cart, shipping: savedShipping } = parseCartRaw(raw);
   if (!cart.length) {
     showError('Your cart is empty.');
     return;
   }
 
-  // Try to detect shipping amount from the page (data attribute or textual currency value), fallback to config
-  let shipping = 0;
-  try {
-    const shipEl = documentRoot.getElementById('summary-shipping');
-    if (shipEl) {
-      const ds = shipEl.dataset && shipEl.dataset.shipping;
-      const txt = String(ds ?? shipEl.textContent ?? '').trim();
-      const parsed = String(txt).replace(/[^\d.-]+/g, '');
-      const n = Number(parsed || 0);
-      if (Number.isFinite(n)) shipping = n;
+  // Use saved shipping, fallback to detecting from page
+  let shipping = savedShipping;
+  if (shipping === 0) {
+    try {
+      const shipEl = documentRoot.getElementById('summary-shipping');
+      if (shipEl) {
+        const ds = shipEl.dataset && shipEl.dataset.shipping;
+        const txt = String(ds ?? shipEl.textContent ?? '').trim();
+        const parsed = String(txt).replace(/[^\d.-]+/g, '');
+        const n = Number(parsed || 0);
+        if (Number.isFinite(n)) shipping = n;
+      }
+    } catch (e) {
+      // ignore
     }
-  } catch (e) {
-    // ignore
   }
 
   const { html, total } = renderSummaryToString(cart, shipping);

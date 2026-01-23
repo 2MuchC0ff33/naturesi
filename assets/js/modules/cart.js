@@ -116,7 +116,18 @@ export function attachFormHandler({
   form.addEventListener('submit', (evt) => {
     try {
       const cart = collect({ documentRoot });
-      if (storage) storage.setItem(key, JSON.stringify(cart));
+
+      // Extract shipping cost
+      const shippingEl = documentRoot.getElementById('summary-shipping');
+      let shippingCost = 0;
+      if (shippingEl) {
+        const shippingText = shippingEl.textContent.trim();
+        const match = shippingText.match(/AUD \$(\d+\.\d+)/);
+        if (match) shippingCost = parseFloat(match[1]);
+      }
+
+      const cartData = { cart, shipping: shippingCost };
+      if (storage) storage.setItem(key, JSON.stringify(cartData));
     } catch (err) {
       console.error('Save cart failed', err);
     }
@@ -127,8 +138,43 @@ export function attachFormHandler({
     btn.addEventListener('click', (ev) => {
       try {
         ev.preventDefault();
+
+        // Validate shipping calculation
+        const shippingEl = documentRoot.getElementById('summary-shipping');
+        if (shippingEl && shippingEl.textContent.trim() === 'Calculated at checkout') {
+          // Show error message
+          const errorId = 'checkout-error';
+          let errorEl = documentRoot.getElementById(errorId);
+          if (!errorEl) {
+            errorEl = documentRoot.createElement('p');
+            errorEl.id = errorId;
+            errorEl.className = 'error-message';
+            errorEl.setAttribute('role', 'alert');
+            errorEl.textContent =
+              'Please enter a valid postcode to calculate shipping costs before proceeding to checkout.';
+            const container =
+              documentRoot.querySelector('.cart-actions-external') || documentRoot.body;
+            container.insertBefore(errorEl, container.firstChild);
+          }
+          return; // Prevent checkout
+        }
+
+        // Remove any existing error message
+        const existingError = documentRoot.getElementById('checkout-error');
+        if (existingError) existingError.remove();
+
         const cart = collect({ documentRoot });
-        if (storage) storage.setItem(key, JSON.stringify(cart));
+
+        // Extract shipping cost
+        let shippingCost = 0;
+        if (shippingEl) {
+          const shippingText = shippingEl.textContent.trim();
+          const match = shippingText.match(/AUD \$(\d+\.\d+)/);
+          if (match) shippingCost = parseFloat(match[1]);
+        }
+
+        const cartData = { cart, shipping: shippingCost };
+        if (storage) storage.setItem(key, JSON.stringify(cartData));
 
         const noticeId = 'checkout-save-note';
         if (!documentRoot.getElementById(noticeId)) {

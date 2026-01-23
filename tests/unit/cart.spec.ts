@@ -95,7 +95,8 @@ describe('cart module helpers', () => {
     // allow microtask queue
     await new Promise((r) => setTimeout(r, 10));
     const stored = JSON.parse(localStorage.getItem('naturesi_cart') || 'null');
-    expect(Array.isArray(stored)).toBe(true);
-    expect(stored[0].id).toBe('p1');
+    expect(stored).toHaveProperty('cart');
+    expect(Array.isArray(stored.cart)).toBe(true);
+    expect(stored.cart[0].id).toBe('p1');
   });
 });
