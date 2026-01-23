@@ -16,8 +16,6 @@ jobs:
           node-version: '18'
       - name: Install deps
         run: npm ci
-      - name: Generate PayPal config
-        run: npm run generate-paypal-config
       - name: Start static server
         run: npm run start:static &
       - name: Run unit tests + coverage

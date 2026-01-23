@@ -1,8 +1,0 @@
-{
-  "business": "sandbox@example.com",
-  "env": "sandbox",
-  "sandbox_url": "https://sandbox.paypal.test/checkout",
-  "return_path": "/pages/payment/success.html",
-  "cancel_path": "/pages/payment/fail.html",
-  "currency": "AUD"
-}

@@ -34,8 +34,6 @@
   },
   "scripts": {
     "start:static": "npx http-server -c-1 -p 8080 .",
-    "generate-paypal-config": "node scripts/generate-paypal-config.js",
-    "prestart:static": "node scripts/generate-paypal-config.js",
     "test:unit": "vitest run",
     "test:unit:watch": "vitest --watch",
     "coverage": "vitest run --coverage",

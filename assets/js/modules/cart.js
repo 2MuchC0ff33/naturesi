@@ -58,8 +58,6 @@ export function readFromDOM(documentRoot = typeof document !== 'undefined' ? doc
   });
 }
 
-import { loadPayPalConfig } from './checkout.js';
-
 export function readFromGlobal(globalObj = typeof globalThis !== 'undefined' ? globalThis : {}) {
   if (Array.isArray(globalObj.naturesi_cart)) return globalObj.naturesi_cart;
   // support legacy/object shape: { items: [...] }
