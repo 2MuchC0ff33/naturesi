@@ -86,6 +86,7 @@ DirectoryIndex index.html
 # --- Force HTTPS (handles proxies like Cloudflare) ---
 # Only enable when site is served over HTTPS on all hostnames (including www)
 # Checks both direct HTTPS and X-Forwarded-Proto (used by proxies/CDNs)
+RewriteCond %{HTTP_HOST} !^localhost
 RewriteCond %{HTTPS} !=on
 RewriteCond %{HTTP:X-Forwarded-Proto} !=https
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]

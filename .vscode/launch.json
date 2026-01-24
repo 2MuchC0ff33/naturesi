@@ -7,6 +7,7 @@
       "type": "chrome",
       "url": "http://localhost:8000",
       "webRoot": "${workspaceFolder}",
+      "preLaunchTask": "start-httpd",
       "runtimeArgs": [
         "--incognito"
       ]

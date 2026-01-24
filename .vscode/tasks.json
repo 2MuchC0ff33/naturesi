@@ -2,47 +2,50 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "start server",
+      "label": "start-httpd",
       "type": "shell",
-      "command": "npx",
+      "command": "apachectl",
       "args": [
-        "http-server",
-        ".",
-        "-p",
-        "8000"
+        "start"
       ],
-      "isBackground": true,
       "options": {
-        "env": {
-          "BASH": "/usr/bin/bash",
-          "PATH": "/cygdrive/c/Users/galloa/scoop/apps/nodejs/current:/cygdrive/c/Users/galloa/scoop/apps/nodejs/current/bin:$PATH"
-        },
         "shell": {
-          "executable": "C:\\Users\\galloa\\scoop\\persist\\cygwin\\root\\bin\\bash.exe",
+          "executable": "C:\\Users\\galloa\\scoop\\shims\\cygwin.exe",
           "args": [
-            "--login",
-            "-c"
+            "-i"
           ]
         }
+      },
+      "problemMatcher": [],
+      "group": "build",
+      " "echo": true,"reveal": "silent",
+      "focus": false,
+      "panel": "shared"
+    }
+  },
+  {
+    "label": "stop-httpd",
+    "type": "shell",
+    "command": "apachectl",
+    "args": [
+      "stop"
+    ],
+    "options": {
+      "shell": {
+        "executable": "C:\\Users\\galloa\\scoop\\shims\\cygwin.exe",
+        "args": [
+          "-i"
+        ]
       }
     },
-    {
-      "label": "stop server",
-      "type": "shell",
-      "command": "pkill",
-      "args": [
-        "-f",
-        "http-server"
-      ],
-      "options": {
-        "shell": {
-          "executable": "C:\\Users\\galloa\\scoop\\persist\\cygwin\\root\\bin\\bash.exe",
-          "args": [
-            "--login",
-            "-c"
-          ]
-        }
-      }
+    "problemMatcher": [],
+    "group": "build",
+    "presentation": {
+      "echo": true,
+      "reveal": "silent",
+      "focus": false,
+      "panel": "shared"
     }
-  ]
+  }
+]
 }
