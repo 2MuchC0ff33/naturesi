@@ -1,32 +1,59 @@
 <!doctype html>
 <html lang="en-AU">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Checkout — Pay with PayPal</title>
-    <link rel="stylesheet" href="/assets/css/main.css" />
-  </head>
-  <body>
-    <main class="container">
-      <h1>Checkout</h1>
 
-      <section id="order-summary" aria-labelledby="summary-heading">
-        <h2 id="summary-heading">Order summary</h2>
-        <div id="summary-content" aria-live="polite"></div>
-        <p id="checkout-note" class="muted"></p>
-        <p id="checkout-error" class="error hidden" role="alert"></p>
-      </section>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Checkout — Pay with PayPal</title>
+  <link rel="stylesheet" href="/assets/css/main.css" />
+</head>
 
-      <section id="payment">
-        <noscript>
-          <p class="muted">
-            No JavaScript required for product purchases — use the Buy Now buttons on product pages.
-          </p>
-        </noscript>
-      </section>
-    </main>
+<body>
+  <main class="container">
+    <h1>Checkout</h1>
 
-    <script type="module" src="/assets/js/app.js"></script>
-    <script type="module" src="/assets/js/modules/checkout-bootstrap.js"></script>
-  </body>
+    <section id="order-summary" aria-labelledby="summary-heading">
+      <h2 id="summary-heading">Order summary</h2>
+      <div id="summary-content" aria-live="polite"></div>
+      <p id="checkout-note" class="muted"></p>
+      <p id="checkout-error" class="error hidden" role="alert"></p>
+    </section>
+
+    <section id="payment" aria-labelledby="payment-heading">
+      <h2 id="payment-heading">Payment</h2>
+      <noscript>
+        <p class="muted">
+          No JavaScript required for product purchases — use the Buy Now buttons on product pages.
+        </p>
+      </noscript>
+      <div id="paypal-button-container" aria-label="PayPal payment options"></div>
+
+      <!-- Simple PayPal Redirect form (minimal, HTML-first fallback).
+           Uses PayPal Payments Standard POST redirect. Amount and item are populated by JS.
+           SECURITY NOTE: Amounts set client-side can be tampered with — reconcile payments server-side or use IPN/PDT for verification. -->
+      <form id="paypal-redirect-form" method="post" class="paypal-redirect"
+        action="https://www.sandbox.paypal.com/cgi-bin/webscr" aria-label="Proceed to PayPal">
+        <input type="hidden" name="cmd" value="_xclick">
+        <input type="hidden" name="business" value="">
+        <input type="hidden" name="item_name" id="pp-item_name" value="">
+        <input type="hidden" name="amount" id="pp-amount" value="0.00">
+        <input type="hidden" name="currency_code" value="AUD">
+        <input type="hidden" name="return" value="/pages/payment/success.html">
+        <input type="hidden" name="cancel_return" value="/pages/payment/fail.html">
+        <input type="hidden" name="rm" value="2">
+        <input type="hidden" name="notify_url" id="pp-notify" value="">
+        <input type="hidden" name="invoice" id="pp-invoice" value="">
+        <button id="pay-now-redirect" class="btn" type="submit" disabled>Proceed to PayPal (Redirect)</button>
+      </form>
+      <!-- Debug: shows populated form values when ?debug=1 is in URL or paypal.json.debug === true -->
+      <div id="paypal-debug" class="muted visually-hidden"
+        style="white-space:pre-wrap; margin-top:1rem; font-family:monospace; font-size:0.9rem;">Debug info hidden. Add
+        ?debug=1 to the URL to view prepared PayPal form values.</div>
+    </section>
+  </main>
+
+  <script type="module" src="/assets/js/app.js"></script>
+  <script type="module" src="/assets/js/modules/checkout-bootstrap.js"></script>
+</body>
+
 </html>

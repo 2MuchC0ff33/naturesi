@@ -4,10 +4,13 @@
     {
       "name": "Launch Chrome",
       "request": "launch",
-      "type": "chrome",
+      "type": "pwa-chrome",
+      "runtimeExecutable": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
       "url": "http://localhost:8000",
       "webRoot": "${workspaceFolder}",
-      "preLaunchTask": "start-httpd",
+      "userDataDir": "${workspaceFolder}/.vscode/chrome",
+      "preLaunchTask": "dev-httpd",
+      "postDebugTask": "stop-httpd",
       "runtimeArgs": [
         "--incognito"
       ]

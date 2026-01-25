@@ -3,49 +3,81 @@
   "tasks": [
     {
       "label": "start-httpd",
-      "type": "shell",
-      "command": "apachectl",
+      "type": "process",
+      "command": "C:\\Users\\galloa\\scoop\\shims\\cygwin.exe",
       "args": [
-        "start"
+        "-i",
+        "-c",
+        "apachectl start"
       ],
       "options": {
-        "shell": {
-          "executable": "C:\\Users\\galloa\\scoop\\shims\\cygwin.exe",
-          "args": [
-            "-i"
-          ]
-        }
+        "cwd": "${workspaceFolder}"
       },
       "problemMatcher": [],
       "group": "build",
-      " "echo": true,"reveal": "silent",
-      "focus": false,
-      "panel": "shared"
-    }
-  },
-  {
-    "label": "stop-httpd",
-    "type": "shell",
-    "command": "apachectl",
-    "args": [
-      "stop"
-    ],
-    "options": {
-      "shell": {
-        "executable": "C:\\Users\\galloa\\scoop\\shims\\cygwin.exe",
-        "args": [
-          "-i"
-        ]
+      "presentation": {
+        "echo": true,
+        "reveal": "silent",
+        "focus": false,
+        "panel": "shared"
       }
     },
-    "problemMatcher": [],
-    "group": "build",
-    "presentation": {
-      "echo": true,
-      "reveal": "silent",
-      "focus": false,
-      "panel": "shared"
+    {
+      "label": "stop-httpd",
+      "type": "process",
+      "command": "C:\\Users\\galloa\\scoop\\shims\\cygwin.exe",
+      "args": [
+        "-i",
+        "-c",
+        "apachectl stop"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "silent",
+        "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "wait-for-httpd",
+      "type": "process",
+      "command": "node",
+      "args": [
+        "${workspaceFolder}/scripts/wait-for-port.cjs",
+        "8000",
+        "30"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [],
+      "group": "build",
+      "presentation": {
+        "echo": false,
+        "reveal": "silent",
+        "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "dev-httpd",
+      "dependsOn": [
+        "start-httpd",
+        "wait-for-httpd"
+      ],
+      "problemMatcher": [],
+      "group": "build",
+      "presentation": {
+        "echo": false,
+        "reveal": "silent",
+        "focus": false,
+        "panel": "shared"
+      }
     }
-  }
-]
+  ]
 }

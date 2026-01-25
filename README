@@ -71,6 +71,8 @@ python -m http.server 8000
 
 Test offline and 404 pages on localhost.
 
+> For local development using the same Apache httpd setup as production, see `.vscode/tasks.md` for VS Code task usage (start/stop httpd, wait-for-port helper) and use the **Launch Chrome** debug configuration to start Apache and attach the debugger.
+
 ## Testing
 
 
