@@ -3,7 +3,6 @@
 var CACHE_NAME = 'naturesi-static-v1';
 var PRECACHE_URLS = [
   '/',
-  '/index.html',
   '/offline.html',
   '/assets/css/main.css',
   '/pages/cart.html',
@@ -17,7 +16,24 @@ self.addEventListener('install', function (evt) {
   self.skipWaiting();
   evt.waitUntil(
     caches.open(CACHE_NAME).then(function (cache) {
-      return cache.addAll(PRECACHE_URLS);
+      // Attempt to fetch and cache each URL individually so one bad URL won't abort the install.
+      return Promise.all(
+        PRECACHE_URLS.map(function (url) {
+          return fetch(url, { credentials: 'same-origin' })
+            .then(function (response) {
+              if (!response.ok) throw new Error(url + ' returned ' + response.status);
+              return cache.put(url, response.clone()).then(function () {
+                console.log('Precached:', url);
+                return true;
+              });
+            })
+            .catch(function (err) {
+              // Log and continue; this prevents a single 404 from failing the whole install.
+              console.warn('Precache failed for', url, err);
+              return null;
+            });
+        })
+      );
     })
   );
 });

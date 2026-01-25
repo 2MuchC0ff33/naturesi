@@ -22,7 +22,12 @@ export function registerServiceWorker() {
         .register('/service-worker.js')
         .then((registration) => {
           console.log('Service Worker registered:', registration);
-          registration.update();
+          // Try to update but ignore failures (can happen in local setups with no HTTPS).
+          if (registration && typeof registration.update === 'function') {
+            registration.update().catch(function (err) {
+              console.warn('Service Worker update (ignored) failed:', err);
+            });
+          }
         })
         .catch((error) => {
           console.log('Service Worker registration failed:', error);
