@@ -54,6 +54,65 @@ function calculateTotalWeight(cartItems, productIndex) {
   return totalGrams;
 }
 
+// Parse a price-like string into a numeric value (robust to currency symbols and comma decimals)
+function parsePriceString(val) {
+  if (val == null) return null;
+  const s = String(val).trim().replace(/[^\d.,-]/g, '').replace(/,/g, '.');
+  const m = s.match(/-?\d+(?:\.\d+)?/);
+  if (!m) return null;
+  const n = Number(m[0]);
+  return Number.isFinite(n) ? n : null;
+}
+
+// Return selected option price (Number) by inspecting common control names inside the form
+function getSelectedOptionPrice(form, productEl) {
+  if (!form) return null;
+  const names = ['size', 'package', 'variant', 'option', 'format'];
+  for (const name of names) {
+    // radios / checkboxes
+    const checked = form.querySelector(`input[name='${name}']:checked`);
+    if (checked) {
+      if (checked.dataset && checked.dataset.price) {
+        const p = parsePriceString(checked.dataset.price);
+        if (p !== null) return p;
+      }
+      if (checked.value) {
+        const p = parsePriceString(checked.value);
+        if (p !== null) return p;
+        if (productEl) {
+          const m = productEl.querySelector(`[data-price][data-value='${checked.value}']`);
+          if (m && m.dataset.price) {
+            const p2 = parsePriceString(m.dataset.price);
+            if (p2 !== null) return p2;
+          }
+        }
+      }
+    }
+    // select
+    const sel = form.querySelector(`select[name='${name}']`);
+    if (sel && sel.selectedOptions && sel.selectedOptions.length) {
+      const opt = sel.selectedOptions[0];
+      if (opt.dataset && opt.dataset.price) {
+        const p = parsePriceString(opt.dataset.price);
+        if (p !== null) return p;
+      }
+      if (opt.value) {
+        const p = parsePriceString(opt.value);
+        if (p !== null) return p;
+      }
+    }
+  }
+
+  // fallback: any checked input within the form with data-price
+  const any = form.querySelector('input:checked[data-price]');
+  if (any && any.dataset && any.dataset.price) {
+    const p = parsePriceString(any.dataset.price);
+    if (p !== null) return p;
+  }
+
+  return null;
+}
+
 // initCart - centralised cart initialiser extracted from app.js
 export async function initCart() {
   const cartStore = new CartStore();
@@ -109,18 +168,109 @@ export async function initCart() {
       const size = fd.get('size') || fd.get('package') || '';
       const quantity = parseInt(fd.get('quantity') || fd.get('qty') || 1, 10) || 1;
 
-      // price extraction (prefer data-price attribute)
+      // price extraction (prefer selected option price, fallback to product-level data-price)
       let price = null;
-      const priceField =
-        productEl &&
-        (productEl.querySelector('[data-price]') || productEl.querySelector('[itemprop="price"]'));
-      if (priceField)
-        price =
-          parseFloat(
-            priceField.dataset.price ||
-              priceField.getAttribute('content') ||
-              priceField.textContent.replace(/[^0-9\.]/g, '')
-          ) || null;
+      // First try an explicit per-option price from selected controls (radios/selects)
+      const selPrice = getSelectedOptionPrice(form, productEl);
+      if (selPrice !== null) {
+        price = selPrice;
+      } else {
+        // Fallback: if FormData has an option value, try to find the control by value
+        const candidateVal = fd.get('package') || fd.get('size') || fd.get('variant') || fd.get('option') || fd.get('format') || '';
+        if (candidateVal) {
+          // Try to find an input/select option matching the value for known option names
+          const names = ['size', 'package', 'variant', 'option', 'format'];
+          for (const n of names) {
+            if (price !== null) break;
+            const valEl = form.querySelector(`input[name="${n}"][value="${candidateVal}"]`);
+            if (valEl && valEl.dataset && valEl.dataset.price) {
+              const p = parsePriceString(valEl.dataset.price);
+              if (p !== null) {
+                price = p;
+                break;
+              }
+            }
+            const optEl = form.querySelector(`select[name="${n}"] option[value="${candidateVal}"]`);
+            if (optEl && optEl.dataset && optEl.dataset.price) {
+              const p2 = parsePriceString(optEl.dataset.price);
+              if (p2 !== null) {
+                price = p2;
+                break;
+              }
+            }
+          }
+        }
+
+        // Still no per-option price found? Fallback to first product-level data-price or itemprop
+        if (price === null) {
+          const priceField =
+            productEl &&
+            (productEl.querySelector('[data-price]') || productEl.querySelector('[itemprop="price"]'));
+          if (priceField) {
+            // read dataset.price, content attribute, or fallback to text content
+            price =
+              parsePriceString(
+                priceField.dataset.price || priceField.getAttribute('content') || priceField.textContent
+              ) || null;
+          }
+        }
+
+        // Debugging aid: when running locally, log the decision tree so we can see why the cylinder price wasn't used.
+        try {
+          if (typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
+            let productLevelPrice = null;
+            try {
+              const pf = productEl && (productEl.querySelector('[data-price]') || productEl.querySelector('[itemprop="price"]'));
+              if (pf) {
+                productLevelPrice = (pf.dataset && pf.dataset.price) ? pf.dataset.price : (pf.getAttribute && pf.getAttribute('content')) || null;
+              }
+            } catch (e) {
+              productLevelPrice = null;
+            }
+
+            // Determine if there is a mismatch between the form's checked package and the candidateVal
+            let fallbackMismatchLocal = false;
+            try {
+              const checkedPkg = form.querySelector('input[name="package"]:checked');
+              if (candidateVal && checkedPkg && String(checkedPkg.value) !== String(candidateVal)) {
+                fallbackMismatchLocal = true;
+              }
+            } catch (e) {
+              // ignore
+            }
+
+            console.debug('Add-to-cart debug:', {
+              id,
+              fdPackage: fd.get('package'),
+              fdSize: fd.get('size'),
+              selPriceFound: selPrice,
+              candidateVal,
+              matchedInput: (candidateVal && form.querySelector(`input[value="${candidateVal}"]`)) ? true : false,
+              matchedInputPrice: (candidateVal && form.querySelector(`input[value="${candidateVal}"]`) && form.querySelector(`input[value="${candidateVal}"]`).dataset) ? form.querySelector(`input[value="${candidateVal}"]`).dataset.price : null,
+              finalPrice: price,
+              productLevelPrice,
+              fallbackMismatch: fallbackMismatchLocal,
+            });
+          }
+        } catch (e) {
+          // ignore debug logging errors
+        }
+      }
+        // Debug: detect when a candidate value was present but the form's checked control doesn't match it
+        let fallbackMismatch = false;
+        try {
+          const checkedPkg = form.querySelector('input[name="package"]:checked');
+          if (price !== null && candidateVal && checkedPkg && String(checkedPkg.value) !== String(candidateVal)) {
+            fallbackMismatch = true;
+          }
+        } catch (e) {
+          // ignore minor DOM errors during debug checks
+        }
+
+        if (false && typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') && fallbackMismatch) {
+          // left intentionally disabled - use console.debug earlier instead of spurious warnings in prod local logs
+          console.warn('Pricing fallback used for product', id, 'selected:', candidateVal, 'priceUsed:', price);
+        }
 
       // image extraction using data attributes or first <img>
       let image = null;

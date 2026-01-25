@@ -19,7 +19,7 @@ export function parseCartRaw(raw) {
 }
 
 export function computeGrandTotal(cart) {
-  return cart.reduce((s, x) => s + x.price * x.qty, 0);
+  return cart.reduce((s, x) => s + (Number(x.price) || 0) * (Number(x.qty) || 0), 0);
 }
 
 export function computeItemLabel(cart) {
@@ -29,12 +29,16 @@ export function computeItemLabel(cart) {
 
 export function renderSummaryToString(cart, shipping = 0) {
   if (!cart || !cart.length) return { html: '<p>Your cart is empty.</p>', total: 0 };
-  const items = cart.map((it) => ({
-    title: it.title,
-    qty: it.qty,
-    price: it.price.toFixed(2),
-    lineTotal: (it.price * it.qty).toFixed(2),
-  }));
+  const items = cart.map((it) => {
+    const priceVal = Number(it.price) || 0;
+    const qty = Number(it.qty) || 0;
+    return {
+      title: it.title,
+      qty,
+      price: priceVal.toFixed(2),
+      lineTotal: (priceVal * qty).toFixed(2),
+    };
+  });
   const subtotal = computeGrandTotal(cart);
   const ship = Number(Number(shipping || 0).toFixed(2));
   const grand = subtotal + ship;
@@ -204,10 +208,10 @@ export async function runCheckout({
             },
             items: cart.map(item => ({
               name: item.title,
-              quantity: item.qty.toString(),
+              quantity: (Number(item.qty) || 0).toString(),
               unit_amount: {
                 currency_code: 'USD',
-                value: item.price.toFixed(2)
+                value: (Number(item.price) || 0).toFixed(2)
               }
             }))
           }]

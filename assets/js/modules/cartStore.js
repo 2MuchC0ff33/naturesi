@@ -70,12 +70,19 @@ export class CartStore {
   }
 
   createCartItem(item) {
+    // Normalize price to a Number where possible to ensure arithmetic works reliably
+    let parsed = null;
+    if (item.price !== undefined && item.price !== null) {
+      const cleaned = String(item.price).trim().replace(/[^0-9.\-]/g, '').replace(/,/g, '.');
+      const n = Number(cleaned);
+      parsed = Number.isFinite(n) ? n : null;
+    }
     return {
       id: item.id,
       name: item.name,
       size: item.size !== undefined && item.size !== null ? item.size : '',
       quantity: item.quantity || 1,
-      price: item.price || null,
+      price: parsed,
     };
   }
 
