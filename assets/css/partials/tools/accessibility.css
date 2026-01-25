@@ -72,3 +72,36 @@ Focus outlines, skip links and visually-hidden utilities live here.
 .invisible {
   visibility: hidden;
 }
+
+/* Alias for legacy naming */
+.sr-only {
+  /* alias of .visually-hidden */
+  border: 0;
+  clip-path: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+/* Focusable helper already used above; useful as utility */
+.focusable {
+  display: inline-block;
+}
+
+.focus-ring {
+  box-shadow: var(--shadow-accent);
+  border-radius: var(--radius-sm);
+}
+
+/* Ensure links and controls remove tap highlight on mobile */
+a,
+button,
+input,
+select,
+textarea {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}

@@ -10,31 +10,77 @@
    assets/css/partials/ and keep the import order in this file.
 
    Partial list (import order):
-     - 01-variables.css
-     - 02-reset.css
-     - 03-base.css
-     - 04-forms.css
-     - 05-accessibility.css
-     - 06-utilities.css
-     - 07-header.css
-     - 08-nav-extras.css
-     - 09-footer.css
-     - 10-categories-theme.css
-     - 11-components.css
+     - variables.css (CSS custom properties)
+     - config.css (General global configuration)
+     - settings.css (Broad settings)
+     - colours.css (Color definitions)
+     - typography.css (Font styles)
+     - spacing.css (Margins and paddings)
+     - sizing.css (Width and height utilities)
+     - breakpoints.css (Responsive design breakpoints)
+     - layout.css (Overall layout styles)
+     - media.css (Media queries)
+     - mixins.css (Reusable CSS snippets)
+     - clearfix.css (Clearfix utility)
+     - hidden.css (Hidden utility)
+     - accessibility.css (Accessibility helpers)
+     - animations.css (Keyframes and animation utilities)
+     - interactions.css (Interaction helpers)
+     - state.css (State-based styles)
+     - performance.css (Performance optimizations)
+     - theme.css (Theming and skinning)
+     - browser-fixes.css (Browser-specific fixes)
+     - reset.css (Style resets)
+     - unstyle.css (Unstyled base elements)
+     - normalize.css (Normalization styles)
+     - sanitize.css (Sanitization styles)
+     - base.css (Base document styles)
+     - selections.css (Text selection styles)
+     - forms.css (Form element styles)
+     - header.css
+     - nav.css
+     - footer.css
+     - categories.css
+     - components.css
+     - cart.css
+     - checkout.css
+     - utilities.css
 */
 
-@import url('partials/01-variables.css');
-@import url('partials/02-reset.css');
-@import url('partials/03-base.css');
-@import url('partials/04-forms.css');
-@import url('partials/05-accessibility.css');
-@import url('partials/06-utilities.css');
-@import url('partials/07-header.css');
-@import url('partials/08-nav-extras.css');
-@import url('partials/09-footer.css');
-@import url('partials/10-categories-theme.css');
-@import url('partials/11-components.css');
-@import url('partials/12-cart.css');
-@import url('partials/13-checkout.css');
+@import url('partials/settings/variables.css');
+@import url('partials/settings/config.css');
+@import url('partials/settings/settings.css');
+@import url('partials/settings/colours.css');
+@import url('partials/settings/typography.css');
+@import url('partials/settings/spacing.css');
+@import url('partials/settings/sizing.css');
+@import url('partials/settings/breakpoints.css');
+@import url('partials/settings/layout.css');
+@import url('partials/settings/media.css');
+@import url('partials/tools/mixins.css');
+@import url('partials/tools/clearfix.css');
+@import url('partials/tools/hidden.css');
+@import url('partials/tools/accessibility.css');
+@import url('partials/tools/animations.css');
+@import url('partials/tools/interactions.css');
+@import url('partials/tools/state.css');
+@import url('partials/tools/performance.css');
+@import url('partials/tools/theme.css');
+@import url('partials/tools/browser-fixes.css');
+@import url('partials/generic/reset.css');
+@import url('partials/generic/unstyle.css');
+@import url('partials/generic/normalize.css');
+@import url('partials/generic/sanitize.css');
+@import url('partials/generic/base.css');
+@import url('partials/generic/selections.css');
+@import url('partials/forms.css');
+@import url('partials/header.css');
+@import url('partials/nav.css');
+@import url('partials/footer.css');
+@import url('partials/categories.css');
+@import url('partials/components.css');
+@import url('partials/cart.css');
+@import url('partials/checkout.css');
+@import url('partials/utilities.css');
 
 /* End of main.css importer — do not add large blocks of styles here. */

@@ -41,6 +41,7 @@ export function init(document) {
   function closeNav() {
     btn.setAttribute('aria-expanded', 'false');
     siteNav.classList.remove('site-nav--open');
+    btn.classList.remove('is-active');
     // On small screens hide the nav from assistive tech
     if (mq.matches) setAriaHidden(true);
     // Remove scroll lock
@@ -52,6 +53,7 @@ export function init(document) {
   function openNav() {
     btn.setAttribute('aria-expanded', 'true');
     siteNav.classList.add('site-nav--open');
+    btn.classList.add('is-active');
     // Apply scroll lock to prevent background scroll while overlay is open
     document.body.classList.add('nav-open');
     // On small screens expose the nav to assistive tech and focus inside

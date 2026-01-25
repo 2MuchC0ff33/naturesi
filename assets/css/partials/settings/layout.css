@@ -1,17 +1,14 @@
 /* ==========================================================================
-Helper and utility classes
-Small, well-scoped utilities (spacing, layout helpers, grid) live here.
+Layout helpers and structural utilities (migrated from utilities.css)
+Contains container/grid helpers and small generic layout utilities
 ========================================================================== */
-.hidden,
-[hidden] {
-  display: none;
-}
 
-.clearfix::after {
-  content: '';
-  display: block;
-  clear: both;
-}
+/* Structural helpers moved to tools layer for re-use:
+   - `.hidden` -> partials/tools/hidden.css
+   - `.clearfix` -> partials/tools/clearfix.css
+*/
+
+/* Note: [hidden] is managed in the reset/normalize partials to keep a single source of truth. */
 
 .container {
   width: 100%;
@@ -38,39 +35,5 @@ Small, well-scoped utilities (spacing, layout helpers, grid) live here.
   }
 }
 
-.p-sm {
-  padding: var(--space-sm);
-}
-
-.p-md {
-  padding: var(--space-md);
-}
-
-.mt-sm {
-  margin-top: var(--space-sm);
-}
-
-.mb-md {
-  margin-bottom: var(--space-md);
-}
-
-/* Utility to reset list styling and spacing (used to replace inline style attributes) */
-.list-reset {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
 /* Layout helpers moved from inline style attributes */
-.center-row {
-  display: flex;
-  flex-direction: row;
-  gap: 1.2rem;
-  align-items: center;
-  width: 100%;
-  justify-content: center;
-}
-
-.inline-block {
-  display: inline-block;
-}
+/* `.center-row` and `.inline-block` utilities have been moved to `partials/tools/mixins.css` for re-use across components and utilities. */

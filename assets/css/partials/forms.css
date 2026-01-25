@@ -15,10 +15,51 @@ textarea {
   min-width: 24px;
   /* WCAG 2.2: Ensure minimum target size */
   min-height: 24px;
+  /* Ensure controls inherit typography and colour after global resets */
+  font: inherit;
+  color: inherit;
+}
+
+/* Restore native markers and accessible sizing for radios and checkboxes.
+   The project reset applies `all: unset` to inputs in `reset.css`, which
+   removes UA-rendered controls (radio/checkbox visuals). Add explicit
+   rules so these controls remain visible, keyboard-accessible and match
+   the site's accent color. */
+input[type="radio"] {
+  -webkit-appearance: radio;
+  appearance: auto;
+  width: 1.15em;
+  height: 1.15em;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 0.5rem 0 0;
+  cursor: pointer;
+  accent-color: var(--color-accent);
+}
+
+input[type="checkbox"] {
+  -webkit-appearance: checkbox;
+  appearance: auto;
+  width: 1.15em;
+  height: 1.15em;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 0.5rem 0 0;
+  cursor: pointer;
+  accent-color: var(--color-accent);
+}
+
+/* Visible focus for assistive keyboard users */
+input[type="radio"]:focus-visible,
+input[type="checkbox"]:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--color-accent) 60%, transparent);
+  outline-offset: 2px;
+  border-radius: 0.25rem;
 }
 
 /* Increase baseline touch area on small screens */
 @media (max-width: 640px) {
+
   button,
   input,
   select,
@@ -50,15 +91,11 @@ button:hover,
 button:focus-visible {
   color: color-mix(in srgb, var(--color-accent) 90%, black);
   background-color: color-mix(in srgb, var(--color-accent) 90%, black);
-  box-shadow: var(--shadow-md);
-  transform: translateY(-1px);
 }
 
 button:hover,
 button:focus-visible {
   background-color: color-mix(in srgb, var(--color-accent) 90%, black);
-  box-shadow: var(--shadow-md);
-  transform: translateY(-1px);
 }
 
 .site-search .search-dropdown {
@@ -123,11 +160,33 @@ button:focus-visible {
 
 /* make search dropdown and controls more forgiving on small screens */
 @media (max-width: 640px) {
+
+  /* Mobile-first stacking: canonical search presentation for small screens */
+  .site-nav .site-search,
+  .site-search {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+    width: 100%;
+    max-width: 100%;
+  }
+
   .site-search .search-dropdown {
     flex: 0 0 140px;
   }
 
   .site-search .search-box {
     height: 44px;
+  }
+
+  .site-search .search-box,
+  .site-search .search-dropdown,
+  #site-category-select,
+  .category-dropdown,
+  .category-dropdown summary {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 }

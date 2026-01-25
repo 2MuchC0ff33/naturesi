@@ -1,0 +1,67 @@
+/* ==========================================================================
+Mixins & small utility snippets
+Lightweight helpers that can be composed in components.
+========================================================================== */
+
+.u-flex {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.u-inline-flex {
+  display: inline-flex;
+}
+
+.u-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.u-grid {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.u-auto-fit {
+  grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+}
+
+/* Small display helpers moved here for reuse */
+.inline-block {
+  display: inline-block;
+}
+
+.center-row {
+  display: flex;
+  flex-direction: row;
+  gap: 1.2rem;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+}
+
+.u-truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  font-size: 0.78rem;
+  border-radius: var(--radius-full);
+  background: var(--color-light-background);
+  color: var(--color-text);
+}
+
+/* Typography helpers */
+.font-mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', 'Courier New', monospace;
+}
+
+.small-text {
+  font-size: 0.9rem;
+  line-height: 1.2;
+}

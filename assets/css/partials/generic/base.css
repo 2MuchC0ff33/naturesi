@@ -1,0 +1,20 @@
+/* ==========================================================================
+Base document styles
+This file contains top-level typographic and document-level settings.
+========================================================================== */
+/* Typography rules moved to partials/typography.css to better separate concerns. */
+
+/* Note: global typographic settings live in assets/css/partials/typography.css */
+
+/* Migrated from reset.css — Base site styles (site-specific primitives)
+   Purpose: site-level, opinionated rules that should live in base rather than reset.
+*/
+
+/* Styled Horizontal Rule (site accent) */
+hr {
+  border: 0;
+  border-top: 1px solid var(--color-light-background);
+  margin: var(--space-md) auto;
+  width: 80%;
+}
+

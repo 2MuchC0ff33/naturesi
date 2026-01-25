@@ -158,12 +158,7 @@ Accordion toggles, social icon variants and other small repeated components.
   }
 }
 
-/* Loading spinner for status region (keyframes kept) */
-@keyframes search-spinner {
-  to {
-    transform: rotate(360deg);
-  }
-}
+/* Loading spinner for status region moved to `partials/tools/animations.css` */
 
 .accordion-toggle::after {
   content: '\25be';

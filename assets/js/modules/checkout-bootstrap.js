@@ -19,4 +19,17 @@
       errEl.textContent = 'Unable to load checkout details. Please try again later.';
     }
   }
+
+  // Give immediate UI feedback when user clicks the redirect PayPal button
+  const redirectBtn = document.getElementById('pay-now-redirect');
+  if (redirectBtn) {
+    redirectBtn.addEventListener('click', () => {
+      try {
+        redirectBtn.classList.add('is-loading');
+        redirectBtn.setAttribute('aria-busy', 'true');
+        redirectBtn.disabled = true;
+      } catch (e) {}
+    });
+  }
+
 })();

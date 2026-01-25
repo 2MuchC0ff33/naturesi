@@ -1,0 +1,73 @@
+/* ==========================================================================
+Utility helpers (small, documented utilities)
+Naming convention: prefix helpers with `u-` to avoid collisions with components.
+========================================================================== */
+
+/* Stacking helpers - prefer `u-stack` over ad-hoc flex columns */
+.u-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.u-stack--sm {
+  gap: var(--space-xs);
+}
+
+.u-stack--lg {
+  gap: var(--space-lg);
+}
+
+/* Generic gap helper for grid and flex layouts */
+.u-gap {
+  gap: var(--space-md);
+}
+
+/* Truncate text for tight containers */
+.u-truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Visually hidden utility for assistive tech (alias of `.visually-hidden`) */
+.u-visually-hidden {
+  border: 0;
+  clip-path: inset(50%);
+  -webkit-clip-path: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.u-visually-hidden.focusable:active,
+.u-visually-hidden.focusable:focus {
+  clip-path: none;
+  -webkit-clip-path: none;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  white-space: inherit;
+  width: auto;
+}
+
+/* Small display helpers */
+.u-inline {
+  display: inline;
+}
+
+.u-inline-block {
+  display: inline-block;
+}
+
+/* Utility aliases kept small and documented */
+.u-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

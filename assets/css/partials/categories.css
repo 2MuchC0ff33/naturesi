@@ -107,6 +107,7 @@ print fallbacks.
    disabled. If dark styling is ever re-enabled, restore the original block. */
 
 @media print {
+
   *,
   *::before,
   *::after {

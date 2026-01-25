@@ -26,14 +26,9 @@ partials can reference variables safely.
   --space-inline-sm: 1rem;
   --space-inline-md: 1.5rem;
   /* Fluid typography helper (used by base) */
-  --fluid-font: clamp(
-    var(--min-font),
-    calc(
-      var(--min-font) + (var(--max-font) - var(--min-font)) *
-        ((100vw - var(--min-width)) / (var(--max-width) - var(--min-width)))
-    ),
-    var(--max-font)
-  );
+  --fluid-font: clamp(var(--min-font),
+      calc(var(--min-font) + (var(--max-font) - var(--min-font)) * ((100vw - var(--min-width)) / (var(--max-width) - var(--min-width)))),
+      var(--max-font));
   --space-unit: 1rem;
   --space-xxs: 0.25rem;
   --space-xs: 0.5rem;
@@ -52,4 +47,18 @@ partials can reference variables safely.
   --transition-fast: 150ms;
   --transition-medium: 300ms;
   --transition-slow: 500ms;
+
+  /* Button tokens */
+  --btn-padding-vertical: 0.6rem;
+  --btn-padding-horizontal: 1rem;
+  --btn-radius: var(--radius-md);
+  --btn-bg: var(--color-accent);
+  --btn-color: #ffffff;
+  --btn-bg-hover: color-mix(in srgb, var(--btn-bg) 90%, black 10%);
+
+  /* Surface / elevation tokens */
+  --color-surface: #ffffff;
+  --elevation-1: 0 1px 3px rgba(0, 0, 0, 0.04);
+  --elevation-2: 0 6px 12px rgba(0, 0, 0, 0.06);
+
 }

@@ -3,7 +3,8 @@ Header and branding
 Core header bar, logo treatment and colour gradient live here.
 ========================================================================== */
 #site-header {
-  --header-height: 1.9rem;
+  /* header height is sourced from settings.css (default) and may be
+     overridden in responsive contexts where appropriate. */
   background: linear-gradient(180deg,
       color-mix(in srgb, var(--color-accent) 72%, white 28%),
       color-mix(in srgb, var(--color-accent) 60%, black 40%));
@@ -123,23 +124,15 @@ Core header bar, logo treatment and colour gradient live here.
   gap: var(--space-xs);
 }
 
+/* Base cart styles are defined in assets/css/partials/cart.css.
+   Keep only nav-specific visual overrides here to avoid duplication. */
 .cart-option {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
+  /* nav-specific background and padding (keep only differences) */
   background: transparent;
   padding: 0.08rem 0.35rem;
   border-radius: 6px;
   color: var(--color-text);
   text-decoration: none;
-}
-
-.cart-option .cart-count {
-  background: var(--color-accent);
-  color: #fff;
-  padding: 0 0.45rem;
-  border-radius: var(--radius-full);
-  font-weight: 700;
 }
 
 @media (max-width: 640px) {
@@ -240,15 +233,9 @@ Core header bar, logo treatment and colour gradient live here.
   flex: 1 1 220px;
 }
 
-.site-search .search-box {
-  flex: 1 1 auto;
-  min-width: 0;
-}
-
-.site-search .search-icon {
-  flex: 0 0 auto;
-  margin-left: 0.2rem;
-}
+/* Base search control styles (inputs, dropdowns) are defined in
+   assets/css/partials/forms.css. Remove duplicated child rules here so
+   forms.css remains the canonical source. */
 
 /* Add improved flex wrapper for nav-center grouping */
 .nav-center-flex {
@@ -334,17 +321,7 @@ Core header bar, logo treatment and colour gradient live here.
     animation: nav-slide-down 220ms ease both;
   }
 
-  @keyframes nav-slide-down {
-    from {
-      transform: translateY(-8px);
-      opacity: 0;
-    }
-
-    to {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  }
+  /* `@keyframes nav-slide-down` moved to `partials/tools/animations.css` */
 
   /* Prevent background scroll when nav is open on small screens */
   body.nav-open {
@@ -429,12 +406,11 @@ Core header bar, logo treatment and colour gradient live here.
     width: 100%;
   }
 
-  .site-search .search-dropdown,
-  .site-search .search-box {
-    flex: 0 0 auto;
-    width: 100%;
-    box-sizing: border-box;
-  }
+  /* NOTE: Search box presentational styles (layout, sizing, borders, colors)
+     are defined in `partials/forms.css` to avoid duplication and conflicting
+     specificity. Any layout overrides specific to header should be added
+     in a tightly-scoped rule here when absolutely necessary. */
+
 
   /* Category select to full width so long option text doesn't cause overflow */
   #site-category-select {
@@ -495,38 +471,24 @@ Core header bar, logo treatment and colour gradient live here.
     min-width: 0 !important;
   }
 
-  /* Stack the search controls vertically and force full-width inputs/dropdowns */
-  .site-nav .site-search,
-  .site-search {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: stretch !important;
-    gap: 0.5rem !important;
-    width: 100% !important;
-    max-width: 100% !important;
-  }
+  /* Search presentation for small screens is defined in `partials/forms.css` to
+     keep form element styling centralized. These header-specific overrides were
+     removed to avoid conflicting specificity. If a header-only layout tweak is
+     required in the future, add a tightly-scoped rule here with a clear
+     comment explaining why it cannot live in `forms.css`. */
+  min-width: 0 !important;
+}
 
-  .site-search .search-box,
-  .site-search .search-dropdown,
-  #site-category-select,
-  .category-dropdown,
-  .category-dropdown summary {
-    width: 100% !important;
-    max-width: 100% !important;
-    box-sizing: border-box !important;
-    min-width: 0 !important;
-  }
+/* Ensure any inline icon/button doesn't add extra width when stacked */
+.site-search .search-icon,
+.site-nav .search-icon,
+.site-nav .cart-option {
+  align-self: flex-end !important;
+}
 
-  /* Ensure any inline icon/button doesn't add extra width when stacked */
-  .site-search .search-icon,
-  .site-nav .search-icon,
-  .site-nav .cart-option {
-    align-self: flex-end !important;
-  }
-
-  /* Make sure the nav center flex wrapper stretches fully and allows children to shrink */
-  .nav-center-flex {
-    align-items: stretch !important;
-    width: 100% !important;
-  }
+/* Make sure the nav center flex wrapper stretches fully and allows children to shrink */
+.nav-center-flex {
+  align-items: stretch !important;
+  width: 100% !important;
+}
 }

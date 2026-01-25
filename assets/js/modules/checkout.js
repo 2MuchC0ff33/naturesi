@@ -158,6 +158,14 @@ export async function runCheckout({
 
           // Clear localStorage flag if present
           if (typeof localStorage !== 'undefined') localStorage.removeItem('autoCheckout');
+
+          // Indicate loading state to user (aria, class)
+          try {
+            btn.classList.add('is-loading');
+            btn.setAttribute('aria-busy', 'true');
+            btn.disabled = true;
+          } catch (e) {}
+
           frm.submit();
         }
       } catch (e) {
