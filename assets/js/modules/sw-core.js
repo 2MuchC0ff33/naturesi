@@ -13,7 +13,8 @@ var PRECACHE_URLS = [
 ];
 
 self.addEventListener('install', function (evt) {
-  self.skipWaiting();
+  // Do not skipWaiting here; allow the new worker to enter a 'waiting' state
+  // so the page can prompt the user before activating the update.
   evt.waitUntil(
     caches.open(CACHE_NAME).then(function (cache) {
       // Attempt to fetch and cache each URL individually so one bad URL won't abort the install.
@@ -36,6 +37,14 @@ self.addEventListener('install', function (evt) {
       );
     })
   );
+});
+
+// Respond to messages from the page (for example, trigger a skipWaiting)
+self.addEventListener('message', function (evt) {
+  if (!evt.data) return;
+  if (evt.data.type === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
 });
 
 self.addEventListener('activate', function (evt) {

@@ -95,11 +95,9 @@ Accordion toggles, social icon variants and other small repeated components.
   padding: var(--space-sm);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
-  background: linear-gradient(
-    180deg,
-    color-mix(in srgb, var(--color-background) 96%, var(--color-highlight) 4%),
-    var(--color-background)
-  );
+  background: linear-gradient(180deg,
+      color-mix(in srgb, var(--color-background) 96%, var(--color-highlight) 4%),
+      var(--color-background));
   display: flex;
   gap: var(--space-md);
   align-items: flex-start;
@@ -190,9 +188,66 @@ Accordion toggles, social icon variants and other small repeated components.
     padding: 0.2rem 0;
   }
 
-  .site-footer .links-grid ul li + li {
+  .site-footer .links-grid ul li+li {
     border-top: 1px solid color-mix(in srgb, var(--footer-text) 6%, transparent);
     margin-top: 0.15rem;
     padding-top: 0.35rem;
   }
+}
+
+/* Service Worker update banner (accessible, keyboard operable) */
+#sw-update-banner {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 1rem;
+  z-index: 99999;
+  background: color-mix(in srgb, var(--color-background) 96%, var(--color-highlight) 4%);
+  border: 1px solid var(--color-border);
+  padding: 0.6rem 0.8rem;
+  border-radius: 8px;
+  box-shadow: var(--shadow-md);
+  min-width: 260px;
+  max-width: 90%;
+}
+
+#sw-update-banner .sw-update-content {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sw-update-message {
+  margin: 0;
+  font-weight: 600;
+  color: var(--color-text);
+  font-size: 0.95rem;
+}
+
+.sw-update-actions {
+  display: inline-flex;
+  gap: 0.4rem;
+}
+
+.sw-update-button,
+.sw-update-dismiss {
+  background: var(--color-accent);
+  color: #fff;
+  border: none;
+  padding: 0.4rem 0.6rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.sw-update-dismiss {
+  background: transparent;
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+}
+
+.sw-update-button:focus,
+.sw-update-dismiss:focus {
+  outline: 3px solid color-mix(in srgb, var(--color-accent) 40%, transparent);
+  outline-offset: 2px;
 }

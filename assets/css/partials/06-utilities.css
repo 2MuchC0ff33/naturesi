@@ -32,9 +32,9 @@ Small, well-scoped utilities (spacing, layout helpers, grid) live here.
   max-width: 880px;
 }
 
-@supports (width: min(250px, 100%)) {
+@supports (width: min(240px, 100%)) {
   .grid-auto-fit {
-    grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
   }
 }
 

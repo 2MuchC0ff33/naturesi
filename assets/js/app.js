@@ -12,6 +12,14 @@ if (
 
 // Defer browser-only startup work behind a document guard so tests can import this module
 if (typeof document !== 'undefined') {
+  // Remove the `no-js` HTML class early so CSS can apply JS-enabled styles
+  // while still allowing HTML-only users to retain visible navigation.
+  try {
+    document.documentElement.classList.remove('no-js');
+  } catch (e) {
+    /* ignore in non-browser contexts */
+  }
+
   (async function start() {
     try {
       const store = await initCart();
@@ -51,6 +59,13 @@ if (typeof document !== 'undefined') {
         if (document.getElementById('site-category-select')) {
           const m = await import('./modules/category-select.js');
           if (m && typeof m.initCategorySelect === 'function') m.initCategorySelect(document);
+        }
+        // Initialize mobile nav toggle (inserts an accessible hamburger button if needed)
+        try {
+          const navMod = await import('./modules/nav-toggle.js');
+          if (navMod && typeof navMod.init === 'function') navMod.init(document);
+        } catch (err) {
+          console.warn('Nav toggle init failed', err);
         }
       } catch (err) {
         console.error('Category select init failed', err);

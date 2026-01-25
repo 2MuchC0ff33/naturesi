@@ -4,11 +4,9 @@ Core header bar, logo treatment and colour gradient live here.
 ========================================================================== */
 #site-header {
   --header-height: 1.9rem;
-  background: linear-gradient(
-    180deg,
-    color-mix(in srgb, var(--color-accent) 72%, white 28%),
-    color-mix(in srgb, var(--color-accent) 60%, black 40%)
-  );
+  background: linear-gradient(180deg,
+      color-mix(in srgb, var(--color-accent) 72%, white 28%),
+      color-mix(in srgb, var(--color-accent) 60%, black 40%));
   color: white;
   border-bottom: 1px solid color-mix(in srgb, var(--color-accent) 20%, black);
 }
@@ -78,6 +76,7 @@ Core header bar, logo treatment and colour gradient live here.
 }
 
 @media (min-width: 640px) {
+
   .site-nav .logo img,
   .site-nav .all-logo img {
     max-height: 34px;
@@ -85,6 +84,7 @@ Core header bar, logo treatment and colour gradient live here.
 }
 
 @media (min-width: 900px) {
+
   .site-nav .logo img,
   .site-nav .all-logo img {
     max-height: 38px;
@@ -92,6 +92,7 @@ Core header bar, logo treatment and colour gradient live here.
 }
 
 @media (min-width: 1200px) {
+
   .site-nav .logo img,
   .site-nav .all-logo img {
     max-height: 44px;
@@ -259,6 +260,100 @@ Core header bar, logo treatment and colour gradient live here.
   width: 100%;
 }
 
+/* Nav toggle button (mobile only)
+   This button is inserted by `nav-toggle.js` when JS is available so the
+   HTML remains semantic and works without JS. */
+.nav-toggle {
+  display: none;
+  background: transparent;
+  border: 0;
+  padding: 0.25rem;
+  border-radius: 0.35rem;
+  color: var(--color-text);
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-toggle svg {
+  display: block;
+  width: 20px;
+  height: 20px;
+}
+
+.nav-toggle:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Small screens: hide the center area by default and show the nav-toggle.
+   When the navigation is opened (.site-nav--open) the nav-center becomes visible. */
+@media (max-width: 900px) {
+  .nav-toggle {
+    display: inline-flex;
+  }
+
+  /* Ensure the header is a positioned container for the absolute overlay */
+  .site-nav {
+    position: relative;
+  }
+
+  /* Hide center nav by default on small screens only when JS is enabled.
+     This ensures HTML-only users (no-js) keep the full navigation visible. */
+  html:not(.no-js) .site-nav .nav-center {
+    display: none;
+  }
+
+  /* Open state: present the nav as an overlay panel below the header */
+  .site-nav.site-nav--open .nav-center {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.6rem;
+    width: calc(100% - var(--space-sm));
+    position: absolute;
+    left: 0.5rem;
+    right: 0.5rem;
+    top: calc(100% + 0.4rem);
+    background: var(--color-background);
+    padding: var(--space-sm);
+    box-shadow: var(--shadow-md);
+    border-radius: 8px;
+    z-index: 2000;
+  }
+
+  /* Increase hit areas for interactive elements inside the open nav */
+  .site-nav.site-nav--open .nav-center a,
+  .site-nav.site-nav--open .nav-center button,
+  .site-nav.site-nav--open .nav-center input,
+  .site-nav.site-nav--open .nav-center select {
+    min-height: 44px;
+  }
+
+  /* animate open state */
+  .site-nav.site-nav--open .nav-center {
+    animation: nav-slide-down 220ms ease both;
+  }
+
+  @keyframes nav-slide-down {
+    from {
+      transform: translateY(-8px);
+      opacity: 0;
+    }
+
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  /* Prevent background scroll when nav is open on small screens */
+  body.nav-open {
+    overflow: hidden;
+    touch-action: none;
+    -webkit-overflow-scrolling: auto;
+  }
+}
+
 @media (max-width: 640px) {
   .nav-center-flex {
     flex-direction: column;
@@ -275,6 +370,7 @@ Core header bar, logo treatment and colour gradient live here.
 
 /* Ensure touch targets meet WCAG / mobile guidelines on small screens */
 @media (max-width: 640px) {
+
   /* increase hit area for icons and interactive nav items */
   .site-nav .logo,
   .site-nav .search-icon,
@@ -292,6 +388,7 @@ Core header bar, logo treatment and colour gradient live here.
    Acceptance: header stacks vertically on phones, no horizontal overflow,
    category select and search become full-width, skip-link placement adjusted. */
 @media (max-width: 640px) {
+
   /* Make the header a single column so the center controls can't force a wide row */
   .site-nav {
     grid-template-columns: 1fr;
@@ -362,6 +459,7 @@ Core header bar, logo treatment and colour gradient live here.
    elements with fixed/min-widths or viewport-width calculations. These are
    conservative rules applied only on small screens. */
 @media (max-width: 640px) {
+
   /* Ensure header cannot exceed viewport width and allow children to shrink */
   #site-header,
   .site-nav {
@@ -388,6 +486,7 @@ Core header bar, logo treatment and colour gradient live here.
 
 /* Extra strong overrides for small screens to eliminate header overflow */
 @media (max-width: 640px) {
+
   /* Allow nav sections to wrap content instead of forcing no-wrap */
   .site-nav .nav-left,
   .site-nav .nav-center,
