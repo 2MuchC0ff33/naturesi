@@ -4,4 +4,6 @@
    Notes: Keep mobile first; prefer native input[type='range'] wrappers.
 */
 
-.slider { width: 100%; }
+.slider {
+  width: 100%;
+}

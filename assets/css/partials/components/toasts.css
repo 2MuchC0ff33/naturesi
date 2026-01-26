@@ -4,6 +4,22 @@
    Notes: Consider `aria-live` and `role="status"` for accessibility.
 */
 
-.toast { position: fixed; right: 1rem; bottom: 1rem; z-index: 99999; background: var(--surface); border:1px solid var(--color-border); padding:0.5rem 0.75rem; border-radius:8px; box-shadow: var(--shadow-md); }
-.toast--success { border-color: var(--color-success-border); }
-.toast--error { border-color: var(--color-error-border); }
+.toast {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 99999;
+  background: var(--surface);
+  border: 1px solid var(--color-border);
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  box-shadow: var(--shadow-md);
+}
+
+.toast--success {
+  border-color: var(--color-success-border);
+}
+
+.toast--error {
+  border-color: var(--color-error-border);
+}

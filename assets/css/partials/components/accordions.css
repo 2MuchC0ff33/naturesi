@@ -4,8 +4,13 @@
    Notes: Keep presentation here; ARIA and keyboard handling remain in JS.
 */
 
-.accordion { display:block; }
-.accordion__item + .accordion__item { margin-top: var(--space-sm); }
+.accordion {
+  display: block;
+}
+
+.accordion__item+.accordion__item {
+  margin-top: var(--space-sm);
+}
 
 /* Toggle button presentation */
 .accordion-toggle {
@@ -35,8 +40,13 @@
   transform: rotate(-180deg);
 }
 
-.accordion-panel { display: none; }
-.accordion__item[aria-expanded='true'] .accordion-panel { display: block; }
+.accordion-panel {
+  display: none;
+}
+
+.accordion__item[aria-expanded='true'] .accordion-panel {
+  display: block;
+}
 
 @media (max-width: 480px) {
   .accordion-toggle {

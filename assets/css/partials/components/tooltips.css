@@ -4,5 +4,17 @@
    Notes: Prefer aria-describedby to associate tooltips; keep CSS minimal and rely on JS for positioning when needed.
 */
 
-.tooltip__content { position:absolute; background: var(--tooltip-bg, rgba(0,0,0,0.85)); color: #fff; padding: 0.35rem 0.5rem; font-size: 0.85rem; border-radius: 4px; display:none; }
-.has-tooltip:focus .tooltip__content, .has-tooltip:hover .tooltip__content { display:block; }
+.tooltip__content {
+  position: absolute;
+  background: var(--tooltip-bg, rgba(0, 0, 0, 0.85));
+  color: #fff;
+  padding: 0.35rem 0.5rem;
+  font-size: 0.85rem;
+  border-radius: 4px;
+  display: none;
+}
+
+.has-tooltip:focus .tooltip__content,
+.has-tooltip:hover .tooltip__content {
+  display: block;
+}

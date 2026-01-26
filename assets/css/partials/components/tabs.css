@@ -4,7 +4,21 @@
    Notes: Markup expects ARIA tablist roles; JS handles selection state with `aria-selected`.
 */
 
-.tabs__list { display:flex; gap: var(--space-sm); }
-.tabs__tab[aria-selected='true'] { font-weight: 700; border-bottom: 2px solid var(--color-accent); }
-.tabs__panel { display:none; }
-.tabs__panel[hidden="false"], .tabs__panel[aria-hidden='false'] { display:block; }
+.tabs__list {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.tabs__tab[aria-selected='true'] {
+  font-weight: 700;
+  border-bottom: 2px solid var(--color-accent);
+}
+
+.tabs__panel {
+  display: none;
+}
+
+.tabs__panel[hidden="false"],
+.tabs__panel[aria-hidden='false'] {
+  display: block;
+}

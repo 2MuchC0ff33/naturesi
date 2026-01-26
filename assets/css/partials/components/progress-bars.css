@@ -4,9 +4,22 @@
    Notes: Keep animations minimal and respect `prefers-reduced-motion`.
 */
 
-.progress { width: 100%; background: var(--progress-bg, #eee); height: 8px; border-radius: 999px; }
-.progress__bar { height: 100%; background: var(--progress-fg, var(--color-accent)); border-radius: inherit; transition: width var(--transition-fast) ease; }
+.progress {
+  width: 100%;
+  background: var(--progress-bg, #eee);
+  height: 8px;
+  border-radius: 999px;
+}
+
+.progress__bar {
+  height: 100%;
+  background: var(--progress-fg, var(--color-accent));
+  border-radius: inherit;
+  transition: width var(--transition-fast) ease;
+}
 
 @media (prefers-reduced-motion: reduce) {
-  .progress__bar { transition: none; }
+  .progress__bar {
+    transition: none;
+  }
 }

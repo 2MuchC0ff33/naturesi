@@ -3,4 +3,11 @@
    Scope: `.popup`, `.popup__content`, `.popup__arrow`.
 */
 
-.popup { position: absolute; background: var(--surface); border:1px solid var(--color-border); border-radius:6px; padding:0.5rem; box-shadow: var(--shadow-md); }
+.popup {
+  position: absolute;
+  background: var(--surface);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  padding: 0.5rem;
+  box-shadow: var(--shadow-md);
+}

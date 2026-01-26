@@ -18,15 +18,28 @@
   justify-content: center;
 }
 
-.nav-toggle svg { display: block; width: 20px; height: 20px; }
-.nav-toggle:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+.nav-toggle svg {
+  display: block;
+  width: 20px;
+  height: 20px;
+}
+
+.nav-toggle:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
 
 @media (max-width: 900px) {
+
   /* Show toggle on small screens */
-  .nav-toggle { display: inline-flex; }
+  .nav-toggle {
+    display: inline-flex;
+  }
 
   /* When JS is enabled hide center nav until open */
-  html:not(.no-js) .site-nav .nav-center { display: none; }
+  html:not(.no-js) .site-nav .nav-center {
+    display: none;
+  }
 
   /* Open state overlay for nav center */
   .site-nav.site-nav--open .nav-center {

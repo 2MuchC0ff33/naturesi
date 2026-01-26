@@ -260,35 +260,35 @@ Core header bar, logo treatment and colour gradient live here.
 
   /* `.nav-center` small-screen behaviours (no-js hide + open-state overlays) moved to component partial */
 
-    top: calc(100% + 0.4rem);
-    background: var(--color-background);
-    padding: var(--space-sm);
-    box-shadow: var(--shadow-md);
-    border-radius: 8px;
-    z-index: 2000;
-  }
+  top: calc(100% + 0.4rem);
+  background: var(--color-background);
+  padding: var(--space-sm);
+  box-shadow: var(--shadow-md);
+  border-radius: 8px;
+  z-index: 2000;
+}
 
-  /* Increase hit areas for interactive elements inside the open nav */
-  .site-nav.site-nav--open .nav-center a,
-  .site-nav.site-nav--open .nav-center button,
-  .site-nav.site-nav--open .nav-center input,
-  .site-nav.site-nav--open .nav-center select {
-    min-height: 44px;
-  }
+/* Increase hit areas for interactive elements inside the open nav */
+.site-nav.site-nav--open .nav-center a,
+.site-nav.site-nav--open .nav-center button,
+.site-nav.site-nav--open .nav-center input,
+.site-nav.site-nav--open .nav-center select {
+  min-height: 44px;
+}
 
-  /* animate open state */
-  .site-nav.site-nav--open .nav-center {
-    animation: nav-slide-down 220ms ease both;
-  }
+/* animate open state */
+.site-nav.site-nav--open .nav-center {
+  animation: nav-slide-down 220ms ease both;
+}
 
-  /* `@keyframes nav-slide-down` moved to `partials/tools/animations.css` */
+/* `@keyframes nav-slide-down` moved to `partials/tools/animations.css` */
 
-  /* Prevent background scroll when nav is open on small screens */
-  body.nav-open {
-    overflow: hidden;
-    touch-action: none;
-    -webkit-overflow-scrolling: auto;
-  }
+/* Prevent background scroll when nav is open on small screens */
+body.nav-open {
+  overflow: hidden;
+  touch-action: none;
+  -webkit-overflow-scrolling: auto;
+}
 }
 
 @media (max-width: 640px) {

@@ -4,6 +4,18 @@
    Notes: Intersection/JS controls should be used for autoplay; CSS handles layout and basic transitions.
 */
 
-.carousel { position:relative; overflow:hidden; }
-.carousel__track { display:flex; gap: var(--space-sm); transition: transform var(--transition-medium) ease; }
-.carousel__slide { flex: 0 0 100%; min-width: 100%; }
+.carousel {
+  position: relative;
+  overflow: hidden;
+}
+
+.carousel__track {
+  display: flex;
+  gap: var(--space-sm);
+  transition: transform var(--transition-medium) ease;
+}
+
+.carousel__slide {
+  flex: 0 0 100%;
+  min-width: 100%;
+}
