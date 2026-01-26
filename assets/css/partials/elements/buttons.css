@@ -1,0 +1,31 @@
+/* Button defaults moved from settings/typography.css */
+
+button,
+[type="button"],
+[type="submit"],
+[type="reset"] {
+  font: inherit;
+  border-radius: var(--radius-sm);
+  padding: var(--space-xs) var(--space-sm);
+  color: var(--color-accent);
+  transition: background-color var(--transition-medium) ease, color var(--transition-medium) ease;
+  cursor: pointer;
+}
+
+button[disabled],
+[disabled][type="button"],
+[disabled][type="submit"],
+[disabled][type="reset"] {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Visible focus for keyboard users */
+button:focus-visible,
+[type="button"]:focus-visible,
+[type="submit"]:focus-visible,
+[type="reset"]:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--color-accent) 60%, transparent);
+  outline-offset: 2px;
+}

@@ -1,0 +1,6 @@
+/* Paragraph defaults */
+
+p {
+  margin: 0 0 var(--space-sm) 0;
+  line-height: 1.6;
+}

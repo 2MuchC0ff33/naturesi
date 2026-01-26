@@ -99,71 +99,9 @@ print fallbacks.
   display: none;
 }
 
-/* Media Queries — Device, Print / Dark mode intentionally disabled
-   Force light mode: previously there was an @media (prefers-color-scheme: dark)
-   block that changed colours based on the user's system preference. To ensure
-   the site displays in light mode consistently for all users (and the build
-   requirement 'force light mode all the time'), dark-mode styles are intentionally
-   disabled. If dark styling is ever re-enabled, restore the original block. */
-
-@media print {
-
-  *,
-  *::before,
-  *::after {
-    background: #fff;
-    color: #000;
-    box-shadow: none;
-    text-shadow: none;
-  }
-
-  a,
-  a:visited {
-    text-decoration: underline;
-  }
-
-  a[href]::after {
-    content: ' (' attr(href) ')';
-  }
-
-  abbr[title]::after {
-    content: ' (' attr(title) ')';
-  }
-
-  a[href^='#']::after,
-  a[href^='javascript:']::after {
-    content: '';
-  }
-
-  pre {
-    white-space: pre-wrap;
-  }
-
-  pre,
-  blockquote {
-    border: 1px solid #999;
-    break-inside: avoid;
-    -webkit-column-break-inside: avoid;
-  }
-
-  tr,
-  img {
-    break-inside: avoid;
-    -webkit-column-break-inside: avoid;
-  }
-
-  p,
-  h2,
-  h3 {
-    orphans: 3;
-    widows: 3;
-  }
-
-  h2,
-  h3 {
-    break-after: avoid;
-  }
-}
+/* Media Query: print styles moved to `partials/elements/all.css` as canonical element print rules
+   (reduces duplication and ensures consistent printed output across site components) */
+/* See `partials/elements/all.css` for the moved @media print rules. */
 
 /* Ensure header dropdown content uses the page text colour (overrides header's white colour)
    Scoped with #site-header .site-nav to be more specific than the generic header rule. */

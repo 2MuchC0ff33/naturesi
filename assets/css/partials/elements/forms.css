@@ -7,10 +7,6 @@ button,
 input,
 select,
 textarea {
-  padding: var(--space-xs) var(--space-sm);
-  transition:
-    border-color var(--transition-fast),
-    box-shadow var(--transition-fast);
   margin: 0;
   min-width: 24px;
   /* WCAG 2.2: Ensure minimum target size */
@@ -83,18 +79,10 @@ button {
   box-shadow: var(--shadow-sm);
 }
 
-/* Merged duplicate selector: a:hover, a:focus-visible, button:hover, button:focus-visible
-   Acceptance: removed duplicate, combined all properties */
-a:hover,
-a:focus-visible,
+/* Button hover + focus (moved link hover to `partials/elements/links.css`) */
 button:hover,
 button:focus-visible {
   color: color-mix(in srgb, var(--color-accent) 90%, black);
-  background-color: color-mix(in srgb, var(--color-accent) 90%, black);
-}
-
-button:hover,
-button:focus-visible {
   background-color: color-mix(in srgb, var(--color-accent) 90%, black);
 }
 

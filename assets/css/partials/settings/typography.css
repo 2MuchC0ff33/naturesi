@@ -3,23 +3,7 @@ Typography base rules (migrated from base.css)
 Global font settings and base typographic scale
 ========================================================================== */
 
-html {
-  color: var(--color-text);
-  /* Use a small, robust fluid typography scale via clamp (mobile-first) */
-  font-size: var(--fluid-font);
-  line-height: var(--line-height);
-  font-family:
-    'Arial',
-    system-ui,
-    -apple-system,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    'Noto Sans',
-    'Liberation Sans',
-    sans-serif;
-  -webkit-text-size-adjust: 100%;
-}
+/* Base html typography moved to `partials/elements/html.css` */
 
 @media (min-width: 320px) {
 
@@ -29,28 +13,8 @@ html {
   }
 }
 
-/* Typographic feature-settings moved from `reset.css` */
-html,
-body,
-table {
-  -webkit-font-feature-settings: "kern" 1, "liga" 1, "calt" 1, "pnum" 1, "tnum" 0, "onum" 1, "lnum" 0, "dlig" 0;
-  -moz-font-feature-settings: "kern" 1, "liga" 1, "calt" 1, "pnum" 1, "tnum" 0, "onum" 1, "lnum" 0, "dlig" 0;
-  font-feature-settings: "kern" 1, "liga" 1, "calt" 1, "pnum" 1, "tnum" 0, "onum" 1, "lnum" 0, "dlig" 0;
-}
+/* Moved global font-feature-settings to `partials/elements/all.css` */
 
-/* Headings - discretionary ligatures for larger headings */
-h1,
-h2,
-h3 {
-  -webkit-font-feature-settings: "kern" 1, "liga" 1, "calt" 1, "pnum" 1, "tnum" 0, "onum" 1, "lnum" 0, "dlig" 1;
-  -moz-font-feature-settings: "kern" 1, "liga" 1, "calt" 1, "pnum" 1, "tnum" 0, "onum" 1, "lnum" 0, "dlig" 1;
-  font-feature-settings: "kern" 1, "liga" 1, "calt" 1, "pnum" 1, "tnum" 0, "onum" 1, "lnum" 0, "dlig" 1;
-}
+/* Headings - discretionary ligatures moved to `partials/elements/headings.css` */
 
-/* Basic link and button color/interaction styles */
-a,
-button {
-  color: var(--color-accent);
-  transition: all var(--transition-medium) ease;
-  cursor: pointer;
-}
+/* Link/button base moved to `partials/elements/links.css` and `partials/elements/buttons.css` */

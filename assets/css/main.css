@@ -36,10 +36,31 @@
      - sanitize.css (Sanitization styles)
      - base.css (Base document styles)
      - selections.css (Text selection styles)
+     - all.css (Global element styles)
+     - html.css (HTML element styles)
+     - body.css (Body element styles)
+     - title.css (Title element styles)
+     - headings.css (Heading element styles)
+     - paragraphs.css (Paragraph element styles)
+     - groups.css (Grouping element styles)
+     - lists.css (List element styles)
+     - links.css (Link element styles)
+     - images.css (Image element styles)
+     - tables.css (Table element styles)
      - forms.css (Form element styles)
-     - header.css
-     - nav.css
-     - footer.css
+     - labels.css (Label element styles)
+     - inputs.css (Input element styles)
+     - buttons.css (Button element styles)
+     - nav.css (Navigation element styles)
+     - header.css (Header element styles)
+     - footer.css (Footer element styles)
+     - container.css (Container object styles)
+     - modals.css (Modal object styles)
+     - wrapper.css (Object layer wrapper)
+     - flexbox.css (Flexbox object styles)
+     - grid.css (Grid object styles)
+     - media-object.css (Media object styles)
+     - responsive.css (Responsive object styles)
      - categories.css
      - components.css
      - cart.css
@@ -73,10 +94,24 @@
 @import url('partials/generic/sanitize.css');
 @import url('partials/generic/base.css');
 @import url('partials/generic/selections.css');
-@import url('partials/forms.css');
-@import url('partials/header.css');
-@import url('partials/nav.css');
-@import url('partials/footer.css');
+@import url('partials/elements/all.css');
+@import url('partials/elements/html.css');
+@import url('partials/elements/body.css');
+@import url('partials/elements/title.css');
+@import url('partials/elements/headings.css');
+@import url('partials/elements/paragraphs.css');
+@import url('partials/elements/groups.css');
+@import url('partials/elements/lists.css');
+@import url('partials/elements/links.css');
+@import url('partials/elements/images.css');
+@import url('partials/elements/tables.css');
+@import url('partials/elements/forms.css');
+@import url('partials/elements/labels.css');
+@import url('partials/elements/inputs.css');
+@import url('partials/elements/buttons.css');
+@import url('partials/elements/nav.css');
+@import url('partials/elements/header.css');
+@import url('partials/elements/footer.css');
 @import url('partials/categories.css');
 @import url('partials/components.css');
 @import url('partials/cart.css');
