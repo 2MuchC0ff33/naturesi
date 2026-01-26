@@ -1,0 +1,61 @@
+{
+  "generated": "2026-01-26T00:00:00Z",
+  "files": {
+    "index.html": [
+      {
+        "type": "application/ld+json",
+        "purpose": "Organization schema",
+        "inline": true
+      },
+      {
+        "type": "application/ld+json",
+        "purpose": "WebSite schema",
+        "inline": true
+      },
+      {
+        "type": "application/ld+json",
+        "purpose": "BreadcrumbList schema",
+        "inline": true
+      }
+    ],
+    "pages/*.html (common)": [
+      {
+        "type": "application/ld+json",
+        "purpose": "Structured data (Organization/WebSite/Breadcrumb)",
+        "inline": true
+      },
+      {
+        "type": "module",
+        "src": "/assets/js/app.js",
+        "inline": false
+      }
+    ],
+    "pages/payment/success.html": [
+      {
+        "type": "module",
+        "src": "/assets/js/app.js",
+        "inline": false
+      },
+      {
+        "type": "module",
+        "purpose": "Clear local cart (inline code)",
+        "inline": true,
+        "snippet": "localStorage.removeItem('naturesi_cart')"
+      }
+    ],
+    "pages/payment/fail.html": [
+      {
+        "type": "module",
+        "src": "/assets/js/app.js",
+        "inline": false
+      }
+    ],
+    "pages/shipping-estimate.html": [
+      {
+        "type": "module",
+        "src": "/assets/js/app.js",
+        "inline": false
+      }
+    ]
+  }
+}

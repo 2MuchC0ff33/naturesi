@@ -1,0 +1,370 @@
+{
+  "modules": [
+    {
+      "path": "assets/js/modules/sync.js",
+      "exports": [
+        "requestBackgroundSync"
+      ],
+      "imports": [],
+      "autoRun": false,
+      "defaultInitialiser": false,
+      "domSelectors": [],
+      "dataAttributes": [],
+      "legacyPatterns": []
+    },
+    {
+      "path": "assets/js/modules/sw-register.js",
+      "exports": [
+        "registerServiceWorker"
+      ],
+      "imports": [],
+      "autoRun": false,
+      "defaultInitialiser": false,
+      "domSelectors": [
+        "#sw-update-banner",
+        ".sw-update-button",
+        ".sw-update-dismiss"
+      ],
+      "dataAttributes": [],
+      "legacyPatterns": [
+        "uses load event and direct DOM mutation to inject update banner (ok), conservative cache clearing logic"
+      ]
+    },
+    {
+      "path": "assets/js/modules/sw-handlers.js",
+      "exports": [],
+      "imports": [],
+      "autoRun": true,
+      "defaultInitialiser": false,
+      "domSelectors": [],
+      "dataAttributes": [],
+      "legacyPatterns": [
+        "service-worker runtime patterns (self.addEventListener, caches API)"
+      ]
+    },
+    {
+      "path": "assets/js/modules/sw-core.js",
+      "exports": [],
+      "imports": [],
+      "autoRun": true,
+      "defaultInitialiser": false,
+      "domSelectors": [],
+      "dataAttributes": [],
+      "legacyPatterns": [
+        "uses var for module-level constants (CACHE_NAME), designed for importScripts in classic SW - not ES module"
+      ]
+    },
+    {
+      "path": "assets/js/modules/storageLocal.js",
+      "exports": [
+        "getLocalCart",
+        "setLocalCart",
+        "removeLocalCart"
+      ],
+      "imports": [],
+      "autoRun": false,
+      "defaultInitialiser": false,
+      "domSelectors": [],
+      "dataAttributes": [],
+      "legacyPatterns": []
+    },
+    {
+      "path": "assets/js/modules/storageIDB.js",
+      "exports": [
+        "loadCartFromIDB",
+        "saveCartToIDB"
+      ],
+      "imports": [],
+      "autoRun": false,
+      "defaultInitialiser": false,
+      "domSelectors": [],
+      "dataAttributes": [],
+      "legacyPatterns": [
+        "Classic IndexedDB event handlers (onsuccess/onserror/onupgradeneeded) — ok but callback-style"
+      ]
+    },
+    {
+      "path": "assets/js/modules/product-helpers.js",
+      "exports": [
+        "init"
+      ],
+      "imports": [],
+      "autoRun": false,
+      "defaultInitialiser": false,
+      "domSelectors": [
+        "figure.product-gallery",
+        "img[itemprop=\"image\"]"
+      ],
+      "dataAttributes": [
+        "width",
+        "height"
+      ],
+      "legacyPatterns": []
+    },
+    {
+      "path": "assets/js/modules/payment-return.js",
+      "exports": [
+        "hasPayPalReturnParams",
+        "handlePaymentReturn",
+        "initPaymentReturn"
+      ],
+      "imports": [],
+      "autoRun": false,
+      "defaultInitialiser": false,
+      "domSelectors": [
+        "main.container",
+        "#cart-cleared-note"
+      ],
+      "dataAttributes": [],
+      "legacyPatterns": [
+        "Clears localStorage keys (naturesi_cart/naturesi-cart) — be cautious when changing keys"
+      ]
+    },
+    {
+      "path": "assets/js/modules/payment-cancel.js",
+      "exports": [
+        "hasPayPalReturnParams",
+        "handlePaymentCancel",
+        "initPaymentCancel"
+      ],
+      "imports": [],
+      "autoRun": false,
+      "defaultInitialiser": false,
+      "domSelectors": [
+        "main.container",
+        "#cart-cancelled-note"
+      ],
+      "dataAttributes": [],
+      "legacyPatterns": []
+    },
+    {
+      "path": "assets/js/modules/nav-toggle.js",
+      "exports": [
+        "init"
+      ],
+      "imports": [],
+      "autoRun": false,
+      "defaultInitialiser": false,
+      "domSelectors": [
+        ".site-nav .nav-right",
+        "#nav-toggle",
+        ".site-nav",
+        "#primary-nav-menu"
+      ],
+      "dataAttributes": [
+        "aria-expanded",
+        "aria-controls",
+        "aria-hidden"
+      ],
+      "legacyPatterns": [
+        "uses setTimeout( ..., 50 ) for focus shift on open — small timing anti-pattern"
+      ]
+    },
+    {
+      "path": "assets/js/modules/modal.js",
+      "exports": [
+        "init"
+      ],
+      "imports": [],
+      "autoRun": false,
+      "defaultInitialiser": false,
+      "domSelectors": [
+        "[data-modal-target]",
+        "[data-modal-close]",
+        ".modal",
+        ".modal__dialog",
+        ".modal__overlay"
+      ],
+      "dataAttributes": [
+        "data-modal-target",
+        "data-modal-close"
+      ],
+      "legacyPatterns": []
+    },
+    {
+      "path": "assets/js/modules/checkout-bootstrap.js",
+      "exports": [],
+      "imports": [
+        "/assets/js/modules/checkout.js (dynamic import)"
+      ],
+      "autoRun": true,
+      "defaultInitialiser": true,
+      "domSelectors": [
+        "#summary-content",
+        "#pay-now-redirect",
+        "#checkout-error"
+      ],
+      "dataAttributes": [],
+      "legacyPatterns": [
+        "IIFE that runs immediately — intentional for in-page bootstrapping"
+      ]
+    },
+    {
+      "path": "assets/js/modules/category-select.js",
+      "exports": [
+        "buildCategoryUrl",
+        "navigateTo",
+        "initCategorySelect"
+      ],
+      "imports": [],
+      "autoRun": true,
+      "defaultInitialiser": false,
+      "domSelectors": [
+        "#site-category-select"
+      ],
+      "dataAttributes": [
+        "data-categorySelectInit"
+      ],
+      "legacyPatterns": []
+    },
+    {
+      "path": "assets/js/modules/cartUI.js",
+      "exports": [
+        "setProductIndex",
+        "updateCartCountOutputs",
+        "renderCartTable",
+        "updateCartTableTotals",
+        "updateCartTableTotalsWithShipping",
+        "displayShippingEstimate"
+      ],
+      "imports": [
+        "calculateParcelRate",
+        "calculateShippingByWeight (from cartStore.js)"
+      ],
+      "autoRun": false,
+      "defaultInitialiser": false,
+      "domSelectors": [
+        "output[name=\"cart-count\"]",
+        ".cart-table tbody",
+        ".cart-table",
+        "#summary-subtotal",
+        "#summary-total",
+        "#summary-shipping",
+        ".remove-item"
+      ],
+      "dataAttributes": [
+        "data-price",
+        "data-subtotal",
+        "data-product-id",
+        "data-product-size"
+      ],
+      "legacyPatterns": [
+        "defensive DOMContentLoaded handling to avoid early renders"
+      ]
+    },
+    {
+      "path": "assets/js/modules/cartStore.js",
+      "exports": [
+        "CartStore",
+        "parseWeightString",
+        "getPostcodeZone",
+        "calculateParcelRate",
+        "calculateShippingByWeight",
+        "__setCachedPostcodes",
+        "__setCachedPostage",
+        "__resetCaches"
+      ],
+      "imports": [
+        "getLocalCart",
+        "setLocalCart (from storageLocal.js)",
+        "loadCartFromIDB",
+        "saveCartToIDB (from storageIDB.js)"
+      ],
+      "autoRun": false,
+      "defaultInitialiser": false,
+      "domSelectors": [],
+      "dataAttributes": [],
+      "legacyPatterns": [
+        "normalises legacy cart array shapes from localStorage — intentional backward compatibility"
+      ]
+    },
+    {
+      "path": "assets/js/modules/cart.js",
+      "exports": [
+        "toNumber",
+        "normalizeItem",
+        "readFromDOM",
+        "readFromGlobal",
+        "collect",
+        "saveCart",
+        "attachFormHandler"
+      ],
+      "imports": [],
+      "autoRun": true,
+      "defaultInitialiser": false,
+      "domSelectors": [
+        "#confirm-cart-form",
+        "#btn-proceed-checkout",
+        ".cart-table tbody tr",
+        ".cart-item",
+        "#checkout-error"
+      ],
+      "dataAttributes": [
+        "data-price",
+        "data-qty",
+        "data-id"
+      ],
+      "legacyPatterns": [
+        "defensive fallbacks for form.requestSubmit vs form.submit — keeps backward compatibility"
+      ]
+    },
+    {
+      "path": "assets/js/modules/cart-init.js",
+      "exports": [
+        "initCart"
+      ],
+      "imports": [
+        "CartStore (from cartStore.js)",
+        "cartUI helpers",
+        "requestBackgroundSync (from sync.js)"
+      ],
+      "autoRun": false,
+      "defaultInitialiser": false,
+      "domSelectors": [
+        "form.add-to-cart",
+        "form.product-options",
+        ".product",
+        "[itemscope]",
+        "#checkout-postcode"
+      ],
+      "dataAttributes": [
+        "data-sku",
+        "data-id",
+        "data-image",
+        "data-price"
+      ],
+      "legacyPatterns": [
+        "generates ephemeral IDs via Math.random when DOM lacks product id — acceptable but could be improved for determinism"
+      ]
+    },
+    {
+      "path": "assets/js/modules/checkout.js",
+      "exports": [
+        "parseCartRaw",
+        "computeGrandTotal",
+        "computeItemLabel",
+        "renderSummaryToString",
+        "runCheckout",
+        "setupPaypalRedirect"
+      ],
+      "imports": [],
+      "autoRun": false,
+      "defaultInitialiser": false,
+      "domSelectors": [
+        "#summary-content",
+        "#payment",
+        "#checkout-error",
+        "#paypal-button-container",
+        "#paypal-redirect-form",
+        "#pay-now-redirect",
+        "#paypal-debug"
+      ],
+      "dataAttributes": [
+        "data-shipping"
+      ],
+      "legacyPatterns": [
+        "uses setTimeout small delays to allow DOM population before auto submit; uses direct form.submit fallback"
+      ]
+    }
+  ]
+}

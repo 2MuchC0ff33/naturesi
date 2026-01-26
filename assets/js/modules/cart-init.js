@@ -155,14 +155,19 @@ export async function initCart() {
     ev.preventDefault();
     try {
       const fd = new FormData(form);
-      const productEl = form.closest('.product') || form.closest('[itemscope]') || form;
+      // Prefer explicit component-root attribute first, then legacy selectors
+    const productEl =
+      form.closest('[data-product]') || form.closest('.product') || form.closest('[itemscope]') || form;
       const id =
         productEl && (productEl.id || productEl.dataset.sku || productEl.dataset.id)
           ? productEl.id || productEl.dataset.sku || productEl.dataset.id
           : `i_${Math.random().toString(36).slice(2, 9)}`;
+      // Prefer explicit product title attribute then fall back to legacy heading selectors
       const nameEl =
         productEl &&
-        (productEl.querySelector('[itemprop="name"]') ||
+        (productEl.querySelector('[data-product-title]') ||
+          productEl.querySelector('[data-product-name]') ||
+          productEl.querySelector('[itemprop="name"]') ||
           productEl.querySelector('h3, h2, .product-title'));
       const name = nameEl ? nameEl.textContent.trim() : fd.get('name') || 'Item';
       const size = fd.get('size') || fd.get('package') || '';
@@ -203,14 +208,15 @@ export async function initCart() {
 
         // Still no per-option price found? Fallback to first product-level data-price or itemprop
         if (price === null) {
+          // Check for explicit product price attributes first, then legacy itemprop
           const priceField =
             productEl &&
-            (productEl.querySelector('[data-price]') || productEl.querySelector('[itemprop="price"]'));
+            (productEl.querySelector('[data-product-price]') || productEl.querySelector('[data-price]') || productEl.querySelector('[itemprop="price"]'));
           if (priceField) {
-            // read dataset.price, content attribute, or fallback to text content
+            // read dataset.price, dataset.productPrice, content attribute, or fallback to text content
             price =
               parsePriceString(
-                priceField.dataset.price || priceField.getAttribute('content') || priceField.textContent
+                priceField.dataset.price || priceField.dataset.productPrice || priceField.getAttribute('content') || priceField.textContent
               ) || null;
           }
         }
@@ -275,8 +281,9 @@ export async function initCart() {
       // image extraction using data attributes or first <img>
       let image = null;
       if (productEl) {
-        if (productEl.dataset && productEl.dataset.image) image = productEl.dataset.image;
-        const imgByItem = productEl.querySelector('img[itemprop="image"]');
+        if (productEl.dataset && (productEl.dataset.image || productEl.dataset.productImage))
+          image = productEl.dataset.image || productEl.dataset.productImage;
+        const imgByItem = productEl.querySelector('img[itemprop="image"], img[data-product-image]');
         if (!image && imgByItem)
           image = imgByItem.currentSrc || imgByItem.src || imgByItem.getAttribute('src');
         if (!image) {
@@ -289,7 +296,7 @@ export async function initCart() {
       // sku and description
       const sku =
         (productEl &&
-          (productEl.dataset.sku ||
+          (productEl.dataset.sku || productEl.dataset.productSku ||
             (productEl.querySelector('[itemprop="sku"]') &&
               productEl.querySelector('[itemprop="sku"]').textContent.trim()))) ||
         null;

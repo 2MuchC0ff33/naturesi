@@ -6,11 +6,15 @@ export function init(document) {
   const navRight = document.querySelector('.site-nav .nav-right');
   if (!navRight) return;
 
-  let btn = document.getElementById('nav-toggle');
+  // Accept existing toggle by id or common JS hook selectors (backward-compatible)
+  let btn = document.getElementById('nav-toggle') || document.querySelector('[data-js-nav-toggle], .js-nav-toggle, [data-nav-toggle]');
   if (!btn) {
     btn = document.createElement('button');
+    btn.type = 'button';
     btn.id = 'nav-toggle';
     btn.className = 'nav-toggle';
+    // mark as a JS hook so future refactors can detect and preserve it
+    btn.setAttribute('data-js-nav-toggle', '');
     btn.setAttribute('aria-label', 'Toggle navigation');
     btn.setAttribute('aria-expanded', 'false');
     btn.setAttribute('aria-controls', 'primary-nav-menu');
@@ -20,11 +24,20 @@ export function init(document) {
       </svg>
     `;
     navRight.insertBefore(btn, navRight.firstElementChild);
+  } else {
+    // If the hook exists but isn't a button, ensure it's keyboard-operable
+    if (btn.tagName !== 'BUTTON') {
+      btn.setAttribute('role', 'button');
+      if (!btn.hasAttribute('tabindex')) btn.setAttribute('tabindex', '0');
+      if (!btn.hasAttribute('data-js-nav-toggle')) btn.setAttribute('data-js-nav-toggle', '');
+    }
   }
 
   const siteNav = document.querySelector('.site-nav');
   const navCenter = document.getElementById('primary-nav-menu');
   const mq = window.matchMedia('(max-width: 900px)');
+  // Remember where focus was before opening so it can be restored
+  let lastFocused = null;
 
   function setAriaHidden(hidden) {
     if (!navCenter) return;
@@ -46,21 +59,31 @@ export function init(document) {
     if (mq.matches) setAriaHidden(true);
     // Remove scroll lock
     document.body.classList.remove('nav-open');
-    // Return focus to the toggle
-    btn.focus();
+    // Return focus to previous element when possible, otherwise to the toggle
+    try {
+      if (lastFocused && document.contains(lastFocused) && typeof lastFocused.focus === 'function') {
+        lastFocused.focus();
+      } else {
+        btn.focus();
+      }
+    } catch (err) {
+      btn.focus();
+    }
   }
 
   function openNav() {
     btn.setAttribute('aria-expanded', 'true');
     siteNav.classList.add('site-nav--open');
     btn.classList.add('is-active');
+    // Remember the element that had focus so it can be restored on close
+    lastFocused = document.activeElement;
     // Apply scroll lock to prevent background scroll while overlay is open
     document.body.classList.add('nav-open');
     // On small screens expose the nav to assistive tech and focus inside
     if (mq.matches) {
       setAriaHidden(false);
       // Move focus into the nav so keyboard users can continue
-      setTimeout(focusFirstInNav, 50);
+      requestAnimationFrame(focusFirstInNav);
     }
   }
 

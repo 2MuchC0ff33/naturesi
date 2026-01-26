@@ -48,8 +48,18 @@ export function init(document) {
 
     // focus dialog
     const dialog = modalEl.querySelector('.modal__dialog') || modalEl;
+    // store the element that had focus so we can restore it later
+    modalEl.__previousActive = document.activeElement;
     dialog.setAttribute('tabindex', '-1');
-    setTimeout(() => dialog.focus({ preventScroll: true }), 50);
+    // Ensure dialog has correct semantics for assistive tech
+    if (!dialog.hasAttribute('role')) dialog.setAttribute('role', 'dialog');
+    if (!dialog.hasAttribute('aria-modal')) dialog.setAttribute('aria-modal', 'true');
+    // Use requestAnimationFrame to avoid arbitrary time delays and improve reliability
+    requestAnimationFrame(() => {
+      const focusable = getFocusable(modalEl);
+      if (focusable.length) focusable[0].focus({ preventScroll: true });
+      else dialog.focus({ preventScroll: true });
+    });
 
     // store trigger for returning focus
     modalEl.__trigger = trigger;
@@ -71,9 +81,10 @@ export function init(document) {
     const main = document.querySelector('main') || document.body;
     if (main) main.removeAttribute('aria-hidden');
 
-    // restore focus
+    // restore focus: prefer the trigger, otherwise the element that had focus before open
     try {
-      if (modalEl.__trigger && typeof modalEl.__trigger.focus === 'function') modalEl.__trigger.focus();
+      const returnTo = modalEl.__trigger || modalEl.__previousActive;
+      if (returnTo && typeof returnTo.focus === 'function' && document.contains(returnTo)) returnTo.focus();
     } catch (e) {
       // ignore
     }
@@ -87,7 +98,23 @@ export function init(document) {
     btn.addEventListener('click', (e) => {
       const selector = btn.getAttribute('data-modal-target');
       if (!selector) return;
-      const modalEl = document.querySelector(selector);
+
+      // Try a few robust resolution strategies:
+      // 1) If selector is a valid CSS selector (e.g. '#newsletter-modal'), query it.
+      // 2) If not found, and selector looks like an id (no leading #), try document.getElementById.
+      // 3) Fallback to attempting `#id` query in case the author omitted the '#'.
+      let modalEl = null;
+      try {
+        modalEl = document.querySelector(selector);
+      } catch (err) {
+        modalEl = null;
+      }
+
+      if (!modalEl) {
+        const maybeId = selector.replace(/^#/, '').trim();
+        if (maybeId) modalEl = document.getElementById(maybeId) || document.querySelector(`#${maybeId}`);
+      }
+
       if (!modalEl) return;
       e.preventDefault();
       openModal(modalEl, btn);

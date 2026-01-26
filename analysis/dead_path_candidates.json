@@ -1,0 +1,13 @@
+{
+  "generated": "2026-01-26T00:00:00Z",
+  "summary": {
+    "total_candidates_found": 0,
+    "notes": "No selectors were found that are safe to remove without further runtime analysis. All selectors missing from static HTML are accounted for as runtime-injected elements (nav toggle, cart remove buttons, service-worker update banner).
+If you want, we can add an instrumentation run that records DOM mutations during a sample user flow to find genuinely unused selectors.","recommended_next_steps": [
+      "Add instrumentation (dev-only) that logs DOM additions for a single user flow and re-run the cross-check",
+      "Add test coverage for high-risk selectors listed in global_reference_map.json",
+      "Create a small migration plan for renaming selectors that includes dual-selector fallbacks and E2E tests"
+    ]
+  },
+  "candidates": []
+}
