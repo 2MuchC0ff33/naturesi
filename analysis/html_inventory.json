@@ -11,39 +11,154 @@
   "summary": {
     "files_scanned": 26,
     "unique_classes_sample": [
-      "no-js","skip-link","site-nav","nav-center","nav-left","logo","u-img-cover","site-search","search-box","cart-option","cart-count","prose","container","product","add-to-cart","modal","modal__overlay","modal__dialog","btn","btn--ghost","btn--primary","visually-hidden","accordion-toggle","links-grid","cart-table","order-summary"
+      "no-js",
+      "skip-link",
+      "site-nav",
+      "nav-center",
+      "nav-left",
+      "logo",
+      "u-img-cover",
+      "site-search",
+      "search-box",
+      "cart-option",
+      "cart-count",
+      "prose",
+      "container",
+      "product",
+      "add-to-cart",
+      "modal",
+      "modal__overlay",
+      "modal__dialog",
+      "btn",
+      "btn--ghost",
+      "btn--primary",
+      "visually-hidden",
+      "accordion-toggle",
+      "links-grid",
+      "cart-table",
+      "order-summary"
     ],
-    "common_data_attributes_sample": ["data-price","data-value","data-sku","data-image","data-controls","data-modal","data-modal-target","data-modal-close"]
+    "common_data_attributes_sample": [
+      "data-price",
+      "data-value",
+      "data-sku",
+      "data-image",
+      "data-controls",
+      "data-modal",
+      "data-modal-target",
+      "data-modal-close"
+    ]
   },
   "files": {
     "index.html": {
-      "ids": ["primary-nav-menu","site-search-form","main-content","shop-now","find-stockists","newsletter-modal"],
-      "classes": ["no-js","skip-link","site-nav","nav-left","logo","u-img-cover","nav-center","prose","container","product","add-to-cart","btn","visually-hidden","modal","modal__overlay","modal__dialog","site-footer","legal-bar"],
-      "data_attributes": ["data-price","data-value","data-modal","data-modal-close","data-modal-target","data-controls"],
+      "ids": [
+        "primary-nav-menu",
+        "site-search-form",
+        "main-content",
+        "shop-now",
+        "find-stockists",
+        "newsletter-modal"
+      ],
+      "classes": [
+        "no-js",
+        "skip-link",
+        "site-nav",
+        "nav-left",
+        "logo",
+        "u-img-cover",
+        "nav-center",
+        "prose",
+        "container",
+        "product",
+        "add-to-cart",
+        "btn",
+        "visually-hidden",
+        "modal",
+        "modal__overlay",
+        "modal__dialog",
+        "site-footer",
+        "legal-bar"
+      ],
+      "data_attributes": [
+        "data-price",
+        "data-value",
+        "data-modal",
+        "data-modal-close",
+        "data-modal-target",
+        "data-controls"
+      ],
       "inline_scripts": [
-        {"type":"application/ld+json","has_src":false,"notes":"structured data blocks present"},
-        {"type":"module","has_src":true,"src":"/assets/js/app.js"}
+        {
+          "type": "application/ld+json",
+          "has_src": false,
+          "notes": "structured data blocks present"
+        },
+        {
+          "type": "module",
+          "has_src": true,
+          "src": "/assets/js/app.js"
+        }
       ]
     },
     "pages/checkout.html": {
-      "ids": ["paypal-redirect-form","paypal-debug"],
-      "classes": ["container","muted","error","hidden","paypal-redirect"],
-      "data_attributes": ["data-controls"],
-      "inline_scripts": [{"type":"module","has_src":true,"src":"/assets/js/app.js"},{"type":"module","has_src":true,"src":"/assets/js/modules/checkout-bootstrap.js"}]
+      "ids": [
+        "paypal-redirect-form",
+        "paypal-debug"
+      ],
+      "classes": [
+        "container",
+        "muted",
+        "error",
+        "hidden",
+        "paypal-redirect"
+      ],
+      "data_attributes": [
+        "data-controls"
+      ],
+      "inline_scripts": [
+        {
+          "type": "module",
+          "has_src": true,
+          "src": "/assets/js/app.js"
+        },
+        {
+          "type": "module",
+          "has_src": true,
+          "src": "/assets/js/modules/checkout-bootstrap.js"
+        }
+      ]
     },
     "pages/payment/success.html": {
       "ids": [],
-      "classes": ["container"],
+      "classes": [
+        "container"
+      ],
       "data_attributes": [],
       "inline_scripts": [
-        {"type":"module","has_src":true,"src":"/assets/js/app.js"},
-        {"type":"module","has_src":false,"snippet":"// Clear local cart used by static checkout flows\ntry { if (typeof localStorage !== 'undefined') { localStorage.removeItem('naturesi_cart'); localStorage.removeItem('naturesi-cart'); } } catch (e) { console.warn('Failed to clear cart on payment success:', e); }"}
+        {
+          "type": "module",
+          "has_src": true,
+          "src": "/assets/js/app.js"
+        },
+        {
+          "type": "module",
+          "has_src": false,
+          "snippet": "// Clear local cart used by static checkout flows\ntry { if (typeof localStorage !== 'undefined') { localStorage.removeItem('naturesi_cart'); localStorage.removeItem('naturesi-cart'); } } catch (e) { console.warn('Failed to clear cart on payment success:', e); }"
+        }
       ]
     },
     "pages/payment/fail.html": {
-      "inline_scripts": [{"type":"module","has_src":true,"src":"/assets/js/app.js"}]
+      "inline_scripts": [
+        {
+          "type": "module",
+          "has_src": true,
+          "src": "/assets/js/app.js"
+        }
+      ]
     },
-    "pages/*.html": {"note":"Most pages include structured JSON-LD script blocks and a module script loading /assets/js/app.js. Detailed per-file listing available on request."}
+    "pages/*.html": {
+      "note": "Most pages include structured JSON-LD script blocks and a module script loading /assets/js/app.js. Detailed per-file listing available on request."
+    }
   }
 }
 {

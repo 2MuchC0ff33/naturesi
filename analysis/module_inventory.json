@@ -8,7 +8,10 @@
   "modules": {
     "cart-init.js": {
       "path": "assets/js/modules/cart-init.js",
-      "imports": ["./cartStore.js", "./sync.js"],
+      "imports": [
+        "./cartStore.js",
+        "./sync.js"
+      ],
       "exports": [],
       "default_init": true,
       "selectors": [
@@ -17,25 +20,147 @@
         "select[name='{name}']",
         "input:checked[data-price]"
       ],
-      "data_attributes": ["data-price","data-value"]
+      "data_attributes": [
+        "data-price",
+        "data-value"
+      ]
     },
-    "cart.js": {"path":"assets/js/modules/cart.js","imports":[],"exports":[],"default_init":false,"selectors":[],"data_attributes":[]},
-    "cartStore.js": {"path":"assets/js/modules/cartStore.js","imports":[],"exports":[],"default_init":false,"selectors":[],"data_attributes":[]},
-    "cartUI.js": {"path":"assets/js/modules/cartUI.js","imports":[],"exports":[],"default_init":false,"selectors":[],"data_attributes":[]},
-    "checkout-bootstrap.js": {"path":"assets/js/modules/checkout-bootstrap.js","imports":[],"exports":[],"default_init":false,"selectors":[],"data_attributes":[]},
-    "checkout.js": {"path":"assets/js/modules/checkout.js","imports":[],"exports":[],"default_init":false,"selectors":[],"data_attributes":[]},
-    "category-select.js": {"path":"assets/js/modules/category-select.js","imports":[],"exports":[],"default_init":false,"selectors":[],"data_attributes":[]},
-    "modal.js": {"path":"assets/js/modules/modal.js","imports":[],"exports":[],"default_init":false,"selectors":[],"data_attributes":[]},
-    "nav-toggle.js": {"path":"assets/js/modules/nav-toggle.js","imports":[],"exports":[],"default_init":false,"selectors":[],"data_attributes":[]},
-    "payment-cancel.js": {"path":"assets/js/modules/payment-cancel.js","imports":[],"exports":[],"default_init":false,"selectors":[],"data_attributes":[]},
-    "payment-return.js": {"path":"assets/js/modules/payment-return.js","imports":[],"exports":[],"default_init":false,"selectors":[],"data_attributes":[]},
-    "product-helpers.js": {"path":"assets/js/modules/product-helpers.js","imports":[],"exports":[],"default_init":false,"selectors":[],"data_attributes":[]},
-    "sw-core.js": {"path":"assets/js/modules/sw-core.js","imports":[],"exports":[],"default_init":false,"selectors":[],"data_attributes":[]},
-    "sw-handlers.js": {"path":"assets/js/modules/sw-handlers.js","imports":[],"exports":[],"default_init":false,"selectors":[],"data_attributes":[]},
-    "sw-register.js": {"path":"assets/js/modules/sw-register.js","imports":[],"exports":[],"default_init":false,"selectors":[],"data_attributes":[]},
-    "storageLocal.js": {"path":"assets/js/modules/storageLocal.js","imports":[],"exports":[],"default_init":false,"selectors":[],"data_attributes":[]},
-    "storageIDB.js": {"path":"assets/js/modules/storageIDB.js","imports":[],"exports":[],"default_init":false,"selectors":[],"data_attributes":[]},
-    "sync.js": {"path":"assets/js/modules/sync.js","imports":[],"exports":[],"default_init":false,"selectors":[],"data_attributes":[]}
+    "cart.js": {
+      "path": "assets/js/modules/cart.js",
+      "imports": [],
+      "exports": [],
+      "default_init": false,
+      "selectors": [],
+      "data_attributes": []
+    },
+    "cartStore.js": {
+      "path": "assets/js/modules/cartStore.js",
+      "imports": [],
+      "exports": [],
+      "default_init": false,
+      "selectors": [],
+      "data_attributes": []
+    },
+    "cartUI.js": {
+      "path": "assets/js/modules/cartUI.js",
+      "imports": [],
+      "exports": [],
+      "default_init": false,
+      "selectors": [],
+      "data_attributes": []
+    },
+    "checkout-bootstrap.js": {
+      "path": "assets/js/modules/checkout-bootstrap.js",
+      "imports": [],
+      "exports": [],
+      "default_init": false,
+      "selectors": [],
+      "data_attributes": []
+    },
+    "checkout.js": {
+      "path": "assets/js/modules/checkout.js",
+      "imports": [],
+      "exports": [],
+      "default_init": false,
+      "selectors": [],
+      "data_attributes": []
+    },
+    "category-select.js": {
+      "path": "assets/js/modules/category-select.js",
+      "imports": [],
+      "exports": [],
+      "default_init": false,
+      "selectors": [],
+      "data_attributes": []
+    },
+    "modal.js": {
+      "path": "assets/js/modules/modal.js",
+      "imports": [],
+      "exports": [],
+      "default_init": false,
+      "selectors": [],
+      "data_attributes": []
+    },
+    "nav-toggle.js": {
+      "path": "assets/js/modules/nav-toggle.js",
+      "imports": [],
+      "exports": [],
+      "default_init": false,
+      "selectors": [],
+      "data_attributes": []
+    },
+    "payment-cancel.js": {
+      "path": "assets/js/modules/payment-cancel.js",
+      "imports": [],
+      "exports": [],
+      "default_init": false,
+      "selectors": [],
+      "data_attributes": []
+    },
+    "payment-return.js": {
+      "path": "assets/js/modules/payment-return.js",
+      "imports": [],
+      "exports": [],
+      "default_init": false,
+      "selectors": [],
+      "data_attributes": []
+    },
+    "product-helpers.js": {
+      "path": "assets/js/modules/product-helpers.js",
+      "imports": [],
+      "exports": [],
+      "default_init": false,
+      "selectors": [],
+      "data_attributes": []
+    },
+    "sw-core.js": {
+      "path": "assets/js/modules/sw-core.js",
+      "imports": [],
+      "exports": [],
+      "default_init": false,
+      "selectors": [],
+      "data_attributes": []
+    },
+    "sw-handlers.js": {
+      "path": "assets/js/modules/sw-handlers.js",
+      "imports": [],
+      "exports": [],
+      "default_init": false,
+      "selectors": [],
+      "data_attributes": []
+    },
+    "sw-register.js": {
+      "path": "assets/js/modules/sw-register.js",
+      "imports": [],
+      "exports": [],
+      "default_init": false,
+      "selectors": [],
+      "data_attributes": []
+    },
+    "storageLocal.js": {
+      "path": "assets/js/modules/storageLocal.js",
+      "imports": [],
+      "exports": [],
+      "default_init": false,
+      "selectors": [],
+      "data_attributes": []
+    },
+    "storageIDB.js": {
+      "path": "assets/js/modules/storageIDB.js",
+      "imports": [],
+      "exports": [],
+      "default_init": false,
+      "selectors": [],
+      "data_attributes": []
+    },
+    "sync.js": {
+      "path": "assets/js/modules/sync.js",
+      "imports": [],
+      "exports": [],
+      "default_init": false,
+      "selectors": [],
+      "data_attributes": []
+    }
   }
 }
 {

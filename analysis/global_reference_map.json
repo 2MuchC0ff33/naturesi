@@ -5,14 +5,99 @@
     "html_inventory": "analysis/html_inventory.json"
   },
   "html_summary": {
-    "classes": ["no-js","skip-link","site-nav","nav-center","nav-left","logo","u-img-cover","site-search","search-box","cart-option","cart-count","prose","container","product","add-to-cart","modal","modal__overlay","modal__dialog","btn","btn--ghost","btn--primary","visually-hidden","accordion-toggle","links-grid","cart-table","order-summary","nav-center-flex","nav-right","category-dropdown","product-gallery","product-card","muted","button","product-card__media","u-reserve-square","u-img-cover","grid","grid-auto-fit","p-sm","product-options","package-options","quantity-selector","product-card__media","lead","error","hidden"] ,
-    "ids": ["primary-nav-menu","site-search-form","main-content","shop-now","find-stockists","newsletter-modal","paypal-redirect-form","paypal-debug","btn-proceed-checkout","confirm-cart-form","summary-subtotal","summary-total","summary-shipping","checkout-postcode","summary-content","pay-now-redirect","paypal-button-container","paypal-debug","site-category-select","site-search","hero","featured-products","featured-heading","product-grid-featured"],
-    "data_attributes": ["data-price","data-value","data-sku","data-image","data-controls","data-modal","data-modal-target","data-modal-close","data-subtotal","data-shipping"]
+    "classes": [
+      "no-js",
+      "skip-link",
+      "site-nav",
+      "nav-center",
+      "nav-left",
+      "logo",
+      "u-img-cover",
+      "site-search",
+      "search-box",
+      "cart-option",
+      "cart-count",
+      "prose",
+      "container",
+      "product",
+      "add-to-cart",
+      "modal",
+      "modal__overlay",
+      "modal__dialog",
+      "btn",
+      "btn--ghost",
+      "btn--primary",
+      "visually-hidden",
+      "accordion-toggle",
+      "links-grid",
+      "cart-table",
+      "order-summary",
+      "nav-center-flex",
+      "nav-right",
+      "category-dropdown",
+      "product-gallery",
+      "product-card",
+      "muted",
+      "button",
+      "product-card__media",
+      "u-reserve-square",
+      "u-img-cover",
+      "grid",
+      "grid-auto-fit",
+      "p-sm",
+      "product-options",
+      "package-options",
+      "quantity-selector",
+      "product-card__media",
+      "lead",
+      "error",
+      "hidden"
+    ],
+    "ids": [
+      "primary-nav-menu",
+      "site-search-form",
+      "main-content",
+      "shop-now",
+      "find-stockists",
+      "newsletter-modal",
+      "paypal-redirect-form",
+      "paypal-debug",
+      "btn-proceed-checkout",
+      "confirm-cart-form",
+      "summary-subtotal",
+      "summary-total",
+      "summary-shipping",
+      "checkout-postcode",
+      "summary-content",
+      "pay-now-redirect",
+      "paypal-button-container",
+      "paypal-debug",
+      "site-category-select",
+      "site-search",
+      "hero",
+      "featured-products",
+      "featured-heading",
+      "product-grid-featured"
+    ],
+    "data_attributes": [
+      "data-price",
+      "data-value",
+      "data-sku",
+      "data-image",
+      "data-controls",
+      "data-modal",
+      "data-modal-target",
+      "data-modal-close",
+      "data-subtotal",
+      "data-shipping"
+    ]
   },
   "modules": [
     {
       "path": "assets/js/modules/sync.js",
-      "exports": ["requestBackgroundSync"],
+      "exports": [
+        "requestBackgroundSync"
+      ],
       "domSelectors": [],
       "dataAttributes": [],
       "selectors_found_in_html": [],
@@ -20,8 +105,14 @@
     },
     {
       "path": "assets/js/modules/sw-register.js",
-      "exports": ["registerServiceWorker"],
-      "domSelectors": ["#sw-update-banner",".sw-update-button",".sw-update-dismiss"],
+      "exports": [
+        "registerServiceWorker"
+      ],
+      "domSelectors": [
+        "#sw-update-banner",
+        ".sw-update-button",
+        ".sw-update-dismiss"
+      ],
       "dataAttributes": [],
       "selectors_found_in_html": [],
       "notes": "No matching selectors found in HTML inventory — banner may be injected dynamically by SW code. Verify runtime insertion before removal."
@@ -40,1026 +131,1209 @@
     },
     {
       "path": "assets/js/modules/storageLocal.js",
-      "exports": ["getLocalCart","setLocalCart","removeLocalCart"],
+      "exports": [
+        "getLocalCart",
+        "setLocalCart",
+        "removeLocalCart"
+      ],
       "domSelectors": [],
       "dataAttributes": [],
       "notes": "Storage helper — no DOM"
     },
     {
       "path": "assets/js/modules/storageIDB.js",
-      "exports": ["loadCartFromIDB","saveCartToIDB"],
+      "exports": [
+        "loadCartFromIDB",
+        "saveCartToIDB"
+      ],
       "domSelectors": [],
       "dataAttributes": [],
       "notes": "IndexedDB helper — no DOM"
     },
     {
       "path": "assets/js/modules/product-helpers.js",
-      "exports": ["init"],
-      "domSelectors": ["figure.product-gallery","img[itemprop=\"image\""]],
-      "dataAttributes": ["width","height"],
-      "selectors_found_in_html": ["u-img-cover","product-gallery"],
-      "notes": "Image helpers target gallery and image elements; HTML inventory contains matching classes/attributes for product images."
-    },
-    {
-      "path": "assets/js/modules/payment-return.js",
-      "exports": ["hasPayPalReturnParams","handlePaymentReturn","initPaymentReturn"],
-      "domSelectors": ["main.container","#cart-cleared-note"],
-      "dataAttributes": [],
-      "selectors_found_in_html": ["container"],
-      "notes": "#cart-cleared-note not found in HTML inventory — confirm presence at runtime or add fallback."
-    },
-    {
-      "path": "assets/js/modules/payment-cancel.js",
-      "exports": ["hasPayPalReturnParams","handlePaymentCancel","initPaymentCancel"],
-      "domSelectors": ["main.container","#cart-cancelled-note"],
-      "dataAttributes": [],
-      "selectors_found_in_html": ["container"],
-      "notes": "#cart-cancelled-note not found in HTML inventory — potential dead selector"
-    },
-    {
-      "path": "assets/js/modules/nav-toggle.js",
-      "exports": ["init"],
-      "domSelectors": [".site-nav .nav-right","#nav-toggle",".site-nav","#primary-nav-menu"],
-      "dataAttributes": ["aria-expanded","aria-controls","aria-hidden"],
-      "selectors_found_in_html": ["site-nav","primary-nav-menu"],
-      "notes": "Primary nav selectors are present; #nav-toggle not found in inventory — likely present via other templates or dynamically generated. Keep conservative."
-    },
-    {
-      "path": "assets/js/modules/modal.js",
-      "exports": ["init"],
-      "domSelectors": ["[data-modal-target]","[data-modal-close]",".modal",".modal__dialog",".modal__overlay"],
-      "dataAttributes": ["data-modal-target","data-modal-close"],
-      "selectors_found_in_html": ["modal","modal__overlay","modal__dialog","data-modal-target","data-modal-close"],
-      "notes": "Modal selectors are widely present in HTML templates."
-    },
-    {
-      "path": "assets/js/modules/checkout-bootstrap.js",
-      "domSelectors": ["#summary-content","#pay-now-redirect","#checkout-error"],
-      "dataAttributes": [],
-      "selectors_found_in_html": ["checkout-error","summary-content"],
-      "notes": "Checkout bootstrap targets appear in checkout page."
-    },
-    {
-      "path": "assets/js/modules/category-select.js",
-      "exports": ["buildCategoryUrl","navigateTo","initCategorySelect"],
-      "domSelectors": ["#site-category-select"],
-      "dataAttributes": ["data-categorySelectInit"],
-      "selectors_found_in_html": ["site-category-select"],
-      "notes": "Category select element present in header templates."
-    },
-    {
-      "path": "assets/js/modules/cartUI.js",
-      "exports": ["setProductIndex","updateCartCountOutputs","renderCartTable","updateCartTableTotals","updateCartTableTotalsWithShipping","displayShippingEstimate"],
-      "domSelectors": ["output[name=\"cart-count\"]",".cart-table tbody",".cart-table","#summary-subtotal","#summary-total","#summary-shipping",".remove-item"],
-      "dataAttributes": ["data-price","data-subtotal","data-product-id","data-product-size"],
-      "selectors_found_in_html": ["cart-count","cart-table","summary-subtotal","summary-total","summary-shipping"],
-      "notes": "Cart UI elements exist in cart templates; data-attributes for price/subtotal are used in product listings."
-    },
-    {
-      "path": "assets/js/modules/cartStore.js",
-      "exports": ["CartStore","parseWeightString","getPostcodeZone","calculateParcelRate","calculateShippingByWeight","__setCachedPostcodes","__setCachedPostage","__resetCaches"],
-      "domSelectors": [],
-      "dataAttributes": [],
-      "notes": "Business logic module — no direct DOM mapping"
-    },
-    {
-      "path": "assets/js/modules/cart.js",
-      "exports": ["toNumber","normalizeItem","readFromDOM","readFromGlobal","collect","saveCart","attachFormHandler"],
-      "domSelectors": ["#confirm-cart-form","#btn-proceed-checkout",".cart-table tbody tr",".cart-item","#checkout-error"],
-      "dataAttributes": ["data-price","data-qty","data-id"],
-      "selectors_found_in_html": ["confirm-cart-form","btn-proceed-checkout","cart-table"],
-      "notes": "Most cart selectors present; confirm #btn-proceed-checkout literal exists in templates or is generated by JS."
-    },
-    {
-      "path": "assets/js/modules/cart-init.js",
-      "exports": ["initCart"],
-      "domSelectors": ["form.add-to-cart","form.product-options",".product","[itemscope]","#checkout-postcode"],
-      "dataAttributes": ["data-sku","data-id","data-image","data-price"],
-      "selectors_found_in_html": ["add-to-cart","product","itemscope","data-price","data-sku"],
-      "notes": "Product option selectors and data-attributes are well represented across product pages."
-    },
-    {
-      "path": "assets/js/modules/checkout.js",
-      "exports": ["parseCartRaw","computeGrandTotal","computeItemLabel","renderSummaryToString","runCheckout","setupPaypalRedirect"],
-      "domSelectors": ["#summary-content","#payment","#checkout-error","#paypal-button-container","#paypal-redirect-form","#pay-now-redirect","#paypal-debug"],
-      "dataAttributes": ["data-shipping"],
-      "selectors_found_in_html": ["summary-content","paypal-redirect-form","paypal-debug","paypal-button-container"],
-      "notes": "PayPal integration selectors present; be conservative when touching these selectors."
-    }
-  ]
+      "exports": [
+        "init"
+      ],
+      "domSelectors": [
+        "figure.product-gallery",
+        "img[itemprop=\"image\""
+      ]
+    ],
+    "dataAttributes": [
+      "width",
+      "height"
+    ],
+    "selectors_found_in_html": [
+      "u-img-cover",
+      "product-gallery"
+    ],
+    "notes": "Image helpers target gallery and image elements; HTML inventory contains matching classes/attributes for product images."
+  },
+  {
+    "path": "assets/js/modules/payment-return.js",
+    "exports": [
+      "hasPayPalReturnParams",
+      "handlePaymentReturn",
+      "initPaymentReturn"
+    ],
+    "domSelectors": [
+      "main.container",
+      "#cart-cleared-note"
+    ],
+    "dataAttributes": [],
+    "selectors_found_in_html": [
+      "container"
+    ],
+    "notes": "#cart-cleared-note not found in HTML inventory — confirm presence at runtime or add fallback."
+  },
+  {
+    "path": "assets/js/modules/payment-cancel.js",
+    "exports": [
+      "hasPayPalReturnParams",
+      "handlePaymentCancel",
+      "initPaymentCancel"
+    ],
+    "domSelectors": [
+      "main.container",
+      "#cart-cancelled-note"
+    ],
+    "dataAttributes": [],
+    "selectors_found_in_html": [
+      "container"
+    ],
+    "notes": "#cart-cancelled-note not found in HTML inventory — potential dead selector"
+  },
+  {
+    "path": "assets/js/modules/nav-toggle.js",
+    "exports": [
+      "init"
+    ],
+    "domSelectors": [
+      ".site-nav .nav-right",
+      "#nav-toggle",
+      ".site-nav",
+      "#primary-nav-menu"
+    ],
+    "dataAttributes": [
+      "aria-expanded",
+      "aria-controls",
+      "aria-hidden"
+    ],
+    "selectors_found_in_html": [
+      "site-nav",
+      "primary-nav-menu"
+    ],
+    "notes": "Primary nav selectors are present; #nav-toggle not found in inventory — likely present via other templates or dynamically generated. Keep conservative."
+  },
+  {
+    "path": "assets/js/modules/modal.js",
+    "exports": [
+      "init"
+    ],
+    "domSelectors": [
+      "[data-modal-target]",
+      "[data-modal-close]",
+      ".modal",
+      ".modal__dialog",
+      ".modal__overlay"
+    ],
+    "dataAttributes": [
+      "data-modal-target",
+      "data-modal-close"
+    ],
+    "selectors_found_in_html": [
+      "modal",
+      "modal__overlay",
+      "modal__dialog",
+      "data-modal-target",
+      "data-modal-close"
+    ],
+    "notes": "Modal selectors are widely present in HTML templates."
+  },
+  {
+    "path": "assets/js/modules/checkout-bootstrap.js",
+    "domSelectors": [
+      "#summary-content",
+      "#pay-now-redirect",
+      "#checkout-error"
+    ],
+    "dataAttributes": [],
+    "selectors_found_in_html": [
+      "checkout-error",
+      "summary-content"
+    ],
+    "notes": "Checkout bootstrap targets appear in checkout page."
+  },
+  {
+    "path": "assets/js/modules/category-select.js",
+    "exports": [
+      "buildCategoryUrl",
+      "navigateTo",
+      "initCategorySelect"
+    ],
+    "domSelectors": [
+      "#site-category-select"
+    ],
+    "dataAttributes": [
+      "data-categorySelectInit"
+    ],
+    "selectors_found_in_html": [
+      "site-category-select"
+    ],
+    "notes": "Category select element present in header templates."
+  },
+  {
+    "path": "assets/js/modules/cartUI.js",
+    "exports": [
+      "setProductIndex",
+      "updateCartCountOutputs",
+      "renderCartTable",
+      "updateCartTableTotals",
+      "updateCartTableTotalsWithShipping",
+      "displayShippingEstimate"
+    ],
+    "domSelectors": [
+      "output[name=\"cart-count\"]",
+      ".cart-table tbody",
+      ".cart-table",
+      "#summary-subtotal",
+      "#summary-total",
+      "#summary-shipping",
+      ".remove-item"
+    ],
+    "dataAttributes": [
+      "data-price",
+      "data-subtotal",
+      "data-product-id",
+      "data-product-size"
+    ],
+    "selectors_found_in_html": [
+      "cart-count",
+      "cart-table",
+      "summary-subtotal",
+      "summary-total",
+      "summary-shipping"
+    ],
+    "notes": "Cart UI elements exist in cart templates; data-attributes for price/subtotal are used in product listings."
+  },
+  {
+    "path": "assets/js/modules/cartStore.js",
+    "exports": [
+      "CartStore",
+      "parseWeightString",
+      "getPostcodeZone",
+      "calculateParcelRate",
+      "calculateShippingByWeight",
+      "__setCachedPostcodes",
+      "__setCachedPostage",
+      "__resetCaches"
+    ],
+    "domSelectors": [],
+    "dataAttributes": [],
+    "notes": "Business logic module — no direct DOM mapping"
+  },
+  {
+    "path": "assets/js/modules/cart.js",
+    "exports": [
+      "toNumber",
+      "normalizeItem",
+      "readFromDOM",
+      "readFromGlobal",
+      "collect",
+      "saveCart",
+      "attachFormHandler"
+    ],
+    "domSelectors": [
+      "#confirm-cart-form",
+      "#btn-proceed-checkout",
+      ".cart-table tbody tr",
+      ".cart-item",
+      "#checkout-error"
+    ],
+    "dataAttributes": [
+      "data-price",
+      "data-qty",
+      "data-id"
+    ],
+    "selectors_found_in_html": [
+      "confirm-cart-form",
+      "btn-proceed-checkout",
+      "cart-table"
+    ],
+    "notes": "Most cart selectors present; confirm #btn-proceed-checkout literal exists in templates or is generated by JS."
+  },
+  {
+    "path": "assets/js/modules/cart-init.js",
+    "exports": [
+      "initCart"
+    ],
+    "domSelectors": [
+      "form.add-to-cart",
+      "form.product-options",
+      ".product",
+      "[itemscope]",
+      "#checkout-postcode"
+    ],
+    "dataAttributes": [
+      "data-sku",
+      "data-id",
+      "data-image",
+      "data-price"
+    ],
+    "selectors_found_in_html": [
+      "add-to-cart",
+      "product",
+      "itemscope",
+      "data-price",
+      "data-sku"
+    ],
+    "notes": "Product option selectors and data-attributes are well represented across product pages."
+  },
+  {
+    "path": "assets/js/modules/checkout.js",
+    "exports": [
+      "parseCartRaw",
+      "computeGrandTotal",
+      "computeItemLabel",
+      "renderSummaryToString",
+      "runCheckout",
+      "setupPaypalRedirect"
+    ],
+    "domSelectors": [
+      "#summary-content",
+      "#payment",
+      "#checkout-error",
+      "#paypal-button-container",
+      "#paypal-redirect-form",
+      "#pay-now-redirect",
+      "#paypal-debug"
+    ],
+    "dataAttributes": [
+      "data-shipping"
+    ],
+    "selectors_found_in_html": [
+      "summary-content",
+      "paypal-redirect-form",
+      "paypal-debug",
+      "paypal-button-container"
+    ],
+    "notes": "PayPal integration selectors present; be conservative when touching these selectors."
+  }
+]
 }
 {
-  "generated": "2026-01-26T00:00:00Z",
-  "summary": {
-    "total_selectors": 38,
-    "present": 34,
-    "runtime_only_or_missing": 4
+"generated": "2026-01-26T00:00:00Z",
+"summary": {
+  "total_selectors": 38,
+  "present": 34,
+  "runtime_only_or_missing": 4
+},
+"selectors": [
+  {
+    "selector": ".site-nav .nav-right",
+    "modules": [
+      "nav-toggle.js"
+    ],
+    "module_paths": [
+      "assets/js/modules/nav-toggle.js"
+    ],
+    "dataAttributes": [
+      "aria-expanded",
+      "aria-controls",
+      "aria-hidden"
+    ],
+    "presence": "present",
+    "example_files": [
+      "index.html",
+      "pages/cart.html",
+      "pages/store.html"
+    ],
+    "risk_level": "low",
+    "notes": "Header navigation structure used for layout and focus management.",
+    "recommended_action": "Keep. When refactoring, add tests for keyboard focus and preserved ARIA attributes.",
+    "qa_steps": [
+      "Tab to navigation and verify focus order",
+      "Open nav on mobile and check aria-expanded toggles"
+    ]
   },
-  "selectors": [
+  {
+    "selector": "#nav-toggle",
+    "selectors_aliases": [
+      "[data-js-nav-toggle]",
+      ".js-nav-toggle",
+      "[data-nav-toggle]"
+    ],
+    "modules": [
+      "nav-toggle.js"
+    ],
+    "module_paths": [
+      "assets/js/modules/nav-toggle.js"
+    ],
+    "dataAttributes": [
+      "data-js-nav-toggle",
+      "aria-expanded",
+      "aria-controls",
+      "aria-hidden"
+    ],
+    "presence": "missing (injected at runtime by nav-toggle.js or present via JS hooks)",
+    "example_files": [],
+    "risk_level": "medium",
+    "notes": "Element is created dynamically to provide a single accessible toggle for the nav. Also supports alternative JS hook selectors for compatibility.",
+    "recommended_action": "Keep (runtime). If renaming, maintain backward-compatible alias or add feature-detecting fallback.",
+    "qa_steps": [
+      "Inspect DOM after load to confirm #nav-toggle or data-js-nav-toggle exists",
+      "Keyboard-only: press enter/space to open/close nav"
+    ]
+  },
+  {
+    "selector": ".site-nav",
+    "modules": [
+      "nav-toggle.js"
+    ],
+    "module_paths": [
+      "assets/js/modules/nav-toggle.js"
+    ],
+    "dataAttributes": [
+      "aria-expanded",
+      "aria-controls",
+      "aria-hidden"
+    ],
+    "presence": "present",
+    "example_files": [
+      "index.html",
+      "pages/cart.html",
+      "pages/store.html"
+    ],
+    "risk_level": "low",
+    "notes": "Semantic container for primary navigation; used across pages.",
+    "recommended_action": "Keep; minor refactors safe if ARIA and structure preserved.",
+    "qa_steps": [
+      "Visual smoke test across pages",
+      "Check mobile nav open/close behaviour"
+    ]
+  },
+  {
+    "selector": "#primary-nav-menu",
+    "modules": [
+      "nav-toggle.js"
+    ],
+    "module_paths": [
+      "assets/js/modules/nav-toggle.js"
+    ],
+    "dataAttributes": [],
+    "presence": "present",
+    "example_files": [
+      "index.html",
+      "pages/cart.html",
+      "pages/store.html"
+    ],
+    "risk_level": "low",
+    "notes": "Primary nav list container.",
+    "recommended_action": "Keep.",
+    "qa_steps": [
+      "Verify menu links are reachable via keyboard"
+    ]
+  },
+  {
+    "selector": "[tabindex]:not([tabindex=\"-1\"])",
+    "modules": [
+      "nav-toggle.js"
+    ],
+    "module_paths": [
+      "assets/js/modules/nav-toggle.js"
+    ],
+    "dataAttributes": [],
+    "presence": "present (various elements use tabindex)",
+    "example_files": [
+      "index.html",
+      "pages/cart.html"
+    ],
+    "risk_level": "low",
+    "notes": "Used for managing focusable items; ensure not to trap focus.",
+    "recommended_action": "Keep and test focus trapping scenarios.",
+    "qa_steps": [
+      "Navigate using keyboard only",
+      "Open/close modals and ensure focus returns correctly"
+    ]
+  },
+  {
+    "selector": "[data-modal-target]",
+    "selectors_aliases": [
+      "[data-modal]"
+    ],
+    "modules": [
+      "modal.js"
+    ],
+    "module_paths": [
+      "assets/js/modules/modal.js"
+    ],
+    "dataAttributes": [
+      "data-modal-target"
+    ],
+    "presence": "present",
+    "example_files": [
+      "index.html"
+    ],
+    "risk_level": "medium",
+    "notes": "Modal trigger selector; important for accessibility and keyboard support.",
+    "recommended_action": "Keep; when changing selectors, add a fallback selector to avoid breaking triggers.",
+    "qa_steps": [
+      "Activate modal via keyboard and mouse",
+      "Ensure aria-hidden and focus trap behaviour"
+    ]
+  },
+  {
+    "selector": "[data-modal]",
+    "modules": [
+      "modal.js"
+    ],
+    "module_paths": [
+      "assets/js/modules/modal.js"
+    ],
+    "dataAttributes": [
+      "data-modal"
+    ],
+    "presence": "present (added to newsletter modal)",
+    "example_files": [
+      "index.html"
+    ],
+    "risk_level": "low",
+    "notes": "Boolean marker on modal containers to provide a stable component root selector. Keeps id-based targeting for backwards compatibility.",
+    "recommended_action": "Keep; prefer data-modal on new modals and add it when migrating markup.",
+    "qa_steps": [
+      "Open newsletter modal via its trigger",
+      "Verify that modal has data-modal attribute and opens/closes normally"
+    ]
+  },
+  {
+    "selector": "[role=\"dialog\"]",
+    "modules": [
+      "modal.js"
+    ],
+    "module_paths": [
+      "assets/js/modules/modal.js"
+    ],
+    "dataAttributes": [],
+    "presence": "present (if dialog elements are used)",
+    "example_files": [
+      "index.html"
+    ],
+    "risk_level": "medium",
+    "notes": "Dialog role provides semantics for assistive tech and is now detected/ensured when opening modals.",
+    "recommended_action": "Keep; modal opener should ensure dialog role and aria-modal are present or added programmatically.",
+    "qa_steps": [
+      "Open modal and verify screen reader announces dialog role",
+      "Confirm aria-modal is set"
+    ]
+  },
+  {
+    "selector": "[data-modal-close]",
+    "modules": [
+      "modal.js"
+    ],
+    "module_paths": [
+      "assets/js/modules/modal.js"
+    ],
+    "dataAttributes": [
+      "data-modal-close"
+    ],
+    "presence": "present",
+    "example_files": [
+      "index.html"
+    ],
+    "risk_level": "medium",
+    "notes": "Modal close controls.",
+    "recommended_action": "Keep.",
+    "qa_steps": [
+      "Close modal with Escape, click, and keyboard actions"
+    ]
+  },
+  {
+    "selector": ".modal",
+    "modules": [
+      "modal.js"
+    ],
+    "module_paths": [
+      "assets/js/modules/modal.js"
+    ],
+    "dataAttributes": [],
+    "presence": "present",
+    "example_files": [
+      "index.html"
+    ],
+    "risk_level": "medium",
+    "notes": "Dialog container; maintain ARIA and role semantics.",
+    "recommended_action": "Keep.",
+    "qa_steps": [
+      "Screen reader quick test (announce dialog)",
+      "Keyboard navigation inside modal"
+    ]
+  },
+  {
+    "selector": ".modal__overlay",
+    "modules": [
+      "modal.js"
+    ],
+    "module_paths": [
+      "assets/js/modules/modal.js"
+    ],
+    "presence": "present",
+    "example_files": [
+      "index.html"
+    ],
+    "risk_level": "medium",
+    "notes": "Overlay used to dim background and capture clicks.",
+    "recommended_action": "Keep.",
+    "qa_steps": [
+      "Ensure click on overlay closes modal when expected"
+    ]
+  },
+  {
+    "selector": ".modal__dialog",
+    "modules": [
+      "modal.js"
+    ],
+    "module_paths": [
+      "assets/js/modules/modal.js"
+    ],
+    "presence": "present",
+    "example_files": [
+      "index.html"
+    ],
+    "risk_level": "medium",
+    "notes": "Dialog element where focus should land.",
+    "recommended_action": "Keep.",
+    "qa_steps": [
+      "Ensure focus lands in dialog when opened"
+    ]
+  },
+  {
+    "selector": "output[name=\"cart-count\"]",
+    "modules": [
+      "cartUI.js"
+    ],
+    "module_paths": [
+      "assets/js/modules/cartUI.js"
+    ],
+    "presence": "present",
+    "example_files": [
+      "index.html",
+      "pages/cart.html"
+    ],
+    "risk_level": "high",
+    "notes": "Displays cart count; used in critical cart flows.",
+    "recommended_action": "Keep and add visual + a11y assertions in tests.",
+    "qa_steps": [
+      "Add item and verify cart-count updates",
+      "Remove item and verify cart-count updates"
+    ]
+  },
+  {
+    "selector": ".cart-table tbody",
+    "modules": [
+      "cartUI.js",
+      "cart.js"
+    ],
+    "module_paths": [
+      "assets/js/modules/cartUI.js",
+      "assets/js/modules/cart.js"
+    ],
+    "presence": "present (tbody exists; rows are populated by JS at runtime)",
+    "example_files": [
+      "pages/cart.html"
+    ],
+    "risk_level": "high",
+    "notes": "Table body is present in HTML but rows are injected by JS; ensure render logic remains intact.",
+    "recommended_action": "Keep.",
+    "qa_steps": [
+      "Open cart page with items and verify rows render correctly"
+    ]
+  },
+  {
+    "selector": ".cart-table",
+    "modules": [
+      "cartUI.js"
+    ],
+    "module_paths": [
+      "assets/js/modules/cartUI.js"
+    ],
+    "presence": "present",
+    "example_files": [
+      "pages/cart.html"
+    ],
+    "risk_level": "high",
+    "notes": "Main cart table structure.",
+    "recommended_action": "Keep.",
+    "qa_steps": [
+      "Verify table layout across breakpoints"
+    ]
+  },
+  {
+    "selector": "#summary-subtotal",
+    "modules": [
+      "cartUI.js"
+    ],
+    "module_paths": [
+      "assets/js/modules/cartUI.js"
+    ],
+    "presence": "present",
+    "example_files": [
+      "pages/cart.html"
+    ],
+    "risk_level": "high",
+    "notes": "Subtotal display used for checkout calculations.",
+    "recommended_action": "Keep. Add assertion that subtotal matches expected value after cart edits.",
+    "qa_steps": [
+      "Change quantities and verify subtotal updates"
+    ]
+  },
+  {
+    "selector": "#summary-total",
+    "modules": [
+      "cartUI.js"
+    ],
+    "module_paths": [
+      "assets/js/modules/cartUI.js"
+    ],
+    "presence": "present",
+    "example_files": [
+      "pages/cart.html"
+    ],
+    "risk_level": "high",
+    "notes": "Grand total display.",
+    "recommended_action": "Keep and test during checkout E2E.",
+    "qa_steps": [
+      "Verify total matches PayPal payload values"
+    ]
+  },
+  {
+    "selector": "#summary-shipping",
+    "modules": [
+      "cartUI.js"
+    ],
+    "module_paths": [
+      "assets/js/modules/cartUI.js"
+    ],
+    "presence": "present",
+    "example_files": [
+      "pages/cart.html"
+    ],
+    "risk_level": "high",
+    "notes": "Shipping estimate output; sensitive to postcode and postage data.",
+    "recommended_action": "Keep and add tests for shipping estimator edge cases.",
+    "qa_steps": [
+      "Enter postcodes and verify shipping updates"
+    ]
+  },
+  {
+    "selector": ".remove-item",
+    "modules": [
+      "cartUI.js"
+    ],
+    "module_paths": [
+      "assets/js/modules/cartUI.js"
+    ],
+    "presence": "missing statically (created by cart UI at runtime)",
+    "example_files": [],
+    "risk_level": "medium",
+    "notes": "Action buttons are created when cart rows render; not present in static HTML.",
+    "recommended_action": "Keep (runtime). If changing, ensure existing click handlers remain bound or migrated safely.",
+    "qa_steps": [
+      "Render a cart with items and remove an item; verify cart updates and totals recalc"
+    ]
+  },
+  {
+    "selector": "form.add-to-cart",
+    "modules": [
+      "cart-init.js"
+    ],
+    "module_paths": [
+      "assets/js/modules/cart-init.js"
+    ],
+    "presence": "present",
+    "example_files": [
+      "pages/store/wellness-blends.html",
+      "index.html"
+    ],
+    "risk_level": "medium",
+    "notes": "Primary add-to-cart form selector for products.",
+    "recommended_action": "Keep; add tests to verify add-to-cart via form submission and via JS product options.",
+    "qa_steps": [
+      "Submit form and ensure cart contains correct SKU and quantity"
+    ]
+  },
+  {
+    "selector": "form.product-options",
+    "modules": [
+      "cart-init.js"
+    ],
+    "module_paths": [
+      "assets/js/modules/cart-init.js"
+    ],
+    "presence": "present",
+    "example_files": [
+      "pages/store/wellness-blends.html"
+    ],
+    "risk_level": "medium",
+    "notes": "Product option groupings for variants.",
+    "recommended_action": "Keep.",
+    "qa_steps": [
+      "Change product options and verify cart item metadata"
+    ]
+  },
+  {
+    "selector": ".product",
+    "selectors_aliases": [
+      "[data-product]"
+    ],
+    "modules": [
+      "cart-init.js"
+    ],
+    "module_paths": [
+      "assets/js/modules/cart-init.js"
+    ],
+    "presence": "present",
+    "example_files": [
+      "pages/store/wellness-blends.html"
+    ],
+    "risk_level": "low",
+    "notes": "Product container used across store pages. Recommend migrating to a component-root '[data-product]' for stability.",
+    "recommended_action": "Keep. When introducing '[data-product]' add dual-selector fallbacks in JS and tests.",
+    "qa_steps": [
+      "Visual check of product cards across pages"
+    ]
+  },
+  {
+    "selector": "[data-product]",
+    "modules": [
+      "cart-init.js"
+    ],
+    "module_paths": [
+      "assets/js/modules/cart-init.js"
+    ],
+    "dataAttributes": [
+      "data-product"
+    ],
+    "presence": "not present (recommended new component-root)",
+    "example_files": [],
+    "risk_level": "low",
+    "notes": "Prefer data-attribute component root for product cards to avoid descendant selector breakage.",
+    "recommended_action": "When migrating, add '[data-product]' to product containers and ensure cart-init accepts it.",
+    "qa_steps": [
+      "Add '[data-product]' to a single product and ensure add-to-cart, image extraction and sku detection still work"
+    ]
+  },
+  {
+    "selector": "[data-product-title]",
+    "modules": [
+      "cart-init.js"
+    ],
+    "module_paths": [
+      "assets/js/modules/cart-init.js"
+    ],
+    "dataAttributes": [
+      "data-product-title",
+      "data-product-name"
+    ],
+    "presence": "not present (optional)",
+    "example_files": [],
+    "risk_level": "low",
+    "notes": "Preferred selector for a product title; JS will use it before legacy heading selectors.",
+    "recommended_action": "Add '[data-product-title]' when migrating product markup; keep legacy headings until tests pass.",
+    "qa_steps": [
+      "Add '[data-product-title]' to a product and verify add-to-cart uses the title"
+    ]
+  },
+  {
+    "selector": "[data-product-price]",
+    "modules": [
+      "cart-init.js"
+    ],
+    "module_paths": [
+      "assets/js/modules/cart-init.js"
+    ],
+    "dataAttributes": [
+      "data-product-price",
+      "data-price"
+    ],
+    "presence": "not present (optional)",
+    "example_files": [],
+    "risk_level": "medium",
+    "notes": "Preferred product-level price attribute; used as a fallback when per-option prices are missing.",
+    "recommended_action": "Add cautiously with E2E checks to ensure price extraction continues to be accurate.",
+    "qa_steps": [
+      "Add data-product-price and verify totals during checkout"
+    ]
+  },
+  {
+    "selector": "[data-product-image]",
+    "modules": [
+      "cart-init.js",
+      "product-helpers.js"
+    ],
+    "module_paths": [
+      "assets/js/modules/cart-init.js",
+      "assets/js/modules/product-helpers.js"
+    ],
+    "dataAttributes": [
+      "data-product-image",
+      "data-image"
+    ],
+    "presence": "not present (optional)",
+    "example_files": [],
+    "risk_level": "low",
+    "notes": "Explicit image attribute for product cards; helps in reliable image extraction and performance tweaks.",
+    "recommended_action": "Add when migrating product cards; product-helpers will apply image classes and lazy-loading.",
+    "qa_steps": [
+      "Add data-product-image to a product image and verify it is used in cart and gallery enhancements"
+    ]
+  },
+  {
+    "selector": "[data-product-sku]",
+    "modules": [
+      "cart-init.js"
+    ],
+    "module_paths": [
+      "assets/js/modules/cart-init.js"
+    ],
+    "dataAttributes": [
+      "data-product-sku",
+      "data-sku"
+    ],
+    "presence": "not present (optional)",
+    "example_files": [],
+    "risk_level": "low",
+    "notes": "SKU attribute for product cards to avoid parsing DOM text content.",
+    "recommended_action": "Add for better SKU extraction and to make cart item uniqueness more robust.",
+    "qa_steps": [
+      "Add data-product-sku and verify cart items store the correct sku"
+    ]
+  }
     {
-      "selector": ".site-nav .nav-right",
-      "modules": [
-        "nav-toggle.js"
-      ],
-      "module_paths": [
-        "assets/js/modules/nav-toggle.js"
-      ],
-      "dataAttributes": [
-        "aria-expanded",
-        "aria-controls",
-        "aria-hidden"
-      ],
-      "presence": "present",
-      "example_files": [
-        "index.html",
-        "pages/cart.html",
-        "pages/store.html"
-      ],
-      "risk_level": "low",
-      "notes": "Header navigation structure used for layout and focus management.",
-      "recommended_action": "Keep. When refactoring, add tests for keyboard focus and preserved ARIA attributes.",
-      "qa_steps": [
-        "Tab to navigation and verify focus order",
-        "Open nav on mobile and check aria-expanded toggles"
-      ]
-    },
-    {
-      "selector": "#nav-toggle",
-      "selectors_aliases": [
-        "[data-js-nav-toggle]",
-        ".js-nav-toggle",
-        "[data-nav-toggle]"
-      ],
-      "modules": [
-        "nav-toggle.js"
-      ],
-      "module_paths": [
-        "assets/js/modules/nav-toggle.js"
-      ],
-      "dataAttributes": [
-        "data-js-nav-toggle",
-        "aria-expanded",
-        "aria-controls",
-        "aria-hidden"
-      ],
-      "presence": "missing (injected at runtime by nav-toggle.js or present via JS hooks)",
-      "example_files": [],
-      "risk_level": "medium",
-      "notes": "Element is created dynamically to provide a single accessible toggle for the nav. Also supports alternative JS hook selectors for compatibility.",
-      "recommended_action": "Keep (runtime). If renaming, maintain backward-compatible alias or add feature-detecting fallback.",
-      "qa_steps": [
-        "Inspect DOM after load to confirm #nav-toggle or data-js-nav-toggle exists",
-        "Keyboard-only: press enter/space to open/close nav"
-      ]
-    },
-    {
-      "selector": ".site-nav",
-      "modules": [
-        "nav-toggle.js"
-      ],
-      "module_paths": [
-        "assets/js/modules/nav-toggle.js"
-      ],
-      "dataAttributes": [
-        "aria-expanded",
-        "aria-controls",
-        "aria-hidden"
-      ],
-      "presence": "present",
-      "example_files": [
-        "index.html",
-        "pages/cart.html",
-        "pages/store.html"
-      ],
-      "risk_level": "low",
-      "notes": "Semantic container for primary navigation; used across pages.",
-      "recommended_action": "Keep; minor refactors safe if ARIA and structure preserved.",
-      "qa_steps": [
-        "Visual smoke test across pages",
-        "Check mobile nav open/close behaviour"
-      ]
-    },
-    {
-      "selector": "#primary-nav-menu",
-      "modules": [
-        "nav-toggle.js"
-      ],
-      "module_paths": [
-        "assets/js/modules/nav-toggle.js"
-      ],
-      "dataAttributes": [],
-      "presence": "present",
-      "example_files": [
-        "index.html",
-        "pages/cart.html",
-        "pages/store.html"
-      ],
-      "risk_level": "low",
-      "notes": "Primary nav list container.",
-      "recommended_action": "Keep.",
-      "qa_steps": [
-        "Verify menu links are reachable via keyboard"
-      ]
-    },
-    {
-      "selector": "[tabindex]:not([tabindex=\"-1\"])",
-      "modules": [
-        "nav-toggle.js"
-      ],
-      "module_paths": [
-        "assets/js/modules/nav-toggle.js"
-      ],
-      "dataAttributes": [],
-      "presence": "present (various elements use tabindex)",
-      "example_files": [
-        "index.html",
-        "pages/cart.html"
-      ],
-      "risk_level": "low",
-      "notes": "Used for managing focusable items; ensure not to trap focus.",
-      "recommended_action": "Keep and test focus trapping scenarios.",
-      "qa_steps": [
-        "Navigate using keyboard only",
-        "Open/close modals and ensure focus returns correctly"
-      ]
-    },
-    {
-      "selector": "[data-modal-target]",
-      "selectors_aliases": [
-        "[data-modal]"
-      ],
-      "modules": [
-        "modal.js"
-      ],
-      "module_paths": [
-        "assets/js/modules/modal.js"
-      ],
-      "dataAttributes": [
-        "data-modal-target"
-      ],
-      "presence": "present",
-      "example_files": [
-        "index.html"
-      ],
-      "risk_level": "medium",
-      "notes": "Modal trigger selector; important for accessibility and keyboard support.",
-      "recommended_action": "Keep; when changing selectors, add a fallback selector to avoid breaking triggers.",
-      "qa_steps": [
-        "Activate modal via keyboard and mouse",
-        "Ensure aria-hidden and focus trap behaviour"
-      ]
-    },
-    {
-      "selector": "[data-modal]",
-      "modules": [
-        "modal.js"
-      ],
-      "module_paths": [
-        "assets/js/modules/modal.js"
-      ],
-      "dataAttributes": [
-        "data-modal"
-      ],
-      "presence": "present (added to newsletter modal)",
-      "example_files": [
-        "index.html"
-      ],
-      "risk_level": "low",
-      "notes": "Boolean marker on modal containers to provide a stable component root selector. Keeps id-based targeting for backwards compatibility.",
-      "recommended_action": "Keep; prefer data-modal on new modals and add it when migrating markup.",
-      "qa_steps": [
-        "Open newsletter modal via its trigger",
-        "Verify that modal has data-modal attribute and opens/closes normally"
-      ]
-    },
-    {
-      "selector": "[role=\"dialog\"]",
-      "modules": [
-        "modal.js"
-      ],
-      "module_paths": [
-        "assets/js/modules/modal.js"
-      ],
-      "dataAttributes": [],
-      "presence": "present (if dialog elements are used)",
-      "example_files": [
-        "index.html"
-      ],
-      "risk_level": "medium",
-      "notes": "Dialog role provides semantics for assistive tech and is now detected/ensured when opening modals.",
-      "recommended_action": "Keep; modal opener should ensure dialog role and aria-modal are present or added programmatically.",
-      "qa_steps": [
-        "Open modal and verify screen reader announces dialog role",
-        "Confirm aria-modal is set"
-      ]
-    },
-    {
-      "selector": "[data-modal-close]",
-      "modules": [
-        "modal.js"
-      ],
-      "module_paths": [
-        "assets/js/modules/modal.js"
-      ],
-      "dataAttributes": [
-        "data-modal-close"
-      ],
-      "presence": "present",
-      "example_files": [
-        "index.html"
-      ],
-      "risk_level": "medium",
-      "notes": "Modal close controls.",
-      "recommended_action": "Keep.",
-      "qa_steps": [
-        "Close modal with Escape, click, and keyboard actions"
-      ]
-    },
-    {
-      "selector": ".modal",
-      "modules": [
-        "modal.js"
-      ],
-      "module_paths": [
-        "assets/js/modules/modal.js"
-      ],
-      "dataAttributes": [],
-      "presence": "present",
-      "example_files": [
-        "index.html"
-      ],
-      "risk_level": "medium",
-      "notes": "Dialog container; maintain ARIA and role semantics.",
-      "recommended_action": "Keep.",
-      "qa_steps": [
-        "Screen reader quick test (announce dialog)",
-        "Keyboard navigation inside modal"
-      ]
-    },
-    {
-      "selector": ".modal__overlay",
-      "modules": [
-        "modal.js"
-      ],
-      "module_paths": [
-        "assets/js/modules/modal.js"
-      ],
-      "presence": "present",
-      "example_files": [
-        "index.html"
-      ],
-      "risk_level": "medium",
-      "notes": "Overlay used to dim background and capture clicks.",
-      "recommended_action": "Keep.",
-      "qa_steps": [
-        "Ensure click on overlay closes modal when expected"
-      ]
-    },
-    {
-      "selector": ".modal__dialog",
-      "modules": [
-        "modal.js"
-      ],
-      "module_paths": [
-        "assets/js/modules/modal.js"
-      ],
-      "presence": "present",
-      "example_files": [
-        "index.html"
-      ],
-      "risk_level": "medium",
-      "notes": "Dialog element where focus should land.",
-      "recommended_action": "Keep.",
-      "qa_steps": [
-        "Ensure focus lands in dialog when opened"
-      ]
-    },
-    {
-      "selector": "output[name=\"cart-count\"]",
-      "modules": [
-        "cartUI.js"
-      ],
-      "module_paths": [
-        "assets/js/modules/cartUI.js"
-      ],
-      "presence": "present",
-      "example_files": [
-        "index.html",
-        "pages/cart.html"
-      ],
-      "risk_level": "high",
-      "notes": "Displays cart count; used in critical cart flows.",
-      "recommended_action": "Keep and add visual + a11y assertions in tests.",
-      "qa_steps": [
-        "Add item and verify cart-count updates",
-        "Remove item and verify cart-count updates"
-      ]
-    },
-    {
-      "selector": ".cart-table tbody",
-      "modules": [
-        "cartUI.js",
-        "cart.js"
-      ],
-      "module_paths": [
-        "assets/js/modules/cartUI.js",
-        "assets/js/modules/cart.js"
-      ],
-      "presence": "present (tbody exists; rows are populated by JS at runtime)",
-      "example_files": [
-        "pages/cart.html"
-      ],
-      "risk_level": "high",
-      "notes": "Table body is present in HTML but rows are injected by JS; ensure render logic remains intact.",
-      "recommended_action": "Keep.",
-      "qa_steps": [
-        "Open cart page with items and verify rows render correctly"
-      ]
-    },
-    {
-      "selector": ".cart-table",
-      "modules": [
-        "cartUI.js"
-      ],
-      "module_paths": [
-        "assets/js/modules/cartUI.js"
-      ],
-      "presence": "present",
-      "example_files": [
-        "pages/cart.html"
-      ],
-      "risk_level": "high",
-      "notes": "Main cart table structure.",
-      "recommended_action": "Keep.",
-      "qa_steps": [
-        "Verify table layout across breakpoints"
-      ]
-    },
-    {
-      "selector": "#summary-subtotal",
-      "modules": [
-        "cartUI.js"
-      ],
-      "module_paths": [
-        "assets/js/modules/cartUI.js"
-      ],
-      "presence": "present",
-      "example_files": [
-        "pages/cart.html"
-      ],
-      "risk_level": "high",
-      "notes": "Subtotal display used for checkout calculations.",
-      "recommended_action": "Keep. Add assertion that subtotal matches expected value after cart edits.",
-      "qa_steps": [
-        "Change quantities and verify subtotal updates"
-      ]
-    },
-    {
-      "selector": "#summary-total",
-      "modules": [
-        "cartUI.js"
-      ],
-      "module_paths": [
-        "assets/js/modules/cartUI.js"
-      ],
-      "presence": "present",
-      "example_files": [
-        "pages/cart.html"
-      ],
-      "risk_level": "high",
-      "notes": "Grand total display.",
-      "recommended_action": "Keep and test during checkout E2E.",
-      "qa_steps": [
-        "Verify total matches PayPal payload values"
-      ]
-    },
-    {
-      "selector": "#summary-shipping",
-      "modules": [
-        "cartUI.js"
-      ],
-      "module_paths": [
-        "assets/js/modules/cartUI.js"
-      ],
-      "presence": "present",
-      "example_files": [
-        "pages/cart.html"
-      ],
-      "risk_level": "high",
-      "notes": "Shipping estimate output; sensitive to postcode and postage data.",
-      "recommended_action": "Keep and add tests for shipping estimator edge cases.",
-      "qa_steps": [
-        "Enter postcodes and verify shipping updates"
-      ]
-    },
-    {
-      "selector": ".remove-item",
-      "modules": [
-        "cartUI.js"
-      ],
-      "module_paths": [
-        "assets/js/modules/cartUI.js"
-      ],
-      "presence": "missing statically (created by cart UI at runtime)",
-      "example_files": [],
-      "risk_level": "medium",
-      "notes": "Action buttons are created when cart rows render; not present in static HTML.",
-      "recommended_action": "Keep (runtime). If changing, ensure existing click handlers remain bound or migrated safely.",
-      "qa_steps": [
-        "Render a cart with items and remove an item; verify cart updates and totals recalc"
-      ]
-    },
-    {
-      "selector": "form.add-to-cart",
-      "modules": [
-        "cart-init.js"
-      ],
-      "module_paths": [
-        "assets/js/modules/cart-init.js"
-      ],
-      "presence": "present",
-      "example_files": [
-        "pages/store/wellness-blends.html",
-        "index.html"
-      ],
-      "risk_level": "medium",
-      "notes": "Primary add-to-cart form selector for products.",
-      "recommended_action": "Keep; add tests to verify add-to-cart via form submission and via JS product options.",
-      "qa_steps": [
-        "Submit form and ensure cart contains correct SKU and quantity"
-      ]
-    },
-    {
-      "selector": "form.product-options",
-      "modules": [
-        "cart-init.js"
-      ],
-      "module_paths": [
-        "assets/js/modules/cart-init.js"
-      ],
-      "presence": "present",
-      "example_files": [
-        "pages/store/wellness-blends.html"
-      ],
-      "risk_level": "medium",
-      "notes": "Product option groupings for variants.",
-      "recommended_action": "Keep.",
-      "qa_steps": [
-        "Change product options and verify cart item metadata"
-      ]
-    },
-    {
-      "selector": ".product",
-      "selectors_aliases": [
-        "[data-product]"
-      ],
-      "modules": [
-        "cart-init.js"
-      ],
-      "module_paths": [
-        "assets/js/modules/cart-init.js"
-      ],
-      "presence": "present",
-      "example_files": [
-        "pages/store/wellness-blends.html"
-      ],
-      "risk_level": "low",
-      "notes": "Product container used across store pages. Recommend migrating to a component-root '[data-product]' for stability.",
-      "recommended_action": "Keep. When introducing '[data-product]' add dual-selector fallbacks in JS and tests.",
-      "qa_steps": [
-        "Visual check of product cards across pages"
-      ]
-    },
-    {
-      "selector": "[data-product]",
-      "modules": [
-        "cart-init.js"
-      ],
-      "module_paths": [
-        "assets/js/modules/cart-init.js"
-      ],
-      "dataAttributes": [
-        "data-product"
-      ],
-      "presence": "not present (recommended new component-root)",
-      "example_files": [],
-      "risk_level": "low",
-      "notes": "Prefer data-attribute component root for product cards to avoid descendant selector breakage.",
-      "recommended_action": "When migrating, add '[data-product]' to product containers and ensure cart-init accepts it.",
-      "qa_steps": [
-        "Add '[data-product]' to a single product and ensure add-to-cart, image extraction and sku detection still work"
-      ]
-    },
-    {
-      "selector": "[data-product-title]",
-      "modules": [
-        "cart-init.js"
-      ],
-      "module_paths": [
-        "assets/js/modules/cart-init.js"
-      ],
-      "dataAttributes": [
-        "data-product-title",
-        "data-product-name"
-      ],
-      "presence": "not present (optional)",
-      "example_files": [],
-      "risk_level": "low",
-      "notes": "Preferred selector for a product title; JS will use it before legacy heading selectors.",
-      "recommended_action": "Add '[data-product-title]' when migrating product markup; keep legacy headings until tests pass.",
-      "qa_steps": [
-        "Add '[data-product-title]' to a product and verify add-to-cart uses the title"
-      ]
-    },
-    {
-      "selector": "[data-product-price]",
-      "modules": [
-        "cart-init.js"
-      ],
-      "module_paths": [
-        "assets/js/modules/cart-init.js"
-      ],
-      "dataAttributes": [
-        "data-product-price",
-        "data-price"
-      ],
-      "presence": "not present (optional)",
-      "example_files": [],
-      "risk_level": "medium",
-      "notes": "Preferred product-level price attribute; used as a fallback when per-option prices are missing.",
-      "recommended_action": "Add cautiously with E2E checks to ensure price extraction continues to be accurate.",
-      "qa_steps": [
-        "Add data-product-price and verify totals during checkout"
-      ]
-    },
-    {
-      "selector": "[data-product-image]",
-      "modules": [
-        "cart-init.js",
-        "product-helpers.js"
-      ],
-      "module_paths": [
-        "assets/js/modules/cart-init.js",
-        "assets/js/modules/product-helpers.js"
-      ],
-      "dataAttributes": [
-        "data-product-image",
-        "data-image"
-      ],
-      "presence": "not present (optional)",
-      "example_files": [],
-      "risk_level": "low",
-      "notes": "Explicit image attribute for product cards; helps in reliable image extraction and performance tweaks.",
-      "recommended_action": "Add when migrating product cards; product-helpers will apply image classes and lazy-loading.",
-      "qa_steps": [
-        "Add data-product-image to a product image and verify it is used in cart and gallery enhancements"
-      ]
-    },
-    {
-      "selector": "[data-product-sku]",
-      "modules": [
-        "cart-init.js"
-      ],
-      "module_paths": [
-        "assets/js/modules/cart-init.js"
-      ],
-      "dataAttributes": [
-        "data-product-sku",
-        "data-sku"
-      ],
-      "presence": "not present (optional)",
-      "example_files": [],
-      "risk_level": "low",
-      "notes": "SKU attribute for product cards to avoid parsing DOM text content.",
-      "recommended_action": "Add for better SKU extraction and to make cart item uniqueness more robust.",
-      "qa_steps": [
-        "Add data-product-sku and verify cart items store the correct sku"
-      ]
-    }
-    {
-      "selector": "[itemscope]",
-      "modules": [
-        "cart-init.js"
-      ],
-      "module_paths": [
-        "assets/js/modules/cart-init.js"
-      ],
-      "presence": "present",
-      "example_files": [
-        "pages/store/wellness-blends.html",
-        "index.html"
-      ],
-      "risk_level": "low",
-      "notes": "Microdata annotation; not mission-critical but useful for SEO.",
-      "recommended_action": "Keep.",
-      "qa_steps": [
-        "SEO smoke check if changing markup"
-      ]
-    },
-    {
-      "selector": "#checkout-postcode",
-      "modules": [
-        "cart-init.js"
-      ],
-      "module_paths": [
-        "assets/js/modules/cart-init.js"
-      ],
-      "presence": "present",
-      "example_files": [
-        "pages/cart.html"
-      ],
-      "risk_level": "high",
-      "notes": "Used by shipping estimator and rate calculations.",
-      "recommended_action": "Keep and add regression tests for shipping estimator with varied postcodes.",
-      "qa_steps": [
-        "Enter test postcodes and verify shipping cost calculations"
-      ]
-    },
-    {
-      "selector": "#confirm-cart-form",
-      "modules": [
-        "cart.js"
-      ],
-      "module_paths": [
-        "assets/js/modules/cart.js"
-      ],
-      "presence": "present",
-      "example_files": [
-        "pages/cart.html"
-      ],
-      "risk_level": "high",
-      "notes": "Form used to progress to checkout; essential for flow.",
-      "recommended_action": "Keep and add form submit E2E tests (desktop/mobile).",
-      "qa_steps": [
-        "Complete checkout flow from cart confirm to PayPal redirect"
-      ]
-    },
-    {
-      "selector": "#btn-proceed-checkout",
-      "modules": [
-        "cart.js"
-      ],
-      "module_paths": [
-        "assets/js/modules/cart.js"
-      ],
-      "presence": "present",
-      "example_files": [
-        "pages/cart.html"
-      ],
-      "risk_level": "high",
-      "notes": "Primary CTA to proceed — high-risk to change selector without fallback.",
-      "recommended_action": "Keep; if changing name or ID, add backwards-compatible hook.",
-      "qa_steps": [
-        "Click proceed and ensure checkout page loads with correct cart payload"
-      ]
-    },
-    {
-      "selector": ".cart-table tbody tr",
-      "modules": [
-        "cart.js"
-      ],
-      "module_paths": [
-        "assets/js/modules/cart.js"
-      ],
-      "presence": "rows are runtime-populated but tbody is present",
-      "example_files": [
-        "pages/cart.html"
-      ],
-      "risk_level": "high",
-      "notes": "Row elements are dynamic — migration must keep rendering logic aligned.",
-      "recommended_action": "Keep.",
-      "qa_steps": [
-        "Verify rows render and their remove buttons work"
-      ]
-    },
-    {
-      "selector": ".cart-item",
-      "modules": [
-        "cart.js"
-      ],
-      "module_paths": [
-        "assets/js/modules/cart.js"
-      ],
-      "presence": "mostly runtime (legacy fallback may generate these)",
-      "example_files": [],
-      "risk_level": "medium",
-      "notes": "Class assigned to row items; may be generated dynamically.",
-      "recommended_action": "Keep (runtime). If refactoring, ensure selectors used for event delegation remain compatible.",
-      "qa_steps": [
-        "Test delegation-based handlers like quantity change and remove"
-      ]
-    },
-    {
-      "selector": "#checkout-error",
-      "modules": [
-        "cart.js",
-        "checkout.js",
-        "checkout-bootstrap.js"
-      ],
-      "module_paths": [
-        "assets/js/modules/cart.js",
-        "assets/js/modules/checkout.js",
-        "assets/js/modules/checkout-bootstrap.js"
-      ],
-      "presence": "present",
-      "example_files": [
-        "pages/checkout.html",
-        "pages/cart.html"
-      ],
-      "risk_level": "high",
-      "notes": "Used to display error messages during checkout.",
-      "recommended_action": "Keep and ensure clients of this element set aria-live attributes as needed.",
-      "qa_steps": [
-        "Trigger a checkout error and verify the message is displayed and announced"
-      ]
-    },
-    {
-      "selector": "#site-category-select",
-      "modules": [
-        "category-select.js"
-      ],
-      "module_paths": [
-        "assets/js/modules/category-select.js"
-      ],
-      "presence": "present",
-      "example_files": [
-        "index.html",
-        "pages/store.html",
-        "pages/cart.html"
-      ],
-      "risk_level": "low",
-      "notes": "Category select component.",
-      "recommended_action": "Keep.",
-      "qa_steps": [
-        "Change categories and verify navigation target"
-      ]
-    },
-    {
-      "selector": "#summary-content",
-      "modules": [
-        "checkout.js",
-        "checkout-bootstrap.js"
-      ],
-      "module_paths": [
-        "assets/js/modules/checkout.js",
-        "assets/js/modules/checkout-bootstrap.js"
-      ],
-      "presence": "present",
-      "example_files": [
-        "pages/checkout.html"
-      ],
-      "risk_level": "high",
-      "notes": "Container where checkout summary is rendered; critical for PayPal payload generation.",
-      "recommended_action": "Keep and include in E2E payload checks.",
-      "qa_steps": [
-        "Ensure summary data matches cart and PayPal payment details"
-      ]
-    },
-    {
-      "selector": "#payment",
-      "modules": [
-        "checkout.js"
-      ],
-      "module_paths": [
-        "assets/js/modules/checkout.js"
-      ],
-      "presence": "present",
-      "example_files": [
-        "pages/checkout.html"
-      ],
-      "risk_level": "high",
-      "notes": "Payment container used for SDK buttons or redirect form.",
-      "recommended_action": "Keep.",
-      "qa_steps": [
-        "Verify both SDK and redirect form flows work"
-      ]
-    },
-    {
-      "selector": "#paypal-button-container",
-      "modules": [
-        "checkout.js"
-      ],
-      "module_paths": [
-        "assets/js/modules/checkout.js"
-      ],
-      "presence": "present",
-      "example_files": [
-        "pages/checkout.html"
-      ],
-      "risk_level": "high",
-      "notes": "Container for PayPal SDK buttons when enabled.",
-      "recommended_action": "Keep and test both SDK and non-SDK modes.",
-      "qa_steps": [
-        "Enable SDK mode (if configured) and verify UI renders"
-      ]
-    },
-    {
-      "selector": "#paypal-redirect-form",
-      "modules": [
-        "checkout.js"
-      ],
-      "module_paths": [
-        "assets/js/modules/checkout.js"
-      ],
-      "presence": "present",
-      "example_files": [
-        "pages/checkout.html"
-      ],
-      "risk_level": "high",
-      "notes": "Fallback redirect form for PayPal; must be preserved for redirect-mode payments.",
-      "recommended_action": "Keep and include form payload validation in E2E.",
-      "qa_steps": [
-        "Submit redirect flow and verify PayPal receives expected POST payload"
-      ]
-    },
-    {
-      "selector": "#pay-now-redirect",
-      "modules": [
-        "checkout.js"
-      ],
-      "module_paths": [
-        "assets/js/modules/checkout.js"
-      ],
-      "presence": "present",
-      "example_files": [
-        "pages/checkout.html"
-      ],
-      "risk_level": "high",
-      "notes": "Redirect button used to submit the paypal redirect form.",
-      "recommended_action": "Keep.",
-      "qa_steps": [
-        "Click pay-now and verify redirect form submits"
-      ]
-    },
-    {
-      "selector": "#paypal-debug",
-      "modules": [
-        "checkout.js"
-      ],
-      "module_paths": [
-        "assets/js/modules/checkout.js"
-      ],
-      "presence": "present",
-      "example_files": [
-        "pages/checkout.html"
-      ],
-      "risk_level": "medium",
-      "notes": "Debug area for PayPal payloads; optional in production.",
-      "recommended_action": "Keep or hide behind debug configuration.",
-      "qa_steps": [
-        "Inspect debug panel when enabled"
-      ]
-    },
-    {
-      "selector": "#sw-update-banner",
-      "modules": [
-        "sw-register.js"
-      ],
-      "module_paths": [
-        "assets/js/modules/sw-register.js"
-      ],
-      "presence": "missing (created by sw-register.js at runtime)",
-      "example_files": [],
-      "risk_level": "medium",
-      "notes": "Service worker update UI is injected when a new SW is available.",
-      "recommended_action": "Keep (runtime). When refactoring SW UI, keep an opt-in/backwards-compatible approach.",
-      "qa_steps": [
-        "Simulate SW update and confirm banner appears and functions"
-      ]
-    },
-    {
-      "selector": ".sw-update-button",
-      "modules": [
-        "sw-register.js"
-      ],
-      "module_paths": [
-        "assets/js/modules/sw-register.js"
-      ],
-      "presence": "missing (created by sw-register.js at runtime)",
-      "example_files": [],
-      "risk_level": "medium",
-      "notes": "Action button to apply update.",
-      "recommended_action": "Keep (runtime).",
-      "qa_steps": [
-        "Click update to ensure new service worker claims and reload behaviour is correct"
-      ]
-    },
-    {
-      "selector": ".sw-update-dismiss",
-      "modules": [
-        "sw-register.js"
-      ],
-      "module_paths": [
-        "assets/js/modules/sw-register.js"
-      ],
-      "presence": "missing (created by sw-register.js at runtime)",
-      "example_files": [],
-      "risk_level": "medium",
-      "notes": "Dismiss control for SW update banner.",
-      "recommended_action": "Keep (runtime).",
-      "qa_steps": [
-        "Dismiss banner and ensure it does not reappear improperly"
-      ]
-    }
-  ]
+    "selector": "[itemscope]",
+    "modules": [
+      "cart-init.js"
+    ],
+    "module_paths": [
+      "assets/js/modules/cart-init.js"
+    ],
+    "presence": "present",
+    "example_files": [
+      "pages/store/wellness-blends.html",
+      "index.html"
+    ],
+    "risk_level": "low",
+    "notes": "Microdata annotation; not mission-critical but useful for SEO.",
+    "recommended_action": "Keep.",
+    "qa_steps": [
+      "SEO smoke check if changing markup"
+    ]
+  },
+  {
+    "selector": "#checkout-postcode",
+    "modules": [
+      "cart-init.js"
+    ],
+    "module_paths": [
+      "assets/js/modules/cart-init.js"
+    ],
+    "presence": "present",
+    "example_files": [
+      "pages/cart.html"
+    ],
+    "risk_level": "high",
+    "notes": "Used by shipping estimator and rate calculations.",
+    "recommended_action": "Keep and add regression tests for shipping estimator with varied postcodes.",
+    "qa_steps": [
+      "Enter test postcodes and verify shipping cost calculations"
+    ]
+  },
+  {
+    "selector": "#confirm-cart-form",
+    "modules": [
+      "cart.js"
+    ],
+    "module_paths": [
+      "assets/js/modules/cart.js"
+    ],
+    "presence": "present",
+    "example_files": [
+      "pages/cart.html"
+    ],
+    "risk_level": "high",
+    "notes": "Form used to progress to checkout; essential for flow.",
+    "recommended_action": "Keep and add form submit E2E tests (desktop/mobile).",
+    "qa_steps": [
+      "Complete checkout flow from cart confirm to PayPal redirect"
+    ]
+  },
+  {
+    "selector": "#btn-proceed-checkout",
+    "modules": [
+      "cart.js"
+    ],
+    "module_paths": [
+      "assets/js/modules/cart.js"
+    ],
+    "presence": "present",
+    "example_files": [
+      "pages/cart.html"
+    ],
+    "risk_level": "high",
+    "notes": "Primary CTA to proceed — high-risk to change selector without fallback.",
+    "recommended_action": "Keep; if changing name or ID, add backwards-compatible hook.",
+    "qa_steps": [
+      "Click proceed and ensure checkout page loads with correct cart payload"
+    ]
+  },
+  {
+    "selector": ".cart-table tbody tr",
+    "modules": [
+      "cart.js"
+    ],
+    "module_paths": [
+      "assets/js/modules/cart.js"
+    ],
+    "presence": "rows are runtime-populated but tbody is present",
+    "example_files": [
+      "pages/cart.html"
+    ],
+    "risk_level": "high",
+    "notes": "Row elements are dynamic — migration must keep rendering logic aligned.",
+    "recommended_action": "Keep.",
+    "qa_steps": [
+      "Verify rows render and their remove buttons work"
+    ]
+  },
+  {
+    "selector": ".cart-item",
+    "modules": [
+      "cart.js"
+    ],
+    "module_paths": [
+      "assets/js/modules/cart.js"
+    ],
+    "presence": "mostly runtime (legacy fallback may generate these)",
+    "example_files": [],
+    "risk_level": "medium",
+    "notes": "Class assigned to row items; may be generated dynamically.",
+    "recommended_action": "Keep (runtime). If refactoring, ensure selectors used for event delegation remain compatible.",
+    "qa_steps": [
+      "Test delegation-based handlers like quantity change and remove"
+    ]
+  },
+  {
+    "selector": "#checkout-error",
+    "modules": [
+      "cart.js",
+      "checkout.js",
+      "checkout-bootstrap.js"
+    ],
+    "module_paths": [
+      "assets/js/modules/cart.js",
+      "assets/js/modules/checkout.js",
+      "assets/js/modules/checkout-bootstrap.js"
+    ],
+    "presence": "present",
+    "example_files": [
+      "pages/checkout.html",
+      "pages/cart.html"
+    ],
+    "risk_level": "high",
+    "notes": "Used to display error messages during checkout.",
+    "recommended_action": "Keep and ensure clients of this element set aria-live attributes as needed.",
+    "qa_steps": [
+      "Trigger a checkout error and verify the message is displayed and announced"
+    ]
+  },
+  {
+    "selector": "#site-category-select",
+    "modules": [
+      "category-select.js"
+    ],
+    "module_paths": [
+      "assets/js/modules/category-select.js"
+    ],
+    "presence": "present",
+    "example_files": [
+      "index.html",
+      "pages/store.html",
+      "pages/cart.html"
+    ],
+    "risk_level": "low",
+    "notes": "Category select component.",
+    "recommended_action": "Keep.",
+    "qa_steps": [
+      "Change categories and verify navigation target"
+    ]
+  },
+  {
+    "selector": "#summary-content",
+    "modules": [
+      "checkout.js",
+      "checkout-bootstrap.js"
+    ],
+    "module_paths": [
+      "assets/js/modules/checkout.js",
+      "assets/js/modules/checkout-bootstrap.js"
+    ],
+    "presence": "present",
+    "example_files": [
+      "pages/checkout.html"
+    ],
+    "risk_level": "high",
+    "notes": "Container where checkout summary is rendered; critical for PayPal payload generation.",
+    "recommended_action": "Keep and include in E2E payload checks.",
+    "qa_steps": [
+      "Ensure summary data matches cart and PayPal payment details"
+    ]
+  },
+  {
+    "selector": "#payment",
+    "modules": [
+      "checkout.js"
+    ],
+    "module_paths": [
+      "assets/js/modules/checkout.js"
+    ],
+    "presence": "present",
+    "example_files": [
+      "pages/checkout.html"
+    ],
+    "risk_level": "high",
+    "notes": "Payment container used for SDK buttons or redirect form.",
+    "recommended_action": "Keep.",
+    "qa_steps": [
+      "Verify both SDK and redirect form flows work"
+    ]
+  },
+  {
+    "selector": "#paypal-button-container",
+    "modules": [
+      "checkout.js"
+    ],
+    "module_paths": [
+      "assets/js/modules/checkout.js"
+    ],
+    "presence": "present",
+    "example_files": [
+      "pages/checkout.html"
+    ],
+    "risk_level": "high",
+    "notes": "Container for PayPal SDK buttons when enabled.",
+    "recommended_action": "Keep and test both SDK and non-SDK modes.",
+    "qa_steps": [
+      "Enable SDK mode (if configured) and verify UI renders"
+    ]
+  },
+  {
+    "selector": "#paypal-redirect-form",
+    "modules": [
+      "checkout.js"
+    ],
+    "module_paths": [
+      "assets/js/modules/checkout.js"
+    ],
+    "presence": "present",
+    "example_files": [
+      "pages/checkout.html"
+    ],
+    "risk_level": "high",
+    "notes": "Fallback redirect form for PayPal; must be preserved for redirect-mode payments.",
+    "recommended_action": "Keep and include form payload validation in E2E.",
+    "qa_steps": [
+      "Submit redirect flow and verify PayPal receives expected POST payload"
+    ]
+  },
+  {
+    "selector": "#pay-now-redirect",
+    "modules": [
+      "checkout.js"
+    ],
+    "module_paths": [
+      "assets/js/modules/checkout.js"
+    ],
+    "presence": "present",
+    "example_files": [
+      "pages/checkout.html"
+    ],
+    "risk_level": "high",
+    "notes": "Redirect button used to submit the paypal redirect form.",
+    "recommended_action": "Keep.",
+    "qa_steps": [
+      "Click pay-now and verify redirect form submits"
+    ]
+  },
+  {
+    "selector": "#paypal-debug",
+    "modules": [
+      "checkout.js"
+    ],
+    "module_paths": [
+      "assets/js/modules/checkout.js"
+    ],
+    "presence": "present",
+    "example_files": [
+      "pages/checkout.html"
+    ],
+    "risk_level": "medium",
+    "notes": "Debug area for PayPal payloads; optional in production.",
+    "recommended_action": "Keep or hide behind debug configuration.",
+    "qa_steps": [
+      "Inspect debug panel when enabled"
+    ]
+  },
+  {
+    "selector": "#sw-update-banner",
+    "modules": [
+      "sw-register.js"
+    ],
+    "module_paths": [
+      "assets/js/modules/sw-register.js"
+    ],
+    "presence": "missing (created by sw-register.js at runtime)",
+    "example_files": [],
+    "risk_level": "medium",
+    "notes": "Service worker update UI is injected when a new SW is available.",
+    "recommended_action": "Keep (runtime). When refactoring SW UI, keep an opt-in/backwards-compatible approach.",
+    "qa_steps": [
+      "Simulate SW update and confirm banner appears and functions"
+    ]
+  },
+  {
+    "selector": ".sw-update-button",
+    "modules": [
+      "sw-register.js"
+    ],
+    "module_paths": [
+      "assets/js/modules/sw-register.js"
+    ],
+    "presence": "missing (created by sw-register.js at runtime)",
+    "example_files": [],
+    "risk_level": "medium",
+    "notes": "Action button to apply update.",
+    "recommended_action": "Keep (runtime).",
+    "qa_steps": [
+      "Click update to ensure new service worker claims and reload behaviour is correct"
+    ]
+  },
+  {
+    "selector": ".sw-update-dismiss",
+    "modules": [
+      "sw-register.js"
+    ],
+    "module_paths": [
+      "assets/js/modules/sw-register.js"
+    ],
+    "presence": "missing (created by sw-register.js at runtime)",
+    "example_files": [],
+    "risk_level": "medium",
+    "notes": "Dismiss control for SW update banner.",
+    "recommended_action": "Keep (runtime).",
+    "qa_steps": [
+      "Dismiss banner and ensure it does not reappear improperly"
+    ]
+  }
+]
 }

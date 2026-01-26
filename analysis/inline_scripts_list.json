@@ -3,20 +3,50 @@
   "notes": "Inline scripts include JSON-LD structured data blocks and a small number of inline module scripts (payment/success clears localStorage). Most pages load /assets/js/app.js as a module.",
   "files": {
     "index.html": [
-      {"type":"application/ld+json","has_src":false},
-      {"type":"module","has_src":true,"src":"/assets/js/app.js"}
+      {
+        "type": "application/ld+json",
+        "has_src": false
+      },
+      {
+        "type": "module",
+        "has_src": true,
+        "src": "/assets/js/app.js"
+      }
     ],
     "pages/*.html": [
-      {"type":"application/ld+json","has_src":false},
-      {"type":"module","has_src":true,"src":"/assets/js/app.js"}
+      {
+        "type": "application/ld+json",
+        "has_src": false
+      },
+      {
+        "type": "module",
+        "has_src": true,
+        "src": "/assets/js/app.js"
+      }
     ],
     "pages/checkout.html": [
-      {"type":"module","has_src":true,"src":"/assets/js/app.js"},
-      {"type":"module","has_src":true,"src":"/assets/js/modules/checkout-bootstrap.js"}
+      {
+        "type": "module",
+        "has_src": true,
+        "src": "/assets/js/app.js"
+      },
+      {
+        "type": "module",
+        "has_src": true,
+        "src": "/assets/js/modules/checkout-bootstrap.js"
+      }
     ],
     "pages/payment/success.html": [
-      {"type":"module","has_src":true,"src":"/assets/js/app.js"},
-      {"type":"module","has_src":false,"snippet":"localStorage.removeItem('naturesi_cart'); localStorage.removeItem('naturesi-cart');"}
+      {
+        "type": "module",
+        "has_src": true,
+        "src": "/assets/js/app.js"
+      },
+      {
+        "type": "module",
+        "has_src": false,
+        "snippet": "localStorage.removeItem('naturesi_cart'); localStorage.removeItem('naturesi-cart');"
+      }
     ],
     "structured_data": "Multiple pages include application/ld+json blocks for SEO; these are treated as inline scripts but are data-only and safe to keep in-place."
   }
