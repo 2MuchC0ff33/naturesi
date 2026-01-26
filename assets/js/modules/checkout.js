@@ -55,9 +55,9 @@ export async function runCheckout({
   fetchPath = '/assets/js/data/paypal.json',
 } = {}) {
   if (!documentRoot) return;
-  const summary = documentRoot.getElementById('summary-content');
-  const paymentSection = documentRoot.getElementById('payment');
-  const errorEl = documentRoot.getElementById('checkout-error');
+  const summary = documentRoot.querySelector('[data-checkout-summary-content]') || documentRoot.getElementById('summary-content');
+  const paymentSection = documentRoot.querySelector('[data-checkout-payment]') || documentRoot.getElementById('payment');
+  const errorEl = documentRoot.querySelector('[data-checkout-error]') || documentRoot.getElementById('checkout-error');
   if (!summary || !paymentSection) return;
 
   const showError = (msg) => {
@@ -65,7 +65,7 @@ export async function runCheckout({
       errorEl.textContent = msg;
       errorEl.classList.remove('hidden');
     }
-    const payBtn = documentRoot.getElementById('pay-now');
+    const payBtn = documentRoot.querySelector('[data-pay-now]') || documentRoot.getElementById('pay-now') || documentRoot.getElementById('pay-now-redirect');
     if (payBtn) payBtn.disabled = true;
   };
   const clearError = () => {
@@ -73,7 +73,7 @@ export async function runCheckout({
       errorEl.textContent = '';
       errorEl.classList.add('u-hide');
     }
-    const payBtn = documentRoot.getElementById('pay-now');
+    const payBtn = documentRoot.querySelector('[data-pay-now]') || documentRoot.getElementById('pay-now') || documentRoot.getElementById('pay-now-redirect');
     if (payBtn) payBtn.disabled = false;
   };
 
@@ -129,6 +129,13 @@ export async function runCheckout({
     console.warn('setupPaypalRedirect failed:', e);
   }
 
+  // Prepare references to redirect form inputs so auto-submit can update them.
+  const frmEl = documentRoot.querySelector('[data-paypal-redirect-form]') || documentRoot.getElementById('paypal-redirect-form');
+  const amountInput = frmEl ? (frmEl.querySelector('input[name="amount"]') || frmEl.querySelector('[data-paypal-amount]')) : null;
+  const itemNameInput = frmEl ? (frmEl.querySelector('input[name="item_name"]') || frmEl.querySelector('[data-paypal-item_name]')) : null;
+  const invoiceInput = frmEl ? (frmEl.querySelector('input[name="invoice"]') || frmEl.querySelector('[data-paypal-invoice]')) : null;
+  const debugEl = documentRoot.querySelector('[data-paypal-debug]') || documentRoot.getElementById('paypal-debug');
+
   // If auto checkout requested (from ?auto=1 or localStorage.autoCheckout), submit redirect form
   const urlParams = new URLSearchParams((typeof location !== 'undefined' ? location.search : ''));
   const autoFlag = urlParams.get('auto') === '1' || (typeof localStorage !== 'undefined' && localStorage.getItem('autoCheckout') === '1');
@@ -175,73 +182,11 @@ export async function runCheckout({
     // Do not continue to try to load SDK in auto-only redirect flow unless configured
   }
 
-  // If useSdk is explicitly true, load SDK and render buttons (optional)
+  // Enforce redirect-only flow: do not load or render PayPal SDK here.
   if (paypalData && paypalData.useSdk) {
-    if (!paypalData.clientId) {
-      showError('PayPal client ID not configured for SDK.');
-      return;
-    }
-
-    if (!window.paypal) {
-      const script = document.createElement('script');
-      script.src = `https://www.paypal.com/sdk/js?client-id=${paypalData.clientId}&currency=USD`;
-      document.head.appendChild(script);
-      try {
-        await new Promise((resolve, reject) => {
-          script.onload = resolve;
-          script.onerror = () => reject(new Error('Failed to load PayPal SDK script.'));
-        });
-      } catch (e) {
-        showError('Failed to load PayPal SDK. Please check your connection and client ID.');
-        console.error('PayPal SDK load error:', e);
-        return;
-      }
-    }
-
-    // Render PayPal buttons (if container present)
-    const paypalButtonContainer = documentRoot.getElementById('paypal-button-container');
-    if (!paypalButtonContainer) {
-      showError('PayPal button container not found.');
-      return;
-    }
-
-    paypal.Buttons({
-      createOrder: function(data, actions) {
-        return actions.order.create({
-          intent: 'CAPTURE',
-          purchase_units: [{
-            amount: {
-              currency_code: 'USD',
-              value: total.toFixed(2)
-            },
-            items: cart.map(item => ({
-              name: item.title,
-              quantity: (Number(item.qty) || 0).toString(),
-              unit_amount: {
-                currency_code: 'USD',
-                value: (Number(item.price) || 0).toFixed(2)
-              }
-            }))
-          }]
-        });
-      },
-      onApprove: function(data, actions) {
-        return actions.order.capture().then(function(details) {
-          if (typeof localStorage !== 'undefined') {
-            localStorage.removeItem('naturesi_cart');
-            localStorage.removeItem('naturesi-cart');
-          }
-          window.location.href = '/pages/payment/success.html';
-        });
-      },
-      onCancel: function(data) {
-        window.location.href = '/pages/payment/cancel.html';
-      },
-      onError: function(err) {
-        showError('PayPal payment failed. Please try again.');
-        console.error('PayPal error:', err);
-      }
-    }).render('#paypal-button-container');
+    console.warn('PayPal SDK requested by configuration but this deployment uses redirect-only flow. Skipping SDK load.');
+    showError('PayPal SDK is disabled in this deployment; only redirect checkout is supported.');
+    return;
   }
 
   clearError();
@@ -249,8 +194,8 @@ export async function runCheckout({
 
 export async function setupPaypalRedirect(documentRoot, cart, shipping = 0, fetchPath = '/assets/js/data/paypal.json') {
   if (!documentRoot) return;
-  const form = documentRoot.getElementById('paypal-redirect-form');
-  const btn = documentRoot.getElementById('pay-now-redirect');
+  const form = documentRoot.querySelector('[data-paypal-redirect-form]') || documentRoot.getElementById('paypal-redirect-form');
+  const btn = documentRoot.querySelector('[data-pay-now]') || documentRoot.getElementById('pay-now-redirect');
   if (!form) return;
 
   let paypalData;
@@ -267,11 +212,11 @@ export async function setupPaypalRedirect(documentRoot, cart, shipping = 0, fetc
   const business = paypalData.sandboxMerchant || paypalData.email || '';
   form.action = env === 'sandbox' ? 'https://www.sandbox.paypal.com/cgi-bin/webscr' : 'https://www.paypal.com/cgi-bin/webscr';
 
-  const businessInput = form.querySelector('input[name="business"]');
-  const itemNameInput = form.querySelector('input[name="item_name"]');
-  const amountInput = form.querySelector('input[name="amount"]');
-  const returnInput = form.querySelector('input[name="return"]');
-  const cancelInput = form.querySelector('input[name="cancel_return"]');
+  const businessInput = form.querySelector('input[name="business"]') || form.querySelector('[name="business"]');
+  const itemNameInput = form.querySelector('input[name="item_name"]') || form.querySelector('[data-paypal-item_name]') || form.querySelector('[name="item_name"]');
+  const amountInput = form.querySelector('input[name="amount"]') || form.querySelector('[data-paypal-amount]') || form.querySelector('[name="amount"]');
+  const returnInput = form.querySelector('input[name="return"]') || form.querySelector('[name="return"]');
+  const cancelInput = form.querySelector('input[name="cancel_return"]') || form.querySelector('[name="cancel_return"]');
 
   if (businessInput) businessInput.value = business;
   const totalValue = (computeGrandTotal(cart) + Number(shipping || 0)).toFixed(2);
@@ -291,7 +236,7 @@ export async function setupPaypalRedirect(documentRoot, cart, shipping = 0, fetc
   if (rmInput) rmInput.value = paypalData.rm || '2';
 
   // Debug UI: show prepared values when debug requested
-  const debugEl = documentRoot.getElementById('paypal-debug');
+  const debugEl = documentRoot.querySelector('[data-paypal-debug]') || documentRoot.getElementById('paypal-debug');
   const urlParams = new URLSearchParams((typeof location !== 'undefined' ? location.search : ''));
   const debugOn = urlParams.get('debug') === '1' || !!paypalData.debug;
   if (debugOn && debugEl) {
@@ -311,7 +256,7 @@ export async function setupPaypalRedirect(documentRoot, cart, shipping = 0, fetc
 
   if (!business) {
     if (btn) btn.disabled = true;
-    const note = documentRoot.getElementById('checkout-note');
+    const note = documentRoot.querySelector('[data-checkout-note]') || documentRoot.getElementById('checkout-note');
     if (note) note.textContent = 'PayPal redirect unavailable (merchant not configured).';
     return;
   }

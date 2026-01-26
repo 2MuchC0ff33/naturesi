@@ -1,4 +1,10 @@
 {
+  "generated_at": "2026-01-27T00:13:00Z",
+  "status": "partial",
+  "notes": "Cross-referencing of JS selectors against HTML templates pending — this file will list selector literals found in JS that do not match any HTML element. Next automated pass will populate candidates for dead paths.",
+  "dead_selector_candidates": []
+}
+{
   "generated": "2026-01-26T00:00:00Z",
   "summary": {
     "total_selectors_checked": 38,

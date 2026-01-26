@@ -157,7 +157,11 @@ export async function initCart() {
       const fd = new FormData(form);
       // Prefer explicit component-root attribute first, then legacy selectors
     const productEl =
-      form.closest('[data-product]') || form.closest('.product') || form.closest('[itemscope]') || form;
+      form.closest('article[data-sku]') ||
+      form.closest('[data-product]') ||
+      form.closest('.product') ||
+      form.closest('[itemscope]') ||
+      form;
       const id =
         productEl && (productEl.id || productEl.dataset.sku || productEl.dataset.id)
           ? productEl.id || productEl.dataset.sku || productEl.dataset.id
@@ -296,9 +300,10 @@ export async function initCart() {
       // sku and description
       const sku =
         (productEl &&
-          (productEl.dataset.sku || productEl.dataset.productSku ||
-            (productEl.querySelector('[itemprop="sku"]') &&
-              productEl.querySelector('[itemprop="sku"]').textContent.trim()))) ||
+          (productEl.dataset.sku ||
+            productEl.dataset.productSku ||
+            productEl.getAttribute && productEl.getAttribute('data-sku') ||
+            (productEl.querySelector && productEl.querySelector('[itemprop="sku"]') && productEl.querySelector('[itemprop="sku"]').textContent.trim()))) ||
         null;
       const descriptionEl =
         productEl &&

@@ -6,6 +6,8 @@
 //   <div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="modal-title" tabindex="-1">...</div>
 // </div>
 
+import { delegate, addKeyListener } from './event-delegation.js';
+
 export function init(document) {
   if (typeof document === 'undefined') return;
 
@@ -64,13 +66,11 @@ export function init(document) {
     // store trigger for returning focus
     modalEl.__trigger = trigger;
 
-    function onKey(e) {
-      if (e.key === 'Escape') closeModal(modalEl);
-      trapFocus(modalEl, e);
-    }
-
-    modalEl.__onKey = onKey;
-    document.addEventListener('keydown', onKey);
+    // Use shared key helper and store remover so it can be cleaned up on close
+    modalEl.__removeKey = addKeyListener(document, {
+      Escape: () => closeModal(modalEl),
+      Tab: (e) => trapFocus(modalEl, e),
+    });
   }
 
   function closeModal(modalEl) {
@@ -89,7 +89,7 @@ export function init(document) {
       // ignore
     }
 
-    if (modalEl.__onKey) document.removeEventListener('keydown', modalEl.__onKey);
+    if (modalEl.__removeKey) modalEl.__removeKey();
   }
 
   // Open triggers
@@ -122,18 +122,15 @@ export function init(document) {
   });
 
   // Close triggers (overlay or [data-modal-close])
-  document.addEventListener('click', (e) => {
-    const close = e.target.closest('[data-modal-close]');
-    if (!close) return;
+  delegate(document, 'click', '[data-modal-close]', (e, close) => {
+    e.preventDefault();
     const modalEl = close.closest('.modal');
     if (!modalEl) return;
-    e.preventDefault();
     closeModal(modalEl);
   });
 
   // Close when clicking outside dialog but inside modal container
-  document.addEventListener('click', (e) => {
-    const m = e.target.closest('.modal');
+  delegate(document, 'click', '.modal', (e, m) => {
     if (!m || m.classList.contains('is-open') === false) return;
     const dialog = m.querySelector('.modal__dialog');
     if (dialog && !dialog.contains(e.target) && !e.target.closest('[data-modal-target]')) {

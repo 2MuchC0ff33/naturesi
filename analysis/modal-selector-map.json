@@ -1,0 +1,22 @@
+{
+  "description": "Map of modal/overlay selectors discovered in the repo (conservative, read-only inventory).",
+  "selectors": {
+    "trigger": "[data-modal-target]",
+    "container": "[data-modal]",
+    "close": "[data-modal-close]",
+    "overlay": ".modal__overlay",
+    "dialog": "[role=\"dialog\"]",
+    "legacyClass": ".modal"
+  },
+  "locations": {
+    "index.html": {
+      "path": "index.html",
+      "notes": "Newsletter modal: #newsletter-modal uses class 'modal', attribute 'data-modal', overlay uses 'data-modal-close', triggers use 'data-modal-target'."
+    },
+    "modalModule": {
+      "path": "assets/js/modules/modal.js",
+      "notes": "Module selects '[data-modal-target]' triggers, uses '[data-modal-close]' for close, sets aria-modal and tabindex on dialog elements."
+    }
+  },
+  "recommendation": "Keep existing data-modal hooks as canonical selectors. When adding new modals, use data-modal on container, data-modal-target on triggers and data-modal-close on overlays/buttons. Preserve role=\"dialog\" and aria-modal attributes for a11y."
+}

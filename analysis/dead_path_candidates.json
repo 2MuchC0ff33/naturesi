@@ -1,4 +1,46 @@
 {
+  "generated_at": "2026-01-27T00:21:00Z",
+  "description": "Selectors and data-attributes referenced by JS modules that were not found in the HTML inventory (initial automated pass). Manual verification recommended before removal.",
+  "candidates": [
+    {
+      "type": "id",
+      "selector": "#sw-update-banner",
+      "modules": ["assets/js/modules/sw-register.js"],
+      "reason": "No matching id found in HTML inventory; may be injected by SW at runtime. Verify before removal."
+    },
+    {
+      "type": "class",
+      "selector": ".sw-update-button",
+      "modules": ["assets/js/modules/sw-register.js"],
+      "reason": "No matching class in HTML inventory"
+    },
+    {
+      "type": "class",
+      "selector": ".sw-update-dismiss",
+      "modules": ["assets/js/modules/sw-register.js"],
+      "reason": "No matching class in HTML inventory"
+    },
+    {
+      "type": "id",
+      "selector": "#cart-cleared-note",
+      "modules": ["assets/js/modules/payment-return.js"],
+      "reason": "Referenced by payment-return; not observed in HTML templates. Confirm runtime rendering or add fallback."
+    },
+    {
+      "type": "id",
+      "selector": "#cart-cancelled-note",
+      "modules": ["assets/js/modules/payment-cancel.js"],
+      "reason": "Referenced by payment-cancel; not observed in HTML templates."
+    },
+    {
+      "type": "id",
+      "selector": "#nav-toggle",
+      "modules": ["assets/js/modules/nav-toggle.js"],
+      "reason": "Not found in inventory; may be present in some templates or added at runtime. Verify before changing."
+    }
+  ]
+}
+{
   "generated": "2026-01-26T00:00:00Z",
   "summary": {
     "total_candidates_found": 0,

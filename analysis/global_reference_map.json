@@ -1,4 +1,154 @@
 {
+  "generated_at": "2026-01-27T00:20:00Z",
+  "source": {
+    "module_inventory": "analysis/module_inventory.json",
+    "html_inventory": "analysis/html_inventory.json"
+  },
+  "html_summary": {
+    "classes": ["no-js","skip-link","site-nav","nav-center","nav-left","logo","u-img-cover","site-search","search-box","cart-option","cart-count","prose","container","product","add-to-cart","modal","modal__overlay","modal__dialog","btn","btn--ghost","btn--primary","visually-hidden","accordion-toggle","links-grid","cart-table","order-summary","nav-center-flex","nav-right","category-dropdown","product-gallery","product-card","muted","button","product-card__media","u-reserve-square","u-img-cover","grid","grid-auto-fit","p-sm","product-options","package-options","quantity-selector","product-card__media","lead","error","hidden"] ,
+    "ids": ["primary-nav-menu","site-search-form","main-content","shop-now","find-stockists","newsletter-modal","paypal-redirect-form","paypal-debug","btn-proceed-checkout","confirm-cart-form","summary-subtotal","summary-total","summary-shipping","checkout-postcode","summary-content","pay-now-redirect","paypal-button-container","paypal-debug","site-category-select","site-search","hero","featured-products","featured-heading","product-grid-featured"],
+    "data_attributes": ["data-price","data-value","data-sku","data-image","data-controls","data-modal","data-modal-target","data-modal-close","data-subtotal","data-shipping"]
+  },
+  "modules": [
+    {
+      "path": "assets/js/modules/sync.js",
+      "exports": ["requestBackgroundSync"],
+      "domSelectors": [],
+      "dataAttributes": [],
+      "selectors_found_in_html": [],
+      "notes": "No DOM targets — background sync helper"
+    },
+    {
+      "path": "assets/js/modules/sw-register.js",
+      "exports": ["registerServiceWorker"],
+      "domSelectors": ["#sw-update-banner",".sw-update-button",".sw-update-dismiss"],
+      "dataAttributes": [],
+      "selectors_found_in_html": [],
+      "notes": "No matching selectors found in HTML inventory — banner may be injected dynamically by SW code. Verify runtime insertion before removal."
+    },
+    {
+      "path": "assets/js/modules/sw-handlers.js",
+      "domSelectors": [],
+      "dataAttributes": [],
+      "notes": "Service worker runtime only"
+    },
+    {
+      "path": "assets/js/modules/sw-core.js",
+      "domSelectors": [],
+      "dataAttributes": [],
+      "notes": "Service worker core; no DOM targets"
+    },
+    {
+      "path": "assets/js/modules/storageLocal.js",
+      "exports": ["getLocalCart","setLocalCart","removeLocalCart"],
+      "domSelectors": [],
+      "dataAttributes": [],
+      "notes": "Storage helper — no DOM"
+    },
+    {
+      "path": "assets/js/modules/storageIDB.js",
+      "exports": ["loadCartFromIDB","saveCartToIDB"],
+      "domSelectors": [],
+      "dataAttributes": [],
+      "notes": "IndexedDB helper — no DOM"
+    },
+    {
+      "path": "assets/js/modules/product-helpers.js",
+      "exports": ["init"],
+      "domSelectors": ["figure.product-gallery","img[itemprop=\"image\""]],
+      "dataAttributes": ["width","height"],
+      "selectors_found_in_html": ["u-img-cover","product-gallery"],
+      "notes": "Image helpers target gallery and image elements; HTML inventory contains matching classes/attributes for product images."
+    },
+    {
+      "path": "assets/js/modules/payment-return.js",
+      "exports": ["hasPayPalReturnParams","handlePaymentReturn","initPaymentReturn"],
+      "domSelectors": ["main.container","#cart-cleared-note"],
+      "dataAttributes": [],
+      "selectors_found_in_html": ["container"],
+      "notes": "#cart-cleared-note not found in HTML inventory — confirm presence at runtime or add fallback."
+    },
+    {
+      "path": "assets/js/modules/payment-cancel.js",
+      "exports": ["hasPayPalReturnParams","handlePaymentCancel","initPaymentCancel"],
+      "domSelectors": ["main.container","#cart-cancelled-note"],
+      "dataAttributes": [],
+      "selectors_found_in_html": ["container"],
+      "notes": "#cart-cancelled-note not found in HTML inventory — potential dead selector"
+    },
+    {
+      "path": "assets/js/modules/nav-toggle.js",
+      "exports": ["init"],
+      "domSelectors": [".site-nav .nav-right","#nav-toggle",".site-nav","#primary-nav-menu"],
+      "dataAttributes": ["aria-expanded","aria-controls","aria-hidden"],
+      "selectors_found_in_html": ["site-nav","primary-nav-menu"],
+      "notes": "Primary nav selectors are present; #nav-toggle not found in inventory — likely present via other templates or dynamically generated. Keep conservative."
+    },
+    {
+      "path": "assets/js/modules/modal.js",
+      "exports": ["init"],
+      "domSelectors": ["[data-modal-target]","[data-modal-close]",".modal",".modal__dialog",".modal__overlay"],
+      "dataAttributes": ["data-modal-target","data-modal-close"],
+      "selectors_found_in_html": ["modal","modal__overlay","modal__dialog","data-modal-target","data-modal-close"],
+      "notes": "Modal selectors are widely present in HTML templates."
+    },
+    {
+      "path": "assets/js/modules/checkout-bootstrap.js",
+      "domSelectors": ["#summary-content","#pay-now-redirect","#checkout-error"],
+      "dataAttributes": [],
+      "selectors_found_in_html": ["checkout-error","summary-content"],
+      "notes": "Checkout bootstrap targets appear in checkout page."
+    },
+    {
+      "path": "assets/js/modules/category-select.js",
+      "exports": ["buildCategoryUrl","navigateTo","initCategorySelect"],
+      "domSelectors": ["#site-category-select"],
+      "dataAttributes": ["data-categorySelectInit"],
+      "selectors_found_in_html": ["site-category-select"],
+      "notes": "Category select element present in header templates."
+    },
+    {
+      "path": "assets/js/modules/cartUI.js",
+      "exports": ["setProductIndex","updateCartCountOutputs","renderCartTable","updateCartTableTotals","updateCartTableTotalsWithShipping","displayShippingEstimate"],
+      "domSelectors": ["output[name=\"cart-count\"]",".cart-table tbody",".cart-table","#summary-subtotal","#summary-total","#summary-shipping",".remove-item"],
+      "dataAttributes": ["data-price","data-subtotal","data-product-id","data-product-size"],
+      "selectors_found_in_html": ["cart-count","cart-table","summary-subtotal","summary-total","summary-shipping"],
+      "notes": "Cart UI elements exist in cart templates; data-attributes for price/subtotal are used in product listings."
+    },
+    {
+      "path": "assets/js/modules/cartStore.js",
+      "exports": ["CartStore","parseWeightString","getPostcodeZone","calculateParcelRate","calculateShippingByWeight","__setCachedPostcodes","__setCachedPostage","__resetCaches"],
+      "domSelectors": [],
+      "dataAttributes": [],
+      "notes": "Business logic module — no direct DOM mapping"
+    },
+    {
+      "path": "assets/js/modules/cart.js",
+      "exports": ["toNumber","normalizeItem","readFromDOM","readFromGlobal","collect","saveCart","attachFormHandler"],
+      "domSelectors": ["#confirm-cart-form","#btn-proceed-checkout",".cart-table tbody tr",".cart-item","#checkout-error"],
+      "dataAttributes": ["data-price","data-qty","data-id"],
+      "selectors_found_in_html": ["confirm-cart-form","btn-proceed-checkout","cart-table"],
+      "notes": "Most cart selectors present; confirm #btn-proceed-checkout literal exists in templates or is generated by JS."
+    },
+    {
+      "path": "assets/js/modules/cart-init.js",
+      "exports": ["initCart"],
+      "domSelectors": ["form.add-to-cart","form.product-options",".product","[itemscope]","#checkout-postcode"],
+      "dataAttributes": ["data-sku","data-id","data-image","data-price"],
+      "selectors_found_in_html": ["add-to-cart","product","itemscope","data-price","data-sku"],
+      "notes": "Product option selectors and data-attributes are well represented across product pages."
+    },
+    {
+      "path": "assets/js/modules/checkout.js",
+      "exports": ["parseCartRaw","computeGrandTotal","computeItemLabel","renderSummaryToString","runCheckout","setupPaypalRedirect"],
+      "domSelectors": ["#summary-content","#payment","#checkout-error","#paypal-button-container","#paypal-redirect-form","#pay-now-redirect","#paypal-debug"],
+      "dataAttributes": ["data-shipping"],
+      "selectors_found_in_html": ["summary-content","paypal-redirect-form","paypal-debug","paypal-button-container"],
+      "notes": "PayPal integration selectors present; be conservative when touching these selectors."
+    }
+  ]
+}
+{
   "generated": "2026-01-26T00:00:00Z",
   "summary": {
     "total_selectors": 38,

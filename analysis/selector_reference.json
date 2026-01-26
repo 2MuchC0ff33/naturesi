@@ -1,4 +1,23 @@
 {
+  "generated_at": "2026-01-27T00:00:00Z",
+  "scanned_path": "assets/js/modules/**/*.js",
+  "selectors": {
+    "data-attributes": {
+      "data-price": {
+        "modules": ["cart-init.js"],
+        "notes": "Used for price lookups on product options and inputs"
+      },
+      "data-value": {"modules": ["cart-init.js"],"notes":"paired with data-price to map option values"}
+    },
+    "querySelectors": {
+      "input[name='{name}']:checked": {"modules":["cart-init.js"]},
+      "select[name='{name}']": {"modules":["cart-init.js"]},
+      "input:checked[data-price]": {"modules":["cart-init.js"]}
+    },
+    "notes": "This is an initial, partial selector map generated from quick grep; further passes will expand cross-module coverage and verify exact literal strings in templates."
+  }
+}
+{
   "nav-toggle.js": {
     "path": "assets/js/modules/nav-toggle.js",
     "selectors": [

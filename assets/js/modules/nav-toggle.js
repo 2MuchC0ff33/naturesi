@@ -2,12 +2,19 @@
 // Inserts an accessible hamburger button if one is not present and
 // toggles the `.site-nav--open` class on the `.site-nav` element.
 
+import { delegate, addKeyListener } from './event-delegation.js';
+
 export function init(document) {
-  const navRight = document.querySelector('.site-nav .nav-right');
+  // Prefer stable data-attribute hooks when present, fall back to legacy selectors
+  const navRight = document.querySelector('[data-header-right]') || document.querySelector('.site-nav .nav-right');
   if (!navRight) return;
 
-  // Accept existing toggle by id or common JS hook selectors (backward-compatible)
-  let btn = document.getElementById('nav-toggle') || document.querySelector('[data-js-nav-toggle], .js-nav-toggle, [data-nav-toggle]');
+  // Locate primary nav containers using data attributes first, then legacy IDs/classes
+  const siteNav = document.querySelector('[data-site-nav]') || document.querySelector('.site-nav');
+  const navCenter = document.querySelector('[data-primary-nav]') || document.getElementById('primary-nav-menu');
+
+  // Accept existing toggle by data attribute first, then id or other legacy JS hook selectors
+  let btn = document.querySelector('[data-nav-toggle]') || document.getElementById('nav-toggle') || document.querySelector('[data-js-nav-toggle], .js-nav-toggle, [data-nav-toggle]');
   if (!btn) {
     btn = document.createElement('button');
     btn.type = 'button';
@@ -15,9 +22,17 @@ export function init(document) {
     btn.className = 'nav-toggle';
     // mark as a JS hook so future refactors can detect and preserve it
     btn.setAttribute('data-js-nav-toggle', '');
+    // provide a stable, semantic hook for future selector modernisation
+    btn.setAttribute('data-nav-toggle', '');
     btn.setAttribute('aria-label', 'Toggle navigation');
     btn.setAttribute('aria-expanded', 'false');
-    btn.setAttribute('aria-controls', 'primary-nav-menu');
+    // Point aria-controls to existing nav container id when available, otherwise keep legacy id
+    try {
+      const controlId = (navCenter && navCenter.id) ? navCenter.id : 'primary-nav-menu';
+      btn.setAttribute('aria-controls', controlId);
+    } catch (e) {
+      btn.setAttribute('aria-controls', 'primary-nav-menu');
+    }
     btn.innerHTML = `
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
         <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
@@ -32,9 +47,7 @@ export function init(document) {
       if (!btn.hasAttribute('data-js-nav-toggle')) btn.setAttribute('data-js-nav-toggle', '');
     }
   }
-
-  const siteNav = document.querySelector('.site-nav');
-  const navCenter = document.getElementById('primary-nav-menu');
+  // siteNav and navCenter were resolved earlier via data-attribute-aware selectors
   const mq = window.matchMedia('(max-width: 900px)');
   // Remember where focus was before opening so it can be restored
   let lastFocused = null;
@@ -111,15 +124,17 @@ export function init(document) {
     toggle();
   });
 
-  // Close nav on Escape
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      closeNav();
-    }
+  // Close nav on Escape (use shared key helper)
+  const _removeNavKey = addKeyListener(document, {
+    Escape: () => closeNav(),
   });
 
   // Close nav when clicking outside (only when open)
-  document.addEventListener('click', (e) => {
+  delegate(document, 'click', 'body', (e /* , _matched */) => {
     if (siteNav.classList.contains('site-nav--open') && !siteNav.contains(e.target)) closeNav();
   });
+
+  // Ensure we clean up key handler if needed when script is unloaded (best-effort)
+  // Attach to btn so other code can remove via btn.__removeNavKey
+  btn.__removeNavKey = _removeNavKey;
 }
