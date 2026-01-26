@@ -1,0 +1,9 @@
+/* ==========================================================================
+Objects — Responsive
+
+Centralised responsive helpers and breakpoint-based object patterns.
+Keep general responsive objects here; avoid component-specific rules.
+========================================================================== */
+
+/* Placeholder for central responsive object helpers. Add small, reusable
+   objects here (e.g., `o-media--landscape`), not component decoration. */

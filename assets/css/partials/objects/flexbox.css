@@ -1,0 +1,25 @@
+/* ==========================================================================
+Objects — Flexbox
+
+Flexbox object utilities: class-based, undecorated layout patterns for
+direction, alignment, and spacing. Keep conservative spacing tokens here.
+========================================================================== */
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.stack--sm {
+  gap: var(--space-xs);
+}
+
+.center-row {
+  display: flex;
+  flex-direction: row;
+  gap: 1.2rem;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+}

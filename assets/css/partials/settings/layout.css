@@ -3,37 +3,13 @@ Layout helpers and structural utilities (migrated from utilities.css)
 Contains container/grid helpers and small generic layout utilities
 ========================================================================== */
 
-/* Structural helpers moved to tools layer for re-use:
-   - `.hidden` -> partials/tools/hidden.css
-   - `.clearfix` -> partials/tools/clearfix.css
+/* Structural layout helpers have been migrated to the Objects layer (partials/objects) to keep
+   layout patterns reusable and undecorated:
+   - `.container` -> partials/objects/container.css
+   - `.grid` -> partials/objects/grid.css
+   - `.container--narrow` -> partials/objects/container.css
+   - `.grid-auto-fit` -> partials/objects/grid.css
 */
 
-/* Note: [hidden] is managed in the reset/normalize partials to keep a single source of truth. */
-
-.container {
-  width: 100%;
-  /* mobile-first horizontal padding, increases at larger widths */
-  padding-inline: var(--space-inline-sm);
-  margin-inline: auto;
-  max-width: var(--max-width);
-}
-
-.grid {
-  display: grid;
-  gap: var(--space-md);
-}
-
-/* Narrow container variant for tightly packed pages (mobile-first) */
-.container--narrow {
-  padding-inline: var(--space-inline-xs);
-  max-width: 880px;
-}
-
-@supports (width: min(240px, 100%)) {
-  .grid-auto-fit {
-    grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
-  }
-}
-
-/* Layout helpers moved from inline style attributes */
-/* `.center-row` and `.inline-block` utilities have been moved to `partials/tools/mixins.css` for re-use across components and utilities. */
+/* Note: `.center-row` moved to `partials/objects/flexbox.css` and `.inline-block` remains in
+   `partials/tools/mixins.css` for lightweight utilities. */

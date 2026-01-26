@@ -66,3 +66,6 @@ table {
     break-after: avoid;
   }
 }
+
+/* Prose styles were consolidated into `partials/elements/paragraphs.css` to
+   avoid duplicate definitions and keep paragraph rules in one canonical file. */

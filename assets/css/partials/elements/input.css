@@ -26,3 +26,16 @@ select[disabled] {
   opacity: 0.6;
   cursor: not-allowed;
 }
+
+/* Validation state helpers */
+.input--error,
+input[aria-invalid="true"] {
+  border-color: color-mix(in srgb, var(--color-accent) 40%, red 60%);
+  box-shadow: 0 0 0 3px color-mix(in srgb, red 8%, transparent);
+}
+
+.help-text {
+  font-size: 0.9rem;
+  color: var(--color-muted);
+  margin-top: 0.25rem;
+}

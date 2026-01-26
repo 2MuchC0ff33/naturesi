@@ -1,0 +1,14 @@
+/* ==========================================================================
+Objects — Wrapper
+
+Object layer: general page-level wrapper styles (ITCSS Objects layer).
+Keep these rules layout-focused and undecorated — no colours, fonts, or
+component-specific visual styles. Use them as re-usable layout building blocks.
+========================================================================== */
+
+.wrapper {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: var(--space-inline-sm);
+  box-sizing: border-box;
+}

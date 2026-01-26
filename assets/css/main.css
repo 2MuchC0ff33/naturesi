@@ -54,17 +54,36 @@
      - nav.css (Navigation element styles)
      - header.css (Header element styles)
      - footer.css (Footer element styles)
-     - container.css (Container object styles)
-     - modals.css (Modal object styles)
      - wrapper.css (Object layer wrapper)
+     - container.css (Container object styles)
      - flexbox.css (Flexbox object styles)
      - grid.css (Grid object styles)
      - media-object.css (Media object styles)
+     - modals.css (Modal object styles)
      - responsive.css (Responsive object styles)
-     - categories.css
-     - components.css
-     - cart.css
-     - checkout.css
+     - templates.css (Template-specific styles)
+     - shadow-dom.css (Shadow DOM styles)
+     - navigation-menu.css (Navigation menu styles)
+     - categories.css (Category-specific styles)
+     - products.css (Product-specific styles)
+     - components.css (Component-specific styles)
+     - input-fields.css (Input field styles)
+     - badges.css (Badge component styles)
+     - progress-bars.css (Progress bar styles)
+     - loaders.css (Loader component styles)
+     - sliders.css (Slider component styles)
+     - carousels.css (Carousel component styles)
+     - accordions.css (Accordion component styles)
+     - tabs.css (Tab component styles)
+     - tooltips.css (Tooltip component styles)
+     - modals-overlays.css (Modal and overlay styles)
+     - popups.css (Popup component styles)
+     - alerts.css (Alert component styles)
+     - notifications.css (Notification component styles)
+     - toasts.css (Toast component styles)
+     - cart.css (Cart-specific styles)
+     - checkout.css (Checkout-specific styles)
+     - transitions.css (Transition component styles)
      - utilities.css
 */
 
@@ -112,10 +131,36 @@
 @import url('partials/elements/nav.css');
 @import url('partials/elements/header.css');
 @import url('partials/elements/footer.css');
-@import url('partials/categories.css');
-@import url('partials/components.css');
-@import url('partials/cart.css');
-@import url('partials/checkout.css');
+@import url('partials/objects/wrapper.css');
+@import url('partials/objects/container.css');
+@import url('partials/objects/flexbox.css');
+@import url('partials/objects/grid.css');
+@import url('partials/objects/media-object.css');
+@import url('partials/objects/modals.css');
+@import url('partials/objects/responsive.css');
+@import url('partials/templates/templates.css');
+@import url('partials/templates/shadow-dom.css');
+@import url('partials/components/navigation-menu.css');
+@import url('partials/components/categories.css');
+@import url('partials/components/products.css');
+@import url('partials/components/components.css');
+@import url('partials/components/input-fields.css');
+@import url('partials/components/badges.css');
+@import url('partials/components/progress-bars.css');
+@import url('partials/components/loaders.css');
+@import url('partials/components/sliders.css');
+@import url('partials/components/carousels.css');
+@import url('partials/components/accordions.css');
+@import url('partials/components/tabs.css');
+@import url('partials/components/tooltips.css');
+@import url('partials/components/modals-overlays.css');
+@import url('partials/components/popups.css');
+@import url('partials/components/alerts.css');
+@import url('partials/components/notifications.css');
+@import url('partials/components/toasts.css');
+@import url('partials/components/cart.css');
+@import url('partials/components/checkout.css');
+@import url('partials/components/transitions.css');
 @import url('partials/utilities.css');
 
 /* End of main.css importer — do not add large blocks of styles here. */

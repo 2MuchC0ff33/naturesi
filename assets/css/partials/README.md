@@ -53,10 +53,36 @@ Import order (important)
 - nav.css (Navigation element styles)
 - header.css (Header element styles)
 - footer.css (Footer element styles)
-- categories.css
-- components.css
-- cart.css
-- checkout.css
+- wrapper.css (Object layer wrapper)
+- container.css (Container object styles)
+- flexbox.css (Flexbox object styles)
+- grid.css (Grid object styles)
+- media-object.css (Media object styles)
+- modals.css (Modal object styles)
+- responsive.css (Responsive object styles)
+- templates.css (Template-specific styles)
+- shadow-dom.css (Shadow DOM styles)
+- navigation-menu.css (Navigation menu styles)
+- categories.css (Category-specific styles)
+- products.css (Product-specific styles)
+- components.css (Component-specific styles)
+- input-fields.css (Input field styles)
+- badges.css (Badge component styles)
+- progress-bars.css (Progress bar styles)
+- loaders.css (Loader component styles)
+- sliders.css (Slider component styles)
+- carousels.css (Carousel component styles)
+- accordions.css (Accordion component styles)
+- tabs.css (Tab component styles)
+- tooltips.css (Tooltip component styles)
+- modals-overlays.css (Modal and overlay styles)
+- popups.css (Popup component styles)
+- alerts.css (Alert component styles)
+- notifications.css (Notification component styles)
+- toasts.css (Toast component styles)
+- cart.css (Cart-specific styles)
+- checkout.css (Checkout-specific styles)
+- transitions.css (Transition component styles)
 - utilities.css
 
 Conventions
@@ -82,6 +108,7 @@ Quick checklist for changes
 - Note (2026-01-26): Migrated control padding/transition into `partials/elements/input.css`; added input focus/disabled rules and button baseline/disabled rules in `partials/elements/buttons.css`. Review forms and search controls for layout parity before merging.
 - Note (2026-01-26): Moved `@media print` rules from `partials/categories.css` to `partials/elements/all.css` to centralise element print styles (a, abbr, pre, blockquote, tr, img, headings, etc.).
 - Note (2026-01-26): Added visible keyboard focus styles for buttons in `partials/elements/buttons.css` to improve keyboard navigation visibility and accessibility.
+- Note (2026-01-26): Added Objects layer partials in `partials/objects/` and migrated layout-only rules into them: `.container` → `partials/objects/container.css`, `.grid` → `partials/objects/grid.css`, `.stack`/`.center-row` → `partials/objects/flexbox.css`, `.responsive-media` → `partials/objects/media-object.css`. Objects should remain undecorated and layout-focused; keep one-off utilities using the `u-` prefix. Before merging run visual/a11y smoke tests on `index.html`, `pages/store/*.html`, `cart.html`, and `checkout.html` to verify parity.
 
 If you want a different split or a build pipeline (Sass/partials compilation),
 open an issue so we can discuss the approach and testing steps.

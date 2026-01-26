@@ -79,6 +79,40 @@ button {
   box-shadow: var(--shadow-sm);
 }
 
+/* Field and help text utilities */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.field--inline {
+  flex-direction: row;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.help-text {
+  font-size: 0.9rem;
+  color: var(--color-muted);
+}
+
+/* Add-to-cart buttons: style submit buttons inside `.add-to-cart` forms as primary CTAs
+   This avoids editing multiple templates and keeps behaviour additive and safe. */
+.add-to-cart [type="submit"],
+.add-to-cart button[type="submit"] {
+  background: var(--color-accent);
+  color: #fff;
+  border-color: transparent;
+}
+
+.add-to-cart [type="submit"]:focus-visible,
+.add-to-cart button[type="submit"]:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--color-accent) 60%, transparent);
+  outline-offset: 2px;
+}
+
+
 /* Button hover + focus (moved link hover to `partials/elements/links.css`) */
 button:hover,
 button:focus-visible {

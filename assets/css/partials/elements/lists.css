@@ -9,3 +9,19 @@ ol {
 li {
   margin-bottom: 0.35rem;
 }
+
+/* Utility lists */
+.list-inline {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: var(--space-xs);
+  align-items: center;
+}
+
+.list-unstyled {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}

@@ -1,0 +1,15 @@
+/* ==========================================================================
+Objects — Media object
+
+Responsive media helpers for images, video and picture elements. Keep these
+layout-only (size, display, aspect) and move visual styles to elements.
+========================================================================== */
+
+.responsive-media,
+.responsive-media img,
+.responsive-media video,
+.responsive-media picture {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}

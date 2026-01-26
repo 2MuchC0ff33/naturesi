@@ -1,0 +1,25 @@
+/* ==========================================================================
+Objects — Modals
+
+Modal object skeleton (undecorated). Keep ARIA/dialog semantics and focus
+management to component JS. This file is intentionally minimal until a
+custom modal component is needed.
+========================================================================== */
+
+/* Basic positioning and open-state layout (undecorated) */
+.modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  /* components toggle open state */
+  align-items: center;
+  justify-content: center;
+}
+
+.modal[open] {
+  display: flex;
+}
+
+/* Note: native dialog behaviour is reverted in reset.css (:where(dialog:modal)).
+   When creating a custom modal component, include focus trap and keyboard
+   handlers in the component's JS and add decorative styles in components/*.css */

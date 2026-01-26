@@ -29,3 +29,42 @@ button:focus-visible,
   outline: 3px solid color-mix(in srgb, var(--color-accent) 60%, transparent);
   outline-offset: 2px;
 }
+
+/* Element utilities: .btn and variants (low-specificity, Elements layer) */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.85rem;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-accent);
+  border: 1px solid transparent;
+  transition: background-color var(--transition-medium), color var(--transition-medium), box-shadow var(--transition-medium);
+}
+
+.btn--primary {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+.btn--ghost {
+  background: transparent;
+  border-color: var(--color-border);
+  color: var(--color-text);
+}
+
+.btn:focus-visible,
+.btn:focus {
+  outline: 3px solid color-mix(in srgb, var(--color-accent) 60%, transparent);
+  outline-offset: 2px;
+}
+
+@media (max-width: 640px) {
+  .btn {
+    min-height: 44px;
+    padding: 0.65rem 1rem;
+  }
+}
