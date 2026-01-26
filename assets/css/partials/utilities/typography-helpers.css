@@ -1,0 +1,25 @@
+/* Utilities – typography helpers */
+
+/* Truncate text */
+.u-truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Text alignment helpers */
+.u-text-center {
+  text-align: center;
+}
+
+.u-text-right {
+  text-align: right;
+}
+
+.u-text-left {
+  text-align: left;
+}
+
+.u-text-muted {
+  color: var(--muted-color);
+}

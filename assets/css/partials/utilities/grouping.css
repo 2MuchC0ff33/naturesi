@@ -1,0 +1,19 @@
+/* Utilities – grouping helpers (stack, gap) */
+
+.u-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.u-stack--sm {
+  gap: var(--space-xs);
+}
+
+.u-stack--lg {
+  gap: var(--space-lg);
+}
+
+.u-gap {
+  gap: var(--space-md);
+}

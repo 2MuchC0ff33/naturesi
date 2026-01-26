@@ -1,0 +1,30 @@
+/* Utilities – margin helpers (alias layer) */
+
+/* Use the single-purpose helpers in `spacing-helpers.css` where possible. */
+.u-mt-0 {
+  margin-top: 0;
+}
+
+.u-mt-1 {
+  margin-top: var(--space-xs);
+}
+
+.u-mt-2 {
+  margin-top: var(--space-sm);
+}
+
+.u-mt-3 {
+  margin-top: var(--space-md);
+}
+
+.u-mb-0 {
+  margin-bottom: 0;
+}
+
+.u-mb-1 {
+  margin-bottom: var(--space-xs);
+}
+
+.u-mb-2 {
+  margin-bottom: var(--space-sm);
+}

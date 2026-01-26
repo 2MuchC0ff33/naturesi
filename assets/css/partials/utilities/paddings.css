@@ -1,0 +1,17 @@
+/* Utilities – padding helpers (alias layer) */
+
+.u-p-0 {
+  padding: 0;
+}
+
+.u-p-1 {
+  padding: var(--space-xs);
+}
+
+.u-p-2 {
+  padding: var(--space-sm);
+}
+
+.u-p-3 {
+  padding: var(--space-md);
+}

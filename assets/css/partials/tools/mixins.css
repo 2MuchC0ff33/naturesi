@@ -1,33 +1,12 @@
 /* ==========================================================================
 Mixins & small utility snippets
 Lightweight helpers that can be composed in components.
+
+NOTE: Display and grid helpers were moved to `partials/utilities/display.css` and
+`partials/utilities/grouping.css`. Keep only small, object-level helpers here.
 ========================================================================== */
 
-.u-flex {
-  display: flex;
-  gap: var(--space-sm);
-}
-
-.u-inline-flex {
-  display: inline-flex;
-}
-
-.u-center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.u-grid {
-  display: grid;
-  gap: var(--space-md);
-}
-
-.u-auto-fit {
-  grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
-}
-
-/* Small display helpers moved here for reuse */
+/* Small display helpers moved to utilities/display.css (kept `.inline-block` here) */
 .inline-block {
   display: inline-block;
 }
@@ -35,11 +14,7 @@ Lightweight helpers that can be composed in components.
 /* `.center-row` moved to partials/objects/flexbox.css (Objects layer).
    Keep compact utilities that are intended for one-off use here (u-* helpers). */
 
-.u-truncate {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
+/* Truncate helper moved to `partials/utilities/typography-helpers.css` */
 
 /* `.badge` styles moved to `partials/components/badges.css` to follow ITCSS components layer */
 

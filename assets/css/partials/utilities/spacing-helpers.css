@@ -1,0 +1,44 @@
+/* Utilities – spacing helper aliases (map to design tokens in settings) */
+
+/* Padding aliases */
+.u-p-sm {
+  padding: var(--space-sm);
+}
+
+.u-p-md {
+  padding: var(--space-md);
+}
+
+/* Margin aliases */
+.u-mt-sm {
+  margin-top: var(--space-sm);
+}
+
+.u-mb-md {
+  margin-bottom: var(--space-md);
+}
+
+/* Simple single-step spacing helpers */
+.u-mt-1 {
+  margin-top: var(--space-xs);
+}
+
+.u-mt-2 {
+  margin-top: var(--space-sm);
+}
+
+.u-mt-3 {
+  margin-top: var(--space-md);
+}
+
+.u-mb-1 {
+  margin-bottom: var(--space-xs);
+}
+
+.u-mb-2 {
+  margin-bottom: var(--space-sm);
+}
+
+.u-mb-3 {
+  margin-bottom: var(--space-md);
+}

@@ -1,0 +1,17 @@
+/* Utilities – show helpers (inverse of hide) */
+
+.u-show-inline {
+  display: inline !important;
+}
+
+.u-show-block {
+  display: block !important;
+}
+
+.u-show-flex {
+  display: flex !important;
+}
+
+.u-show-inline-block {
+  display: inline-block !important;
+}

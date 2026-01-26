@@ -1,0 +1,9 @@
+/* Utilities – hide helpers (non-invasive) */
+
+/* Non-destructive hide for utilities layer */
+.u-hide,
+.u-hidden {
+  display: none !important;
+}
+
+/* Keep `.hidden` in tools for backwards compatibility — do not remove here. */

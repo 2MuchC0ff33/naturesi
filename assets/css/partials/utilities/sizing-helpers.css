@@ -1,0 +1,21 @@
+/* Utilities – sizing helpers */
+
+.u-w-100 {
+  width: 100%;
+}
+
+.u-h-100 {
+  height: 100%;
+}
+
+.u-w-auto {
+  width: auto;
+}
+
+.u-h-auto {
+  height: auto;
+}
+
+.u-maxw-600 {
+  max-width: 600px;
+}

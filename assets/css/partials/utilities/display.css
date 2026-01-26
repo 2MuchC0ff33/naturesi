@@ -1,0 +1,34 @@
+/* Utilities – display helpers */
+
+/* Flex and grid helpers */
+.u-flex {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.u-inline-flex {
+  display: inline-flex;
+}
+
+.u-grid {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.u-auto-fit {
+  grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+}
+
+/* Small display helpers */
+.u-inline {
+  display: inline;
+}
+
+.u-inline-block {
+  display: inline-block;
+}
+
+/* Backwards-compatibility - keep non-prefixed inline-block when used by objects */
+.inline-block {
+  display: inline-block;
+}
