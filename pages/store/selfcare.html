@@ -279,8 +279,8 @@
       </div>
     </nav>
   </header>
-  <main id="main-content" class="prose">
-    <section class="product-grid" aria-labelledby="selfcare-heading">
+  <main id="main-content" class="prose container">
+    <section aria-labelledby="selfcare-heading">
       <h2 id="selfcare-heading">Self Care</h2>
       <!-- Self Care products moved from pages/store.html -->
 
@@ -330,7 +330,6 @@
         <form action="/add-to-cart" method="post" class="product-options add-to-cart">
           <fieldset>
             <legend>Product Options</legend>
-
             <div class="quantity-selector">
               <label for="qty-pillow">Quantity:</label>
               <select id="qty-pillow" name="quantity" min="1" max="10" required>
@@ -341,11 +340,6 @@
                 <option value="5">5</option>
               </select>
             </div>
-
-            <output name="total-price" for="qty-pillow" class="total-price">
-              Total: $20.00
-            </output>
-
             <button type="submit">Add to Cart</button>
           </fieldset>
         </form>
@@ -410,7 +404,6 @@
         <form action="/add-to-cart" method="post" class="product-options add-to-cart">
           <fieldset>
             <legend>Product Options</legend>
-
             <div class="quantity-selector">
               <label for="qty-floralspray">Quantity:</label>
               <select id="qty-floralspray" name="quantity" min="1" max="10" required>
@@ -421,11 +414,6 @@
                 <option value="5">5</option>
               </select>
             </div>
-
-            <output name="total-price" for="qty-floralspray" class="total-price">
-              Total: $10.00
-            </output>
-
             <button type="submit">Add to Cart</button>
           </fieldset>
         </form>
@@ -488,7 +476,6 @@
         <form action="/add-to-cart" method="post" class="product-options add-to-cart">
           <fieldset>
             <legend>Product Options</legend>
-
             <div class="quantity-selector">
               <label for="qty-magnesium">Quantity:</label>
               <select id="qty-magnesium" name="quantity" min="1" max="10" required>
@@ -499,11 +486,6 @@
                 <option value="5">5</option>
               </select>
             </div>
-
-            <output name="total-price" for="qty-magnesium" class="total-price">
-              Total: $10.00
-            </output>
-
             <button type="submit">Add to Cart</button>
           </fieldset>
         </form>

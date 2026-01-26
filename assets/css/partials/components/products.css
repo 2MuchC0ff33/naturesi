@@ -67,7 +67,7 @@
   margin: 0 0 var(--space-xs) 0;
 }
 
-.product-card .total-price,
+.product-card,
 .product-card__price {
   font-weight: 700;
   color: var(--color-text);
