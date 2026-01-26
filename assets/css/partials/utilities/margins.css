@@ -4,12 +4,28 @@
    to avoid duplication and provide a canonical source of truth. */
 
 /* Axis aliases */
-.u-ml-1 { margin-left: var(--space-xs) !important; }
-.u-ml-2 { margin-left: var(--space-sm) !important; }
-.u-ml-3 { margin-left: var(--space-md) !important; }
+.u-ml-1 {
+  margin-left: var(--space-xs) !important;
+}
 
-.u-mr-1 { margin-right: var(--space-xs) !important; }
-.u-mr-2 { margin-right: var(--space-sm) !important; }
-.u-mr-3 { margin-right: var(--space-md) !important; }
+.u-ml-2 {
+  margin-left: var(--space-sm) !important;
+}
+
+.u-ml-3 {
+  margin-left: var(--space-md) !important;
+}
+
+.u-mr-1 {
+  margin-right: var(--space-xs) !important;
+}
+
+.u-mr-2 {
+  margin-right: var(--space-sm) !important;
+}
+
+.u-mr-3 {
+  margin-right: var(--space-md) !important;
+}
 
 /* Use `.u-mx-*` canonical helpers defined in `spacing-helpers.css` */

@@ -10,14 +10,18 @@
 
 /* Respect user preference to reduce motion */
 @media (prefers-reduced-motion: reduce) {
+
   .u-animate-fade,
   .u-animate-slide-up,
   .u-reduced-motion {
     animation: none !important;
     transition: none !important;
   }
+
   /* Turn off smooth scrolling for reduced motion */
-  .u-smooth-scroll { scroll-behavior: auto !important; }
+  .u-smooth-scroll {
+    scroll-behavior: auto !important;
+  }
 }
 
 /* Utility to programmatically disable animations on an element */
@@ -25,4 +29,3 @@
   animation: none !important;
   transition: none !important;
 }
-
