@@ -1,0 +1,17 @@
+/* Utilities – mobile-specific helpers */
+
+@media (max-width: 600px) {
+  .u-mobile-only {
+    display: block !important;
+  }
+
+  .u-hide-mobile {
+    display: none !important;
+  }
+}
+
+@media (min-width: 601px) {
+  .u-mobile-only {
+    display: none !important;
+  }
+}

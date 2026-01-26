@@ -1,0 +1,5 @@
+/* Utilities – Cumulative Layout Shift (CLS) helpers */
+
+.u-cls-stable {
+  min-height: 2.5rem;
+}

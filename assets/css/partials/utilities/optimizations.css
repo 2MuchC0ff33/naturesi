@@ -1,0 +1,13 @@
+/* Utilities – performance/optimization helpers */
+
+.u-will-change-transform {
+  will-change: transform;
+}
+
+.u-will-change-opacity {
+  will-change: opacity;
+}
+
+.u-will-change-top {
+  will-change: top;
+}

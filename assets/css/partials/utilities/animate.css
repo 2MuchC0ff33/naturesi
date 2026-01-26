@@ -1,0 +1,9 @@
+/* Utilities – animation helpers */
+
+.u-animate-fade {
+  animation: fade-in 0.3s ease both;
+}
+
+.u-animate-slide-up {
+  animation: slide-up 0.3s ease both;
+}

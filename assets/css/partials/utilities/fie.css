@@ -1,0 +1,6 @@
+/* Utilities – First Input Delay (FID) helpers */
+
+.u-fid-quick {
+  touch-action: manipulation;
+  user-select: auto;
+}
