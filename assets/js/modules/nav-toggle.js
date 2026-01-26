@@ -3,6 +3,7 @@
 // toggles the `.site-nav--open` class on the `.site-nav` element.
 
 import { delegate, addKeyListener } from './event-delegation.js';
+import { mqMax } from './breakpoints.js';
 
 export function init(document) {
   // Prefer stable data-attribute hooks when present, fall back to legacy selectors
@@ -48,7 +49,8 @@ export function init(document) {
     }
   }
   // siteNav and navCenter were resolved earlier via data-attribute-aware selectors
-  const mq = window.matchMedia('(max-width: 900px)');
+  // Use centralized breakpoint tokens (reads CSS custom properties)
+  const mq = mqMax('md');
   // Remember where focus was before opening so it can be restored
   let lastFocused = null;
 

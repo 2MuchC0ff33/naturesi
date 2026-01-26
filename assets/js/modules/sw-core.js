@@ -8,8 +8,9 @@ var PRECACHE_URLS = [
   '/pages/cart.html',
   '/pages/checkout.html',
   '/pages/shipping-estimate.html',
-  '/pages/payment/success.html',
-  '/pages/payment/fail.html',
+  // NOTE: payment success/fail pages are intentionally NOT precached.
+  // These pages can include transient data or query params from payment
+  // providers; caching them can cause stale or sensitive content to be served.
 ];
 
 self.addEventListener('install', function (evt) {

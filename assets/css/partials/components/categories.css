@@ -70,10 +70,11 @@ print fallbacks.
 }
 
 #site-header .category-dropdown a:hover,
-#site-header .category-dropdown a:focus {
+#site-header .category-dropdown a:focus-visible {
   background: color-mix(in srgb, var(--color-accent) 12%, white);
   color: var(--color-text);
-  outline: none;
+  outline: 3px solid color-mix(in srgb, var(--color-accent) 18%, transparent);
+  outline-offset: 2px;
 }
 
 #site-header .category-dropdown,
@@ -120,9 +121,11 @@ print fallbacks.
 }
 
 #site-header .site-nav .category-dropdown ul a:hover,
-#site-header .site-nav .category-dropdown ul a:focus {
+#site-header .site-nav .category-dropdown ul a:focus-visible {
   background: color-mix(in srgb, var(--color-accent) 12%, white);
   color: var(--color-text);
+  outline: 3px solid color-mix(in srgb, var(--color-accent) 18%, transparent);
+  outline-offset: 2px;
 }
 
 /* Strong override to ensure dropdown text is readable in light mode. Scoped and intentional to avoid wide-use of !important. */

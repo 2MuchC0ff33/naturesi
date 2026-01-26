@@ -18,7 +18,10 @@
 }
 
 .slider input[type='range']:focus-visible {
+  /* Keep native outline off but provide an accessible focus ring */
   outline: none;
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-accent) 18%, transparent);
+  border-radius: 999px;
 }
 
 /* Track */

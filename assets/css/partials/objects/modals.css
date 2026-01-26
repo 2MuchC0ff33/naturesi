@@ -39,7 +39,6 @@ API: `.modal` (container), `.modal__overlay`, `.modal__dialog`, `.modal__header`
   max-height: calc(100vh - 4rem);
   overflow: auto;
   box-sizing: border-box;
-  outline: none;
 }
 
 /* When a modal is open prevent background scroll */
@@ -55,6 +54,7 @@ body.modal-open {
 }
 
 /* Focus styles: component layer should define visual focus, but ensure focusable dialog receives focus */
-.modal__dialog:focus {
+.modal__dialog:focus-visible {
+  outline: 3px solid Highlight;
   outline-offset: 4px;
 }

@@ -7,17 +7,7 @@
   <title>Payment success</title>
   <link rel="stylesheet" href="/assets/css/main.css" />
   <script type="module" src="/assets/js/app.js"></script>
-  <script type="module">
-    // Clear local cart used by static checkout flows
-    try {
-      if (typeof localStorage !== 'undefined') {
-        localStorage.removeItem('naturesi_cart');
-        localStorage.removeItem('naturesi-cart');
-      }
-    } catch (e) {
-      console.warn('Failed to clear cart on payment success:', e);
-    }
-  </script>
+  <script type="module" src="/assets/js/modules/payment-success.js"></script>
 </head>
 
 <body>

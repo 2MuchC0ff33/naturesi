@@ -35,7 +35,6 @@ Accessibility:
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
   transform: translateY(8px) scale(0.995);
   transition: transform 240ms cubic-bezier(0.2, 0, 0, 1), box-shadow 240ms ease;
-  outline: none;
 }
 
 .modal.is-open .modal__dialog,
@@ -74,6 +73,12 @@ Accessibility:
   outline: 3px solid Highlight;
   /* visible focus for keyboard users */
   outline-offset: 2px;
+}
+
+/* Visible focus for the dialog container when keyboard-focused */
+.modal__dialog:focus-visible {
+  outline: 4px solid color-mix(in srgb, var(--color-accent) 20%, transparent);
+  outline-offset: 4px;
 }
 
 /* Respect reduced-motion */
