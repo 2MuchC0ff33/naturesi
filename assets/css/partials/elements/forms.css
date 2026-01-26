@@ -112,6 +112,20 @@ button {
   outline-offset: 2px;
 }
 
+/* Ensure buttons in the cart section have white text for visibility */
+#cart button {
+  color: white;
+}
+
+/* Ensure the Proceed to Checkout button has white text for visibility */
+#btn-proceed-checkout {
+  color: white;
+}
+
+/* Ensure the PayPal redirect button has white text for visibility */
+#pay-now-redirect {
+  color: white;
+}
 
 /* Button hover + focus (moved link hover to `partials/elements/links.css`) */
 button:hover,
