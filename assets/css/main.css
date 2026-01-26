@@ -228,5 +228,11 @@
 @import url('partials/utilities/mobile.css');
 @import url('partials/utilities/tablet.css');
 @import url('partials/utilities/desktop.css');
+@import url('partials/utilities/colors.css');
+@import url('partials/utilities/interactions.css');
+@import url('partials/utilities/flex.css');
+@import url('partials/utilities/grid.css');
+@import url('partials/utilities/overflow.css');
+@import url('partials/utilities/responsive.css');
 
 /* End of main.css importer — do not add large blocks of styles here. */

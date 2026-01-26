@@ -71,7 +71,7 @@ export async function runCheckout({
   const clearError = () => {
     if (errorEl) {
       errorEl.textContent = '';
-      errorEl.classList.add('hidden');
+      errorEl.classList.add('u-hide');
     }
     const payBtn = documentRoot.getElementById('pay-now');
     if (payBtn) payBtn.disabled = false;

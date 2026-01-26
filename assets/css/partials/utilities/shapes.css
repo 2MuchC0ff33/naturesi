@@ -7,3 +7,20 @@
 .u-circle {
   border-radius: 50%;
 }
+
+/* Border radius variants */
+.u-rounded-sm {
+  border-radius: 0.25rem !important;
+}
+
+.u-rounded-md {
+  border-radius: 0.5rem !important;
+}
+
+.u-rounded-lg {
+  border-radius: 0.75rem !important;
+}
+
+.u-rounded-xl {
+  border-radius: 1rem !important;
+}

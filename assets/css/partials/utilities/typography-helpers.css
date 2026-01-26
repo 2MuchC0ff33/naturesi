@@ -40,3 +40,33 @@
 .u-text-muted {
   color: var(--muted-color) !important;
 }
+
+/* Line height utilities */
+.u-leading-tight {
+  line-height: 1.25 !important;
+}
+
+.u-leading-normal {
+  line-height: 1.5 !important;
+}
+
+/* Font weight utilities */
+.u-font-light {
+  font-weight: 300 !important;
+}
+
+.u-font-normal {
+  font-weight: 400 !important;
+}
+
+.u-font-medium {
+  font-weight: 500 !important;
+}
+
+.u-font-semibold {
+  font-weight: 600 !important;
+}
+
+.u-font-bold {
+  font-weight: 700 !important;
+}

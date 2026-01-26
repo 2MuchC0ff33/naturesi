@@ -60,6 +60,20 @@
   color: var(--color-accent);
 }
 
+/* Make section headings bold within product cards */
+.product-card h4,
+.product-card h5,
+.product-card summary,
+.product-card legend {
+  font-weight: 700;
+}
+
+/* Make disclaimer text italic and regular weight */
+.product-card summary small {
+  font-style: italic;
+  font-weight: normal;
+}
+
 /* Fallbacks for pages that don't yet include explicit BEM classes */
 .product-card h3,
 .product-card__title {
@@ -67,7 +81,6 @@
   margin: 0 0 var(--space-xs) 0;
 }
 
-.product-card,
 .product-card__price {
   font-weight: 700;
   color: var(--color-text);
