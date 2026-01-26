@@ -1,5 +1,14 @@
 /* Utilities – visibility helpers */
 
+// Visibility helpers: visible, invisible, and a11y-friendly visually hidden state
+.u-visible {
+  visibility: visible !important;
+}
+
+.u-invisible {
+  visibility: hidden !important;
+}
+
 /* Alias of `.visually-hidden` from tools/accessibility.css for convenience */
 .u-visually-hidden {
   border: 0;

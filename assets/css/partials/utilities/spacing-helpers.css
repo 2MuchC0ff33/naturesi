@@ -1,5 +1,46 @@
 /* Utilities – spacing helper aliases (map to design tokens in settings) */
 
+// Spacing helpers: gap, space, padding, margin. Mobile-first, rem-based.
+.u-p-0 {
+  padding: 0 !important;
+}
+
+.u-p-1 {
+  padding: 0.25rem !important;
+}
+
+.u-p-2 {
+  padding: 0.5rem !important;
+}
+
+.u-p-3 {
+  padding: 1rem !important;
+}
+
+.u-p-4 {
+  padding: 2rem !important;
+}
+
+.u-m-0 {
+  margin: 0 !important;
+}
+
+.u-m-1 {
+  margin: 0.25rem !important;
+}
+
+.u-m-2 {
+  margin: 0.5rem !important;
+}
+
+.u-m-3 {
+  margin: 1rem !important;
+}
+
+.u-m-4 {
+  margin: 2rem !important;
+}
+
 /* Padding aliases */
 .u-p-sm {
   padding: var(--space-sm);
