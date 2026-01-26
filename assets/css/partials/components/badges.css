@@ -1,0 +1,16 @@
+/* components/badges.css
+   Purpose: Badge components and modifiers (e.g., `.badge`, `.badge--sale`, `.badge--new`).
+   Scope: Small inline elements that annotate products, categories, and nav items.
+   Notes: Badges should be simple and rely on tokens for colours and radii.
+*/
+
+.badge {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  border-radius: var(--radius-full, 999px);
+  /* Prefer explicit component tokens with sensible fallbacks to previous values */
+  background: var(--badge-bg, var(--color-light-background));
+  color: var(--badge-fg, var(--color-text));
+}

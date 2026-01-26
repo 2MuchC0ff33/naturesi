@@ -1,0 +1,6 @@
+/* templates/shadow-dom.css
+   Purpose: Styles intended for Shadow DOM hosts or to be injected into shadow roots.
+   Notes: Use only when a component requires encapsulation (web components) — keep minimal.
+*/
+
+/* Placeholder: shadow host utilities */

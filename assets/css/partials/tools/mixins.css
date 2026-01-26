@@ -41,14 +41,7 @@ Lightweight helpers that can be composed in components.
   text-overflow: ellipsis;
 }
 
-.badge {
-  display: inline-block;
-  padding: 0.15rem 0.5rem;
-  font-size: 0.78rem;
-  border-radius: var(--radius-full);
-  background: var(--color-light-background);
-  color: var(--color-text);
-}
+/* `.badge` styles moved to `partials/components/badges.css` to follow ITCSS components layer */
 
 /* Typography helpers */
 .font-mono {

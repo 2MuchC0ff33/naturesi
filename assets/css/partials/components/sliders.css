@@ -1,0 +1,7 @@
+/* components/sliders.css
+   Purpose: Range sliders and related UI parts.
+   Scope: `.slider`, `.slider__track`, `.slider__thumb`.
+   Notes: Keep mobile first; prefer native input[type='range'] wrappers.
+*/
+
+.slider { width: 100%; }

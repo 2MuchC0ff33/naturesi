@@ -187,9 +187,7 @@ Core header bar, logo treatment and colour gradient live here.
    ensures consistent light appearance regardless of OS preference. */
 
 @media (max-width: 420px) {
-  .cart-option .cart-text {
-    display: none;
-  }
+  /* Small-screen cart text hide moved to `partials/components/cart.css` to canonicalise component behaviour */
 
   .site-search .search-dropdown {
     flex: 0 0 110px;
@@ -247,59 +245,21 @@ Core header bar, logo treatment and colour gradient live here.
   width: 100%;
 }
 
-/* Nav toggle button (mobile only)
-   This button is inserted by `nav-toggle.js` when JS is available so the
-   HTML remains semantic and works without JS. */
-.nav-toggle {
-  display: none;
-  background: transparent;
-  border: 0;
-  padding: 0.25rem;
-  border-radius: 0.35rem;
-  color: var(--color-text);
-  align-items: center;
-  justify-content: center;
-}
+/* Nav toggle (presentation and mobile behaviour) moved to `partials/components/navigation-menu.css` */
 
-.nav-toggle svg {
-  display: block;
-  width: 20px;
-  height: 20px;
-}
-
-.nav-toggle:focus-visible {
-  outline: 2px solid var(--color-accent);
-  outline-offset: 2px;
-}
 
 /* Small screens: hide the center area by default and show the nav-toggle.
    When the navigation is opened (.site-nav--open) the nav-center becomes visible. */
 @media (max-width: 900px) {
-  .nav-toggle {
-    display: inline-flex;
-  }
+  /* `.nav-toggle` display and small-screen open-state moved to `partials/components/navigation-menu.css` */
 
   /* Ensure the header is a positioned container for the absolute overlay */
   .site-nav {
     position: relative;
   }
 
-  /* Hide center nav by default on small screens only when JS is enabled.
-     This ensures HTML-only users (no-js) keep the full navigation visible. */
-  html:not(.no-js) .site-nav .nav-center {
-    display: none;
-  }
+  /* `.nav-center` small-screen behaviours (no-js hide + open-state overlays) moved to component partial */
 
-  /* Open state: present the nav as an overlay panel below the header */
-  .site-nav.site-nav--open .nav-center {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0.6rem;
-    width: calc(100% - var(--space-sm));
-    position: absolute;
-    left: 0.5rem;
-    right: 0.5rem;
     top: calc(100% + 0.4rem);
     background: var(--color-background);
     padding: var(--space-sm);

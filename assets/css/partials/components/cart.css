@@ -115,13 +115,5 @@
   color: var(--muted-color, #6b7280);
 }
 
-/* Error message styling */
-.error-message {
-  color: var(--color-error, #dc2626);
-  background-color: var(--color-error-bg, #fef2f2);
-  border: 1px solid var(--color-error-border, #fecaca);
-  border-radius: 4px;
-  padding: 0.75rem;
-  margin-bottom: 1rem;
-  font-weight: 500;
-}
+/* Error message styling moved to `partials/components/alerts.css` to centralise alert visuals */
+/* Keep cart-specific structure and behaviour in this file but reuse `.error-message` from alerts.css */
