@@ -67,6 +67,14 @@ if (typeof document !== 'undefined') {
         } catch (err) {
           console.warn('Nav toggle init failed', err);
         }
+
+        // Initialize accessible modal behavior (lightweight, optional)
+        try {
+          const modalMod = await import('./modules/modal.js');
+          if (modalMod && typeof modalMod.init === 'function') modalMod.init(document);
+        } catch (err) {
+          console.warn('Modal init failed', err);
+        }
       } catch (err) {
         console.error('Category select init failed', err);
       }

@@ -281,7 +281,7 @@
   </header>
 
   <!-- WCAG: Main content landmark for skip link target -->
-  <main id="main-content" tabindex="-1" class="prose">
+  <main id="main-content" tabindex="-1" class="prose container">
     <section id="home" itemscope itemtype="https://schema.org/Store">
       <header id="hero">
         <h1 itemprop="name">Nature's Infusions</h1>
@@ -417,7 +417,11 @@
             pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="your@email.com"
             aria-describedby="newsletter-error" />
           <span id="newsletter-error" class="visually-hidden" aria-live="polite"></span>
-          <button type="submit" class="btn btn--primary">Subscribe</button>
+          <div class="newsletter-actions">
+            <button type="submit" class="btn btn--primary">Subscribe</button>
+            <!-- Non-essential info about the newsletter in an accessible modal -->
+            <button type="button" class="btn btn--ghost" data-modal-target="#newsletter-modal">Why subscribe?</button>
+          </div>
         </form>
       </section>
 
@@ -534,6 +538,25 @@
       </footer>
     </div>
   </main>
+
+  <!-- Newsletter modal (structural objects only; styling in components if desired) -->
+  <div id="newsletter-modal" class="modal" aria-hidden="true">
+    <div class="modal__overlay" data-modal-close></div>
+    <div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="newsletter-modal-title" tabindex="-1">
+      <header class="modal__header">
+        <h3 id="newsletter-modal-title">Why subscribe?</h3>
+        <button type="button" class="btn btn--ghost" data-modal-close aria-label="Close dialog">Close</button>
+      </header>
+      <div class="modal__body">
+        <p>Subscribe for product launches, special offers and herbal tips delivered monthly. We promise no spam and a
+          clear unsubscribe option.</p>
+      </div>
+      <footer class="modal__footer">
+        <button type="button" class="btn btn--primary" data-modal-close>OK, got it</button>
+      </footer>
+    </div>
+  </div>
+
 </body>
 
 </html>

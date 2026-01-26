@@ -3,6 +3,9 @@ Objects — Container
 
 Container object: mobile-first, token-driven container sizing. Keep layout
 properties only; move decorations (colours, borders) into components.
+
+API: `.container` (default), `.container--narrow`, `.container--lg`, `.container--fluid`
+Use `.container` inside `.wrapper` to constrain content width.
 ========================================================================== */
 
 .container {
@@ -11,6 +14,13 @@ properties only; move decorations (colours, borders) into components.
   padding-inline: var(--space-inline-sm);
   margin-inline: auto;
   max-width: var(--max-width);
+  box-sizing: border-box;
+}
+
+/* Optional alias to ease migration */
+.o-container {
+  max-width: var(--max-width);
+  padding-inline: var(--space-inline-sm);
   box-sizing: border-box;
 }
 
@@ -23,4 +33,10 @@ properties only; move decorations (colours, borders) into components.
 .container--lg {
   max-width: 64rem;
   /* migrated from elements/groups.css */
+}
+
+/* Fluid variant: removes max-width to allow full-bleed content inside wrapper */
+.container--fluid {
+  max-width: none;
+  padding-inline: var(--space-inline-sm);
 }
