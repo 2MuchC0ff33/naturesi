@@ -25,7 +25,7 @@ my project consists of html css js json xml and markdown, i use the node/npm eco
 ---
 
 ```md
-
+class="u-img-cover"
 
 You are GitHub Copilot Raptor Mini acting as an **autonomous refactoring assistant** for an HTML5-first, static, mobile-first progressive web app e-commerce store.
 

@@ -13,6 +13,5 @@
   justify-content: center;
 }
 
-.u-text-center {
-  text-align: center !important;
-}
+/* Text alignment utilities are defined in `typography-helpers.css`.
+   Keep the single canonical definition there to avoid duplication. */

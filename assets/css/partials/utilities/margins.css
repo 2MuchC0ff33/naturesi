@@ -1,30 +1,15 @@
-/* Utilities – margin helpers (alias layer) */
+/* Utilities – margin helpers (alias layer)
+   This partial provides axis helpers and convenience aliases. The single-purpose
+   spacing utilities (e.g. `.u-mt-1`, `.u-p-1`) are defined in `spacing-helpers.css`
+   to avoid duplication and provide a canonical source of truth. */
 
-/* Use the single-purpose helpers in `spacing-helpers.css` where possible. */
-.u-mt-0 {
-  margin-top: 0;
-}
+/* Axis aliases */
+.u-ml-1 { margin-left: var(--space-xs) !important; }
+.u-ml-2 { margin-left: var(--space-sm) !important; }
+.u-ml-3 { margin-left: var(--space-md) !important; }
 
-.u-mt-1 {
-  margin-top: var(--space-xs);
-}
+.u-mr-1 { margin-right: var(--space-xs) !important; }
+.u-mr-2 { margin-right: var(--space-sm) !important; }
+.u-mr-3 { margin-right: var(--space-md) !important; }
 
-.u-mt-2 {
-  margin-top: var(--space-sm);
-}
-
-.u-mt-3 {
-  margin-top: var(--space-md);
-}
-
-.u-mb-0 {
-  margin-bottom: 0;
-}
-
-.u-mb-1 {
-  margin-bottom: var(--space-xs);
-}
-
-.u-mb-2 {
-  margin-bottom: var(--space-sm);
-}
+/* Use `.u-mx-*` canonical helpers defined in `spacing-helpers.css` */

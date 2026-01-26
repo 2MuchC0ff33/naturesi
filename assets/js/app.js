@@ -75,6 +75,16 @@ if (typeof document !== 'undefined') {
         } catch (err) {
           console.warn('Modal init failed', err);
         }
+
+        // Enhance product gallery markup with Utilities to reduce CLS and ensure consistent object-fit
+        try {
+          if (document.querySelector('figure.product-gallery')) {
+            const ph = await import('./modules/product-helpers.js');
+            if (ph && typeof ph.init === 'function') ph.init(document);
+          }
+        } catch (err) {
+          console.warn('Product helpers init failed', err);
+        }
       } catch (err) {
         console.error('Category select init failed', err);
       }

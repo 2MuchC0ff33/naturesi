@@ -1,6 +1,8 @@
 /* Utilities – hide helpers (non-invasive) */
 
-// Hide helpers: fully hidden (u-hide), visually hidden (u-hide-visually), screen-reader only (u-hide-sr)
+// Hide helpers: fully hidden (u-hide) — removes from layout and assistive tech
+// `.u-hide-visually` hides visually but keeps layout space (visibility:hidden)
+// `.u-hide-sr` is for screen-reader-only content (keeps content available to AT)
 .u-hide {
   display: none !important;
 }
