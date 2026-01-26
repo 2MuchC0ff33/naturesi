@@ -3,4 +3,26 @@
    Notes: Minimal component-level styles only when truly template-specific.
 */
 
-/* Placeholder: template-specific rules */
+/* templates/templates.css
+   Minimal template-specific helpers used by page templates.
+   Scope: `.template-home`, `.template-store`, `.template-checkout`
+   Keep these focused and small; prefer components for all UI pieces.
+*/
+
+.template-home .hero {
+  padding: var(--space-lg) 0;
+  text-align: center;
+}
+
+.template-checkout .checkout-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+@media (min-width: 900px) {
+  .template-checkout .checkout-layout {
+    grid-template-columns: minmax(320px, 1fr) 360px;
+    align-items: start;
+  }
+}

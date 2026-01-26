@@ -3,4 +3,21 @@
    Notes: Use only when a component requires encapsulation (web components) — keep minimal.
 */
 
-/* Placeholder: shadow host utilities */
+/* templates/shadow-dom.css
+   Styles intended for Shadow DOM hosts or to be injected into shadow roots.
+   Keep minimal and only for components that actually use Shadow DOM.
+*/
+
+:root {
+  /* host-level variables that may be reflected into shadow hosts */
+}
+
+/* Example host utilities - to be used sparingly */
+.shadow-host {
+  display: block;
+}
+
+.shadow-host:focus-within {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}

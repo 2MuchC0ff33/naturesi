@@ -14,7 +14,15 @@
   display: none;
 }
 
+/* Prefer programmatic ARIA control: show when tooltip host has aria-expanded or aria-describedby relationship */
+[aria-describedby]>.tooltip__content,
+.tooltip[aria-hidden='false'] .tooltip__content,
 .has-tooltip:focus .tooltip__content,
 .has-tooltip:hover .tooltip__content {
   display: block;
+}
+
+.tooltip__content:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--color-accent) 32%, #0000);
+  outline-offset: 2px;
 }

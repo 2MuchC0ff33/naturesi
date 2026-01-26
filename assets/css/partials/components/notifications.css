@@ -35,3 +35,9 @@
   border-radius: 6px;
   cursor: pointer;
 }
+
+.sw-update-button:focus-visible,
+.sw-update-dismiss:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--color-accent) 32%, #0000);
+  outline-offset: 3px;
+}

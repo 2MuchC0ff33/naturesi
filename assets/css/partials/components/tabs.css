@@ -9,9 +9,22 @@
   gap: var(--space-sm);
 }
 
+.tabs__tab {
+  background: transparent;
+  border: 0;
+  padding: 0.5rem 0.6rem;
+  cursor: pointer;
+  font: inherit;
+}
+
 .tabs__tab[aria-selected='true'] {
   font-weight: 700;
   border-bottom: 2px solid var(--color-accent);
+}
+
+.tabs__tab:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--color-accent) 28%, #0000);
+  outline-offset: 3px;
 }
 
 .tabs__panel {

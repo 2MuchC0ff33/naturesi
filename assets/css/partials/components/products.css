@@ -4,7 +4,119 @@
    Notes: Product layout should compose with object classes (grid, media-object).
 */
 
-/* Placeholder: product component rules will go here */
+/* Product component rules (BEM-style) - mobile-first
+   - `.product-grid` - wrapper for product listings
+   - `.product-card` - individual product container
+   - `.product-card__media` - product media (image/gallery)
+   - `.product-card__title`, `.product-card__price`, `.product-card__badge`, `.product-card__body`
+*/
+
+.product-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.product-card {
+  display: block;
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-sm);
+  transition: box-shadow var(--transition-fast) ease, transform var(--transition-fast) ease;
+}
+
+.product-card:focus-within,
+.product-card:hover {
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  transform: translateY(-2px);
+}
+
+.product-gallery,
+.product-card__media {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  display: block;
+  border-radius: calc(var(--radius-sm) - 2px);
+  margin-bottom: var(--space-sm);
+}
+
+.product-gallery img,
+.product-card__media img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.product-card__title {
+  margin: 0 0 var(--space-xs) 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-accent);
+}
+
+/* Fallbacks for pages that don't yet include explicit BEM classes */
+.product-card h3,
+.product-card__title {
+  font-size: 1rem;
+  margin: 0 0 var(--space-xs) 0;
+}
+
+.product-card .total-price,
+.product-card__price {
+  font-weight: 700;
+  color: var(--color-text);
+  display: inline-block;
+}
+
+.product-card__price {
+  font-weight: 700;
+  color: var(--color-text);
+  display: inline-block;
+}
+
+.product-card__price--original {
+  text-decoration: line-through;
+  opacity: 0.6;
+  margin-left: var(--space-xs);
+}
+
+.product-card__badge {
+  display: inline-block;
+  padding: 0.15rem 0.4rem;
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--color-accent) 14%, transparent);
+  color: var(--color-accent);
+  font-size: 0.8rem;
+  margin-left: var(--space-xs);
+}
+
+.product-card__body {
+  margin-top: var(--space-sm);
+  color: color-mix(in srgb, var(--color-text) 80%, #0000);
+  font-size: 0.95rem;
+}
+
+/* Grid enhancements for larger viewports */
+@media (min-width: 640px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+  }
+}
+
+@media (min-width: 1000px) {
+  .product-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Reuse search / listing presentation */
 
 /* Search results and product-listing presentation (migrated from components/components.css) */
 .search-status {
