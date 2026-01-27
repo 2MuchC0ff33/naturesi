@@ -1,6 +1,6 @@
 /* Utilities – visibility helpers */
 
-// Visibility helpers: visible, invisible, and a11y-friendly visually hidden state
+/* Visibility helpers: visible, invisible, and a11y-friendly visually hidden state */
 .u-visible {
   visibility: visible !important;
 }

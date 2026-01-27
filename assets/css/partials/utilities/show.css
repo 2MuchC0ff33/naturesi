@@ -1,6 +1,6 @@
 /* Utilities – show helpers (inverse of hide) */
 
-// Show helpers: display helpers to make elements visible in a specific display context
+/* Show helpers: display helpers to make elements visible in a specific display context */
 .u-show-inline {
   display: inline !important;
 }
@@ -17,7 +17,7 @@
   display: inline-block !important;
 }
 
-// Legacy alias
+/* Legacy alias */
 .show {
   display: block !important;
 }

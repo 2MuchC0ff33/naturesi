@@ -1,3 +1,15 @@
+## CSS Comment Syntax Policy
+
+All CSS files in this repository must use standard CSS block comments only:
+
+  /* This is a valid CSS comment */
+
+Do **not** use JavaScript-style `//` comments in any CSS file. This ensures compatibility with all CSS parsers, minifiers, and tools.
+
+- Use `/* ... */` for all comments, including inline and documentation comments.
+- Remove or convert any `//` comments found in CSS files.
+
+This rule is mandatory for all contributors and Copilot-generated code. PRs or code suggestions with `//` comments in CSS will not be accepted.
 # Copilot instructions — Nature's Infusions (static E‑Store)
 
 ## Auto-Context: Agents & Instructions (MANDATORY)

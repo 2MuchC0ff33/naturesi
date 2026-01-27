@@ -1,8 +1,8 @@
 /* Utilities – hide helpers (non-invasive) */
 
-// Hide helpers: fully hidden (u-hide) — removes from layout and assistive tech
-// `.u-hide-visually` hides visually but keeps layout space (visibility:hidden)
-// `.u-hide-sr` is for screen-reader-only content (keeps content available to AT)
+/* Hide helpers: fully hidden (u-hide) — removes from layout and assistive tech */
+/* `.u-hide-visually` hides visually but keeps layout space (visibility:hidden) */
+/* `.u-hide-sr` is for screen-reader-only content (keeps content available to AT) */
 .u-hide {
   display: none !important;
 }
@@ -27,7 +27,7 @@
   border: 0 !important;
 }
 
-// ARIA helper: allow [aria-hidden="true"] to hide elements programmatically
+/* ARIA helper: allow [aria-hidden="true"] to hide elements programmatically */
 [aria-hidden="true"] {
   display: none !important;
 }

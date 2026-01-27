@@ -1,6 +1,6 @@
 /* Utilities – centering helpers */
 
-// Centering helpers: use small, composable utilities
+/* Centering helpers: use small, composable utilities */
 .u-center {
   display: flex;
   align-items: center;
