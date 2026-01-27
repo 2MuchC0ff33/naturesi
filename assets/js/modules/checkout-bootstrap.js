@@ -1,4 +1,6 @@
 // Minimal checkout bootstrap moved out of HTML to satisfy inline-script policy
+import { parseWeightString, calculateShippingByWeight } from './cartStore.js';
+
 (function(){
   const calcEl = document.querySelector('[data-checkout-summary]');
   const form = document.querySelector('form[data-checkout-form]');
@@ -51,7 +53,41 @@
         }
       }
       const total = cart.items.reduce((s,it)=> s + (Number(it.price||0)*Number(it.qty||1)), 0);
-      const sum = { lines: cart.items.map(it=>({ sku: it.sku, qty: it.qty, price: it.price, subtotal: Math.round(it.qty*it.price*100)/100 })), discounts: [], tax: 0, shipping: 0, total: Math.round(total*100)/100 };
+        // compute subtotal
+        const subtotal = cart.items.reduce((s,it)=> s + (Number(it.price||0)*Number(it.qty||1)), 0);
+        // Attempt to compute shipping using postage/postcodes via cartStore helper
+        let shipping = 0;
+        try {
+          await window.PricingIndex.load();
+          const idx = window.PricingIndex.get();
+          // compute total weight in grams
+          let totalWeight = 0;
+          for (const it of cart.items){
+            const prod = idx && (idx[String(it.sku)] || idx[String(it.id)]) ? (idx[String(it.sku)] || idx[String(it.id)]) : null;
+            let weightPerItem = 0;
+            if (prod) {
+              if (it.size && Array.isArray(prod.options)){
+                const opt = prod.options.find(o => o.id === it.size || o.label === it.size);
+                if (opt && opt.weight) weightPerItem = parseWeightString(opt.weight);
+              }
+              if (!weightPerItem && Array.isArray(prod.options) && prod.options.length){
+                const opt0 = prod.options[0]; if (opt0 && opt0.weight) weightPerItem = parseWeightString(opt0.weight);
+              }
+              if (!weightPerItem && prod.weight) weightPerItem = parseWeightString(prod.weight);
+            }
+            if (!weightPerItem) weightPerItem = 50; // fallback 50g per unit
+            totalWeight += (parseInt(it.qty || it.quantity || 1,10) || 1) * weightPerItem;
+          }
+          // Use checkout address if available
+          const address = window.checkoutAddress || {};
+          const postcode = address.postcode || address.postCode || address.postalCode || '';
+          const res = await calculateShippingByWeight(totalWeight, postcode, { storePostcode: '6147', storeState: 'WA' });
+          if (res && res.totalRate != null) shipping = Number(res.totalRate);
+        } catch (e) {
+          // ignore and leave shipping as 0
+        }
+
+        const sum = { lines: cart.items.map(it=>({ sku: it.sku, qty: it.qty, price: it.price, subtotal: Math.round(it.qty*it.price*100)/100 })), discounts: [], tax: 0, shipping: shipping, total: Math.round((subtotal + (shipping||0))*100)/100 };
       renderSummary(sum); resolve(sum);
     });
   }

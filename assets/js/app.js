@@ -6,6 +6,10 @@ import './modules/worker-registry.js';
 // Ensure canonical pricing index and UI guards are available globally (side-effect modules)
 import './modules/pricing-index.js';
 import './modules/products-guard.js';
+// Load these utility modules as side-effects via app entrypoint instead of per-page <script> tags
+import './modules/structured-data-fix.js';
+import './modules/search-bootstrap.js';
+import './modules/search-autocomplete.js';
 
 if (
   typeof window !== 'undefined' &&
