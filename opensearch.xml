@@ -1,20 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/"
-  xmlns:moz="http://www.mozilla.org/2006/browser/search/">
-  <ShortName>NaturesInfusions</ShortName> <!-- shortened to <=16 chars per OpenSearch guidance -->
-  <Description>Search handcrafted products and artisan blends at Nature's Infusions marketplace.</Description>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+  <ShortName>Site Search</ShortName>
+  <Description>Search the product catalogue</Description>
   <InputEncoding>UTF-8</InputEncoding>
-  <OutputEncoding>UTF-8</OutputEncoding>
-  <Language>en-AU</Language>
-  <Image height="16" width="16" type="image/png">/favicon-16x16.png</Image>
-  <Image height="64" width="64" type="image/svg+xml">/assets/img/logo.svg</Image>
-  <!-- Use an absolute template and include optional category param so browsers can submit category when present -->
-  <Url type="text/html" method="get" template="https://www.naturesinfusions.com.au/pages/search.html?q={searchTerms}&amp;category={category?}"/>
-  <Query role="example" searchTerms="herbal tea"/>
-  <Developer>Solo Developer</Developer>
-  <Attribution>Nature's Infusions – Ultra-Simple Static EStore</Attribution>
-  <Contact>support@naturesinfusions.com</Contact>
-  <Tags>nature,infusions,artisan,marketplace,herbal,handcrafted,products</Tags>
-  <LongName>Nature's Infusions – Artisan Marketplace Search</LongName>
-  <moz:SearchForm>/index.html</moz:SearchForm>
+  <Url type="text/html" template="https://{host}/search.html?q={searchTerms}" />
+  <Query role="example" searchTerms="herbal tea" />
 </OpenSearchDescription>

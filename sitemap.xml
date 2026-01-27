@@ -99,6 +99,38 @@
     <changefreq>yearly</changefreq>
   </url>
 
+  <!-- Standalone transactional and utility pages -->
+  <url>
+    <loc>https://www.naturesinfusions.com.au/pages/cart.html</loc>
+    <priority>0.60</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.naturesinfusions.com.au/pages/checkout.html</loc>
+    <priority>0.60</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.naturesinfusions.com.au/pages/fail.html</loc>
+    <priority>0.60</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.naturesinfusions.com.au/pages/success.html</loc>
+    <priority>0.60</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.naturesinfusions.com.au/pages/search.html</loc>
+    <priority>0.60</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.naturesinfusions.com.au/pages/shipping-estimate.html</loc>
+    <priority>0.60</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
   <!-- Site utilities & special pages -->
   <url>
     <loc>https://www.naturesinfusions.com.au/offline.html</loc>

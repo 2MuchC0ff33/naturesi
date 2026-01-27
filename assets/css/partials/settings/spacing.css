@@ -1,0 +1,27 @@
+/* ==========================================================================
+Spacing utilities (migrated from utilities.css)
+These helpers are small, semantic spacing utilities that map to design tokens
+========================================================================== */
+
+.p-sm {
+  padding: var(--space-sm);
+}
+
+.p-md {
+  padding: var(--space-md);
+}
+
+.mt-sm {
+  margin-top: var(--space-sm);
+}
+
+.mb-md {
+  margin-bottom: var(--space-md);
+}
+
+/* Utility to reset list styling and spacing (used to replace inline style attributes) */
+.list-reset {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}

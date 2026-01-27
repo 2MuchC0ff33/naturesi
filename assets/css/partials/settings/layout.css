@@ -1,0 +1,15 @@
+/* ==========================================================================
+Layout helpers and structural utilities (migrated from utilities.css)
+Contains container/grid helpers and small generic layout utilities
+========================================================================== */
+
+/* Structural layout helpers have been migrated to the Objects layer (partials/objects) to keep
+   layout patterns reusable and undecorated:
+   - `.container` -> partials/objects/container.css
+   - `.grid` -> partials/objects/grid.css
+   - `.container--narrow` -> partials/objects/container.css
+   - `.grid-auto-fit` -> partials/objects/grid.css
+*/
+
+/* Note: `.center-row` moved to `partials/objects/flexbox.css` and `.inline-block` remains in
+   `partials/tools/mixins.css` for lightweight utilities. */

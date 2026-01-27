@@ -1,0 +1,21 @@
+/* ==========================================================================
+Color helpers and shared color tokens
+Keep tokens in `variables.css`; use this partial for derived color helpers and
+small, non-invasive utility classes that are safe across components.
+========================================================================== */
+
+:root {
+  /* Muted text color used across components when a soft visual tone is desired */
+  --muted-color: #6b7280;
+  /* fallback used by some components (explicitly defined here) */
+}
+
+/* Non-invasive utility for muted text (safe, semantic) */
+.text-muted {
+  color: var(--muted-color);
+}
+
+/* Light background utility useful for cards and callouts */
+.bg-muted {
+  background: color-mix(in srgb, var(--color-background) 96%, var(--color-highlight) 4%);
+}

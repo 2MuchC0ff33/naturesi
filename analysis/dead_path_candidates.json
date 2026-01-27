@@ -1,0 +1,66 @@
+{
+  "generated_at": "2026-01-27T00:21:00Z",
+  "description": "Selectors and data-attributes referenced by JS modules that were not found in the HTML inventory (initial automated pass). Manual verification recommended before removal.",
+  "candidates": [
+    {
+      "type": "id",
+      "selector": "#sw-update-banner",
+      "modules": [
+        "assets/js/modules/sw-register.js"
+      ],
+      "reason": "No matching id found in HTML inventory; may be injected by SW at runtime. Verify before removal."
+    },
+    {
+      "type": "class",
+      "selector": ".sw-update-button",
+      "modules": [
+        "assets/js/modules/sw-register.js"
+      ],
+      "reason": "No matching class in HTML inventory"
+    },
+    {
+      "type": "class",
+      "selector": ".sw-update-dismiss",
+      "modules": [
+        "assets/js/modules/sw-register.js"
+      ],
+      "reason": "No matching class in HTML inventory"
+    },
+    {
+      "type": "id",
+      "selector": "#cart-cleared-note",
+      "modules": [
+        "assets/js/modules/payment-return.js"
+      ],
+      "reason": "Referenced by payment-return; not observed in HTML templates. Confirm runtime rendering or add fallback."
+    },
+    {
+      "type": "id",
+      "selector": "#cart-cancelled-note",
+      "modules": [
+        "assets/js/modules/payment-cancel.js"
+      ],
+      "reason": "Referenced by payment-cancel; not observed in HTML templates."
+    },
+    {
+      "type": "id",
+      "selector": "#nav-toggle",
+      "modules": [
+        "assets/js/modules/nav-toggle.js"
+      ],
+      "reason": "Not found in inventory; may be present in some templates or added at runtime. Verify before changing."
+    }
+  ]
+}
+{
+  "generated": "2026-01-26T00:00:00Z",
+  "summary": {
+    "total_candidates_found": 0,
+    "notes": "No selectors were found that are safe to remove without further runtime analysis. All selectors missing from static HTML are accounted for as runtime-injected elements (nav toggle, cart remove buttons, service-worker update banner).
+If you want, we can add an instrumentation run that records DOM mutations during a sample user flow to find genuinely unused selectors.","recommended_next_steps": ["Add instrumentation (dev-only) that logs DOM additions for a single user flow and re-run the cross-check",
+    "Add test coverage for high-risk selectors listed in global_reference_map.json",
+    "Create a small migration plan for renaming selectors that includes dual-selector fallbacks and E2E tests"
+  ]
+},
+"candidates": []
+}

@@ -1,0 +1,17 @@
+/* ==========================================================================
+Media helpers and responsive utilities
+Use for image/video helpers and responsive media rules
+========================================================================== */
+
+/* Responsive media helpers moved to objects layer: partials/objects/media-object.css */
+
+/* Useful figure/figcaption baseline */
+figure {
+  margin: 0;
+}
+
+figure figcaption {
+  font-size: 0.95rem;
+  color: var(--muted-color, #6b7280);
+  margin-top: var(--space-xs);
+}

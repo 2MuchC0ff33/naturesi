@@ -1,0 +1,63 @@
+/* components/accordions.css
+   Purpose: Accordion component styles and expanded/collapsed states.
+   Scope: `.accordion`, `.accordion__item`, `.accordion-toggle`, `.accordion-panel`.
+   Notes: Keep presentation here; ARIA and keyboard handling remain in JS.
+*/
+
+.accordion {
+  display: block;
+}
+
+.accordion__item+.accordion__item {
+  margin-top: var(--space-sm);
+}
+
+/* Toggle button presentation */
+.accordion-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  color: inherit;
+  border: 0;
+  padding: 0.4rem 0.6rem;
+  /* WCAG 2.2: Ensure minimum target size */
+  min-width: 24px;
+  min-height: 24px;
+  font: inherit;
+  cursor: pointer;
+}
+
+.accordion-toggle::after {
+  content: '\25be';
+  display: inline-block;
+  transform-origin: center;
+  transition: transform var(--transition-fast) ease;
+  font-size: 0.85rem;
+}
+
+.accordion-toggle[aria-expanded='true']::after {
+  transform: rotate(-180deg);
+}
+
+.accordion-panel {
+  display: none;
+}
+
+.accordion__item[aria-expanded='true'] .accordion-panel {
+  display: block;
+}
+
+@media (max-width: 480px) {
+  .accordion-toggle {
+    width: 100%;
+    justify-content: center;
+    padding: 0.2rem 0;
+  }
+
+  .site-footer .links-grid ul li+li {
+    border-top: 1px solid color-mix(in srgb, var(--footer-text) 6%, transparent);
+    margin-top: 0.15rem;
+    padding-top: 0.35rem;
+  }
+}

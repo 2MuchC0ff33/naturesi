@@ -1,0 +1,7 @@
+/* Label defaults */
+
+label {
+  display: inline-block;
+  margin-bottom: 0.25rem;
+  font-weight: 600;
+}

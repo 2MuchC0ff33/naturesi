@@ -1,0 +1,31 @@
+/* Utilities – animation helpers */
+
+.u-animate-fade {
+  animation: fade-in 0.3s ease both;
+}
+
+.u-animate-slide-up {
+  animation: slide-up 0.3s ease both;
+}
+
+/* Respect user preference to reduce motion */
+@media (prefers-reduced-motion: reduce) {
+
+  .u-animate-fade,
+  .u-animate-slide-up,
+  .u-reduced-motion {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  /* Turn off smooth scrolling for reduced motion */
+  .u-smooth-scroll {
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Utility to programmatically disable animations on an element */
+.u-reduced-motion {
+  animation: none !important;
+  transition: none !important;
+}

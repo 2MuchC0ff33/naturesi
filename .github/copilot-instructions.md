@@ -1,4 +1,61 @@
+## CSS Comment Syntax Policy
+
+All CSS files in this repository must use standard CSS block comments only:
+
+  /* This is a valid CSS comment */
+
+Do **not** use JavaScript-style `//` comments in any CSS file. This ensures compatibility with all CSS parsers, minifiers, and tools.
+
+- Use `/* ... */` for all comments, including inline and documentation comments.
+- Remove or convert any `//` comments found in CSS files.
+
+This rule is mandatory for all contributors and Copilot-generated code. PRs or code suggestions with `//` comments in CSS will not be accepted.
 # Copilot instructions — Nature's Infusions (static E‑Store)
+
+## Auto-Context: Agents & Instructions (MANDATORY)
+
+Copilot MUST always use the following agents and instruction files for every relevant task, PR, refactor, and documentation change. These files are auto-included and referenced by default—users do NOT need to manually add them as context.
+
+### Agents (always active)
+
+- [.github/agents/accessibility.agent.md](.github/agents/accessibility.agent.md): Web accessibility, WCAG, a11y testing, inclusive UX
+- [.github/agents/janitor.agent.md](.github/agents/janitor.agent.md): Codebase cleanup, simplification, tech debt removal
+- [.github/agents/modernization.agent.md](.github/agents/modernization.agent.md): Modernization analysis, planning, and implementation
+- [.github/agents/Ultimate-Transparent-Thinking-Beast-Mode.agent.md](.github/agents/Ultimate-Transparent-Thinking-Beast-Mode.agent.md): Maximum transparency, creative overclocking, relentless completion
+
+### Instruction Files (always referenced)
+
+- [.github/instructions/html-css-style-color-guide.instructions.md](.github/instructions/html-css-style-color-guide.instructions.md): Accessible, professional HTML/CSS color and style rules
+- [.github/instructions/markdown.instructions.md](.github/instructions/markdown.instructions.md): Markdown content, formatting, and structure standards
+- [.github/instructions/nodejs-javascript.instructions.md](.github/instructions/nodejs-javascript.instructions.md): Node.js/JavaScript coding and testing guidelines
+- [.github/instructions/performance-optimization.instructions.md](.github/instructions/performance-optimization.instructions.md): Performance best practices for all stacks
+- [.github/instructions/security-and-owasp.instructions.md](.github/instructions/security-and-owasp.instructions.md): Secure coding, OWASP Top 10, industry security standards
+- [.github/instructions/self-explanatory-code-commenting.instructions.md](.github/instructions/self-explanatory-code-commenting.instructions.md): Commenting for self-explanatory code
+
+### Prompts (auto-included)
+
+- [.github/prompts/boost-prompt.prompt.md](.github/prompts/boost-prompt.prompt.md): Enhanced prompt for Copilot agents
+- [.github/prompts/documentation-writer.prompt.md](.github/prompts/documentation-writer.prompt.md): Diátaxis documentation expert workflow
+- [.github/prompts/readme-blueprint-generator.prompt.md](.github/prompts/readme-blueprint-generator.prompt.md): README generator and structure
+- [.github/prompts/update-markdown-file-index.prompt.md](.github/prompts/update-markdown-file-index.prompt.md): Markdown file index updater
+
+**Copilot must always reference and apply these agents/instructions/prompts for every relevant task. Manual context management is NOT required.**
+
+#### Example Workflow (Auto-Context)
+
+- When refactoring HTML/CSS/JS, Copilot automatically applies accessibility, color/style, and security instructions.
+- For documentation, Copilot uses markdown standards and Diátaxis documentation expert workflow.
+- For code cleanup, Copilot invokes janitor agent and performance/security instructions.
+- For modernization, Copilot leverages modernization agent and all relevant instructions.
+- For commenting, Copilot applies self-explanatory code commenting instructions.
+
+#### Contributor Reminder
+
+- You do NOT need to manually add agents/instructions/prompts as context—Copilot will always use them.
+- All PRs, refactors, and documentation changes are auto-validated against these files.
+- If you add new agents/instructions/prompts, update this section to ensure auto-context coverage.
+
+---
 
 Purpose: give an AI coding agent the minimal, practical context to be productive in this single-page, static storefront.
 
@@ -68,7 +125,7 @@ Recommended process (step-by-step)
    - Ensure forms have `<label for="...">` bound to inputs and include placeholders for accessible error messaging.
    - Ensure images use descriptive `alt` attributes or explicit decorative roles.
    - Add brief inline comments describing why the change was made (one line) and reference the acceptance checklist.
-5. Keep edits scoped to repo root, `pages/`, `pages/store/`, `assets/css/partials/`, `assets/js/modules/`, `assets/js/data/`,`.github/` and similar config files.
+3. Keep edits scoped to repo root, `pages/`, `pages/store/`, `assets/css/partials/`, `assets/js/modules/`, `assets/js/data/`,`.github/` and similar config files.
 
 Safe, small examples
 

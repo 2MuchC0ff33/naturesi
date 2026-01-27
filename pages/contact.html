@@ -204,7 +204,7 @@
   <!-- WCAG: Skip link for keyboard navigation, visible on focus -->
   <a class="skip-link" href="#main-content">Skip to main content</a>
   <header id="site-header">
-    <nav class="site-nav" aria-label="Site navigation">
+    <nav class="site-nav" aria-label="Site navigation" data-site-nav>
       <div class="nav-left">
         <a class="logo" href="/" aria-label="Nature's Infusions home">
           <img src="/assets/img/logo.svg" alt="Nature's Infusions logo">
@@ -212,29 +212,13 @@
       </div>
 
       <!-- Improved nav-center: group category and search in a flex wrapper -->
-      <div class="nav-center">
-        <div class="nav-center-flex"
-          style="display: flex; flex-direction: row; gap: 1.2rem; align-items: center; width: 100%; justify-content: center;">
+      <div id="primary-nav-menu" class="nav-center" data-primary-nav>
+        <div class="nav-center-flex center-row">
           <!-- Category select -->
           <nav aria-label="Browse by category" class="category-dropdown">
             <form action="/pages/store.html" method="get" id="category-nav-form" aria-label="Browse by category">
               <label for="site-category-select" class="visually-hidden">Select a product category</label>
-              <select id="site-category-select" name="category" aria-label="Product categories" onchange="
-                  var map = {
-                    'wellness-blends': '/pages/store/wellness-blends.html',
-                    'herbal-infusions': '/pages/store/herbal-infusions.html',
-                    'black-tea': '/pages/store/black-tea.html',
-                    'green-tea': '/pages/store/green-tea.html',
-                    'balms': '/pages/store/balms.html',
-                    'creams': '/pages/store/creams.html',
-                    'selfcare': '/pages/store/selfcare.html',
-                    'accessories': '/pages/store/accessories.html',
-                    'ice-tea': '/pages/store/ice-tea.html',
-                    'artisan-blends': '/pages/store/artisan-blends.html',
-                    '': '/pages/store.html'
-                  };
-                  window.location.href = map[this.value] || '/pages/store.html';
-                ">
+              <select id="site-category-select" name="category" aria-label="Product categories">
                 <option value="">All categories</option>
                 <option value="wellness-blends">Wellness Blends</option>
                 <option value="herbal-infusions">Herbal Infusions</option>
@@ -247,6 +231,10 @@
                 <option value="ice-tea">Ice Tea</option>
                 <option value="artisan-blends">Artisan Blends</option>
               </select>
+
+              <!-- JS-enhanced horizontal tabs will be injected here when available. The select is preserved as the no-JS fallback. -->
+              <div id="category-tabs-container" class="tabs" aria-hidden="true" hidden></div>
+
               <noscript>
                 <div class="category-fallback">
                   <ul>
@@ -268,12 +256,12 @@
           </nav>
 
           <!-- Search form (pure HTML5, no JS) -->
-          <form id="site-search-form" class="site-search" action="/pages/search.html" method="get" role="search"
+          <form id="site-search-form" class="site-search" action="/search.html" method="get" role="search"
             aria-label="Search site">
             <label for="site-search" class="visually-hidden">Search Nature's Infusions</label>
             <input id="site-search" name="q" type="search" placeholder="Search Nature's Infusions" class="search-box"
               aria-label="Search site">
-            <button class="search-icon" type="submit" aria-label="Submit search">
+            <button class="search-icon btn btn--ghost" type="submit" aria-label="Submit search">
               <!-- inline svg magnifier -->
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
                 aria-hidden="true" focusable="false">
@@ -287,7 +275,7 @@
         </div>
       </div>
 
-      <div class="nav-right">
+      <div class="nav-right" data-header-right>
         <a class="cart-option" href="/pages/cart.html" aria-label="Cart">
           <div class="cart-logo" aria-hidden="true">
             <!-- inline svg cart -->
@@ -308,67 +296,68 @@
     </nav>
   </header>
 
-  <article id="contact-info">
-    <h2>Support Information</h2>
-    <p>Email: <a href="mailto:tea@naturesinfusions.com.au">tea@naturesinfusions.com.au</a></p>
-    <p>Phone: +61 434 947 131</p>
-    <address>
-      63 Meadowbrook Drive<br>
-      Parkwood WA 6147
-    </address>
-  </article>
+  <main id="main-content" class="prose container">
 
-  <section id="contact-form">
-    <h2>Support Request Form</h2>
-    <!-- Primary HTML5 Form -->
-    <form action="https://api.naturesinfusions.com.au/contact" method="post" enctype="multipart/form-data">
-      <fieldset>
-        <legend>Personal Information</legend>
-        <div>
-          <label for="form-name">Full Name: <span aria-hidden="true">*</span></label>
-          <input id="form-name" name="name" type="text" required autocomplete="name" minlength="2" maxlength="100"
-            placeholder="Your full name">
-        </div>
-        <div>
-          <label for="form-email">Email: <span aria-hidden="true">*</span></label>
-          <input id="form-email" name="email" type="email" required autocomplete="email" inputmode="email"
-            placeholder="your@email.com">
-        </div>
-      </fieldset>
-      <fieldset>
-        <legend>Request Details</legend>
-        <div>
-          <label for="request-type">Request Type: <span aria-hidden="true">*</span></label>
-          <select id="request-type" name="request_type" required aria-describedby="request-type-hint">
-            <option value="">Please select...</option>
-            <option value="order-support">Order Support</option>
-            <option value="payment-issues">Payment Support</option>
-            <option value="stockist-info">Stockist Information</option>
-            <option value="wholesale-enquiry">Wholesale Enquiry</option>
-            <option value="other">Other Inquiry</option>
-          </select>
-          <small id="request-type-hint" class="visually-hidden">Choose the best matching request type so we can
-            route your enquiry.</small>
-        </div>
-        <div>
-          <label for="message">Message: <span aria-hidden="true">*</span></label>
-          <textarea id="message" name="message" rows="8" minlength="20" maxlength="2000" required
-            placeholder="Please describe your issue in detail..." spellcheck="true"
-            aria-describedby="message-hint"></textarea>
-          <small id="message-hint">Minimum 20 characters. Provide relevant order or account details where
-            applicable.</small>
-        </div>
-        <div>
-          <button type="submit">Submit Request</button>
-          <button type="reset">Reset Form</button>
-        </div>
-        <!-- Accessibility: live status region for screen reader users to announce form submission results -->
-        <div id="contact-form-status" role="status" aria-live="polite" aria-atomic="true" class="visually-hidden">
-        </div>
-      </fieldset>
-    </form>
-  </section>
-  </section>
+    <article id="contact-info">
+      <h2>Support Information</h2>
+      <p>Email: <a href="mailto:tea@naturesinfusions.com.au">tea@naturesinfusions.com.au</a></p>
+      <p>Phone: +61 434 947 131</p>
+      <address>
+        63 Meadowbrook Drive<br>
+        Parkwood WA 6147
+      </address>
+    </article>
+
+    <section id="contact-form">
+      <h2>Support Request Form</h2>
+      <!-- Primary HTML5 Form -->
+      <form action="https://api.naturesinfusions.com.au/contact" method="post" enctype="multipart/form-data">
+        <fieldset>
+          <legend>Personal Information</legend>
+          <div>
+            <label for="form-name">Full Name: <span aria-hidden="true">*</span></label>
+            <input id="form-name" name="name" type="text" required autocomplete="name" minlength="2" maxlength="100"
+              placeholder="Your full name">
+          </div>
+          <div>
+            <label for="form-email">Email: <span aria-hidden="true">*</span></label>
+            <input id="form-email" name="email" type="email" required autocomplete="email" inputmode="email"
+              placeholder="your@email.com">
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Request Details</legend>
+          <div>
+            <label for="request-type">Request Type: <span aria-hidden="true">*</span></label>
+            <select id="request-type" name="request_type" required aria-describedby="request-type-hint">
+              <option value="">Please select...</option>
+              <option value="order-support">Order Support</option>
+              <option value="payment-issues">Payment Support</option>
+              <option value="stockist-info">Stockist Information</option>
+              <option value="wholesale-enquiry">Wholesale Enquiry</option>
+              <option value="other">Other Inquiry</option>
+            </select>
+            <small id="request-type-hint" class="visually-hidden">Choose the best matching request type so we can
+              route your enquiry.</small>
+          </div>
+          <div>
+            <label for="message">Message: <span aria-hidden="true">*</span></label>
+            <textarea id="message" name="message" rows="8" minlength="20" maxlength="2000" required
+              placeholder="Please describe your issue in detail..." spellcheck="true"
+              aria-describedby="message-hint"></textarea>
+            <small id="message-hint">Minimum 20 characters. Provide relevant order or account details where
+              applicable.</small>
+          </div>
+          <div>
+            <button type="submit">Submit Request</button>
+            <button type="reset">Reset Form</button>
+          </div>
+          <!-- Accessibility: live status region for screen reader users to announce form submission results -->
+          <div id="contact-form-status" role="status" aria-live="polite" aria-atomic="true" class="visually-hidden">
+          </div>
+        </fieldset>
+      </form>
+    </section>
   </main>
 
   <hr aria-hidden="true">
@@ -413,7 +402,7 @@
         <nav aria-label="Social media links">
           <ul>
             <li>
-              <a class="facebook" href="https://www.facebook.com/NaturesInfusions/" rel="noopener noreferrer"
+              <a class="facebook" href="https://www.facebook.com/naturesinfusions.herbaltea/" rel="noopener noreferrer"
                 itemprop="sameAs" target="_blank" aria-label="Nature's Infusions on Facebook (opens in new tab)">
                 <!-- Facebook SVG (uses currentColor) -->
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
@@ -470,5 +459,6 @@
       </div>
     </footer>
   </div>
-  </main>
 </body>
+
+</html>

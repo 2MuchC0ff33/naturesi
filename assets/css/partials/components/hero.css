@@ -1,0 +1,105 @@
+/* components/hero.css
+   Purpose: Homepage hero section styles (mobile-first)
+*/
+
+.hero {
+  display: grid;
+  align-items: center;
+  min-height: 320px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.hero__content {
+  padding: var(--space-md);
+  text-align: left;
+}
+
+/* Make hero CTAs more tappable on small screens (stacked, full width) */
+@media (max-width: 640px) {
+  #cta-buttons .button {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 0.6rem;
+  }
+
+  #cta-buttons .button.btn--primary {
+    margin-bottom: 0.4rem;
+  }
+}
+
+.hero h1 {
+  margin: 0 0 var(--space-xs) 0;
+  font-size: 1.6rem;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+
+.hero blockquote {
+  margin: var(--space-sm) 0;
+  font-style: italic;
+  color: color-mix(in srgb, var(--color-text) 78%, #0000);
+}
+
+.hero p {
+  margin: 0 0 var(--space-md) 0;
+  color: color-mix(in srgb, var(--color-text) 82%, #0000);
+  max-width: 58ch;
+}
+
+#cta-buttons .button {
+  display: inline-block;
+  margin-right: var(--space-xs);
+}
+
+#cta-buttons .button.btn--primary {
+  padding: 0.7rem 1rem;
+  border-radius: 0.45rem;
+  font-weight: 700;
+  box-shadow: 0 8px 20px rgba(76, 175, 80, 0.12);
+}
+
+#cta-buttons .button.btn--ghost {
+  padding: 0.64rem 0.9rem;
+  border-radius: 0.45rem;
+}
+
+/* Responsive adjustments */
+@media (min-width: 640px) {
+  .hero {
+    grid-template-columns: 1fr 1fr;
+    min-height: 360px;
+  }
+
+  .hero__content {
+    padding: var(--space-lg);
+  }
+
+  .hero h1 {
+    font-size: 2.4rem;
+  }
+}
+
+@media (min-width: 900px) {
+  .hero h1 {
+    font-size: 3rem;
+  }
+
+  .hero p {
+    font-size: 1.05rem;
+  }
+}
+
+/* Reduced motion: remove motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+
+  .hero__media picture,
+  .hero__media img {
+    transition: none !important;
+  }
+
+  .product-card__media img {
+    transition: none !important;
+  }
+}

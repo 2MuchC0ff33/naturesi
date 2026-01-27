@@ -7,7 +7,14 @@
   Header set X-Frame-Options "SAMEORIGIN"
   Header set X-XSS-Protection "1; mode=block"
   Header set Referrer-Policy "strict-origin-when-cross-origin"
-  Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; script-src-elem 'self' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://static.cloudflareinsights.com; form-action 'self' mailto:;"
+  Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com https://www.paypal.com https://www.sandbox.paypal.com https://www.paypalobjects.com; script-src-elem 'self' https://static.cloudflareinsights.com https://www.paypal.com https://www.sandbox.paypal.com https://www.paypalobjects.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://static.cloudflareinsights.com https://www.paypal.com https://www.sandbox.paypal.com https://www.paypalobjects.com; form-action 'self' https://www.paypal.com https://www.sandbox.paypal.com mailto:; upgrade-insecure-requests;"
+  # Additional security headers (enable when ready)
+  # Permissions-Policy restricts device features (adjust as needed)
+  Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+  # HSTS: enabled for production WITH preload. Ensure all subdomains and hosts serve HTTPS, then submit to https://hstspreload.org
+  # Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+  # Expect-CT is optional; configure report-uri or remove if not used
+  # Header always set Expect-CT "max-age=86400, enforce, report-uri=\"https://example.com/report\""
 </IfModule>
 
 # --- MIME Types for SVG, WebP, CSS, PNG, ICO ---
@@ -41,37 +48,32 @@ AddType image/x-icon .ico
   ExpiresByType text/xml "access plus 0 seconds"
 </IfModule>
 
-# --- Disable Cache Control Headers for All Files (Cloudflare Compatible) ---
+# --- PRODUCTION: Example long-lived caching (enable when you use cache-busting for assets) ---
+# Uncomment and adjust when moving to production
+# <IfModule mod_expires.c>
+#   ExpiresActive On
+#   ExpiresByType text/css "access plus 1 year"
+#   ExpiresByType application/javascript "access plus 1 year"
+#   ExpiresByType image/webp "access plus 1 year"
+#   ExpiresByType image/png "access plus 1 year"
+#   Header set Cache-Control "public, max-age=31536000, immutable"
+# </IfModule>
+# --- End Production cache example ---
+
+# --- Production Cache Control ---
 <IfModule mod_headers.c>
-  # No cache for all files to allow immediate updates
-  Header set Cache-Control "no-cache, no-store, must-revalidate, max-age=0"
-  Header set Pragma "no-cache"
-  Header set Expires "0"
-  
-  # Cloudflare-specific headers
-  Header set CF-Cache-Status "BYPASS"
-  Header set CF-Cache-Control "no-cache"
-  Header set CF-Cache-Tag "development"
-  Header set CF-Edge-Cache "no-cache"
-  Header set CF-Worker "bypass"
-  
-  # Additional Cloudflare bypass headers
-  Header set X-CF-Cache-Status "BYPASS"
-  Header set X-CF-Cache-Control "no-cache"
-  Header set X-CF-Edge-Cache "no-cache"
-  
-  # Force Cloudflare to always fetch from origin
-  Header set CF-Visitor-Origin "always"
-  Header set CF-Ray-Origin "direct"
-  
-  # Prevent Cloudflare from caching errors
-  Header set CF-Cache-Status-Error "BYPASS"
-  
-  # Development mode indicator
-  Header set CF-Development-Mode "on"
-  
-  # Custom header to force cache bypass
-  Header set X-Development-Cache "bypass"
+  # Static assets: long-lived caching (ensure cache-busting on deploys)
+  <FilesMatch "\.(css|js|svg|png|jpe?g|gif|webp|ico|woff2?|ttf)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  # HTML and JSON: short cache to allow content updates and revalidation
+  <FilesMatch "\.(html|json)$">
+    Header set Cache-Control "public, max-age=60, must-revalidate"
+  </FilesMatch>
+
+  # Cloudflare caching is best configured in the Cloudflare dashboard. Remove
+  # development-specific Cloudflare bypass headers to allow proper edge caching.
 </IfModule>
 
 # --- Custom 404 Page ---
@@ -80,6 +82,14 @@ ErrorDocument 404 /404.html
 # --- Clean URLs: Redirect index.html and fallback ---
 RewriteEngine On
 DirectoryIndex index.html
+
+# --- Force HTTPS (handles proxies like Cloudflare) ---
+# Only enable when site is served over HTTPS on all hostnames (including www)
+# Checks both direct HTTPS and X-Forwarded-Proto (used by proxies/CDNs)
+RewriteCond %{HTTP_HOST} !^localhost
+RewriteCond %{HTTPS} !=on
+RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
 # Redirect /index.html to /
 RewriteCond %{THE_REQUEST} /index\.html [NC]

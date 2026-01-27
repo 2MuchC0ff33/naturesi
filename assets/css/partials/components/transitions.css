@@ -1,0 +1,33 @@
+/* components/transitions.css
+   Purpose: Shared transitions and motion utilities used across components.
+   Scope: `--transition-fast`, `--transition-medium`, `--transition-slow`, and helper classes like `.fade-in`, `.slide-up`.
+   Notes: Respect `prefers-reduced-motion` and keep durations short for snappy UX.
+*/
+
+:root {
+  --transition-fast: 120ms;
+  --transition-medium: 240ms;
+  --transition-slow: 420ms;
+}
+
+.fade-in {
+  animation: fade-in var(--transition-medium) ease both;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-in {
+    animation: none;
+  }
+}

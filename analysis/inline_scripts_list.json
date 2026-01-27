@@ -1,0 +1,114 @@
+{
+  "generated_at": "2026-01-27T00:12:00Z",
+  "notes": "Inline scripts include JSON-LD structured data blocks and a small number of inline module scripts (payment/success clears localStorage). Most pages load /assets/js/app.js as a module.",
+  "files": {
+    "index.html": [
+      {
+        "type": "application/ld+json",
+        "has_src": false
+      },
+      {
+        "type": "module",
+        "has_src": true,
+        "src": "/assets/js/app.js"
+      }
+    ],
+    "pages/*.html": [
+      {
+        "type": "application/ld+json",
+        "has_src": false
+      },
+      {
+        "type": "module",
+        "has_src": true,
+        "src": "/assets/js/app.js"
+      }
+    ],
+    "pages/checkout.html": [
+      {
+        "type": "module",
+        "has_src": true,
+        "src": "/assets/js/app.js"
+      },
+      {
+        "type": "module",
+        "has_src": true,
+        "src": "/assets/js/modules/checkout-bootstrap.js"
+      }
+    ],
+    "pages/payment/success.html": [
+      {
+        "type": "module",
+        "has_src": true,
+        "src": "/assets/js/app.js"
+      },
+      {
+        "type": "module",
+        "has_src": false,
+        "snippet": "localStorage.removeItem('naturesi_cart'); localStorage.removeItem('naturesi-cart');"
+      }
+    ],
+    "structured_data": "Multiple pages include application/ld+json blocks for SEO; these are treated as inline scripts but are data-only and safe to keep in-place."
+  }
+}
+{
+  "generated": "2026-01-26T00:00:00Z",
+  "files": {
+    "index.html": [
+      {
+        "type": "application/ld+json",
+        "purpose": "Organization schema",
+        "inline": true
+      },
+      {
+        "type": "application/ld+json",
+        "purpose": "WebSite schema",
+        "inline": true
+      },
+      {
+        "type": "application/ld+json",
+        "purpose": "BreadcrumbList schema",
+        "inline": true
+      }
+    ],
+    "pages/*.html (common)": [
+      {
+        "type": "application/ld+json",
+        "purpose": "Structured data (Organization/WebSite/Breadcrumb)",
+        "inline": true
+      },
+      {
+        "type": "module",
+        "src": "/assets/js/app.js",
+        "inline": false
+      }
+    ],
+    "pages/payment/success.html": [
+      {
+        "type": "module",
+        "src": "/assets/js/app.js",
+        "inline": false
+      },
+      {
+        "type": "module",
+        "purpose": "Clear local cart (inline code)",
+        "inline": true,
+        "snippet": "localStorage.removeItem('naturesi_cart')"
+      }
+    ],
+    "pages/payment/fail.html": [
+      {
+        "type": "module",
+        "src": "/assets/js/app.js",
+        "inline": false
+      }
+    ],
+    "pages/shipping-estimate.html": [
+      {
+        "type": "module",
+        "src": "/assets/js/app.js",
+        "inline": false
+      }
+    ]
+  }
+}

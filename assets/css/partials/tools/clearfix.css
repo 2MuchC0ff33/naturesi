@@ -1,0 +1,10 @@
+/* ==========================================================================
+Clearfix utility
+Small helper to clear floats; centralised in the tools layer.
+========================================================================== */
+
+.clearfix::after {
+  content: '';
+  display: block;
+  clear: both;
+}

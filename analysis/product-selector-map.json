@@ -1,0 +1,42 @@
+{
+  "description": "Inventory of product-related selectors and recommendations for canonical hooks.",
+  "selectors": {
+    "productArticle": "article.product",
+    "productDataSku": "[data-sku]",
+    "productDataImage": "[data-image]",
+    "price": "[data-price]",
+    "addToCartForm": "form.add-to-cart, form.product-options.add-to-cart",
+    "addToCartButton": "button.add-to-cart, button[type=submit].add-to-cart",
+    "quantity": "[name=quantity], input[name='quantity']",
+    "productAnchors": ".product-anchor",
+    "productGallery": ".product-gallery",
+    "productSpecSection": ".product-specs, .product-ingredients"
+  },
+  "representativeLocations": {
+    "store_pages": "pages/store/*.html — multiple product articles with data-sku/data-image and add-to-cart forms (e.g., pages/store/artisan-blends.html, pages/store/balms.html, pages/store/accessories.html)",
+    "products_json": "assets/js/data/products.json — canonical product data used elsewhere",
+    "generate_script": "scripts/generate-products.js — extracts data-price/data-sku/data-image when producing templates",
+    "cart_init": "assets/js/modules/cart-init.js — reads dataset.price/value and form inputs; sensitive to selector changes",
+    "cart_ui": "assets/js/modules/cartUI.js — updates cart UI based on product SKUs and prices"
+  },
+  "findings": {
+    "consistent_data_attributes": "Most product articles use `data-sku` and `data-image` consistently across store pages.",
+    "price_markup": "Multiple pages use `data-price` on option inputs and fallback parsing in generate-products.js — keep `data-price` canonical.",
+    "add-to-cart_variants": "Forms use `form.add-to-cart` or `form.product-options.add-to-cart` and submit buttons have class `add-to-cart` — treat these as canonical triggers.",
+    "dynamic_parsing": "scripts/generate-products.js contains regex-based fallbacks to find prices and SKUs; refactor carefully if changing template structure."
+  },
+  "recommendations": {
+    "canonical_hooks": [
+      "Use `data-sku` on product container (article.product) as the primary identifier.",
+      "Use `data-image` for the product's primary image URL.",
+      "Keep `data-price` on option inputs or variant elements — update `cart-init.js` only after verifying selectors.",
+      "Ensure add-to-cart forms include `class=\"add-to-cart\"` and a submit button with class `add-to-cart` so modules can delegate safely."
+    ],
+    "migration_steps": [
+      "Audit all `article.product` elements and ensure `data-sku`/`data-image` present — scripts/generate-products.js already expects these.",
+      "Update `assets/js/modules/cart-init.js` to derive SKU via `closest('article[data-sku]')` instead of fragile selectors where practical.",
+      "Add `data-product` or `data-product-id` attributes only if necessary; prefer existing `data-sku` for compatibility.",
+      "Create automated smoke tests (see Batch 7) for add-to-cart flows after changes."
+    ]
+  }
+}
