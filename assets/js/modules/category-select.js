@@ -154,9 +154,19 @@ export function initCategoryTabs(documentRoot = typeof document !== 'undefined' 
   container.removeAttribute('hidden');
   container.setAttribute('aria-hidden', 'false');
 
-  // Mark header so CSS can hide the native select
+  // Mark header so CSS can hide the native select and disable it as a fallback
   const header = documentRoot.getElementById('site-header');
-  if (header) header.classList.add('has-category-tabs');
+  if (header) {
+    header.classList.add('has-category-tabs');
+    try {
+      // Hide and disable the native select explicitly to prevent it from capturing focus or clicks
+      sel.setAttribute('aria-hidden', 'true');
+      sel.setAttribute('tabindex', '-1');
+      sel.disabled = true;
+    } catch (e) {
+      // ignore errors - best-effort enhancement
+    }
+  }
 
   // Simple focus management: ensure the tab that matches the current URL is selected
   // This improves discoverability when the user lands directly on a category page.

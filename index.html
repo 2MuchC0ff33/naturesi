@@ -92,7 +92,10 @@
   <!-- Resource Hints -->
   <link rel="dns-prefetch" href="//www.naturesinfusions.com.au" />
   <link rel="preload" href="/assets/css/main.css" as="style" />
-  <link rel="preload" href="/assets/img/hero-home-1200x675.webp" as="image" type="image/webp" />
+  <!-- Preload hero image for LCP: include imagesrcset/imagesizes so the preload matches the picture's source candidates -->
+  <link rel="preload" href="/assets/img/hero-home-1200x675.webp" as="image" type="image/webp"
+    imagesrcset="/assets/img/hero-home-800x450.webp 800w, /assets/img/hero-home-1200x675.webp 1200w, /assets/img/hero-home-1600x900.webp 1600w"
+    imagesizes="(max-width:640px) 100vw, (max-width:1200px) 80vw, 1200px" />
   <link rel="prefetch" href="/assets/js/data/products.json" as="fetch" />
 
   <!-- Cache Control -->

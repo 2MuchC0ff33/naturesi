@@ -155,7 +155,7 @@ export async function initCart() {
     const client = sc && sc.createClient ? sc.createClient() : null;
     if (client) {
       // When the shared worker sends the canonical cart, replace local store and re-render
-      client.on((msg) => {
+      client.on(async (msg) => {
         if (!msg) return;
         if (msg.event === 'CART' || msg.event === 'CART_UPDATED') {
           try {

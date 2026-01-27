@@ -120,6 +120,14 @@ print fallbacks.
   display: none;
 }
 
+/* When tabs are active, fully hide the legacy dropdown to avoid visual clutter
+   and prevent it from intercepting pointer events. It remains in the DOM as an
+   accessibility fallback when JS is disabled. */
+#site-header.has-category-tabs .category-dropdown {
+  display: none !important;
+  pointer-events: none !important;
+}
+
 #category-tabs-container {
   display: none;
 }
