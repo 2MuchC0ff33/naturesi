@@ -198,6 +198,9 @@
   <!-- Script Loading: load main JS as an ES module so app.js can import smaller modules (modular refactor) -->
   <!-- Cache-busting query added to force clients to fetch latest module during development/debugging -->
   <script type="module" src="/assets/js/app.js"></script>
+  <script src="/assets/js/modules/structured-data-fix.js" defer></script>
+  <script src="/assets/js/modules/search-bootstrap.js" defer></script>
+  <script src="/assets/js/modules/search-autocomplete.js" defer></script>
 </head>
 
 <body itemscope itemtype="https://schema.org/WebPage">
@@ -252,7 +255,7 @@
           </nav>
 
           <!-- Search form (pure HTML5, no JS) -->
-          <form id="site-search-form" class="site-search" action="/pages/search.html" method="get" role="search"
+          <form id="site-search-form" class="site-search" action="/search.html" method="get" role="search"
             aria-label="Search site">
             <label for="site-search" class="visually-hidden">Search Nature's Infusions</label>
             <input id="site-search" name="q" type="search" placeholder="Search Nature's Infusions" class="search-box"

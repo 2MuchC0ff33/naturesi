@@ -158,8 +158,8 @@
         "publisher": { "@id": "https://www.naturesinfusions.com.au/#organization" },
         "potentialAction": {
           "@type": "SearchAction",
-          "target": "https://www.naturesinfusions.com.au/pages/search.html?q={search_term_string}",
-          "query-input": "required name=\"search_term_string\""
+          "target": "/search.html?q={search_term_string}",
+          "query-input": "required name=q"
         }
       }
     </script>
@@ -182,6 +182,9 @@
   <link rel="stylesheet" href="/assets/css/main.css" type="text/css" />
   <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="Nature's Infusions" />
   <script type="module" src="/assets/js/app.js"></script>
+  <script src="/assets/js/modules/structured-data-fix.js" defer></script>
+  <script src="/assets/js/modules/search-bootstrap.js" defer></script>
+  <script src="/assets/js/modules/search-autocomplete.js" defer></script>
 </head>
 
 <body itemscope itemtype="https://schema.org/WebPage">
@@ -238,7 +241,7 @@
           </nav>
 
           <!-- Search form (pure HTML5, no JS) -->
-          <form id="site-search-form" class="site-search" action="/pages/search.html" method="get" role="search"
+          <form id="site-search-form" class="site-search" action="/search.html" method="get" role="search"
             aria-label="Search site">
             <label for="site-search" class="visually-hidden">Search Nature's Infusions</label>
             <input id="site-search" name="q" type="search" placeholder="Search Nature's Infusions" class="search-box"
@@ -295,6 +298,11 @@
       <li><a href="/pages/search/selfcare.html">Self Care</a></li>
       <li><a href="/pages/search/accessories.html">Accessories</a></li>
     </ul>
+
+    <section id="search-results">
+      <h2>Search results</h2>
+      <ul data-product-list class="result-list"></ul>
+    </section>
 
     <section id="all-products">
       <h2>All Products</h2>
