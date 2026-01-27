@@ -1,0 +1,82 @@
+/* Utilities – display helpers */
+
+/* Display helpers: block, inline, flex, grid, none, etc. Mobile-first. */
+.u-d-block {
+  display: block !important;
+}
+
+.u-d-inline {
+  display: inline !important;
+}
+
+.u-d-inline-block {
+  display: inline-block !important;
+}
+
+.u-d-flex {
+  display: flex !important;
+}
+
+.u-d-grid {
+  display: grid !important;
+}
+
+.u-d-none {
+  display: none !important;
+}
+
+/* Legacy aliases for compatibility */
+.inline-block {
+  display: inline-block !important;
+}
+
+.flex {
+  display: flex !important;
+}
+
+.grid {
+  display: grid !important;
+}
+
+@media (min-width: 600px) {
+  .u-d-block-md {
+    display: block !important;
+  }
+
+  .u-d-flex-md {
+    display: flex !important;
+  }
+}
+
+/* Flex and grid helpers */
+.u-flex {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.u-inline-flex {
+  display: inline-flex;
+}
+
+.u-grid {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.u-auto-fit {
+  grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+}
+
+/* Small display helpers */
+.u-inline {
+  display: inline;
+}
+
+.u-inline-block {
+  display: inline-block;
+}
+
+/* Backwards-compatibility - keep non-prefixed inline-block when used by objects */
+.inline-block {
+  display: inline-block;
+}

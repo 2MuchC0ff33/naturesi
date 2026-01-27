@@ -1,0 +1,7 @@
+{
+  "DOMContentLoaded Listener": {
+    "prefix": "domready",
+    "body": ["document.addEventListener('DOMContentLoaded', () => {", "  $1", "});"],
+    "description": "JS snippet for DOMContentLoaded event listener.",
+  },
+}

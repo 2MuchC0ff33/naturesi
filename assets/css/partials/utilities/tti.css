@@ -1,0 +1,5 @@
+/* Utilities – Time to Interactive (TTI) helpers */
+
+.u-tti-delay {
+  transition-delay: 0.2s;
+}

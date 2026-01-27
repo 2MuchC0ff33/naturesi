@@ -27,7 +27,9 @@ function isSafePath(path) {
   return true;
 }
 if (!decodedBasePath.startsWith(expectedBaseDir) || !isSafePath(decodedBasePath)) {
-  console.error('Invalid basePath detected. Service Worker initialization aborted for security reasons.');
+  console.error(
+    'Invalid basePath detected. Service Worker initialization aborted for security reasons.'
+  );
 } else {
   try {
     importScripts(`${basePath}assets/js/modules/sw-core.js`);
@@ -37,7 +39,9 @@ if (!decodedBasePath.startsWith(expectedBaseDir) || !isSafePath(decodedBasePath)
 
     // Handle specific error cases
     if (e.name === 'NetworkError') {
-      console.warn('Network error occurred while loading scripts. Falling back to offline handler.');
+      console.warn(
+        'Network error occurred while loading scripts. Falling back to offline handler.'
+      );
     } else if (e.name === 'SecurityError') {
       console.warn('Security error occurred. Ensure the scripts are served over HTTPS.');
     } else {
@@ -52,3 +56,17 @@ if (!decodedBasePath.startsWith(expectedBaseDir) || !isSafePath(decodedBasePath)
     });
   }
 }
+
+// Cache canonical products.json with network-first and TTL to keep catalog fresh
+self.addEventListener('fetch', (event) => {
+  const req = event.request;
+  try {
+    const url = new URL(req.url);
+    if (url.origin === self.location.origin && url.pathname === '/products.json'){
+      event.respondWith(networkFirstWithTTL(req, API_CACHE, 5 * 60 * 1000));
+      return;
+    }
+  } catch (e) {
+    // ignore URL parsing errors and fallback to default handlers
+  }
+});

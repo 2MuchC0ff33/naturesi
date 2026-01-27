@@ -1,0 +1,32 @@
+/* ==========================================================================
+Browser specific fixes and touch adjustments
+========================================================================== */
+
+/* Prevent iOS from highlighting links on long press */
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+/* Remove input clear on IE/Edge and standardise placeholders */
+input::-ms-clear {
+  display: none;
+}
+
+/* Improve momentum scrolling on iOS */
+.scroll-smooth {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Hide default scrollbars for aesthetic reasons (use sparingly) */
+.hide-scrollbar {
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Chrome/Safari */

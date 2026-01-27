@@ -1,0 +1,57 @@
+/* components/navigation-menu.css
+   Purpose: Styles for the primary and secondary navigation menus.
+   Scope: Goal is to contain navigation-specific presentation (menus, toggles, dropdowns).
+   Notes: Use `.site-nav`, `.nav-toggle`, `.nav-list`, `.nav-item` and keep layout to object classes.
+*/
+
+/* Navigation menu component rules */
+
+/* Toggle button inserted by `nav-toggle.js` when JS is available. Keep presentation here so component behaviour is localised. */
+.nav-toggle {
+  display: none;
+  background: transparent;
+  border: 0;
+  padding: 0.25rem;
+  border-radius: 0.35rem;
+  color: var(--color-text);
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-toggle svg {
+  display: block;
+  width: 20px;
+  height: 20px;
+}
+
+.nav-toggle:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+@media (max-width: 900px) {
+
+  /* Show toggle on small screens */
+  .nav-toggle {
+    display: inline-flex;
+  }
+
+  /* When JS is enabled hide center nav until open */
+  html:not(.no-js) .site-nav .nav-center {
+    display: none;
+  }
+
+  /* Open state overlay for nav center */
+  .site-nav.site-nav--open .nav-center {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.6rem;
+    width: calc(100% - var(--space-sm));
+    position: absolute;
+    left: 0.5rem;
+    right: 0.5rem;
+  }
+}
+
+/* Placeholder: additional navigation menu rules can be added here */

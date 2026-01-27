@@ -1,0 +1,41 @@
+/* Input defaults: padding, borders, backgrounds and focus state */
+
+input,
+textarea,
+select {
+  padding: var(--space-xs) var(--space-sm);
+  border: 1px solid var(--color-border);
+  background: var(--color-background);
+  border-radius: var(--radius-sm);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  color: inherit;
+  font: inherit;
+}
+
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--color-accent) 60%, transparent);
+  outline-offset: 2px;
+  box-shadow: var(--shadow-accent);
+}
+
+input[disabled],
+textarea[disabled],
+select[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Validation state helpers */
+.input--error,
+input[aria-invalid="true"] {
+  border-color: color-mix(in srgb, var(--color-accent) 40%, red 60%);
+  box-shadow: 0 0 0 3px color-mix(in srgb, red 8%, transparent);
+}
+
+.help-text {
+  font-size: 0.9rem;
+  color: var(--color-muted);
+  margin-top: 0.25rem;
+}

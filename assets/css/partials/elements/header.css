@@ -1,0 +1,531 @@
+/* ==========================================================================
+Header and branding
+Core header bar, logo treatment and colour gradient live here.
+========================================================================== */
+#site-header {
+  /* header height is sourced from settings.css (default) and may be
+     overridden in responsive contexts where appropriate. */
+  background: linear-gradient(180deg,
+      color-mix(in srgb, var(--color-accent) 72%, white 28%),
+      color-mix(in srgb, var(--color-accent) 60%, black 40%));
+  color: white;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-accent) 20%, black);
+}
+
+/* Ensure the native category select inside the header uses readable
+   black text on a white background even though the header sets
+   a white foreground for its contents. This rule must live here
+   (after the header colour) so it wins in the cascade. */
+#site-header #site-category-select {
+  color: #000;
+  /* explicit black text for the select */
+  -webkit-text-fill-color: #000;
+  /* help WebKit-based browsers show black text */
+  background: white;
+  /* ensure select shows on white background */
+}
+
+#site-header #site-category-select option {
+  color: #000;
+  /* explicit black for option list items */
+  background: white;
+}
+
+.site-nav {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: var(--space-xxs);
+  align-items: center;
+  padding: 0.26rem var(--space-sm);
+  border-bottom: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-accent) 4%, transparent);
+  font-size: 0.9rem;
+  line-height: 1.02;
+  min-height: 44px;
+}
+
+.site-nav .nav-left,
+.site-nav .nav-center,
+.site-nav .nav-right {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.site-nav .nav-left {
+  gap: var(--space-xxs);
+  min-width: 64px;
+}
+
+.site-nav .logo,
+.site-nav .all-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.28rem;
+  padding: 0.02rem 0.35rem;
+  border-radius: 0.4rem;
+  background: rgba(255, 255, 255, 0.95);
+  color: color-mix(in srgb, var(--color-accent) 70%, black);
+  text-decoration: none;
+}
+
+.site-nav .logo img,
+.site-nav .all-logo img {
+  /* larger baseline for improved brand visibility on phones */
+  max-height: 48px;
+  width: auto;
+  height: auto;
+}
+
+@media (min-width: 640px) {
+
+  .site-nav .logo img,
+  .site-nav .all-logo img {
+    max-height: 56px;
+  }
+}
+
+@media (min-width: 900px) {
+
+  .site-nav .logo img,
+  .site-nav .all-logo img {
+    max-height: 64px;
+  }
+}
+
+@media (min-width: 1200px) {
+
+  .site-nav .logo img,
+  .site-nav .all-logo img {
+    max-height: 72px;
+  }
+}
+
+/* When JS replaces the native <select> with tabs we hide the native category control
+   visually (it remains in the DOM as an accessibility fallback when necessary). */
+.has-category-tabs .category-dropdown {
+  position: absolute !important;
+  left: -9999px !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  clip: rect(1px, 1px, 1px, 1px) !important;
+}
+
+/* Merged duplicate selector: .nav-center
+   Acceptance: removed duplicate, combined all properties */
+.nav-center {
+  flex: 2 1 280px;
+  gap: 0.35rem;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.site-nav .search-icon,
+.site-nav .cart-option,
+.site-nav .all-logo {
+  min-height: 32px;
+  min-width: 32px;
+  height: 36px;
+}
+
+.nav-right {
+  flex: 1 1 160px;
+  justify-content: flex-end;
+  gap: var(--space-xs);
+}
+
+/* Base cart styles are defined in assets/css/partials/cart.css.
+   Keep only nav-specific visual overrides here to avoid duplication. */
+.cart-option {
+  /* nav-specific background and padding (keep only differences) */
+  background: transparent;
+  padding: 0.08rem 0.35rem;
+  border-radius: 6px;
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+@media (max-width: 640px) {
+  .nav-center {
+    order: 3;
+    flex-basis: 100%;
+    gap: 0.4rem;
+  }
+
+  .nav-right {
+    order: 2;
+    flex-basis: auto;
+  }
+
+  .nav-left {
+    order: 1;
+  }
+
+  /* increase hit area for icons and interactive nav items */
+  .site-nav .logo,
+  .site-nav .search-icon,
+  .site-nav .cart-option,
+  .site-nav .all-logo,
+  .site-search .search-dropdown {
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0.35rem;
+    border-radius: 0.5rem;
+  }
+
+  /* stack nav-center content to avoid horizontal overflow on small screens */
+  .nav-center-flex {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.6rem;
+  }
+}
+
+.site-nav .logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.08rem 0.5rem;
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.9);
+  color: color-mix(in srgb, var(--color-accent) 70%, black);
+  text-decoration: none;
+}
+
+/* Dark mode styling intentionally disabled to force light mode across the site.
+   Previously the logo background and colour were inverted in dark mode; this
+   ensures consistent light appearance regardless of OS preference. */
+
+@media (max-width: 420px) {
+  /* Small-screen cart text hide moved to `partials/components/cart.css` to canonicalise component behaviour */
+
+  .site-search .search-dropdown {
+    flex: 0 0 110px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .site-nav {
+    gap: var(--space-sm);
+    padding-inline: var(--space-md);
+  }
+
+  .site-search .search-dropdown {
+    flex: 0 0 160px;
+  }
+
+  .site-nav .logo img {
+    max-height: 56px;
+  }
+}
+
+/* Add or update in assets/css/main.css or partials/07-header.css */
+/* Ensure the search form is centred within nav-center */
+
+/* Hero banner decorative media and content layering */
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: var(--space-lg) 0;
+  border-radius: 8px;
+}
+
+.hero__media {
+  position: absolute;
+  inset: 0 0 0 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.hero__media picture,
+.hero__media img.hero__img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  filter: saturate(0.98) contrast(0.98);
+}
+
+/* gentle overlay to ensure hero text contrast */
+.hero__media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.06));
+  pointer-events: none;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 1;
+  color: var(--color-text);
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-md);
+}
+
+.hero blockquote,
+.hero #tagline {
+  color: color-mix(in srgb, var(--color-text) 86%, #0000);
+}
+
+.hero .button.btn--primary {
+  background: var(--color-accent);
+  color: white;
+}
+
+/* Ensure hero content is readable on small screens */
+@media (max-width: 640px) {
+  .hero {
+    padding: var(--space-md) 0;
+  }
+
+  .hero__content {
+    padding: var(--space-sm);
+  }
+}
+
+/* Acceptance: aligns search box and button evenly, vertically and horizontally */
+/* Merged duplicate selector: .site-search
+   Acceptance: removed duplicate, combined all properties */
+.site-search {
+  display: flex;
+  align-items: center;
+  /* Vertically centre items */
+  justify-content: center;
+  /* Horizontally centre items */
+  gap: 0.4rem;
+  /* Space between input and button */
+  margin: 0 auto;
+  /* Centre within parent if width is set */
+  width: 100%;
+  /* Take full available width */
+  max-width: 340px;
+  /* Optional: limit width for aesthetics */
+  flex: 1 1 220px;
+}
+
+/* Base search control styles (inputs, dropdowns) are defined in
+   `partials/elements/forms.css`. Remove duplicated child rules here so
+   `partials/elements/forms.css` remains the canonical source. */
+
+/* Add improved flex wrapper for nav-center grouping */
+.nav-center-flex {
+  display: flex;
+  flex-direction: row;
+  gap: 1.2rem;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Nav toggle (presentation and mobile behaviour) moved to `partials/components/navigation-menu.css` */
+
+
+/* Small screens: hide the center area by default and show the nav-toggle.
+   When the navigation is opened (.site-nav--open) the nav-center becomes visible. */
+@media (max-width: 900px) {
+  /* `.nav-toggle` display and small-screen open-state moved to `partials/components/navigation-menu.css` */
+
+  /* Ensure the header is a positioned container for the absolute overlay */
+  .site-nav {
+    position: relative;
+  }
+
+  /* `.nav-center` small-screen behaviours (no-js hide + open-state overlays) moved to component partial */
+
+  top: calc(100% + 0.4rem);
+  background: var(--color-background);
+  padding: var(--space-sm);
+  box-shadow: var(--shadow-md);
+  border-radius: 8px;
+  z-index: 2000;
+}
+
+/* Increase hit areas for interactive elements inside the open nav */
+.site-nav.site-nav--open .nav-center a,
+.site-nav.site-nav--open .nav-center button,
+.site-nav.site-nav--open .nav-center input,
+.site-nav.site-nav--open .nav-center select {
+  min-height: 44px;
+}
+
+/* animate open state */
+.site-nav.site-nav--open .nav-center {
+  animation: nav-slide-down 220ms ease both;
+}
+
+/* `@keyframes nav-slide-down` moved to `partials/tools/animations.css` */
+
+/* Prevent background scroll when nav is open on small screens */
+body.nav-open {
+  overflow: hidden;
+  touch-action: none;
+  -webkit-overflow-scrolling: auto;
+}
+}
+
+@media (max-width: 640px) {
+  .nav-center-flex {
+    flex-direction: column;
+    gap: 0.6rem;
+    align-items: stretch;
+    justify-content: center;
+  }
+}
+
+/* Optional: visually separate category and search for clarity */
+.category-dropdown {
+  min-width: 160px;
+}
+
+/* Ensure touch targets meet WCAG / mobile guidelines on small screens */
+@media (max-width: 640px) {
+
+  /* increase hit area for icons and interactive nav items */
+  .site-nav .logo,
+  .site-nav .search-icon,
+  .site-nav .cart-option,
+  .site-nav .all-logo,
+  .site-search .search-dropdown {
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0.35rem;
+    border-radius: 0.5rem;
+  }
+}
+
+/* Small-screen header: change grid -> single column, stack center controls
+   Acceptance: header stacks vertically on phones, no horizontal overflow,
+   category select and search become full-width, skip-link placement adjusted. */
+@media (max-width: 640px) {
+
+  /* Make the header a single column so the center controls can't force a wide row */
+  .site-nav {
+    grid-template-columns: 1fr;
+    align-items: start;
+    gap: var(--space-xs);
+  }
+
+  /* Order the regions so logo stays top, centre controls next, actions last */
+  .site-nav .nav-left {
+    order: 1;
+    justify-content: flex-start;
+  }
+
+  .nav-center {
+    order: 2;
+    width: 100%;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+
+  .nav-right {
+    order: 3;
+    justify-content: flex-end;
+    margin-top: 0.25rem;
+  }
+
+  /* Ensure the nav-center internal wrapper stacks and stretches */
+  .nav-center-flex {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.6rem;
+    width: 100%;
+  }
+
+  /* Make search and category controls fill available width */
+  .site-search {
+    max-width: none;
+    width: 100%;
+  }
+
+  /* NOTE: Search box presentational styles (layout, sizing, borders, colors)
+     are defined in `partials/elements/forms.css` to avoid duplication and conflicting
+     specificity. Any layout overrides specific to header should be added
+     in a tightly-scoped rule here when absolutely necessary. */
+
+
+  /* Category select to full width so long option text doesn't cause overflow */
+  #site-category-select {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Prevent logo/cart from stretching the row */
+  .site-nav .logo,
+  .site-nav .cart-option {
+    flex: 0 0 auto;
+  }
+
+  /* Increase header-height variable used by the skip-link so the skip link is placed correctly */
+  #site-header {
+    --header-height: 6rem;
+    /* tuned for stacked header height on small screens */
+  }
+}
+
+/* Small-screen overflow safeguards: prevent horizontal scrolling caused by
+   elements with fixed/min-widths or viewport-width calculations. These are
+   conservative rules applied only on small screens. */
+@media (max-width: 640px) {
+
+  /* Ensure header cannot exceed viewport width and allow children to shrink */
+  #site-header,
+  .site-nav {
+    max-width: 100%;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+
+  /* Allow flex children to shrink below their content width to avoid overflow */
+  .site-nav .nav-left,
+  .site-nav .nav-center,
+  .site-nav .nav-right,
+  .nav-center-flex,
+  .site-search,
+  .site-search .search-box,
+  .site-search .search-dropdown,
+  #site-category-select {
+    min-width: 0;
+  }
+
+  /* Constrain any element that might use viewport units elsewhere: keep rules
+     targeted above instead of using a global empty :root block. */
+}
+
+/* Extra strong overrides for small screens to eliminate header overflow */
+@media (max-width: 640px) {
+
+  /* Allow nav sections to wrap content instead of forcing no-wrap */
+  .site-nav .nav-left,
+  .site-nav .nav-center,
+  .site-nav .nav-right {
+    white-space: normal !important;
+    min-width: 0 !important;
+  }
+
+  /* Search presentation for small screens is defined in `partials/elements/forms.css` to
+     keep form element styling centralized. These header-specific overrides were
+     removed to avoid conflicting specificity. If a header-only layout tweak is
+     required in the future, add a tightly-scoped rule here with a clear
+     comment explaining why it cannot live in `partials/elements/forms.css`. */
+  min-width: 0 !important;
+}
+
+/* Ensure any inline icon/button doesn't add extra width when stacked */
+.site-search .search-icon,
+.site-nav .search-icon,
+.site-nav .cart-option {
+  align-self: flex-end !important;
+}
+
+/* Make sure the nav center flex wrapper stretches fully and allows children to shrink */
+.nav-center-flex {
+  align-items: stretch !important;
+  width: 100% !important;
+}
+}

@@ -1,0 +1,60 @@
+/* ==========================================================================
+Objects — Modals
+
+Modal object skeleton (undecorated). Keep ARIA/dialog semantics and focus
+management to component JS. This file is intentionally structural and minimal.
+
+API: `.modal` (container), `.modal__overlay`, `.modal__dialog`, `.modal__header`,
+`.modal__body`, `.modal__footer`, plus `body.modal-open` (scroll lock helper).
+========================================================================== */
+
+/* Basic positioning and open-state layout (undecorated) */
+.modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  /* high-level stacking — visual styling belongs in components */
+}
+
+/* Open state — prefer the boolean attribute when possible */
+.modal[open],
+.modal.is-open {
+  display: flex;
+}
+
+/* Overlay and dialog skeletons — visual presentation left to component layer */
+.modal__overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: auto;
+}
+
+.modal__dialog {
+  position: relative;
+  max-width: min(95%, 720px);
+  width: 100%;
+  max-height: calc(100vh - 4rem);
+  overflow: auto;
+  box-sizing: border-box;
+}
+
+/* When a modal is open prevent background scroll */
+body.modal-open {
+  overflow: hidden;
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .modal__dialog {
+    transition: none !important;
+  }
+}
+
+/* Focus styles: component layer should define visual focus, but ensure focusable dialog receives focus */
+.modal__dialog:focus-visible {
+  outline: 3px solid Highlight;
+  outline-offset: 4px;
+}

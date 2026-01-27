@@ -1,0 +1,50 @@
+/* ==========================================================================
+Base document styles
+This file contains top-level typographic and document-level settings using design tokens.
+========================================================================== */
+
+/* HTML5 document base styles */
+html {
+  line-height: var(--line-height, 1.6);
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: var(--fluid-font, 1rem);
+  line-height: var(--line-height, 1.6);
+  color: var(--color-text);
+  background-color: var(--color-background);
+}
+
+/* Ensure main element displays correctly */
+main {
+  display: block;
+}
+
+/* Form elements baseline */
+input,
+button,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+/* Focus management for keyboard navigation */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Styled Horizontal Rule (site accent) */
+hr {
+  border: 0;
+  border-top: 1px solid var(--color-light-background);
+  margin: var(--space-md) auto;
+  width: 80%;
+}

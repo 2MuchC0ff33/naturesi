@@ -1,0 +1,28 @@
+/* components/tooltips.css
+   Purpose: Tooltip visual styles; content should be visually hidden by default and shown on hover/focus of host element.
+   Scope: `.tooltip`, `.tooltip__content`, `.has-tooltip`.
+   Notes: Prefer aria-describedby to associate tooltips; keep CSS minimal and rely on JS for positioning when needed.
+*/
+
+.tooltip__content {
+  position: absolute;
+  background: var(--tooltip-bg, rgba(0, 0, 0, 0.85));
+  color: #fff;
+  padding: 0.35rem 0.5rem;
+  font-size: 0.85rem;
+  border-radius: 4px;
+  display: none;
+}
+
+/* Prefer programmatic ARIA control: show when tooltip host has aria-expanded or aria-describedby relationship */
+[aria-describedby]>.tooltip__content,
+.tooltip[aria-hidden='false'] .tooltip__content,
+.has-tooltip:focus .tooltip__content,
+.has-tooltip:hover .tooltip__content {
+  display: block;
+}
+
+.tooltip__content:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--color-accent) 32%, #0000);
+  outline-offset: 2px;
+}

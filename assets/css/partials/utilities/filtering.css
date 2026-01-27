@@ -1,0 +1,9 @@
+/* Utilities – filtering helpers */
+
+.u-filter-active {
+  filter: brightness(1.1);
+}
+
+.u-filter-inactive {
+  filter: grayscale(1);
+}

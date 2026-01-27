@@ -1,61 +1,9 @@
 {
   "name": "naturesi",
   "version": "1.0.0",
-  "description": "",
-  "main": "service-worker.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/2MuchC0ff33/naturesi.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/2MuchC0ff33/naturesi/issues"
-  },
-  "homepage": "https://github.com/2MuchC0ff33/naturesi#readme",
-  "devDependencies": {
-    "@babel/core": "^7.22.0",
-    "@babel/eslint-parser": "^7.22.0",
-    "@babel/plugin-syntax-import-assertions": "^7.22.0",
-    "@babel/preset-env": "^7.22.0",
-    "eslint": "^9.37.0",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-prettier": "^5.5.4",
-    "husky": "^9.1.7",
-    "lint-staged": "^16.2.3",
-    "prettier": "^3.6.2",
-    "stylelint": "^16.25.0",
-    "stylelint-config-recommended": "^17.0.0"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "format": "prettier --write \"**/*.{html,css,js,json,md}\"",
-    "prepare": "husky install",
-    "stylelint": "stylelint \"**/*.{css,scss}\" --fix",
-    "lint": "eslint \"**/*.js\" --fix",
-    "generate:categories": "node scripts/generate-product-categories.js",
-    "refactor:postcodes": "node scripts/refactor-postcodes.js",
-    "serve": "python -m http.server 8000",
-    "pa11y": "node scripts/run-pa11y.js"
-  },
-  "lint-staged": {
-    "*.{css,scss}": [
-      "prettier --write",
-      "stylelint --fix",
-      "git add"
-    ],
-    "*.js": [
-      "eslint --fix",
-      "prettier --write",
-      "git add"
-    ],
-    "*.{html,md,json}": [
-      "prettier --write",
-      "git add"
-    ]
-  },
-  "dependencies": {
-    "eslint-plugin-html": "^8.1.3"
-  }
+  "type": "module",
+  "description": "Nature's Infusions static e-commerce site",
+  "author": "2MuchC0ff33",
+  "devDependencies": {},
+  "scripts": {}
 }

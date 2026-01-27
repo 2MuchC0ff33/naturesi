@@ -4,7 +4,7 @@ Describe the changes in this PR and the problem it solves.
 
 ## Checklist
 
-- [ ] I have run linters and formatters (ESLint, Stylelint, Prettier)
+- [ ] I have run linters and formatters
 - [ ] I have validated HTML and JSON where relevant
 - [ ] I have tested locally (see testing notes below)
 - [ ] This change does not affect payments or cart flow, or I have requested manual review if it does

@@ -1,24 +1,9 @@
-# EditorConfig helps maintain consistent coding styles between editors
+# .editorconfig for Nature's Infusions static site
+# Ensures consistent formatting for HTML, CSS, JS, data, and documentation files
+
 root = true
 
-[ * ]
-# Use UTF-8 for all files
-charset = utf-8
-# Use LF for all line endings
-end_of_line = lf
-# Insert final newline at end of file
-insert_final_newline = true
-# Trim trailing whitespace by default
-trim_trailing_whitespace = true
-
-[*.md]
-# Keep trailing whitespace in markdown files (often used for hard line breaks)
-trim_trailing_whitespace = false
-
-[*.{png,jpg,jpeg,gif,ico,svg,webp,zip,gz,7z}]
-binary = true
-root = true
-
+# Universal defaults for all text/code files
 [*]
 charset = utf-8
 end_of_line = lf
@@ -27,5 +12,47 @@ trim_trailing_whitespace = true
 indent_style = space
 indent_size = 2
 
+# Markdown: allow trailing whitespace for hard line breaks
 [*.md]
 trim_trailing_whitespace = false
+
+# JSON: enforce 2-space indent, no trailing whitespace, final newline
+[*.json]
+indent_style = space
+indent_size = 2
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+# YAML: 2-space indent, no trailing whitespace, final newline
+[*.yml]
+indent_style = space
+indent_size = 2
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+# XML: 2-space indent, no trailing whitespace, final newline
+[*.xml]
+indent_style = space
+indent_size = 2
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+# CSV/TSV: no trailing whitespace, final newline
+[*.csv]
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+[*.tsv]
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+# Config files: treat as text, 2-space indent, no trailing whitespace
+[*.env]
+indent_style = space
+indent_size = 2
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+# Binary files: do not apply text rules
+[*.{png,jpg,jpeg,gif,ico,svg,webp,zip,gz,7z}]
+binary = true

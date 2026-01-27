@@ -1,0 +1,9 @@
+/* Utilities – sorting helpers */
+
+.u-sort-asc {
+  order: 1;
+}
+
+.u-sort-desc {
+  order: 2;
+}

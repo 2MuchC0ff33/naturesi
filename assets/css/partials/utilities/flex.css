@@ -1,0 +1,83 @@
+/* Flex – Flexbox alignment and direction utilities
+   Mobile-first flexbox helpers for responsive layouts.
+*/
+
+/* Flex direction */
+.u-flex-row {
+  flex-direction: row !important;
+}
+
+.u-flex-column {
+  flex-direction: column !important;
+}
+
+/* Responsive flex direction */
+@media (min-width: 900px) {
+  .u-flex-column\@md {
+    flex-direction: column !important;
+  }
+
+  .u-flex-row\@md {
+    flex-direction: row !important;
+  }
+}
+
+/* Justify content */
+.u-justify-start {
+  justify-content: flex-start !important;
+}
+
+.u-justify-center {
+  justify-content: center !important;
+}
+
+.u-justify-end {
+  justify-content: flex-end !important;
+}
+
+.u-justify-between {
+  justify-content: space-between !important;
+}
+
+.u-justify-around {
+  justify-content: space-around !important;
+}
+
+/* Align items */
+.u-items-start {
+  align-items: flex-start !important;
+}
+
+.u-items-center {
+  align-items: center !important;
+}
+
+.u-items-end {
+  align-items: flex-end !important;
+}
+
+.u-items-stretch {
+  align-items: stretch !important;
+}
+
+/* Align self */
+.u-self-start {
+  align-self: flex-start !important;
+}
+
+.u-self-center {
+  align-self: center !important;
+}
+
+.u-self-end {
+  align-self: flex-end !important;
+}
+
+/* Flex wrap */
+.u-flex-wrap {
+  flex-wrap: wrap !important;
+}
+
+.u-flex-nowrap {
+  flex-wrap: nowrap !important;
+}

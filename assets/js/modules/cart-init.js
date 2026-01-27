@@ -13,7 +13,7 @@
     for add-to-cart forms to avoid duplicate listeners and ensure dynamic content works.
 */
 
-import { CartStore, parseWeightString } from './cartStore.js';
+import { parseWeightString } from './cartStore.js';
 import {
   updateCartCountOutputs,
   renderCartTable,
@@ -54,10 +54,69 @@ function calculateTotalWeight(cartItems, productIndex) {
   return totalGrams;
 }
 
+// Parse a price-like string into a numeric value (robust to currency symbols and comma decimals)
+function parsePriceString(val) {
+  if (val == null) return null;
+  const s = String(val).trim().replace(/[^\d.,-]/g, '').replace(/,/g, '.');
+  const m = s.match(/-?\d+(?:\.\d+)?/);
+  if (!m) return null;
+  const n = Number(m[0]);
+  return Number.isFinite(n) ? n : null;
+}
+
+// Return selected option price (Number) by inspecting common control names inside the form
+function getSelectedOptionPrice(form, productEl) {
+  if (!form) return null;
+  const names = ['size', 'package', 'variant', 'option', 'format'];
+  for (const name of names) {
+    // radios / checkboxes
+    const checked = form.querySelector(`input[name='${name}']:checked`);
+    if (checked) {
+      if (checked.dataset && checked.dataset.price) {
+        const p = parsePriceString(checked.dataset.price);
+        if (p !== null) return p;
+      }
+      if (checked.value) {
+        const p = parsePriceString(checked.value);
+        if (p !== null) return p;
+        if (productEl) {
+          const m = productEl.querySelector(`[data-price][data-value='${checked.value}']`);
+          if (m && m.dataset.price) {
+            const p2 = parsePriceString(m.dataset.price);
+            if (p2 !== null) return p2;
+          }
+        }
+      }
+    }
+    // select
+    const sel = form.querySelector(`select[name='${name}']`);
+    if (sel && sel.selectedOptions && sel.selectedOptions.length) {
+      const opt = sel.selectedOptions[0];
+      if (opt.dataset && opt.dataset.price) {
+        const p = parsePriceString(opt.dataset.price);
+        if (p !== null) return p;
+      }
+      if (opt.value) {
+        const p = parsePriceString(opt.value);
+        if (p !== null) return p;
+      }
+    }
+  }
+
+  // fallback: any checked input within the form with data-price
+  const any = form.querySelector('input:checked[data-price]');
+  if (any && any.dataset && any.dataset.price) {
+    const p = parsePriceString(any.dataset.price);
+    if (p !== null) return p;
+  }
+
+  return null;
+}
+
 // initCart - centralised cart initialiser extracted from app.js
 export async function initCart() {
-  const cartStore = new CartStore();
-  await cartStore.init();
+  const cartStore = window.CartStore;
+  if (cartStore && typeof cartStore.init === 'function') await cartStore.init();
 
   // load canonical product index (best-effort). We expose it to cart UI so rendering prefers it.
   // `idx` is declared in outer scope so other functions (estimator) can reference it safely.
@@ -89,6 +148,44 @@ export async function initCart() {
   // Ensure totals include current shipping (initially 0)
   updateCartTableTotalsWithShipping(currentShippingRate);
 
+  // Optional: Shared cart synchronization across tabs
+  try {
+    // Lazy-import the client to keep no-JS and small bundles lean
+    const sc = await import('./shared-cart-client.js');
+    const client = sc && sc.createClient ? sc.createClient() : null;
+    if (client) {
+      // When the shared worker sends the canonical cart, replace local store and re-render
+      client.on(async (msg) => {
+        if (!msg) return;
+        if (msg.event === 'CART' || msg.event === 'CART_UPDATED') {
+          try {
+            if (msg.cart) {
+              // Overwrite local cart with canonical copy and persist via global CartStore
+              try { await window.CartStore.set(msg.cart); } catch (e) { window.CartStore.set && window.CartStore.set(msg.cart); }
+              const c = window.CartStore.get();
+              updateCartCountOutputs((c.items || []).reduce((s, it) => s + (parseInt(it.qty || it.quantity || 0,10)||0), 0));
+              renderCartTable(c);
+              updateCartTableTotalsWithShipping(currentShippingRate);
+            }
+          } catch (err) { console.warn('Failed to apply shared cart update', err); }
+        }
+      });
+
+      // When local cart changes, push to shared worker
+      document.addEventListener('cart:updated', () => {
+        try {
+          const c = window.CartStore.get();
+          client.setCart(c, 'cart-init');
+        } catch (err) { console.warn('Failed to push cart to shared worker', err); }
+      });
+
+      // Push current cart on load (idempotent)
+      try { client.setCart(window.CartStore.get(), 'cart-init'); } catch (e) {}
+    }
+  } catch (e) {
+    // dynamic import may fail on older browsers — ignore for progressive enhancement
+  }
+
   // Delegated submit handler for add-to-cart forms (uses native FormData)
   document.addEventListener('submit', async (ev) => {
     const form = ev.target;
@@ -96,37 +193,139 @@ export async function initCart() {
     ev.preventDefault();
     try {
       const fd = new FormData(form);
-      const productEl = form.closest('.product') || form.closest('[itemscope]') || form;
+      // Prefer explicit component-root attribute first, then legacy selectors
+    const productEl =
+      form.closest('article[data-sku]') ||
+      form.closest('[data-product]') ||
+      form.closest('.product') ||
+      form.closest('[itemscope]') ||
+      form;
       const id =
         productEl && (productEl.id || productEl.dataset.sku || productEl.dataset.id)
           ? productEl.id || productEl.dataset.sku || productEl.dataset.id
           : `i_${Math.random().toString(36).slice(2, 9)}`;
+      // Prefer explicit product title attribute then fall back to legacy heading selectors
       const nameEl =
         productEl &&
-        (productEl.querySelector('[itemprop="name"]') ||
+        (productEl.querySelector('[data-product-title]') ||
+          productEl.querySelector('[data-product-name]') ||
+          productEl.querySelector('[itemprop="name"]') ||
           productEl.querySelector('h3, h2, .product-title'));
       const name = nameEl ? nameEl.textContent.trim() : fd.get('name') || 'Item';
       const size = fd.get('size') || fd.get('package') || '';
       const quantity = parseInt(fd.get('quantity') || fd.get('qty') || 1, 10) || 1;
 
-      // price extraction (prefer data-price attribute)
+      // price extraction (prefer selected option price, fallback to product-level data-price)
       let price = null;
-      const priceField =
-        productEl &&
-        (productEl.querySelector('[data-price]') || productEl.querySelector('[itemprop="price"]'));
-      if (priceField)
-        price =
-          parseFloat(
-            priceField.dataset.price ||
-              priceField.getAttribute('content') ||
-              priceField.textContent.replace(/[^0-9\.]/g, '')
-          ) || null;
+      // First try an explicit per-option price from selected controls (radios/selects)
+      const selPrice = getSelectedOptionPrice(form, productEl);
+      if (selPrice !== null) {
+        price = selPrice;
+      } else {
+        // Fallback: if FormData has an option value, try to find the control by value
+        const candidateVal = fd.get('package') || fd.get('size') || fd.get('variant') || fd.get('option') || fd.get('format') || '';
+        if (candidateVal) {
+          // Try to find an input/select option matching the value for known option names
+          const names = ['size', 'package', 'variant', 'option', 'format'];
+          for (const n of names) {
+            if (price !== null) break;
+            const valEl = form.querySelector(`input[name="${n}"][value="${candidateVal}"]`);
+            if (valEl && valEl.dataset && valEl.dataset.price) {
+              const p = parsePriceString(valEl.dataset.price);
+              if (p !== null) {
+                price = p;
+                break;
+              }
+            }
+            const optEl = form.querySelector(`select[name="${n}"] option[value="${candidateVal}"]`);
+            if (optEl && optEl.dataset && optEl.dataset.price) {
+              const p2 = parsePriceString(optEl.dataset.price);
+              if (p2 !== null) {
+                price = p2;
+                break;
+              }
+            }
+          }
+        }
+
+        // Still no per-option price found? Fallback to first product-level data-price or itemprop
+        if (price === null) {
+          // Check for explicit product price attributes first, then legacy itemprop
+          const priceField =
+            productEl &&
+            (productEl.querySelector('[data-product-price]') || productEl.querySelector('[data-price]') || productEl.querySelector('[itemprop="price"]'));
+          if (priceField) {
+            // read dataset.price, dataset.productPrice, content attribute, or fallback to text content
+            price =
+              parsePriceString(
+                priceField.dataset.price || priceField.dataset.productPrice || priceField.getAttribute('content') || priceField.textContent
+              ) || null;
+          }
+        }
+
+        // Debugging aid: when running locally, log the decision tree so we can see why the cylinder price wasn't used.
+        try {
+          if (typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
+            let productLevelPrice = null;
+            try {
+              const pf = productEl && (productEl.querySelector('[data-price]') || productEl.querySelector('[itemprop="price"]'));
+              if (pf) {
+                productLevelPrice = (pf.dataset && pf.dataset.price) ? pf.dataset.price : (pf.getAttribute && pf.getAttribute('content')) || null;
+              }
+            } catch (e) {
+              productLevelPrice = null;
+            }
+
+            // Determine if there is a mismatch between the form's checked package and the candidateVal
+            let fallbackMismatchLocal = false;
+            try {
+              const checkedPkg = form.querySelector('input[name="package"]:checked');
+              if (candidateVal && checkedPkg && String(checkedPkg.value) !== String(candidateVal)) {
+                fallbackMismatchLocal = true;
+              }
+            } catch (e) {
+              // ignore
+            }
+
+            console.debug('Add-to-cart debug:', {
+              id,
+              fdPackage: fd.get('package'),
+              fdSize: fd.get('size'),
+              selPriceFound: selPrice,
+              candidateVal,
+              matchedInput: (candidateVal && form.querySelector(`input[value="${candidateVal}"]`)) ? true : false,
+              matchedInputPrice: (candidateVal && form.querySelector(`input[value="${candidateVal}"]`) && form.querySelector(`input[value="${candidateVal}"]`).dataset) ? form.querySelector(`input[value="${candidateVal}"]`).dataset.price : null,
+              finalPrice: price,
+              productLevelPrice,
+              fallbackMismatch: fallbackMismatchLocal,
+            });
+          }
+        } catch (e) {
+          // ignore debug logging errors
+        }
+      }
+        // Debug: detect when a candidate value was present but the form's checked control doesn't match it
+        let fallbackMismatch = false;
+        try {
+          const checkedPkg = form.querySelector('input[name="package"]:checked');
+          if (price !== null && candidateVal && checkedPkg && String(checkedPkg.value) !== String(candidateVal)) {
+            fallbackMismatch = true;
+          }
+        } catch (e) {
+          // ignore minor DOM errors during debug checks
+        }
+
+        if (false && typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') && fallbackMismatch) {
+          // left intentionally disabled - use console.debug earlier instead of spurious warnings in prod local logs
+          console.warn('Pricing fallback used for product', id, 'selected:', candidateVal, 'priceUsed:', price);
+        }
 
       // image extraction using data attributes or first <img>
       let image = null;
       if (productEl) {
-        if (productEl.dataset && productEl.dataset.image) image = productEl.dataset.image;
-        const imgByItem = productEl.querySelector('img[itemprop="image"]');
+        if (productEl.dataset && (productEl.dataset.image || productEl.dataset.productImage))
+          image = productEl.dataset.image || productEl.dataset.productImage;
+        const imgByItem = productEl.querySelector('img[itemprop="image"], img[data-product-image]');
         if (!image && imgByItem)
           image = imgByItem.currentSrc || imgByItem.src || imgByItem.getAttribute('src');
         if (!image) {
@@ -140,8 +339,9 @@ export async function initCart() {
       const sku =
         (productEl &&
           (productEl.dataset.sku ||
-            (productEl.querySelector('[itemprop="sku"]') &&
-              productEl.querySelector('[itemprop="sku"]').textContent.trim()))) ||
+            productEl.dataset.productSku ||
+            productEl.getAttribute && productEl.getAttribute('data-sku') ||
+            (productEl.querySelector && productEl.querySelector('[itemprop="sku"]') && productEl.querySelector('[itemprop="sku"]').textContent.trim()))) ||
         null;
       const descriptionEl =
         productEl &&
@@ -149,10 +349,22 @@ export async function initCart() {
           productEl.querySelector('.product-description, p'));
       const description = descriptionEl ? descriptionEl.textContent.trim().slice(0, 160) : '';
 
-      await cartStore.add({ id, name, size, quantity, price, image, sku, description });
-      const updated = cartStore.get();
+      // Prefer canonical price from product index when available to avoid DOM tampering
+      try {
+        if ((typeof idx !== 'undefined' && idx) && sku) {
+          const prod = idx[String(sku)] || idx[String(id)];
+          if (prod && prod.price != null) {
+            price = Number(prod.price);
+          }
+        }
+      } catch (e) {
+        // ignore and fall back to detected price
+      }
+
+      await window.CartStore.add({ id, name, size, qty: quantity, price, image, sku, description });
+      const updated = window.CartStore.get();
       updateCartCountOutputs(
-        (updated.items || []).reduce((s, it) => s + (parseInt(it.quantity, 10) || 0), 0)
+        (updated.items || []).reduce((s, it) => s + (parseInt(it.qty || it.quantity, 10) || 0), 0)
       );
       renderCartTable(updated);
       // Keep totals in sync with the latest shipping rate
@@ -179,19 +391,25 @@ export async function initCart() {
     const rows = Array.from(form.querySelectorAll('tbody tr'));
     // sequentially update quantities and await persistence for each
     for (const row of rows) {
-      const qty = row.querySelector('input[type="number"]');
-      const id = row.dataset.productId;
-      const size =
-        row.dataset.productSize !== undefined ? row.dataset.productSize : row.dataset.size || '';
-      if (qty && id) {
-        // updateQuantity already returns a promise and now accepts size
-        await cartStore.updateQuantity(id, parseInt(qty.value, 10) || 0, size);
+      const qtyEl = row.querySelector('input[type="number"]');
+      const pid = row.dataset.productId;
+      const size = row.dataset.productSize !== undefined ? row.dataset.productSize : row.dataset.size || '';
+      const newQty = qtyEl ? (parseInt(qtyEl.value, 10) || 0) : 0;
+      if (pid) {
+        // Normalize cart shape and update item quantity via global CartStore
+        const cur = window.CartStore.get();
+        const items = (cur.items || []).slice();
+        for (const it of items) {
+          if ((it.sku && String(it.sku) === String(pid)) || (it.id && String(it.id) === String(pid))) {
+            it.qty = newQty;
+            if (it.quantity !== undefined) it.quantity = newQty;
+          }
+        }
+        await window.CartStore.set({ items });
       }
     }
-    const c = cartStore.get();
-    updateCartCountOutputs(
-      (c.items || []).reduce((s, it) => s + (parseInt(it.quantity, 10) || 0), 0)
-    );
+    const c = window.CartStore.get();
+    updateCartCountOutputs((c.items || []).reduce((s, it) => s + (parseInt(it.qty || it.quantity, 10) || 0), 0));
     renderCartTable(c);
     // Keep totals in sync after quantity updates
     updateCartTableTotalsWithShipping(currentShippingRate);
@@ -235,14 +453,18 @@ export async function initCart() {
       (row.dataset.productSize !== undefined ? row.dataset.productSize : row.dataset.size || '');
     if (!id) return;
     try {
-      await cartStore.remove(id, size);
-      const c2 = cartStore.get();
+      await window.CartStore.remove(id);
+      const c2 = window.CartStore.get();
       updateCartCountOutputs(
-        (c2.items || []).reduce((s, it) => s + (parseInt(it.quantity, 10) || 0), 0)
+        (c2.items || []).reduce((s, it) => s + (parseInt(it.qty || it.quantity, 10) || 0), 0)
       );
       renderCartTable(c2);
       // update totals after removal
       updateCartTableTotalsWithShipping(currentShippingRate);
+      // Notify listeners (e.g. shipping estimator) that the cart has changed
+      document.dispatchEvent(
+        new CustomEvent('cart:updated', { detail: { source: 'remove-item' } })
+      );
     } catch (e) {
       console.error('Error removing cart item:', e);
     }
@@ -263,7 +485,7 @@ export async function initCart() {
     const pcEl = document.getElementById('checkout-postcode');
     const pc = pcEl ? pcEl.value : '';
     // Calculate total weight from cart items using shared utility
-    const cart = cartStore.get();
+    const cart = window.CartStore.get();
     const totalGrams = calculateTotalWeight(cart.items, idx);
 
     if (DEBUG_SHIPPING) {
@@ -314,5 +536,5 @@ export async function initCart() {
   }
 
   // return the store so callers (app.js) can expose a debug API
-  return cartStore;
+  return window.CartStore;
 }

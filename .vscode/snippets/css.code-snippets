@@ -1,0 +1,13 @@
+{
+  "CSS Utility Class": {
+    "prefix": "cssutil",
+    "body": [
+      ".u-flex {",
+      "  display: flex;",
+      "  align-items: center;",
+      "  justify-content: center;",
+      "}",
+    ],
+    "description": "Basic flex utility class for CSS.",
+  },
+}

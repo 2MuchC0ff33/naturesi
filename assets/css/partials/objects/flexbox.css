@@ -1,0 +1,72 @@
+/* ==========================================================================
+Objects — Flexbox
+
+Flexbox object utilities: class-based, undecorated layout patterns for
+direction, alignment, and spacing. Keep conservative spacing tokens here.
+
+API highlights: `.stack`, `.stack--sm`, `.stack--lg`, `.row`, `.center-row`,
+`.row--space-between`, `.items-center`, `.justify-center`, `.flex--wrap`.
+========================================================================== */
+
+/* Vertical stacking layout — mobile-first */
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.stack--sm {
+  gap: var(--space-xs);
+}
+
+.stack--lg {
+  gap: var(--space-md);
+}
+
+.stack--reverse {
+  flex-direction: column-reverse;
+}
+
+/* Generic row helpers */
+.row {
+  display: flex;
+  flex-direction: row;
+  gap: var(--space-sm);
+  align-items: stretch;
+}
+
+.row--space-between {
+  justify-content: space-between;
+}
+
+.row--center {
+  justify-content: center;
+}
+
+/* Centered row utility kept for compatibility */
+.center-row {
+  display: flex;
+  flex-direction: row;
+  gap: 1.2rem;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+}
+
+/* Alignment utilities (kept small) */
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+/* Wrapping helper */
+.flex--wrap {
+  flex-wrap: wrap;
+}
+
+.flex--no-wrap {
+  flex-wrap: nowrap;
+}

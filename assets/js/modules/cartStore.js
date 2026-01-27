@@ -5,7 +5,7 @@ const DEFAULT = { items: [] };
 
 export class CartStore {
   constructor(opts = {}) {
-    this.key = opts.key || 'naturesi-cart';
+    this.key = opts.key || 'naturesi_cart';
     this.dbName = opts.dbName || 'naturesi_cart_db';
     this.cart = DEFAULT;
   }
@@ -13,10 +13,23 @@ export class CartStore {
   async init() {
     const local = getLocalCart(this.key);
     if (local) {
-      this.cart = local;
+      // Accept legacy array shape and normalise to { items: [...] }
+      if (Array.isArray(local)) {
+        this.cart = {
+          items: local.map((it) => ({
+            id: it.id,
+            name: it.title || it.name || '',
+            size: it.size || '',
+            quantity: it.qty || it.quantity || 1,
+            price: it.price || null,
+          })),
+        };
+      } else {
+        this.cart = { items: [], ...local };
+      }
     } else {
       const idb = await loadCartFromIDB(this.dbName, this.key);
-      this.cart = idb || DEFAULT;
+      this.cart = idb ? { items: [], ...idb } : DEFAULT;
     }
     return this.cart;
   }
@@ -57,12 +70,19 @@ export class CartStore {
   }
 
   createCartItem(item) {
+    // Normalize price to a Number where possible to ensure arithmetic works reliably
+    let parsed = null;
+    if (item.price !== undefined && item.price !== null) {
+      const cleaned = String(item.price).trim().replace(/[^0-9.\-]/g, '').replace(/,/g, '.');
+      const n = Number(cleaned);
+      parsed = Number.isFinite(n) ? n : null;
+    }
     return {
       id: item.id,
       name: item.name,
       size: item.size !== undefined && item.size !== null ? item.size : '',
       quantity: item.quantity || 1,
-      price: item.price || null,
+      price: parsed,
     };
   }
 
@@ -126,15 +146,18 @@ export function parseWeightString(wstr) {
 }
 
 // Minimal parcel specs (max weight in grams). Moved to module level to avoid recreation on each call.
+// Updated to match Sendle's domestic parcel size thresholds (grams):
+// pouch 250g, satchel 500g, handbag 1000g, shoebox 3000g, briefcase 5000g,
+// carryon 10000g, duffle 20000g, checkin 25000g
 const PARCEL_SPECS = [
-  { type: 'pouch', maxGrams: 500 },
-  { type: 'satchel', maxGrams: 3000 },
-  { type: 'handbag', maxGrams: 5000 },
-  { type: 'shoebox', maxGrams: 10000 },
-  { type: 'briefcase', maxGrams: 15000 },
-  { type: 'carryon', maxGrams: 20000 },
-  { type: 'duffle', maxGrams: 25000 },
-  { type: 'checkin', maxGrams: Infinity },
+  { type: 'pouch', maxGrams: 250 }, // up to 250 g
+  { type: 'satchel', maxGrams: 500 }, // up to 500 g
+  { type: 'handbag', maxGrams: 1000 }, // up to 1 kg
+  { type: 'shoebox', maxGrams: 3000 }, // up to 3 kg
+  { type: 'briefcase', maxGrams: 5000 }, // up to 5 kg
+  { type: 'carryon', maxGrams: 10000 }, // up to 10 kg
+  { type: 'duffle', maxGrams: 20000 }, // up to 20 kg
+  { type: 'checkin', maxGrams: 25000 }, // up to 25 kg
 ];
 
 export async function loadJSONResource(path) {
@@ -245,25 +268,41 @@ export async function calculateShippingByWeight(totalWeightGrams, postcode, opts
 
   let total = base.rate === null || base.rate === undefined ? null : Number(base.rate);
 
-  // Determine surcharge level from postcode data heuristically
+  // Determine destination postcode meta (mmm band and destination state)
   let mmm = null;
+  let destState = null;
   if (postcodesData && postcodesData.postcodes && postcodesData.postcodes[pc]) {
     const entry = postcodesData.postcodes[pc];
     mmm = entry && entry.mmm_2019 ? parseInt(String(entry.mmm_2019).replace(/\D/g, ''), 10) : null;
+    destState = (entry.state || '').toString().toUpperCase();
   }
 
-  // Apply surcharges: MMM >=5 => remoteSurcharge, MMM ===4 => regionalSurcharge, else none
+  // Apply surcharges:
+  // - MMM >= 5 => remote surcharge (applies to remote locations)
+  // - MMM === 4 => regional surcharge
+  // - Additionally, if destination is WA or NT and MMM >=5, add remote WA/NT extra (per Sendle rules)
   if (total !== null) {
     if (postage.remoteSurcharge && mmm >= 5) {
       const extra = postage.remoteSurcharge[parcelType];
       if (extra) total += Number(extra);
-      // additional W/ANT extra for very remote bulky items
-      if (postage.remoteWaNtExtra && postage.remoteWaNtExtra[parcelType]) {
+      // Add WA/NT extra only when destination state is WA or NT
+      if (
+        (destState === 'WA' || destState === 'NT') &&
+        postage.remoteWaNtExtra &&
+        postage.remoteWaNtExtra[parcelType]
+      ) {
         total += Number(postage.remoteWaNtExtra[parcelType]);
       }
     } else if (postage.regionalSurcharge && mmm === 4) {
       const extra = postage.regionalSurcharge[parcelType];
       if (extra) total += Number(extra);
+    }
+
+    // Apply over-length surcharge if requested (either explicit flag or lengthCm > 105)
+    const lengthCm = opts && opts.lengthCm != null ? Number(opts.lengthCm) : null;
+    const isOverLengthByValue = Number.isFinite(lengthCm) && lengthCm > 105;
+    if (opts && (opts.overLength === true || isOverLengthByValue)) {
+      if (postage.overLengthSurcharge) total += Number(postage.overLengthSurcharge);
     }
   }
 
@@ -276,3 +315,45 @@ export async function calculateShippingByWeight(totalWeightGrams, postcode, opts
     mmm,
   };
 }
+
+// Testing hooks: allow injecting caches for unit tests / debug
+export function __setCachedPostcodes(data) {
+  cachedPostcodes = data;
+}
+export function __setCachedPostage(data) {
+  cachedPostage = data;
+}
+export function __resetCaches() {
+  cachedPostcodes = null;
+  cachedPostage = null;
+}
+
+// Backwards-compatibility helpers: allow modules to obtain the global window.CartStore
+// when present, otherwise create and return an instance of the exported `CartStore` class.
+export async function getGlobalStore() {
+  if (typeof window !== 'undefined' && window.CartStore) return window.CartStore;
+  // Fallback: create an instance of the module CartStore and initialise it
+  try {
+    const inst = new CartStore();
+    if (typeof inst.init === 'function') await inst.init();
+    return inst;
+  } catch (err) {
+    console.warn('getGlobalStore fallback failed', err);
+    return null;
+  }
+}
+
+// Default proxy export: forwards common store operations to `window.CartStore` when available,
+// otherwise uses the module-local CartStore implementation. Methods are async where persistence
+// may occur so callers can `await` them.
+const StoreProxy = {
+  async init() { const s = await getGlobalStore(); return s && s.init ? s.init() : s; },
+  get() { try { if (typeof window !== 'undefined' && window.CartStore) return window.CartStore.get(); } catch (e) {} return DEFAULT; },
+  async set(cart) { const s = await getGlobalStore(); return s && s.set ? s.set(cart) : null; },
+  async add(item) { const s = await getGlobalStore(); return s && s.add ? s.add(item) : null; },
+  async remove(id, size) { const s = await getGlobalStore(); return s && s.remove ? s.remove(id, size) : null; },
+  async updateQuantity(id, qty, size) { const s = await getGlobalStore(); return s && s.updateQuantity ? s.updateQuantity(id, qty, size) : null; },
+  async clear() { const s = await getGlobalStore(); return s && s.clear ? s.clear() : null; },
+};
+
+export default StoreProxy;

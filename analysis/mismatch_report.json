@@ -1,0 +1,276 @@
+{
+  "generated_at": "2026-01-27T00:13:00Z",
+  "status": "partial",
+  "notes": "Cross-referencing of JS selectors against HTML templates pending — this file will list selector literals found in JS that do not match any HTML element. Next automated pass will populate candidates for dead paths.",
+  "dead_selector_candidates": []
+}
+{
+  "generated": "2026-01-26T00:00:00Z",
+  "summary": {
+    "total_selectors_checked": 38,
+    "missing_or_runtime_only": 4,
+    "notes": "Most selectors referenced by modules are present in templates. Missing selectors are either injected at runtime or created by service-worker update UI logic."
+  },
+  "details": [
+    {
+      "selector": ".site-nav .nav-right",
+      "status": "present",
+      "example_files": [
+        "index.html",
+        "pages/cart.html",
+        "pages/store.html"
+      ]
+    },
+    {
+      "selector": "#nav-toggle",
+      "status": "missing (injected at runtime by nav-toggle.js)",
+      "example_files": []
+    },
+    {
+      "selector": ".site-nav",
+      "status": "present",
+      "example_files": [
+        "index.html",
+        "pages/cart.html",
+        "pages/store.html"
+      ]
+    },
+    {
+      "selector": "#primary-nav-menu",
+      "status": "present",
+      "example_files": [
+        "index.html",
+        "pages/cart.html",
+        "pages/store.html"
+      ]
+    },
+    {
+      "selector": "[tabindex]:not([tabindex=\"-1\"])",
+      "status": "present (various elements use tabindex)",
+      "example_files": [
+        "index.html",
+        "pages/cart.html"
+      ]
+    },
+    {
+      "selector": "[data-modal-target]",
+      "status": "present",
+      "example_files": [
+        "index.html"
+      ]
+    },
+    {
+      "selector": "[data-modal-close]",
+      "status": "present",
+      "example_files": [
+        "index.html"
+      ]
+    },
+    {
+      "selector": ".modal",
+      "status": "present",
+      "example_files": [
+        "index.html"
+      ]
+    },
+    {
+      "selector": ".modal__overlay",
+      "status": "present",
+      "example_files": [
+        "index.html"
+      ]
+    },
+    {
+      "selector": ".modal__dialog",
+      "status": "present",
+      "example_files": [
+        "index.html"
+      ]
+    },
+    {
+      "selector": "output[name=\"cart-count\"]",
+      "status": "present",
+      "example_files": [
+        "index.html",
+        "pages/cart.html"
+      ]
+    },
+    {
+      "selector": ".cart-table tbody",
+      "status": "present (tbody exists; rows are populated by JS at runtime)",
+      "example_files": [
+        "pages/cart.html"
+      ]
+    },
+    {
+      "selector": ".cart-table",
+      "status": "present",
+      "example_files": [
+        "pages/cart.html"
+      ]
+    },
+    {
+      "selector": "#summary-subtotal",
+      "status": "present",
+      "example_files": [
+        "pages/cart.html"
+      ]
+    },
+    {
+      "selector": "#summary-total",
+      "status": "present",
+      "example_files": [
+        "pages/cart.html"
+      ]
+    },
+    {
+      "selector": "#summary-shipping",
+      "status": "present",
+      "example_files": [
+        "pages/cart.html"
+      ]
+    },
+    {
+      "selector": ".remove-item",
+      "status": "missing statically (created by cart UI at runtime)",
+      "example_files": []
+    },
+    {
+      "selector": "form.add-to-cart",
+      "status": "present",
+      "example_files": [
+        "pages/store/wellness-blends.html",
+        "index.html"
+      ]
+    },
+    {
+      "selector": "form.product-options",
+      "status": "present",
+      "example_files": [
+        "pages/store/wellness-blends.html"
+      ]
+    },
+    {
+      "selector": ".product",
+      "status": "present",
+      "example_files": [
+        "pages/store/wellness-blends.html"
+      ]
+    },
+    {
+      "selector": "[itemscope]",
+      "status": "present",
+      "example_files": [
+        "pages/store/wellness-blends.html",
+        "index.html"
+      ]
+    },
+    {
+      "selector": "#checkout-postcode",
+      "status": "present",
+      "example_files": [
+        "pages/cart.html"
+      ]
+    },
+    {
+      "selector": "#confirm-cart-form",
+      "status": "present",
+      "example_files": [
+        "pages/cart.html"
+      ]
+    },
+    {
+      "selector": "#btn-proceed-checkout",
+      "status": "present",
+      "example_files": [
+        "pages/cart.html"
+      ]
+    },
+    {
+      "selector": ".cart-table tbody tr",
+      "status": "rows are runtime-populated but tbody is present",
+      "example_files": [
+        "pages/cart.html"
+      ]
+    },
+    {
+      "selector": ".cart-item",
+      "status": "mostly runtime (legacy fallback may generate these)",
+      "example_files": []
+    },
+    {
+      "selector": "#checkout-error",
+      "status": "present",
+      "example_files": [
+        "pages/checkout.html",
+        "pages/cart.html"
+      ]
+    },
+    {
+      "selector": "#site-category-select",
+      "status": "present",
+      "example_files": [
+        "index.html",
+        "pages/store.html",
+        "pages/cart.html"
+      ]
+    },
+    {
+      "selector": "#summary-content",
+      "status": "present",
+      "example_files": [
+        "pages/checkout.html"
+      ]
+    },
+    {
+      "selector": "#payment",
+      "status": "present",
+      "example_files": [
+        "pages/checkout.html"
+      ]
+    },
+    {
+      "selector": "#paypal-button-container",
+      "status": "present",
+      "example_files": [
+        "pages/checkout.html"
+      ]
+    },
+    {
+      "selector": "#paypal-redirect-form",
+      "status": "present",
+      "example_files": [
+        "pages/checkout.html"
+      ]
+    },
+    {
+      "selector": "#pay-now-redirect",
+      "status": "present",
+      "example_files": [
+        "pages/checkout.html"
+      ]
+    },
+    {
+      "selector": "#paypal-debug",
+      "status": "present",
+      "example_files": [
+        "pages/checkout.html"
+      ]
+    },
+    {
+      "selector": "#sw-update-banner",
+      "status": "missing (created by sw-register.js at runtime)",
+      "example_files": []
+    },
+    {
+      "selector": ".sw-update-button",
+      "status": "missing (created by sw-register.js at runtime)",
+      "example_files": []
+    },
+    {
+      "selector": ".sw-update-dismiss",
+      "status": "missing (created by sw-register.js at runtime)",
+      "example_files": []
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 ﻿node_modules/
 package-lock.json
-.vscode/
+!.vscode/
 .idea/
 .DS_Store
 dist/
@@ -9,4 +9,4 @@ build/
 .env
 .env.local
 *.log
-.sass-cache/
+.vscode/chrome

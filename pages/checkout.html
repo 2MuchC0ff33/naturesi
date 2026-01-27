@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en-AU">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Checkout — Pay with PayPal</title>
+  <link rel="stylesheet" href="/assets/css/main.css" />
+</head>
+
+<body>
+  <!-- WCAG: Skip link for keyboard users -->
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header id="site-header">
+    <nav class="site-nav" aria-label="Site navigation" data-site-nav>
+      <div id="primary-nav-menu" class="nav-center" data-primary-nav>
+        <div class="nav-right" data-header-right></div>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main-content" tabindex="-1" class="container">
+    <h1>Checkout</h1>
+
+    <section id="order-summary" aria-labelledby="summary-heading" data-checkout-summary>
+      <h2 id="summary-heading">Order summary</h2>
+      <div id="summary-content" aria-live="polite" data-checkout-summary-content></div>
+      <p id="checkout-note" class="muted" data-checkout-note></p>
+      <p id="checkout-error" class="error hidden" role="alert" data-checkout-error></p>
+    </section>
+
+    <section id="payment" aria-labelledby="payment-heading" data-checkout-payment>
+      <h2 id="payment-heading">Payment</h2>
+      <noscript>
+        <p class="muted">
+          No JavaScript required for product purchases — use the Buy Now buttons on product pages.
+        </p>
+      </noscript>
+      <div id="paypal-button-container" aria-label="PayPal payment options" data-paypal-button></div>
+
+      <!-- Simple PayPal Redirect form (minimal, HTML-first fallback).
+           Uses PayPal Payments Standard POST redirect. Amount and item are populated by JS.
+           SECURITY NOTE: Amounts set client-side can be tampered with — reconcile payments server-side or use IPN/PDT for verification. -->
+      <form id="paypal-redirect-form" method="post" class="paypal-redirect" data-paypal-redirect-form
+        action="https://www.sandbox.paypal.com/cgi-bin/webscr" aria-label="Proceed to PayPal">
+        <input type="hidden" name="cmd" value="_xclick">
+        <input type="hidden" name="business" value="">
+        <input type="hidden" name="item_name" id="pp-item_name" data-paypal-item_name value="">
+        <input type="hidden" name="amount" id="pp-amount" data-paypal-amount value="0.00">
+        <input type="hidden" name="currency_code" value="AUD">
+        <input type="hidden" name="return" value="/pages/payment/success.html">
+        <input type="hidden" name="cancel_return" value="/pages/payment/fail.html">
+        <input type="hidden" name="rm" value="2">
+        <input type="hidden" name="notify_url" id="pp-notify" data-paypal-notify value="">
+        <input type="hidden" name="invoice" id="pp-invoice" data-paypal-invoice value="">
+        <button id="pay-now-redirect" type="submit" disabled data-pay-now>Proceed to PayPal (Redirect)</button>
+      </form>
+      <!-- Debug: shows populated form values when ?debug=1 is in URL or paypal.json.debug === true -->
+      <div id="paypal-debug" class="muted visually-hidden font-mono small-text mt-sm" data-paypal-debug>Debug info
+        hidden. Add
+        ?debug=1 to the URL to view prepared PayPal form values.</div>
+    </section>
+  </main>
+
+  <script type="module" src="/assets/js/app.js"></script>
+  <!-- pricing-index and products-guard are bundled via /assets/js/app.js -->
+  <script type="module" src="/assets/js/modules/checkout-bootstrap.js"></script>
+</body>
+
+</html>
