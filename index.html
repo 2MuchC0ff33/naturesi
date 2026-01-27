@@ -93,9 +93,7 @@
   <link rel="dns-prefetch" href="//www.naturesinfusions.com.au" />
   <link rel="preload" href="/assets/css/main.css" as="style" />
   <!-- Preload hero image for LCP: include imagesrcset/imagesizes so the preload matches the picture's source candidates -->
-  <link rel="preload" href="/assets/img/hero-home-1200x675.webp" as="image" type="image/webp"
-    imagesrcset="/assets/img/hero-home-800x450.webp 800w, /assets/img/hero-home-1200x675.webp 1200w, /assets/img/hero-home-1600x900.webp 1600w"
-    imagesizes="(max-width:640px) 100vw, (max-width:1200px) 80vw, 1200px" />
+  <link rel="preload" href="/assets/img/hero-home-800x450.svg" as="image" type="image/svg+xml" />
   <link rel="prefetch" href="/assets/js/data/products.json" as="fetch" />
 
   <!-- Cache Control -->
@@ -294,17 +292,9 @@
     <section id="home" itemscope itemtype="https://schema.org/Store">
       <header id="hero" class="hero">
         <div class="hero__media" aria-hidden="true">
-          <picture>
-            <source type="image/webp"
-              srcset="/assets/img/hero-home-800x450.webp 800w, /assets/img/hero-home-1200x675.webp 1200w, /assets/img/hero-home-1600x900.webp 1600w"
-              sizes="(max-width:640px) 100vw, (max-width:1200px) 80vw, 1200px" />
-            <source type="image/jpeg"
-              srcset="/assets/img/hero-home-800x450.jpg 800w, /assets/img/hero-home-1200x675.jpg 1200w, /assets/img/hero-home-1600x900.jpg 1600w"
-              sizes="(max-width:640px) 100vw, (max-width:1200px) 80vw, 1200px" />
-            <img src="/assets/img/hero-home-1200x675.jpg"
-              alt="Sunlit herbal tea leaves and a steaming cup — Nature's Infusions signature blend" loading="eager"
-              decoding="async" class="hero__img" />
-          </picture>
+          <img src="/assets/img/hero-home-800x450.svg"
+            alt="Sunlit herbal tea leaves and a steaming cup — Nature's Infusions signature blend" loading="eager"
+            decoding="async" class="hero__img" />
         </div>
         <div class="hero__content">
           <h1 itemprop="name">Nature's Infusions</h1>
