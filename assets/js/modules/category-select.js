@@ -151,12 +151,43 @@ export function initCategoryTabs(documentRoot = typeof document !== 'undefined' 
 
   // Insert built tab list into container and reveal it
   container.appendChild(tabList);
-  container.removeAttribute('hidden');
-  container.setAttribute('aria-hidden', 'false');
+  // Ensure the tabs container is not left inside the legacy `.category-dropdown` which
+  // is hidden (display:none !important) when JS enables tabs. Move the container to a
+  // safe, visible parent (`#primary-nav-menu`) so it can size and render correctly.
+  try {
+    const primaryMenu = documentRoot.getElementById('primary-nav-menu');
+    const parentIsDropdown = container.parentElement && container.parentElement.classList && container.parentElement.classList.contains('category-dropdown');
+    if (primaryMenu && parentIsDropdown) {
+      primaryMenu.appendChild(container);
+    }
+  } catch (e) {
+    // ignore errors, it's a best-effort enhancement
+  }
+
+  // Reveal the tabs container. Use a defensive approach: remove the `hidden` attribute,
+  // ensure the `hidden` property is false, and set `aria-hidden` to 'false'. Some
+  // environments may re-apply `hidden` or interrupt DOM operations, so calling all
+  // three increases robustness across browsers and edge cases.
+  try {
+    container.removeAttribute('hidden');
+    // explicit property assignment; works in older browsers too
+    container.hidden = false;
+    container.setAttribute('aria-hidden', 'false');
+  } catch (e) {
+    // If this fails, try a gentle fallback: set styles to make it visible
+    try {
+      container.style.display = 'block';
+      container.setAttribute('aria-hidden', 'false');
+    } catch (err) {
+      // swallow errors to avoid breaking enhancement
+    }
+  }
 
   // Mark header so CSS can hide the native select and disable it as a fallback
   const header = documentRoot.getElementById('site-header');
   if (header) {
+    // Add the header class after the container is revealed to allow CSS selectors
+    // that depend on the header state to apply correctly.
     header.classList.add('has-category-tabs');
     try {
       // Hide and disable the native select explicitly to prevent it from capturing focus or clicks

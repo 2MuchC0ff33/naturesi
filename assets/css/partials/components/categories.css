@@ -130,10 +130,20 @@ print fallbacks.
 
 #category-tabs-container {
   display: none;
+  /* defensive positioning to avoid being visually obscured by other header elements */
+  position: relative;
+  z-index: 2200;
+  padding: 0.1rem 0.25rem;
+  /* Ensure container can size itself and not collapse to 0 in odd layouts */
+  min-width: 1px;
+  min-height: 1px;
 }
 
 #site-header.has-category-tabs #category-tabs-container {
   display: block;
+  /* make tabs visually stand out against the header background */
+  background: transparent;
+  backdrop-filter: none;
 }
 
 /* Tabs list styling (list uses .tabs__list and buttons .tabs__tab for consistency with tabs.css */
@@ -141,11 +151,24 @@ print fallbacks.
   display: flex;
   gap: 0.4rem;
   align-items: center;
+  align-self: center;
+  justify-content: center;
+  /* Defensive sizing so flex container produces measurable layout */
+  min-width: 1px;
+  min-height: 1px;
+}
+
+#category-tabs-container .tabs__tab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
 }
 
 #category-tabs-container .tabs__tab {
   background: transparent;
   border: 1px solid var(--color-border);
+  color: var(--color-text);
   padding: 0.35rem 0.6rem;
   border-radius: 6px;
   cursor: pointer;
@@ -154,6 +177,7 @@ print fallbacks.
 #category-tabs-container .tabs__tab[aria-selected='true'] {
   background: color-mix(in srgb, var(--color-accent) 12%, white);
   border-bottom: 2px solid var(--color-accent);
+  color: var(--color-accent);
 }
 
 #category-tabs-container .tabs__tab:focus-visible {
