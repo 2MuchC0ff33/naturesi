@@ -35,3 +35,26 @@
   background: color-mix(in srgb, var(--color-accent) 14%, transparent);
   color: var(--color-accent);
 }
+
+/* Additional badge modifiers for product trust indicators */
+.badge--organic {
+  background: color-mix(in srgb, green 12%, transparent);
+  color: color-mix(in srgb, green 80%, black);
+  border: 1px solid color-mix(in srgb, green 18%, transparent);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.badge--origin {
+  background: color-mix(in srgb, var(--color-accent) 8%, transparent);
+  color: color-mix(in srgb, var(--color-accent) 80%, black);
+  border: 1px solid color-mix(in srgb, var(--color-accent) 18%, transparent);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.product-badges {
+  margin-top: var(--space-xs);
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
