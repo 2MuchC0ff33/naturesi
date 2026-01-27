@@ -31,6 +31,7 @@
       "id": "enchanted-turmeric-60g",
       "sku": "enchanted-turmeric-60g",
       "name": "Enchanted Turmeric",
+      "featured": true,
       "image": "/assets/img/enchantedturmeric2.webp",
       "imageAlt": "",
       "images": [
@@ -159,6 +160,7 @@
       "id": "product-calming",
       "sku": "product-calming",
       "name": "Calming Garden",
+      "featured": true,
       "image": "/assets/img/calmingtea.webp",
       "imageAlt": "",
       "images": [

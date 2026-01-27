@@ -8,6 +8,14 @@ var PRECACHE_URLS = [
   '/pages/cart.html',
   '/pages/checkout.html',
   '/pages/shipping-estimate.html',
+  '/assets/img/hero-home-1600x900.webp',
+  '/assets/img/hero-home-1600x900.jpg',
+  '/assets/img/hero-home-1200x675.webp',
+  '/assets/img/hero-home-1200x675.jpg',
+  '/assets/img/hero-home-800x450.webp',
+  '/assets/img/hero-home-800x450.jpg',
+  '/assets/js/data/products.json',
+  '/assets/img/profile-placeholder-256x256.svg',
   // NOTE: payment success/fail pages are intentionally NOT precached.
   // These pages can include transient data or query params from payment
   // providers; caching them can cause stale or sensitive content to be served.

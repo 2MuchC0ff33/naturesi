@@ -85,6 +85,14 @@ if (typeof document !== 'undefined') {
         } catch (err) {
           console.warn('Product helpers init failed', err);
         }
+
+        // Initialize featured badges module to insert badges for data-featured products
+        try {
+          const fb = await import('./modules/featured-badges.js');
+          if (fb && typeof fb.initFeaturedBadges === 'function') fb.initFeaturedBadges(document);
+        } catch (err) {
+          console.warn('Featured badges init failed', err);
+        }
       } catch (err) {
         console.error('Category select init failed', err);
       }

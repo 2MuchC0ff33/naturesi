@@ -27,6 +27,23 @@
   border-radius: var(--radius-sm);
   padding: var(--space-sm);
   transition: box-shadow var(--transition-fast) ease, transform var(--transition-fast) ease;
+  position: relative;
+  /* for badge overlays */
+}
+
+.product-card__badge {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  z-index: 3;
+  display: inline-block;
+  padding: 0.2rem 0.45rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  border-radius: 0.4rem;
+  background: var(--color-accent);
+  color: #fff;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
 }
 
 .product-card:focus-within,
@@ -51,6 +68,24 @@
   height: auto;
   display: block;
   object-fit: cover;
+  transition: transform var(--transition-fast) ease, filter var(--transition-fast) ease;
+}
+
+.product-card__media:hover img,
+.product-card__media:focus-within img {
+  transform: scale(1.04);
+  filter: drop-shadow(0 12px 20px rgba(0, 0, 0, 0.06));
+}
+
+/* Generic product hover for legacy pages that use .product class */
+.product img {
+  transition: transform var(--transition-fast) ease, filter var(--transition-fast) ease;
+}
+
+.product:hover img,
+.product:focus-within img {
+  transform: scale(1.04);
+  filter: drop-shadow(0 12px 20px rgba(0, 0, 0, 0.06));
 }
 
 .product-card__title {

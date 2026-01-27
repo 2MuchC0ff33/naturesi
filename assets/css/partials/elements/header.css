@@ -71,7 +71,7 @@ Core header bar, logo treatment and colour gradient live here.
 
 .site-nav .logo img,
 .site-nav .all-logo img {
-  max-height: 60px;
+  max-height: 56px;
   width: auto;
   height: auto;
 }
@@ -80,7 +80,7 @@ Core header bar, logo treatment and colour gradient live here.
 
   .site-nav .logo img,
   .site-nav .all-logo img {
-    max-height: 34px;
+    max-height: 44px;
   }
 }
 
@@ -88,7 +88,7 @@ Core header bar, logo treatment and colour gradient live here.
 
   .site-nav .logo img,
   .site-nav .all-logo img {
-    max-height: 38px;
+    max-height: 48px;
   }
 }
 
@@ -96,7 +96,7 @@ Core header bar, logo treatment and colour gradient live here.
 
   .site-nav .logo img,
   .site-nav .all-logo img {
-    max-height: 44px;
+    max-height: 64px;
   }
 }
 
@@ -211,6 +211,71 @@ Core header bar, logo treatment and colour gradient live here.
 
 /* Add or update in assets/css/main.css or partials/07-header.css */
 /* Ensure the search form is centred within nav-center */
+
+/* Hero banner decorative media and content layering */
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: var(--space-lg) 0;
+  border-radius: 8px;
+}
+
+.hero__media {
+  position: absolute;
+  inset: 0 0 0 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.hero__media picture,
+.hero__media img.hero__img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  filter: saturate(0.98) contrast(0.98);
+}
+
+/* gentle overlay to ensure hero text contrast */
+.hero__media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.06));
+  pointer-events: none;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 1;
+  color: var(--color-text);
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-md);
+}
+
+.hero blockquote,
+.hero #tagline {
+  color: color-mix(in srgb, var(--color-text) 86%, #0000);
+}
+
+.hero .button.btn--primary {
+  background: var(--color-accent);
+  color: white;
+}
+
+/* Ensure hero content is readable on small screens */
+@media (max-width: 640px) {
+  .hero {
+    padding: var(--space-md) 0;
+  }
+
+  .hero__content {
+    padding: var(--space-sm);
+  }
+}
+
 /* Acceptance: aligns search box and button evenly, vertically and horizontally */
 /* Merged duplicate selector: .site-search
    Acceptance: removed duplicate, combined all properties */

@@ -114,6 +114,45 @@ print fallbacks.
   color: var(--color-text);
 }
 
+/* When JS enhances the select into an accessible horizontal tab list, hide the native select
+   and reveal the tabs container. This preserves the HTML-first fallback while providing a richer UI. */
+#site-header.has-category-tabs #site-category-select {
+  display: none;
+}
+
+#category-tabs-container {
+  display: none;
+}
+
+#site-header.has-category-tabs #category-tabs-container {
+  display: block;
+}
+
+/* Tabs list styling (list uses .tabs__list and buttons .tabs__tab for consistency with tabs.css */
+#category-tabs-container .tabs__list {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+#category-tabs-container .tabs__tab {
+  background: transparent;
+  border: 1px solid var(--color-border);
+  padding: 0.35rem 0.6rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#category-tabs-container .tabs__tab[aria-selected='true'] {
+  background: color-mix(in srgb, var(--color-accent) 12%, white);
+  border-bottom: 2px solid var(--color-accent);
+}
+
+#category-tabs-container .tabs__tab:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--color-accent) 18%, transparent);
+  outline-offset: 2px;
+}
+
 #site-header .site-nav .category-dropdown summary {
   /* make sure the summary remains visually distinct from the header while matching the
      site text colour in light/dark modes via variables */

@@ -219,6 +219,10 @@
                 <option value="ice-tea">Ice Tea</option>
                 <option value="artisan-blends">Artisan Blends</option>
               </select>
+
+              <!-- JS-enhanced horizontal tabs will be injected here when available. The select is preserved as the no-JS fallback. -->
+              <div id="category-tabs-container" class="tabs" aria-hidden="true" hidden></div>
+
               <noscript>
                 <div class="category-fallback">
                   <ul>
@@ -283,26 +287,43 @@
   <!-- WCAG: Main content landmark for skip link target -->
   <main id="main-content" tabindex="-1" class="prose container">
     <section id="home" itemscope itemtype="https://schema.org/Store">
-      <header id="hero">
-        <h1 itemprop="name">Nature's Infusions</h1>
-        <blockquote id="tagline" cite="Nature's Infusions" itemprop="description">
-          "Cultivating Holistic Well-being with Nature's Premium Botanicals."
-        </blockquote>
-        <p id="description" itemprop="description">
-          Nature's Infusions is a Perth-based business, providing locally blended and ethically
-          sourced organic teas and herbal remedies; to support your journey towards optimal
-          health. Experience the benefits of natural healing through our meticulously selected
-          range, designed to harness the therapeutic properties of nature's finest botanicals.
-        </p>
+      <header id="hero" class="hero">
+        <div class="hero__media" aria-hidden="true">
+          <picture>
+            <source type="image/webp"
+              srcset="/assets/img/hero-home-800x450.webp 800w, /assets/img/hero-home-1200x675.webp 1200w, /assets/img/hero-home-1600x900.webp 1600w"
+              sizes="(max-width:640px) 100vw, (max-width:1200px) 80vw, 1200px" />
+            <source type="image/jpeg"
+              srcset="/assets/img/hero-home-800x450.jpg 800w, /assets/img/hero-home-1200x675.jpg 1200w, /assets/img/hero-home-1600x900.jpg 1600w"
+              sizes="(max-width:640px) 100vw, (max-width:1200px) 80vw, 1200px" />
+            <img src="/assets/img/hero-home-1200x675.jpg"
+              alt="Sunlit herbal tea leaves and a steaming cup — Nature's Infusions signature blend" loading="eager"
+              decoding="async" class="hero__img" />
+          </picture>
+        </div>
+        <div class="hero__content">
+          <h1 itemprop="name">Nature's Infusions</h1>
+          <blockquote id="tagline" cite="Nature's Infusions" itemprop="description">
+            "Cultivating Holistic Well-being with Nature's Premium Botanicals."
+          </blockquote>
+          <p id="description" itemprop="description">
+            Nature's Infusions is a Perth-based business, providing locally blended and ethically
+            sourced organic teas and herbal remedies; to support your journey towards optimal
+            health. Experience the benefits of natural healing through our meticulously selected
+            range, designed to harness the therapeutic properties of nature's finest botanicals.
+          </p>
 
-        <div id="cta-buttons">
-          <nav aria-label="Call to action">
-            <a href="/pages/store.html" id="shop-now" class="button" itemprop="url">Shop Our Premium Organic Teas and
-              Herbal Infusions Online</a>
-            <span role="separator" aria-hidden="true">or</span>
-            <a href="/pages/stockists.html" id="find-stockists" class="button" itemprop="url">Find a Local Stockist Near
-              You</a>
-          </nav>
+          <div id="cta-buttons">
+            <nav aria-label="Call to action">
+              <a href="/pages/store.html" id="shop-now" class="button btn--primary" itemprop="url">Shop Our Premium
+                Organic Teas and
+                Herbal Infusions Online</a>
+              <span role="separator" aria-hidden="true">or</span>
+              <a href="/pages/stockists.html" id="find-stockists" class="button btn--ghost" itemprop="url">Find a Local
+                Stockist Near
+                You</a>
+            </nav>
+          </div>
         </div>
       </header>
 
@@ -316,10 +337,10 @@
           </p>
         </header>
 
-        <div id="product-grid-featured">
-          <article class="product" tabindex="0" itemprop="itemListElement" itemscope
+        <div id="product-grid-featured" class="product-grid" aria-live="polite">
+          <article class="product product-card" data-featured="true" tabindex="0" itemprop="itemListElement" itemscope
             itemtype="https://schema.org/Product">
-            <figure>
+            <figure class="product-card__media">
               <picture>
                 <source srcset="assets/img/enchantedturmeric2.webp" type="image/webp" />
                 <img src="assets/img/enchantedturmeric2.webp" alt="Enchanted Turmeric Tea Package" loading="lazy"
@@ -327,6 +348,7 @@
               </picture>
               <figcaption>
                 <h3 itemprop="name">Enchanted Turmeric Tea</h3>
+                <span class="product-card__badge" aria-hidden="true">Featured</span>
                 <details>
                   <summary>Product Details</summary>
                   <p itemprop="description">
@@ -356,9 +378,9 @@
             </form>
           </article>
 
-          <article class="product" tabindex="0" itemprop="itemListElement" itemscope
+          <article class="product product-card" data-featured="true" tabindex="0" itemprop="itemListElement" itemscope
             itemtype="https://schema.org/Product">
-            <figure>
+            <figure class="product-card__media">
               <picture>
                 <source srcset="assets/img/calmingtea.webp" type="image/webp" />
                 <img src="assets/img/calmingtea.webp" alt="Calming Garden Tea" loading="lazy" width="300" height="300"
@@ -366,6 +388,7 @@
               </picture>
               <figcaption>
                 <h3 itemprop="name">Calming Garden Tea</h3>
+                <span class="product-card__badge" aria-hidden="true">Featured</span>
                 <details>
                   <summary>Product Details</summary>
                   <p itemprop="description">
@@ -400,6 +423,46 @@
           <a href="pages/store.html" itemprop="url">View Complete Product Catalog - Browse All Organic Teas &amp;
             Wellness Blends</a>
         </footer>
+      </section>
+
+      <!-- Reviews / Testimonials -->
+      <section id="reviews" aria-labelledby="reviews-heading">
+        <h2 id="reviews-heading">What Customers Are Saying</h2>
+        <div class="reviews-grid">
+          <article class="review">
+            <div class="review__avatar">
+              <img src="/assets/img/profile-placeholder-256x256.svg" alt="Reviewer profile photo" />
+            </div>
+            <div class="review__body">
+              <div class="review__meta"><span class="review__name">Samantha R.</span><span
+                  aria-hidden="true">•</span><span class="review__rating">★★★★★</span></div>
+              <p class="review__text">Beautifully fragrant blends — I noticed a real improvement in my sleep routine.
+              </p>
+            </div>
+          </article>
+
+          <article class="review">
+            <div class="review__avatar">
+              <img src="/assets/img/profile-placeholder-256x256.svg" alt="Reviewer profile photo" />
+            </div>
+            <div class="review__body">
+              <div class="review__meta"><span class="review__name">Marcus T.</span><span
+                  aria-hidden="true">•</span><span class="review__rating">★★★★★</span></div>
+              <p class="review__text">Fast shipping and a lovely, clean taste — delightful.</p>
+            </div>
+          </article>
+
+          <article class="review">
+            <div class="review__avatar">
+              <img src="/assets/img/profile-placeholder-256x256.svg" alt="Reviewer profile photo" />
+            </div>
+            <div class="review__body">
+              <div class="review__meta"><span class="review__name">Aisha P.</span><span aria-hidden="true">•</span><span
+                  class="review__rating">★★★★☆</span></div>
+              <p class="review__text">Lovely packaging and a calming aroma — highly recommend.</p>
+            </div>
+          </article>
+        </div>
       </section>
 
       <!-- Newsletter Signup with HTML5 validation -->
