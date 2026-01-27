@@ -27,6 +27,24 @@ if (typeof document !== 'undefined') {
 
   (async function start() {
     try {
+      // Ensure legacy global CartStore is available for modules that expect it
+      async function ensureGlobalCartStore() {
+        if (typeof window !== 'undefined' && window.CartStore) return;
+        await new Promise((resolve) => {
+          try {
+            const s = document.createElement('script');
+            s.src = '/assets/js/cartStore.js';
+            s.onload = () => resolve();
+            s.onerror = () => resolve();
+            document.head.appendChild(s);
+          } catch (e) {
+            // ignore and continue
+            resolve();
+          }
+        });
+      }
+
+      await ensureGlobalCartStore();
       const store = await initCart();
       // expose small debug API
       window.NaturesCart = { store };

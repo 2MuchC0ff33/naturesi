@@ -327,3 +327,33 @@ export function __resetCaches() {
   cachedPostcodes = null;
   cachedPostage = null;
 }
+
+// Backwards-compatibility helpers: allow modules to obtain the global window.CartStore
+// when present, otherwise create and return an instance of the exported `CartStore` class.
+export async function getGlobalStore() {
+  if (typeof window !== 'undefined' && window.CartStore) return window.CartStore;
+  // Fallback: create an instance of the module CartStore and initialise it
+  try {
+    const inst = new CartStore();
+    if (typeof inst.init === 'function') await inst.init();
+    return inst;
+  } catch (err) {
+    console.warn('getGlobalStore fallback failed', err);
+    return null;
+  }
+}
+
+// Default proxy export: forwards common store operations to `window.CartStore` when available,
+// otherwise uses the module-local CartStore implementation. Methods are async where persistence
+// may occur so callers can `await` them.
+const StoreProxy = {
+  async init() { const s = await getGlobalStore(); return s && s.init ? s.init() : s; },
+  get() { try { if (typeof window !== 'undefined' && window.CartStore) return window.CartStore.get(); } catch (e) {} return DEFAULT; },
+  async set(cart) { const s = await getGlobalStore(); return s && s.set ? s.set(cart) : null; },
+  async add(item) { const s = await getGlobalStore(); return s && s.add ? s.add(item) : null; },
+  async remove(id, size) { const s = await getGlobalStore(); return s && s.remove ? s.remove(id, size) : null; },
+  async updateQuantity(id, qty, size) { const s = await getGlobalStore(); return s && s.updateQuantity ? s.updateQuantity(id, qty, size) : null; },
+  async clear() { const s = await getGlobalStore(); return s && s.clear ? s.clear() : null; },
+};
+
+export default StoreProxy;
