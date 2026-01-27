@@ -166,6 +166,20 @@
   }
 }
 
+/* Mobile-first: make add-to-cart buttons easy targets on small screens */
+@media (max-width: 640px) {
+
+  .add-to-cart button[type="submit"],
+  .add-to-cart [type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 0.85rem 1rem;
+    font-weight: 700;
+    border-radius: 0.5rem;
+    margin-top: var(--space-sm);
+  }
+}
+
 @media (min-width: 1000px) {
   .product-grid {
     grid-template-columns: repeat(3, 1fr);

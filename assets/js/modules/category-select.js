@@ -62,6 +62,8 @@ export function initCategoryTabs(documentRoot = typeof document !== 'undefined' 
   tabList.className = 'tabs__list';
   tabList.setAttribute('role', 'tablist');
   tabList.setAttribute('aria-label', 'Product categories');
+  // Explicitly mark orientation for assistive tech
+  tabList.setAttribute('aria-orientation', 'horizontal');
 
   let firstTab = null;
   options.forEach((opt, index) => {
@@ -143,10 +145,61 @@ export function initCategoryTabs(documentRoot = typeof document !== 'undefined' 
   const header = documentRoot.getElementById('site-header');
   if (header) header.classList.add('has-category-tabs');
 
-  // Simple focus management: ensure first tab is focusable and selected
-  if (firstTab) {
-    firstTab.setAttribute('tabindex', '0');
-    firstTab.setAttribute('aria-selected', 'true');
+  // Simple focus management: ensure the tab that matches the current URL is selected
+  // This improves discoverability when the user lands directly on a category page.
+  try {
+    const path = (typeof location !== 'undefined' && location.pathname) ? location.pathname : '';
+    let currentCategory = '';
+    if (path.includes('/pages/store/')) {
+      // /pages/store/green-tea.html -> 'green-tea'
+      const seg = path.replace(/\/$/, '').split('/').pop() || '';
+      if (seg && seg.endsWith('.html')) currentCategory = seg.replace(/\.html$/, '');
+    } else if (path.endsWith('/pages/store.html')) {
+      try {
+        const params = new URLSearchParams(location.search);
+        currentCategory = params.get('category') || '';
+      } catch (e) {
+        currentCategory = '';
+      }
+    }
+
+    let selectedTab = null;
+    if (currentCategory !== '') {
+      selectedTab = tabList.querySelector(`.tabs__tab[data-value="${currentCategory}"]`);
+    }
+    // fallback: try to match label text (some pages may use friendly names)
+    if (!selectedTab && currentCategory) {
+      selectedTab = Array.from(tabList.querySelectorAll('.tabs__tab')).find(t => t.textContent.toLowerCase().includes(currentCategory.replace(/-/g,' ').toLowerCase()));
+    }
+
+    // Final fallback is the first tab (All categories)
+    const tabs = tabList.querySelectorAll('.tabs__tab');
+    const defaultTab = tabs && tabs.length ? tabs[0] : null;
+    const tabToSelect = selectedTab || defaultTab || firstTab;
+
+    if (tabToSelect) {
+      // Set selection and make it focusable
+      tabList.querySelectorAll('.tabs__tab').forEach((t) => {
+        t.setAttribute('aria-selected', 'false');
+        t.setAttribute('tabindex', '-1');
+      });
+      tabToSelect.setAttribute('aria-selected', 'true');
+      tabToSelect.setAttribute('tabindex', '0');
+      // If the selected tab is off-screen on small devices, ensure it's visible.
+      // Respect users who prefer reduced motion.
+      try {
+        const prefersReduced = (typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+        tabToSelect.scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth', block: 'nearest', inline: 'center' });
+      } catch (e) {
+        try { tabToSelect.scrollIntoView({block: 'nearest', inline: 'center'}); } catch (err) { /* ignore */ }
+      }
+    }
+  } catch (e) {
+    // do not let enhancement errors break the page
+    if (firstTab) {
+      firstTab.setAttribute('tabindex', '0');
+      firstTab.setAttribute('aria-selected', 'true');
+    }
   }
 }
 

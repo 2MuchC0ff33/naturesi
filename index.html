@@ -92,6 +92,7 @@
   <!-- Resource Hints -->
   <link rel="dns-prefetch" href="//www.naturesinfusions.com.au" />
   <link rel="preload" href="/assets/css/main.css" as="style" />
+  <link rel="preload" href="/assets/img/hero-home-1200x675.webp" as="image" type="image/webp" />
   <link rel="prefetch" href="/assets/js/data/products.json" as="fetch" />
 
   <!-- Cache Control -->
@@ -338,9 +339,9 @@
           </p>
         </header>
 
-        <div id="product-grid-featured" class="product-grid" aria-live="polite">
+        <div id="product-grid-featured" class="product-grid" aria-live="polite" role="list">
           <article class="product product-card" data-featured="true" tabindex="0" itemprop="itemListElement" itemscope
-            itemtype="https://schema.org/Product">
+            itemtype="https://schema.org/Product" role="listitem">
             <figure class="product-card__media">
               <picture>
                 <source srcset="assets/img/enchantedturmeric2.webp" type="image/webp" />
@@ -380,7 +381,7 @@
           </article>
 
           <article class="product product-card" data-featured="true" tabindex="0" itemprop="itemListElement" itemscope
-            itemtype="https://schema.org/Product">
+            itemtype="https://schema.org/Product" role="listitem">
             <figure class="product-card__media">
               <picture>
                 <source srcset="assets/img/calmingtea.webp" type="image/webp" />
@@ -432,7 +433,7 @@
         <div class="reviews-grid">
           <article class="review">
             <div class="review__avatar">
-              <img src="/assets/img/profile-placeholder-256x256.svg" alt="Reviewer profile photo" />
+              <img src="/assets/img/profile-placeholder-256x256.svg" alt="Avatar: Samantha R." />
             </div>
             <div class="review__body">
               <div class="review__meta"><span class="review__name">Samantha R.</span><span
@@ -444,7 +445,7 @@
 
           <article class="review">
             <div class="review__avatar">
-              <img src="/assets/img/profile-placeholder-256x256.svg" alt="Reviewer profile photo" />
+              <img src="/assets/img/profile-placeholder-256x256.svg" alt="Avatar: Marcus T." />
             </div>
             <div class="review__body">
               <div class="review__meta"><span class="review__name">Marcus T.</span><span
@@ -455,7 +456,7 @@
 
           <article class="review">
             <div class="review__avatar">
-              <img src="/assets/img/profile-placeholder-256x256.svg" alt="Reviewer profile photo" />
+              <img src="/assets/img/profile-placeholder-256x256.svg" alt="Avatar: Aisha P." />
             </div>
             <div class="review__body">
               <div class="review__meta"><span class="review__name">Aisha P.</span><span aria-hidden="true">•</span><span
@@ -597,8 +598,8 @@
     </div>
   </main>
 
-  <!-- Newsletter modal (structural objects only; styling in components if desired) -->
-  <div id="newsletter-modal" class="modal" aria-hidden="true" data-modal>
+  <!-- Newsletter modal (prefers native <dialog> where available; structural objects only; styling in components) -->
+  <dialog id="newsletter-modal" class="modal" aria-hidden="true" data-modal>
     <div class="modal__overlay" data-modal-close></div>
     <div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="newsletter-modal-title" tabindex="-1">
       <header class="modal__header">
@@ -613,7 +614,7 @@
         <button type="button" class="btn btn--primary" data-modal-close>OK, got it</button>
       </footer>
     </div>
-  </div>
+  </dialog>
 
 </body>
 

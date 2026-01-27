@@ -41,21 +41,46 @@ export function init(document) {
 
   function openModal(modalEl, trigger) {
     if (!modalEl) return;
-    modalEl.setAttribute('open', '');
-    modalEl.classList.add('is-open');
+
+    // Prefer native <dialog> when available for improved built-in behaviour
+    const isNativeDialog = modalEl.tagName && modalEl.tagName.toLowerCase() === 'dialog' && typeof modalEl.showModal === 'function';
+
+    try {
+      if (isNativeDialog) {
+        // Ensure aria-hidden removed from the dialog container
+        modalEl.removeAttribute('aria-hidden');
+        modalEl.showModal();
+        modalEl.classList.add('is-open');
+      } else {
+        modalEl.setAttribute('open', '');
+        modalEl.classList.add('is-open');
+      }
+    } catch (e) {
+      // Fallback to class-based open state if showModal throws
+      modalEl.setAttribute('open', '');
+      modalEl.classList.add('is-open');
+    }
+
     document.body.classList.add(BODY_CLASS);
+
     // Hide main content from AT
     const main = document.querySelector('main') || document.body;
     if (main) main.setAttribute('aria-hidden', 'true');
 
-    // focus dialog
+    // focus dialog content element (the visual dialog surface)
     const dialog = modalEl.querySelector('.modal__dialog') || modalEl;
     // store the element that had focus so we can restore it later
     modalEl.__previousActive = document.activeElement;
-    dialog.setAttribute('tabindex', '-1');
-    // Ensure dialog has correct semantics for assistive tech
-    if (!dialog.hasAttribute('role')) dialog.setAttribute('role', 'dialog');
-    if (!dialog.hasAttribute('aria-modal')) dialog.setAttribute('aria-modal', 'true');
+
+    try {
+      dialog.setAttribute('tabindex', '-1');
+      // Ensure dialog has correct semantics for assistive tech
+      if (!dialog.hasAttribute('role')) dialog.setAttribute('role', 'dialog');
+      if (!dialog.hasAttribute('aria-modal')) dialog.setAttribute('aria-modal', 'true');
+    } catch (err) {
+      // ignore if setting attributes fails for any reason
+    }
+
     // Use requestAnimationFrame to avoid arbitrary time delays and improve reliability
     requestAnimationFrame(() => {
       const focusable = getFocusable(modalEl);
@@ -75,8 +100,24 @@ export function init(document) {
 
   function closeModal(modalEl) {
     if (!modalEl) return;
-    modalEl.removeAttribute('open');
-    modalEl.classList.remove('is-open');
+
+    const isNativeDialog = modalEl.tagName && modalEl.tagName.toLowerCase() === 'dialog' && typeof modalEl.close === 'function';
+
+    try {
+      if (isNativeDialog) {
+        // native dialog close handles removing open state
+        modalEl.close();
+        modalEl.classList.remove('is-open');
+      } else {
+        modalEl.removeAttribute('open');
+        modalEl.classList.remove('is-open');
+      }
+    } catch (e) {
+      // fallback
+      modalEl.removeAttribute('open');
+      modalEl.classList.remove('is-open');
+    }
+
     document.body.classList.remove(BODY_CLASS);
     const main = document.querySelector('main') || document.body;
     if (main) main.removeAttribute('aria-hidden');

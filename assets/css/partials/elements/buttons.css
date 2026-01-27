@@ -48,6 +48,15 @@ button:focus-visible,
 .btn--primary {
   background: var(--color-accent);
   color: #fff;
+  /* subtle elevation to make primary CTAs stand out */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.10);
+  transition: transform var(--transition-fast) ease, box-shadow var(--transition-fast) ease;
+}
+
+.btn--primary:active,
+.btn--primary:focus {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.14);
 }
 
 .btn--ghost {

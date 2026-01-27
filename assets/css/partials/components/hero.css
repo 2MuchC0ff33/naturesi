@@ -15,6 +15,20 @@
   text-align: left;
 }
 
+/* Make hero CTAs more tappable on small screens (stacked, full width) */
+@media (max-width: 640px) {
+  #cta-buttons .button {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 0.6rem;
+  }
+
+  #cta-buttons .button.btn--primary {
+    margin-bottom: 0.4rem;
+  }
+}
+
 .hero h1 {
   margin: 0 0 var(--space-xs) 0;
   font-size: 1.6rem;
