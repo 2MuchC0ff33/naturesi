@@ -7,19 +7,35 @@
 .tabs__list {
   display: flex;
   gap: var(--space-sm);
+  /* Allow horizontal scrolling on narrow screens without wrapping */
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 0.2rem;
+}
+
+.tabs__list::-webkit-scrollbar {
+  height: 6px;
 }
 
 .tabs__tab {
   background: transparent;
   border: 0;
-  padding: 0.5rem 0.6rem;
+  padding: 0.42rem 0.64rem;
   cursor: pointer;
   font: inherit;
+  border-radius: 999px;
+  white-space: nowrap;
+  transition: background var(--transition-fast), transform var(--transition-fast);
 }
 
 .tabs__tab[aria-selected='true'] {
   font-weight: 700;
-  border-bottom: 2px solid var(--color-accent);
+  color: var(--color-accent);
+  background: color-mix(in srgb, var(--color-accent) 8%, transparent);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.04);
+  border-bottom: 0;
+  /* pill style replaces underline */
 }
 
 .tabs__tab:focus-visible {

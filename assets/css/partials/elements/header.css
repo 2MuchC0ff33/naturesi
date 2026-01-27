@@ -71,7 +71,8 @@ Core header bar, logo treatment and colour gradient live here.
 
 .site-nav .logo img,
 .site-nav .all-logo img {
-  max-height: 56px;
+  /* larger baseline for improved brand visibility on phones */
+  max-height: 48px;
   width: auto;
   height: auto;
 }
@@ -80,7 +81,7 @@ Core header bar, logo treatment and colour gradient live here.
 
   .site-nav .logo img,
   .site-nav .all-logo img {
-    max-height: 44px;
+    max-height: 56px;
   }
 }
 
@@ -88,7 +89,7 @@ Core header bar, logo treatment and colour gradient live here.
 
   .site-nav .logo img,
   .site-nav .all-logo img {
-    max-height: 48px;
+    max-height: 64px;
   }
 }
 
@@ -96,8 +97,19 @@ Core header bar, logo treatment and colour gradient live here.
 
   .site-nav .logo img,
   .site-nav .all-logo img {
-    max-height: 64px;
+    max-height: 72px;
   }
+}
+
+/* When JS replaces the native <select> with tabs we hide the native category control
+   visually (it remains in the DOM as an accessibility fallback when necessary). */
+.has-category-tabs .category-dropdown {
+  position: absolute !important;
+  left: -9999px !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  clip: rect(1px, 1px, 1px, 1px) !important;
 }
 
 /* Merged duplicate selector: .nav-center

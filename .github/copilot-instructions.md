@@ -9,7 +9,6 @@ Copilot MUST always use the following agents and instruction files for every rel
 - [.github/agents/accessibility.agent.md](.github/agents/accessibility.agent.md): Web accessibility, WCAG, a11y testing, inclusive UX
 - [.github/agents/janitor.agent.md](.github/agents/janitor.agent.md): Codebase cleanup, simplification, tech debt removal
 - [.github/agents/modernization.agent.md](.github/agents/modernization.agent.md): Modernization analysis, planning, and implementation
-- [.github/agents/frontend-ecommerce-ui.agent.md](.github/agents/frontend-ecommerce-ui.agent.md): Front‑end ecommerce UI agent — HTML‑first, mobile‑first, PWA‑friendly
 - [.github/agents/Ultimate-Transparent-Thinking-Beast-Mode.agent.md](.github/agents/Ultimate-Transparent-Thinking-Beast-Mode.agent.md): Maximum transparency, creative overclocking, relentless completion
 
 ### Instruction Files (always referenced)

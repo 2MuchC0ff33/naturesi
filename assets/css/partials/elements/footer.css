@@ -9,14 +9,15 @@ footer[itemscope][itemtype*='WPFooter'] {
   --footer-accent-outline: color-mix(in srgb, var(--color-accent) 36%, transparent);
   background: var(--footer-bg);
   color: var(--footer-text);
-  padding: calc(var(--space-xs) + 0.1rem) var(--space-md);
+  /* tightened vertical spacing for a cleaner footer */
+  padding: calc(var(--space-xs) * 0.8) var(--space-md);
 }
 
 .site-footer .container,
 footer[itemscope][itemtype*='WPFooter'] .container {
   display: grid;
-  grid-template-columns: 1fr 1fr 240px;
-  gap: calc(var(--space-xs) / 1.2);
+  grid-template-columns: 1fr 1fr 180px;
+  gap: calc(var(--space-xs) / 1.6);
   align-items: start;
   max-width: var(--max-width);
 }
