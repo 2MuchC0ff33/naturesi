@@ -4,6 +4,44 @@
    Notes: Markup expects ARIA tablist roles; JS handles selection state with `aria-selected`.
 */
 
+.tabs {
+  position: relative;
+}
+
+.tabs::before,
+.tabs::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 3.6rem;
+  pointer-events: none;
+  transition: opacity var(--transition-fast) ease;
+  opacity: 0;
+  z-index: 2;
+}
+
+/* left fade */
+.tabs::before {
+  left: 0;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+}
+
+/* right fade */
+.tabs::after {
+  right: 0;
+  background: linear-gradient(270deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+}
+
+/* Show fades when JS detects overflow on the respective side */
+.tabs--fade-left::before {
+  opacity: 1;
+}
+
+.tabs--fade-right::after {
+  opacity: 1;
+}
+
 .tabs__list {
   display: flex;
   gap: var(--space-sm);
@@ -11,6 +49,7 @@
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   padding-bottom: 0.2rem;
+  scroll-behavior: smooth;
 }
 
 .tabs__list::-webkit-scrollbar {
@@ -25,7 +64,12 @@
   font: inherit;
   border-radius: 999px;
   white-space: nowrap;
-  transition: background var(--transition-fast), transform var(--transition-fast);
+  transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.tabs__tab:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
 }
 
 .tabs__tab[aria-selected='true'] {
@@ -50,4 +94,20 @@
 .tabs__panel[hidden="false"],
 .tabs__panel[aria-hidden='false'] {
   display: block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tabs__list {
+    scroll-behavior: auto;
+  }
+
+  .tabs__tab {
+    transition: none;
+    transform: none;
+  }
+
+  .tabs::before,
+  .tabs::after {
+    transition: none;
+  }
 }

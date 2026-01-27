@@ -96,6 +96,19 @@ export function initCategoryTabs(documentRoot = typeof document !== 'undefined' 
       });
       target.setAttribute('aria-selected', 'true');
       target.setAttribute('tabindex', '0');
+
+      // Announce change to assistive tech if available (debounced by last value)
+      try {
+        if (container && container.__announcer) {
+          const text = target.textContent.trim();
+          if (container.__lastAnnounced !== text) {
+            container.__announcer.textContent = `${text} selected`;
+            container.__lastAnnounced = text;
+          }
+        }
+      } catch (e) {
+        // ignore announcer errors
+      }
     };
 
     btn.addEventListener('focus', (ev) => {
@@ -201,6 +214,76 @@ export function initCategoryTabs(documentRoot = typeof document !== 'undefined' 
       firstTab.setAttribute('aria-selected', 'true');
     }
   }
+
+  // Create a screened, visually-hidden live region to announce tab changes to AT
+  try {
+    const announcer = document.createElement('div');
+    announcer.className = 'sr-only category-announcer';
+    announcer.setAttribute('role', 'status');
+    announcer.setAttribute('aria-live', 'polite');
+    container.appendChild(announcer);
+    container.__announcer = announcer;
+    container.__lastAnnounced = '';
+  } catch (e) {
+    // ignore DOM errors
+  }
+
+  // Fade indicators: show gradient edges when tab list is scrollable and adapt colour to theme
+  (function setupFadeIndicators() {
+    const list = tabList;
+    if (!list || typeof list.scrollWidth === 'undefined') return;
+
+    const update = () => {
+      const hasLeft = list.scrollLeft > 0;
+      const hasRight = list.scrollLeft + list.clientWidth < list.scrollWidth - 1;
+      container.classList.toggle('tabs--fade-left', hasLeft);
+      container.classList.toggle('tabs--fade-right', hasRight);
+    };
+
+    // Update fade colour based on document theme attribute (data-theme)
+    const updateFadeColor = () => {
+      try {
+        const theme = (document.documentElement && document.documentElement.getAttribute('data-theme')) || '';
+        const fade = theme.toLowerCase() === 'dark' ? 'rgba(0,0,0,0.85)' : 'rgba(255,255,255,0.95)';
+        container.style.setProperty('--tabs-fade', fade);
+      } catch (e) {
+        // ignore
+      }
+    };
+
+    // Observe theme changes to update fade colour dynamically
+    let mo = null;
+    try {
+      const docEl = document.documentElement;
+      if (typeof MutationObserver !== 'undefined') {
+        mo = new MutationObserver((mutations) => {
+          for (const m of mutations) {
+            if (m.attributeName === 'data-theme') updateFadeColor();
+          }
+        });
+        mo.observe(docEl, { attributes: true, attributeFilter: ['data-theme'] });
+      }
+    } catch (e) {
+      // ignore
+    }
+
+    // rAF-throttled schedule
+    let rafId = null;
+    const schedule = () => {
+      if (rafId) return;
+      rafId = requestAnimationFrame(() => {
+        update();
+        rafId = null;
+      });
+    };
+
+    // Attach listeners
+    list.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule);
+    // initial checks
+    updateFadeColor();
+    schedule();
+  })();
 }
 
 
