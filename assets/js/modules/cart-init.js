@@ -148,6 +148,44 @@ export async function initCart() {
   // Ensure totals include current shipping (initially 0)
   updateCartTableTotalsWithShipping(currentShippingRate);
 
+  // Optional: Shared cart synchronization across tabs
+  try {
+    // Lazy-import the client to keep no-JS and small bundles lean
+    const sc = await import('./shared-cart-client.js');
+    const client = sc && sc.createClient ? sc.createClient() : null;
+    if (client) {
+      // When the shared worker sends the canonical cart, replace local store and re-render
+      client.on((msg) => {
+        if (!msg) return;
+        if (msg.event === 'CART' || msg.event === 'CART_UPDATED') {
+          try {
+            if (msg.cart) {
+              // Overwrite local cart with canonical copy and persist
+              cartStore.cart = msg.cart;
+              cartStore.save();
+              updateCartCountOutputs((msg.cart.items || []).reduce((s, it) => s + (parseInt(it.quantity,10)||0), 0));
+              renderCartTable(msg.cart);
+              updateCartTableTotalsWithShipping(currentShippingRate);
+            }
+          } catch (err) { console.warn('Failed to apply shared cart update', err); }
+        }
+      });
+
+      // When local cart changes, push to shared worker
+      document.addEventListener('cart:updated', () => {
+        try {
+          const c = cartStore.get();
+          client.setCart(c, 'cart-init');
+        } catch (err) { console.warn('Failed to push cart to shared worker', err); }
+      });
+
+      // Push current cart on load (idempotent)
+      try { client.setCart(cartStore.get(), 'cart-init'); } catch (e) {}
+    }
+  } catch (e) {
+    // dynamic import may fail on older browsers — ignore for progressive enhancement
+  }
+
   // Delegated submit handler for add-to-cart forms (uses native FormData)
   document.addEventListener('submit', async (ev) => {
     const form = ev.target;

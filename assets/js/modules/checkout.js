@@ -101,8 +101,46 @@ export async function runCheckout({
     }
   }
 
-  const { html, total } = renderSummaryToString(cart, shipping);
-  summary.innerHTML = html;
+  // Offload price, tax and shipping calculation to worker when available
+  const { html: fallbackHtml, total: fallbackTotal } = renderSummaryToString(cart, shipping);
+  let usedWorker = false;
+  if (window.WorkerRegistry && window.WorkerRegistry.supports && window.WorkerRegistry.supports.worker) {
+    try {
+      const w = window.WorkerRegistry.createWorker('/assets/js/workers/price-calculator.worker.js');
+      if (w) {
+        usedWorker = true;
+        const payload = { type: 'CALC', id: String(Date.now()), cartItems: cart.map(i=>({ sku: i.sku||i.id, name: i.title||i.name, qty: i.qty, price: i.price })), address: {}, promoCodes: [] };
+        w.onmessage = (ev) => {
+          const msg = ev.data || {};
+          if (msg.type === 'SUMMARY') {
+            // Render worker-provided summary
+            const parts = [];
+            parts.push('<ul class="checkout-line-items">');
+            msg.lines.forEach(l => parts.push(`<li class="checkout-line-item"><span class="line-title">${escapeHtml(l.name)}</span><span class="line-meta">${l.qty} × ${Number(l.price).toFixed(2)}</span><span class="line-total">${Number(l.subtotal).toFixed(2)}</span></li>`));
+            parts.push('</ul>');
+            parts.push(`<dl class="checkout-totals"><div><dt>Discounts</dt><dd>${msg.discounts.reduce((s,d)=>s+(d.amount||0),0).toFixed(2)}</dd></div><div><dt>Tax</dt><dd>${Number(msg.tax||0).toFixed(2)}</dd></div><div><dt>Shipping</dt><dd>${Number(msg.shipping||0).toFixed(2)}</dd></div></dl>`);
+            parts.push(`<p class="grand-total">Total: <strong>$${Number(msg.total||0).toFixed(2)}</strong></p>`);
+            summary.innerHTML = parts.join('');
+            try { w.terminate(); } catch(_){}
+          }
+          if (msg.type === 'ERROR') {
+            console.warn('Price worker error', msg.message);
+            // fallback
+            summary.innerHTML = fallbackHtml;
+            try { w.terminate(); } catch(_){}
+          }
+        };
+        w.postMessage(payload);
+      }
+    } catch (e) { console.warn('Worker calc failed', e); }
+  }
+  // fallback if worker not used
+  if (!usedWorker) {
+    summary.innerHTML = fallbackHtml;
+  }
+
+  function escapeHtml(s){ return String(s||'').replace(/[&<>"']/g, function(c){ return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;"})[c]; }); }
+
 
   // Ensure simple redirect form is populated even if PayPal SDK fails
   try {

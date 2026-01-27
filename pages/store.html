@@ -458,6 +458,44 @@
       </div>
     </footer>
   </div>
+  <script>
+    (function () {
+      const input = document.getElementById('site-search');
+      if (!input) return;
+      const container = document.createElement('div');
+      container.id = 'search-autocomplete';
+      container.className = 'search-autocomplete';
+      container.setAttribute('role', 'listbox');
+      input.parentNode.appendChild(container);
+
+      const w = (window.WorkerRegistry && window.WorkerRegistry.createWorker('/assets/js/workers/search-filter.worker.js')) || null;
+      const shared = (window.WorkerRegistry && window.WorkerRegistry.createSharedWorker('/assets/js/shared/product-cache.shared-worker.js', 'product-cache')) || null;
+      const port = shared && shared.port; if (port) port.start && port.start();
+
+      function render(items) {
+        container.innerHTML = (items || []).slice(0, 10).map(it => `<div role="option" class="search-item">${escapeHtml(it.name)} — $${Number(it.price || 0).toFixed(2)}</div>`).join('') || '<div class="search-empty">No results</div>';
+      }
+
+      function init(products) { if (w) w.postMessage({ type: 'INIT', products, options: { indexFields: ['name', 'sku', 'category', 'brand'] } }); }
+
+      if (w) { w.onmessage = (e) => { const msg = e.data || {}; if (msg.type === 'RESULT') render(msg.items); } }
+
+      async function boot() {
+        if (port) {
+          port.onmessage = (e) => { const m = e.data || {}; if (m.event === 'CATALOG' && m.data) init(m.data); };
+          port.postMessage({ action: 'GET_CATALOG' });
+        }
+        if (!port) { try { const r = await fetch('/assets/js/data/products.json'); const data = await r.json(); init(data); } catch (_) { } }
+      }
+
+      input.addEventListener('input', debounce(() => { const q = input.value || ''; if (w) w.postMessage({ type: 'QUERY', id: String(Date.now()), q, filters: {}, page: 1, perPage: 10 }); }, 200));
+
+      function debounce(fn, wait = 200) { let t; return function () { clearTimeout(t); t = setTimeout(() => fn.apply(this, arguments), wait); }; }
+      function escapeHtml(s) { return String(s || '').replace(/[&<>"']/g, function (c) { return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": "&#39;" })[c]; }); }
+
+      boot();
+    })();
+  </script>
 </body>
 
 </html>

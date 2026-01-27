@@ -1,6 +1,8 @@
 // Module entrypoint: only register service worker for offline/PWA support
 import { registerServiceWorker } from './modules/sw-register.js';
 import { initCart } from './modules/cart-init.js';
+// Worker registry exposes feature-detection helpers and factories for Workers/SharedWorkers
+import './modules/worker-registry.js';
 
 if (
   typeof window !== 'undefined' &&
@@ -92,6 +94,14 @@ if (typeof document !== 'undefined') {
           if (fb && typeof fb.initFeaturedBadges === 'function') fb.initFeaturedBadges(document);
         } catch (err) {
           console.warn('Featured badges init failed', err);
+        }
+
+        // Initialize lightweight analytics (uses a dedicated worker under the hood)
+        try {
+          const analyticsMod = await import('./modules/analytics.js');
+          // module auto-initialises itself; nothing to do here
+        } catch (err) {
+          console.warn('Analytics module init failed', err);
         }
       } catch (err) {
         console.error('Category select init failed', err);

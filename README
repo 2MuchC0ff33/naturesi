@@ -21,6 +21,7 @@ A small, privacy‑first static storefront for Nature's Infusions. Built with pl
 - Assets in `/assets/css/`, `/assets/js/`, `/assets/img/`
 - Product data in JSON under `/assets/js/data/`
 - Service worker for offline/PWA support
+- Web Workers for off-main-thread tasks (see `docs/WORKERS.md`)
 
 ## Features
 
