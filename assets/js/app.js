@@ -3,6 +3,9 @@ import { registerServiceWorker } from './modules/sw-register.js';
 import { initCart } from './modules/cart-init.js';
 // Worker registry exposes feature-detection helpers and factories for Workers/SharedWorkers
 import './modules/worker-registry.js';
+// Ensure canonical pricing index and UI guards are available globally (side-effect modules)
+import './modules/pricing-index.js';
+import './modules/products-guard.js';
 
 if (
   typeof window !== 'undefined' &&
@@ -102,6 +105,45 @@ if (typeof document !== 'undefined') {
           // module auto-initialises itself; nothing to do here
         } catch (err) {
           console.warn('Analytics module init failed', err);
+        }
+
+        // Shipping estimate page helper: wire postcode lookup to parcel rate calculator
+        try {
+          if (document.getElementById('postcode') || document.querySelector('.postcode-lookup')) {
+            const ship = await import('./modules/cartStore.js');
+            const form = document.querySelector('.postcode-lookup');
+            const outputId = 'postcode-lookup-result';
+            function ensureOutput(){
+              let out = document.getElementById(outputId);
+              if (!out) {
+                out = document.createElement('div');
+                out.id = outputId;
+                out.className = 'postcode-lookup-result';
+                if (form && form.parentNode) form.parentNode.insertBefore(out, form.nextSibling);
+              }
+              return out;
+            }
+            if (form) {
+              form.addEventListener('submit', async (ev) => {
+                ev.preventDefault();
+                const pc = (form.querySelector('input[name="postcode"]') || document.getElementById('postcode')).value || '';
+                const types = ['pouch','satchel','handbag','shoebox','briefcase'];
+                const out = ensureOutput();
+                out.innerHTML = 'Looking up...';
+                try {
+                  const rows = await Promise.all(types.map(async (t) => {
+                    const r = await ship.calculateParcelRate(t, pc, { storePostcode: '6147', storeState: 'WA' });
+                    return { type: t, zone: r.zone, rate: r.rate || r.baseRate || r.totalRate };
+                  }));
+                  out.innerHTML = '<ul>' + rows.map(r=>`<li>${r.type}: ${r.rate==null? 'N/A' : 'AUD $' + Number(r.rate).toFixed(2)} (${r.zone})</li>`).join('') + '</ul>';
+                } catch (err) {
+                  out.textContent = 'Lookup failed';
+                }
+              });
+            }
+          }
+        } catch (err) {
+          console.warn('Shipping estimate helper failed to initialise', err);
         }
       } catch (err) {
         console.error('Category select init failed', err);

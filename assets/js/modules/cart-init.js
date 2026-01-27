@@ -13,7 +13,7 @@
     for add-to-cart forms to avoid duplicate listeners and ensure dynamic content works.
 */
 
-import { CartStore, parseWeightString } from './cartStore.js';
+import { parseWeightString } from './cartStore.js';
 import {
   updateCartCountOutputs,
   renderCartTable,
@@ -115,8 +115,8 @@ function getSelectedOptionPrice(form, productEl) {
 
 // initCart - centralised cart initialiser extracted from app.js
 export async function initCart() {
-  const cartStore = new CartStore();
-  await cartStore.init();
+  const cartStore = window.CartStore;
+  if (cartStore && typeof cartStore.init === 'function') await cartStore.init();
 
   // load canonical product index (best-effort). We expose it to cart UI so rendering prefers it.
   // `idx` is declared in outer scope so other functions (estimator) can reference it safely.
@@ -160,11 +160,11 @@ export async function initCart() {
         if (msg.event === 'CART' || msg.event === 'CART_UPDATED') {
           try {
             if (msg.cart) {
-              // Overwrite local cart with canonical copy and persist
-              cartStore.cart = msg.cart;
-              cartStore.save();
-              updateCartCountOutputs((msg.cart.items || []).reduce((s, it) => s + (parseInt(it.quantity,10)||0), 0));
-              renderCartTable(msg.cart);
+              // Overwrite local cart with canonical copy and persist via global CartStore
+              try { await window.CartStore.set(msg.cart); } catch (e) { window.CartStore.set && window.CartStore.set(msg.cart); }
+              const c = window.CartStore.get();
+              updateCartCountOutputs((c.items || []).reduce((s, it) => s + (parseInt(it.qty || it.quantity || 0,10)||0), 0));
+              renderCartTable(c);
               updateCartTableTotalsWithShipping(currentShippingRate);
             }
           } catch (err) { console.warn('Failed to apply shared cart update', err); }
@@ -174,13 +174,13 @@ export async function initCart() {
       // When local cart changes, push to shared worker
       document.addEventListener('cart:updated', () => {
         try {
-          const c = cartStore.get();
+          const c = window.CartStore.get();
           client.setCart(c, 'cart-init');
         } catch (err) { console.warn('Failed to push cart to shared worker', err); }
       });
 
       // Push current cart on load (idempotent)
-      try { client.setCart(cartStore.get(), 'cart-init'); } catch (e) {}
+      try { client.setCart(window.CartStore.get(), 'cart-init'); } catch (e) {}
     }
   } catch (e) {
     // dynamic import may fail on older browsers — ignore for progressive enhancement
@@ -349,10 +349,22 @@ export async function initCart() {
           productEl.querySelector('.product-description, p'));
       const description = descriptionEl ? descriptionEl.textContent.trim().slice(0, 160) : '';
 
-      await cartStore.add({ id, name, size, quantity, price, image, sku, description });
-      const updated = cartStore.get();
+      // Prefer canonical price from product index when available to avoid DOM tampering
+      try {
+        if ((typeof idx !== 'undefined' && idx) && sku) {
+          const prod = idx[String(sku)] || idx[String(id)];
+          if (prod && prod.price != null) {
+            price = Number(prod.price);
+          }
+        }
+      } catch (e) {
+        // ignore and fall back to detected price
+      }
+
+      await window.CartStore.add({ id, name, size, qty: quantity, price, image, sku, description });
+      const updated = window.CartStore.get();
       updateCartCountOutputs(
-        (updated.items || []).reduce((s, it) => s + (parseInt(it.quantity, 10) || 0), 0)
+        (updated.items || []).reduce((s, it) => s + (parseInt(it.qty || it.quantity, 10) || 0), 0)
       );
       renderCartTable(updated);
       // Keep totals in sync with the latest shipping rate
@@ -379,19 +391,25 @@ export async function initCart() {
     const rows = Array.from(form.querySelectorAll('tbody tr'));
     // sequentially update quantities and await persistence for each
     for (const row of rows) {
-      const qty = row.querySelector('input[type="number"]');
-      const id = row.dataset.productId;
-      const size =
-        row.dataset.productSize !== undefined ? row.dataset.productSize : row.dataset.size || '';
-      if (qty && id) {
-        // updateQuantity already returns a promise and now accepts size
-        await cartStore.updateQuantity(id, parseInt(qty.value, 10) || 0, size);
+      const qtyEl = row.querySelector('input[type="number"]');
+      const pid = row.dataset.productId;
+      const size = row.dataset.productSize !== undefined ? row.dataset.productSize : row.dataset.size || '';
+      const newQty = qtyEl ? (parseInt(qtyEl.value, 10) || 0) : 0;
+      if (pid) {
+        // Normalize cart shape and update item quantity via global CartStore
+        const cur = window.CartStore.get();
+        const items = (cur.items || []).slice();
+        for (const it of items) {
+          if ((it.sku && String(it.sku) === String(pid)) || (it.id && String(it.id) === String(pid))) {
+            it.qty = newQty;
+            if (it.quantity !== undefined) it.quantity = newQty;
+          }
+        }
+        await window.CartStore.set({ items });
       }
     }
-    const c = cartStore.get();
-    updateCartCountOutputs(
-      (c.items || []).reduce((s, it) => s + (parseInt(it.quantity, 10) || 0), 0)
-    );
+    const c = window.CartStore.get();
+    updateCartCountOutputs((c.items || []).reduce((s, it) => s + (parseInt(it.qty || it.quantity, 10) || 0), 0));
     renderCartTable(c);
     // Keep totals in sync after quantity updates
     updateCartTableTotalsWithShipping(currentShippingRate);
@@ -435,10 +453,10 @@ export async function initCart() {
       (row.dataset.productSize !== undefined ? row.dataset.productSize : row.dataset.size || '');
     if (!id) return;
     try {
-      await cartStore.remove(id, size);
-      const c2 = cartStore.get();
+      await window.CartStore.remove(id);
+      const c2 = window.CartStore.get();
       updateCartCountOutputs(
-        (c2.items || []).reduce((s, it) => s + (parseInt(it.quantity, 10) || 0), 0)
+        (c2.items || []).reduce((s, it) => s + (parseInt(it.qty || it.quantity, 10) || 0), 0)
       );
       renderCartTable(c2);
       // update totals after removal
@@ -467,7 +485,7 @@ export async function initCart() {
     const pcEl = document.getElementById('checkout-postcode');
     const pc = pcEl ? pcEl.value : '';
     // Calculate total weight from cart items using shared utility
-    const cart = cartStore.get();
+    const cart = window.CartStore.get();
     const totalGrams = calculateTotalWeight(cart.items, idx);
 
     if (DEBUG_SHIPPING) {
@@ -518,5 +536,5 @@ export async function initCart() {
   }
 
   // return the store so callers (app.js) can expose a debug API
-  return cartStore;
+  return window.CartStore;
 }

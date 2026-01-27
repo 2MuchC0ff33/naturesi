@@ -1,4 +1,3 @@
-// Minimal checkout bootstrap moved out of HTML to satisfy inline-script policy
 (function(){
   const calcEl = document.querySelector('[data-checkout-summary]');
   const form = document.querySelector('form[data-checkout-form]');
