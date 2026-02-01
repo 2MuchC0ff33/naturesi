@@ -92,8 +92,8 @@
   <!-- Resource Hints -->
   <link rel="dns-prefetch" href="//www.naturesinfusions.com.au" />
   <link rel="preload" href="/assets/css/main.css" as="style" />
-  <!-- Preload hero image for LCP: include imagesrcset/imagesizes so the preload matches the picture's source candidates -->
-  <link rel="preload" href="/assets/img/hero-home-800x450.svg" as="image" type="image/svg+xml" />
+  <!-- Preload hero image for LCP: now using logo.svg as a temporary hero placeholder -->
+  <link rel="preload" href="/assets/img/logo.svg" as="image" type="image/svg+xml" />
   <link rel="prefetch" href="/assets/js/data/products.json" as="fetch" />
 
   <!-- Cache Control -->
@@ -253,10 +253,9 @@
   <main id="main-content" tabindex="-1" class="prose container">
     <section id="home" itemscope itemtype="https://schema.org/Store">
       <header id="hero" class="hero">
-        <div class="hero__media" aria-hidden="true">
-          <img src="/assets/img/hero-home-800x450.svg"
-            alt="Sunlit herbal tea leaves and a steaming cup — Nature's Infusions signature blend" loading="eager"
-            decoding="async" class="hero__img" />
+        <div class="hero__media hero__media--logo">
+          <img src="/assets/img/logo.svg" alt="Nature's Infusions logo" class="hero__img hero__logo-img" width="600"
+            height="144" loading="eager" decoding="async" />
         </div>
         <div class="hero__content">
           <h1 itemprop="name">Nature's Infusions</h1>
@@ -521,10 +520,6 @@
             <p itemprop="description">
               Premium organic teas and herbal remedies — handcrafted in Perth.
             </p>
-            <a class="logo" href="/" aria-label="Nature's Infusions home">
-              <img src="/assets/img/logo.svg" alt="Nature's Infusions logo" class="footer-logo-img" width="150"
-                height="36" loading="eager" decoding="async" />
-            </a>
           </div>
         </div>
 

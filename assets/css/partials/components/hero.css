@@ -177,3 +177,90 @@
   display: block !important;
   width: auto !important;
 }
+
+/* -----------------------
+   Hero logo placeholder styles
+   ----------------------- */
+/* When using the logo as a temporary hero media, center it and constrain its height */
+
+.hero__media--logo {
+  /* Use absolute positioning so the media truly spans the viewport width.
+     The .hero element is positioned relative; this child will be full-bleed
+     and sit behind the hero content (which has z-index:1). */
+  position: absolute !important;
+  inset: 0 0 0 0 !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: 100vw !important;
+  height: 100% !important;
+  z-index: 0 !important;
+  overflow: hidden !important;
+  display: block;
+}
+
+.hero__media--logo img.hero__logo-img {
+  /* Keep logo centred within the full-bleed media. Constrain size for readability. */
+  position: relative;
+  z-index: 0;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: auto;
+  max-width: min(90%, var(--max-width, 1200px));
+  max-height: 200px;
+  object-fit: contain !important;
+}
+
+@media (max-width: 640px) {
+  .hero__media--logo {
+    min-height: 100px;
+  }
+
+  .hero__media--logo img.hero__logo-img {
+    max-height: 100px;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 879px) {
+  .hero__media--logo {
+    min-height: 140px;
+  }
+
+  .hero__media--logo img.hero__logo-img {
+    max-height: 140px;
+  }
+}
+
+@media (min-width: 880px) {
+  .hero__media--logo {
+    min-height: 200px;
+  }
+
+  .hero__media--logo img.hero__logo-img {
+    max-height: 200px;
+  }
+}
+
+/* Ensure hero media spans the full viewport and the logo remains centered
+   even when the hero is placed inside a constrained .container. These
+   rules are intentionally specific to avoid affecting other .hero usages. */
+.hero__media--logo {
+  /* Force full-bleed appearance even within centered .container.
+     Use left/transform method which is robust across parent transforms. */
+  position: relative !important;
+  width: 100vw !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  box-sizing: border-box;
+  padding-inline: 0;
+}
+
+.hero__media--logo img.hero__logo-img {
+  /* constrain the logo so it doesn't exceed the readable measure on large screens */
+  max-width: min(90%, var(--max-width, 1200px));
+  width: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  pointer-events: auto;
+}

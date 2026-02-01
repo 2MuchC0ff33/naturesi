@@ -37,7 +37,6 @@
 }
 
 /* Footer logo: custom class + fallback override if u-img-cover remains */
-.site-footer .footer-logo-img,
 .site-footer .logo img.u-img-cover {
   display: block;
   width: auto;
@@ -108,7 +107,6 @@
     order: 1;
   }
 
-  .site-footer .footer-logo-img,
   .site-footer .logo img.u-img-cover {
     max-height: 28px;
   }
@@ -127,7 +125,6 @@
 /* Tablet (641–879px) */
 @media (min-width: 641px) and (max-width: 879px) {
 
-  .site-footer .footer-logo-img,
   .site-footer .logo img.u-img-cover {
     max-height: 36px;
   }
@@ -140,7 +137,6 @@
 /* Desktop (>=880px) */
 @media (min-width: 880px) {
 
-  .site-footer .footer-logo-img,
   .site-footer .logo img.u-img-cover {
     max-height: 48px;
   }
