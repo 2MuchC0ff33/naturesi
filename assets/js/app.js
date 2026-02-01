@@ -157,12 +157,10 @@ if (typeof document !== 'undefined') {
               }
             });
           }
+        }
         } catch (err) {
           console.warn('Shipping estimate helper failed to initialise', err);
         }
-      } catch (err) {
-        console.error('Category select init failed', err);
-      }
     } catch (err) {
       console.error('Deferred module load failed', err);
     }

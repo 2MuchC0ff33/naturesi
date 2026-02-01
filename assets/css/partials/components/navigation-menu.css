@@ -36,9 +36,11 @@
     display: inline-flex;
   }
 
-  /* When JS is enabled hide center nav until open */
-  html:not(.no-js) .site-nav .nav-center {
-    display: none;
+  /* When JS is enabled hide center nav until open on mobile */
+  @media (max-width: 640px) {
+    html:not(.no-js) .site-nav .nav-center {
+      display: none;
+    }
   }
 
   /* Open state overlay for nav center */
@@ -52,6 +54,18 @@
     left: 0.5rem;
     right: 0.5rem;
   }
+}
+
+/* Search icon button styles */
+.search-icon {
+  background-image: url('../../../img/icons/search.webp') !important;
+  background-size: 18px 18px !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  width: 2.25rem !important;
+  height: 2.25rem !important;
+  padding: 0.25rem !important;
+  display: inline-block !important;
 }
 
 /* Placeholder: additional navigation menu rules can be added here */
