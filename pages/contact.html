@@ -216,14 +216,11 @@
         <div class="nav-center-flex center-row">
           <!-- Removed category select dropdown -->
 
-          <!-- Search form (pure HTML5, no JS) -->
-          <form id="site-search-form" class="site-search" action="/search.html" method="get" role="search"
+          <label for="site-search" class="visually-hidden">Search Nature's Infusions</label>
+          <input id="site-search" name="q" type="search" placeholder="Search Nature's Infusions" class="search-box"
             aria-label="Search site">
-            <label for="site-search" class="visually-hidden">Search Nature's Infusions</label>
-            <input id="site-search" name="q" type="search" placeholder="Search Nature's Infusions" class="search-box"
-              aria-label="Search site">
-            <button class="search-icon btn btn--ghost" type="submit" aria-label="Submit search">
-            </button>
+          <button class="search-icon btn btn--ghost" type="submit" aria-label="Submit search">
+          </button>
           </form>
           <!-- Inline comment: All JS removed for pure HTML5 search, OpenSearch compatible. -->
         </div>
@@ -335,9 +332,6 @@
           <p itemprop="description">
             Premium organic teas and herbal remedies — handcrafted in Perth.
           </p>
-          <a class="logo" href="/" aria-label="Nature's Infusions home">
-            <img src="/assets/img/logo.svg" alt="Nature's Infusions logo">
-          </a>
         </div>
       </div>
 
