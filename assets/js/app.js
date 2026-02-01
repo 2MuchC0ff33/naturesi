@@ -10,6 +10,8 @@ import './modules/products-guard.js';
 import './modules/structured-data-fix.js';
 import './modules/search-bootstrap.js';
 import './modules/search-autocomplete.js';
+// Categories nav (populates header categories row)
+import './modules/categories-nav.js';
 
 if (
   typeof window !== 'undefined' &&
@@ -81,94 +83,86 @@ if (typeof document !== 'undefined') {
         console.error('Payment module init failed', err);
       }
 
-      // Initialize category select behavior only when present (keeps no-JS and HTML-first fallback intact)
+      // Initialize mobile nav toggle (inserts an accessible hamburger button if needed)
       try {
-        if (document.getElementById('site-category-select')) {
-          const m = await import('./modules/category-select.js');
-          if (m && typeof m.initCategorySelect === 'function') m.initCategorySelect(document);
-        }
-        // Initialize mobile nav toggle (inserts an accessible hamburger button if needed)
-        try {
-          const navMod = await import('./modules/nav-toggle.js');
-          if (navMod && typeof navMod.init === 'function') navMod.init(document);
-        } catch (err) {
-          console.warn('Nav toggle init failed', err);
-        }
+        const navMod = await import('./modules/nav-toggle.js');
+        if (navMod && typeof navMod.init === 'function') navMod.init(document);
+      } catch (err) {
+        console.warn('Nav toggle init failed', err);
+      }
 
-        // Initialize accessible modal behavior (lightweight, optional)
-        try {
-          const modalMod = await import('./modules/modal.js');
-          if (modalMod && typeof modalMod.init === 'function') modalMod.init(document);
-        } catch (err) {
-          console.warn('Modal init failed', err);
-        }
+      // Initialize accessible modal behavior (lightweight, optional)
+      try {
+        const modalMod = await import('./modules/modal.js');
+        if (modalMod && typeof modalMod.init === 'function') modalMod.init(document);
+      } catch (err) {
+        console.warn('Modal init failed', err);
+      }
 
-        // Enhance product gallery markup with Utilities to reduce CLS and ensure consistent object-fit
-        try {
-          if (document.querySelector('figure.product-gallery')) {
-            const ph = await import('./modules/product-helpers.js');
-            if (ph && typeof ph.init === 'function') ph.init(document);
-          }
-        } catch (err) {
-          console.warn('Product helpers init failed', err);
-        }
-
-        // Initialize featured badges module to insert badges for data-featured products
-        try {
-          const fb = await import('./modules/featured-badges.js');
-          if (fb && typeof fb.initFeaturedBadges === 'function') fb.initFeaturedBadges(document);
-        } catch (err) {
-          console.warn('Featured badges init failed', err);
-        }
-
-        // Initialize lightweight analytics (uses a dedicated worker under the hood)
-        try {
-          const analyticsMod = await import('./modules/analytics.js');
-          // module auto-initialises itself; nothing to do here
-        } catch (err) {
-          console.warn('Analytics module init failed', err);
-        }
-
-        // Shipping estimate page helper: wire postcode lookup to parcel rate calculator
-        try {
-          if (document.getElementById('postcode') || document.querySelector('.postcode-lookup')) {
-            const ship = await import('./modules/cartStore.js');
-            const form = document.querySelector('.postcode-lookup');
-            const outputId = 'postcode-lookup-result';
-            function ensureOutput(){
-              let out = document.getElementById(outputId);
-              if (!out) {
-                out = document.createElement('div');
-                out.id = outputId;
-                out.className = 'postcode-lookup-result';
-                if (form && form.parentNode) form.parentNode.insertBefore(out, form.nextSibling);
-              }
-              return out;
-            }
-            if (form) {
-              form.addEventListener('submit', async (ev) => {
-                ev.preventDefault();
-                const pc = (form.querySelector('input[name="postcode"]') || document.getElementById('postcode')).value || '';
-                const types = ['pouch','satchel','handbag','shoebox','briefcase'];
-                const out = ensureOutput();
-                out.innerHTML = 'Looking up...';
-                try {
-                  const rows = await Promise.all(types.map(async (t) => {
-                    const r = await ship.calculateParcelRate(t, pc, { storePostcode: '6147', storeState: 'WA' });
-                    return { type: t, zone: r.zone, rate: r.rate || r.baseRate || r.totalRate };
-                  }));
-                  out.innerHTML = '<ul>' + rows.map(r=>`<li>${r.type}: ${r.rate==null? 'N/A' : 'AUD $' + Number(r.rate).toFixed(2)} (${r.zone})</li>`).join('') + '</ul>';
-                } catch (err) {
-                  out.textContent = 'Lookup failed';
-                }
-              });
-            }
-          }
-        } catch (err) {
-          console.warn('Shipping estimate helper failed to initialise', err);
+      // Enhance product gallery markup with Utilities to reduce CLS and ensure consistent object-fit
+      try {
+        if (document.querySelector('figure.product-gallery')) {
+          const ph = await import('./modules/product-helpers.js');
+          if (ph && typeof ph.init === 'function') ph.init(document);
         }
       } catch (err) {
-        console.error('Category select init failed', err);
+        console.warn('Product helpers init failed', err);
+      }
+
+      // Initialize featured badges module to insert badges for data-featured products
+      try {
+        const fb = await import('./modules/featured-badges.js');
+        if (fb && typeof fb.initFeaturedBadges === 'function') fb.initFeaturedBadges(document);
+      } catch (err) {
+        console.warn('Featured badges init failed', err);
+      }
+
+      // Initialize lightweight analytics (uses a dedicated worker under the hood)
+      try {
+        await import('./modules/analytics.js');
+        // module auto-initialises itself; nothing to do here
+      } catch (err) {
+        console.warn('Analytics module init failed', err);
+      }
+
+      // Shipping estimate page helper: wire postcode lookup to parcel rate calculator
+      try {
+        if (document.getElementById('postcode') || document.querySelector('.postcode-lookup')) {
+          const ship = await import('./modules/cartStore.js');
+          const form = document.querySelector('.postcode-lookup');
+          const outputId = 'postcode-lookup-result';
+          function ensureOutput(){
+            let out = document.getElementById(outputId);
+            if (!out) {
+              out = document.createElement('div');
+              out.id = outputId;
+              out.className = 'postcode-lookup-result';
+              if (form && form.parentNode) form.parentNode.insertBefore(out, form.nextSibling);
+            }
+            return out;
+          }
+          if (form) {
+            form.addEventListener('submit', async (ev) => {
+              ev.preventDefault();
+              const pc = (form.querySelector('input[name="postcode"]') || document.getElementById('postcode')).value || '';
+              const types = ['pouch','satchel','handbag','shoebox','briefcase'];
+              const out = ensureOutput();
+              out.innerHTML = 'Looking up...';
+              try {
+                const rows = await Promise.all(types.map(async (t) => {
+                  const r = await ship.calculateParcelRate(t, pc, { storePostcode: '6147', storeState: 'WA' });
+                  return { type: t, zone: r.zone, rate: r.rate || r.baseRate || r.totalRate };
+                }));
+                out.innerHTML = '<ul>' + rows.map(r=>`<li>${r.type}: ${r.rate==null? 'N/A' : 'AUD $' + Number(r.rate).toFixed(2)} (${r.zone})</li>`).join('') + '</ul>';
+              } catch (err) {
+                out.textContent = 'Lookup failed';
+              }
+            });
+          }
+        }
+      }
+      catch (err) {
+        console.warn('Shipping estimate helper failed to initialise', err);
       }
     } catch (err) {
       console.error('Deferred module load failed', err);

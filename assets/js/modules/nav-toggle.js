@@ -10,12 +10,12 @@ export function init(document) {
   const navRight = document.querySelector('[data-header-right]') || document.querySelector('.site-nav .nav-right');
   if (!navRight) return;
 
-  // Locate primary nav containers using data attributes first, then legacy IDs/classes
+  // Locate primary nav containers using data attributes first
   const siteNav = document.querySelector('[data-site-nav]') || document.querySelector('.site-nav');
-  const navCenter = document.querySelector('[data-primary-nav]') || document.getElementById('primary-nav-menu');
+  const navCenter = document.querySelector('[data-primary-nav]');
 
   // Accept existing toggle by data attribute first, then id or other legacy JS hook selectors
-  let btn = document.querySelector('[data-nav-toggle]') || document.getElementById('nav-toggle') || document.querySelector('[data-js-nav-toggle], .js-nav-toggle, [data-nav-toggle]');
+  let btn = document.querySelector('[data-nav-toggle]') || document.querySelector('[data-js-nav-toggle], .js-nav-toggle');
   if (!btn) {
     btn = document.createElement('button');
     btn.type = 'button';
@@ -27,12 +27,12 @@ export function init(document) {
     btn.setAttribute('data-nav-toggle', '');
     btn.setAttribute('aria-label', 'Toggle navigation');
     btn.setAttribute('aria-expanded', 'false');
-    // Point aria-controls to existing nav container id when available, otherwise keep legacy id
+    // Point aria-controls to existing nav container id when available
     try {
-      const controlId = (navCenter && navCenter.id) ? navCenter.id : 'primary-nav-menu';
+      const controlId = (navCenter && navCenter.id) ? navCenter.id : '';
       btn.setAttribute('aria-controls', controlId);
     } catch (e) {
-      btn.setAttribute('aria-controls', 'primary-nav-menu');
+      btn.setAttribute('aria-controls', '');
     }
     btn.innerHTML = `
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
@@ -40,13 +40,12 @@ export function init(document) {
       </svg>
     `;
     navRight.insertBefore(btn, navRight.firstElementChild);
-  } else {
-    // If the hook exists but isn't a button, ensure it's keyboard-operable
-    if (btn.tagName !== 'BUTTON') {
-      btn.setAttribute('role', 'button');
-      if (!btn.hasAttribute('tabindex')) btn.setAttribute('tabindex', '0');
-      if (!btn.hasAttribute('data-js-nav-toggle')) btn.setAttribute('data-js-nav-toggle', '');
-    }
+  }
+  // If the hook exists but isn't a button, ensure it's keyboard-operable
+  if (btn.tagName !== 'BUTTON') {
+    btn.setAttribute('role', 'button');
+    if (!btn.hasAttribute('tabindex')) btn.setAttribute('tabindex', '0');
+    if (!btn.hasAttribute('data-js-nav-toggle')) btn.setAttribute('data-js-nav-toggle', '');
   }
   // siteNav and navCenter were resolved earlier via data-attribute-aware selectors
   // Use centralized breakpoint tokens (reads CSS custom properties)

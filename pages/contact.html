@@ -11,7 +11,7 @@
   <meta name="color-scheme" content="light">
 
   <!-- Primary Meta Tags -->
-  <title>Nature's Infusions | Premium Organic Teas &amp; Herbal Remedies</title>
+  <title>Contact &amp; Support - Nature's Infusions | Premium Organic Teas &amp; Herbal Remedies</title>
   <meta name="description"
     content="Perth-based Naturopath's passion project offering certified organic teas and herbal infusions for holistic wellness. Australian-made since 2025.">
   <meta name="keywords"
@@ -158,7 +158,7 @@
           "publisher": { "@id": "https://www.naturesinfusions.com.au/#organization" },
           "potentialAction": {
             "@type": "SearchAction",
-            "target": "https://www.naturesinfusions.com.au/pages/search.html?q={search_term_string}",
+            "target": "https://www.naturesinfusions.com.au/search.html?q={search_term_string}",
             "query-input": "required name=\"search_term_string\""
           }
         }
@@ -184,7 +184,7 @@
         "@context": "https://schema.org",
         "@type": "ContactPage",
         "name": "Contact Nature's Infusions",
-        "url": "https://naturesinfusions.com/pages/contact.html",
+        "url": "https://www.naturesinfusions.com.au/pages/contact.html",
         "contactOption": "TollFree",
         "availableLanguage": "en-AU",
         "telephone": "+1-800-555-0199"
@@ -211,64 +211,16 @@
         </a>
       </div>
 
-      <!-- Improved nav-center: group category and search in a flex wrapper -->
+      <!-- Improved nav-center: group search in a flex wrapper -->
       <div id="primary-nav-menu" class="nav-center" data-primary-nav>
         <div class="nav-center-flex center-row">
-          <!-- Category select -->
-          <nav aria-label="Browse by category" class="category-dropdown">
-            <form action="/pages/store.html" method="get" id="category-nav-form" aria-label="Browse by category">
-              <label for="site-category-select" class="visually-hidden">Select a product category</label>
-              <select id="site-category-select" name="category" aria-label="Product categories">
-                <option value="">All categories</option>
-                <option value="wellness-blends">Wellness Blends</option>
-                <option value="herbal-infusions">Herbal Infusions</option>
-                <option value="black-tea">Black Tea</option>
-                <option value="green-tea">Green Tea</option>
-                <option value="balms">Balms</option>
-                <option value="creams">Creams</option>
-                <option value="selfcare">Self Care</option>
-                <option value="accessories">Accessories</option>
-                <option value="ice-tea">Ice Tea</option>
-                <option value="artisan-blends">Artisan Blends</option>
-              </select>
+          <!-- Removed category select dropdown -->
 
-              <!-- JS-enhanced horizontal tabs will be injected here when available. The select is preserved as the no-JS fallback. -->
-              <div id="category-tabs-container" class="tabs" aria-hidden="true" hidden></div>
-
-              <noscript>
-                <div class="category-fallback">
-                  <ul>
-                    <li><a href="/pages/store/wellness-blends.html">Wellness Blends</a></li>
-                    <li><a href="/pages/store/herbal-infusions.html">Herbal Infusions</a></li>
-                    <li><a href="/pages/store/black-tea.html">Black Tea</a></li>
-                    <li><a href="/pages/store/green-tea.html">Green Tea</a></li>
-                    <li><a href="/pages/store/balms.html">Balms</a></li>
-                    <li><a href="/pages/store/creams.html">Creams</a></li>
-                    <li><a href="/pages/store/selfcare.html">Self Care</a></li>
-                    <li><a href="/pages/store/accessories.html">Accessories</a></li>
-                    <li><a href="/pages/store/ice-tea.html">Ice Tea</a></li>
-                    <li><a href="/pages/store/artisan-blends.html">Artisan Blends</a></li>
-                    <li><a href="/pages/store.html">All categories</a></li>
-                  </ul>
-                </div>
-              </noscript>
-            </form>
-          </nav>
-
-          <!-- Search form (pure HTML5, no JS) -->
-          <form id="site-search-form" class="site-search" action="/search.html" method="get" role="search"
-            aria-label="Search site">
+          <form action="/search.html" method="get" role="search">
             <label for="site-search" class="visually-hidden">Search Nature's Infusions</label>
             <input id="site-search" name="q" type="search" placeholder="Search Nature's Infusions" class="search-box"
               aria-label="Search site">
             <button class="search-icon btn btn--ghost" type="submit" aria-label="Submit search">
-              <!-- inline svg magnifier -->
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true" focusable="false">
-                <path
-                  d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79L20 21.49 21.49 20l-5.99-6zM4 9.5a5.5 5.5 0 1111 0 5.5 5.5 0 01-11 0z"
-                  fill="currentColor"></path>
-              </svg>
             </button>
           </form>
           <!-- Inline comment: All JS removed for pure HTML5 search, OpenSearch compatible. -->
@@ -294,6 +246,16 @@
         </a>
       </div>
     </nav>
+
+    <!-- Categories nav: dynamic list will be populated by assets/js/modules/categories-nav.js -->
+    <nav class="site-header__categories" aria-label="Product categories" role="navigation">
+      <h2 class="sr-only">Product categories</h2>
+      <ul class="site-header__categories-list" role="menubar" aria-hidden="true">
+        <!-- JS will populate list items here. Minimal fallback item for no-JS. -->
+        <li role="none"><a role="menuitem" class="site-header__categories-link" href="/pages/store.html">Show All</a>
+        </li>
+      </ul>
+    </nav>
   </header>
 
   <main id="main-content" class="prose container">
@@ -311,7 +273,7 @@
     <section id="contact-form">
       <h2>Support Request Form</h2>
       <!-- Primary HTML5 Form -->
-      <form action="https://api.naturesinfusions.com.au/contact" method="post" enctype="multipart/form-data">
+      <form action="https://api.naturesinfusions.com.au/contact" method="post">
         <fieldset>
           <legend>Personal Information</legend>
           <div>
@@ -371,9 +333,6 @@
           <p itemprop="description">
             Premium organic teas and herbal remedies — handcrafted in Perth.
           </p>
-          <a class="logo" href="/" aria-label="Nature's Infusions home">
-            <img src="/assets/img/logo.svg" alt="Nature's Infusions logo">
-          </a>
         </div>
       </div>
 

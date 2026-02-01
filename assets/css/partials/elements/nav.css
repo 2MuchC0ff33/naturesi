@@ -4,6 +4,7 @@ This partial contains additional nav rules such as the category dropdown and
 small icon sizing rules that extend the header styles.
 ========================================================================== */
 /* Removed duplicate .site-search .search-icon style. See 04-forms.css for canonical rules. */
+/* Removed dropdown menu styles */
 
 svg[aria-hidden='true'] {
   display: inline-block;

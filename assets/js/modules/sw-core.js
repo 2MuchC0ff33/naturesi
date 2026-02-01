@@ -1,12 +1,15 @@
 'use strict';
 // sw-core.js - core constants and caching helpers for the service worker
 // This file is intended to be loaded by importScripts from the root service worker.
-const VERSION = 'v1.0.0';
-const STATIC_CACHE = `static-${VERSION}`;
-const PAGE_CACHE = `pages-${VERSION}`;
-const API_CACHE = `api-${VERSION}`;
-const IMAGE_CACHE = `img-${VERSION}`;
 
+// Cache version and names
+const VERSION = 'v1.0.0';
+const STATIC_CACHE = 'static-' + VERSION;
+const PAGE_CACHE = 'pages-' + VERSION;
+const API_CACHE = 'api-' + VERSION;
+const IMAGE_CACHE = 'img-' + VERSION;
+
+// Best-effort precache URLs; missing files are ignored during install via catch
 const PRECACHE_URLS = [
   '/',
   '/index.html',
@@ -31,6 +34,14 @@ self.addEventListener('activate', (event) => {
     const keys = await caches.keys();
     await Promise.all(keys.filter(k => ![STATIC_CACHE, PAGE_CACHE, API_CACHE, IMAGE_CACHE].includes(k)).map(k => caches.delete(k)));
     await self.clients.claim();
+    // Enable navigation preload when available to improve navigation latency
+    try {
+      if (self.registration && self.registration.navigationPreload) {
+        await self.registration.navigationPreload.enable();
+      }
+    } catch (e) {
+      // best-effort, do not fail activation on preload errors
+    }
     // Try to flush any queued telemetry on activation (best-effort, only when telemetry is enabled)
     try { if (await telemetryEnabled()) await telemetryFlush(); } catch (e) {}
   })());
@@ -45,14 +56,16 @@ async function cacheFirst(req, cacheName){
   const cached = await cache.match(req);
   if (cached) return cached;
   const res = await fetch(req);
-  if (res && res.ok) cache.put(req, res.clone());
+  if (res && res.ok) {
+    try { await cache.put(req, res.clone()); } catch (e) { /* swallow cache put errors */ }
+  }
   return res;
 }
 
 async function staleWhileRevalidate(req, cacheName){
   const cache = await caches.open(cacheName);
   const cached = await cache.match(req);
-  const networkPromise = fetch(req).then(res => { if (res && res.ok) cache.put(req, res.clone()); return res; }).catch(()=>cached);
+  const networkPromise = fetch(req).then(res => { if (res && res.ok) { try { cache.put(req, res.clone()); } catch (e) {} } return res; }).catch(()=>cached);
   return cached || networkPromise;
 }
 
@@ -62,9 +75,16 @@ async function networkFirstWithTTL(req, cacheName, ttlMs){
   try {
     const res = await fetch(req);
     if (res && res.ok) {
-      const withDate = new Response(res.clone().body, { headers: new Headers([...res.headers, ['sw-cached-at', Date.now().toString()]]) });
-      await cache.put(req, withDate.clone());
-      return withDate;
+      try {
+        const headers = new Headers(res.headers);
+        headers.set('sw-cached-at', Date.now().toString());
+        const withDate = new Response(res.clone().body, { headers });
+        try { await cache.put(req, withDate.clone()); } catch (e) { /* swallow put errors */ }
+        return withDate;
+      } catch (e) {
+        // If cloning/headers fails, fall back to returning the network response
+        return res;
+      }
     }
   } catch (_) {}
   if (cached){
@@ -151,6 +171,24 @@ self.addEventListener('message', (evt) => {
   }
   if (data.type === 'FLUSH_SW_ERRORS') {
     telemetryFlush().catch(()=>{});
+  }
+  // Allow pages to request a prefetch into the page cache
+  if (data.type === 'PREFETCH_PAGE' && data.href) {
+    (async () => {
+      try {
+        const url = new URL(String(data.href), self.location.origin).href;
+        const cache = await caches.open(PAGE_CACHE);
+        const res = await fetch(url, { credentials: 'same-origin' });
+        if (res && res.ok) {
+          try {
+            const headers = new Headers(res.headers);
+            headers.set('sw-cached-at', Date.now().toString());
+            const withDate = new Response(res.clone().body, { headers });
+            await cache.put(url, withDate.clone()).catch(()=>{});
+          } catch (e) { /* ignore clone/cache errors */ }
+        }
+      } catch (e) { /* best-effort prefetch failed */ }
+    })();
   }
 });
 

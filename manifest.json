@@ -186,6 +186,9 @@
     {
       "resources": [
         "/assets/img/*.webp",
+        "/assets/img/icons/*.webp",
+        "/assets/img/*.svg",
+        "/assets/img/*.png",
         "/assets/css/*.css",
         "/assets/js/app.js",
         "/offline.html",
