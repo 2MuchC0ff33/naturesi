@@ -180,6 +180,7 @@
 @import url('partials/components/hero.css');
 @import url('partials/components/reviews.css');
 @import url('partials/components/components.css');
+@import url('partials/components/footer-overrides.css');
 @import url('partials/components/input-fields.css');
 @import url('partials/components/badges.css');
 @import url('partials/components/progress-bars.css');
