@@ -134,22 +134,6 @@ button:focus-visible {
   background-color: color-mix(in srgb, var(--color-accent) 90%, black);
 }
 
-.site-search .search-dropdown {
-  flex: 0 0 130px;
-  box-sizing: border-box;
-  appearance: none;
-  -webkit-appearance: none;
-  border: 1px solid var(--color-border);
-  padding: 0 0.6rem;
-  border-radius: 6px;
-  background: white;
-  font-size: 0.95rem;
-  color: var(--color-text);
-  height: 36px;
-  display: inline-flex;
-  align-items: center;
-}
-
 .site-search .search-box {
   flex: 1 1 auto;
   min-width: 0;
@@ -169,20 +153,6 @@ button:focus-visible {
   color: var(--color-text);
 }
 
-.site-search .search-dropdown option {
-  color: var(--color-text);
-  background: white;
-}
-
-/* Ensure the category select shows black text specifically.
-   Using the ID selector ensures higher specificity so it overrides
-   other theme or utility rules that might make the text appear muted. */
-#site-category-select,
-#site-category-select option {
-  color: #000;
-  /* Explicit black for select and its options */
-}
-
 .site-search .search-icon {
   color: #111;
   display: inline-flex;
@@ -198,7 +168,6 @@ button:focus-visible {
 @media (max-width: 640px) {
 
   /* Mobile-first stacking: canonical search presentation for small screens */
-  .site-nav .site-search,
   .site-search {
     display: flex;
     flex-direction: column;
@@ -206,10 +175,6 @@ button:focus-visible {
     gap: 0.5rem;
     width: 100%;
     max-width: 100%;
-  }
-
-  .site-search .search-dropdown {
-    flex: 0 0 140px;
   }
 
   .site-search .search-box {

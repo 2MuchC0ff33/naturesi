@@ -1,27 +1,59 @@
 {
   "categories": [
-    { "slug": "", "label": "Show All", "href": "/pages/store.html#all" },
+    {
+      "slug": "",
+      "label": "Show All",
+      "href": "/pages/store.html"
+    },
     {
       "slug": "wellness-blends",
       "label": "Wellness Blends",
-      "href": "/pages/store.html#wellness-blends"
+      "href": "/pages/store/wellness-blends.html"
     },
     {
       "slug": "artisan-blends",
       "label": "Artisan Blends",
-      "href": "/pages/store.html#artisan-blends"
+      "href": "/pages/store/artisan-blends.html"
     },
     {
       "slug": "herbal-infusions",
       "label": "Herbal Infusions",
-      "href": "/pages/store.html#herbal-infusions"
+      "href": "/pages/store/herbal-infusions.html"
     },
-    { "slug": "black-tea", "label": "Black Tea", "href": "/pages/store.html#black-tea" },
-    { "slug": "green-tea", "label": "Green Tea", "href": "/pages/store.html#green-tea" },
-    { "slug": "ice-tea", "label": "Ice Tea", "href": "/pages/store.html#ice-tea" },
-    { "slug": "balms", "label": "Herbal Balms", "href": "/pages/store.html#balms" },
-    { "slug": "creams", "label": "Herbal Creams", "href": "/pages/store.html#creams" },
-    { "slug": "selfcare", "label": "Self Care", "href": "/pages/store.html#selfcare" },
-    { "slug": "accessories", "label": "Accessories", "href": "/pages/store.html#accessories" }
+    {
+      "slug": "black-tea",
+      "label": "Black Tea",
+      "href": "/pages/store/black-tea.html"
+    },
+    {
+      "slug": "green-tea",
+      "label": "Green Tea",
+      "href": "/pages/store/green-tea.html"
+    },
+    {
+      "slug": "ice-tea",
+      "label": "Ice Tea",
+      "href": "/pages/store/ice-tea.html"
+    },
+    {
+      "slug": "balms",
+      "label": "Herbal Balms",
+      "href": "/pages/store/balms.html"
+    },
+    {
+      "slug": "creams",
+      "label": "Herbal Creams",
+      "href": "/pages/store/creams.html"
+    },
+    {
+      "slug": "selfcare",
+      "label": "Self Care",
+      "href": "/pages/store/selfcare.html"
+    },
+    {
+      "slug": "accessories",
+      "label": "Accessories",
+      "href": "/pages/store/accessories.html"
+    }
   ]
 }

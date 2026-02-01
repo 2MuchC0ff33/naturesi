@@ -51,6 +51,25 @@ export class CartStore {
   }
 
   async add(item) {
+    if (!item || typeof item !== 'object') {
+      console.error('Invalid item provided to add');
+      return this.cart;
+    }
+    if (!item.id || typeof item.id !== 'string' || item.id.trim() === '') {
+      console.error('Cannot add item without valid SKU (id)');
+      return this.cart;
+    }
+    // Validate price
+    let validPrice = null;
+    if (item.price !== undefined && item.price !== null) {
+      const cleaned = String(item.price).trim().replace(/[^0-9.\-]/g, '').replace(/,/g, '.');
+      const n = Number(cleaned);
+      validPrice = Number.isFinite(n) && n > 0 ? n : null;
+    }
+    if (validPrice === null) {
+      console.error('Cannot add item without valid price');
+      return this.cart;
+    }
     // normalize size to empty string when not provided so storage is consistent
     const size = item.size !== undefined && item.size !== null ? item.size : '';
     const key = `${item.id}::${size}`;
