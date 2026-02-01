@@ -158,7 +158,7 @@
           "publisher": { "@id": "https://www.naturesinfusions.com.au/#organization" },
           "potentialAction": {
             "@type": "SearchAction",
-            "target": "https://www.naturesinfusions.com.au/pages/search.html?q={search_term_string}",
+            "target": "https://www.naturesinfusions.com.au/search.html?q={search_term_string}",
             "query-input": "required name=\"search_term_string\""
           }
         }
@@ -184,7 +184,7 @@
         "@context": "https://schema.org",
         "@type": "ContactPage",
         "name": "Contact Nature's Infusions",
-        "url": "https://naturesinfusions.com/pages/contact.html",
+        "url": "https://www.naturesinfusions.com.au/pages/contact.html",
         "contactOption": "TollFree",
         "availableLanguage": "en-AU",
         "telephone": "+1-800-555-0199"
@@ -216,11 +216,12 @@
         <div class="nav-center-flex center-row">
           <!-- Removed category select dropdown -->
 
-          <label for="site-search" class="visually-hidden">Search Nature's Infusions</label>
-          <input id="site-search" name="q" type="search" placeholder="Search Nature's Infusions" class="search-box"
-            aria-label="Search site">
-          <button class="search-icon btn btn--ghost" type="submit" aria-label="Submit search">
-          </button>
+          <form action="/search.html" method="get" role="search">
+            <label for="site-search" class="visually-hidden">Search Nature's Infusions</label>
+            <input id="site-search" name="q" type="search" placeholder="Search Nature's Infusions" class="search-box"
+              aria-label="Search site">
+            <button class="search-icon btn btn--ghost" type="submit" aria-label="Submit search">
+            </button>
           </form>
           <!-- Inline comment: All JS removed for pure HTML5 search, OpenSearch compatible. -->
         </div>
@@ -272,7 +273,7 @@
     <section id="contact-form">
       <h2>Support Request Form</h2>
       <!-- Primary HTML5 Form -->
-      <form action="https://api.naturesinfusions.com.au/contact" method="post" enctype="multipart/form-data">
+      <form action="https://api.naturesinfusions.com.au/contact" method="post">
         <fieldset>
           <legend>Personal Information</legend>
           <div>

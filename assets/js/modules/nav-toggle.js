@@ -39,6 +39,7 @@ export function init(document) {
         <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
       </svg>
     `;
+    navRight.insertBefore(btn, navRight.firstElementChild);
   }
   // If the hook exists but isn't a button, ensure it's keyboard-operable
   if (btn.tagName !== 'BUTTON') {

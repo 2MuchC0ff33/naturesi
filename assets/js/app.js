@@ -119,7 +119,7 @@ if (typeof document !== 'undefined') {
 
       // Initialize lightweight analytics (uses a dedicated worker under the hood)
       try {
-        const analyticsMod = await import('./modules/analytics.js');
+        await import('./modules/analytics.js');
         // module auto-initialises itself; nothing to do here
       } catch (err) {
         console.warn('Analytics module init failed', err);
@@ -160,9 +160,10 @@ if (typeof document !== 'undefined') {
             });
           }
         }
-        } catch (err) {
-          console.warn('Shipping estimate helper failed to initialise', err);
-        }
+      }
+      catch (err) {
+        console.warn('Shipping estimate helper failed to initialise', err);
+      }
     } catch (err) {
       console.error('Deferred module load failed', err);
     }

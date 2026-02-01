@@ -8,7 +8,7 @@ self.addEventListener('fetch', function (event) {
   // Product data JSON (network-first, keep catalog fresh)
   try {
     if (url.origin === self.location.origin && (url.pathname === '/assets/js/data/products.json' || url.pathname === '/products.json')) {
-      event.respondWith(self.__swHelpers.networkFirstWithTTL(req, 'api-' + 'v1.0.0', 5 * 60 * 1000));
+      event.respondWith(self.__swHelpers.networkFirstWithTTL(req, API_CACHE, 5 * 60 * 1000));
       return;
     }
   } catch (e) { /* ignore */ }
@@ -25,9 +25,8 @@ self.addEventListener('fetch', function (event) {
         if (preload) return preload;
       } catch (e) { /* ignore preload errors */ }
       try {
-        // Use PAGE_CACHE constant from sw-core when available, otherwise fallback to hardcoded pages-<version>
-        const pageCache = typeof PAGE_CACHE !== 'undefined' ? PAGE_CACHE : ('pages-' + 'v1.0.0');
-        return await self.__swHelpers.networkFirstWithTTL(req, pageCache, 0);
+        // Use PAGE_CACHE constant from sw-core
+        return await self.__swHelpers.networkFirstWithTTL(req, PAGE_CACHE, 0);
       } catch (err) {
         try { await self.__swHelpers.logError({ message: 'navigation-fetch-failed', url: req.url, meta: { error: String(err) } }); } catch(_){ }
         return caches.match('/offline.html');
@@ -38,20 +37,20 @@ self.addEventListener('fetch', function (event) {
 
   // Static assets
   if (req.destination === 'style' || req.destination === 'script' || req.destination === 'font') {
-    event.respondWith(self.__swHelpers.cacheFirst(req, 'static-' + 'v1.0.0'));
+    event.respondWith(self.__swHelpers.cacheFirst(req, STATIC_CACHE));
     return;
   }
 
   // Images: cache-first
   if (req.destination === 'image') {
-    event.respondWith(self.__swHelpers.cacheFirst(req, 'img-' + 'v1.0.0'));
+    event.respondWith(self.__swHelpers.cacheFirst(req, IMAGE_CACHE));
     return;
   }
 
   // API JSON endpoints
   if (url.pathname.startsWith('/api/')) {
     const dynamic = /product-updates|inventory|prices/.test(url.pathname);
-    event.respondWith(self.__swHelpers.networkFirstWithTTL(req, 'api-' + 'v1.0.0', dynamic ? 0 : 5 * 60 * 1000));
+    event.respondWith(self.__swHelpers.networkFirstWithTTL(req, API_CACHE, dynamic ? 0 : 5 * 60 * 1000));
     return;
   }
 

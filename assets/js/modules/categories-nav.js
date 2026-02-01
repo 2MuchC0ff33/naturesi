@@ -28,7 +28,7 @@ function buildCategoriesList(container, categories) {
     li.appendChild(a);
     container.appendChild(li);
   });
-  attachPrefetchAndClickHandlers(container);
+  attachPrefetchHandlers(container);
 }
 
 // Send a prefetch request message to the service worker (best-effort)
@@ -45,8 +45,8 @@ function sendPrefetchMessage(href){
   } catch (e) {}
 }
 
-// Attach hover/focus prefetch and safe click-fallback to anchors
-function attachPrefetchAndClickHandlers(container){
+// Attach hover/focus prefetch to anchors
+function attachPrefetchHandlers(container){
   const links = Array.from(container.querySelectorAll('a.site-header__categories-link'));
   const timers = new Map();
   links.forEach(a => {
@@ -62,19 +62,6 @@ function attachPrefetchAndClickHandlers(container){
     a.addEventListener('focus', schedule, { passive: true });
     a.addEventListener('mouseleave', cancel, { passive: true });
     a.addEventListener('blur', cancel, { passive: true });
-
-    // Click fallback: ensure normal left-click navigation performs a full navigation
-    a.addEventListener('click', (ev) => {
-      // Respect modifier keys and non-left clicks (allow open-in-new-tab, etc.)
-      if (ev.defaultPrevented) return;
-      if (ev.button !== 0) return;
-      if (ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.altKey) return;
-      // Force a full navigation to the href to avoid SPA-like history issues
-      try {
-        ev.preventDefault();
-        window.location.href = href;
-      } catch (e) { /* ignore */ }
-    }, { passive: false });
   });
 }
 

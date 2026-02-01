@@ -1,12 +1,15 @@
 'use strict';
 // sw-core.js - core constants and caching helpers for the service worker
 // This file is intended to be loaded by importScripts from the root service worker.
-const VERSION = 'v1.0.0';
-const STATIC_CACHE = `static-${VERSION}`;
-const PAGE_CACHE = `pages-${VERSION}`;
-const API_CACHE = `api-${VERSION}`;
-const IMAGE_CACHE = `img-${VERSION}`;
 
+// Cache version and names
+const VERSION = 'v1.0.0';
+const STATIC_CACHE = 'static-' + VERSION;
+const PAGE_CACHE = 'pages-' + VERSION;
+const API_CACHE = 'api-' + VERSION;
+const IMAGE_CACHE = 'img-' + VERSION;
+
+// Best-effort precache URLs; missing files are ignored during install via catch
 const PRECACHE_URLS = [
   '/',
   '/index.html',
@@ -17,15 +20,6 @@ const PRECACHE_URLS = [
   '/assets/js/data/products.json',
   '/assets/img/profile-placeholder-256x256.svg'
 ];
-
-// Add critical worker scripts to the precache so workers can be created offline
-try {
-  // Feature-detect: only add if the paths exist at runtime (best-effort)
-  PRECACHE_URLS.push('/assets/js/workers/price-calculator.worker.js');
-  PRECACHE_URLS.push('/assets/js/workers/payment-tokenizer.worker.js');
-  PRECACHE_URLS.push('/assets/js/workers/search-filter.worker.js');
-  PRECACHE_URLS.push('/assets/js/shared/product-cache.shared-worker.js');
-} catch (e) { /* ignore */ }
 
 self.addEventListener('install', (event) => {
   event.waitUntil((async () => {

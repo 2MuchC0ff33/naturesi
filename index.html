@@ -239,11 +239,11 @@
     </nav>
 
     <!-- Categories nav: dynamic list will be populated by assets/js/modules/categories-nav.js -->
-    <nav class="site-header__categories" aria-label="Product categories" role="navigation">
+    <nav class="site-header__categories" aria-label="Product categories">
       <h2 class="sr-only">Product categories</h2>
-      <ul class="site-header__categories-list" role="menubar" aria-hidden="true">
+      <ul class="site-header__categories-list">
         <!-- JS will populate list items here. Minimal fallback item for no-JS. -->
-        <li role="none"><a role="menuitem" class="site-header__categories-link" href="/pages/store.html">Show All</a>
+        <li><a class="site-header__categories-link" href="/pages/store.html">Show All</a>
         </li>
       </ul>
     </nav>
@@ -274,7 +274,7 @@
               <a href="/pages/store.html" id="shop-now" class="button btn--primary" itemprop="url">Shop Our Premium
                 Organic Teas and
                 Herbal Infusions Online</a>
-              <span role="separator" aria-hidden="true">or</span>
+              <span role="separator">or</span>
               <a href="/pages/stockists.html" id="find-stockists" class="button btn--ghost" itemprop="url">Find a Local
                 Stockist Near
                 You</a>
@@ -293,9 +293,9 @@
           </p>
         </header>
 
-        <div id="product-grid-featured" class="product-grid" aria-live="polite" role="list">
+        <div id="product-grid-featured" class="product-grid" aria-live="polite">
           <article class="product product-card" data-featured="true" tabindex="0" itemprop="itemListElement" itemscope
-            itemtype="https://schema.org/Product" role="listitem">
+            itemtype="https://schema.org/Product">
             <figure class="product-card__media">
               <picture>
                 <source srcset="assets/img/enchantedturmeric2.webp" type="image/webp" />
@@ -304,13 +304,13 @@
               </picture>
               <figcaption>
                 <h3 itemprop="name">Enchanted Turmeric Tea</h3>
-                <div class="product-badges" aria-hidden="false">
-                  <span class="badge badge--organic" aria-hidden="true">Certified organic</span>
+                <div class="product-badges">
+                  <span class="badge badge--organic">Certified organic</span>
                   <span class="sr-only">Certified organic</span>
-                  <span class="badge badge--origin" aria-hidden="true">Australian made</span>
+                  <span class="badge badge--origin">Australian made</span>
                   <span class="sr-only">Australian made</span>
                 </div>
-                <span class="product-card__badge" aria-hidden="true">Featured</span>
+                <span class="product-card__badge">Featured</span>
                 <details>
                   <summary>Product Details</summary>
                   <p itemprop="description">
@@ -341,7 +341,7 @@
           </article>
 
           <article class="product product-card" data-featured="true" tabindex="0" itemprop="itemListElement" itemscope
-            itemtype="https://schema.org/Product" role="listitem">
+            itemtype="https://schema.org/Product">
             <figure class="product-card__media">
               <picture>
                 <source srcset="assets/img/calmingtea.webp" type="image/webp" />
@@ -350,13 +350,13 @@
               </picture>
               <figcaption>
                 <h3 itemprop="name">Calming Garden Tea</h3>
-                <div class="product-badges" aria-hidden="false">
-                  <span class="badge badge--organic" aria-hidden="true">Certified organic</span>
+                <div class="product-badges">
+                  <span class="badge badge--organic">Certified organic</span>
                   <span class="sr-only">Certified organic</span>
-                  <span class="badge badge--origin" aria-hidden="true">Australian made</span>
+                  <span class="badge badge--origin">Australian made</span>
                   <span class="sr-only">Australian made</span>
                 </div>
-                <span class="product-card__badge" aria-hidden="true">Featured</span>
+                <span class="product-card__badge">Featured</span>
                 <details>
                   <summary>Product Details</summary>
                   <p itemprop="description">
@@ -387,7 +387,7 @@
           </article>
 
           <article class="product product-card" data-featured="true" tabindex="0" itemprop="itemListElement" itemscope
-            itemtype="https://schema.org/Product" role="listitem">
+            itemtype="https://schema.org/Product">
             <figure class="product-card__media">
               <picture>
                 <source srcset="/assets/img/sleepingsoundly1.webp" type="image/webp" />
@@ -396,13 +396,13 @@
               </picture>
               <figcaption>
                 <h3 itemprop="name">Sleeping Soundly Tea</h3>
-                <div class="product-badges" aria-hidden="false">
-                  <span class="badge badge--organic" aria-hidden="true">Certified organic</span>
+                <div class="product-badges">
+                  <span class="badge badge--organic">Certified organic</span>
                   <span class="sr-only">Certified organic</span>
-                  <span class="badge badge--origin" aria-hidden="true">Australian made</span>
+                  <span class="badge badge--origin">Australian made</span>
                   <span class="sr-only">Australian made</span>
                 </div>
-                <span class="product-card__badge" aria-hidden="true">Featured</span>
+                <span class="product-card__badge">Featured</span>
                 <details>
                   <summary>Product Details</summary>
                   <p itemprop="description">
@@ -609,7 +609,6 @@
         <button type="button" class="btn btn--primary" data-modal-close>OK, got it</button>
       </footer>
     </div>
-  </dialog>
   </dialog>
 
   <!-- Categories nav script is loaded via /assets/js/app.js; no direct include needed here -->
