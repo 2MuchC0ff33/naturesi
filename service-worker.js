@@ -57,16 +57,5 @@ if (!decodedBasePath.startsWith(expectedBaseDir) || !isSafePath(decodedBasePath)
   }
 }
 
-// Cache canonical products.json with network-first and TTL to keep catalog fresh
-self.addEventListener('fetch', (event) => {
-  const req = event.request;
-  try {
-    const url = new URL(req.url);
-    if (url.origin === self.location.origin && url.pathname === '/products.json'){
-      event.respondWith(networkFirstWithTTL(req, API_CACHE, 5 * 60 * 1000));
-      return;
-    }
-  } catch (e) {
-    // ignore URL parsing errors and fallback to default handlers
-  }
-});
+// Note: specific resource handlers (including product JSON) are implemented
+// in the modular handlers imported above (`sw-handlers.js`).

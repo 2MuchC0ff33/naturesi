@@ -10,6 +10,8 @@ import './modules/products-guard.js';
 import './modules/structured-data-fix.js';
 import './modules/search-bootstrap.js';
 import './modules/search-autocomplete.js';
+// Categories nav (populates header categories row)
+import './modules/categories-nav.js';
 
 if (
   typeof window !== 'undefined' &&

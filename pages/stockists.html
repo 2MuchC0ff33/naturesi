@@ -235,6 +235,16 @@
         </a>
       </div>
     </nav>
+
+    <!-- Categories nav: dynamic list will be populated by assets/js/modules/categories-nav.js -->
+    <nav class="site-header__categories" aria-label="Product categories" role="navigation">
+      <h2 class="sr-only">Product categories</h2>
+      <ul class="site-header__categories-list" role="menubar" aria-hidden="true">
+        <!-- JS will populate list items here. Minimal fallback item for no-JS. -->
+        <li role="none"><a role="menuitem" class="site-header__categories-link" href="/pages/store.html">Show All</a>
+        </li>
+      </ul>
+    </nav>
   </header>
 
   <nav id="stockists-breadcrumb" aria-label="Breadcrumb">

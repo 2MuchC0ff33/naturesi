@@ -18,6 +18,15 @@ const PRECACHE_URLS = [
   '/assets/img/profile-placeholder-256x256.svg'
 ];
 
+// Add critical worker scripts to the precache so workers can be created offline
+try {
+  // Feature-detect: only add if the paths exist at runtime (best-effort)
+  PRECACHE_URLS.push('/assets/js/workers/price-calculator.worker.js');
+  PRECACHE_URLS.push('/assets/js/workers/payment-tokenizer.worker.js');
+  PRECACHE_URLS.push('/assets/js/workers/search-filter.worker.js');
+  PRECACHE_URLS.push('/assets/js/shared/product-cache.shared-worker.js');
+} catch (e) { /* ignore */ }
+
 self.addEventListener('install', (event) => {
   event.waitUntil((async () => {
     const cache = await caches.open(STATIC_CACHE);
@@ -31,6 +40,14 @@ self.addEventListener('activate', (event) => {
     const keys = await caches.keys();
     await Promise.all(keys.filter(k => ![STATIC_CACHE, PAGE_CACHE, API_CACHE, IMAGE_CACHE].includes(k)).map(k => caches.delete(k)));
     await self.clients.claim();
+    // Enable navigation preload when available to improve navigation latency
+    try {
+      if (self.registration && self.registration.navigationPreload) {
+        await self.registration.navigationPreload.enable();
+      }
+    } catch (e) {
+      // best-effort, do not fail activation on preload errors
+    }
     // Try to flush any queued telemetry on activation (best-effort, only when telemetry is enabled)
     try { if (await telemetryEnabled()) await telemetryFlush(); } catch (e) {}
   })());
@@ -45,14 +62,16 @@ async function cacheFirst(req, cacheName){
   const cached = await cache.match(req);
   if (cached) return cached;
   const res = await fetch(req);
-  if (res && res.ok) cache.put(req, res.clone());
+  if (res && res.ok) {
+    try { await cache.put(req, res.clone()); } catch (e) { /* swallow cache put errors */ }
+  }
   return res;
 }
 
 async function staleWhileRevalidate(req, cacheName){
   const cache = await caches.open(cacheName);
   const cached = await cache.match(req);
-  const networkPromise = fetch(req).then(res => { if (res && res.ok) cache.put(req, res.clone()); return res; }).catch(()=>cached);
+  const networkPromise = fetch(req).then(res => { if (res && res.ok) { try { cache.put(req, res.clone()); } catch (e) {} } return res; }).catch(()=>cached);
   return cached || networkPromise;
 }
 
@@ -62,9 +81,16 @@ async function networkFirstWithTTL(req, cacheName, ttlMs){
   try {
     const res = await fetch(req);
     if (res && res.ok) {
-      const withDate = new Response(res.clone().body, { headers: new Headers([...res.headers, ['sw-cached-at', Date.now().toString()]]) });
-      await cache.put(req, withDate.clone());
-      return withDate;
+      try {
+        const headers = new Headers(res.headers);
+        headers.set('sw-cached-at', Date.now().toString());
+        const withDate = new Response(res.clone().body, { headers });
+        try { await cache.put(req, withDate.clone()); } catch (e) { /* swallow put errors */ }
+        return withDate;
+      } catch (e) {
+        // If cloning/headers fails, fall back to returning the network response
+        return res;
+      }
     }
   } catch (_) {}
   if (cached){
@@ -151,6 +177,24 @@ self.addEventListener('message', (evt) => {
   }
   if (data.type === 'FLUSH_SW_ERRORS') {
     telemetryFlush().catch(()=>{});
+  }
+  // Allow pages to request a prefetch into the page cache
+  if (data.type === 'PREFETCH_PAGE' && data.href) {
+    (async () => {
+      try {
+        const url = new URL(String(data.href), self.location.origin).href;
+        const cache = await caches.open(PAGE_CACHE);
+        const res = await fetch(url, { credentials: 'same-origin' });
+        if (res && res.ok) {
+          try {
+            const headers = new Headers(res.headers);
+            headers.set('sw-cached-at', Date.now().toString());
+            const withDate = new Response(res.clone().body, { headers });
+            await cache.put(url, withDate.clone()).catch(()=>{});
+          } catch (e) { /* ignore clone/cache errors */ }
+        }
+      } catch (e) { /* best-effort prefetch failed */ }
+    })();
   }
 });
 
