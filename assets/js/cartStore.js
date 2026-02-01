@@ -38,12 +38,9 @@
       const idx = await window.PricingIndex.load().then(()=>window.PricingIndex.get());
       const product = idx ? idx[String(raw && (raw.sku || raw.id) || '')] : null;
       const item = normaliseItem(raw, product);
-      if (!item.sku) return;
-      if (item.price == null) { alert('This item is currently unavailable for purchase.'); return; }
-      const next = { items: (cur.items || []).slice() };
-      const existing = next.items.find(x => x.sku === item.sku);
-      if (existing) existing.qty += item.qty; else next.items.push(item);
-      setLocal(next);
+      const updatedCart = { items: [...cur.items, item] };
+      await window.CartStore.set(updatedCart);
+      listeners.forEach((fn)=>fn(updatedCart));
     },
     remove: (sku)=>{ const cur = getLocal(); const next = { items: (cur.items||[]).filter(x => x.sku !== String(sku)) }; setLocal(next); },
     clear: ()=>{ setLocal({ items: [] }); }
