@@ -43,6 +43,11 @@
       display: none;
     } */
 
+    /* Force nav-center to stay visible on mobile */
+    .site-nav .nav-center {
+      display: flex !important;
+    }
+
     html.no-js .site-nav .nav-center {
       display: flex;
     }

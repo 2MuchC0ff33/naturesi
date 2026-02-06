@@ -130,6 +130,12 @@ Core header bar, logo treatment and colour gradient live here.
   height: 36px;
 }
 
+/* Improve mobile touch interactions */
+.site-nav a,
+.site-nav button {
+  touch-action: manipulation;
+}
+
 .nav-right {
   flex: 1 1 160px;
   justify-content: flex-end;
@@ -401,6 +407,9 @@ body.nav-open {
     grid-template-columns: 1fr;
     align-items: start;
     gap: var(--space-xs);
+    min-height: 36px;
+    padding: 0.15rem var(--space-sm);
+    padding-top: calc(0.15rem + env(safe-area-inset-top));
   }
 
   /* Order the regions so logo stays top, centre controls next, actions last */
