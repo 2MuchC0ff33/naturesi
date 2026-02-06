@@ -38,9 +38,10 @@
 
   /* Hide center nav by default on mobile, show only for no-JS users */
   @media (max-width: 640px) {
-    .site-nav .nav-center {
+    /* Removed display: none to keep nav-center visible on mobile */
+    /* .site-nav .nav-center {
       display: none;
-    }
+    } */
 
     html.no-js .site-nav .nav-center {
       display: flex;
