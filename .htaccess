@@ -27,6 +27,10 @@ AddType image/x-icon .ico
 AddType application/javascript .js
 AddType application/json .json
 
+<FilesMatch "\.js$">
+  Header set Content-Type application/javascript
+</FilesMatch>
+
 # --- Gzip Compression ---
 <IfModule mod_deflate.c>
   AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
