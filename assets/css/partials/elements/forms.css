@@ -204,8 +204,10 @@ button:focus-visible {
   }
 
   .site-search .search-box {
-    height: 32px;
-    padding: 0 0.5rem;
+    height: 40px;
+    /* Increased from 32px to match button height for balanced alignment */
+    padding: 0 0.75rem;
+    /* Increased padding for less cramped appearance */
     border-radius: 4px;
     flex: 1 1 auto;
     min-width: 0;

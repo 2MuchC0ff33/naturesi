@@ -10,6 +10,8 @@ Core header bar, logo treatment and colour gradient live here.
       color-mix(in srgb, var(--color-accent) 60%, black 40%));
   color: white;
   border-bottom: 1px solid color-mix(in srgb, var(--color-accent) 20%, black);
+  position: relative;
+  /* Positioning context for skip-link to prevent overlap with nav bar */
 }
 
 /* Ensure the native category select inside the header uses readable
@@ -462,12 +464,7 @@ body.nav-open {
   .site-nav .cart-option {
     flex: 0 0 auto;
   }
-
-  /* Increase header-height variable used by the skip-link so the skip link is placed correctly */
-  #site-header {
-    --header-height: 6rem;
-    /* tuned for stacked header height on small screens */
-  }
+}
 }
 
 /* Small-screen overflow safeguards: prevent horizontal scrolling caused by
@@ -548,8 +545,6 @@ navigation elements in a single compact row while maintaining accessibility.
     gap: var(--space-xs);
     min-height: 48px;
     padding: 0.25rem var(--space-sm);
-    /* Increase header height for skip link positioning below categories nav */
-    --header-height: 5rem;
   }
 
   /* Reset grid-specific properties that conflict with flexbox */

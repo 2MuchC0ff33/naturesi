@@ -28,7 +28,8 @@ Focus outlines, skip links and visually-hidden utilities live here.
 .skip-link:focus-visible {
   position: absolute;
   left: var(--space-md);
-  top: calc(var(--header-height, 3.75rem));
+  top: 100%;
+  /* Position below header to prevent overlap with nav bar */
   outline: 2px solid color-mix(in srgb, var(--color-accent) 80%, white);
   background: var(--color-accent);
   color: #fff;
@@ -39,7 +40,8 @@ Focus outlines, skip links and visually-hidden utilities live here.
 @media (max-width: 640px) {
   .skip-link {
     left: calc(var(--space-xs) + 0.25rem);
-    top: calc(var(--header-height, 3.25rem));
+    top: 100%;
+    /* Position below header to prevent overlap with nav bar */
     font-size: 0.72rem;
   }
 }
