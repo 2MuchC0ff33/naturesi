@@ -24,6 +24,8 @@ AddType image/webp .webp
 AddType text/css .css
 AddType image/png .png
 AddType image/x-icon .ico
+AddType application/javascript .js
+AddType application/json .json
 
 # --- Gzip Compression ---
 <IfModule mod_deflate.c>
