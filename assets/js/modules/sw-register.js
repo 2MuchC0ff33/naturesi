@@ -7,24 +7,7 @@ export function registerServiceWorker() {
     (window.location.hostname === 'localhost' || window.location.protocol === 'https:')
   ) {
     window.addEventListener('load', () => {
-        // Clear caches only in explicit dev contexts:
-      // - localhost, or use ?clear_cache=1 or add #clear-cache to the URL
-      if (
-        'caches' in window &&
-        (window.location.hostname === 'localhost' ||
-          /[?&]clear_cache=1/.test(window.location.search) ||
-          /#clear-cache/.test(window.location.hash))
-      ) {
-        caches.keys().then((keys) => {
-          keys.forEach((key) => {
-            caches.delete(key).then((ok) => {
-              if (ok) console.log('Cleared cache:', key);
-            });
-          });
-        });
-      }
-
-      // Register the no-cache service worker
+      // Register the service worker
       navigator.serviceWorker
         .register('/service-worker.js')
         .then((registration) => {

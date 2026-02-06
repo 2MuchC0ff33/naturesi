@@ -18,18 +18,17 @@
 </IfModule>
 
 # --- MIME Types for SVG, WebP, CSS, PNG, ICO ---
-AddType text/html .html
-AddType image/svg+xml .svg
-AddType image/webp .webp
-AddType text/css .css
-AddType image/png .png
-AddType image/x-icon .ico
 AddType application/javascript .js
 AddType application/json .json
 
 <FilesMatch "\.js$">
   Header set Content-Type application/javascript
+  ForceType application/javascript
 </FilesMatch>
+
+<Files "cartUI.js">
+  ForceType application/javascript
+</Files>
 
 # --- Gzip Compression ---
 <IfModule mod_deflate.c>
