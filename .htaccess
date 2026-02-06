@@ -7,7 +7,7 @@
   Header set X-Frame-Options "SAMEORIGIN"
   Header set X-XSS-Protection "1; mode=block"
   Header set Referrer-Policy "strict-origin-when-cross-origin"
-  Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.paypal.com https://www.sandbox.paypal.com https://www.paypalobjects.com; script-src-elem 'self' https://www.paypal.com https://www.sandbox.paypal.com https://www.paypalobjects.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://www.paypal.com https://www.sandbox.paypal.com https://www.paypalobjects.com; form-action 'self' https://www.paypal.com https://www.sandbox.paypal.com mailto:; upgrade-insecure-requests;"
+  Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.paypal.com https://www.sandbox.paypal.com https://www.paypalobjects.com; script-src-elem 'self' 'sha256-QwXwNPh43Mi79vmf0GEgGOOqdsubXLdpx8U/GiCdfi8=' https://static.cloudflareinsights.com https://www.paypal.com https://www.sandbox.paypal.com https://www.paypalobjects.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://www.paypal.com https://www.sandbox.paypal.com https://www.paypalobjects.com; form-action 'self' https://www.paypal.com https://www.sandbox.paypal.com mailto:; upgrade-insecure-requests;"
   # Additional security headers (enable when ready)
   # Permissions-Policy restricts device features (adjust as needed)
   Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
