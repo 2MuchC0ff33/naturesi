@@ -548,8 +548,8 @@ navigation elements in a single compact row while maintaining accessibility.
     gap: var(--space-xs);
     min-height: 48px;
     padding: 0.25rem var(--space-sm);
-    /* Reduce header height variable for skip link positioning */
-    --header-height: 3rem;
+    /* Increase header height for skip link positioning below categories nav */
+    --header-height: 5rem;
   }
 
   /* Reset grid-specific properties that conflict with flexbox */
@@ -580,7 +580,7 @@ navigation elements in a single compact row while maintaining accessibility.
     flex: 1 1 auto;
     width: auto;
     gap: 0;
-    justify-content: stretch;
+    /* Removed invalid justify-content: stretch */
   }
 
   .nav-center-flex {
@@ -598,6 +598,8 @@ navigation elements in a single compact row while maintaining accessibility.
     width: 100%;
     max-width: none;
     flex: 1 1 auto;
+    /* Remove centering margin that causes layout shift */
+    margin: 0;
   }
 
   /* Cart: compact layout, hide text to save space */
