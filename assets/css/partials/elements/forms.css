@@ -191,3 +191,30 @@ button:focus-visible {
     box-sizing: border-box;
   }
 }
+
+/* Compact mobile search styles for very small screens */
+@media (max-width: 480px) {
+  .site-search {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.25rem;
+    width: 100%;
+    max-width: none;
+  }
+
+  .site-search .search-box {
+    height: 32px;
+    padding: 0 0.5rem;
+    border-radius: 4px;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .site-search .search-icon {
+    min-width: 40px;
+    min-height: 40px;
+    padding: 0.25rem;
+    border-radius: 4px;
+  }
+}

@@ -530,3 +530,113 @@ body.nav-open {
   align-items: stretch !important;
   width: 100% !important;
 }
+
+/* ==========================================================================
+Compact mobile header layout
+Horizontal flexbox layout for very small screens (≤480px) to fit all
+navigation elements in a single compact row while maintaining accessibility.
+========================================================================== */
+
+@media (max-width: 480px) {
+
+  /* Switch from stacked grid to horizontal flexbox for compact layout */
+  .site-nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-xs);
+    min-height: 48px;
+    padding: 0.25rem var(--space-sm);
+    /* Reduce header height variable for skip link positioning */
+    --header-height: 3rem;
+  }
+
+  /* Reset grid-specific properties that conflict with flexbox */
+  .site-nav .nav-left,
+  .site-nav .nav-center,
+  .site-nav .nav-right {
+    order: unset;
+    flex: 0 0 auto;
+    white-space: nowrap;
+    min-width: unset;
+  }
+
+  /* Logo: reduce size and constrain width */
+  .site-nav .logo img {
+    max-height: 36px;
+    width: auto;
+    height: auto;
+  }
+
+  .site-nav .logo {
+    padding: 0.25rem 0.5rem;
+    min-width: 40px;
+    min-height: 40px;
+  }
+
+  /* Search form: horizontal layout with input taking remaining space */
+  .nav-center {
+    flex: 1 1 auto;
+    width: auto;
+    gap: 0;
+    justify-content: stretch;
+  }
+
+  .nav-center-flex {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.25rem;
+    width: 100%;
+  }
+
+  .site-search {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.25rem;
+    width: 100%;
+    max-width: none;
+    flex: 1 1 auto;
+  }
+
+  /* Cart: compact layout, hide text to save space */
+  .nav-right {
+    flex: 0 0 auto;
+    justify-content: flex-end;
+    margin-top: 0;
+  }
+
+  .cart-option {
+    padding: 0.25rem;
+    min-width: 40px;
+    min-height: 40px;
+    gap: 0.25rem;
+  }
+
+  .cart-text {
+    display: none;
+  }
+
+  /* Ensure search and cart buttons maintain touch targets */
+  .site-nav .search-icon,
+  .site-nav .cart-option {
+    min-width: 40px;
+    min-height: 40px;
+    padding: 0.5rem;
+    border-radius: 4px;
+  }
+
+  /* Prevent overflow on very small screens */
+  .site-nav {
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+
+  .site-nav .nav-left,
+  .site-nav .nav-center,
+  .site-nav .nav-right {
+    min-width: 0;
+    flex-shrink: 1;
+  }
+}
