@@ -35,7 +35,7 @@ API: `.responsive-media` (images), `.media`, `.media__img`, `.media__body`,
   flex: 1 1 auto;
 }
 
-@media (min-width: var(--bp-md)) {
+@media (min-width: 900px) {
   .media {
     flex-direction: row;
     align-items: flex-start;
@@ -56,7 +56,7 @@ API: `.responsive-media` (images), `.media`, `.media__img`, `.media__body`,
   flex-direction: column-reverse;
 }
 
-@media (min-width: var(--bp-md)) {
+@media (min-width: 900px) {
   .media--reverse {
     flex-direction: row-reverse;
   }
