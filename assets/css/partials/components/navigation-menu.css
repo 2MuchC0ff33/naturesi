@@ -36,10 +36,14 @@
     display: inline-flex;
   }
 
-  /* When JS is enabled hide center nav until open on mobile */
+  /* Hide center nav by default on mobile, show only for no-JS users */
   @media (max-width: 640px) {
-    html:not(.no-js) .site-nav .nav-center {
+    .site-nav .nav-center {
       display: none;
+    }
+
+    html.no-js .site-nav .nav-center {
+      display: flex;
     }
   }
 

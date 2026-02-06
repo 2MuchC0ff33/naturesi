@@ -24,13 +24,14 @@ if (
 
 // Defer browser-only startup work behind a document guard so tests can import this module
 if (typeof document !== 'undefined') {
-  // Remove the `no-js` HTML class early so CSS can apply JS-enabled styles
-  // while still allowing HTML-only users to retain visible navigation.
-  try {
-    document.documentElement.classList.remove('no-js');
-  } catch (e) {
-    /* ignore in non-browser contexts */
-  }
+  // Defer no-js class removal until DOMContentLoaded to ensure CSS is applied first
+  document.addEventListener('DOMContentLoaded', () => {
+    try {
+      document.documentElement.classList.remove('no-js');
+    } catch (e) {
+      /* ignore in non-browser contexts */
+    }
+  });
 
   (async function start() {
     try {
