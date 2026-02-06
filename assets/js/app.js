@@ -12,6 +12,7 @@ import './modules/search-bootstrap.js';
 import './modules/search-autocomplete.js';
 // Categories nav (populates header categories row)
 import './modules/categories-nav.js';
+import './modules/structured-data.js';
 
 if (
   typeof window !== 'undefined' &&
