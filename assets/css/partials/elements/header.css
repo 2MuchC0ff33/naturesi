@@ -336,13 +336,7 @@ Core header bar, logo treatment and colour gradient live here.
   }
 
   /* `.nav-center` small-screen behaviours (no-js hide + open-state overlays) moved to component partial */
-
-  top: calc(100% + 0.4rem);
-  background: var(--color-background);
-  padding: var(--space-sm);
-  box-shadow: var(--shadow-md);
-  border-radius: 8px;
-  z-index: 2000;
+  /* Removed orphaned properties as they were relocated to partials/components/navigation-menu.css */
 }
 
 /* Increase hit areas for interactive elements inside the open nav */
@@ -365,7 +359,6 @@ body.nav-open {
   overflow: hidden;
   touch-action: none;
   -webkit-overflow-scrolling: auto;
-}
 }
 
 @media (max-width: 640px) {
@@ -513,7 +506,7 @@ body.nav-open {
      removed to avoid conflicting specificity. If a header-only layout tweak is
      required in the future, add a tightly-scoped rule here with a clear
      comment explaining why it cannot live in `partials/elements/forms.css`. */
-  min-width: 0 !important;
+  /* Removed orphaned min-width property as it duplicates the above rule */
 }
 
 /* Ensure any inline icon/button doesn't add extra width when stacked */
