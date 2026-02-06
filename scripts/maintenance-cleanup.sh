@@ -1,10 +1,10 @@
 #!/bin/sh
 
-# filepath: /home/galloa/GitHub/personal/naturesi/maintenance-cleanup.sh
+# filepath: /home/galloa/GitHub/personal/naturesi/scripts/maintenance-cleanup.sh
 
 # Aggressive Git Repository Maintenance Script (POSIX sh)
 # This script combines state checks with the optimal sequential order of maintenance commands
-# in a temporary branch workflow to isolate changes and preserve main branch integrity.
+# in a temporary branch workflow to isolate changes and preserve the original branch integrity.
 # Run this on a clean working tree to avoid data loss. Test thoroughly post-merge.
 # Accessibility note: This script uses plain text output for screen readers; no visual elements.
 # Performance: Commands are sequenced to minimize redundant work and optimize for common cases.
@@ -13,17 +13,20 @@
 
 set -e  # Exit on any error for safety (POSIX compliant)
 
-echo "Starting aggressive Git maintenance workflow..."
+# Detect current branch for dynamic handling
+ORIGINAL_BRANCH=$(git branch --show-current)
 
-# Step 1: Initial checks on main branch before starting
-echo "Step 1: Checking repository state on main branch..."
+echo "Starting aggressive Git maintenance workflow on branch '$ORIGINAL_BRANCH'..."
+
+# Step 1: Initial checks on original branch before starting
+echo "Step 1: Checking repository state on $ORIGINAL_BRANCH branch..."
 git status
 git fsck --full
 git log --oneline -10
 echo "Note any uncommitted changes or issues above. If present, commit or stash them before proceeding."
 
 # Step 2: Create and switch to temporary maintenance branch
-echo "Step 2: Creating temporary maintenance branch..."
+echo "Step 2: Creating temporary maintenance branch from $ORIGINAL_BRANCH..."
 git checkout -b maintenance-temp
 git branch  # Confirm branch switch
 git status  # Re-check status on new branch
@@ -45,15 +48,15 @@ git fsck --full --strict --unreachable  # Integrity check
 git status
 git log --oneline -5  # Review changes (should show maintenance if any)
 
-# Step 5: Merge squash back to main and clean up
-echo "Step 5: Merging squash to main and cleaning up..."
-git checkout main
+# Step 5: Merge squash back to original branch and clean up
+echo "Step 5: Merging squash to $ORIGINAL_BRANCH and cleaning up..."
+git checkout "$ORIGINAL_BRANCH"
 git merge --squash maintenance-temp
 git commit -m "chore: aggressive Git maintenance cleanup"  # Commit the squash
 git branch -D maintenance-temp  # Delete temp branch
 
-# Step 6: Final checks on main after merge
-echo "Step 6: Final verification on main branch..."
+# Step 6: Final checks on original branch after merge
+echo "Step 6: Final verification on $ORIGINAL_BRANCH branch..."
 git log --oneline -5  # Confirm merge
 git fsck --full  # Final integrity check
 git status
