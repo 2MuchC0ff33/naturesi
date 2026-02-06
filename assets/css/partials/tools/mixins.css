@@ -20,7 +20,7 @@ NOTE: Display and grid helpers were moved to `partials/utilities/display.css` an
 
 /* Typography helpers */
 .font-mono {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', 'Courier New', monospace;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Courier New', monospace;
 }
 
 .small-text {
