@@ -32,7 +32,7 @@ AddType application/json .json
 
 # --- Gzip Compression ---
 <IfModule mod_deflate.c>
-  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json video/webm
 </IfModule>
 
 # --- Disable All Caching for Development ---
@@ -61,6 +61,7 @@ AddType application/json .json
 #   ExpiresByType application/javascript "access plus 1 year"
 #   ExpiresByType image/webp "access plus 1 year"
 #   ExpiresByType image/png "access plus 1 year"
+#   ExpiresByType video/webm "access plus 1 year"
 #   Header set Cache-Control "public, max-age=31536000, immutable"
 # </IfModule>
 # --- End Production cache example ---
@@ -68,7 +69,7 @@ AddType application/json .json
 # --- Production Cache Control ---
 <IfModule mod_headers.c>
   # Static assets: long-lived caching (ensure cache-busting on deploys)
-  <FilesMatch "\.(css|js|svg|png|jpe?g|gif|webp|ico|woff2?|ttf)$">
+  <FilesMatch "\.(css|js|svg|png|jpe?g|gif|webp|ico|woff2?|ttf|webm)$">
     Header set Cache-Control "public, max-age=31536000, immutable"
   </FilesMatch>
 

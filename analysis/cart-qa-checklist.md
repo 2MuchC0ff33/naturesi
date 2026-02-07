@@ -4,7 +4,7 @@ Purpose: smoke-test add-to-cart, cart UI, PayPal checkout hooks, and localStorag
 
 Manual checklist
 
-- **Setup:** Start local server: `python -m http.server 8000` or run the provided `dev-httpd` task.
+- **Setup:** Start local server: Use apache httpd or run the provided `dev-httpd` task.
 - **1) Add-to-cart (product page)**
   - Open a product page (e.g., `/pages/store/artisan-blends.html`).
   - Select any variant/options and click the `Add to Cart` button.

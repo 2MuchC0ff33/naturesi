@@ -95,7 +95,7 @@ Project-specific conventions
 
 - Title format: `chore(refactor-html): short summary`
 - Files changed: list them (mandatory)
-- Smoke test performed: `python -m http.server 8000` and service-worker install/uninstall tested on `localhost` (yes/no)
+- Smoke test performed: Use apache httpd and service-worker install/uninstall tested on `localhost` (yes/no)
 - HTML meta & semantics checked: yes/no
 - Accessibility basics verified (labels, alt text, form associations): yes/no
 - Tools used: list MCP servers/tools and key results/links (e.g. `mcp_github_github_search_code` – found SW registration in `assets/js/app.js`)

@@ -64,11 +64,8 @@ A small, privacy‑first static storefront for Nature's Infusions. Built with pl
 
 ## Getting Started
 
-Serve the site from a local static server (e.g., Python's http.server) to test service worker registration:
+Serve the site from a local static server (e.g.,apache httpd) to test service worker registration:
 
-```sh
-python -m http.server 8000
-```
 
 Test offline and 404 pages on localhost.
 
