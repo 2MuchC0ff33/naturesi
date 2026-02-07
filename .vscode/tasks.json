@@ -3,15 +3,17 @@
   "tasks": [
     {
       "label": "start-httpd",
-      "type": "process",
-      "command": "C:\\Users\\galloa\\scoop\\shims\\cygwin.exe",
-      "args": [
-        "-i",
-        "-c",
-        "apachectl start"
-      ],
+      "type": "shell",
+      "command": "/usr/sbin/apachectl start",
       "options": {
-        "cwd": "${workspaceFolder}"
+        "cwd": "/home/galloa/GitHub/personal/naturesi",
+        "shell": {
+          "executable": "C:\\Users\\galloa\\scoop\\persist\\cygwin\\root\\bin\\sh.exe",
+          "args": [
+            "-l",
+            "-i"
+          ]
+        }
       },
       "problemMatcher": [],
       "group": "build",
@@ -24,15 +26,17 @@
     },
     {
       "label": "stop-httpd",
-      "type": "process",
-      "command": "C:\\Users\\galloa\\scoop\\shims\\cygwin.exe",
-      "args": [
-        "-i",
-        "-c",
-        "apachectl stop"
-      ],
+      "type": "shell",
+      "command": "/usr/sbin/apachectl stop",
       "options": {
-        "cwd": "${workspaceFolder}"
+        "cwd": "/home/galloa/GitHub/personal/naturesi",
+        "shell": {
+          "executable": "C:\\Users\\galloa\\scoop\\persist\\cygwin\\root\\bin\\sh.exe",
+          "args": [
+            "-l",
+            "-i"
+          ]
+        }
       },
       "problemMatcher": [],
       "group": "build",
