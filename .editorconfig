@@ -1,9 +1,5 @@
-# .editorconfig for Nature's Infusions static site
-# Ensures consistent formatting for HTML, CSS, JS, data, and documentation files
-
 root = true
 
-# Universal defaults for all text/code files
 [*]
 charset = utf-8
 end_of_line = lf
@@ -12,32 +8,82 @@ trim_trailing_whitespace = true
 indent_style = space
 indent_size = 2
 
-# Markdown: allow trailing whitespace for hard line breaks
-[*.md]
-trim_trailing_whitespace = false
+[*.sh]
+indent_style = tab
+insert_final_newline = true
 
-# JSON: enforce 2-space indent, no trailing whitespace, final newline
+[*.awk]
+indent_style = tab
+insert_final_newline = true
+
+[*.bc]
+indent_style = tab
+insert_final_newline = true
+
+[*.sed]
+indent_style = tab
+insert_final_newline = true
+
 [*.json]
 indent_style = space
 indent_size = 2
 trim_trailing_whitespace = true
 insert_final_newline = true
 
-# YAML: 2-space indent, no trailing whitespace, final newline
-[*.yml]
+[*.html]
+indent_size = 2
+insert_final_newline = true
+
+[*.md,*.markdown]
+trim_trailing_whitespace = false
+
+[*.js]
+indent_size = 2
+insert_final_newline = true
+
+[*.css]
+indent_size = 2
+insert_final_newline = true
+
+[*.env]
 indent_style = space
 indent_size = 2
 trim_trailing_whitespace = true
 insert_final_newline = true
 
-# XML: 2-space indent, no trailing whitespace, final newline
+[*.c,*.h]
+insert_final_newline = true
+
+[*.f,*.for]
+indent_size = 2
+insert_final_newline = true
+
+[*.l]
+insert_final_newline = true
+
+[*.s,*.asm]
+indent_style = tab
+indent_size = 8
+insert_final_newline = true
+
+[*.m4]
+insert_final_newline = true
+
+[*.y]
+insert_final_newline = true
+
 [*.xml]
 indent_style = space
 indent_size = 2
 trim_trailing_whitespace = true
 insert_final_newline = true
 
-# CSV/TSV: no trailing whitespace, final newline
+[*.yml]
+indent_style = space
+indent_size = 2
+trim_trailing_whitespace = true
+insert_final_newline = true
+
 [*.csv]
 trim_trailing_whitespace = true
 insert_final_newline = true
@@ -46,13 +92,5 @@ insert_final_newline = true
 trim_trailing_whitespace = true
 insert_final_newline = true
 
-# Config files: treat as text, 2-space indent, no trailing whitespace
-[*.env]
-indent_style = space
-indent_size = 2
-trim_trailing_whitespace = true
-insert_final_newline = true
-
-# Binary files: do not apply text rules
 [*.{png,jpg,jpeg,gif,ico,svg,webp,zip,gz,7z}]
 binary = true
