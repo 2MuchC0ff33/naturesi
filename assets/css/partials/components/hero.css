@@ -38,7 +38,7 @@
 .hero__media>video,
 .hero__media video {
   display: block;
-  width: 100%;
+  width: auto;
   max-width: 100%;
   height: auto;
   aspect-ratio: 16 / 9;
@@ -46,8 +46,7 @@
   object-fit: contain;
   /* preserve full frame */
   max-height: calc(100vh - var(--site-header-height, 96px));
-  margin: 0 auto;
-  /* centre when narrower than container */
+  /* margin removed: flex centering handles horizontal alignment */
   align-self: center;
   /* ensure vertical centring in flex container */
   flex: 0 1 auto;
