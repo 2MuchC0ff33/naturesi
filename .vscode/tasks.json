@@ -86,14 +86,13 @@
     {
       "label": "minify-current-file",
       "type": "shell",
-      "command": "mkdir -p dist/$(dirname ${relativeFile}) && /cygdrive/c/Users/galloa/scoop/shims/minify -o dist/${relativeFile} ${file}",
+      "command": "/usr/bin/mkdir -p dist/$(/usr/bin/dirname ${relativeFile}) && /cygdrive/c/Users/galloa/scoop/shims/minify -o dist/${relativeFile} ${relativeFile}",
       "options": {
-        "cwd": "/home/galloa/GitHub/personal/naturesi",
+        "cwd": "C:\\Users\\galloa\\scoop\\persist\\cygwin\\root\\home\\galloa\\GitHub\\personal\\naturesi",
         "shell": {
-          "executable": "C:\\Users\\galloa\\scoop\\persist\\cygwin\\root\\bin\\sh.exe",
+          "executable": "C:\\Users\\galloa\\scoop\\persist\\cygwin\\root\\bin\\bash.exe",
           "args": [
-            "-l",
-            "-i"
+            "-c"
           ]
         }
       },
@@ -109,12 +108,16 @@
     {
       "label": "fix-current-file-biome",
       "type": "shell",
-      "command": "/cygdrive/c/Users/galloa/scoop/shims/biome",
-      "args": [
-        "lint",
-        "--write",
-        "${file}"
-      ],
+      "command": "file=$(echo \"${file}\" | /usr/bin/tr '\\\\' '/') && /cygdrive/c/Users/galloa/scoop/shims/biome lint --write \"$file\"",
+      "options": {
+        "cwd": "C:\\Users\\galloa\\scoop\\persist\\cygwin\\root\\home\\galloa\\GitHub\\personal\\naturesi",
+        "shell": {
+          "executable": "C:\\Users\\galloa\\scoop\\persist\\cygwin\\root\\bin\\bash.exe",
+          "args": [
+            "-c"
+          ]
+        }
+      },
       "group": "build",
       "problemMatcher": [
         "$eslint-stylish"
@@ -128,22 +131,15 @@
     },
     {
       "label": "fix-current-file-html",
-      "type": "shell",
-      "command": "mkdir -p dist/$(dirname ${relativeFile}) && /cygdrive/c/Users/galloa/scoop/shims/tidy",
+      "type": "process",
+      "command": "C:\\Users\\galloa\\scoop\\persist\\cygwin\\root\\bin\\bash.exe",
       "args": [
-        "-o",
-        "dist/${relativeFile}",
-        "${file}"
+        "--login",
+        "-c",
+        "cd /home/galloa/GitHub/personal/naturesi && mkdir -p dist/$(dirname ${relativeFile}) && tidy -o dist/${relativeFile} ${relativeFile}"
       ],
       "options": {
-        "cwd": "/home/galloa/GitHub/personal/naturesi",
-        "shell": {
-          "executable": "C:\\Users\\galloa\\scoop\\persist\\cygwin\\root\\bin\\sh.exe",
-          "args": [
-            "-l",
-            "-i"
-          ]
-        }
+        "cwd": "/home/galloa/GitHub/personal/naturesi"
       },
       "group": "build",
       "problemMatcher": {

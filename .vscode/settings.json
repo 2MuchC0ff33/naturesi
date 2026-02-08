@@ -1,3 +1,6 @@
 {
-  "harper.markdown.IgnoreLinkTitle": true
+  "harper.markdown.IgnoreLinkTitle": true,
+  "terminal.integrated.env.windows": {
+    "CHERE_INVOKING": "1"
+  }
 }
