@@ -18,8 +18,46 @@ if (typeof document !== 'undefined') {
   document.addEventListener('DOMContentLoaded', () => {
     try {
       document.documentElement.classList.remove('no-js');
-    } catch (e) {
+    } catch (_e) {
       /* ignore in non-browser contexts */
+    }
+
+    // Video autoplay and looping with pause
+    const video = document.querySelector('video');
+    const toggleButton = document.getElementById('toggle-autoplay');
+    let autoplayEnabled = true;
+    const pauseDuration = 2000; // 2 seconds pause before restart
+
+    if (video) {
+      // Handle looping with pause
+      video.addEventListener('ended', () => {
+        if (autoplayEnabled) {
+          setTimeout(() => {
+            video.play().catch((error) => {
+              console.warn('Autoplay blocked or failed:', error);
+              // Fallback: Show controls or poster
+            });
+          }, pauseDuration);
+        }
+      });
+
+      // Attempt autoplay on load (muted is required)
+      video.play().catch((error) => {
+        console.warn('Initial autoplay blocked:', error);
+        // Video will show poster and controls
+      });
+
+      // Toggle button for user control
+      if (toggleButton) {
+        toggleButton.addEventListener('click', () => {
+          autoplayEnabled = !autoplayEnabled;
+          toggleButton.textContent = autoplayEnabled ? 'Disable Autoplay' : 'Enable Autoplay';
+          toggleButton.setAttribute('aria-label', autoplayEnabled ? 'Disable video autoplay' : 'Enable video autoplay');
+          if (!autoplayEnabled) {
+            video.pause();
+          }
+        });
+      }
     }
   });
 
@@ -34,7 +72,7 @@ if (typeof document !== 'undefined') {
             s.onload = () => resolve();
             s.onerror = () => resolve();
             document.head.appendChild(s);
-          } catch (e) {
+          } catch (_e) {
             resolve();
           }
         });
@@ -43,11 +81,11 @@ if (typeof document !== 'undefined') {
       await ensureGlobalCartStore();
       const store = await initCart();
       window.NaturesCart = { store };
-    } catch (e) {
+    } catch (_e) {
     }
   })();
 
-  (async function () {
+  (async () => {
     try {
       if (document.getElementById('confirm-cart-form')) {
         await import('./modules/cart.js');
@@ -56,7 +94,7 @@ if (typeof document !== 'undefined') {
         await import('./modules/checkout.js');
       };
 
-      const path = (location && location.pathname) || '';
+      const path = (location?.pathname) || '';
       try {
         if (path.endsWith('/pages/payment/success.html')) {
           const m = await import('./modules/payment-return.js');
@@ -117,14 +155,14 @@ if (typeof document !== 'undefined') {
               out = document.createElement('div');
               out.id = outputId;
               out.className = 'postcode-lookup-result';
-              if (form && form.parentNode) form.parentNode.insertBefore(out, form.nextSibling);
+              if (form?.parentNode) form.parentNode.insertBefore(out, form.nextSibling);
             }
             return out;
           }
           if (form) {
             form.addEventListener('submit', async (ev) => {
               ev.preventDefault();
-              let pc = (form.querySelector('input[name="postcode"]') || document.getElementById('postcode')).value || '';
+              const pc = (form.querySelector('input[name="postcode"]') || document.getElementById('postcode')).value || '';
               const types = ['pouch','satchel','handbag','shoebox','briefcase'];
               const out = ensureOutput();
               out.innerHTML = 'Looking up...';
@@ -133,8 +171,8 @@ if (typeof document !== 'undefined') {
                   const r = await ship.calculateParcelRate(t, pc, { storePostcode: '6147', storeState: 'WA' });
                   return { type: t, zone: r.zone, rate: r.rate || r.baseRate || r.totalRate };
                 }));
-                out.innerHTML = '<ul>' + rows.map(r=>`<li>${r.type}: ${r.rate==null? 'N/A' : 'AUD $' + Number(r.rate).toFixed(2)} (${r.zone})</li>`).join('') + '</ul>';
-              } catch (err) {
+                out.innerHTML = `<ul>${rows.map(r=>`<li>${r.type}: ${r.rate==null? 'N/A' : `AUD $${Number(r.rate).toFixed(2)}`} (${r.zone})</li>`).join('')}</ul>`;
+              } catch (_err) {
                 out.textContent = 'Lookup failed';
               }
             });
