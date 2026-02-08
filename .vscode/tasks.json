@@ -82,6 +82,88 @@
         "focus": false,
         "panel": "shared"
       }
+    },
+    {
+      "label": "minify-current-file",
+      "type": "shell",
+      "command": "mkdir -p dist/$(dirname ${relativeFile}) && /cygdrive/c/Users/galloa/scoop/shims/minify -o dist/${relativeFile} ${file}",
+      "options": {
+        "cwd": "/home/galloa/GitHub/personal/naturesi",
+        "shell": {
+          "executable": "C:\\Users\\galloa\\scoop\\persist\\cygwin\\root\\bin\\sh.exe",
+          "args": [
+            "-l",
+            "-i"
+          ]
+        }
+      },
+      "problemMatcher": [],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "silent",
+        "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "fix-current-file-biome",
+      "type": "shell",
+      "command": "/cygdrive/c/Users/galloa/scoop/shims/biome",
+      "args": [
+        "lint",
+        "--write",
+        "${file}"
+      ],
+      "group": "build",
+      "problemMatcher": [
+        "$eslint-stylish"
+      ],
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "fix-current-file-html",
+      "type": "shell",
+      "command": "mkdir -p dist/$(dirname ${relativeFile}) && /cygdrive/c/Users/galloa/scoop/shims/tidy",
+      "args": [
+        "-o",
+        "dist/${relativeFile}",
+        "${file}"
+      ],
+      "options": {
+        "cwd": "/home/galloa/GitHub/personal/naturesi",
+        "shell": {
+          "executable": "C:\\Users\\galloa\\scoop\\persist\\cygwin\\root\\bin\\sh.exe",
+          "args": [
+            "-l",
+            "-i"
+          ]
+        }
+      },
+      "group": "build",
+      "problemMatcher": {
+        "owner": "html",
+        "source": "tidy",
+        "fileLocation": "relative",
+        "pattern": {
+          "regexp": "^line (\\d+) column (\\d+) - (Error|Warning): (.*)$",
+          "line": 1,
+          "column": 2,
+          "severity": 3,
+          "message": 4
+        }
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "shared"
+      }
     }
   ]
 }
