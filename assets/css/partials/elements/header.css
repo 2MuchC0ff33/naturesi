@@ -236,15 +236,13 @@ Core header bar, logo treatment and colour gradient live here.
 .hero {
   position: relative;
   overflow: hidden;
-  padding: var(--space-lg) 0;
   border-radius: 8px;
 }
 
 .hero__media {
-  position: absolute;
-  inset: 0 0 0 0;
+  position: static;
   z-index: 0;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .hero__media picture,
@@ -277,10 +275,10 @@ Core header bar, logo treatment and colour gradient live here.
   color: white;
 }
 
-/* Ensure hero content is readable on small screens */
+/* Ensure hero is properly sized on small screens */
 @media (max-width: 640px) {
   .hero {
-    padding: var(--space-md) 0;
+    /* padding removed for video-only layout */
   }
 }
 
