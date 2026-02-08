@@ -86,7 +86,7 @@
     {
       "label": "minify-current-file",
       "type": "shell",
-      "command": "/usr/bin/mkdir -p dist/$(/usr/bin/dirname ${relativeFile}) && /cygdrive/c/Users/galloa/scoop/shims/minify -o dist/${relativeFile} ${relativeFile}",
+      "command": "file=$(echo \"${relativeFile}\" | /usr/bin/tr '\\\\' '/') && /usr/bin/mkdir -p dist/$(/usr/bin/dirname \"$file\") && /cygdrive/c/Users/galloa/scoop/shims/minify -o dist/\"$file\" \"$file\"",
       "options": {
         "cwd": "C:\\Users\\galloa\\scoop\\persist\\cygwin\\root\\home\\galloa\\GitHub\\personal\\naturesi",
         "shell": {
