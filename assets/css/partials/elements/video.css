@@ -9,4 +9,6 @@ video {
   /* Maintains standard 16:9 aspect ratio for most videos */
   border-radius: 10px;
   /* Subtle rounding for modern look */
+  margin: 0 auto;
+  /* Center videos horizontally */
 }

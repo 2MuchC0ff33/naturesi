@@ -25,9 +25,9 @@
   align-items: center;
 }
 
-/* Make hero media full-bleed inside a centered .container (use calc to avoid scrollbar-induced offsets) */
+/* Make hero media full-width inside .container */
 .container .hero__media {
-  width: calc(100vw - (100vw - 100%));
+  width: 100%;
   margin-inline-start: 0;
   margin-inline-end: 0;
   padding-inline: 0;
@@ -46,7 +46,8 @@
   object-fit: contain;
   /* preserve full frame */
   max-height: calc(100vh - var(--site-header-height, 96px));
-  /* margin removed: flex centering handles horizontal alignment */
+  margin: 0 auto;
+  /* center horizontally */
   align-self: center;
   /* ensure vertical centring in flex container */
   flex: 0 1 auto;
