@@ -108,7 +108,7 @@
     {
       "label": "fix-current-file-biome",
       "type": "shell",
-      "command": "file=$(echo \"${file}\" | /usr/bin/tr '\\\\' '/') && /cygdrive/c/Users/galloa/scoop/shims/biome lint --write \"$file\"",
+      "command": "file=$(cygpath -m \"${file}\") && /cygdrive/c/Users/galloa/scoop/shims/biome lint --write \"$file\"",
       "options": {
         "cwd": "C:\\Users\\galloa\\scoop\\persist\\cygwin\\root\\home\\galloa\\GitHub\\personal\\naturesi",
         "shell": {
