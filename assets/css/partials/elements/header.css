@@ -266,14 +266,6 @@ Core header bar, logo treatment and colour gradient live here.
   pointer-events: none;
 }
 
-.hero__content {
-  position: relative;
-  z-index: 1;
-  color: var(--color-text);
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: var(--space-md);
-}
 
 .hero blockquote,
 .hero #tagline {
@@ -289,10 +281,6 @@ Core header bar, logo treatment and colour gradient live here.
 @media (max-width: 640px) {
   .hero {
     padding: var(--space-md) 0;
-  }
-
-  .hero__content {
-    padding: var(--space-sm);
   }
 }
 
