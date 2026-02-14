@@ -36,7 +36,73 @@
   <meta name="twitter:title" content="Checkout - Nature's Infusions | Premium Organic Teas and Herbal Infusions" />
   <meta name="twitter:description" content="Secure checkout for Australian-made organic teas and herbal infusions" />
   <meta name="twitter:image" content="https://www.naturesinfusions.com.au/assets/img/social-share-og.webp" />
-
+  <!-- Structured Data: Organization, WebSite, and BreadcrumbList for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": "https://www.naturesinfusions.com.au/#organization",
+    "name": "Nature's Infusions",
+    "url": "https://www.naturesinfusions.com.au/",
+    "logo": "https://www.naturesinfusions.com.au/assets/img/logo.svg",
+    "description": "Perth-based naturopath's passion project offering certified organic teas and herbal infusions",
+    "foundingDate": "2025",
+    "sameAs": [
+      "https://www.facebook.com/naturesinfusions.herbaltea/",
+      "https://www.instagram.com/natures_infusions_au/",
+      "https://au.linkedin.com/in/bree-gallo-75a81518a"
+    ],
+    "contactPoint": [
+      {
+        "@type": "ContactPoint",
+        "telephone": "+61 434 947 131",
+        "contactType": "customer service",
+        "email": "tea@naturesinfusions.com.au",
+        "areaServed": "AU",
+        "availableLanguage": "English"
+      }
+    ],
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "63 Meadowbrook Drive",
+      "addressLocality": "Parkwood",
+      "addressRegion": "WA",
+      "postalCode": "6147",
+      "addressCountry": "AU"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": "https://www.naturesinfusions.com.au/#website",
+    "url": "https://www.naturesinfusions.com.au/",
+    "name": "Nature's Infusions",
+    "publisher": {
+      "@id": "https://www.naturesinfusions.com.au/#organization"
+    },
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "/search.html?q={search_term_string}",
+      "query-input": "required name=q"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.naturesinfusions.com.au/"
+      }
+    ]
+  }
+  </script>
   <link rel="stylesheet" href="/assets/css/main.css" />
 </head>
 
@@ -62,8 +128,7 @@
             <label for="site-search" class="visually-hidden">Search Nature's Infusions</label>
             <input id="site-search" name="q" type="search" placeholder="Search Nature's Infusions" class="search-box"
               aria-label="Search site" />
-            <button class="search-icon btn btn--ghost" type="submit" aria-label="Submit search">
-            </button>
+            <button class="search-icon btn btn--ghost" type="submit" aria-label="Submit search">&nbsp;</button>
           </form>
         </div>
       </div>
@@ -73,7 +138,7 @@
           <div class="cart-logo" aria-hidden="true">
             <!-- inline svg cart -->
             <svg width="20" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true" focusable="false">
+              aria-hidden="true">
               <!-- Simple cart shape (rectangle body + wheels) -->
               <rect x="3" y="4" width="14" height="10" rx="1" stroke="currentColor" stroke-width="1.25" fill="none">
               </rect>
