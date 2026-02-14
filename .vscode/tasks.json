@@ -4,16 +4,12 @@
     {
       "label": "start-httpd",
       "type": "shell",
-      "command": "/usr/sbin/apachectl start",
+      "command": "apachectl",
+      "args": [
+        "start"
+      ],
       "options": {
-        "cwd": "/home/galloa/GitHub/personal/naturesi",
-        "shell": {
-          "executable": "C:\\Users\\galloa\\scoop\\persist\\cygwin\\root\\bin\\sh.exe",
-          "args": [
-            "-l",
-            "-i"
-          ]
-        }
+        "cwd": "${workspaceFolder}"
       },
       "problemMatcher": [],
       "group": "build",
@@ -27,16 +23,12 @@
     {
       "label": "stop-httpd",
       "type": "shell",
-      "command": "/usr/sbin/apachectl stop",
+      "command": "apachectl",
+      "args": [
+        "stop"
+      ],
       "options": {
-        "cwd": "/home/galloa/GitHub/personal/naturesi",
-        "shell": {
-          "executable": "C:\\Users\\galloa\\scoop\\persist\\cygwin\\root\\bin\\sh.exe",
-          "args": [
-            "-l",
-            "-i"
-          ]
-        }
+        "cwd": "${workspaceFolder}"
       },
       "problemMatcher": [],
       "group": "build",
@@ -86,15 +78,9 @@
     {
       "label": "minify-current-file",
       "type": "shell",
-      "command": "file=$(echo \"${relativeFile}\" | /usr/bin/tr '\\\\' '/') && /usr/bin/mkdir -p dist/$(/usr/bin/dirname \"$file\") && /cygdrive/c/Users/galloa/scoop/shims/minify -o dist/\"$file\" \"$file\"",
+      "command": "mkdir -p dist/$(dirname \"${relativeFile}\") && minify \"${relativeFile}\" -o dist/\"${relativeFile}\"",
       "options": {
-        "cwd": "C:\\Users\\galloa\\scoop\\persist\\cygwin\\root\\home\\galloa\\GitHub\\personal\\naturesi",
-        "shell": {
-          "executable": "C:\\Users\\galloa\\scoop\\persist\\cygwin\\root\\bin\\bash.exe",
-          "args": [
-            "-c"
-          ]
-        }
+        "cwd": "${workspaceFolder}"
       },
       "problemMatcher": [],
       "group": "build",
@@ -108,15 +94,9 @@
     {
       "label": "lint-current-file-biome",
       "type": "shell",
-      "command": "file=$(cygpath -m \"${file}\") && /cygdrive/c/Users/galloa/scoop/shims/biome lint --write \"$file\"",
+      "command": "biome lint --write \"${file}\"",
       "options": {
-        "cwd": "C:\\Users\\galloa\\scoop\\persist\\cygwin\\root\\home\\galloa\\GitHub\\personal\\naturesi",
-        "shell": {
-          "executable": "C:\\Users\\galloa\\scoop\\persist\\cygwin\\root\\bin\\bash.exe",
-          "args": [
-            "-c"
-          ]
-        }
+        "cwd": "${workspaceFolder}"
       },
       "group": "build",
       "problemMatcher": [
@@ -131,15 +111,10 @@
     },
     {
       "label": "lint-current-file-html",
-      "type": "process",
-      "command": "C:\\Users\\galloa\\scoop\\persist\\cygwin\\root\\bin\\bash.exe",
-      "args": [
-        "--login",
-        "-c",
-        "cd /home/galloa/GitHub/personal/naturesi && mkdir -p dist/$(dirname ${relativeFile}) && tidy -o dist/${relativeFile} ${relativeFile}"
-      ],
+      "type": "shell",
+      "command": "mkdir -p dist/$(dirname \"${relativeFile}\") && tidy -o dist/\"${relativeFile}\" \"${relativeFile}\"",
       "options": {
-        "cwd": "/home/galloa/GitHub/personal/naturesi"
+        "cwd": "${workspaceFolder}"
       },
       "group": "build",
       "problemMatcher": {
