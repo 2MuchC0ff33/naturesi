@@ -8,9 +8,9 @@ Focus outlines, skip links and visually-hidden utilities live here.
 }
 
 .skip-link {
-  position: absolute;
-  left: -9999px;
-  top: auto;
+  position: fixed;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
   z-index: 9999;
   background: rgba(19, 25, 33, 0.9);
   color: #fff;
@@ -26,9 +26,9 @@ Focus outlines, skip links and visually-hidden utilities live here.
 
 .skip-link:focus,
 .skip-link:focus-visible {
-  position: absolute;
+  position: fixed;
   left: var(--space-md);
-  top: 100%;
+  top: var(--header-height);
   /* Position below header to prevent overlap with nav bar */
   outline: 2px solid color-mix(in srgb, var(--color-accent) 80%, white);
   background: var(--color-accent);
@@ -40,7 +40,7 @@ Focus outlines, skip links and visually-hidden utilities live here.
 @media (max-width: 640px) {
   .skip-link {
     left: calc(var(--space-xs) + 0.25rem);
-    top: 100%;
+    top: var(--header-height-mobile);
     /* Position below header to prevent overlap with nav bar */
     font-size: 0.72rem;
   }
