@@ -4,7 +4,7 @@ files=(
 	"404.html"
 	"index.html"
 	"offline.html"
-	"search.html"P
+	"search.html"
 	"pages/about.html"
 	"pages/cart.html"
 	"pages/checkout.html"
