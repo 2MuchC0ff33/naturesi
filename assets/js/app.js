@@ -1,14 +1,12 @@
 // Module entrypoint: only register service worker for offline/PWA support
-import { registerServiceWorker } from './modules/sw-register.js';
 import { initCart } from './modules/cart-init.js';
-import './modules/worker-registry.js';
+import './modules/categories-nav.js';
 import './modules/pricing-index.js';
 import './modules/products-guard.js';
-import './modules/structured-data-fix.js';
-import './modules/search-bootstrap.js';
 import './modules/search-autocomplete.js';
-import './modules/categories-nav.js';
-import './modules/structured-data.js';
+import './modules/search-bootstrap.js';
+import { registerServiceWorker } from './modules/sw-register.js';
+import './modules/worker-registry.js';
 
 if (typeof window !== 'undefined' && typeof navigator !== 'undefined' && 'serviceWorker' in navigator) {
   registerServiceWorker();
@@ -149,7 +147,7 @@ if (typeof document !== 'undefined') {
           const ship = await import('./modules/cartStore.js');
           const form = document.querySelector('.postcode-lookup');
           const outputId = 'postcode-lookup-result';
-          function ensureOutput(){
+          function ensureOutput() {
             let out = document.getElementById(outputId);
             if (!out) {
               out = document.createElement('div');
@@ -163,7 +161,7 @@ if (typeof document !== 'undefined') {
             form.addEventListener('submit', async (ev) => {
               ev.preventDefault();
               const pc = (form.querySelector('input[name="postcode"]') || document.getElementById('postcode')).value || '';
-              const types = ['pouch','satchel','handbag','shoebox','briefcase'];
+              const types = ['pouch', 'satchel', 'handbag', 'shoebox', 'briefcase'];
               const out = ensureOutput();
               out.innerHTML = 'Looking up...';
               try {
@@ -171,7 +169,7 @@ if (typeof document !== 'undefined') {
                   const r = await ship.calculateParcelRate(t, pc, { storePostcode: '6147', storeState: 'WA' });
                   return { type: t, zone: r.zone, rate: r.rate || r.baseRate || r.totalRate };
                 }));
-                out.innerHTML = `<ul>${rows.map(r=>`<li>${r.type}: ${r.rate==null? 'N/A' : `AUD $${Number(r.rate).toFixed(2)}`} (${r.zone})</li>`).join('')}</ul>`;
+                out.innerHTML = `<ul>${rows.map(r => `<li>${r.type}: ${r.rate == null ? 'N/A' : `AUD $${Number(r.rate).toFixed(2)}`} (${r.zone})</li>`).join('')}</ul>`;
               } catch (_err) {
                 out.textContent = 'Lookup failed';
               }
