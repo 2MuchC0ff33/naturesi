@@ -79,6 +79,7 @@ Test offline and 404 pages on localhost.
 - Keep changes small and reversible.
 - Edit files directly under repo root, `pages/`, `pages/store/`, `assets/css/partials/`, `assets/js/data/`, `assets/js/modules/`.
 - Add new assets only under `assets/` and reference them relatively.
+- After any substantive change, GitHub Copilot will automatically run Biome (JS/JSON/CSS linting), Tidy (HTML linting), and Minify (all files to dist/) as part of its validation process, iterating until all pass.
 - See [Copilot instructions](.github/copilot-instructions.md) and [Contribution prompts](.github/prompts/refactor-html.prompt.md).
 
 ## License

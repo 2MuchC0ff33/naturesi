@@ -95,11 +95,21 @@ Project-specific conventions
 
 - Title format: `chore(refactor-html): short summary`
 - Files changed: list them (mandatory)
-- Smoke test performed: Use apache httpd and service-worker install/uninstall tested on `localhost` (yes/no)
+- Linting and minification performed: Biome for JS/JSON/CSS, Tidy for HTML, Minify for all to dist/ (yes/no)
 - HTML meta & semantics checked: yes/no
 - Accessibility basics verified (labels, alt text, form associations): yes/no
 - Tools used: list MCP servers/tools and key results/links (e.g. `mcp_github_github_search_code` – found SW registration in `assets/js/app.js`)
 - Reviewer: [2MuchC0ff33@example.org] (replace with the actual contact before merge)
+
+## Post-Change Validation
+
+After any substantive code change (HTML, CSS, JS, JSON), GitHub Copilot MUST run the following validation steps as part of its process, iterating and fixing issues until all pass:
+
+1. **Biome Linting (JS/JSON/CSS)**: Run `biome lint --write <file>` on all changed JS, JSON, and CSS files. Fix any errors/warnings by updating the code. Iterate until no issues remain.
+2. **Tidy Linting (HTML)**: Run `tidy -o dist/<relativeFile> <file>` on all changed HTML files. Fix any errors/warnings by updating the code. Iterate until no issues remain.
+3. **Minification**: Run minify on all changed HTML, JS, JSON, CSS files, outputting to `dist/<relativeFile>`. Ensure minification succeeds without errors.
+
+Do not proceed with further changes or end responses until all validation passes. If issues persist after 3 iterations, summarize root causes and suggest manual fixes.
 
 ## HTML5 refactor checklist
 
