@@ -3,20 +3,98 @@
 */
 
 .hero {
-  display: grid;
-  align-items: center;
-  min-height: 320px;
+  display: block;
+  position: relative;
+  overflow: visible;
+  /* ensure hero doesn't clip positioned media */
+  /* Added for absolute positioning of content on desktop */
   border-radius: 10px;
-  overflow: hidden;
+  /* Removed min-height to allow auto-sizing based on video aspect ratio */
 }
 
-.hero__content {
-  padding: var(--space-md);
-  text-align: left;
+.hero__media {
+  position: static;
+  /* Keep media in flow so hero's height is determined by media */
+  z-index: 0;
+  overflow: visible;
   width: 100%;
-  max-width: none;
-  margin: 0;
+
+  /* Center media visually and allow video to size itself */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Make hero media full-width inside .container */
+.container .hero__media {
+  width: 100%;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+  padding-inline: 0;
   box-sizing: border-box;
+}
+
+/* Ensure the video element is visible and contributes to layout */
+.hero__media>video,
+.hero__media video {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  /* keep aspect ratio */
+  object-fit: contain;
+  /* preserve full frame */
+  max-height: calc(100vh - var(--site-header-height, 96px));
+  margin: 0 auto;
+  /* center horizontally */
+  align-self: center;
+  /* ensure vertical centring in flex container */
+  flex: 0 1 auto;
+  /* avoid unintended stretching */
+}
+
+/* Responsive caps to keep the hero balanced across viewports */
+@media (max-width: 640px) {
+
+  .hero__media>video,
+  .hero__media video {
+    max-height: 50vh;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 899px) {
+
+  .hero__media>video,
+  .hero__media video {
+    max-height: 60vh;
+  }
+}
+
+@media (min-width: 900px) {
+
+  .hero__media>video,
+  .hero__media video {
+    max-height: 85vh;
+  }
+}
+
+/* Developer helper — enable by adding `debug-video-outline` class to <body> for visual debugging */
+.debug-video-outline .hero__media>video,
+.debug-video-outline .hero__media video {
+  outline: 3px dashed rgba(0, 0, 0, 0.35);
+  outline-offset: -3px;
+}
+
+/* sensible minimums so the poster is visible during load and on quirks */
+.hero {
+  min-height: 240px;
+}
+
+@media (min-width: 640px) {
+  .hero {
+    min-height: 360px;
+  }
 }
 
 /* Make hero CTAs more tappable on small screens (stacked, full width) */
@@ -71,15 +149,6 @@
 
 /* Responsive adjustments */
 @media (min-width: 640px) {
-  .hero {
-    grid-template-columns: 1fr 1fr;
-    min-height: 360px;
-  }
-
-  .hero__content {
-    padding: var(--space-lg);
-  }
-
   .hero h1 {
     font-size: 2.4rem;
   }
@@ -100,11 +169,11 @@
 
   .hero__media picture,
   .hero__media img {
-    transition: none !important;
+    transition: none;
   }
 
   .product-card__media img {
-    transition: none !important;
+    transition: none;
   }
 }
 
@@ -121,61 +190,11 @@
   box-sizing: border-box;
 }
 
-.container .hero__content {
-  max-width: var(--max-width);
-  margin-inline: auto;
-  padding-inline: var(--space-inline-sm, 1rem);
-  box-sizing: border-box;
-  grid-column: 1 / -1;
-  /* ensure content spans the hero grid columns and centers */
-  text-align: center;
-  /* centre headings, paragraph and CTAs by default */
-}
-
-/* Center text and CTA layout for the full-bleed hero at larger sizes */
-@media (min-width: 640px) {
-  .container .hero__content {
-    text-align: center;
-  }
-
-  .container .hero__content #cta-buttons nav {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    gap: var(--space-xs);
-    flex-wrap: wrap;
-  }
-
-  .container .hero__content #cta-buttons .button {
-    display: inline-block;
-    margin-right: 0.6rem;
-  }
-}
-
 /* Optional: mitigate tiny horizontal scrollbar caused by 100vw including scrollbar width */
 @supports (width: calc(100vw - (100vw - 100%))) {
   .container .hero {
     width: calc(100vw - (100vw - 100%));
   }
-}
-
-/* Strong override: ensure hero paragraph and #description are centered and
-   that paragraph blocks are centered when constrained by max-width. Use
-   high-specificity selectors and !important to win over competing rules. */
-#home#hero .hero__content p,
-#home #hero .hero__content p,
-#description,
-.container .hero__content p {
-  text-align: center !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-}
-
-/* Also ensure the paragraph does not float or align unexpectedly */
-.container .hero__content p {
-  float: none !important;
-  display: block !important;
-  width: auto !important;
 }
 
 /* -----------------------
@@ -193,7 +212,7 @@
   width: auto;
   max-width: min(90%, var(--max-width, 1200px));
   max-height: 200px;
-  object-fit: contain !important;
+  object-fit: contain;
 }
 
 @media (max-width: 640px) {
@@ -232,10 +251,10 @@
 .hero__media--logo {
   /* Force full-bleed appearance even within centered .container.
      Use left/transform method which is robust across parent transforms. */
-  position: relative !important;
-  width: 100vw !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  transform: translateX(-50%);
   box-sizing: border-box;
   padding-inline: 0;
 }

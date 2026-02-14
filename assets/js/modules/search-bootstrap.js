@@ -1,4 +1,4 @@
-(function(){
+(()=> {
   // Central search bootstrap: attaches to nav and search page
   const searchForm = document.querySelector('form#site-search-form');
   const searchInput = searchForm ? searchForm.querySelector('input[name="q"]') : document.querySelector('[data-search]');

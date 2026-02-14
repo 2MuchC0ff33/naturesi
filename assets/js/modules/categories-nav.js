@@ -15,6 +15,9 @@ const DEFAULT_CATEGORIES = [
   { label: 'Accessories', href: '/pages/store/accessories.html' }
 ];
 
+// Track active prefetches for cancellation
+const activePrefetches = new Map();
+
 function buildCategoriesList(container, categories) {
   container.innerHTML = '';
   categories.forEach(cat => {
@@ -32,21 +35,30 @@ function buildCategoriesList(container, categories) {
 }
 
 // Send a prefetch request message to the service worker (best-effort)
-function sendPrefetchMessage(href){
+function sendPrefetchMessage(href, priority = 'normal') {
   if (!href) return;
+  const url = new URL(href, window.location.origin).href;
   try {
-    if (navigator.serviceWorker && navigator.serviceWorker.getRegistration) {
+    if (navigator.serviceWorker?.getRegistration) {
       navigator.serviceWorker.getRegistration().then(reg => {
-        if (reg && reg.active && reg.active.postMessage) {
-          try { reg.active.postMessage({ type: 'PREFETCH_PAGE', href: href }); } catch(_){}
+        if (reg?.active?.postMessage) {
+          const id = Date.now() + Math.random();
+          reg.active.postMessage({
+            type: 'PRELOAD_NAVIGATION',
+            url,
+            id,
+            priority
+          });
+          // Store ID for potential cancellation
+          activePrefetches.set(url, id);
         }
-      }).catch(()=>{});
+      }).catch(() => { });
     }
-  } catch (e) {}
+  } catch (_e) { }
 }
 
 // Attach hover/focus prefetch to anchors
-function attachPrefetchHandlers(container){
+function attachPrefetchHandlers(container) {
   const links = Array.from(container.querySelectorAll('a.site-header__categories-link'));
   const timers = new Map();
   links.forEach(a => {
@@ -54,10 +66,27 @@ function attachPrefetchHandlers(container){
     // Prefetch on hover or keyboard focus (debounced 120ms)
     const schedule = () => {
       if (timers.has(href)) return;
-      const t = setTimeout(()=>{ sendPrefetchMessage(href); timers.delete(href); }, 120);
+      const t = setTimeout(() => { sendPrefetchMessage(href); timers.delete(href); }, 120);
       timers.set(href, t);
     };
-    const cancel = () => { const t = timers.get(href); if (t) { clearTimeout(t); timers.delete(href); } };
+    const cancel = () => {
+      const t = timers.get(href);
+      if (t) {
+        clearTimeout(t);
+        timers.delete(href);
+        // Cancel preload if not yet started
+        const url = new URL(href, window.location.origin).href;
+        const id = activePrefetches.get(url);
+        if (id) {
+          navigator.serviceWorker.getRegistration().then(reg => {
+            if (reg?.active) {
+              reg.active.postMessage({ type: 'CANCEL_PRELOAD', url });
+            }
+          });
+          activePrefetches.delete(url);
+        }
+      }
+    };
     a.addEventListener('mouseenter', schedule, { passive: true });
     a.addEventListener('focus', schedule, { passive: true });
     a.addEventListener('mouseleave', cancel, { passive: true });
@@ -73,24 +102,24 @@ function tryFetchCategories() {
     })
     .then(data => {
       // Expecting an array of categories with label and href or slug
-        // Accept two shapes: either the JSON is an array, or an object with `categories` array.
-        const arr = Array.isArray(data) ? data : (Array.isArray(data.categories) ? data.categories : null);
-        if (arr && arr.length) return arr.map(item => {
-          const label = item.label || item.name || item.title || item;
-          // prefer explicit href or slug; otherwise derive a safe filename from slug or label
-          let href = item.href || null;
-          const slug = item.slug || item.id || null;
-          if (!href) {
-            if (slug) {
-              href = `/pages/store/${String(slug).toLowerCase()}.html`;
-            } else {
-              // derive slug from label: lowercase, remove apostrophes, replace non-word chars with hyphen
-              const derived = String(label).toLowerCase().replace(/'/g, '').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-              href = `/pages/store/${derived}.html`;
-            }
+      // Accept two shapes: either the JSON is an array, or an object with `categories` array.
+      const arr = Array.isArray(data) ? data : (Array.isArray(data.categories) ? data.categories : null);
+      if (arr?.length) return arr.map(item => {
+        const label = item.label || item.name || item.title || item;
+        // prefer explicit href or slug; otherwise derive a safe filename from slug or label
+        let href = item.href || null;
+        const slug = item.slug || item.id || null;
+        if (!href) {
+          if (slug) {
+            href = `/pages/store/${String(slug).toLowerCase()}.html`;
+          } else {
+            // derive slug from label: lowercase, remove apostrophes, replace non-word chars with hyphen
+            const derived = String(label).toLowerCase().replace(/'/g, '').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+            href = `/pages/store/${derived}.html`;
           }
-          return { label, href };
-        });
+        }
+        return { label, href };
+      });
       throw new Error('Unexpected data');
     });
 }
@@ -106,7 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Try load canonical categories.json and replace list if successful
   tryFetchCategories()
     .then(items => {
-      if (items && items.length) buildCategoriesList(list, items);
+      if (items?.length) buildCategoriesList(list, items);
     })
     .catch(() => {
       // keep defaults on failure

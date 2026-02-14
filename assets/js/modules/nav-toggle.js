@@ -2,8 +2,8 @@
 // Inserts an accessible hamburger button if one is not present and
 // toggles the `.site-nav--open` class on the `.site-nav` element.
 
-import { delegate, addKeyListener } from './event-delegation.js';
 import { mqMax } from './breakpoints.js';
+import { addKeyListener, delegate } from './event-delegation.js';
 
 export function init(document) {
   // Prefer stable data-attribute hooks when present, fall back to legacy selectors
@@ -44,7 +44,7 @@ export function init(document) {
     navRight.insertBefore(btn, navRight.firstElementChild);
     // Show button after insertion using requestAnimationFrame to ensure DOM is updated
     requestAnimationFrame(() => {
-      btn.style.display = '';
+      btn.style.removeProperty('display'); // Revert to CSS-defined value
     });
   }
   // If the hook exists but isn't a button, ensure it's keyboard-operable

@@ -1,25 +1,20 @@
-// Minimal service worker for PWA basics
-// Install event: cache offline page
-self.addEventListener('install', (event) => {
-  event.waitUntil(
-    caches.open('offline-v1').then((cache) => {
-      return cache.add('/offline.html');
-    })
-  );
-});
+// Advanced service worker with modular architecture for full PWA capabilities
+// Imports core helpers and event handlers for precaching, advanced caching, background sync, push notifications, telemetry, and error handling
+importScripts('/assets/js/modules/sw-core.js', '/assets/js/modules/sw-handlers.js');
 
-// Activate event: claim clients
-self.addEventListener('activate', (event) => {
-  event.waitUntil(self.clients.claim());
-});
-
-// Fetch event: serve offline page for navigation requests when offline
-self.addEventListener('fetch', (event) => {
-  if (event.request.mode === 'navigate') {
-    event.respondWith(
-      fetch(event.request).catch(() => {
-        return caches.match('/offline.html');
-      })
-    );
-  }
+// Additional message handler for development cache clearing (preserved from minimal version)
+self.addEventListener("message", (event) => {
+	if (event.data && event.data.type === "CLEAR_CACHES") {
+		caches
+			.keys()
+			.then((keys) => {
+				return Promise.all(keys.map((key) => caches.delete(key)));
+			})
+			.then(() => {
+				console.log("All caches cleared successfully");
+			})
+			.catch((err) => {
+				console.error("Failed to clear caches:", err);
+			});
+	}
 });

@@ -1,5 +1,5 @@
 // Minimal worker registry and feature detection (no build step)
-(function(){
+(()=> {
   const supports = {
     worker: typeof Worker !== 'undefined',
     sharedWorker: typeof SharedWorker !== 'undefined',

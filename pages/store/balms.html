@@ -4,8 +4,8 @@
 <head>
   <!-- Character Encoding and Rendering -->
   <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content=" IE=edge" />
-  <meta name="viewport" content=" width=device-width,initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
 
   <!-- Sets the theme color for mobile browsers (using your accent color) -->
   <meta name="color-scheme" content="light" />
@@ -111,7 +111,34 @@
   <meta name="msvalidate.01" content="B279BB1A64D31F7EC1A04AFAEFE05314" />
   <meta name="yandex-verification" content="7847a6427bfa1388" />
 
-  <!-- Structured Data loaded dynamically via assets/js/modules/structured-data.js -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": "https://naturesinfusions.com.au/#organization",
+    "name": "Nature's Infusions",
+    "url": "https://naturesinfusions.com.au",
+    "logo": "https://naturesinfusions.com.au/assets/img/icons/icon-512x512.png",
+    "description": "Premium Australian herbal teas and wellness products. Artisan blends, black tea, green tea, herbal infusions, ice tea, wellness blends, balms, creams, and self-care essentials.",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+61-2-1234-5678",
+      "contactType": "customer service",
+      "availableLanguage": "English"
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "AU",
+      "addressRegion": "NSW",
+      "addressLocality": "Sydney"
+    },
+    "sameAs": [
+      "https://www.facebook.com/naturesinfusions",
+      "https://www.instagram.com/naturesinfusions",
+      "https://twitter.com/naturesinfusions"
+    ]
+  }
+  </script>
 
   <script type="application/ld+json">
       {
@@ -123,8 +150,8 @@
         "publisher": { "@id": "https://www.naturesinfusions.com.au/#organization" },
         "potentialAction": {
           "@type": "SearchAction",
-          "target": "https://www.naturesinfusions.com.au/pages/search.html?q={search_term_string}",
-          "query-input": "required name="search_term_string""
+          "target": "https://www.naturesinfusions.com.au/search.html?q={q}",
+          "query-input": "required name=\"q\""
         }
       }
     </script>
@@ -139,6 +166,18 @@
             "position": 1,
             "name": "Home",
             "item": "https://www.naturesinfusions.com.au/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Store",
+            "item": "https://www.naturesinfusions.com.au/pages/store.html"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Balms",
+            "item": "https://www.naturesinfusions.com.au/pages/store/balms.html"
           }
         ]
       }
@@ -155,9 +194,9 @@
 </head>
 
 <body itemscope itemtype="https://schema.org/WebPage">
-  <!-- WCAG: Skip link for keyboard navigation, visible on focus -->
-  <a class="skip-link" href="#main-content">Skip to main content</a>
   <header id="site-header">
+    <!-- WCAG: Skip link for keyboard navigation, visible on focus -->
+    <a class="skip-link" href="#main-content">Skip to main content</a>
     <nav class="site-nav" aria-label="Site navigation" data-site-nav>
       <div class="nav-left">
         <a class="logo" href="/" aria-label="Nature's Infusions home">

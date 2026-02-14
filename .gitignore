@@ -10,3 +10,4 @@ build/
 .env.local
 *.log
 .vscode/chrome
+.dist/

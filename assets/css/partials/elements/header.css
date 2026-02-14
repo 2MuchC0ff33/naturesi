@@ -236,15 +236,13 @@ Core header bar, logo treatment and colour gradient live here.
 .hero {
   position: relative;
   overflow: hidden;
-  padding: var(--space-lg) 0;
   border-radius: 8px;
 }
 
 .hero__media {
-  position: absolute;
-  inset: 0 0 0 0;
+  position: static;
   z-index: 0;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .hero__media picture,
@@ -266,14 +264,6 @@ Core header bar, logo treatment and colour gradient live here.
   pointer-events: none;
 }
 
-.hero__content {
-  position: relative;
-  z-index: 1;
-  color: var(--color-text);
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: var(--space-md);
-}
 
 .hero blockquote,
 .hero #tagline {
@@ -285,14 +275,10 @@ Core header bar, logo treatment and colour gradient live here.
   color: white;
 }
 
-/* Ensure hero content is readable on small screens */
+/* Ensure hero is properly sized on small screens */
 @media (max-width: 640px) {
   .hero {
-    padding: var(--space-md) 0;
-  }
-
-  .hero__content {
-    padding: var(--space-sm);
+    /* padding removed for video-only layout */
   }
 }
 
@@ -344,7 +330,6 @@ Core header bar, logo treatment and colour gradient live here.
   }
 
   /* `.nav-center` small-screen behaviours (no-js hide + open-state overlays) moved to component partial */
-  /* Removed orphaned properties as they were relocated to partials/components/navigation-menu.css */
 }
 
 /* Increase hit areas for interactive elements inside the open nav */
@@ -512,7 +497,9 @@ body.nav-open {
      removed to avoid conflicting specificity. If a header-only layout tweak is
      required in the future, add a tightly-scoped rule here with a clear
      comment explaining why it cannot live in `partials/elements/forms.css`. */
-  /* Removed orphaned min-width property as it duplicates the above rule */
+  /* Note: a previous min-width override in this block was removed because the
+     responsive rule above (lines 483–493) already sets min-width: 0; keeping
+     a single source of truth here prevents conflicting small-screen layouts. */
 }
 
 /* Ensure any inline icon/button doesn't add extra width when stacked */
@@ -575,7 +562,7 @@ navigation elements in a single compact row while maintaining accessibility.
     flex: 1 1 auto;
     width: auto;
     gap: 0;
-    /* Removed invalid justify-content: stretch */
+    /* Removed invalid justify-content: stretch (not a valid value for justify-content); if vertical stretching of flex items was intended, use align-items: stretch on the flex container instead */
   }
 
   .nav-center-flex {
