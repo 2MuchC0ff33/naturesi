@@ -1,4 +1,4 @@
-'use strict';
+
 // sw-core.js - core constants and caching helpers for the service worker
 // This file is intended to be loaded by importScripts from the root service worker.
 

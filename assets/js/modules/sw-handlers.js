@@ -1,6 +1,6 @@
 // sw-handlers.js - fetch and sync handlers for the service worker
 // Uses helpers exposed by sw-core.js
-self.addEventListener('fetch', function (event) {
+self.addEventListener('fetch', (event) => {
   const req = event.request;
   if (req.method !== 'GET') return;
   const url = new URL(req.url);
@@ -56,7 +56,7 @@ self.addEventListener('fetch', function (event) {
 
   // Default fallback
   event.respondWith(
-    caches.match(req).then(function (cached) {
+    caches.match(req).then((cached) => {
       if (cached) return cached;
       return fetch(req).catch(async (err) => {
         try { await self.__swHelpers.logError({ message: 'fetch-failed', url: req.url, meta: { error: String(err) } }); } catch(_){}
