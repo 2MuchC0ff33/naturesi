@@ -3,7 +3,7 @@
 // This file is intended to be loaded by importScripts from the root service worker.
 
 // Cache version and names
-const VERSION = 'v1.0.0';
+const VERSION = 'v1.0.1';
 const STATIC_CACHE = 'static-' + VERSION;
 const PAGE_CACHE = 'pages-' + VERSION;
 const API_CACHE = 'api-' + VERSION;
@@ -21,7 +21,10 @@ const PRECACHE_URLS = [
   '/assets/css/partials/README.md',
   '/assets/js/modules/worker-registry.js',
   '/assets/js/data/products.json',
-  '/assets/img/profile-placeholder-256x256.svg'
+  '/assets/img/profile-placeholder-256x256.svg',
+  '/assets/img/avatar1.webp',
+  '/assets/img/avatar2.webp',
+  '/assets/img/avatar3.webp'
 ];
 
 self.addEventListener('install', (event) => {
