@@ -562,7 +562,7 @@ navigation elements in a single compact row while maintaining accessibility.
     flex: 1 1 auto;
     width: auto;
     gap: 0;
-    /* Removed invalid justify-content: stretch */
+    /* Removed invalid justify-content: stretch (not a valid value for justify-content); if vertical stretching of flex items was intended, use align-items: stretch on the flex container instead */
   }
 
   .nav-center-flex {
