@@ -330,7 +330,6 @@ Core header bar, logo treatment and colour gradient live here.
   }
 
   /* `.nav-center` small-screen behaviours (no-js hide + open-state overlays) moved to component partial */
-  /* Removed orphaned properties as they were relocated to partials/components/navigation-menu.css */
 }
 
 /* Increase hit areas for interactive elements inside the open nav */
