@@ -87,7 +87,7 @@ if (typeof document !== 'undefined') {
     try {
       if (document.getElementById('confirm-cart-form')) {
         await import('./modules/cart.js');
-      };
+      }
       if (document.getElementById('paypal-form') || document.getElementById('summary-content')) {
         await import('./modules/checkout.js');
       };
@@ -97,50 +97,50 @@ if (typeof document !== 'undefined') {
         if (path.endsWith('/pages/payment/success.html')) {
           const m = await import('./modules/payment-return.js');
           if (m && typeof m.initPaymentReturn === 'function') m.initPaymentReturn();
-        };
+        }
         if (path.endsWith('/pages/payment/fail.html')) {
           const m2 = await import('./modules/payment-cancel.js');
           if (m2 && typeof m2.initPaymentCancel === 'function') m2.initPaymentCancel();
-        };
+        }
       } catch (err) {
         console.error('Payment module init failed', err);
-      };
+      }
 
       try {
         const navMod = await import('./modules/nav-toggle.js');
         if (navMod && typeof navMod.init === 'function') navMod.init(document);
       } catch (err) {
         console.warn('Nav toggle init failed', err);
-      };
+      }
 
       try {
         const modalMod = await import('./modules/modal.js');
         if (modalMod && typeof modalMod.init === 'function') modalMod.init(document);
       } catch (err) {
         console.warn('Modal init failed', err);
-      };
+      }
 
       try {
         if (document.querySelector('figure.product-gallery')) {
           const ph = await import('./modules/product-helpers.js');
           if (ph && typeof ph.init === 'function') ph.init(document);
-        };
+        }
       } catch (err) {
         console.warn('Product helpers init failed', err);
-      };
+      }
 
       try {
         const fb = await import('./modules/featured-badges.js');
         if (fb && typeof fb.initFeaturedBadges === 'function') fb.initFeaturedBadges(document);
       } catch (err) {
         console.warn('Featured badges init failed', err);
-      };
+      }
 
       try {
         await import('./modules/analytics.js');
       } catch (err) {
         console.warn('Analytics module init failed', err);
-      };
+      }
 
       try {
         if (document.getElementById('postcode') || document.querySelector('.postcode-lookup')) {
@@ -174,13 +174,13 @@ if (typeof document !== 'undefined') {
                 out.textContent = 'Lookup failed';
               }
             });
-          };
-        };
+          }
+        }
       } catch (err) {
         console.warn('Shipping estimate helper failed to initialise', err);
-      };
+      }
     } catch (err) {
       console.error('Deferred module load failed', err);
     }
   })();
-};
+}
