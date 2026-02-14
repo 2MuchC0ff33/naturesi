@@ -9,16 +9,6 @@
 @import url('selections.css');
 
 /* Placeholder styling: keep placeholders visible but deemphasised */
-::-webkit-input-placeholder {
-  color: inherit;
-  opacity: .6;
-}
-
-:-ms-input-placeholder {
-  color: inherit;
-  opacity: .6;
-}
-
 ::placeholder {
   color: inherit;
   opacity: .6;

@@ -101,8 +101,8 @@ button {
    This avoids editing multiple templates and keeps behaviour additive and safe. */
 .add-to-cart [type="submit"],
 .add-to-cart button[type="submit"] {
-  background: var(--color-accent);
-  color: #fff;
+  background: var(--color-accent) !important;
+  color: #fff !important;
   border-color: transparent;
 }
 
@@ -110,6 +110,13 @@ button {
 .add-to-cart button[type="submit"]:focus-visible {
   outline: 3px solid color-mix(in srgb, var(--color-accent) 60%, transparent);
   outline-offset: 2px;
+}
+
+/* Specific styling for add-to-cart buttons with btn-add-to-cart class */
+.btn-add-to-cart {
+  background: var(--color-accent);
+  color: #fff;
+  border-color: transparent;
 }
 
 /* Ensure buttons in the cart section have white text for visibility */
@@ -189,5 +196,34 @@ button:focus-visible {
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
+  }
+}
+
+/* Compact mobile search styles for very small screens */
+@media (max-width: 480px) {
+  .site-search {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.25rem;
+    width: 100%;
+    max-width: none;
+  }
+
+  .site-search .search-box {
+    height: 40px;
+    /* Increased from 32px to match button height for balanced alignment */
+    padding: 0 0.75rem;
+    /* Increased padding for less cramped appearance */
+    border-radius: 4px;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .site-search .search-icon {
+    min-width: 40px;
+    min-height: 40px;
+    padding: 0.25rem;
+    border-radius: 4px;
   }
 }

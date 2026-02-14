@@ -63,12 +63,6 @@
     cursor: pointer;
   }
 
-  button::-moz-focus-inner,
-  input::-moz-focus-inner {
-    padding: 0;
-    border: 0;
-  }
-
   input[type="search"] {
     box-sizing: content-box;
     -webkit-appearance: textfield;

@@ -25,13 +25,13 @@ API: `.grid`, `.grid-auto-fit`, `.grid--cols-2`, `.grid--cols-3`,
 }
 
 /* Column helpers (mobile-first: single column by default) */
-@media (min-width: var(--bp-md)) {
+@media (min-width: 900px) {
   .grid--cols-2 {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (min-width: var(--bp-lg)) {
+@media (min-width: 1200px) {
   .grid--cols-3 {
     grid-template-columns: repeat(3, 1fr);
   }

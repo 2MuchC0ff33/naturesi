@@ -3,12 +3,10 @@
   "tasks": [
     {
       "label": "start-httpd",
-      "type": "process",
-      "command": "C:\\Users\\galloa\\scoop\\shims\\cygwin.exe",
+      "type": "shell",
+      "command": "apachectl",
       "args": [
-        "-i",
-        "-c",
-        "apachectl start"
+        "start"
       ],
       "options": {
         "cwd": "${workspaceFolder}"
@@ -24,12 +22,10 @@
     },
     {
       "label": "stop-httpd",
-      "type": "process",
-      "command": "C:\\Users\\galloa\\scoop\\shims\\cygwin.exe",
+      "type": "shell",
+      "command": "apachectl",
       "args": [
-        "-i",
-        "-c",
-        "apachectl stop"
+        "stop"
       ],
       "options": {
         "cwd": "${workspaceFolder}"
@@ -76,6 +72,67 @@
         "echo": false,
         "reveal": "silent",
         "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "minify-current-file",
+      "type": "shell",
+      "command": "mkdir -p dist/$(dirname \"${relativeFile}\") && minify \"${relativeFile}\" -o dist/\"${relativeFile}\"",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "silent",
+        "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "lint-current-file-biome",
+      "type": "shell",
+      "command": "biome lint --write \"${file}\"",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "build",
+      "problemMatcher": [
+        "$eslint-stylish"
+      ],
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "lint-current-file-html",
+      "type": "shell",
+      "command": "mkdir -p dist/$(dirname \"${relativeFile}\") && tidy -o dist/\"${relativeFile}\" \"${relativeFile}\"",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "build",
+      "problemMatcher": {
+        "owner": "html",
+        "source": "tidy",
+        "fileLocation": "relative",
+        "pattern": {
+          "regexp": "^line (\\d+) column (\\d+) - (Error|Warning): (.*)$",
+          "line": 1,
+          "column": 2,
+          "severity": 3,
+          "message": 4
+        }
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
         "panel": "shared"
       }
     }

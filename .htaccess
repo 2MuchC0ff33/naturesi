@@ -1,69 +1,55 @@
-# Ultra-Simple  Static EStore Framework – .htaccess
+# Ultra-Simple Static EStore Framework – .htaccess
 # Standards: Mobile-First, Accessibility, Security
 
 # --- Security Headers ---
 <IfModule mod_headers.c>
   Header set X-Content-Type-Options "nosniff"
   Header set X-Frame-Options "SAMEORIGIN"
-  Header set X-XSS-Protection "1; mode=block"
-  Header set Referrer-Policy "strict-origin-when-cross-origin"
-  Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com https://www.paypal.com https://www.sandbox.paypal.com https://www.paypalobjects.com; script-src-elem 'self' https://static.cloudflareinsights.com https://www.paypal.com https://www.sandbox.paypal.com https://www.paypalobjects.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://static.cloudflareinsights.com https://www.paypal.com https://www.sandbox.paypal.com https://www.paypalobjects.com; form-action 'self' https://www.paypal.com https://www.sandbox.paypal.com mailto:; upgrade-insecure-requests;"
-  # Additional security headers (enable when ready)
+  Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.paypal.com https://www.sandbox.paypal.com https://www.paypalobjects.com; script-src-elem 'self' 'unsafe-inline' https://www.paypal.com https://www.sandbox.paypal.com https://www.paypalobjects.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://www.paypal.com https://www.sandbox.paypal.com https://www.paypalobjects.com; form-action 'self' https://www.paypal.com https://www.sandbox.paypal.com mailto:; upgrade-insecure-requests;"
   # Permissions-Policy restricts device features (adjust as needed)
   Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
-  # HSTS: enabled for production WITH preload. Ensure all subdomains and hosts serve HTTPS, then submit to https://hstspreload.org
+  # HSTS: handled by Cloudflare edge for better performance. Enable in Cloudflare dashboard with max-age=63072000, includeSubDomains, preload, then submit to https://hstspreload.org
   # Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
   # Expect-CT is optional; configure report-uri or remove if not used
   # Header always set Expect-CT "max-age=86400, enforce, report-uri=\"https://example.com/report\""
 </IfModule>
 
-# --- MIME Types for SVG, WebP, CSS, PNG, ICO ---
+# --- MIME Types ---
 AddType text/html .html
-AddType image/svg+xml .svg
-AddType image/webp .webp
+AddType text/plain .txt
 AddType text/css .css
+AddType text/javascript .js
+AddType text/javascript .cjs
+AddType application/json .json
+AddType video/webm .webm
+AddType image/webp .webp
+AddType image/svg+xml .svg
 AddType image/png .png
+AddType image/jpeg .jpg
+AddType image/jpeg .jpeg
+AddType application/xml .xml
+AddType image/gif .gif
 AddType image/x-icon .ico
+AddType text/csv .csv
+AddType text/markdown .md
+
+<FilesMatch "\.js$">
+  Header set Content-Type text/javascript
+</FilesMatch>
+
+<FilesMatch "\.cjs$">
+  Header set Content-Type text/javascript
+</FilesMatch>
 
 # --- Gzip Compression ---
 <IfModule mod_deflate.c>
-  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+  AddOutputFilterByType DEFLATE text/html text/plain application/xml text/css text/javascript application/json video/webm text/csv text/markdown
 </IfModule>
-
-# --- Disable All Caching for Development ---
-<IfModule mod_expires.c>
-  ExpiresActive On
-  # Disable caching for all file types
-  ExpiresByType image/webp "access plus 0 seconds"
-  ExpiresByType image/png "access plus 0 seconds"
-  ExpiresByType image/svg+xml "access plus 0 seconds"
-  ExpiresByType image/x-icon "access plus 0 seconds"
-  ExpiresByType image/jpeg "access plus 0 seconds"
-  ExpiresByType image/gif "access plus 0 seconds"
-  ExpiresByType text/css "access plus 0 seconds"
-  ExpiresByType application/javascript "access plus 0 seconds"
-  ExpiresByType application/json "access plus 0 seconds"
-  ExpiresByType text/html "access plus 0 seconds"
-  ExpiresByType text/plain "access plus 0 seconds"
-  ExpiresByType text/xml "access plus 0 seconds"
-</IfModule>
-
-# --- PRODUCTION: Example long-lived caching (enable when you use cache-busting for assets) ---
-# Uncomment and adjust when moving to production
-# <IfModule mod_expires.c>
-#   ExpiresActive On
-#   ExpiresByType text/css "access plus 1 year"
-#   ExpiresByType application/javascript "access plus 1 year"
-#   ExpiresByType image/webp "access plus 1 year"
-#   ExpiresByType image/png "access plus 1 year"
-#   Header set Cache-Control "public, max-age=31536000, immutable"
-# </IfModule>
-# --- End Production cache example ---
 
 # --- Production Cache Control ---
 <IfModule mod_headers.c>
   # Static assets: long-lived caching (ensure cache-busting on deploys)
-  <FilesMatch "\.(css|js|svg|png|jpe?g|gif|webp|ico|woff2?|ttf)$">
+  <FilesMatch "\.(css|js|svg|png|jpe?g|gif|webp|ico|woff2?|ttf|webm|xml|csv|md)$">
     Header set Cache-Control "public, max-age=31536000, immutable"
   </FilesMatch>
 
@@ -124,7 +110,7 @@ Options -Indexes +FollowSymLinks
 
 # --- CORS for static assets (CSS, images, SVG, ICO, etc) ---
 <IfModule mod_headers.c>
-  <FilesMatch "\.(css|js|svg|png|jpe?g|gif|ico|webp)$">
+  <FilesMatch "\.(css|js|svg|png|jpe?g|gif|ico|webp|xml)$">
     Header set Access-Control-Allow-Origin "*"
   </FilesMatch>
 </IfModule>
