@@ -497,7 +497,9 @@ body.nav-open {
      removed to avoid conflicting specificity. If a header-only layout tweak is
      required in the future, add a tightly-scoped rule here with a clear
      comment explaining why it cannot live in `partials/elements/forms.css`. */
-  /* Removed orphaned min-width property as it duplicates the above rule */
+  /* Note: a previous min-width override in this block was removed because the
+     responsive rule above (lines 483–493) already sets min-width: 0; keeping
+     a single source of truth here prevents conflicting small-screen layouts. */
 }
 
 /* Ensure any inline icon/button doesn't add extra width when stacked */
