@@ -143,7 +143,7 @@
     },
     "potentialAction": {
       "@type": "SearchAction",
-      "target": "/search.html?q={search_term_string}",
+      "target": "/search.html?q={q}",
       "query-input": "required name=q"
     }
   }
@@ -220,8 +220,9 @@
   <main id="main-content" tabindex="-1" class="prose container">
     <section id="home" itemscope itemtype="https://schema.org/Store">
       <header id="hero" class="hero">
-        <div class="hero__media"><video autoplay muted controls poster="/assets/video/poster.webp" preload="auto"
-            width="800" height="450" aria-label="Hero video showcasing Nature's Infusions teas and wellness products">
+        <div class="hero__media"><video id="hero-video" data-autoplay-loop="true" autoplay muted controls
+            poster="/assets/video/poster.webp" preload="auto" width="800" height="450"
+            aria-label="Hero video showcasing Nature's Infusions teas and wellness products">
             <source src="/assets/video/production.webm" type="video/webm">
             <track kind="captions" src="/assets/video/captions.vtt" srclang="en" label="English captions" default="">
           </video>

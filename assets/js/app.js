@@ -1,4 +1,5 @@
 // Module entrypoint: only register service worker for offline/PWA support
+import { initAutoplayLoop } from './modules/autoplay-loop.js';
 import { initCart } from './modules/cart-init.js';
 import './modules/categories-nav.js';
 import './modules/pricing-index.js';
@@ -20,60 +21,22 @@ if (typeof document !== 'undefined') {
       /* ignore in non-browser contexts */
     }
 
-    // Video autoplay and looping with pause
-    const video = document.querySelector('video');
-    const toggleButton = document.getElementById('toggle-autoplay');
-    let autoplayEnabled = true;
-    const pauseDuration = 2000; // 2 seconds pause before restart
-
-    if (video) {
-      // Handle looping with pause
-      video.addEventListener('ended', () => {
-        if (autoplayEnabled) {
-          setTimeout(() => {
-            video.play().catch((error) => {
-              console.warn('Autoplay blocked or failed:', error);
-              // Fallback: Show controls or poster
-            });
-          }, pauseDuration);
-        }
-      });
-
-      // Attempt autoplay on load (muted is required)
-      video.play().catch((error) => {
-        console.warn('Initial autoplay blocked:', error);
-        // Video will show poster and controls
-      });
-
-      // Toggle button for user control
-      if (toggleButton) {
-        toggleButton.addEventListener('click', () => {
-          autoplayEnabled = !autoplayEnabled;
-          toggleButton.textContent = autoplayEnabled ? 'Disable Autoplay' : 'Enable Autoplay';
-          toggleButton.setAttribute('aria-label', autoplayEnabled ? 'Disable video autoplay' : 'Enable video autoplay');
-          if (!autoplayEnabled) {
-            video.pause();
-          }
-        });
-      }
-    }
+    // Initialize autoplay loop for configured videos
+    initAutoplayLoop();
   });
 
   (async function start() {
     try {
       async function ensureGlobalCartStore() {
         if (typeof window !== 'undefined' && window.CartStore) return;
-        await new Promise((resolve) => {
-          try {
-            const s = document.createElement('script');
-            s.src = '/assets/js/cartStore.js';
-            s.onload = () => resolve();
-            s.onerror = () => resolve();
-            document.head.appendChild(s);
-          } catch (_e) {
-            resolve();
-          }
-        });
+        try {
+          const { CartStore } = await import('./modules/cartStore.js');
+          const instance = new CartStore();
+          await instance.init();
+          window.CartStore = instance;
+        } catch (e) {
+          console.warn('Failed to load CartStore:', e);
+        }
       }
 
       await ensureGlobalCartStore();

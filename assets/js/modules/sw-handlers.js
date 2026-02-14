@@ -18,17 +18,30 @@ self.addEventListener('fetch', (event) => {
 
   // Navigation requests: prefer network-first to avoid serving stale shell (fixes back+click navigation issues)
   if (req.mode === 'navigate') {
-    // Try navigation preload first (if available), then network-first using the page cache.
     event.respondWith((async () => {
+      const url = req.url;
+
+      // Check for preloaded response in worker cache
       try {
-        const preload = await event.preloadResponse;
-        if (preload) return preload;
-      } catch (e) { /* ignore preload errors */ }
+        const cache = await caches.open('navigation-preloads');
+        const preloaded = await cache.match(url);
+        if (preloaded) {
+          // Verify preload is still fresh (within 30 seconds)
+          const preloadedAt = preloaded.headers.get('sw-preloaded-at');
+          if (preloadedAt && (Date.now() - parseInt(preloadedAt, 10)) < 30000) {
+            return preloaded;
+          } else {
+            // Stale preload, remove it
+            await cache.delete(url);
+          }
+        }
+      } catch (e) { /* ignore cache errors */ }
+
+      // Fallback to network-first
       try {
-        // Use PAGE_CACHE constant from sw-core
         return await self.__swHelpers.networkFirstWithTTL(req, PAGE_CACHE, 0);
       } catch (err) {
-        try { await self.__swHelpers.logError({ message: 'navigation-fetch-failed', url: req.url, meta: { error: String(err) } }); } catch(_){ }
+        await self.__swHelpers.logError({ message: 'navigation-fetch-failed', url: req.url, meta: { error: String(err) } });
         return caches.match('/offline.html');
       }
     })());
@@ -59,7 +72,7 @@ self.addEventListener('fetch', (event) => {
     caches.match(req).then((cached) => {
       if (cached) return cached;
       return fetch(req).catch(async (err) => {
-        try { await self.__swHelpers.logError({ message: 'fetch-failed', url: req.url, meta: { error: String(err) } }); } catch(_){}
+        try { await self.__swHelpers.logError({ message: 'fetch-failed', url: req.url, meta: { error: String(err) } }); } catch (_) { }
         throw err;
       });
     })
@@ -87,11 +100,11 @@ self.addEventListener('sync', (event) => {
 // Push notifications
 self.addEventListener('push', (ev) => {
   let data = {};
-  try { data = ev.data ? ev.data.json() : {}; } catch (e) { try { self.__swHelpers.logError({ message: 'push-parse-error', meta: { error: String(e) } }); } catch(_){} }
+  try { data = ev.data ? ev.data.json() : {}; } catch (e) { try { self.__swHelpers.logError({ message: 'push-parse-error', meta: { error: String(e) } }); } catch (_) { } }
   const title = data.title || 'Update';
   const options = { body: data.body || '', icon: '/assets/img/profile-placeholder-256x256.svg', data: data, actions: data.actions || [] };
   ev.waitUntil((async () => {
-    try { await self.registration.showNotification(title, options); } catch (err) { try { await self.__swHelpers.logError({ message: 'push-notification-failed', meta: { error: String(err), payload: data } }); } catch(_){} }
+    try { await self.registration.showNotification(title, options); } catch (err) { try { await self.__swHelpers.logError({ message: 'push-notification-failed', meta: { error: String(err), payload: data } }); } catch (_) { } }
   })());
 });
 

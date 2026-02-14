@@ -106,7 +106,7 @@
       }
     },
     {
-      "label": "fix-current-file-biome",
+      "label": "lint-current-file-biome",
       "type": "shell",
       "command": "file=$(cygpath -m \"${file}\") && /cygdrive/c/Users/galloa/scoop/shims/biome lint --write \"$file\"",
       "options": {
@@ -130,7 +130,7 @@
       }
     },
     {
-      "label": "fix-current-file-html",
+      "label": "lint-current-file-html",
       "type": "process",
       "command": "C:\\Users\\galloa\\scoop\\persist\\cygwin\\root\\bin\\bash.exe",
       "args": [
