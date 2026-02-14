@@ -75,14 +75,15 @@ function attachPrefetchHandlers(container) {
         clearTimeout(t);
         timers.delete(href);
         // Cancel preload if not yet started
-        const id = activePrefetches.get(href);
+        const url = new URL(href, window.location.origin).href;
+        const id = activePrefetches.get(url);
         if (id) {
           navigator.serviceWorker.getRegistration().then(reg => {
-            if (reg && reg.active) {
-              reg.active.postMessage({ type: 'CANCEL_PRELOAD', url: href });
+            if (reg?.active) {
+              reg.active.postMessage({ type: 'CANCEL_PRELOAD', url });
             }
           });
-          activePrefetches.delete(href);
+          activePrefetches.delete(url);
         }
       }
     };
@@ -103,7 +104,7 @@ function tryFetchCategories() {
       // Expecting an array of categories with label and href or slug
       // Accept two shapes: either the JSON is an array, or an object with `categories` array.
       const arr = Array.isArray(data) ? data : (Array.isArray(data.categories) ? data.categories : null);
-      if (arr && arr.length) return arr.map(item => {
+      if (arr?.length) return arr.map(item => {
         const label = item.label || item.name || item.title || item;
         // prefer explicit href or slug; otherwise derive a safe filename from slug or label
         let href = item.href || null;
@@ -134,7 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Try load canonical categories.json and replace list if successful
   tryFetchCategories()
     .then(items => {
-      if (items && items.length) buildCategoriesList(list, items);
+      if (items?.length) buildCategoriesList(list, items);
     })
     .catch(() => {
       // keep defaults on failure
