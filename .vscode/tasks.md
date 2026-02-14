@@ -3,23 +3,36 @@
 Purpose: brief usage notes for the `start-httpd`, `wait-for-httpd`, `dev-httpd`, and `stop-httpd` tasks used by the "Launch Chrome" debug configuration.
 
 ## Tasks
-- `start-httpd` — runs `apachectl start` via the Cygwin shim (`type: "process"`).
-- `wait-for-httpd` — runs `scripts/wait-for-port.cjs 8000 30` (Node script — cross-platform, preferred) and exits when port 8000 is reachable. (Fallback: the original `wait-for-port.sh` exists, but the Node script avoids Cygwin invocation issues.)
+- `start-httpd` — runs `apachectl start` (assumes Apache installed with apachectl in PATH).
+- `wait-for-httpd` — runs `scripts/wait-for-port.cjs 8000 30` (Node script — cross-platform, preferred) and exits when port 8000 is reachable.
 - `dev-httpd` — composite task (`dependsOn`) that runs `start-httpd` then `wait-for-httpd` (used as `preLaunchTask`).
-- `stop-httpd` — runs `apachectl stop` via the Cygwin shim (`type: "process"`) after debugging finishes (`postDebugTask`).
+- `stop-httpd` — runs `apachectl stop` (assumes Apache installed with apachectl in PATH) after debugging finishes (`postDebugTask`).
+- `minify-current-file` — minifies the current file using `minify` (assumes minify in PATH).
+- `lint-current-file-biome` — lints the current JS/JSON/CSS file with `biome` (assumes biome in PATH).
+- `lint-current-file-html` — lints the current HTML file with `tidy` (assumes tidy in PATH).
 
 ## How to use
 1. In VS Code: Run Task → select `dev-httpd` to start Apache and wait for port 8000.
 2. Or use the Run & Debug panel and start the **Launch Chrome** configuration — it uses `dev-httpd` as `preLaunchTask` and will stop httpd with `stop-httpd` after debugging.
 3. For manual testing:
-   - Start: `apachectl start` (Cygwin)
+   - Start: `apachectl start`
    - Stop: `apachectl stop`
-   - Test port: `./scripts/wait-for-port.sh 8000 30`
+   - Test port: `node scripts/wait-for-port.cjs 8000 30`
+
+## Setup Requirements
+Ensure the following tools are installed and in your PATH:
+- Apache HTTP Server (with `apachectl` command)
+- Node.js (for wait-for-httpd and other scripts)
+- minify (for minification)
+- biome (for linting JS/JSON/CSS)
+- tidy (for linting HTML)
+
+On Windows, you may need Cygwin or WSL for Unix-like commands. On macOS/Linux, use Homebrew or apt.
 
 ## Permissions & common issues ⚠️
-- Starting httpd may require elevated privileges on Windows/Cygwin. If `apachectl start` fails with permission errors, run the command in an elevated Cygwin terminal or run VS Code as Administrator for tasks that start the service.
-- If port 8000 is already in use, change the listening port in your local Apache config or stop the conflicting process.
-- Confirm the Cygwin shim path is correct: `C:\Users\galloa\scoop\shims\cygwin.exe` (used by the tasks). If your environment differs, update `.vscode/tasks.json`.
+- Starting httpd may require elevated privileges. If `apachectl start` fails with permission errors, run the command in an elevated terminal or run VS Code as Administrator.
+- If port 8000 is already in use, change the listening port in your Apache config or stop the conflicting process.
+- If tools are not in PATH, install them globally (e.g., `npm install -g minify biome`, or use package managers).
 
 ## Debugger notes
 - The debug config uses `type: "pwa-chrome"` and `runtimeExecutable: "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"`.
@@ -27,10 +40,10 @@ Purpose: brief usage notes for the `start-httpd`, `wait-for-httpd`, `dev-httpd`,
 
 ## Troubleshooting checklist
 - [ ] Run `apachectl start` manually and confirm no permission errors.
-- [ ] Run `./scripts/wait-for-port.sh 8000 30` to verify the wait helper works.
+- [ ] Run `node scripts/wait-for-port.cjs 8000 30` to verify the wait helper works.
 - [ ] Confirm `Launch Chrome` attaches after `dev-httpd` completes.
-- [ ] If you see `bash: /d: No such file or directory` or `exit code 127` from the task: that means VS Code passed Windows-style `/d /c` arguments into the Cygwin shell. The fix used here is to invoke the Cygwin executable directly using `type: "process"` and `args: ["-i","-c","./scripts/wait-for-port.sh 8000 30"]` so the shim runs the script directly (check `.vscode/tasks.json`).
-- [ ] If problems persist, run the command manually from an elevated Cygwin terminal to see full stderr messages.
+- [ ] If tools are not found, check PATH or install them.
+- [ ] If problems persist, run commands manually to see full stderr messages.
 
 ---
 

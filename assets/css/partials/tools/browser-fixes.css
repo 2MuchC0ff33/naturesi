@@ -9,12 +9,7 @@ button {
   -webkit-touch-callout: none;
 }
 
-/* Remove input clear on IE/Edge and standardise placeholders */
-input::-ms-clear {
-  display: none;
-}
 
-/* Improve momentum scrolling on iOS */
 .scroll-smooth {
   -webkit-overflow-scrolling: touch;
 }

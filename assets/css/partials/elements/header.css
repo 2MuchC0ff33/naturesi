@@ -10,6 +10,8 @@ Core header bar, logo treatment and colour gradient live here.
       color-mix(in srgb, var(--color-accent) 60%, black 40%));
   color: white;
   border-bottom: 1px solid color-mix(in srgb, var(--color-accent) 20%, black);
+  position: relative;
+  /* Positioning context for skip-link to prevent overlap with nav bar */
 }
 
 /* Ensure the native category select inside the header uses readable
@@ -130,6 +132,12 @@ Core header bar, logo treatment and colour gradient live here.
   height: 36px;
 }
 
+/* Improve mobile touch interactions */
+.site-nav a,
+.site-nav button {
+  touch-action: manipulation;
+}
+
 .nav-right {
   flex: 1 1 160px;
   justify-content: flex-end;
@@ -228,15 +236,13 @@ Core header bar, logo treatment and colour gradient live here.
 .hero {
   position: relative;
   overflow: hidden;
-  padding: var(--space-lg) 0;
   border-radius: 8px;
 }
 
 .hero__media {
-  position: absolute;
-  inset: 0 0 0 0;
+  position: static;
   z-index: 0;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .hero__media picture,
@@ -258,14 +264,6 @@ Core header bar, logo treatment and colour gradient live here.
   pointer-events: none;
 }
 
-.hero__content {
-  position: relative;
-  z-index: 1;
-  color: var(--color-text);
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: var(--space-md);
-}
 
 .hero blockquote,
 .hero #tagline {
@@ -277,14 +275,10 @@ Core header bar, logo treatment and colour gradient live here.
   color: white;
 }
 
-/* Ensure hero content is readable on small screens */
+/* Ensure hero is properly sized on small screens */
 @media (max-width: 640px) {
   .hero {
-    padding: var(--space-md) 0;
-  }
-
-  .hero__content {
-    padding: var(--space-sm);
+    /* padding removed for video-only layout */
   }
 }
 
@@ -336,13 +330,6 @@ Core header bar, logo treatment and colour gradient live here.
   }
 
   /* `.nav-center` small-screen behaviours (no-js hide + open-state overlays) moved to component partial */
-
-  top: calc(100% + 0.4rem);
-  background: var(--color-background);
-  padding: var(--space-sm);
-  box-shadow: var(--shadow-md);
-  border-radius: 8px;
-  z-index: 2000;
 }
 
 /* Increase hit areas for interactive elements inside the open nav */
@@ -365,7 +352,6 @@ body.nav-open {
   overflow: hidden;
   touch-action: none;
   -webkit-overflow-scrolling: auto;
-}
 }
 
 @media (max-width: 640px) {
@@ -408,6 +394,9 @@ body.nav-open {
     grid-template-columns: 1fr;
     align-items: start;
     gap: var(--space-xs);
+    min-height: 36px;
+    padding: 0.15rem var(--space-sm);
+    padding-top: calc(0.15rem + env(safe-area-inset-top));
   }
 
   /* Order the regions so logo stays top, centre controls next, actions last */
@@ -460,12 +449,7 @@ body.nav-open {
   .site-nav .cart-option {
     flex: 0 0 auto;
   }
-
-  /* Increase header-height variable used by the skip-link so the skip link is placed correctly */
-  #site-header {
-    --header-height: 6rem;
-    /* tuned for stacked header height on small screens */
-  }
+}
 }
 
 /* Small-screen overflow safeguards: prevent horizontal scrolling caused by
@@ -513,7 +497,9 @@ body.nav-open {
      removed to avoid conflicting specificity. If a header-only layout tweak is
      required in the future, add a tightly-scoped rule here with a clear
      comment explaining why it cannot live in `partials/elements/forms.css`. */
-  min-width: 0 !important;
+  /* Note: a previous min-width override in this block was removed because the
+     responsive rule above (lines 483–493) already sets min-width: 0; keeping
+     a single source of truth here prevents conflicting small-screen layouts. */
 }
 
 /* Ensure any inline icon/button doesn't add extra width when stacked */
@@ -527,4 +513,114 @@ body.nav-open {
 .nav-center-flex {
   align-items: stretch !important;
   width: 100% !important;
+}
+
+/* ==========================================================================
+Compact mobile header layout
+Horizontal flexbox layout for very small screens (≤480px) to fit all
+navigation elements in a single compact row while maintaining accessibility.
+========================================================================== */
+
+@media (max-width: 480px) {
+
+  /* Switch from stacked grid to horizontal flexbox for compact layout */
+  .site-nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-xs);
+    min-height: 48px;
+    padding: 0.25rem var(--space-sm);
+  }
+
+  /* Reset grid-specific properties that conflict with flexbox */
+  .site-nav .nav-left,
+  .site-nav .nav-center,
+  .site-nav .nav-right {
+    order: unset;
+    flex: 0 0 auto;
+    white-space: nowrap;
+    min-width: unset;
+  }
+
+  /* Logo: reduce size and constrain width */
+  .site-nav .logo img {
+    max-height: 36px;
+    width: auto;
+    height: auto;
+  }
+
+  .site-nav .logo {
+    padding: 0.25rem 0.5rem;
+    min-width: 40px;
+    min-height: 40px;
+  }
+
+  /* Search form: horizontal layout with input taking remaining space */
+  .nav-center {
+    flex: 1 1 auto;
+    width: auto;
+    gap: 0;
+    /* Removed invalid justify-content: stretch (not a valid value for justify-content); if vertical stretching of flex items was intended, use align-items: stretch on the flex container instead */
+  }
+
+  .nav-center-flex {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.25rem;
+    width: 100%;
+  }
+
+  .site-search {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.25rem;
+    width: 100%;
+    max-width: none;
+    flex: 1 1 auto;
+    /* Remove centering margin that causes layout shift */
+    margin: 0;
+  }
+
+  /* Cart: compact layout, hide text to save space */
+  .nav-right {
+    flex: 0 0 auto;
+    justify-content: flex-end;
+    margin-top: 0;
+  }
+
+  .cart-option {
+    padding: 0.25rem;
+    min-width: 40px;
+    min-height: 40px;
+    gap: 0.25rem;
+  }
+
+  .cart-text {
+    display: none;
+  }
+
+  /* Ensure search and cart buttons maintain touch targets */
+  .site-nav .search-icon,
+  .site-nav .cart-option {
+    min-width: 40px;
+    min-height: 40px;
+    padding: 0.5rem;
+    border-radius: 4px;
+  }
+
+  /* Prevent overflow on very small screens */
+  .site-nav {
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+
+  .site-nav .nav-left,
+  .site-nav .nav-center,
+  .site-nav .nav-right {
+    min-width: 0;
+    flex-shrink: 1;
+  }
 }

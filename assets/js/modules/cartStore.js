@@ -50,6 +50,15 @@ export class CartStore {
     return this.cart;
   }
 
+  async set(cart) {
+    if (!cart || typeof cart !== 'object') {
+      console.error('Invalid cart provided to set');
+      return this.cart;
+    }
+    this.cart = { items: [], ...cart };  // Ensure items array exists
+    return this.save();
+  }
+
   async add(item) {
     if (!item || typeof item !== 'object') {
       console.error('Invalid item provided to add');
@@ -62,7 +71,7 @@ export class CartStore {
     // Validate price
     let validPrice = null;
     if (item.price !== undefined && item.price !== null) {
-      const cleaned = String(item.price).trim().replace(/[^0-9.\-]/g, '').replace(/,/g, '.');
+      const cleaned = String(item.price).trim().replace(/[^0-9.-]/g, '').replace(/,/g, '.');
       const n = Number(cleaned);
       validPrice = Number.isFinite(n) && n > 0 ? n : null;
     }
@@ -92,7 +101,7 @@ export class CartStore {
     // Normalize price to a Number where possible to ensure arithmetic works reliably
     let parsed = null;
     if (item.price !== undefined && item.price !== null) {
-      const cleaned = String(item.price).trim().replace(/[^0-9.\-]/g, '').replace(/,/g, '.');
+      const cleaned = String(item.price).trim().replace(/[^0-9.-]/g, '').replace(/,/g, '.');
       const n = Number(cleaned);
       parsed = Number.isFinite(n) ? n : null;
     }
@@ -105,8 +114,18 @@ export class CartStore {
     };
   }
 
-  remove(id, size) {
-    this.cart.items = this.cart.items.filter((it) => !(it.id === id && it.size === size));
+  async remove(id, size) {
+    if (!id || typeof id !== 'string' || id.trim() === '') {
+      console.error('Invalid ID provided to remove');
+      return this.cart;
+    }
+    if (size === undefined || size === null) {
+      // If no size provided, remove all items with the matching ID (compatibility mode)
+      this.cart.items = this.cart.items.filter((it) => it.id !== id);
+    } else {
+      // Original behavior: remove specific ID + size combination
+      this.cart.items = this.cart.items.filter((it) => !(it.id === id && it.size === size));
+    }
     return this.save();
   }
 
@@ -277,7 +296,7 @@ export async function calculateShippingByWeight(totalWeightGrams, postcode, opts
   const postcodesData = cachedPostcodes;
 
   // Choose smallest parcel type that can accommodate weight
-  let chosen = PARCEL_SPECS.find((s) => w <= s.maxGrams) || PARCEL_SPECS[PARCEL_SPECS.length - 1];
+  const chosen = PARCEL_SPECS.find((s) => w <= s.maxGrams) || PARCEL_SPECS[PARCEL_SPECS.length - 1];
   const parcelType = chosen.type;
 
   // Base rate (uses existing helper)

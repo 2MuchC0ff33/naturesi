@@ -1,6 +1,6 @@
 // sw-handlers.js - fetch and sync handlers for the service worker
 // Uses helpers exposed by sw-core.js
-self.addEventListener('fetch', function (event) {
+self.addEventListener('fetch', (event) => {
   const req = event.request;
   if (req.method !== 'GET') return;
   const url = new URL(req.url);
@@ -16,19 +16,38 @@ self.addEventListener('fetch', function (event) {
   // Bypass PayPal and other cross-origin payment providers entirely
   if (!url.origin.startsWith(self.location.origin) && self.__swHelpers && self.__swHelpers.isPayPal(req.url)) return; // default network handling
 
-  // Navigation requests: prefer network-first to avoid serving stale shell (fixes back+click navigation issues)
+  // Navigation requests: prefer preloadResponse (Navigation Preload API), then manual cache, then network-first
   if (req.mode === 'navigate') {
-    // Try navigation preload first (if available), then network-first using the page cache.
     event.respondWith((async () => {
+      const url = req.url;
+
+      // 1. Check for browser-initiated preload (Navigation Preload API)
       try {
-        const preload = await event.preloadResponse;
-        if (preload) return preload;
-      } catch (e) { /* ignore preload errors */ }
+        const preloadResponse = await event.preloadResponse;
+        if (preloadResponse) {
+          return preloadResponse;
+        }
+      } catch (e) { /* Ignore preload errors */ }
+
+      // 2. Check for manually preloaded response in cache
       try {
-        // Use PAGE_CACHE constant from sw-core
+        const cache = await caches.open('navigation-preloads');
+        const cached = await cache.match(url);
+        if (cached) {
+          const preloadedAt = cached.headers.get('sw-preloaded-at');
+          if (preloadedAt && (Date.now() - parseInt(preloadedAt, 10)) < 30000) {
+            return cached;
+          } else {
+            await cache.delete(url);
+          }
+        }
+      } catch (e) { /* Ignore cache errors */ }
+
+      // 3. Fallback to network-first
+      try {
         return await self.__swHelpers.networkFirstWithTTL(req, PAGE_CACHE, 0);
       } catch (err) {
-        try { await self.__swHelpers.logError({ message: 'navigation-fetch-failed', url: req.url, meta: { error: String(err) } }); } catch(_){ }
+        await self.__swHelpers.logError({ message: 'navigation-fetch-failed', url: req.url, meta: { error: String(err) } });
         return caches.match('/offline.html');
       }
     })());
@@ -56,10 +75,10 @@ self.addEventListener('fetch', function (event) {
 
   // Default fallback
   event.respondWith(
-    caches.match(req).then(function (cached) {
+    caches.match(req).then((cached) => {
       if (cached) return cached;
       return fetch(req).catch(async (err) => {
-        try { await self.__swHelpers.logError({ message: 'fetch-failed', url: req.url, meta: { error: String(err) } }); } catch(_){}
+        try { await self.__swHelpers.logError({ message: 'fetch-failed', url: req.url, meta: { error: String(err) } }); } catch (_) { }
         throw err;
       });
     })
@@ -87,11 +106,11 @@ self.addEventListener('sync', (event) => {
 // Push notifications
 self.addEventListener('push', (ev) => {
   let data = {};
-  try { data = ev.data ? ev.data.json() : {}; } catch (e) { try { self.__swHelpers.logError({ message: 'push-parse-error', meta: { error: String(e) } }); } catch(_){} }
+  try { data = ev.data ? ev.data.json() : {}; } catch (e) { try { self.__swHelpers.logError({ message: 'push-parse-error', meta: { error: String(e) } }); } catch (_) { } }
   const title = data.title || 'Update';
   const options = { body: data.body || '', icon: '/assets/img/profile-placeholder-256x256.svg', data: data, actions: data.actions || [] };
   ev.waitUntil((async () => {
-    try { await self.registration.showNotification(title, options); } catch (err) { try { await self.__swHelpers.logError({ message: 'push-notification-failed', meta: { error: String(err), payload: data } }); } catch(_){} }
+    try { await self.registration.showNotification(title, options); } catch (err) { try { await self.__swHelpers.logError({ message: 'push-notification-failed', meta: { error: String(err), payload: data } }); } catch (_) { } }
   })());
 });
 
