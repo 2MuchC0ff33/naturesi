@@ -78,11 +78,15 @@ function attachPrefetchHandlers(container) {
         const url = new URL(href, window.location.origin).href;
         const id = activePrefetches.get(url);
         if (id) {
-          navigator.serviceWorker.getRegistration().then(reg => {
-            if (reg?.active) {
-              reg.active.postMessage({ type: 'CANCEL_PRELOAD', url });
+          try {
+            if (navigator.serviceWorker?.getRegistration) {
+              navigator.serviceWorker.getRegistration().then(reg => {
+                if (reg?.active) {
+                  reg.active.postMessage({ type: 'CANCEL_PRELOAD', url });
+                }
+              });
             }
-          });
+          } catch (_e) { }
           activePrefetches.delete(url);
         }
       }
