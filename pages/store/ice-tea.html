@@ -1,633 +1,491 @@
-<!doctype html>
+<!DOCTYPE html>
 <html class="no-js" lang="en-AU" dir="ltr" data-theme="light">
-
 <head>
-  <!-- Character Encoding and Rendering -->
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-
-  <!-- Sets the theme color for mobile browsers (using your accent color) -->
-  <meta name="color-scheme" content="light" />
-
-  <!-- Primary Meta Tags -->
-  <title>Ice Tea - Nature's Infusions | Premium Organic Teas &amp; Herbal Remedies</title>
-  <meta name="description"
-    content="Perth-based Naturopath's passion project offering certified organic teas and herbal infusions for holistic wellness. Australian-made since 2025." />
-  <meta name="keywords"
-    content="organic tea, herbal infusion, naturopath, Perth, wellness, detox, chamomile, peppermint, turmeric" />
-  <meta name="author" content="Nature's Infusions" />
-  <meta name="copyright" content="© 2025 Nature's Infusions" />
-  <meta name="generator" content="Ultra-Simple StaticEStore Framework" />
-  <base href="/" />
-
-  <!-- SEO and Indexing -->
-  <meta name="robots" content="index,follow,max-image-preview:large" />
-  <meta name="referrer" content="strict-origin-when-cross-origin" />
-  <meta name="rating" content="general" />
-  <link rel="canonical" href="https://www.naturesinfusions.com.au/" />
-  <link rel="sitemap" href="/sitemap.xml" type="application/xml" title="Sitemap" />
-
-  <!-- Social Media Meta -->
-  <!-- Open Graph -->
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://www.naturesinfusions.com.au/" />
-  <meta property="og:title" content="Nature's Infusions | Premium Organic Teas and Herbal Infusions" />
-  <meta property="og:description" content="Australian-made organic teas and herbal infusions for holistic wellness" />
-  <meta property="og:image" content="https://www.naturesinfusions.com.au/assets/img/social-share-og.webp" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:locale" content="en_AU" />
-  <meta property="og:site_name" content="Nature's Infusions" />
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:site" content="@naturesinfusions" />
-  <meta name="twitter:creator" content="@naturesinfusions" />
-  <meta name="twitter:title" content="Nature's Infusions | Premium Organic Teas and Herbal Infusions" />
-  <meta name="twitter:description" content="Australian-made organic teas and herbal infusions for holistic wellness" />
-  <meta name="twitter:image" content="https://www.naturesinfusions.com.au/assets/img/social-share-twitter.webp" />
-
-  <!-- PWA Configuration -->
-  <!-- automated: kept theme-color from manifest or provided input; see issue #11 -->
-  <meta name="theme-color" content="#4CAF50" />
-  <meta name="application-name" content="Nature's Infusions" />
-  <meta name="mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-title" content="Nature's Infusions" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="format-detection" content="telephone=yes,email=yes,address=yes" />
-  <meta name="full-screen" content="yes" />
-  <meta name="browsermode" content="application" />
-  <meta name="screen-orientation" content="portrait-primary" />
-
-  <!-- Icons and Favicons -->
-  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#4CAF50" />
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <!-- Standard Sizes -->
-  <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
-  <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
-  <link rel="icon" href="/favicon-96x96.png" type="image/png" sizes="96x96" />
-  <!-- Android -->
-  <link rel="icon" href="/android-icon-192x192.png" type="image/png" sizes="192x192" />
-  <!-- Apple -->
-  <link rel="apple-touch-icon" href="/apple-icon-57x57.png" sizes="57x57" />
-  <link rel="apple-touch-icon" href="/apple-icon-60x60.png" sizes="60x60" />
-  <link rel="apple-touch-icon" href="/apple-icon-72x72.png" sizes="72x72" />
-  <link rel="apple-touch-icon" href="/apple-icon-76x76.png" sizes="76x76" />
-  <link rel="apple-touch-icon" href="/apple-icon-114x114.png" sizes="114x114" />
-  <link rel="apple-touch-icon" href="/apple-icon-120x120.png" sizes="120x120" />
-  <link rel="apple-touch-icon" href="/apple-icon-144x144.png" sizes="144x144" />
-  <link rel="apple-touch-icon" href="/apple-icon-152x152.png" sizes="152x152" />
-  <link rel="apple-touch-icon" href="/apple-icon-180x180.png" sizes="180x180" />
-  <!-- Launch Images -->
-  <link rel="apple-touch-startup-image" href="/launch-640x1136.png"
-    media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" />
-
-  <!-- Web App Manifest -->
-  <link rel="manifest" href="/manifest.json" crossorigin="use-credentials" />
-
-  <!-- Resource Hints -->
-  <link rel="dns-prefetch" href="//www.naturesinfusions.com.au" />
-  <link rel="preload" href="/assets/css/main.css" as="style" />
-  <link rel="prefetch" href="/assets/js/data/products.json" as="fetch" />
-
-  <!-- Cache Control -->
-  <meta http-equiv="Cache-Control" content="public, no-cache, must-revalidate" />
-  <meta http-equiv="Pragma" content="no-cache" />
-
-  <!-- Security Headers -->
-  <meta http-equiv="Content-Security-Policy"
-    content="default-src 'self'; script-src 'self' 'unsafe-inline'; script-src-elem 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self'" />
-  <meta http-equiv="Permissions-Policy" content="geolocation=(),microphone=(),camera=()" />
-  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
-  <meta http-equiv="Strict-Transport-Security" content=" max-age=63072000; includeSubDomains; preload" />
-  <meta http-equiv="Expect-CT" content=" max-age=86400, enforce" />
-
-  <!-- Verification -->
-  <meta name="google-site-verification" content="v_tU6K8nwyC7GsB8lB40ylqHmpu9V_TDoARsAYuxY_U" />
-  <meta name="msvalidate.01" content="B279BB1A64D31F7EC1A04AFAEFE05314" />
-  <meta name="yandex-verification" content="7847a6427bfa1388" />
-
+  <meta name="generator" content="HTML Tidy for HTML5 for Cygwin version 5.9.20">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Ice Tea - Nature's Infusions | Premium Organic Teas & Herbal Remedies</title>
+  <meta name="description" content=
+  "Perth-based Naturopath's passion project offering teas and herbal infusions for holistic wellness. Australian-made since 2025.">
+  <meta name="keywords" content=
+  "organic tea,herbal infusion,naturopath,Perth,wellness,detox,chamomile,peppermint,turmeric">
+  <meta name="author" content="Nature's Infusions">
+  <meta name="copyright" content="© 2025 Nature's Infusions">
+  <meta name="generator" content="Ultra-Simple StaticEStore Framework">
+  <base href="/">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="rating" content="general">
+  <link rel="canonical" href="https://www.naturesinfusions.com.au/">
+  <link rel="sitemap" href="/sitemap.xml" type="application/xml" title="Sitemap">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.naturesinfusions.com.au/">
+  <meta property="og:title" content="Nature's Infusions | Premium Organic Teas and Herbal Infusions">
+  <meta property="og:description" content="Australian-made organic teas and herbal infusions for holistic wellness">
+  <meta property="og:image" content="https://www.naturesinfusions.com.au/assets/img/social-share-og.webp">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="en_AU">
+  <meta property="og:site_name" content="Nature's Infusions">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@naturesinfusions">
+  <meta name="twitter:creator" content="@naturesinfusions">
+  <meta name="twitter:title" content="Nature's Infusions | Premium Organic Teas and Herbal Infusions">
+  <meta name="twitter:description" content="Australian-made organic teas and herbal infusions for holistic wellness">
+  <meta name="twitter:image" content="https://www.naturesinfusions.com.au/assets/img/social-share-twitter.webp">
+  <meta name="theme-color" content="#4CAF50">
+  <meta name="application-name" content="Nature's Infusions">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Nature's Infusions">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="format-detection" content="telephone=yes,email=yes,address=yes">
+  <meta name="full-screen" content="yes">
+  <meta name="browsermode" content="application">
+  <meta name="screen-orientation" content="portrait-primary">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#4CAF50">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="/favicon-96x96.png" type="image/png" sizes="96x96">
+  <link rel="icon" href="/android-icon-192x192.png" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="/apple-icon-57x57.png" sizes="57x57">
+  <link rel="apple-touch-icon" href="/apple-icon-60x60.png" sizes="60x60">
+  <link rel="apple-touch-icon" href="/apple-icon-72x72.png" sizes="72x72">
+  <link rel="apple-touch-icon" href="/apple-icon-76x76.png" sizes="76x76">
+  <link rel="apple-touch-icon" href="/apple-icon-114x114.png" sizes="114x114">
+  <link rel="apple-touch-icon" href="/apple-icon-120x120.png" sizes="120x120">
+  <link rel="apple-touch-icon" href="/apple-icon-144x144.png" sizes="144x144">
+  <link rel="apple-touch-icon" href="/apple-icon-152x152.png" sizes="152x152">
+  <link rel="apple-touch-icon" href="/apple-icon-180x180.png" sizes="180x180">
+  <link rel="apple-touch-startup-image" href="/launch-640x1136.png" media=
+  "(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)">
+  <link rel="manifest" href="/manifest.json" crossorigin="use-credentials">
+  <link rel="dns-prefetch" href="//www.naturesinfusions.com.au">
+  <link rel="preload" href="/assets/css/main.css" as="style">
+  <link rel="prefetch" href="/assets/js/data/products.json" as="fetch">
+  <meta http-equiv="Cache-Control" content="public, no-cache, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Content-Security-Policy" content=
+  "default-src 'self'; script-src 'self' 'unsafe-inline'; script-src-elem 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self'">
+  <meta http-equiv="Permissions-Policy" content="geolocation=(),microphone=(),camera=()">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="Strict-Transport-Security" content="max-age=63072000; includeSubDomains; preload">
+  <meta http-equiv="Expect-CT" content="max-age=86400, enforce">
+  <meta name="google-site-verification" content="v_tU6K8nwyC7GsB8lB40ylqHmpu9V_TDoARsAYuxY_U">
+  <meta name="msvalidate.01" content="B279BB1A64D31F7EC1A04AFAEFE05314">
+  <meta name="yandex-verification" content="7847a6427bfa1388">
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "@id": "https://naturesinfusions.com.au/#organization",
-    "name": "Nature's Infusions",
-    "url": "https://naturesinfusions.com.au",
-    "logo": "https://naturesinfusions.com.au/assets/img/icons/icon-512x512.png",
-    "description": "Premium Australian herbal teas and wellness products. Artisan blends, black tea, green tea, herbal infusions, ice tea, wellness blends, balms, creams, and self-care essentials.",
-    "contactPoint": {
-      "@type": "ContactPoint",
-      "telephone": "+61-2-1234-5678",
-      "contactType": "customer service",
-      "availableLanguage": "English"
-    },
-    "address": {
-      "@type": "PostalAddress",
-      "addressCountry": "AU",
-      "addressRegion": "NSW",
-      "addressLocality": "Sydney"
-    },
-    "sameAs": [
-      "https://www.facebook.com/naturesinfusions",
-      "https://www.instagram.com/naturesinfusions",
-      "https://twitter.com/naturesinfusions"
-    ]
-  }
+  {"@context":"https://schema.org","@type":"Organization","@id":"https://naturesinfusions.com.au/#organization","name":"Nature's Infusions","url":"https://naturesinfusions.com.au","logo":"https://naturesinfusions.com.au/assets/img/icons/icon-512x512.png","description":"Premium Australian herbal teas and wellness products. Artisan blends, black tea, green tea, herbal infusions, ice tea, wellness blends, balms, creams, and self-care essentials.","contactPoint":{"@type":"ContactPoint","telephone":"+61-434-947-131","contactType":"customer service","availableLanguage":"English"},"address":{"@type":"PostalAddress","addressCountry":"AU","addressRegion":"WA","addressLocality":"Parkwood"},"sameAs":["https://www.facebook.com/naturesinfusions","https://www.instagram.com/naturesinfusions","https://twitter.com/naturesinfusions"]}
   </script>
-
   <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "@id": "https://www.naturesinfusions.com.au/#website",
-        "url": "https://www.naturesinfusions.com.au/",
-        "name": "Nature's Infusions",
-        "publisher": { "@id": "https://www.naturesinfusions.com.au/#organization" },
-        "potentialAction": {
-          "@type": "SearchAction",
-          "target": "https://www.naturesinfusions.com.au/search.html?q={q}",
-          "query-input": "required name=\"q\""
-        }
-      }
-    </script>
-
+  {"@context":"https://schema.org","@type":"WebSite","@id":"https://www.naturesinfusions.com.au/#website","url":"https://www.naturesinfusions.com.au/","name":"Nature's Infusions","publisher":{"@id":"https://www.naturesinfusions.com.au/#organization"},"potentialAction":{"@type":"SearchAction","target":"https://www.naturesinfusions.com.au/search.html?q={q}","query-input":"required name=\"q\""}}
+  </script>
   <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://www.naturesinfusions.com.au/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Store",
-            "item": "https://www.naturesinfusions.com.au/pages/store.html"
-          },
-          {
-            "@type": "ListItem",
-            "position": 3,
-            "name": "Ice Tea",
-            "item": "https://www.naturesinfusions.com.au/pages/store/ice-tea.html"
-          }
-        ]
-      }
-    </script>
-
-  <link rel="stylesheet" href="/assets/css/main.css" type="text/css" />
-  <!-- OpenSearch description for browser search providers (matches /opensearch.xml) -->
-  <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="Nature's Infusions" />
-
-  <!-- Script Loading: load main JS as an ES module so app.js can import smaller modules (modular refactor) -->
-  <!-- Cache-busting query added to force clients to fetch latest module during development/debugging -->
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.naturesinfusions.com.au/"},{"@type":"ListItem","position":2,"name":"Store","item":"https://www.naturesinfusions.com.au/pages/store.html"},{"@type":"ListItem","position":3,"name":"Ice Tea","item":"https://www.naturesinfusions.com.au/pages/store/ice-tea.html"}]}
+  </script>
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="Nature's Infusions">
   <script type="module" src="/assets/js/app.js"></script>
-  <!-- pricing-index and products-guard are bundled via /assets/js/app.js -->
 </head>
-
 <body itemscope itemtype="https://schema.org/WebPage">
   <header id="site-header">
-    <!-- WCAG: Skip link for keyboard navigation, visible on focus -->
     <a class="skip-link" href="#main-content">Skip to main content</a>
-    <nav class="site-nav" aria-label="Site navigation" data-site-nav>
+    <nav class="site-nav" aria-label="Site navigation" data-site-nav="">
       <div class="nav-left">
-        <a class="logo" href="/" aria-label="Nature's Infusions home">
-          <img src="/assets/img/logo.svg" alt="Nature's Infusions logo" />
-        </a>
+        <a class="logo" href="/" aria-label="Nature's Infusions home"><img src="/assets/img/logo.svg" alt=
+        "Nature's Infusions logo"></a>
       </div>
-
-      <!-- Improved nav-center: group search in a flex wrapper -->
-      <div id="primary-nav-menu" class="nav-center" data-primary-nav>
+      <div id="primary-nav-menu" class="nav-center" data-primary-nav="">
         <div class="nav-center-flex center-row">
-          <!-- Category select -->
           <nav aria-label="Browse by category" class="category-dropdown">
-            <form action="/pages/store.html" method="get" id="category-nav-form" aria-label="Browse by category">
-              <label for="site-category-select" class="visually-hidden">Select a product category</label>
-              <select id="site-category-select" name="category" aria-label="Product categories">
-                <option value="">All categories</option>
-                <option value="wellness-blends">Wellness Blends</option>
-                <option value="herbal-infusions">Herbal Infusions</option>
-                <option value="black-tea">Black Tea</option>
-                <option value="green-tea">Green Tea</option>
-                <option value="balms">Balms</option>
-                <option value="creams">Creams</option>
-                <option value="selfcare">Self Care</option>
-                <option value="accessories">Accessories</option>
-                <option value="ice-tea">Ice Tea</option>
-                <option value="artisan-blends">Artisan Blends</option>
+            <form action="/pages/store.html" id="category-nav-form" aria-label="Browse by category" name=
+            "category-nav-form">
+              <label for="site-category-select" class="visually-hidden">Select a product category</label> <select id=
+              "site-category-select" name="category" aria-label="Product categories">
+                <option value="">
+                  All categories
+                </option>
+                <option value="wellness-blends">
+                  Wellness Blends
+                </option>
+                <option value="herbal-infusions">
+                  Herbal Infusions
+                </option>
+                <option value="black-tea">
+                  Black Tea
+                </option>
+                <option value="green-tea">
+                  Green Tea
+                </option>
+                <option value="balms">
+                  Balms
+                </option>
+                <option value="creams">
+                  Creams
+                </option>
+                <option value="selfcare">
+                  Self Care
+                </option>
+                <option value="accessories">
+                  Accessories
+                </option>
+                <option value="ice-tea">
+                  Ice Tea
+                </option>
+                <option value="artisan-blends">
+                  Artisan Blends
+                </option>
               </select>
-
-              <!-- JS-enhanced horizontal tabs will be injected here when available. The select is preserved as the no-JS fallback. -->
-              <div id="category-tabs-container" class="tabs" aria-hidden="true" hidden></div>
-
-              <noscript>
-                <div class="category-fallback">
-                  <ul>
-                    <li><a href="/pages/store/wellness-blends.html">Wellness Blends</a></li>
-                    <li><a href="/pages/store/herbal-infusions.html">Herbal Infusions</a></li>
-                    <li><a href="/pages/store/black-tea.html">Black Tea</a></li>
-                    <li><a href="/pages/store/green-tea.html">Green Tea</a></li>
-                    <li><a href="/pages/store/balms.html">Balms</a></li>
-                    <li><a href="/pages/store/creams.html">Creams</a></li>
-                    <li><a href="/pages/store/selfcare.html">Self Care</a></li>
-                    <li><a href="/pages/store/accessories.html">Accessories</a></li>
-                    <li><a href="/pages/store/ice-tea.html">Ice Tea</a></li>
-                    <li><a href="/pages/store/artisan-blends.html">Artisan Blends</a></li>
-                    <li><a href="/pages/store.html">All categories</a></li>
-                  </ul>
-                </div>
-              </noscript>
+              <div id="category-tabs-container" class="tabs" aria-hidden="true" hidden=""></div><noscript>
+              <div class="category-fallback">
+                <ul>
+                  <li>
+                    <a href="/pages/store/wellness-blends.html">Wellness Blends</a>
+                  </li>
+                  <li>
+                    <a href="/pages/store/herbal-infusions.html">Herbal Infusions</a>
+                  </li>
+                  <li>
+                    <a href="/pages/store/black-tea.html">Black Tea</a>
+                  </li>
+                  <li>
+                    <a href="/pages/store/green-tea.html">Green Tea</a>
+                  </li>
+                  <li>
+                    <a href="/pages/store/balms.html">Balms</a>
+                  </li>
+                  <li>
+                    <a href="/pages/store/creams.html">Creams</a>
+                  </li>
+                  <li>
+                    <a href="/pages/store/selfcare.html">Self Care</a>
+                  </li>
+                  <li>
+                    <a href="/pages/store/accessories.html">Accessories</a>
+                  </li>
+                  <li>
+                    <a href="/pages/store/ice-tea.html">Ice Tea</a>
+                  </li>
+                  <li>
+                    <a href="/pages/store/artisan-blends.html">Artisan Blends</a>
+                  </li>
+                  <li>
+                    <a href="/pages/store.html">All categories</a>
+                  </li>
+                </ul>
+              </div></noscript>
             </form>
           </nav>
-
-          <!-- Search form (pure HTML5, no JS) -->
-          <form id="site-search-form" class="site-search" action="/search.html" method="get" role="search"
-            aria-label="Search site">
-            <label for="site-search" class="visually-hidden">Search Nature's Infusions</label>
-            <input id="site-search" name="q" type="search" placeholder="Search Nature's Infusions" class="search-box"
-              aria-label="Search site" />
-            <button class="search-icon btn btn--ghost" type="submit" aria-label="Submit search">
-            </button>
+          <form id="site-search-form" class="site-search" action="/search.html" role="search" aria-label="Search site"
+          name="site-search-form">
+            <label for="site-search" class="visually-hidden">Search Nature's Infusions</label> <input id="site-search"
+            name="q" type="search" placeholder="Search Nature's Infusions" class="search-box" aria-label="Search site">
           </form>
-          <!-- Inline comment: All JS removed for pure HTML5 search, OpenSearch compatible. -->
         </div>
       </div>
-
-      <div class="nav-right" data-header-right>
+      <div class="nav-right" data-header-right="">
         <a class="cart-option" href="/pages/cart.html" aria-label="Cart">
-          <div class="cart-logo" aria-hidden="true">
-            <!-- inline svg cart -->
-            <svg width="20" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true" focusable="false">
-              <!-- Simple cart shape (rectangle body + wheels) -->
-              <rect x="3" y="4" width="14" height="10" rx="1" stroke="currentColor" stroke-width="1.25" fill="none">
-              </rect>
-              <path d="M7 4L6 2H3" stroke="currentColor" stroke-width="1.25" fill="none"></path>
-              <circle cx="8.5" cy="17.5" r="1.25" fill="currentColor"></circle>
-              <circle cx="17.5" cy="17.5" r="1.25" fill="currentColor"></circle>
-            </svg>
-          </div>
-          <span class="cart-text">Cart</span>
-          <output class="cart-count" name="cart-count" aria-live="polite">0</output>
-        </a>
+        <div class="cart-logo" aria-hidden="true">
+          <svg width="20" height="18" viewbox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+          <rect x="3" y="4" width="14" height="10" rx="1" stroke="currentColor" stroke-width="1.25" fill="none"></rect>
+          <path d="M7 4 6 2H3" stroke="currentColor" stroke-width="1.25" fill="none"></path>
+          <circle cx="8.5" cy="17.5" r="1.25" fill="currentColor"></circle>
+          <circle cx="17.5" cy="17.5" r="1.25" fill="currentColor"></circle></svg>
+        </div><span class="cart-text">Cart</span> <output class="cart-count" name="cart-count" aria-live=
+        "polite">0</output></a>
       </div>
     </nav>
-
-    <!-- Categories nav: dynamic list will be populated by assets/js/modules/categories-nav.js -->
     <nav class="site-header__categories" aria-label="Product categories" role="navigation">
       <h2 class="sr-only">Product categories</h2>
       <ul class="site-header__categories-list" role="menubar" aria-hidden="true">
-        <!-- JS will populate list items here. Minimal fallback item for no-JS. -->
-        <li role="none"><a role="menuitem" class="site-header__categories-link" href="/pages/store.html">Show All</a>
+        <li role="none">
+          <a role="menuitem" class="site-header__categories-link" href="/pages/store.html">Show All</a>
         </li>
       </ul>
     </nav>
   </header>
   <main id="main-content" class="prose container">
     <section aria-labelledby="ice-heading">
-      <h2 id="ice-heading">Ice Tea</h2>
-      <!-- Ice Tea products moved from pages/store.html -->
-
-      <a id="apple-delight" class="product-anchor slug-anchor" aria-hidden="true"></a>
-      <a id="product-apple-anchor" class="product-anchor"></a>
-      <article id="product-apple" class="product product-card" itemprop="itemListElement" itemscope
-        itemtype="https://schema.org/Product" data-image="/assets/img/summerbreeze.webp" data-sku="product-apple">
+      <h2 id="ice-heading">Ice Tea</h2><a id="apple-delight" class="product-anchor slug-anchor" aria-hidden=
+      "true"></a><a id="product-apple-anchor" class="product-anchor"></a>
+      <article id="product-apple" class="product product-card" itemprop="itemListElement" itemscope itemtype=
+      "https://schema.org/Product" data-image="/assets/img/summerbreeze.webp" data-sku="product-apple">
         <header class="media">
           <figure class="product-gallery product-card__media u-reserve-square">
-            <picture>
-              <source srcset="assets/img/Natures2_with_fonts.webp" type="image/webp" />
-              <img class="u-img-cover" src="assets/img/Natures2_with_fonts.webp" alt="Apple Delight Tea" width="300"
-                height="300" loading="lazy" itemprop="image" />
-            </picture>
-            <figcaption>Product image</figcaption>
+            <picture><source srcset="assets/img/Natures2_with_fonts.webp" type="image/webp"><img class="u-img-cover"
+            src="assets/img/Natures2_with_fonts.webp" alt="Apple Delight Tea" width="300" height="300" loading="lazy"
+            itemprop="image"></picture>
+            <figcaption>
+              Product image
+            </figcaption>
           </figure>
-
           <h3 itemprop="name">Apple Delight</h3>
-
           <div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-            <link itemprop="availability" href="https://schema.org/InStock" />
-            <meta itemprop="priceCurrency" content="AUD" />
-            <p>&#10007; <span itemprop="itemCondition">Out of Stock</span></p>
+            <link itemprop="availability" href="https://schema.org/InStock">
+            <meta itemprop="priceCurrency" content="AUD">
+            <p>✗ <span itemprop="itemCondition">Out of Stock</span></p>
           </div>
-
           <div class="reviews" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
-            <span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-            <span>(<span itemprop="ratingCount">20</span> reviews, Rating:
-              <span itemprop="ratingValue">5</span>/5)</span>
+            <span aria-hidden="true">★★★★★</span> <span>(<span itemprop="ratingCount">20</span> reviews, Rating:
+            <span itemprop="ratingValue">5</span>/5)</span>
           </div>
         </header>
-
         <section class="product-description" itemprop="description">
-          <p>
-            Savour the taste of summer with this refreshing blend of dried apple pieces, rosehip,
-            lemongrass, and spearmint. This naturally sweet, fruity tea can be enjoyed hot or
-            cold, offering a revitalising experience in each sip.
-          </p>
+          <p>Savour the taste of summer with this refreshing blend of dried apple pieces, rosehip, lemongrass, and
+          spearmint. This naturally sweet, fruity tea can be enjoyed hot or cold, offering a revitalising experience in
+          each sip.</p>
         </section>
-
-        <section class="product-ingredients" itemprop="nutrition" itemscope
-          itemtype="https://schema.org/NutritionInformation">
+        <section class="product-ingredients" itemprop="nutrition" itemscope itemtype=
+        "https://schema.org/NutritionInformation">
           <h4>Ingredients</h4>
           <p itemprop="ingredients">Apple Pieces, Rosehip, Lemongrass and Spearmint.</p>
           <p><small>Sourced from multiple origins</small></p>
         </section>
-
         <form action="mailto:info@naturesinfusions.com" method="post" class="product-options add-to-cart">
           <fieldset>
             <legend>Out of Stock Notification</legend>
-
             <div class="email-notification">
-              <!-- Inline comment: Updated input ID for product-specific accessibility (see HTML5 refactor checklist) -->
-              <label for="customer-email-apple">Email Address:</label>
-              <input type="email" id="customer-email-apple" name="email" required placeholder="your@email.com"
-                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" />
-            </div>
-
-            <button type="submit" class="notify-me">Notify When Available</button>
+              <label for="customer-email-apple">Email Address:</label> <input type="email" id="customer-email-apple"
+              name="email" required="" placeholder="your@email.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+            </div><button class="notify-me">Notify When Available</button>
           </fieldset>
         </form>
-
         <footer class="product-disclaimer">
           <details>
-            <summary><small>Important Disclaimer</small></summary>
-            <p itemprop="disambiguatingDescription">
-              <small>This product is not intended to diagnose, treat, cure, or prevent any disease.
-                Always consult with a healthcare provider before starting any new supplement or
-                wellness regimen.</small>
-            </p>
+            <summary>
+              <small>Important Disclaimer</small>
+            </summary>
+            <p itemprop="disambiguatingDescription"><small>This product is not intended to diagnose, treat, cure, or
+            prevent any disease. Always consult with a healthcare provider before starting any new supplement or
+            wellness regimen.</small></p>
           </details>
         </footer>
-      </article>
-      <a id="summer-breeze" class="product-anchor slug-anchor" aria-hidden="true"></a>
-      <a id="product-summer-anchor" class="product-anchor"></a>
-      <article id="product-summer" class="product product-card" itemprop="itemListElement" itemscope
-        itemtype="https://schema.org/Product" data-image="/assets/img/summerbreeze1.webp" data-sku="product-summer">
+      </article><a id="summer-breeze" class="product-anchor slug-anchor" aria-hidden="true"></a><a id=
+      "product-summer-anchor" class="product-anchor"></a>
+      <article id="product-summer" class="product product-card" itemprop="itemListElement" itemscope itemtype=
+      "https://schema.org/Product" data-image="/assets/img/summerbreeze1.webp" data-sku="product-summer">
         <header class="media">
           <figure class="product-gallery product-card__media">
-            <picture>
-              <source srcset="assets/img/summerbreeze1.webp" type="image/webp" />
-              <img src="assets/img/summerbreeze1.webp" alt="Summer Breeze Tea" width="300" height="300" loading="lazy"
-                itemprop="image" />
-            </picture>
-            <picture>
-              <source srcset="assets/img/summerbreeze2.webp" type="image/webp" />
-              <img src="assets/img/summerbreeze2.webp" alt="Summer Breeze Tea Package" width="300" height="300"
-                loading="lazy" itemprop="image" />
-            </picture>
-            <figcaption>Product images</figcaption>
+            <picture><source srcset="assets/img/summerbreeze1.webp" type="image/webp"><img src=
+            "assets/img/summerbreeze1.webp" alt="Summer Breeze Tea" width="300" height="300" loading="lazy" itemprop=
+            "image"></picture> <picture><source srcset="assets/img/summerbreeze2.webp" type="image/webp"><img src=
+            "assets/img/summerbreeze2.webp" alt="Summer Breeze Tea Package" width="300" height="300" loading="lazy"
+            itemprop="image"></picture>
+            <figcaption>
+              Product images
+            </figcaption>
           </figure>
-
           <h3 itemprop="name">Summer Breeze</h3>
-
           <div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-            <link itemprop="availability" href="https://schema.org/InStock" />
-            <meta itemprop="priceCurrency" content="AUD" />
-            <p>&#10003; <span itemprop="itemCondition">In Stock</span></p>
+            <link itemprop="availability" href="https://schema.org/InStock">
+            <meta itemprop="priceCurrency" content="AUD">
+            <p>✓ <span itemprop="itemCondition">In Stock</span></p>
           </div>
-
           <div class="reviews" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
-            <span aria-hidden="true">&#9733;&#9733;&#9733;</span>
-            <span>(<span itemprop="ratingCount">3</span> reviews, Rating:
-              <span itemprop="ratingValue">3</span>/5)</span>
+            <span aria-hidden="true">★★★</span> <span>(<span itemprop="ratingCount">3</span> reviews, Rating:
+            <span itemprop="ratingValue">3</span>/5)</span>
           </div>
         </header>
-
         <section class="product-description" itemprop="description">
-          <p>
-            A vibrant pink blend of hibiscus, peppermint and lemon balm, this tea is perfect for
-            warm days and can be enjoyed hot or cold. Hibiscus brings refreshing qualities, while
-            peppermint and lemon balm add gentle, soothing notes to each sip.
-          </p>
+          <p>A vibrant pink blend of hibiscus, peppermint and lemon balm, this tea is perfect for warm days and can be
+          enjoyed hot or cold. Hibiscus brings refreshing qualities, while peppermint and lemon balm add gentle,
+          soothing notes to each sip.</p>
         </section>
-
-        <section class="product-ingredients" itemprop="nutrition" itemscope
-          itemtype="https://schema.org/NutritionInformation">
+        <section class="product-ingredients" itemprop="nutrition" itemscope itemtype=
+        "https://schema.org/NutritionInformation">
           <h4>Ingredients</h4>
           <p itemprop="ingredients">Hibiscus, Peppermint and Lemon Balm.</p>
           <p><small>Sourced from multiple origins</small></p>
         </section>
-
         <form action="/add-to-cart" method="post" class="product-options add-to-cart">
           <fieldset>
             <legend>Product Options</legend>
-
             <div class="package-options" role="radiogroup" aria-labelledby="package-label-product-summer">
-              <h4 id="package-label-product-summer">Select Packaging</h4>
-
-              <label>
-                <input type="radio" name="package" value="pouch" checked itemprop="price" content="14.00"
-                  data-price="14.00" />
-                <span>$14.00 - 40 grams <small>(Pouch)</small></span>
-              </label>
-
-              <label>
-                <input type="radio" name="package" value="cylinder" itemprop="price" content="22.00"
-                  data-price="22.00" />
-                <span>$22.00 - 70 grams <small>(Cylinder)</small></span>
-              </label>
+              <h4 id="package-label-product-summer">Select Packaging</h4><label><input type="radio" name="package"
+              value="pouch" checked itemprop="price" content="14.00" data-price="14.00"> <span>$14.00 - 40 grams
+              <small>(Pouch)</small></span></label> <label><input type="radio" name="package" value="cylinder"
+              itemprop="price" content="22.00" data-price="22.00"> <span>$22.00 - 70 grams
+              <small>(Cylinder)</small></span></label>
             </div>
-
             <div class="quantity-selector">
-              <label for="qty-summer">Quantity:</label>
-              <select id="qty-summer" name="quantity" min="1" max="10" required>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
+              <label for="qty-summer">Quantity:</label> <select id="qty-summer" name="quantity" min="1" max="10"
+              required="">
+                <option value="1">
+                  1
+                </option>
+                <option value="2">
+                  2
+                </option>
+                <option value="3">
+                  3
+                </option>
+                <option value="4">
+                  4
+                </option>
+                <option value="5">
+                  5
+                </option>
               </select>
-            </div>
-
-            <button type="submit">Add to Cart</button>
+            </div><button>Add to Cart</button>
           </fieldset>
         </form>
-      </article>
-      <a id="lemongrass-and-ginger" class="product-anchor slug-anchor" aria-hidden="true"></a>
-      <a id="product-lemonginger-anchor" class="product-anchor"></a>
-      <article id="product-lemonginger" class="product product-card" itemprop="itemListElement" itemscope
-        itemtype="https://schema.org/Product" data-image="/assets/img/lemongrassginger1.webp"
-        data-sku="product-lemonginger">
+      </article><a id="lemongrass-and-ginger" class="product-anchor slug-anchor" aria-hidden="true"></a><a id=
+      "product-lemonginger-anchor" class="product-anchor"></a>
+      <article id="product-lemonginger" class="product product-card" itemprop="itemListElement" itemscope itemtype=
+      "https://schema.org/Product" data-image="/assets/img/lemongrassginger1.webp" data-sku="product-lemonginger">
         <header class="media">
           <figure class="product-gallery product-card__media">
-            <picture>
-              <source srcset="assets/img/lemongrassginger1.webp" type="image/webp" />
-              <img src="assets/img/lemongrassginger1.webp" alt="Lemongrass and Ginger Tea" width="300" height="300"
-                loading="lazy" itemprop="image" />
-            </picture>
-            <picture>
-              <source srcset="assets/img/lemongrassginger2.webp" type="image/webp" />
-              <img src="assets/img/lemongrassginger2.webp" alt="Lemongrass and Ginger Tea Package" width="300"
-                height="300" loading="lazy" itemprop="image" />
-            </picture>
-            <figcaption>Product images</figcaption>
+            <picture><source srcset="assets/img/lemongrassginger1.webp" type="image/webp"><img src=
+            "assets/img/lemongrassginger1.webp" alt="Lemongrass and Ginger Tea" width="300" height="300" loading="lazy"
+            itemprop="image"></picture> <picture><source srcset="assets/img/lemongrassginger2.webp" type=
+            "image/webp"><img src="assets/img/lemongrassginger2.webp" alt="Lemongrass and Ginger Tea Package" width=
+            "300" height="300" loading="lazy" itemprop="image"></picture>
+            <figcaption>
+              Product images
+            </figcaption>
           </figure>
-
           <h3 itemprop="name">Lemongrass and Ginger</h3>
-
           <div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-            <link itemprop="availability" href="https://schema.org/InStock" />
-            <meta itemprop="priceCurrency" content="AUD" />
-            <p>&#10003; <span itemprop="itemCondition">In Stock</span></p>
+            <link itemprop="availability" href="https://schema.org/InStock">
+            <meta itemprop="priceCurrency" content="AUD">
+            <p>✓ <span itemprop="itemCondition">In Stock</span></p>
           </div>
-
           <div class="reviews" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
-            <span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-            <span>(<span itemprop="ratingCount">10</span> reviews, Rating:
-              <span itemprop="ratingValue">5</span>/5)</span>
+            <span aria-hidden="true">★★★★★</span> <span>(<span itemprop="ratingCount">10</span> reviews, Rating:
+            <span itemprop="ratingValue">5</span>/5)</span>
           </div>
         </header>
-
         <section class="product-description" itemprop="description">
-          <p>
-            Aromatic and invigorating, this tea combines the zesty brightness of lemongrass with
-            the warm spice of ginger. A delightful choice for any time of the day, it can be
-            enjoyed hot to soothe and relax or iced for a refreshing pick-me-up.
-          </p>
+          <p>Aromatic and invigorating, this tea combines the zesty brightness of lemongrass with the warm spice of
+          ginger. A delightful choice for any time of the day, it can be enjoyed hot to soothe and relax or iced for a
+          refreshing pick-me-up.</p>
         </section>
-
-        <section class="product-ingredients" itemprop="nutrition" itemscope
-          itemtype="https://schema.org/NutritionInformation">
+        <section class="product-ingredients" itemprop="nutrition" itemscope itemtype=
+        "https://schema.org/NutritionInformation">
           <h4>Ingredients</h4>
           <p itemprop="ingredients">Lemongrass and Ginger.</p>
           <p><small>Sourced from multiple origins</small></p>
         </section>
-
         <form action="/add-to-cart" method="post" class="product-options add-to-cart">
           <fieldset>
             <legend>Product Options</legend>
-
             <div class="package-options" role="radiogroup" aria-labelledby="package-label-product-lemonginger">
-              <h4 id="package-label-product-lemonginger">Select Packaging</h4>
-
-              <label>
-                <input type="radio" name="package" value="pouch" checked itemprop="price" content="14.00"
-                  data-price="14.00" />
-                <span>$14.00 - 40 grams <small>(Pouch)</small></span>
-              </label>
-
-              <label>
-                <input type="radio" name="package" value="cylinder" itemprop="price" content="22.00"
-                  data-price="22.00" />
-                <span>$22.00 - 70 grams <small>(Cylinder)</small></span>
-              </label>
+              <h4 id="package-label-product-lemonginger">Select Packaging</h4><label><input type="radio" name="package"
+              value="pouch" checked itemprop="price" content="14.00" data-price="14.00"> <span>$14.00 - 40 grams
+              <small>(Pouch)</small></span></label> <label><input type="radio" name="package" value="cylinder"
+              itemprop="price" content="22.00" data-price="22.00"> <span>$22.00 - 70 grams
+              <small>(Cylinder)</small></span></label>
             </div>
-
             <div class="quantity-selector">
-              <label for="qty-lemonginger">Quantity:</label>
-              <select id="qty-lemonginger" name="quantity" min="1" max="10" required>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
+              <label for="qty-lemonginger">Quantity:</label> <select id="qty-lemonginger" name="quantity" min="1" max=
+              "10" required="">
+                <option value="1">
+                  1
+                </option>
+                <option value="2">
+                  2
+                </option>
+                <option value="3">
+                  3
+                </option>
+                <option value="4">
+                  4
+                </option>
+                <option value="5">
+                  5
+                </option>
               </select>
-            </div>
-
-            <button type="submit">Add to Cart</button>
+            </div><button>Add to Cart</button>
           </fieldset>
         </form>
       </article>
     </section>
   </main>
-
-  <hr aria-hidden="true" />
-
+  <hr aria-hidden="true">
   <div class="site-footer" itemscope itemtype="https://schema.org/WPFooter">
     <div class="container">
       <div class="branding">
         <div class="brand-text">
           <h3>Nature's Infusions</h3>
-          <p itemprop="description">
-            Premium organic teas and herbal remedies — handcrafted in Perth.
-          </p>
+          <p itemprop="description">Premium organic teas and herbal remedies — handcrafted in Perth.</p>
         </div>
       </div>
-
       <section class="quick-links-wrapper">
-        <h4>
-          <button type="button" class="accordion-toggle" aria-expanded="false" aria-controls="quick-links-panel"
-            data-controls="quick-links-panel">
-            Quick Links
-          </button>
-        </h4>
+        <h4><button type="button" class="accordion-toggle" aria-expanded="false" aria-controls="quick-links-panel"
+        data-controls="quick-links-panel">Quick Links</button></h4>
         <nav id="quick-links-panel" class="links-grid" aria-label="Quick links" aria-hidden="false">
           <ul>
-            <li><a href="/" itemprop="url">Home</a></li>
-            <li><a href="/pages/about.html" itemprop="url">About</a></li>
-            <li><a href="/pages/store.html" itemprop="url">Store</a></li>
-            <li><a href="/pages/stockists.html" itemprop="url">Stockists</a></li>
-            <li><a href="/pages/contact.html" itemprop="url">Contact &amp; Support</a></li>
-            <li><a href="/pages/terms.html" itemprop="url">Terms &amp; Conditions</a></li>
-            <li><a href="/pages/social.html" itemprop="url">Social</a></li>
+            <li>
+              <a href="/" itemprop="url">Home</a>
+            </li>
+            <li>
+              <a href="/pages/about.html" itemprop="url">About</a>
+            </li>
+            <li>
+              <a href="/pages/store.html" itemprop="url">Store</a>
+            </li>
+            <li>
+              <a href="/pages/stockists.html" itemprop="url">Stockists</a>
+            </li>
+            <li>
+              <a href="/pages/contact.html" itemprop="url">Contact & Support</a>
+            </li>
+            <li>
+              <a href="/pages/terms.html" itemprop="url">Terms & Conditions</a>
+            </li>
+            <li>
+              <a href="/pages/social.html" itemprop="url">Social</a>
+            </li>
           </ul>
         </nav>
       </section>
-
       <section>
         <h4>Connect</h4>
         <nav aria-label="Social media links">
           <ul>
             <li>
               <a class="facebook" href="https://www.facebook.com/naturesinfusions.herbaltea/" rel="noopener noreferrer"
-                itemprop="sameAs" target="_blank" aria-label="Nature's Infusions on Facebook (opens in new tab)">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-                  aria-hidden="true" focusable="false">
-                  <path
-                    d="M22 12C22 6.477 17.523 2 12 2S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878V14.89h-2.54v-2.89h2.54V9.845c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.772-1.63 1.562v1.868h2.773l-.443 2.89h-2.33v6.99C18.343 21.128 22 16.991 22 12z"
-                    fill="currentColor" />
-                </svg>
-                <span class="visually-hidden">Facebook</span>
-              </a>
+              itemprop="sameAs" target="_blank" aria-label=
+              "Nature's Infusions on Facebook (opens in new tab)"><svg width="20" height="20" viewbox="0 0 24 24" fill=
+              "none" aria-hidden="true" focusable="false">
+              <path d=
+              "M22 12C22 6.477 17.523 2 12 2S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878V14.89h-2.54V12h2.54V9.845c0-2.506 1.492-3.89 3.777-3.89 1.094.0 2.238.195 2.238.195v2.46h-1.26c-1.243.0-1.63.772-1.63 1.562v1.868h2.773l-.443 2.89h-2.33v6.99C18.343 21.128 22 16.991 22 12z"
+              fill="currentColor"></path></svg> <span class="visually-hidden">Facebook</span></a>
             </li>
             <li>
               <a class="instagram" href="https://www.instagram.com/natures_infusions_au/" rel="noopener noreferrer"
-                itemprop="sameAs" target="_blank" aria-label="Nature's Infusions on Instagram (opens in new tab)">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-                  aria-hidden="true" focusable="false">
-                  <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.5"
-                    fill="none" />
-                  <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5" fill="none" />
-                  <circle cx="17.5" cy="6.5" r="0.75" fill="currentColor" />
-                </svg>
-                <span class="visually-hidden">Instagram</span>
-              </a>
+              itemprop="sameAs" target="_blank" aria-label=
+              "Nature's Infusions on Instagram (opens in new tab)"><svg width="20" height="20" viewbox="0 0 24 24"
+              fill="none" aria-hidden="true" focusable="false">
+              <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.5" fill=
+              "none"></rect>
+              <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5" fill="none"></circle>
+              <circle cx="17.5" cy="6.5" r=".75" fill="currentColor"></circle></svg> <span class=
+              "visually-hidden">Instagram</span></a>
             </li>
           </ul>
         </nav>
       </section>
     </div>
-    <!-- Use native footer element for semantics and accessibility; footer has implicit role="contentinfo" -->
     <footer class="legal-bar" aria-label="Legal and credits">
       <div class="legal">
-        <p>&copy; <time datetime="2025">2025</time> Nature's Infusions. All rights reserved.</p>
+        <p>© <time datetime="2025">2025</time> Nature's Infusions. All rights reserved.</p>
         <p>Powered by Ultra-Simple Static EStore Framework</p>
-        <p>
-          Author: <span itemprop="author">Adrian Gallo (2MuchC0ff33)</span>
-          <a class="github" href="https://2muchc0ff33.github.io" itemprop="url" target="_blank"
-            rel="noopener noreferrer" aria-label="Adrian Gallo on GitHub (opens in new tab)">
-            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"
-              xmlns="http://www.w3.org/2000/svg">
-              <path fill="currentColor"
-                d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.38-3.88-1.38-.53-1.36-1.3-1.72-1.3-1.72-1.06-.73-.01-.73-.01-.73 1.14.08 1.74 1.17 1.74 1.17 1.04 1.78 2.7 1.27 3.36.97.1-.76.4-1.27.72-1.56-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.17-3.1-.12-.29-.51-1.44.11-3 0 0 .95-.31 3.12 1.18A10.94 10.94 0 0112 6.84c.96.005 1.92.13 2.82.38 2.16-1.5 3.11-1.18 3.11-1.18.62 1.56.23 2.71.12 3 .73.81 1.16 1.84 1.16 3.1 0 4.43-2.7 5.4-5.27 5.68.41.36.78 1.07.78 2.16 0 1.56-.01 2.82-.01 3.2 0 .31.21.67.8.56A11.5 11.5 0 0023.5 12C23.5 5.73 18.27.5 12 .5z" />
-            </svg>
-            <span class="visually-hidden">Adrian Gallo (aka 2MuchC0ff33) on GitHub</span>
-          </a>
-        </p>
-        <p>
-          Website generated:
-          <time datetime="2025-07-21" itemprop="datePublished">21/07/2025</time>
-        </p>
+        <p>Author: <span itemprop="author">Adrian Gallo (2MuchC0ff33)</span> <a class="github" href=
+        "https://2muchc0ff33.github.io" itemprop="url" target="_blank" rel="noopener noreferrer" aria-label=
+        "Adrian Gallo on GitHub (opens in new tab)"><svg viewbox="0 0 24 24" width="18" height="18" aria-hidden="true"
+        focusable="false">
+        <path fill="currentColor" d=
+        "M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56.0-.28-.01-1.02-.02-2-3.2.7-3.88-1.38-3.88-1.38-.53-1.36-1.3-1.72-1.3-1.72-1.06-.73-.01-.73-.01-.73 1.14.08 1.74 1.17 1.74 1.17 1.04 1.78 2.7 1.27 3.36.97.1-.76.4-1.27.72-1.56-2.55-.29-5.24-1.28-5.24-5.7.0-1.26.45-2.29 1.17-3.1-.12-.29-.51-1.44.11-3 0 0 .95-.31 3.12 1.18A10.94 10.94.0 0112 6.84c.96.005 1.92.13 2.82.38 2.16-1.5 3.11-1.18 3.11-1.18.62 1.56.23 2.71.12 3 .73.81 1.16 1.84 1.16 3.1.0 4.43-2.7 5.4-5.27 5.68.41.36.78 1.07.78 2.16.0 1.56-.01 2.82-.01 3.2.0.31.21.67.8.56A11.5 11.5.0 0023.5 12C23.5 5.73 18.27.5 12 .5z"></path>
+        </svg> <span class="visually-hidden">Adrian Gallo (aka 2MuchC0ff33) on GitHub</span></a></p>
+        <p>Website generated: <time datetime="2025-07-21" itemprop="datePublished">21/07/2025</time></p>
       </div>
     </footer>
   </div>
 </body>
-
 </html>
