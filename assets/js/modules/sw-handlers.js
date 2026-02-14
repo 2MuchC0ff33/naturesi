@@ -16,28 +16,34 @@ self.addEventListener('fetch', (event) => {
   // Bypass PayPal and other cross-origin payment providers entirely
   if (!url.origin.startsWith(self.location.origin) && self.__swHelpers && self.__swHelpers.isPayPal(req.url)) return; // default network handling
 
-  // Navigation requests: prefer network-first to avoid serving stale shell (fixes back+click navigation issues)
+  // Navigation requests: prefer preloadResponse (Navigation Preload API), then manual cache, then network-first
   if (req.mode === 'navigate') {
     event.respondWith((async () => {
       const url = req.url;
 
-      // Check for preloaded response in worker cache
+      // 1. Check for browser-initiated preload (Navigation Preload API)
+      try {
+        const preloadResponse = await event.preloadResponse;
+        if (preloadResponse) {
+          return preloadResponse;
+        }
+      } catch (e) { /* Ignore preload errors */ }
+
+      // 2. Check for manually preloaded response in cache
       try {
         const cache = await caches.open('navigation-preloads');
-        const preloaded = await cache.match(url);
-        if (preloaded) {
-          // Verify preload is still fresh (within 30 seconds)
-          const preloadedAt = preloaded.headers.get('sw-preloaded-at');
+        const cached = await cache.match(url);
+        if (cached) {
+          const preloadedAt = cached.headers.get('sw-preloaded-at');
           if (preloadedAt && (Date.now() - parseInt(preloadedAt, 10)) < 30000) {
-            return preloaded;
+            return cached;
           } else {
-            // Stale preload, remove it
             await cache.delete(url);
           }
         }
-      } catch (e) { /* ignore cache errors */ }
+      } catch (e) { /* Ignore cache errors */ }
 
-      // Fallback to network-first
+      // 3. Fallback to network-first
       try {
         return await self.__swHelpers.networkFirstWithTTL(req, PAGE_CACHE, 0);
       } catch (err) {

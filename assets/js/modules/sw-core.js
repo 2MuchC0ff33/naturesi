@@ -9,8 +9,8 @@ const PAGE_CACHE = 'pages-' + VERSION;
 const API_CACHE = 'api-' + VERSION;
 const IMAGE_CACHE = 'img-' + VERSION;
 
-// Navigation preload worker instance
-let navigationPreloadWorker = null;
+// Map to track active preloads for cancellation
+const activePreloads = new Map(); // url -> AbortController
 
 // Best-effort precache URLs; missing files are ignored during install via catch
 const PRECACHE_URLS = [
@@ -38,16 +38,9 @@ self.addEventListener('activate', (event) => {
     await Promise.all(keys.filter(k => ![STATIC_CACHE, PAGE_CACHE, API_CACHE, IMAGE_CACHE].includes(k)).map(k => caches.delete(k)));
     await self.clients.claim();
 
-    // Initialize navigation preload worker
-    try {
-      navigationPreloadWorker = new Worker('/assets/js/workers/navigation-preload.worker.js');
-      navigationPreloadWorker.onmessage = handleWorkerMessage;
-      navigationPreloadWorker.onerror = (error) => {
-        console.error('Navigation preload worker error:', error);
-        logError({ message: 'preload-worker-error', meta: { error: String(error) } });
-      };
-    } catch (e) {
-      console.warn('Failed to initialize navigation preload worker:', e);
+    // Enable Navigation Preload API for browser-initiated preloads
+    if ('navigationPreload' in self.registration) {
+      await self.registration.navigationPreload.enable();
     }
 
     // Try to flush any queued telemetry on activation (best-effort, only when telemetry is enabled)
@@ -55,17 +48,45 @@ self.addEventListener('activate', (event) => {
   })());
 });
 
-// Handle messages from navigation preload worker
-function handleWorkerMessage(e) {
-  const { type, url, id, error } = e.data;
-  // Handle worker messages (can be extended for logging/metrics)
-  if (type === 'PRELOAD_FAILED') {
-    logError({ message: 'navigation-preload-failed', url, meta: { error } });
+function isPayPal(url) {
+  try { const u = new URL(url); return /paypal\.com$/.test(u.hostname); } catch (e) { return false; }
+}
+
+// Function to handle on-demand navigation preloading in SW
+async function preloadNavigation(url, id) {
+  // Cancel any existing preload for this URL
+  cancelPreload(url);
+
+  const controller = new AbortController();
+  activePreloads.set(url, controller);
+
+  try {
+    const response = await fetch(url, { signal: controller.signal, credentials: 'same-origin' });
+    if (response.ok) {
+      const cache = await caches.open('navigation-preloads');
+      const headers = new Headers(response.headers);
+      headers.set('sw-preloaded-at', Date.now().toString());
+      const cachedResponse = new Response(response.clone().body, {
+        status: response.status,
+        statusText: response.statusText,
+        headers
+      });
+      await cache.put(url, cachedResponse);
+    }
+  } catch (e) {
+    // Ignore errors (e.g., aborted or network failure)
+  } finally {
+    activePreloads.delete(url);
   }
 }
 
-function isPayPal(url) {
-  try { const u = new URL(url); return /paypal\.com$/.test(u.hostname); } catch (e) { return false; }
+// Function to cancel an active preload
+function cancelPreload(url) {
+  const controller = activePreloads.get(url);
+  if (controller) {
+    controller.abort();
+    activePreloads.delete(url);
+  }
 }
 
 async function cacheFirst(req, cacheName) {
@@ -194,26 +215,10 @@ self.addEventListener('message', (evt) => {
     telemetryFlush().catch(() => { });
   }
   if (data.type === 'PRELOAD_NAVIGATION' && data.url) {
-    if (navigationPreloadWorker) {
-      navigationPreloadWorker.postMessage({
-        type: 'PRELOAD',
-        url: data.url,
-        id: data.id,
-        priority: data.priority || 'normal'
-      });
-    }
+    preloadNavigation(data.url, data.id);
   }
   if (data.type === 'CANCEL_PRELOAD' && data.url) {
-    if (navigationPreloadWorker) {
-      navigationPreloadWorker.postMessage({ type: 'CANCEL', url: data.url });
-    }
-  }
-  if (data.type === 'SW_TERMINATING') {
-    if (navigationPreloadWorker) {
-      navigationPreloadWorker.postMessage({ type: 'CLEANUP' });
-      navigationPreloadWorker.terminate();
-      navigationPreloadWorker = null;
-    }
+    cancelPreload(data.url);
   }
   // Allow pages to request a prefetch into the page cache
   if (data.type === 'PREFETCH_PAGE' && data.href) {
