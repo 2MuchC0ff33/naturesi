@@ -1,4 +1,4 @@
-(function(){
+(()=> {
   document.addEventListener('DOMContentLoaded', async ()=>{
     try {
       await window.PricingIndex.load();

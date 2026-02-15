@@ -1,7 +1,7 @@
 // Small event delegation and key helper utilities
 export function delegate(container = document, eventType, selector, handler) {
   if (!container || !container.addEventListener) return () => {};
-  const listener = function (e) {
+  const listener = (e) => {
     try {
       const match = e.target && e.target.closest ? e.target.closest(selector) : null;
       if (!match) return;
@@ -20,7 +20,7 @@ export function delegate(container = document, eventType, selector, handler) {
 // Add a simple keydown map helper. Returns a remover function.
 export function addKeyListener(container = document, map = {}) {
   if (!container || !container.addEventListener) return () => {};
-  const listener = function (e) {
+  const listener = (e) => {
     try {
       if (e && e.key && map[e.key]) {
         map[e.key](e);
