@@ -139,7 +139,7 @@ export async function runCheckout({
     summary.innerHTML = fallbackHtml;
   }
 
-  function escapeHtml(s){ return String(s||'').replace(/[&<>"']/g, function(c){ return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;"})[c]; }); }
+  function escapeHtml(s){ return String(s||'').replace(/[&<>"']/g, (c)=> ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;"})[c]); }
 
 
   // Ensure simple redirect form is populated even if PayPal SDK fails
@@ -302,7 +302,7 @@ export async function setupPaypalRedirect(documentRoot, cart, shipping = 0, fetc
   if (btn) {
     btn.disabled = false;
     // Refresh values just before submit
-    form.addEventListener('submit', function () {
+    form.addEventListener('submit', () => {
       if (amountInput) amountInput.value = (computeGrandTotal(cart) + Number(shipping || 0)).toFixed(2);
       if (itemNameInput) itemNameInput.value = computeItemLabel(cart);
     });

@@ -1,4 +1,4 @@
-(function(){
+(()=> {
   let _index = null; // Map by sku and id
   let _list = null;
   let _loading = null;

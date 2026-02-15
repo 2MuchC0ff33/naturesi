@@ -1,7 +1,7 @@
 // Minimal checkout bootstrap moved out of HTML to satisfy inline-script policy
 import { parseWeightString, calculateShippingByWeight } from './cartStore.js';
 
-(function(){
+(()=> {
   const calcEl = document.querySelector('[data-checkout-summary]');
   const form = document.querySelector('form[data-checkout-form]');
   const methodRadios = document.querySelectorAll('input[name="paymentMethod"]');
@@ -41,7 +41,7 @@ import { parseWeightString, calculateShippingByWeight } from './cartStore.js';
     const id = String(Date.now());
     const cart = await canonicalCart();
 
-    return new Promise((resolve) => {
+    return new Promise(async (resolve) => {
       if (window.WorkerRegistry && window.WorkerRegistry.supports.worker){
         const w = window.WorkerRegistry.createWorker('/assets/js/workers/price-calculator.worker.js');
         if (w){
@@ -108,7 +108,7 @@ import { parseWeightString, calculateShippingByWeight } from './cartStore.js';
   }
 
   if (form){
-    form.addEventListener('submit', async function(ev){
+    form.addEventListener('submit', async (ev)=> {
       const method = currentPaymentMethod();
       if (method === 'paypal') {
         const sum = await recalcAndRender();
