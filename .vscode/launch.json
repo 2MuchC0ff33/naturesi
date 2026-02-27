@@ -1,18 +1,1 @@
-{
-  "version": "1.0.0",
-  "configurations": [
-    {
-      "name": "Launch Chrome",
-      "request": "launch",
-      "type": "chrome",
-      "runtimeExecutable": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
-      "url": "http://localhost:8000",
-      "webRoot": "${workspaceFolder}",
-      "userDataDir": "${workspaceFolder}/.vscode/chrome",
-      "postDebugTask": "stop-httpd",
-      "runtimeArgs": [
-        "--incognito"
-      ]
-    }
-  ]
-}
+{}

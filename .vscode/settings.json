@@ -30,7 +30,7 @@
       ],
       "env": {
         "BASH": "/usr/bin/bash",
-        "PATH": "/usr/sbin:/cygdrive/c/Users/galloa/scoop/shims:/cygdrive/c/Users/galloa/scoop/apps/nodejs/current:/cygdrive/c/Users/galloa/scoop/apps/nodejs/current/bin:$PATH"
+        "PATH": "/usr/sbin:/cygdrive/c/Users/galloa/scoop/shims:$PATH"
       }
     }
   },
