@@ -32,6 +32,11 @@ Autoprefixer 10.4.27
 
 Stylelint 17.4.0
 
+A minimal `stylelint.config.cjs` is included in the project root so the
+VS Code stylelint extension does not attempt to read `package.json` (see
+error “Invalid package config” on Windows).  Customize the configuration
+as needed.
+
 ### Javascript
 
 ECMA-262 16th edition June 2025 (ECMAScript® 2025)

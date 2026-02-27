@@ -39,7 +39,6 @@ node tests/check_csaf.js
 
 ## Notes
 
-- The current implementation uses `https://www.example.com` as a placeholder
   domain; replace with the real host when deploying.
 - If the publishing authority changes DNS, update the metadata accordingly and
   adjust any aggregator flags.
