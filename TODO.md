@@ -39,6 +39,10 @@
     *   Colour system and gradients
     *   Spacing and typography scales
     *   Shadows, easing curves, and animations
+*  **PicoCSS** globally for:
+    *   Base typographic styles, lightweight form controls, and accessible components.
+    *   Rapid prototyping and a minimal reset layer so custom tokens and utilities can override.
+    *   Imported as a foundational base (import pico first), with overrides applied via Open Props and project Sass.
 *   PostCSS + Autoprefixer.
 *   Tokens exposed via CSS Custom Properties.
 *   Optional: CSS Typed OM + Properties & Values API, CSS Font Loading API.
@@ -135,6 +139,7 @@
 *   Convert `assets/css/main.css` → `assets/css/main.scss`
 *   Create `assets/css/partials/` and token mapping file
 *   Add Open Props via pnpm
+*   Add pico.css (via pnpm) and include it in the build
 *   `views/layout.php`, `views/partials/` (head/meta, header, footer)
 *   Promote 8 pilot pages into Plates templates:
     *   `index`, `accessories`, `wellness-blends`, `cart`, `checkout`, `about`, `contact`, `success`
@@ -148,6 +153,7 @@
     Ensure that `postcss-import` runs *before* Autoprefixer so vendor prefixes
     are added to inlined rules from the partials rather than just the root file.
 *   Import **Open Props** tokens in `main.scss`; expose CSS custom properties.
+*   Import `pico.css` into `main.scss` (import pico first, then Open Props, then custom partials) so base styles load before tokens and overrides.
 *   Optionally enable **CSS Typed OM**, **Properties & Values API**, **CSS Font Loading** where supported.
 
 **Outcome**
