@@ -15,7 +15,16 @@ try {
     console.error('✗ build output contains a source map reference');
     process.exit(1);
   }
-  console.log('✓ build output contains no @import from partials and no source map');
+
+  // sanity check that autoprefixer actually inserted at least one
+  // vendor prefix.  A missing prefix usually means the plugin order
+  // is wrong or the plugin wasn’t enabled.
+  if (!/-(webkit|moz|ms|o)-/.test(out)) {
+    console.error('✗ build output has no vendor prefixes (autoprefixer may not have run)');
+    process.exit(1);
+  }
+
+  console.log('✓ build output contains no @import from partials, no source map, and has prefixes');
 } catch (e) {
   console.error('error during css build check', e);
   process.exit(1);

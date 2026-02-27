@@ -128,7 +128,7 @@ To get up and running in a fresh clone:
    ```
 4. Build front‑end assets:
    ```sh
-   pnpm run build:css && pnpm run build:ts
+   pnpm run build:css && pnpm run build:ts  # build:css uses postcss-import to inline partials, then autoprefixer to add vendor prefixes
    ```
    The resulting CSS and JS files land in `public/assets` but do not modify any
    existing page markup. The intermediary `assets/css/output.css` file is
