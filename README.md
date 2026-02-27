@@ -131,7 +131,9 @@ To get up and running in a fresh clone:
    pnpm run build:css && pnpm run build:ts
    ```
    The resulting CSS and JS files land in `public/assets` but do not modify any
-   existing page markup. No user‑facing changes occur in Phase 0.
+   existing page markup. The intermediary `assets/css/output.css` file is
+   generated during the build for local debugging but is **not** tracked in
+   source control (see `.gitignore`). No user‑facing changes occur in Phase 0.
 5. (Optional) if you create a `.env` file at the project root, it will be
    parsed during bootstrap and the values become available via `getenv()`,
    `$_ENV` and `$_SERVER`. A simple parser is included so no additional

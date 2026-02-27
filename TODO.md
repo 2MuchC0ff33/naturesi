@@ -142,7 +142,8 @@
 **Actions**
 
 *   Integrate **Slim** routing for the pilot pages and fragment endpoints.
-*   Wire npm scripts: `build:css`, `watch:css` (dart‑sass + PostCSS/Autoprefixer).  CSS build already uses `postcss-import` so
+*   Wire npm scripts: `build:css`, `watch:css` (dart‑sass + PostCSS/Autoprefixer).  CSS build already uses `postcss-import` so (note: builds now create
+    a temporary `assets/css/output.css` which is gitignored),
     partials referenced from `assets/css/main.css` are bundled at build time.
 *   Import **Open Props** tokens in `main.scss`; expose CSS custom properties.
 *   Optionally enable **CSS Typed OM**, **Properties & Values API**, **CSS Font Loading** where supported.

@@ -12,6 +12,9 @@ build/
 .vscode/chrome
 .dist/
 
+# generated CSS output – built during development and intentionally ignored
+assets/css/output.css
+
 # PHP/Composer
 vendor/
 composer.lock
