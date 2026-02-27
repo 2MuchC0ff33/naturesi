@@ -1,8 +1,5 @@
 {
   "harper.markdown.IgnoreLinkTitle": true,
-  "terminal.integrated.env.windows": {
-    "CHERE_INVOKING": "1"
-  },
   "editor.rulers": [
     80
   ],
@@ -21,18 +18,18 @@
     "**/node_modules": true,
     "**/.vscode": false
   },
-  "terminal.integrated.defaultProfile.windows": "Cygwin",
   "terminal.integrated.profiles.windows": {
     "Cygwin": {
-      "path": "C:\\Users\\galloa\\scoop\\shims\\cygwin.exe",
+      "path": "C:\\Users\\galloa\\scoop\\persist\\cygwin\\root\\bin\\sh.exe",
       "args": [
+        "-l",
         "-i"
       ],
       "env": {
-        "BASH": "/usr/bin/bash",
-        "PATH": "/usr/sbin:/cygdrive/c/Users/galloa/scoop/shims:$PATH"
-      }
+        "CHERE_INVOKING": "1"
+      },
+      "cwd": "${workspaceFolder}"
     }
   },
-  "terminal.integrated.shellIntegration.enabled": true
+  "postcssense.cssPath": "C:\\Users\\galloa\\scoop\\persist\\cygwin\\root\\home\\galloa\\GitHub\\personal\\naturesi\\node_modules\\postcss",
 }
