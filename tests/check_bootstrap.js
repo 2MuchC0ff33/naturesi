@@ -26,4 +26,8 @@ try {
 output = output.trim();
 assert(output === 'ok', `bootstrap did not load TEST_BOOTSTRAP (got '${output}')`);
 
+// ensure branch marker is present
+const used = execSync("php -r \"require 'php/bootstrap.php'; echo getenv('DOTENV_USED');//\"", { encoding: 'utf-8' }).trim();
+assert(used === '1', 'expected phpdotenv branch to run');
+
 console.log('bootstrap dotenv loading works');

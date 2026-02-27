@@ -36,13 +36,17 @@ fs.writeFileSync('.env', 'TEST_BOOTSTRAP=ok\n', 'utf-8');
 
 let output;
 try {
-  output = execSync("php -r \"require 'php/bootstrap.php'; echo getenv('DOTENV_USED');\"", { encoding: 'utf-8' });
+  // verify both that the branch ran and that getenv() sees the key
+  output = execSync("php -r \"require 'php/bootstrap.php'; echo getenv('TEST_BOOTSTRAP');\"", { encoding: 'utf-8' });
 } catch (e) {
   console.error('php command failed:', e.message);
   process.exit(1);
 }
 
 output = output.trim();
-assert(output === '1', `bootstrap did not invoke Dotenv branch (got '${output}')`);
+assert(output === 'ok', `bootstrap did not load TEST_BOOTSTRAP (got '${output}')`);
+
+const used = execSync("php -r \"require 'php/bootstrap.php'; echo getenv('DOTENV_USED');\"", { encoding: 'utf-8' }).trim();
+assert(used === '1', 'expected phpdotenv branch to run');
 
 console.log('bootstrap dotenv loading works');

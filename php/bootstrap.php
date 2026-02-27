@@ -27,11 +27,30 @@ if ($path !== false && $path !== '') {
 
 if (file_exists(__DIR__ . '/../.env')) {
   if (class_exists('Dotenv\\Dotenv')) {
-    // composer-installed dotenv is available
-    // Reference the class name as a string to avoid static-analysis
-    // warnings about an undefined type while still calling it at runtime.
+    // composer-installed dotenv is available.  The real library reads the
+    // file and then writes variables into $_ENV/$_SERVER but (by design)
+    // doesn’t call putenv().  Since some callers (and our tests) expect
+    // getenv() to work, we mirror the results here and set a marker
+    // variable so automated checks can tell which branch executed.
     $dotenvClass = 'Dotenv\\Dotenv';
-    $dotenvClass::createImmutable(__DIR__ . '/../')->load();
+    // load() returns the array of variables it wrote.  Accept anything but
+    // treat non-array results as an empty set (the stub in tests uses
+    // this behaviour).
+    $loaded = $dotenvClass::createImmutable(__DIR__ . '/../')->load();
+    if (is_array($loaded)) {
+      foreach ($loaded as $k => $v) {
+        if ($v !== null) {
+          putenv("$k=$v");
+          $_ENV[$k] = $v;
+          $_SERVER[$k] = $v;
+        }
+      }
+    }
+
+    // mark that the phpdotenv branch executed
+    putenv('DOTENV_USED=1');
+    $_ENV['DOTENV_USED'] = '1';
+    $_SERVER['DOTENV_USED'] = '1';
   } else {
     // naive parser fallback
     $lines = file(__DIR__ . '/../.env', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);

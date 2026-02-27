@@ -143,7 +143,7 @@ To get up and running in a fresh clone:
 7. A quick sanity check script is provided (run from the repository root):
    ```sh
    node tests/check_csaf.js       # validates CSAF/security.txt metadata
-   node tests/check_bootstrap.cjs # verifies php/bootstrap.php prefers phpdotenv
+   node tests/check_bootstrap.cjs # verifies php/bootstrap.php prefers phpdotenv and makes values available via getenv()
    ```
 
    You can also execute the PHP unit test via Composer after installing dev
