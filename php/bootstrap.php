@@ -2,6 +2,17 @@
 // php/bootstrap.php
 // Optional bootstrap: set PHP include_path from environment variable.
 // Include this early in your app (e.g., public/index.php) or via auto_prepend_file.
+//
+// When Composer is installed, some callers execute this file standalone
+// (notably the post-install-cmd script).  In those cases the autoloader
+// isn’t yet loaded and class_exists('Dotenv\\Dotenv') will always return
+// false, causing the naive .env parser to be used.  Load the autoloader if
+// it’s present so dependencies like vlucas/phpdotenv are discoverable.
+
+$autoload = __DIR__ . '/../vendor/autoload.php';
+if (is_readable($autoload)) {
+  require_once $autoload;
+}
 
 $path = getenv('PHP_INCLUDE_PATH');
 if ($path !== false && $path !== '') {

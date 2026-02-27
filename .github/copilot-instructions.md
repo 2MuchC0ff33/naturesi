@@ -34,6 +34,8 @@ Purpose: provide concise, actionable guidance so an AI coding agent is immediate
 	- [tsconfig.json](tsconfig.json) — TypeScript outputs.
 	- `js/data/` and `js/modules/` — runtime data and logic boundaries.
 	- [tests/check_csaf.js](tests/check_csaf.js) — example test harness (run with Node).
+- [tests/check_bootstrap.cjs](tests/check_bootstrap.cjs) — ensures `php/bootstrap.php` loads phpdotenv when available.
+- [tests/BootstrapTest.php](tests/BootstrapTest.php) — PHPUnit wrapper for the same check (requires phpunit).
 
 - **Examples / snippets to follow**
 	- To rebuild styles: `pnpm run build:css` (produces `public/assets/css/main.css`). See `package.json` script.

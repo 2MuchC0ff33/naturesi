@@ -140,9 +140,23 @@ To get up and running in a fresh clone:
 6. Verify the bootstrap working by opening `public/index.php` in a browser or
    running `php -S localhost:8000 -t public` and visiting
    `http://localhost:8000`. You should see the placeholder message.
-7. A quick sanity check script is provided:
+7. A quick sanity check script is provided (run from the repository root):
    ```sh
-   node tests/check_csaf.js
+   node tests/check_csaf.js       # validates CSAF/security.txt metadata
+   node tests/check_bootstrap.cjs # verifies php/bootstrap.php prefers phpdotenv
+   ```
+
+   You can also execute the PHP unit test via Composer after installing dev
+   dependencies:
+   ```sh
+   composer install --dev
+   composer test       # runs phpunit on tests/BootstrapTest.php
+   ```
+   If the required PHP extensions aren't installed (xmlwriter, tokenizer, etc.)
+   Composer may be unable to install phpunit and `composer test` will simply
+   print a message and exit.  In that case fall back to the JavaScript check:
+   ```sh
+   node tests/check_bootstrap.cjs
    ```
 
 > The `pages/` directory still contains the original static HTML; we won’t

@@ -52,10 +52,19 @@
       "NatureSI\\": "php/"
     }
   },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9"
+  },
   "scripts": {
     "post-install-cmd": [
       "@php php/bootstrap.php"
-    ]
+    ],
+    "test": "php tests/run-tests.php"
   },
   "minimum-stability": "stable",
   "prefer-stable": true
