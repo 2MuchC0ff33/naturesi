@@ -24,6 +24,11 @@ Autoprefixer 10.4.27
   (bundles `@import`‑ed partials) and then autoprefixer, producing a single
   deployable stylesheet under `public/assets/css/main.css`.  The input file is
   `assets/css/main.css` which only contains an ordered list of partial imports.
+  A post-build validation step (`node tests/check_css_build.cjs`) is executed
+  automatically; it fails if any `@import` referencing the `partials/` tree
+  remains or if autoprefixer appears not to have run. this prevents the
+  disastrous case where a browser would request a missing partial and get a
+  404 when `public/` is served as the document root.
 
 Stylelint 17.4.0
 

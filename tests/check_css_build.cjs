@@ -1,11 +1,16 @@
 #!/usr/bin/env node
-// simple validation that build:css inlines all partial imports
+// simple validation that build:css inlines all partial imports. this
+// prevents a deployed site from shipping a stylesheet that still references
+// `partials/...` paths, which would 404 when `public/` serves as the docroot.
+// the script is invoked automatically by the npm build command and can also
+// be run standalone via `pnpm run verify:css`.
 const { execSync } = require('child_process');
 const { readFileSync } = require('fs');
 
 try {
-  console.log('running build:css...');
-  execSync('pnpm run build:css', { stdio: 'inherit' });
+  // caller (usually the build script) is responsible for producing
+  // public/assets/css/main.css before executing this check. when run
+  // standalone the user should ensure the file already exists.
   const out = readFileSync('public/assets/css/main.css', 'utf-8');
   if (/\@import\s+url\(['\"]?partials\//.test(out)) {
     console.error('✗ build output still contains partial imports');

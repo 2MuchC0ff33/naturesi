@@ -5,7 +5,8 @@
   "description": "Nature's Infusions static e-commerce site",
   "author": "2MuchC0ff33",
   "scripts": {
-    "build:css": "postcss assets/css/main.css -o public/assets/css/main.css",
+    "build:css": "postcss assets/css/main.css -o public/assets/css/main.css && node tests/check_css_build.cjs",
+    "verify:css": "node tests/check_css_build.cjs",
     "build:ts": "tsc"
   },
   "dependencies": {
