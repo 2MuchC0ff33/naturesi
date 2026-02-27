@@ -19,6 +19,12 @@ Sass 1.97.3
 
 PostCSS 8.5.6
 Autoprefixer 10.4.27
+
+* Build script (`pnpm run build:css`) runs PostCSS with `postcss-import` first
+  (bundles `@import`‑ed partials) and then autoprefixer, producing a single
+  deployable stylesheet under `public/assets/css/main.css`.  The input file is
+  `assets/css/main.css` which only contains an ordered list of partial imports.
+
 Stylelint 17.4.0
 
 ### Javascript

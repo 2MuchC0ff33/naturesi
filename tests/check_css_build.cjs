@@ -15,7 +15,17 @@ try {
     console.error('✗ build output contains a source map reference');
     process.exit(1);
   }
-  console.log('✓ build output contains no @import from partials and no source map');
+
+  /* ensure a vendor prefix made it into the generated file so autoprefixer
+     actually ran. the sample value comes from main.css partials (e.g. flex
+     or gradient rules). */
+  if (!/-webkit-/.test(out)) {
+    console.error('✗ build output does not appear to have any vendor prefixes');
+    process.exit(1);
+  }
+
+  console.log('✓ build output contains no @import from partials, no source map,' +
+              ' and includes vendor prefixes');
 } catch (e) {
   console.error('error during css build check', e);
   process.exit(1);

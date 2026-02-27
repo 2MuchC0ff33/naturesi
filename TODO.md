@@ -145,6 +145,8 @@
 *   Wire npm scripts: `build:css`, `watch:css` (dart‑sass + PostCSS/Autoprefixer).  CSS build already uses `postcss-import` so (note: builds now create
     a temporary `assets/css/output.css` which is gitignored),
     partials referenced from `assets/css/main.css` are bundled at build time.
+    Ensure that `postcss-import` runs *before* Autoprefixer so vendor prefixes
+    are added to inlined rules from the partials rather than just the root file.
 *   Import **Open Props** tokens in `main.scss`; expose CSS custom properties.
 *   Optionally enable **CSS Typed OM**, **Properties & Values API**, **CSS Font Loading** where supported.
 
