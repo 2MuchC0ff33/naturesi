@@ -113,6 +113,37 @@ Memcached 1.6.40
 [Composer JSON Schema](https://getcomposer.org/schema.json)
 [security.txt - RFC 9116 A File Format to Aid in Security Vulnerability Disclosure](https://www.rfc-editor.org/rfc/rfc9116)
 
+## Development setup
+
+To get up and running in a fresh clone:
+
+1. Ensure PHP 8.1 or later is installed, along with [Composer](https://getcomposer.org/).
+2. From the project root run:
+   ```sh
+   composer install           # installs PHP dependencies and runs bootstrap
+   ```
+3. Install Node.js (v25 recommended) and a package manager such as PNPM or npm.
+   ```sh
+   pnpm install               # or `npm install` if PNPM is unavailable
+   ```
+4. Build front‑end assets:
+   ```sh
+   pnpm run build:css && pnpm run build:ts
+   ```
+   The resulting CSS and JS files land in `public/assets` but do not modify any
+   existing page markup. No user‑facing changes occur in Phase 0.
+5. Verify the bootstrap working by opening `public/index.php` in a browser or
+   running `php -S localhost:8000 -t public` and visiting
+   `http://localhost:8000`. You should see the placeholder message.
+6. A quick sanity check script is provided:
+   ```sh
+   node tests/check_csaf.js
+   ```
+
+> The `pages/` directory still contains the original static HTML; we won’t
+> touch those files until later phases.
+
+
 ## Contributing
 
 Contributions are welcome!  Please read [CONTRIBUTING](CONTRIBUTING) for
