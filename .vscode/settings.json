@@ -1,8 +1,5 @@
 {
   "harper.markdown.IgnoreLinkTitle": true,
-  "terminal.integrated.env.windows": {
-    "CHERE_INVOKING": "1"
-  },
   "editor.rulers": [
     80
   ],
@@ -21,18 +18,10 @@
     "**/node_modules": true,
     "**/.vscode": false
   },
-  "terminal.integrated.defaultProfile.windows": "Cygwin",
-  "terminal.integrated.profiles.windows": {
-    "Cygwin": {
-      "path": "C:\\Users\\galloa\\scoop\\shims\\cygwin.exe",
-      "args": [
-        "-i"
-      ],
-      "env": {
-        "BASH": "/usr/bin/bash",
-        "PATH": "/usr/sbin:/cygdrive/c/Users/galloa/scoop/shims:$PATH"
-      }
-    }
-  },
-  "terminal.integrated.shellIntegration.enabled": true
+  // machine-specific terminal profiles should live in a local
+  // override file (see README). kept here only so the JSON stays valid
+  "terminal.integrated.profiles.windows": {},
+  "postcssense.cssPath": "./node_modules/postcss",
+  "php.validate.executablePath": "/usr/bin/php",
+  "intelephense.environment.phpVersion": "8.1.28"
 }

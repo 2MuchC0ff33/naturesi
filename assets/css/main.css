@@ -6,6 +6,13 @@
    assets/css/partials/. The order is important: variables must be imported
    first so other partials can reference CSS custom properties.
 
+   *IMPORTANT*: this stylesheet is never served directly. the build pipeline
+   (see `package.json`/"build:css") uses postcss-import to inline every
+   @import and produces a single bundle at public/assets/css/main.css. a
+   post‑build sanity check (`tests/check_css_build.cjs`) runs automatically
+   to catch stray imports, preventing runtime 404s. do not add rules directly
+   to the output file.
+
    To add or modify styles, create or edit the relevant partial in
    assets/css/partials/ and keep the import order in this file.
 

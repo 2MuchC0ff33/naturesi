@@ -4,11 +4,16 @@
   "type": "module",
   "description": "Nature's Infusions static e-commerce site",
   "author": "2MuchC0ff33",
-  "scripts": {},
+  "scripts": {
+    "build:css": "postcss assets/css/main.css -o public/assets/css/main.css && node tests/check_css_build.cjs",
+    "verify:css": "node tests/check_css_build.cjs",
+    "build:ts": "tsc"
+  },
   "dependencies": {
     "assemblyscript": "^0.28.9",
     "autoprefixer": "^10.4.27",
     "postcss": "^8.5.6",
+    "postcss-import": "^15.1.0",
     "stylelint": "^17.4.0",
     "typescript": "^5.9.3"
   },

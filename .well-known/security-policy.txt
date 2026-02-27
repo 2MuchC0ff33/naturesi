@@ -1,0 +1,10 @@
+# Security Policy
+This text file is here to point automated tools and visitors at our
+vulnerability disclosure/security policy.
+
+See the full policy on GitHub:
+
+https://github.com/2MuchC0ff33/naturesi/blob/main/SECURITY.md
+
+> Please report security issues according to the procedures described in
+> that document.

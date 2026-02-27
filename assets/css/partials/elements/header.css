@@ -450,7 +450,6 @@ body.nav-open {
     flex: 0 0 auto;
   }
 }
-}
 
 /* Small-screen overflow safeguards: prevent horizontal scrolling caused by
    elements with fixed/min-widths or viewport-width calculations. These are

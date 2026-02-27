@@ -3,6 +3,8 @@ package-lock.json
 !.vscode/
 .idea/
 .DS_Store
+# local VS Code overrides; each developer can create their own
+.vscode/settings.local.json
 dist/
 build/
 .cache/
@@ -11,3 +13,11 @@ build/
 *.log
 .vscode/chrome
 .dist/
+
+# generated CSS output – built during development and intentionally ignored
+assets/css/output.css
+
+# PHP/Composer
+vendor/
+composer.lock
+.phpunit.result.cache

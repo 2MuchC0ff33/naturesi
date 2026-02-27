@@ -8,6 +8,7 @@ Describe the changes in this PR and the problem it solves.
 - [ ] I have validated HTML and JSON where relevant
 - [ ] I have tested locally (see testing notes below)
 - [ ] This change does not affect payments or cart flow, or I have requested manual review if it does
+- [ ] I have signed the [Contributor License Agreement](../CLA.md) or added a `Signed-off-by:` line to each commit
 
 Manual review required: changes touching `pages/store.html`, `products.json` or `/add-to-cart` MUST NOT be merged without 2MuchC0ff33 approval.
 

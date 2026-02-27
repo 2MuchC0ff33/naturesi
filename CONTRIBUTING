@@ -44,6 +44,25 @@ Thank you for your interest in contributing! Your help is greatly appreciated. P
 
 Please note that this project is governed by a [Code of Conduct](CODE_OF_CONDUCT). By participating, you agree to abide by its terms.
 
+## Legal & Licensing
+
+Contributions to this repository are made under the terms of the project's
+open source licence (see `LICENSE`).  Nature's Infusions retains copyright in
+the code it owns.  Before your pull request can be merged you must either:
+
+1. Sign the repository's [Contributor License Agreement](CLA.md) via GitHub (a
+   button will appear on your pull request) or
+2. Include a **Developer Certificate of Origin** sign‑off line in each commit
+   (`Signed-off-by: Your Name <you@example.com>`).
+
+The CLA grants the maintainers a perpetual, worldwide, royalty-free licence to
+use your work under the project licence and confirms you have the right to
+contribute.  The DCO is a lightweight alternative; either is sufficient, but
+you may choose to do both.
+
+If you have questions about this process or need assistance, please open an
+issue.
+
 ## Reporting Issues
 
 If you find a bug or have a feature request, please open an issue with a clear description and steps to reproduce if applicable.

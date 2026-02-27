@@ -103,6 +103,11 @@
 
 #### Phase 0 — Baseline & Guardrails (Week 1)
 
+> **Note:** Local helper scripts (`*-wrapper.sh`) have been moved out of the repository to `~/.local/share/wrappers` and consolidated into a single `windows-executable-wrapper.sh` with symlinks in `~/.local/bin`. The `tools/` directory no longer contains those wrappers.
+>
+> The unified wrapper has since been expanded to cover additional Windows executables (`ssh`, `python`, `go`, `shellcheck`) using the same dispatch mechanism; corresponding symlinks were created in `~/.local/bin`. All scripts are written with shellcheck‑friendly quoting and `exec` calls to eliminate lint warnings.
+
+
 **Files**
 
 *   `composer.json`
@@ -129,7 +134,7 @@
 
 *   Convert `assets/css/main.css` → `assets/css/main.scss`
 *   Create `assets/css/partials/` and token mapping file
-*   Add Open Props via npm
+*   Add Open Props via pnpm
 *   `views/layout.php`, `views/partials/` (head/meta, header, footer)
 *   Promote 8 pilot pages into Plates templates:
     *   `index`, `accessories`, `wellness-blends`, `cart`, `checkout`, `about`, `contact`, `success`
@@ -137,7 +142,11 @@
 **Actions**
 
 *   Integrate **Slim** routing for the pilot pages and fragment endpoints.
-*   Wire npm scripts: `build:css`, `watch:css` (dart‑sass + PostCSS/Autoprefixer).
+*   Wire npm scripts: `build:css`, `watch:css` (dart‑sass + PostCSS/Autoprefixer).  CSS build already uses `postcss-import` so (note: builds now create
+    a temporary `assets/css/output.css` which is gitignored),
+    partials referenced from `assets/css/main.css` are bundled at build time.
+    Ensure that `postcss-import` runs *before* Autoprefixer so vendor prefixes
+    are added to inlined rules from the partials rather than just the root file.
 *   Import **Open Props** tokens in `main.scss`; expose CSS custom properties.
 *   Optionally enable **CSS Typed OM**, **Properties & Values API**, **CSS Font Loading** where supported.
 
@@ -281,8 +290,8 @@
 
 **Build checks**
 
-*   `npm run build:css` produces expected `main.css`.
-*   `npm run build:ts` compiles TypeScript without warnings.
+*   `pnpm run build:css` produces expected `main.css`.
+*   `pnpm run build:ts` compiles TypeScript without warnings.
 
 **HTMX endpoints**
 
@@ -345,7 +354,7 @@
 
 ***
 
-### 6) Example NPM Scripts (Illustrative)
+### 6) Example PNPM Scripts (Illustrative)
 
 ```json
 {

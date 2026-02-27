@@ -1,0 +1,71 @@
+{
+  "name": "2muchc0ff33/naturesi",
+  "description": "Nature’s\u2024Infusions",
+  "version": "1.0.0",
+  "type": "project",
+  "keywords": [
+    "nature",
+    "botanical",
+    "infusions",
+    "herbal",
+    "wellness",
+    "tea",
+    "naturopathy",
+    "natural-remedies",
+    "naturesi"
+  ],
+  "homepage": "https://naturesinfusions.com.au/",
+  "readme": "README.md",
+  "time": "2026-02-27",
+  "license": "ISC",
+  "authors": [
+    {
+      "name": "2MuchC0ff33",
+      "email": "65397884+2MuchC0ff33@users.noreply.github.com",
+      "homepage": "https://2muchc0ff33.github.io/",
+      "role": "Developer"
+    }
+  ],
+  "support": {
+    "email": "65397884+2MuchC0ff33@users.noreply.github.com",
+    "issues": "https://github.com/2MuchC0ff33/naturesi/issues",
+    "forum": "https://github.com/2MuchC0ff33/naturesi/discussions",
+    "wiki": "https://github.com/2MuchC0ff33/naturesi/wiki",
+    "source": "https://github.com/2MuchC0ff33/naturesi",
+    "docs": "https://naturesinfusions.com.au/docs",
+    "security": "https://naturesinfusions.com.au/.well-known/security.txt"
+  },
+  "funding": [
+    {
+      "type": "github",
+      "url": "https://github.com/2MuchC0ff33/naturesi/blob/main/.github/FUNDING.yml"
+    }
+  ],
+  "require": {
+    "php": ">=8.1.28",
+    "slim/slim": "^4.10",
+    "league/plates": "^3.4",
+    "vlucas/phpdotenv": "^5.6"
+  },
+  "autoload": {
+    "psr-4": {
+      "NatureSI\\": "php/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9"
+  },
+  "scripts": {
+    "post-install-cmd": [
+      "@php php/bootstrap.php"
+    ],
+    "test": "php tests/run-tests.php"
+  },
+  "minimum-stability": "stable",
+  "prefer-stable": true
+}
