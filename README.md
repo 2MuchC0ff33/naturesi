@@ -122,9 +122,9 @@ To get up and running in a fresh clone:
    ```sh
    composer install           # installs PHP dependencies and runs bootstrap
    ```
-3. Install Node.js (v25 recommended) and a package manager such as PNPM or npm.
+3. Install Node.js (v25 recommended) and PNPM (this project requires it).
    ```sh
-   pnpm install               # or `npm install` if PNPM is unavailable
+   pnpm install
    ```
 4. Build front‑end assets:
    ```sh

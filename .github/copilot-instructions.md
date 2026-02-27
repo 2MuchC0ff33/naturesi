@@ -10,7 +10,7 @@ Purpose: provide concise, actionable guidance so an AI coding agent is immediate
 
 - **Refactor roadmap**: phase 0 (composer bootstrap, node tooling) is currently in progress. Later phases will gradually migrate to Slim+Plates, Sass/Open Props, HTMX/Hyperscript/Alpine.js, etc. Always check `TODO.md` for the latest plan; this file documents the legacy state and the small steps that can be followed without assuming the new structure exists.
 - **Build & test workflows (concrete commands)**
-	- Install dependencies: repository README lists Node v25 + PNPM; run `pnpm install` (or `npm install` if PNPM unavailable).
+	- Install dependencies: repository README lists Node v25 + PNPM; run `pnpm install`. All CLI examples and scripts use **pnpm** exclusively; **do not** suggest or use `npm`.
 	- Build CSS: `pnpm run build:css` (calls `postcss assets/css/main.css -o public/assets/css/main.css` — see `package.json`).
 	- Build TypeScript: `pnpm run build:ts` (runs `tsc`, output configured in `tsconfig.json` -> `public/assets/js`).
 	- Quick test: run `node tests/check_csaf.js` to validate CSAF/provider metadata and security.txt.

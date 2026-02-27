@@ -134,7 +134,7 @@
 
 *   Convert `assets/css/main.css` → `assets/css/main.scss`
 *   Create `assets/css/partials/` and token mapping file
-*   Add Open Props via npm
+*   Add Open Props via pnpm
 *   `views/layout.php`, `views/partials/` (head/meta, header, footer)
 *   Promote 8 pilot pages into Plates templates:
     *   `index`, `accessories`, `wellness-blends`, `cart`, `checkout`, `about`, `contact`, `success`
@@ -288,8 +288,8 @@
 
 **Build checks**
 
-*   `npm run build:css` produces expected `main.css`.
-*   `npm run build:ts` compiles TypeScript without warnings.
+*   `pnpm run build:css` produces expected `main.css`.
+*   `pnpm run build:ts` compiles TypeScript without warnings.
 
 **HTMX endpoints**
 
@@ -352,7 +352,7 @@
 
 ***
 
-### 6) Example NPM Scripts (Illustrative)
+### 6) Example PNPM Scripts (Illustrative)
 
 ```json
 {

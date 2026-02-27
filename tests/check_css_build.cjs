@@ -5,7 +5,7 @@ const { readFileSync } = require('fs');
 
 try {
   console.log('running build:css...');
-  execSync('npm run build:css', { stdio: 'inherit' });
+  execSync('pnpm run build:css', { stdio: 'inherit' });
   const out = readFileSync('public/assets/css/main.css', 'utf-8');
   if (/\@import\s+url\(['\"]?partials\//.test(out)) {
     console.error('✗ build output still contains partial imports');
