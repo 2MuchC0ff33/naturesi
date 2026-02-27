@@ -17,7 +17,10 @@ if ($path !== false && $path !== '') {
 if (file_exists(__DIR__ . '/../.env')) {
   if (class_exists('Dotenv\\Dotenv')) {
     // composer-installed dotenv is available
-    Dotenv\Dotenv::createImmutable(__DIR__ . '/../')->load();
+    // Reference the class name as a string to avoid static-analysis
+    // warnings about an undefined type while still calling it at runtime.
+    $dotenvClass = 'Dotenv\\Dotenv';
+    $dotenvClass::createImmutable(__DIR__ . '/../')->load();
   } else {
     // naive parser fallback
     $lines = file(__DIR__ . '/../.env', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
