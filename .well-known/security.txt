@@ -6,4 +6,4 @@ Acknowledgments: https://naturesinfusions.com.au/.well-known/thanks.txt
 Preferred-Languages: en
 Canonical: https://naturesinfusions.com.au/.well-known/security.txt
 Policy: https://naturesinfusions.com.au/.well-known/security-policy.txt
-CSAF: https://www.example.com/.well-known/csaf/provider-metadata.json
+CSAF: https://naturesinfusions.com.au/.well-known/csaf/provider-metadata.json
