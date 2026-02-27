@@ -4,7 +4,10 @@
   "type": "module",
   "description": "Nature's Infusions static e-commerce site",
   "author": "2MuchC0ff33",
-  "scripts": {},
+  "scripts": {
+    "build:css": "postcss assets/css/main.css -o public/assets/css/main.css",
+    "build:ts": "tsc"
+  },
   "dependencies": {
     "assemblyscript": "^0.28.9",
     "autoprefixer": "^10.4.27",
