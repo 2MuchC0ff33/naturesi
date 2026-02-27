@@ -4,6 +4,12 @@
   "type": "module",
   "description": "Nature's Infusions static e-commerce site",
   "author": "2MuchC0ff33",
-  "devDependencies": {},
-  "scripts": {}
+  "scripts": {},
+  "dependencies": {
+    "assemblyscript": "^0.28.9",
+    "autoprefixer": "^10.4.27",
+    "postcss": "^8.5.6",
+    "stylelint": "^17.4.0",
+    "typescript": "^5.9.3"
+  }
 }

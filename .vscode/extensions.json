@@ -3,6 +3,12 @@
     "github.copilot-chat",
     "elijah-potter.harper",
     "paypal.vscode-paypal",
-    "editorconfig.editorconfig"
+    "editorconfig.editorconfig",
+    "csstools.postcss",
+    "smallcase.postcssense",
+    "stylelint.vscode-stylelint",
+    "bmewburn.vscode-intelephense-client",
+    "dtsvet.vscode-wasm",
+    "mtxr.sqltools"
   ]
 }
