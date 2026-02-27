@@ -15,3 +15,4 @@ build/
 # PHP/Composer
 vendor/
 composer.lock
+.phpunit.result.cache
