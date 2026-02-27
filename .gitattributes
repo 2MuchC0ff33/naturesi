@@ -97,3 +97,21 @@ assets/** text eol=lf working-tree-encoding=UTF-8
 *.zip binary
 *.gz binary
 *.7z binary
+
+# PHP
+*.php text eol=lf diff=php working-tree-encoding=UTF-8
+*.phtml text eol=lf diff=php working-tree-encoding=UTF-8
+
+# Perl
+*.pl text eol=lf working-tree-encoding=UTF-8
+*.pm text eol=lf working-tree-encoding=UTF-8
+*.t text eol=lf working-tree-encoding=UTF-8
+
+# SQL
+*.sql text eol=lf working-tree-encoding=UTF-8
+
+# AssemblyScript (uses .ts but keep asc if used)
+*.asc text eol=lf working-tree-encoding=UTF-8
+
+# WebAssembly binary
+*.wasm binary

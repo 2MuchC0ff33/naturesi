@@ -84,6 +84,40 @@ indent_size = 2
 trim_trailing_whitespace = true
 insert_final_newline = true
 
+# PHP files: common 4-space indent
+[*.php]
+indent_style = space
+indent_size = 4
+insert_final_newline = true
+
+# Perl scripts/modules
+[*.pl]
+indent_style = space
+indent_size = 4
+insert_final_newline = true
+
+[*.pm]
+indent_style = space
+indent_size = 4
+insert_final_newline = true
+
+[*.t]
+indent_style = space
+indent_size = 4
+insert_final_newline = true
+
+# SQL
+[*.sql]
+indent_style = space
+indent_size = 2
+insert_final_newline = true
+
+# AssemblyScript extensions (treated as TypeScript)
+[*.asc]
+indent_style = space
+indent_size = 2
+insert_final_newline = true
+
 [*.csv]
 trim_trailing_whitespace = true
 insert_final_newline = true
