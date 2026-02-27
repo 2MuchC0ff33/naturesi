@@ -10,5 +10,5 @@ if (file_exists($phpunit) && is_executable($phpunit)) {
 }
 echo "phpunit binary not found; skip PHP tests\n";
 echo "Install development dependencies (composer install --dev)\n";
-echo "or run the Node sanity check at tests/check_bootstrap.cjs\n";
+echo "or run the Node sanity checks at tests/check_bootstrap.cjs and tests/check_css_build.cjs\n";
 exit(0);

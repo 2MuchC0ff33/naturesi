@@ -103,6 +103,9 @@
 
 #### Phase 0 — Baseline & Guardrails (Week 1)
 
+> **Note:** Local helper scripts (`*-wrapper.sh`) have been moved out of the repository to `~/.local/share/wrappers` and consolidated into a single `windows-executable-wrapper.sh` with symlinks in `~/.local/bin`. The `tools/` directory no longer contains those wrappers.
+
+
 **Files**
 
 *   `composer.json`
@@ -137,7 +140,8 @@
 **Actions**
 
 *   Integrate **Slim** routing for the pilot pages and fragment endpoints.
-*   Wire npm scripts: `build:css`, `watch:css` (dart‑sass + PostCSS/Autoprefixer).
+*   Wire npm scripts: `build:css`, `watch:css` (dart‑sass + PostCSS/Autoprefixer).  CSS build already uses `postcss-import` so
+    partials referenced from `assets/css/main.css` are bundled at build time.
 *   Import **Open Props** tokens in `main.scss`; expose CSS custom properties.
 *   Optionally enable **CSS Typed OM**, **Properties & Values API**, **CSS Font Loading** where supported.
 
