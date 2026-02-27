@@ -106,3 +106,16 @@ Memcached 1.6.40
 [Memcached Documentation](https://docs.memcached.org/)
 [PNPM Docs](https://pnpm.io/pnpm-cli)
 [HTML Tidy Documentation](https://www.html-tidy.org/documentation/)
+[PHP Manual](https://www.php.net/manual/en/)
+[Composer Documentation](https://getcomposer.org/doc/01-basic-usage.md)
+[JSON Schema Specification](https://json-schema.org/specification#specification-section)
+[JSON Schema Documentation](https://json-schema.org/docs)
+[Composer JSON Schema](https://getcomposer.org/schema.json)
+[security.txt - RFC 9116 A File Format to Aid in Security Vulnerability Disclosure](https://www.rfc-editor.org/rfc/rfc9116)
+
+## Contributing
+
+Contributions are welcome!  Please read [CONTRIBUTING](CONTRIBUTING) for
+workflow instructions and be sure to review and agree to the
+[Contributor License Agreement](CLA.md) or include a Developer Certificate of
+Origin sign-off in your commits.

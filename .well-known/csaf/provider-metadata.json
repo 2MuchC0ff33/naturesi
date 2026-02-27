@@ -1,0 +1,15 @@
+{
+  "metadata_version": "2.0",
+  "canonical_url": "https://naturesinfusions.com.au/.well-known/csaf/provider-metadata.json",
+  "last_updated": "2026-02-27T00:00:00Z",
+  "publisher": {
+    "name": "Nature's Infusions",
+    "namespace": "https://naturesinfusions.com.au",
+    "contact_details": "security@naturesinfusions.com.au",
+    "category": "vendor"
+  },
+  "role": "csaf_trusted_provider",
+  "list_on_CSAF_aggregators": false,
+  "mirror_on_CSAF_aggregators": false,
+  "distributions": []
+}
