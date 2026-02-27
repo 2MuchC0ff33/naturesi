@@ -104,6 +104,8 @@
 #### Phase 0 — Baseline & Guardrails (Week 1)
 
 > **Note:** Local helper scripts (`*-wrapper.sh`) have been moved out of the repository to `~/.local/share/wrappers` and consolidated into a single `windows-executable-wrapper.sh` with symlinks in `~/.local/bin`. The `tools/` directory no longer contains those wrappers.
+>
+> The unified wrapper has since been expanded to cover additional Windows executables (`ssh`, `python`, `go`, `shellcheck`) using the same dispatch mechanism; corresponding symlinks were created in `~/.local/bin`. All scripts are written with shellcheck‑friendly quoting and `exec` calls to eliminate lint warnings.
 
 
 **Files**
