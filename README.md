@@ -187,3 +187,12 @@ Contributions are welcome!  Please read [CONTRIBUTING](CONTRIBUTING) for
 workflow instructions and be sure to review and agree to the
 [Contributor License Agreement](CLA.md) or include a Developer Certificate of
 Origin sign-off in your commits.
+
+> **Editor configuration:** To avoid committing machine‑specific paths,
+> shared repository settings are stored in `.vscode/settings.json` only. If you
+> need a custom terminal profile (for Cygwin, WSL, etc.) or other local tweaks,
+> create a file called `.vscode/settings.local.json` and add it to your global
+> `.gitignore` (a sample is included in the repo). The local file overrides any
+> settings in the tracked config and is never checked in by default. See the
+> `assets`/ `js`/ or `README` for examples on how to keep personal config
+> separate.

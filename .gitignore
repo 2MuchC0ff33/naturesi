@@ -3,6 +3,8 @@ package-lock.json
 !.vscode/
 .idea/
 .DS_Store
+# local VS Code overrides; each developer can create their own
+.vscode/settings.local.json
 dist/
 build/
 .cache/
