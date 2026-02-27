@@ -31,5 +31,5 @@
       "cwd": "${workspaceFolder}"
     }
   },
-  "postcssense.cssPath": "C:\\Users\\galloa\\scoop\\persist\\cygwin\\root\\home\\galloa\\GitHub\\personal\\naturesi\\node_modules\\postcss",
+  "postcssense.cssPath": "./node_modules/postcss"
 }

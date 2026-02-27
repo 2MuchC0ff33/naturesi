@@ -1,0 +1,245 @@
+/* Category anchor removed from here — moved to partials/06-utilities.css
+   (keeps this file a pure importer for maintenance).
+*/
+/* main.css (refactor)
+   This file is now an aggregator that imports modular partials located in
+   assets/css/partials/. The order is important: variables must be imported
+   first so other partials can reference CSS custom properties.
+
+   To add or modify styles, create or edit the relevant partial in
+   assets/css/partials/ and keep the import order in this file.
+
+   Partial list (import order):
+     - variables.css (CSS custom properties)
+     - config.css (General global configuration)
+     - settings.css (Broad settings)
+     - colours.css (Color definitions)
+     - typography.css (Font styles)
+     - spacing.css (Margins and paddings)
+     - sizing.css (Width and height utilities)
+     - breakpoints.css (Responsive design breakpoints)
+     - layout.css (Overall layout styles)
+     - media.css (Media queries)
+     - mixins.css (Reusable CSS snippets)
+     - clearfix.css (Clearfix utility)
+     - hidden.css (Hidden utility)
+     - accessibility.css (Accessibility helpers)
+     - animations.css (Keyframes and animation utilities)
+     - interactions.css (Interaction helpers)
+     - state.css (State-based styles)
+     - performance.css (Performance optimizations)
+     - theme.css (Theming and skinning)
+     - browser-fixes.css (Browser-specific fixes)
+     - reset.css (Style resets)
+     - unstyle.css (Unstyled base elements)
+     - normalize.css (Normalization styles)
+     - sanitize.css (Sanitization styles)
+     - base.css (Base document styles)
+     - selections.css (Text selection styles)
+     - all.css (Global element styles)
+     - html.css (HTML element styles)
+     - body.css (Body element styles)
+     - title.css (Title element styles)
+     - headings.css (Heading element styles)
+     - paragraphs.css (Paragraph element styles)
+     - groups.css (Grouping element styles)
+     - lists.css (List element styles)
+     - links.css (Link element styles)
+     - images.css (Image element styles)
+     - tables.css (Table element styles)
+     - forms.css (Form element styles)
+     - labels.css (Label element styles)
+     - inputs.css (Input element styles)
+     - buttons.css (Button element styles)
+     - nav.css (Navigation element styles)
+     - header.css (Header element styles)
+     - footer.css (Footer element styles)
+     - wrapper.css (Object layer wrapper)
+     - container.css (Container object styles)
+     - flexbox.css (Flexbox object styles)
+     - grid.css (Grid object styles)
+     - media-object.css (Media object styles)
+     - modals.css (Modal object styles)
+     - responsive.css (Responsive object styles)
+     - templates.css (Template-specific styles)
+     - shadow-dom.css (Shadow DOM styles)
+     - navigation-menu.css (Navigation menu styles)
+     - categories.css (Category-specific styles)
+     - products.css (Product-specific styles)
+     - components.css (Component-specific styles)
+     - input-fields.css (Input field styles)
+     - badges.css (Badge component styles)
+     - progress-bars.css (Progress bar styles)
+     - loaders.css (Loader component styles)
+     - sliders.css (Slider component styles)
+     - carousels.css (Carousel component styles)
+     - accordions.css (Accordion component styles)
+     - tabs.css (Tab component styles)
+     - tooltips.css (Tooltip component styles)
+     - modals-overlays.css (Modal and overlay styles)
+     - popups.css (Popup component styles)
+     - alerts.css (Alert component styles)
+     - notifications.css (Notification component styles)
+     - toasts.css (Toast component styles)
+     - cart.css (Cart-specific styles)
+     - checkout.css (Checkout-specific styles)
+     - transitions.css (Transition component styles)
+     - utilities.css (General utility classes)
+     - display.css (Display helper utilities)
+     - visibility.css (Visibility utilities)
+     - hide.css (Hide utilities)
+     - show.css (Show utilities)
+     - sizing-helpers.css (Sizing helper utilities)
+     - spacing-helpers.css (Spacing helper utilities)
+     - margins.css (Margin utilities)
+     - paddings.css (Padding utilities)
+     - center.css (Centering utilities)
+     - grouping.css (Grouping utilities)
+     - sorting.css (Sorting utilities)
+     - filtering.css (Filtering utilities)
+     - pagination.css (Pagination utilities)
+     - typography-helpers.css (Typography helper utilities)
+     - positioning.css (Positioning helper utilities)
+     - z-index.css (Z-index helper utilities)
+     - layering.css (Layering helper utilities)
+     - transforms.css (Transform helper utilities)
+     - animate.css (Animation helper utilities)
+     - smoothing.css (Smoothing helper utilities)
+     - shadows.css (Shadow helper utilities)
+     - borders.css (Border helper utilities)
+     - shapes.css (Shape helper utilities)
+     - compression.css (Compression utilities)
+     - optimizations.css (Optimization utilities)
+     - lcp.css (Largest Contentful Paint utilities)
+     - fcp.css (First Contentful Paint utilities)
+     - tti.css (Time to Interactive utilities)
+     - cls.css (Cumulative Layout Shift utilities)
+     - fie.css (First Input Delay utilities)
+     - mobile.css (Mobile-specific utilities)
+     - tablet.css (Tablet-specific utilities)
+     - desktop.css (Desktop-specific utilities)
+*/
+
+@import url('partials/settings/variables.css');
+@import url('partials/settings/config.css');
+@import url('partials/settings/settings.css');
+@import url('partials/settings/colours.css');
+@import url('partials/settings/typography.css');
+@import url('partials/settings/spacing.css');
+@import url('partials/settings/sizing.css');
+@import url('partials/settings/breakpoints.css');
+@import url('partials/settings/layout.css');
+@import url('partials/settings/media.css');
+@import url('partials/tools/mixins.css');
+@import url('partials/tools/clearfix.css');
+@import url('partials/tools/hidden.css');
+@import url('partials/tools/accessibility.css');
+@import url('partials/tools/animations.css');
+@import url('partials/tools/interactions.css');
+@import url('partials/tools/state.css');
+@import url('partials/tools/performance.css');
+@import url('partials/tools/theme.css');
+@import url('partials/tools/browser-fixes.css');
+@import url('partials/generic/reset.css');
+@import url('partials/generic/unstyle.css');
+@import url('partials/generic/normalize.css');
+@import url('partials/generic/sanitize.css');
+@import url('partials/generic/base.css');
+@import url('partials/generic/selections.css');
+@import url('partials/elements/all.css');
+@import url('partials/elements/html.css');
+@import url('partials/elements/body.css');
+@import url('partials/elements/title.css');
+@import url('partials/elements/headings.css');
+@import url('partials/elements/paragraphs.css');
+@import url('partials/elements/groups.css');
+@import url('partials/elements/lists.css');
+@import url('partials/elements/links.css');
+@import url('partials/elements/images.css');
+@import url('partials/elements/video.css');
+@import url('partials/elements/tables.css');
+@import url('partials/elements/forms.css');
+@import url('partials/elements/labels.css');
+@import url('partials/elements/inputs.css');
+@import url('partials/elements/buttons.css');
+@import url('partials/elements/nav.css');
+@import url('partials/elements/header.css');
+@import url('partials/elements/footer.css');
+@import url('partials/objects/wrapper.css');
+@import url('partials/objects/container.css');
+@import url('partials/objects/flexbox.css');
+@import url('partials/objects/grid.css');
+@import url('partials/objects/media-object.css');
+@import url('partials/objects/modals.css');
+@import url('partials/objects/responsive.css');
+@import url('partials/templates/templates.css');
+@import url('partials/templates/shadow-dom.css');
+@import url('partials/components/navigation-menu.css');
+@import url('partials/components/categories.css');
+@import url('partials/components/categories-nav.css');
+@import url('partials/components/products.css');
+@import url('partials/components/hero.css');
+@import url('partials/components/reviews.css');
+@import url('partials/components/components.css');
+@import url('partials/components/footer-overrides.css');
+@import url('partials/components/input-fields.css');
+@import url('partials/components/badges.css');
+@import url('partials/components/progress-bars.css');
+@import url('partials/components/loaders.css');
+@import url('partials/components/sliders.css');
+@import url('partials/components/carousels.css');
+@import url('partials/components/accordions.css');
+@import url('partials/components/tabs.css');
+@import url('partials/components/tooltips.css');
+@import url('partials/components/modals-overlays.css');
+@import url('partials/components/popups.css');
+@import url('partials/components/alerts.css');
+@import url('partials/components/notifications.css');
+@import url('partials/components/toasts.css');
+@import url('partials/components/cart.css');
+@import url('partials/components/checkout.css');
+@import url('partials/components/transitions.css');
+@import url('partials/utilities/utilities.css');
+@import url('partials/utilities/display.css');
+@import url('partials/utilities/visibility.css');
+@import url('partials/utilities/hide.css');
+@import url('partials/utilities/show.css');
+@import url('partials/utilities/sizing-helpers.css');
+@import url('partials/utilities/spacing-helpers.css');
+@import url('partials/utilities/margins.css');
+@import url('partials/utilities/paddings.css');
+@import url('partials/utilities/center.css');
+@import url('partials/utilities/grouping.css');
+@import url('partials/utilities/sorting.css');
+@import url('partials/utilities/filtering.css');
+@import url('partials/utilities/pagination.css');
+@import url('partials/utilities/typography-helpers.css');
+@import url('partials/utilities/positioning.css');
+@import url('partials/utilities/z-index.css');
+@import url('partials/utilities/layering.css');
+@import url('partials/utilities/transforms.css');
+@import url('partials/utilities/animate.css');
+@import url('partials/utilities/smoothing.css');
+@import url('partials/utilities/shadows.css');
+@import url('partials/utilities/borders.css');
+@import url('partials/utilities/shapes.css');
+@import url('partials/utilities/compression.css');
+@import url('partials/utilities/optimizations.css');
+@import url('partials/utilities/lcp.css');
+@import url('partials/utilities/fcp.css');
+@import url('partials/utilities/tti.css');
+@import url('partials/utilities/cls.css');
+@import url('partials/utilities/fie.css');
+@import url('partials/utilities/mobile.css');
+@import url('partials/utilities/tablet.css');
+@import url('partials/utilities/desktop.css');
+@import url('partials/utilities/colors.css');
+@import url('partials/utilities/interactions.css');
+@import url('partials/utilities/flex.css');
+@import url('partials/utilities/grid.css');
+@import url('partials/utilities/overflow.css');
+@import url('partials/utilities/responsive.css');
+
+/* End of main.css importer — do not add large blocks of styles here. */
+
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIm1haW4uY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBIiwiZmlsZSI6Im91dHB1dC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIvKiBDYXRlZ29yeSBhbmNob3IgcmVtb3ZlZCBmcm9tIGhlcmUg4oCUIG1vdmVkIHRvIHBhcnRpYWxzLzA2LXV0aWxpdGllcy5jc3NcbiAgIChrZWVwcyB0aGlzIGZpbGUgYSBwdXJlIGltcG9ydGVyIGZvciBtYWludGVuYW5jZSkuXG4qL1xuLyogbWFpbi5jc3MgKHJlZmFjdG9yKVxuICAgVGhpcyBmaWxlIGlzIG5vdyBhbiBhZ2dyZWdhdG9yIHRoYXQgaW1wb3J0cyBtb2R1bGFyIHBhcnRpYWxzIGxvY2F0ZWQgaW5cbiAgIGFzc2V0cy9jc3MvcGFydGlhbHMvLiBUaGUgb3JkZXIgaXMgaW1wb3J0YW50OiB2YXJpYWJsZXMgbXVzdCBiZSBpbXBvcnRlZFxuICAgZmlyc3Qgc28gb3RoZXIgcGFydGlhbHMgY2FuIHJlZmVyZW5jZSBDU1MgY3VzdG9tIHByb3BlcnRpZXMuXG5cbiAgIFRvIGFkZCBvciBtb2RpZnkgc3R5bGVzLCBjcmVhdGUgb3IgZWRpdCB0aGUgcmVsZXZhbnQgcGFydGlhbCBpblxuICAgYXNzZXRzL2Nzcy9wYXJ0aWFscy8gYW5kIGtlZXAgdGhlIGltcG9ydCBvcmRlciBpbiB0aGlzIGZpbGUuXG5cbiAgIFBhcnRpYWwgbGlzdCAoaW1wb3J0IG9yZGVyKTpcbiAgICAgLSB2YXJpYWJsZXMuY3NzIChDU1MgY3VzdG9tIHByb3BlcnRpZXMpXG4gICAgIC0gY29uZmlnLmNzcyAoR2VuZXJhbCBnbG9iYWwgY29uZmlndXJhdGlvbilcbiAgICAgLSBzZXR0aW5ncy5jc3MgKEJyb2FkIHNldHRpbmdzKVxuICAgICAtIGNvbG91cnMuY3NzIChDb2xvciBkZWZpbml0aW9ucylcbiAgICAgLSB0eXBvZ3JhcGh5LmNzcyAoRm9udCBzdHlsZXMpXG4gICAgIC0gc3BhY2luZy5jc3MgKE1hcmdpbnMgYW5kIHBhZGRpbmdzKVxuICAgICAtIHNpemluZy5jc3MgKFdpZHRoIGFuZCBoZWlnaHQgdXRpbGl0aWVzKVxuICAgICAtIGJyZWFrcG9pbnRzLmNzcyAoUmVzcG9uc2l2ZSBkZXNpZ24gYnJlYWtwb2ludHMpXG4gICAgIC0gbGF5b3V0LmNzcyAoT3ZlcmFsbCBsYXlvdXQgc3R5bGVzKVxuICAgICAtIG1lZGlhLmNzcyAoTWVkaWEgcXVlcmllcylcbiAgICAgLSBtaXhpbnMuY3NzIChSZXVzYWJsZSBDU1Mgc25pcHBldHMpXG4gICAgIC0gY2xlYXJmaXguY3NzIChDbGVhcmZpeCB1dGlsaXR5KVxuICAgICAtIGhpZGRlbi5jc3MgKEhpZGRlbiB1dGlsaXR5KVxuICAgICAtIGFjY2Vzc2liaWxpdHkuY3NzIChBY2Nlc3NpYmlsaXR5IGhlbHBlcnMpXG4gICAgIC0gYW5pbWF0aW9ucy5jc3MgKEtleWZyYW1lcyBhbmQgYW5pbWF0aW9uIHV0aWxpdGllcylcbiAgICAgLSBpbnRlcmFjdGlvbnMuY3NzIChJbnRlcmFjdGlvbiBoZWxwZXJzKVxuICAgICAtIHN0YXRlLmNzcyAoU3RhdGUtYmFzZWQgc3R5bGVzKVxuICAgICAtIHBlcmZvcm1hbmNlLmNzcyAoUGVyZm9ybWFuY2Ugb3B0aW1pemF0aW9ucylcbiAgICAgLSB0aGVtZS5jc3MgKFRoZW1pbmcgYW5kIHNraW5uaW5nKVxuICAgICAtIGJyb3dzZXItZml4ZXMuY3NzIChCcm93c2VyLXNwZWNpZmljIGZpeGVzKVxuICAgICAtIHJlc2V0LmNzcyAoU3R5bGUgcmVzZXRzKVxuICAgICAtIHVuc3R5bGUuY3NzIChVbnN0eWxlZCBiYXNlIGVsZW1lbnRzKVxuICAgICAtIG5vcm1hbGl6ZS5jc3MgKE5vcm1hbGl6YXRpb24gc3R5bGVzKVxuICAgICAtIHNhbml0aXplLmNzcyAoU2FuaXRpemF0aW9uIHN0eWxlcylcbiAgICAgLSBiYXNlLmNzcyAoQmFzZSBkb2N1bWVudCBzdHlsZXMpXG4gICAgIC0gc2VsZWN0aW9ucy5jc3MgKFRleHQgc2VsZWN0aW9uIHN0eWxlcylcbiAgICAgLSBhbGwuY3NzIChHbG9iYWwgZWxlbWVudCBzdHlsZXMpXG4gICAgIC0gaHRtbC5jc3MgKEhUTUwgZWxlbWVudCBzdHlsZXMpXG4gICAgIC0gYm9keS5jc3MgKEJvZHkgZWxlbWVudCBzdHlsZXMpXG4gICAgIC0gdGl0bGUuY3NzIChUaXRsZSBlbGVtZW50IHN0eWxlcylcbiAgICAgLSBoZWFkaW5ncy5jc3MgKEhlYWRpbmcgZWxlbWVudCBzdHlsZXMpXG4gICAgIC0gcGFyYWdyYXBocy5jc3MgKFBhcmFncmFwaCBlbGVtZW50IHN0eWxlcylcbiAgICAgLSBncm91cHMuY3NzIChHcm91cGluZyBlbGVtZW50IHN0eWxlcylcbiAgICAgLSBsaXN0cy5jc3MgKExpc3QgZWxlbWVudCBzdHlsZXMpXG4gICAgIC0gbGlua3MuY3NzIChMaW5rIGVsZW1lbnQgc3R5bGVzKVxuICAgICAtIGltYWdlcy5jc3MgKEltYWdlIGVsZW1lbnQgc3R5bGVzKVxuICAgICAtIHRhYmxlcy5jc3MgKFRhYmxlIGVsZW1lbnQgc3R5bGVzKVxuICAgICAtIGZvcm1zLmNzcyAoRm9ybSBlbGVtZW50IHN0eWxlcylcbiAgICAgLSBsYWJlbHMuY3NzIChMYWJlbCBlbGVtZW50IHN0eWxlcylcbiAgICAgLSBpbnB1dHMuY3NzIChJbnB1dCBlbGVtZW50IHN0eWxlcylcbiAgICAgLSBidXR0b25zLmNzcyAoQnV0dG9uIGVsZW1lbnQgc3R5bGVzKVxuICAgICAtIG5hdi5jc3MgKE5hdmlnYXRpb24gZWxlbWVudCBzdHlsZXMpXG4gICAgIC0gaGVhZGVyLmNzcyAoSGVhZGVyIGVsZW1lbnQgc3R5bGVzKVxuICAgICAtIGZvb3Rlci5jc3MgKEZvb3RlciBlbGVtZW50IHN0eWxlcylcbiAgICAgLSB3cmFwcGVyLmNzcyAoT2JqZWN0IGxheWVyIHdyYXBwZXIpXG4gICAgIC0gY29udGFpbmVyLmNzcyAoQ29udGFpbmVyIG9iamVjdCBzdHlsZXMpXG4gICAgIC0gZmxleGJveC5jc3MgKEZsZXhib3ggb2JqZWN0IHN0eWxlcylcbiAgICAgLSBncmlkLmNzcyAoR3JpZCBvYmplY3Qgc3R5bGVzKVxuICAgICAtIG1lZGlhLW9iamVjdC5jc3MgKE1lZGlhIG9iamVjdCBzdHlsZXMpXG4gICAgIC0gbW9kYWxzLmNzcyAoTW9kYWwgb2JqZWN0IHN0eWxlcylcbiAgICAgLSByZXNwb25zaXZlLmNzcyAoUmVzcG9uc2l2ZSBvYmplY3Qgc3R5bGVzKVxuICAgICAtIHRlbXBsYXRlcy5jc3MgKFRlbXBsYXRlLXNwZWNpZmljIHN0eWxlcylcbiAgICAgLSBzaGFkb3ctZG9tLmNzcyAoU2hhZG93IERPTSBzdHlsZXMpXG4gICAgIC0gbmF2aWdhdGlvbi1tZW51LmNzcyAoTmF2aWdhdGlvbiBtZW51IHN0eWxlcylcbiAgICAgLSBjYXRlZ29yaWVzLmNzcyAoQ2F0ZWdvcnktc3BlY2lmaWMgc3R5bGVzKVxuICAgICAtIHByb2R1Y3RzLmNzcyAoUHJvZHVjdC1zcGVjaWZpYyBzdHlsZXMpXG4gICAgIC0gY29tcG9uZW50cy5jc3MgKENvbXBvbmVudC1zcGVjaWZpYyBzdHlsZXMpXG4gICAgIC0gaW5wdXQtZmllbGRzLmNzcyAoSW5wdXQgZmllbGQgc3R5bGVzKVxuICAgICAtIGJhZGdlcy5jc3MgKEJhZGdlIGNvbXBvbmVudCBzdHlsZXMpXG4gICAgIC0gcHJvZ3Jlc3MtYmFycy5jc3MgKFByb2dyZXNzIGJhciBzdHlsZXMpXG4gICAgIC0gbG9hZGVycy5jc3MgKExvYWRlciBjb21wb25lbnQgc3R5bGVzKVxuICAgICAtIHNsaWRlcnMuY3NzIChTbGlkZXIgY29tcG9uZW50IHN0eWxlcylcbiAgICAgLSBjYXJvdXNlbHMuY3NzIChDYXJvdXNlbCBjb21wb25lbnQgc3R5bGVzKVxuICAgICAtIGFjY29yZGlvbnMuY3NzIChBY2NvcmRpb24gY29tcG9uZW50IHN0eWxlcylcbiAgICAgLSB0YWJzLmNzcyAoVGFiIGNvbXBvbmVudCBzdHlsZXMpXG4gICAgIC0gdG9vbHRpcHMuY3NzIChUb29sdGlwIGNvbXBvbmVudCBzdHlsZXMpXG4gICAgIC0gbW9kYWxzLW92ZXJsYXlzLmNzcyAoTW9kYWwgYW5kIG92ZXJsYXkgc3R5bGVzKVxuICAgICAtIHBvcHVwcy5jc3MgKFBvcHVwIGNvbXBvbmVudCBzdHlsZXMpXG4gICAgIC0gYWxlcnRzLmNzcyAoQWxlcnQgY29tcG9uZW50IHN0eWxlcylcbiAgICAgLSBub3RpZmljYXRpb25zLmNzcyAoTm90aWZpY2F0aW9uIGNvbXBvbmVudCBzdHlsZXMpXG4gICAgIC0gdG9hc3RzLmNzcyAoVG9hc3QgY29tcG9uZW50IHN0eWxlcylcbiAgICAgLSBjYXJ0LmNzcyAoQ2FydC1zcGVjaWZpYyBzdHlsZXMpXG4gICAgIC0gY2hlY2tvdXQuY3NzIChDaGVja291dC1zcGVjaWZpYyBzdHlsZXMpXG4gICAgIC0gdHJhbnNpdGlvbnMuY3NzIChUcmFuc2l0aW9uIGNvbXBvbmVudCBzdHlsZXMpXG4gICAgIC0gdXRpbGl0aWVzLmNzcyAoR2VuZXJhbCB1dGlsaXR5IGNsYXNzZXMpXG4gICAgIC0gZGlzcGxheS5jc3MgKERpc3BsYXkgaGVscGVyIHV0aWxpdGllcylcbiAgICAgLSB2aXNpYmlsaXR5LmNzcyAoVmlzaWJpbGl0eSB1dGlsaXRpZXMpXG4gICAgIC0gaGlkZS5jc3MgKEhpZGUgdXRpbGl0aWVzKVxuICAgICAtIHNob3cuY3NzIChTaG93IHV0aWxpdGllcylcbiAgICAgLSBzaXppbmctaGVscGVycy5jc3MgKFNpemluZyBoZWxwZXIgdXRpbGl0aWVzKVxuICAgICAtIHNwYWNpbmctaGVscGVycy5jc3MgKFNwYWNpbmcgaGVscGVyIHV0aWxpdGllcylcbiAgICAgLSBtYXJnaW5zLmNzcyAoTWFyZ2luIHV0aWxpdGllcylcbiAgICAgLSBwYWRkaW5ncy5jc3MgKFBhZGRpbmcgdXRpbGl0aWVzKVxuICAgICAtIGNlbnRlci5jc3MgKENlbnRlcmluZyB1dGlsaXRpZXMpXG4gICAgIC0gZ3JvdXBpbmcuY3NzIChHcm91cGluZyB1dGlsaXRpZXMpXG4gICAgIC0gc29ydGluZy5jc3MgKFNvcnRpbmcgdXRpbGl0aWVzKVxuICAgICAtIGZpbHRlcmluZy5jc3MgKEZpbHRlcmluZyB1dGlsaXRpZXMpXG4gICAgIC0gcGFnaW5hdGlvbi5jc3MgKFBhZ2luYXRpb24gdXRpbGl0aWVzKVxuICAgICAtIHR5cG9ncmFwaHktaGVscGVycy5jc3MgKFR5cG9ncmFwaHkgaGVscGVyIHV0aWxpdGllcylcbiAgICAgLSBwb3NpdGlvbmluZy5jc3MgKFBvc2l0aW9uaW5nIGhlbHBlciB1dGlsaXRpZXMpXG4gICAgIC0gei1pbmRleC5jc3MgKFotaW5kZXggaGVscGVyIHV0aWxpdGllcylcbiAgICAgLSBsYXllcmluZy5jc3MgKExheWVyaW5nIGhlbHBlciB1dGlsaXRpZXMpXG4gICAgIC0gdHJhbnNmb3Jtcy5jc3MgKFRyYW5zZm9ybSBoZWxwZXIgdXRpbGl0aWVzKVxuICAgICAtIGFuaW1hdGUuY3NzIChBbmltYXRpb24gaGVscGVyIHV0aWxpdGllcylcbiAgICAgLSBzbW9vdGhpbmcuY3NzIChTbW9vdGhpbmcgaGVscGVyIHV0aWxpdGllcylcbiAgICAgLSBzaGFkb3dzLmNzcyAoU2hhZG93IGhlbHBlciB1dGlsaXRpZXMpXG4gICAgIC0gYm9yZGVycy5jc3MgKEJvcmRlciBoZWxwZXIgdXRpbGl0aWVzKVxuICAgICAtIHNoYXBlcy5jc3MgKFNoYXBlIGhlbHBlciB1dGlsaXRpZXMpXG4gICAgIC0gY29tcHJlc3Npb24uY3NzIChDb21wcmVzc2lvbiB1dGlsaXRpZXMpXG4gICAgIC0gb3B0aW1pemF0aW9ucy5jc3MgKE9wdGltaXphdGlvbiB1dGlsaXRpZXMpXG4gICAgIC0gbGNwLmNzcyAoTGFyZ2VzdCBDb250ZW50ZnVsIFBhaW50IHV0aWxpdGllcylcbiAgICAgLSBmY3AuY3NzIChGaXJzdCBDb250ZW50ZnVsIFBhaW50IHV0aWxpdGllcylcbiAgICAgLSB0dGkuY3NzIChUaW1lIHRvIEludGVyYWN0aXZlIHV0aWxpdGllcylcbiAgICAgLSBjbHMuY3NzIChDdW11bGF0aXZlIExheW91dCBTaGlmdCB1dGlsaXRpZXMpXG4gICAgIC0gZmllLmNzcyAoRmlyc3QgSW5wdXQgRGVsYXkgdXRpbGl0aWVzKVxuICAgICAtIG1vYmlsZS5jc3MgKE1vYmlsZS1zcGVjaWZpYyB1dGlsaXRpZXMpXG4gICAgIC0gdGFibGV0LmNzcyAoVGFibGV0LXNwZWNpZmljIHV0aWxpdGllcylcbiAgICAgLSBkZXNrdG9wLmNzcyAoRGVza3RvcC1zcGVjaWZpYyB1dGlsaXRpZXMpXG4qL1xuXG5AaW1wb3J0IHVybCgncGFydGlhbHMvc2V0dGluZ3MvdmFyaWFibGVzLmNzcycpO1xuQGltcG9ydCB1cmwoJ3BhcnRpYWxzL3NldHRpbmdzL2NvbmZpZy5jc3MnKTtcbkBpbXBvcnQgdXJsKCdwYXJ0aWFscy9zZXR0aW5ncy9zZXR0aW5ncy5jc3MnKTtcbkBpbXBvcnQgdXJsKCdwYXJ0aWFscy9zZXR0aW5ncy9jb2xvdXJzLmNzcycpO1xuQGltcG9ydCB1cmwoJ3BhcnRpYWxzL3NldHRpbmdzL3R5cG9ncmFwaHkuY3NzJyk7XG5AaW1wb3J0IHVybCgncGFydGlhbHMvc2V0dGluZ3Mvc3BhY2luZy5jc3MnKTtcbkBpbXBvcnQgdXJsKCdwYXJ0aWFscy9zZXR0aW5ncy9zaXppbmcuY3NzJyk7XG5AaW1wb3J0IHVybCgncGFydGlhbHMvc2V0dGluZ3MvYnJlYWtwb2ludHMuY3NzJyk7XG5AaW1wb3J0IHVybCgncGFydGlhbHMvc2V0dGluZ3MvbGF5b3V0LmNzcycpO1xuQGltcG9ydCB1cmwoJ3BhcnRpYWxzL3NldHRpbmdzL21lZGlhLmNzcycpO1xuQGltcG9ydCB1cmwoJ3BhcnRpYWxzL3Rvb2xzL21peGlucy5jc3MnKTtcbkBpbXBvcnQgdXJsKCdwYXJ0aWFscy90b29scy9jbGVhcmZpeC5jc3MnKTtcbkBpbXBvcnQgdXJsKCdwYXJ0aWFscy90b29scy9oaWRkZW4uY3NzJyk7XG5AaW1wb3J0IHVybCgncGFydGlhbHMvdG9vbHMvYWNjZXNzaWJpbGl0eS5jc3MnKTtcbkBpbXBvcnQgdXJsKCdwYXJ0aWFscy90b29scy9hbmltYXRpb25zLmNzcycpO1xuQGltcG9ydCB1cmwoJ3BhcnRpYWxzL3Rvb2xzL2ludGVyYWN0aW9ucy5jc3MnKTtcbkBpbXBvcnQgdXJsKCdwYXJ0aWFscy90b29scy9zdGF0ZS5jc3MnKTtcbkBpbXBvcnQgdXJsKCdwYXJ0aWFscy90b29scy9wZXJmb3JtYW5jZS5jc3MnKTtcbkBpbXBvcnQgdXJsKCdwYXJ0aWFscy90b29scy90aGVtZS5jc3MnKTtcbkBpbXBvcnQgdXJsKCdwYXJ0aWFscy90b29scy9icm93c2VyLWZpeGVzLmNzcycpO1xuQGltcG9ydCB1cmwoJ3BhcnRpYWxzL2dlbmVyaWMvcmVzZXQuY3NzJyk7XG5AaW1wb3J0IHVybCgncGFydGlhbHMvZ2VuZXJpYy91bnN0eWxlLmNzcycpO1xuQGltcG9ydCB1cmwoJ3BhcnRpYWxzL2dlbmVyaWMvbm9ybWFsaXplLmNzcycpO1xuQGltcG9ydCB1cmwoJ3BhcnRpYWxzL2dlbmVyaWMvc2FuaXRpemUuY3NzJyk7XG5AaW1wb3J0IHVybCgncGFydGlhbHMvZ2VuZXJpYy9iYXNlLmNzcycpO1xuQGltcG9ydCB1cmwoJ3BhcnRpYWxzL2dlbmVyaWMvc2VsZWN0aW9ucy5jc3MnKTtcbkBpbXBvcnQgdXJsKCdwYXJ0aWFscy9lbGVtZW50cy9hbGwuY3NzJyk7XG5AaW1wb3J0IHVybCgncGFydGlhbHMvZWxlbWVudHMvaHRtbC5jc3MnKTtcbkBpbXBvcnQgdXJsKCdwYXJ0aWFscy9lbGVtZW50cy9ib2R5LmNzcycpO1xuQGltcG9ydCB1cmwoJ3BhcnRpYWxzL2VsZW1lbnRzL3RpdGxlLmNzcycpO1xuQGltcG9ydCB1cmwoJ3BhcnRpYWxzL2VsZW1lbnRzL2hlYWRpbmdzLmNzcycpO1xuQGltcG9ydCB1cmwoJ3BhcnRpYWxzL2VsZW1lbnRzL3BhcmFncmFwaHMuY3NzJyk7XG5AaW1wb3J0IHVybCgncGFydGlhbHMvZWxlbWVudHMvZ3JvdXBzLmNzcycpO1xuQGltcG9ydCB1cmwoJ3BhcnRpYWxzL2VsZW1lbnRzL2xpc3RzLmNzcycpO1xuQGltcG9ydCB1cmwoJ3BhcnRpYWxzL2VsZW1lbnRzL2xpbmtzLmNzcycpO1xuQGltcG9ydCB1cmwoJ3BhcnRpYWxzL2VsZW1lbnRzL2ltYWdlcy5jc3MnKTtcbkBpbXBvcnQgdXJsKCdwYXJ0aWFscy9lbGVtZW50cy92aWRlby5jc3MnKTtcbkBpbXBvcnQgdXJsKCdwYXJ0aWFscy9lbGVtZW50cy90YWJsZXMuY3NzJyk7XG5AaW1wb3J0IHVybCgncGFydGlhbHMvZWxlbWVudHMvZm9ybXMuY3NzJyk7XG5AaW1wb3J0IHVybCgncGFydGlhbHMvZWxlbWVudHMvbGFiZWxzLmNzcycpO1xuQGltcG9ydCB1cmwoJ3BhcnRpYWxzL2VsZW1lbnRzL2lucHV0cy5jc3MnKTtcbkBpbXBvcnQgdXJsKCdwYXJ0aWFscy9lbGVtZW50cy9idXR0b25zLmNzcycpO1xuQGltcG9ydCB1cmwoJ3BhcnRpYWxzL2VsZW1lbnRzL25hdi5jc3MnKTtcbkBpbXBvcnQgdXJsKCdwYXJ0aWFscy9lbGVtZW50cy9oZWFkZXIuY3NzJyk7XG5AaW1wb3J0IHVybCgncGFydGlhbHMvZWxlbWVudHMvZm9vdGVyLmNzcycpO1xuQGltcG9ydCB1cmwoJ3BhcnRpYWxzL29iamVjdHMvd3JhcHBlci5jc3MnKTtcbkBpbXBvcnQgdXJsKCdwYXJ0aWFscy9vYmplY3RzL2NvbnRhaW5lci5jc3MnKTtcbkBpbXBvcnQgdXJsKCdwYXJ0aWFscy9vYmplY3RzL2ZsZXhib3guY3NzJyk7XG5AaW1wb3J0IHVybCgncGFydGlhbHMvb2JqZWN0cy9ncmlkLmNzcycpO1xuQGltcG9ydCB1cmwoJ3BhcnRpYWxzL29iamVjdHMvbWVkaWEtb2JqZWN0LmNzcycpO1xuQGltcG9ydCB1cmwoJ3BhcnRpYWxzL29iamVjdHMvbW9kYWxzLmNzcycpO1xuQGltcG9ydCB1cmwoJ3BhcnRpYWxzL29iamVjdHMvcmVzcG9uc2l2ZS5jc3MnKTtcbkBpbXBvcnQgdXJsKCdwYXJ0aWFscy90ZW1wbGF0ZXMvdGVtcGxhdGVzLmNzcycpO1xuQGltcG9ydCB1cmwoJ3BhcnRpYWxzL3RlbXBsYXRlcy9zaGFkb3ctZG9tLmNzcycpO1xuQGltcG9ydCB1cmwoJ3BhcnRpYWxzL2NvbXBvbmVudHMvbmF2aWdhdGlvbi1tZW51LmNzcycpO1xuQGltcG9ydCB1cmwoJ3BhcnRpYWxzL2NvbXBvbmVudHMvY2F0ZWdvcmllcy5jc3MnKTtcbkBpbXBvcnQgdXJsKCdwYXJ0aWFscy9jb21wb25lbnRzL2NhdGVnb3JpZXMtbmF2LmNzcycpO1xuQGltcG9ydCB1cmwoJ3BhcnRpYWxzL2NvbXBvbmVudHMvcHJvZHVjdHMuY3NzJyk7XG5AaW1wb3J0IHVybCgncGFydGlhbHMvY29tcG9uZW50cy9oZXJvLmNzcycpO1xuQGltcG9ydCB1cmwoJ3BhcnRpYWxzL2NvbXBvbmVudHMvcmV2aWV3cy5jc3MnKTtcbkBpbXBvcnQgdXJsKCdwYXJ0aWFscy9jb21wb25lbnRzL2NvbXBvbmVudHMuY3NzJyk7XG5AaW1wb3J0IHVybCgncGFydGlhbHMvY29tcG9uZW50cy9mb290ZXItb3ZlcnJpZGVzLmNzcycpO1xuQGltcG9ydCB1cmwoJ3BhcnRpYWxzL2NvbXBvbmVudHMvaW5wdXQtZmllbGRzLmNzcycpO1xuQGltcG9ydCB1cmwoJ3BhcnRpYWxzL2NvbXBvbmVudHMvYmFkZ2VzLmNzcycpO1xuQGltcG9ydCB1cmwoJ3BhcnRpYWxzL2NvbXBvbmVudHMvcHJvZ3Jlc3MtYmFycy5jc3MnKTtcbkBpbXBvcnQgdXJsKCdwYXJ0aWFscy9jb21wb25lbnRzL2xvYWRlcnMuY3NzJyk7XG5AaW1wb3J0IHVybCgncGFydGlhbHMvY29tcG9uZW50cy9zbGlkZXJzLmNzcycpO1xuQGltcG9ydCB1cmwoJ3BhcnRpYWxzL2NvbXBvbmVudHMvY2Fyb3VzZWxzLmNzcycpO1xuQGltcG9ydCB1cmwoJ3BhcnRpYWxzL2NvbXBvbmVudHMvYWNjb3JkaW9ucy5jc3MnKTtcbkBpbXBvcnQgdXJsKCdwYXJ0aWFscy9jb21wb25lbnRzL3RhYnMuY3NzJyk7XG5AaW1wb3J0IHVybCgncGFydGlhbHMvY29tcG9uZW50cy90b29sdGlwcy5jc3MnKTtcbkBpbXBvcnQgdXJsKCdwYXJ0aWFscy9jb21wb25lbnRzL21vZGFscy1vdmVybGF5cy5jc3MnKTtcbkBpbXBvcnQgdXJsKCdwYXJ0aWFscy9jb21wb25lbnRzL3BvcHVwcy5jc3MnKTtcbkBpbXBvcnQgdXJsKCdwYXJ0aWFscy9jb21wb25lbnRzL2FsZXJ0cy5jc3MnKTtcbkBpbXBvcnQgdXJsKCdwYXJ0aWFscy9jb21wb25lbnRzL25vdGlmaWNhdGlvbnMuY3NzJyk7XG5AaW1wb3J0IHVybCgncGFydGlhbHMvY29tcG9uZW50cy90b2FzdHMuY3NzJyk7XG5AaW1wb3J0IHVybCgncGFydGlhbHMvY29tcG9uZW50cy9jYXJ0LmNzcycpO1xuQGltcG9ydCB1cmwoJ3BhcnRpYWxzL2NvbXBvbmVudHMvY2hlY2tvdXQuY3NzJyk7XG5AaW1wb3J0IHVybCgncGFydGlhbHMvY29tcG9uZW50cy90cmFuc2l0aW9ucy5jc3MnKTtcbkBpbXBvcnQgdXJsKCdwYXJ0aWFscy91dGlsaXRpZXMvdXRpbGl0aWVzLmNzcycpO1xuQGltcG9ydCB1cmwoJ3BhcnRpYWxzL3V0aWxpdGllcy9kaXNwbGF5LmNzcycpO1xuQGltcG9ydCB1cmwoJ3BhcnRpYWxzL3V0aWxpdGllcy92aXNpYmlsaXR5LmNzcycpO1xuQGltcG9ydCB1cmwoJ3BhcnRpYWxzL3V0aWxpdGllcy9oaWRlLmNzcycpO1xuQGltcG9ydCB1cmwoJ3BhcnRpYWxzL3V0aWxpdGllcy9zaG93LmNzcycpO1xuQGltcG9ydCB1cmwoJ3BhcnRpYWxzL3V0aWxpdGllcy9zaXppbmctaGVscGVycy5jc3MnKTtcbkBpbXBvcnQgdXJsKCdwYXJ0aWFscy91dGlsaXRpZXMvc3BhY2luZy1oZWxwZXJzLmNzcycpO1xuQGltcG9ydCB1cmwoJ3BhcnRpYWxzL3V0aWxpdGllcy9tYXJnaW5zLmNzcycpO1xuQGltcG9ydCB1cmwoJ3BhcnRpYWxzL3V0aWxpdGllcy9wYWRkaW5ncy5jc3MnKTtcbkBpbXBvcnQgdXJsKCdwYXJ0aWFscy91dGlsaXRpZXMvY2VudGVyLmNzcycpO1xuQGltcG9ydCB1cmwoJ3BhcnRpYWxzL3V0aWxpdGllcy9ncm91cGluZy5jc3MnKTtcbkBpbXBvcnQgdXJsKCdwYXJ0aWFscy91dGlsaXRpZXMvc29ydGluZy5jc3MnKTtcbkBpbXBvcnQgdXJsKCdwYXJ0aWFscy91dGlsaXRpZXMvZmlsdGVyaW5nLmNzcycpO1xuQGltcG9ydCB1cmwoJ3BhcnRpYWxzL3V0aWxpdGllcy9wYWdpbmF0aW9uLmNzcycpO1xuQGltcG9ydCB1cmwoJ3BhcnRpYWxzL3V0aWxpdGllcy90eXBvZ3JhcGh5LWhlbHBlcnMuY3NzJyk7XG5AaW1wb3J0IHVybCgncGFydGlhbHMvdXRpbGl0aWVzL3Bvc2l0aW9uaW5nLmNzcycpO1xuQGltcG9ydCB1cmwoJ3BhcnRpYWxzL3V0aWxpdGllcy96LWluZGV4LmNzcycpO1xuQGltcG9ydCB1cmwoJ3BhcnRpYWxzL3V0aWxpdGllcy9sYXllcmluZy5jc3MnKTtcbkBpbXBvcnQgdXJsKCdwYXJ0aWFscy91dGlsaXRpZXMvdHJhbnNmb3Jtcy5jc3MnKTtcbkBpbXBvcnQgdXJsKCdwYXJ0aWFscy91dGlsaXRpZXMvYW5pbWF0ZS5jc3MnKTtcbkBpbXBvcnQgdXJsKCdwYXJ0aWFscy91dGlsaXRpZXMvc21vb3RoaW5nLmNzcycpO1xuQGltcG9ydCB1cmwoJ3BhcnRpYWxzL3V0aWxpdGllcy9zaGFkb3dzLmNzcycpO1xuQGltcG9ydCB1cmwoJ3BhcnRpYWxzL3V0aWxpdGllcy9ib3JkZXJzLmNzcycpO1xuQGltcG9ydCB1cmwoJ3BhcnRpYWxzL3V0aWxpdGllcy9zaGFwZXMuY3NzJyk7XG5AaW1wb3J0IHVybCgncGFydGlhbHMvdXRpbGl0aWVzL2NvbXByZXNzaW9uLmNzcycpO1xuQGltcG9ydCB1cmwoJ3BhcnRpYWxzL3V0aWxpdGllcy9vcHRpbWl6YXRpb25zLmNzcycpO1xuQGltcG9ydCB1cmwoJ3BhcnRpYWxzL3V0aWxpdGllcy9sY3AuY3NzJyk7XG5AaW1wb3J0IHVybCgncGFydGlhbHMvdXRpbGl0aWVzL2ZjcC5jc3MnKTtcbkBpbXBvcnQgdXJsKCdwYXJ0aWFscy91dGlsaXRpZXMvdHRpLmNzcycpO1xuQGltcG9ydCB1cmwoJ3BhcnRpYWxzL3V0aWxpdGllcy9jbHMuY3NzJyk7XG5AaW1wb3J0IHVybCgncGFydGlhbHMvdXRpbGl0aWVzL2ZpZS5jc3MnKTtcbkBpbXBvcnQgdXJsKCdwYXJ0aWFscy91dGlsaXRpZXMvbW9iaWxlLmNzcycpO1xuQGltcG9ydCB1cmwoJ3BhcnRpYWxzL3V0aWxpdGllcy90YWJsZXQuY3NzJyk7XG5AaW1wb3J0IHVybCgncGFydGlhbHMvdXRpbGl0aWVzL2Rlc2t0b3AuY3NzJyk7XG5AaW1wb3J0IHVybCgncGFydGlhbHMvdXRpbGl0aWVzL2NvbG9ycy5jc3MnKTtcbkBpbXBvcnQgdXJsKCdwYXJ0aWFscy91dGlsaXRpZXMvaW50ZXJhY3Rpb25zLmNzcycpO1xuQGltcG9ydCB1cmwoJ3BhcnRpYWxzL3V0aWxpdGllcy9mbGV4LmNzcycpO1xuQGltcG9ydCB1cmwoJ3BhcnRpYWxzL3V0aWxpdGllcy9ncmlkLmNzcycpO1xuQGltcG9ydCB1cmwoJ3BhcnRpYWxzL3V0aWxpdGllcy9vdmVyZmxvdy5jc3MnKTtcbkBpbXBvcnQgdXJsKCdwYXJ0aWFscy91dGlsaXRpZXMvcmVzcG9uc2l2ZS5jc3MnKTtcblxuLyogRW5kIG9mIG1haW4uY3NzIGltcG9ydGVyIOKAlCBkbyBub3QgYWRkIGxhcmdlIGJsb2NrcyBvZiBzdHlsZXMgaGVyZS4gKi9cbiJdfQ== */
