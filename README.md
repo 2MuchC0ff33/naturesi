@@ -132,10 +132,15 @@ To get up and running in a fresh clone:
    ```
    The resulting CSS and JS files land in `public/assets` but do not modify any
    existing page markup. No user‑facing changes occur in Phase 0.
-5. Verify the bootstrap working by opening `public/index.php` in a browser or
+5. (Optional) if you create a `.env` file at the project root, it will be
+   parsed during bootstrap and the values become available via `getenv()`,
+   `$_ENV` and `$_SERVER`. A simple parser is included so no additional
+   dependencies are required; `vlucas/phpdotenv` will be used automatically if
+   installed later.
+6. Verify the bootstrap working by opening `public/index.php` in a browser or
    running `php -S localhost:8000 -t public` and visiting
    `http://localhost:8000`. You should see the placeholder message.
-6. A quick sanity check script is provided:
+7. A quick sanity check script is provided:
    ```sh
    node tests/check_csaf.js
    ```
