@@ -31,5 +31,7 @@
       "cwd": "${workspaceFolder}"
     }
   },
-  "postcssense.cssPath": "./node_modules/postcss"
+  "postcssense.cssPath": "./node_modules/postcss",
+  "php.validate.executablePath": "/usr/bin/php",
+  "intelephense.environment.phpVersion": "8.1.28"
 }
