@@ -15,30 +15,30 @@ if ($path !== false && $path !== '') {
 // strips surrounding quotes but does not perform advanced escaping.
 
 if (file_exists(__DIR__ . '/../.env')) {
-    if (class_exists('Dotenv\\Dotenv')) {
-        // composer-installed dotenv is available
-        Dotenv\Dotenv::createImmutable(__DIR__ . '/../')->load();
-    } else {
-        // naive parser fallback
-        $lines = file(__DIR__ . '/../.env', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-        foreach ($lines as $ln) {
-            $ln = trim($ln);
-            if ($ln === '' || $ln[0] === '#') {
-                continue;
-            }
-            if (strpos($ln, '=') === false) {
-                continue;
-            }
-            list($key, $val) = explode('=', $ln, 2);
-            $key = trim($key);
-            $val = trim($val);
-            // remove surrounding quotes if present
-            if ((strlen($val) >= 2) && (($val[0] === '"' && substr($val, -1) === '"') || ($val[0] === "'" && substr($val, -1) === "'"))) {
-                $val = substr($val, 1, -1);
-            }
-            putenv("$key=$val");
-            $_ENV[$key] = $val;
-            $_SERVER[$key] = $val;
-        }
+  if (class_exists('Dotenv\\Dotenv')) {
+    // composer-installed dotenv is available
+    Dotenv\Dotenv::createImmutable(__DIR__ . '/../')->load();
+  } else {
+    // naive parser fallback
+    $lines = file(__DIR__ . '/../.env', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    foreach ($lines as $ln) {
+      $ln = trim($ln);
+      if ($ln === '' || $ln[0] === '#') {
+        continue;
+      }
+      if (strpos($ln, '=') === false) {
+        continue;
+      }
+      list($key, $val) = explode('=', $ln, 2);
+      $key = trim($key);
+      $val = trim($val);
+      // remove surrounding quotes if present
+      if ((strlen($val) >= 2) && (($val[0] === '"' && substr($val, -1) === '"') || ($val[0] === "'" && substr($val, -1) === "'"))) {
+        $val = substr($val, 1, -1);
+      }
+      putenv("$key=$val");
+      $_ENV[$key] = $val;
+      $_SERVER[$key] = $val;
     }
+  }
 }

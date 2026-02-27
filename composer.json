@@ -44,9 +44,9 @@
   "require": {
     "php": ">=8.1.28",
     "slim/slim": "^4.10",
-    "league/plates": "^3.4"
+    "league/plates": "^3.4",
+    "vlucas/phpdotenv": "*"
   },
-  "require-dev": {},
   "autoload": {
     "psr-4": {
       "NatureSI\\": "php/"
