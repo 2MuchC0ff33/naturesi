@@ -3,6 +3,8 @@
    import order: maintained by assets/css/main.scss.
 */
 
+@use "maps" as maps;
+
 /* ==========================================================================
 Sizing utilities
 Small, explicit helpers for common sizing patterns (non-opinionated)
@@ -24,5 +26,5 @@ Small, explicit helpers for common sizing patterns (non-opinionated)
 }
 
 .max-w-1200 {
-  max-width: var(--max-width, 1200px);
+  max-width: maps.layout("max-width");
 }

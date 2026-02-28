@@ -8,6 +8,8 @@ State helpers
 Small state utility classes for interactive components (non-visual states).
 ========================================================================== */
 
+@use "../settings/maps" as maps;
+
 .is-loading {
   opacity: 0.7;
   pointer-events: none;
@@ -33,11 +35,11 @@ Small state utility classes for interactive components (non-visual states).
 }
 
 .is-error {
-  color: var(--color-error);
+  color: maps.color(error);
 }
 
 .is-success {
-  color: var(--color-success);
+  color: maps.color(success);
 }
 
 /* Toggle visibility without removing from DOM (useful for CSS transitions) */

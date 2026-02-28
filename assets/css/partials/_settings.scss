@@ -4,6 +4,11 @@ migration from legacy `@import` to the Sass module system.  Each of the
 forwarded modules still uses `@import` internally; they will be converted
 one by one in subsequent commits.  Keeping a single entry point makes it
 possible to switch `main.scss` over in one change.
+
+// NOTE: most of these modules currently only emit raw CSS.  When a module
+// begins exporting Sass variables, functions or mixins it should be
+// forwarded with an explicit namespace (e.g. `@forward "settings/colours"
+// as colours-*;`) to avoid global name collisions.
 ========================================================================== */
 
 @forward "settings/tokens";

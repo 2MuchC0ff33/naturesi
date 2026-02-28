@@ -3,6 +3,8 @@
    import order: maintained by assets/css/main.scss.
 */
 
+@use "../settings/maps" as maps;
+
 /* Utilities – margin helpers (alias layer)
    This partial provides axis helpers and convenience aliases. The single-purpose
    spacing utilities (e.g. `.u-mt-1`, `.u-p-1`) are defined in `spacing-helpers.css`
@@ -10,7 +12,7 @@
 
 /* Axis aliases */
 .u-ml-1 {
-  margin-left: var(--space-xs) !important;
+  margin-left: maps.spacing(xs) !important;
 }
 
 .u-ml-2 {

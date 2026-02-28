@@ -57,7 +57,12 @@ Purpose: concise guidance so an AI coding agent can start work quickly in this r
     mixins in `partials/utilities/helpers.scss` provide a namespaced API.
     Generated `:root` custom-properties ensure runtime compatibility.
   * For new mixins or helpers, always create a dedicated module and invoke
-    it via its namespace rather than polluting the global scope.
+    it via its namespace rather than polluting the global scope.  helper
+    mixins live in `partials/utilities/helpers.scss` and include
+    `bg-color`, `text-color`, `pad`, `margin`, `grid`, `box-shadow`,
+    `fluid-type`, and `respond-to`.
+  * When converting existing styles, replace `var(--token)` references with
+    `maps.color(token)`/`maps.spacing(token)` or the appropriate helper.
   * Vendor CSS that cannot be converted to Sass lives under
     `partials/vendors`; once the final dependency is eliminated the
     `postcss-import` plugin can be removed and the build command

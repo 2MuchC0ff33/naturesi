@@ -20,6 +20,32 @@
   padding: maps.spacing($size);
 }
 
+// spacing shorthand (margin)
+@mixin margin($size) {
+  margin: maps.spacing($size);
+}
+
+// responsive grid helper: specify number of columns (default 2) and gap
+@mixin grid($cols: 2, $gap: maps.spacing(unit)) {
+  display: grid;
+  grid-template-columns: repeat($cols, 1fr);
+  gap: $gap;
+}
+
+// simple shadow mixin referencing map tokens
+@mixin box-shadow($which: sm) {
+  box-shadow: maps.shadow($which);
+}
+
+// fluid typography calculator using font & layout tokens
+@function clamp-fluid($min, $max) {
+  @return clamp($min, calc($min + ($max - $min) * ((100vw - maps.layout("min-width")) / (maps.layout("max-width") - maps.layout("min-width")))), $max);
+}
+
+@mixin fluid-type() {
+  font-size: clamp-fluid(maps.font(min), maps.font(max));
+}
+
 // breakpoint media mixin for convenience
 @mixin respond-to($breakpoint) {
   @media (min-width: maps.breakpoint($breakpoint)) {

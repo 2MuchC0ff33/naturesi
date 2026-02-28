@@ -8,12 +8,14 @@ Interaction helpers
 Generic hover/focus interactions used across components (lift effect).
 ========================================================================== */
 
-/* Add gentle lift and shadow for focus/hover states on interactive elements - scoped to `.interactive` and `.btn` to avoid layout shifts on all anchors */
+/* Add gentle lift and shadow for focus/hover states on interactive elements */
+@use "../settings/maps" as maps;
+
 .interactive:hover,
 .interactive:focus-visible,
 .btn:hover,
 .btn:focus-visible {
-  box-shadow: var(--shadow-md);
+  box-shadow: maps.shadow(md);
   transform: translateY(-1px);
   will-change: transform, box-shadow;
 }
@@ -31,14 +33,14 @@ Generic hover/focus interactions used across components (lift effect).
 /* Buttons */
 .btn {
   display: inline-block;
-  padding: var(--btn-padding-vertical) var(--btn-padding-horizontal);
-  border-radius: var(--btn-radius);
-  background: var(--btn-bg);
-  color: var(--btn-color);
+  padding: maps.button(padding-vertical) maps.button(padding-horizontal);
+  border-radius: maps.button(radius);
+  background: maps.button(bg);
+  color: maps.button(color);
   text-decoration: none;
   border: 0;
   cursor: pointer;
-  transition: box-shadow var(--transition-fast), transform var(--transition-fast), opacity var(--transition-fast);
+  transition: box-shadow maps.transition(fast), transform maps.transition(fast), opacity maps.transition(fast);
   font-weight: 600;
 }
 
@@ -65,8 +67,8 @@ Generic hover/focus interactions used across components (lift effect).
 
 .btn--secondary {
   background: transparent;
-  color: var(--color-text);
-  border: 1px solid var(--color-border);
+  color: maps.color(text);
+  border: 1px solid maps.color(border);
 }
 
 /* Icon-only button */

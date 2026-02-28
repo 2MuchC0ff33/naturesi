@@ -3,6 +3,8 @@
    import order: maintained by assets/css/main.scss.
 */
 
+@use "../settings/maps" as maps;
+
 /* templates/templates.css
    Purpose: Template-specific page layout tweaks and helper styles for page templates.
    Notes: Minimal component-level styles only when truly template-specific.
@@ -15,14 +17,14 @@
 */
 
 .template-home .hero {
-  padding: var(--space-lg) 0;
+  padding: maps.spacing(lg) 0;
   text-align: center;
 }
 
 .template-checkout .checkout-layout {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--space-md);
+  gap: maps.spacing(md);
 }
 
 @media (min-width: 900px) {

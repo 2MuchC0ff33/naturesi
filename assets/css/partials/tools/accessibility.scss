@@ -7,8 +7,11 @@
 Accessibility helpers
 Focus outlines, skip links and visually-hidden utilities live here.
 ========================================================================== */
+
+@use "../settings/maps" as maps;
+
 :focus-visible {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid maps.color(accent);
   outline-offset: 0.25rem;
 }
 
@@ -35,8 +38,8 @@ Focus outlines, skip links and visually-hidden utilities live here.
   left: var(--space-md);
   top: var(--header-height);
   /* Position below header to prevent overlap with nav bar */
-  outline: 2px solid color-mix(in srgb, var(--color-accent) 80%, white);
-  background: var(--color-accent);
+  outline: 2px solid color-mix(in srgb, maps.color(accent) 80%, white);
+  background: maps.color(accent);
   color: #fff;
   opacity: 1;
   transform: translateY(-1px);

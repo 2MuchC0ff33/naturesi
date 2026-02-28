@@ -138,6 +138,11 @@ migration from legacy `@import` to the Sass module system.  Each of the
 forwarded modules still uses `@import` internally; they will be converted
 one by one in subsequent commits.  Keeping a single entry point makes it
 possible to switch `main.scss` over in one change.
+
+// NOTE: most of these modules currently only emit raw CSS.  When a module
+// begins exporting Sass variables, functions or mixins it should be
+// forwarded with an explicit namespace (e.g. `@forward "settings/colours"
+// as colours-*;`) to avoid global name collisions.
 ========================================================================== */
 /* third-party vendor stylesheet
    this file isolates external CSS imports so they can be removed or
@@ -277,10 +282,6 @@ just before the :root declaration.
   --elevation-2: 0 6px 12px rgba(0, 0, 0, 0.06);
   /* values that aren’t currently modelled; these can be moved into a map
      as needed. */
-  /* fluid-font calculation is still hand‑coded for now */
-  --fluid-font: clamp(var(--font-min),
-    calc(var(--font-min) + (var(--font-max) - var(--font-min)) * ((100vw - var(--layout-min-width)) / (var(--layout-max-width) - var(--layout-min-width)))),
-    var(--font-max));
 }
 /* config.scss
    purpose: see assets/css/partials/README.md for organisation.
@@ -399,16 +400,16 @@ Spacing utilities (migrated from utilities.css)
 These helpers are small, semantic spacing utilities that map to design tokens
 ========================================================================== */
 .p-sm {
-  padding: var(--space-sm);
+  padding: 0.75rem;
 }
 .p-md {
-  padding: var(--space-md);
+  padding: 1.25rem;
 }
 .mt-sm {
-  margin-top: var(--space-sm);
+  margin-top: 0.75rem;
 }
 .mb-md {
-  margin-bottom: var(--space-md);
+  margin-bottom: 1.25rem;
 }
 /* Utility to reset list styling and spacing (used to replace inline style attributes) */
 .list-reset {
@@ -437,7 +438,7 @@ Small, explicit helpers for common sizing patterns (non-opinionated)
   max-width: 880px;
 }
 .max-w-1200 {
-  max-width: var(--max-width, 1200px);
+  max-width: 1200px;
 }
 /* breakpoints.scss
    purpose: see assets/css/partials/README.md for organisation.
@@ -562,7 +563,7 @@ Accessibility helpers
 Focus outlines, skip links and visually-hidden utilities live here.
 ========================================================================== */
 :focus-visible {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid #346967;
   outline-offset: 0.25rem;
 }
 .skip-link {
@@ -587,8 +588,8 @@ Focus outlines, skip links and visually-hidden utilities live here.
   left: var(--space-md);
   top: var(--header-height);
   /* Position below header to prevent overlap with nav bar */
-  outline: 2px solid color-mix(in srgb, var(--color-accent) 80%, white);
-  background: var(--color-accent);
+  outline: 2px solid color-mix(in srgb, #346967 80%, white);
+  background: #346967;
   color: #fff;
   opacity: 1;
   transform: translateY(-1px);
@@ -722,12 +723,12 @@ Centralised keyframes for reuse by components (keeps components focused on usage
 Interaction helpers
 Generic hover/focus interactions used across components (lift effect).
 ========================================================================== */
-/* Add gentle lift and shadow for focus/hover states on interactive elements - scoped to `.interactive` and `.btn` to avoid layout shifts on all anchors */
+/* Add gentle lift and shadow for focus/hover states on interactive elements */
 .interactive:hover,
 .interactive:focus-visible,
 .btn:hover,
 .btn:focus-visible {
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transform: translateY(-1px);
   will-change: transform, box-shadow;
 }
@@ -742,14 +743,14 @@ Generic hover/focus interactions used across components (lift effect).
 /* Buttons */
 .btn {
   display: inline-block;
-  padding: var(--btn-padding-vertical) var(--btn-padding-horizontal);
-  border-radius: var(--btn-radius);
-  background: var(--btn-bg);
-  color: var(--btn-color);
+  padding: 0.6rem 1rem;
+  border-radius: 0.5rem;
+  background: #346967;
+  color: #ffffff;
   text-decoration: none;
   border: 0;
   cursor: pointer;
-  transition: box-shadow var(--transition-fast), transform var(--transition-fast), opacity var(--transition-fast);
+  transition: box-shadow 150ms, transform 150ms, opacity 150ms;
   font-weight: 600;
 }
 .btn:disabled,
@@ -771,8 +772,8 @@ Generic hover/focus interactions used across components (lift effect).
 }
 .btn--secondary {
   background: transparent;
-  color: var(--color-text);
-  border: 1px solid var(--color-border);
+  color: #050505;
+  border: 1px solid #e1e1e1;
 }
 /* Icon-only button */
 .btn--icon {
@@ -816,10 +817,10 @@ Small state utility classes for interactive components (non-visual states).
   pointer-events: none;
 }
 .is-error {
-  color: var(--color-error);
+  color: #f44336;
 }
 .is-success {
-  color: var(--color-success);
+  color: #4caf50;
 }
 /* Toggle visibility without removing from DOM (useful for CSS transitions) */
 .is-hidden {
@@ -1169,6 +1170,10 @@ Base document styles
 This file contains top-level typographic and document-level settings using design tokens.
 ========================================================================== */
 /* HTML5 document base styles */
+/* helpers.scss – mixins and functions that use Sass maps from the
+   `settings/maps` module. this demonstrates the namespaced utility pattern
+   and provides a place for small reusable snippets that don’t warrant
+   their own broad file. */
 html {
   line-height: var(--line-height, 1.6);
   -webkit-font-smoothing: antialiased;
@@ -1176,7 +1181,7 @@ html {
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  font-size: var(--fluid-font, 1rem);
+  font-size: clamp(16px, 16px + 4px * (100vw - 320px) / 880px, 20px);
   line-height: var(--line-height, 1.6);
   color: #050505;
   background-color: #ffffff;
@@ -2928,13 +2933,13 @@ API examples: `.hide--sm-up`, `.hide--md-up`, `.show--md-up` — mobile-first he
    Keep these focused and small; prefer components for all UI pieces.
 */
 .template-home .hero {
-  padding: var(--space-lg) 0;
+  padding: 2rem 0;
   text-align: center;
 }
 .template-checkout .checkout-layout {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--space-md);
+  gap: 1.25rem;
 }
 @media (min-width: 900px) {
   .template-checkout .checkout-layout {
@@ -2962,7 +2967,7 @@ API examples: `.hide--sm-up`, `.hide--md-up`, `.show--md-up` — mobile-first he
   display: block;
 }
 .shadow-host:focus-within {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid #346967;
   outline-offset: 2px;
 }
 /* ==========================================================================
@@ -4920,14 +4925,14 @@ See `display.css`, `grouping.css`, `typography-helpers.css`, `visibility.css` an
 /* Flex and grid helpers */
 .u-flex {
   display: flex;
-  gap: var(--space-sm);
+  gap: 0.75rem;
 }
 .u-inline-flex {
   display: inline-flex;
 }
 .u-grid {
   display: grid;
-  gap: var(--space-md);
+  gap: 1.25rem;
 }
 .u-auto-fit {
   grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
@@ -5036,10 +5041,15 @@ See `display.css`, `grouping.css`, `typography-helpers.css`, `visibility.css` an
   display: none !important;
 }
 /* Keep `.hidden` in tools for backwards compatibility — do not remove here. */
-/* helpers.scss – mixins and functions that use Sass maps from the
-   `settings/maps` module. this demonstrates the namespaced utility pattern
-   and provides a place for small reusable snippets that don’t warrant
-   their own broad file. */
+/* base.scss
+   purpose: see assets/css/partials/README.md for organisation.
+   import order: maintained by assets/css/main.scss.
+*/
+/* ==========================================================================
+Base document styles
+This file contains top-level typographic and document-level settings using design tokens.
+========================================================================== */
+/* HTML5 document base styles */
 /* show.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -5323,7 +5333,7 @@ See `display.css`, `grouping.css`, `typography-helpers.css`, `visibility.css` an
    to avoid duplication and provide a canonical source of truth. */
 /* Axis aliases */
 .u-ml-1 {
-  margin-left: var(--space-xs) !important;
+  margin-left: 0.5rem !important;
 }
 .u-ml-2 {
   margin-left: var(--space-sm) !important;
@@ -5412,29 +5422,29 @@ See `display.css`, `grouping.css`, `typography-helpers.css`, `visibility.css` an
 .u-stack {
   display: flex;
   flex-direction: column;
-  gap: var(--space-sm);
+  gap: 0.75rem;
 }
 .u-stack--sm {
-  gap: var(--space-xs);
+  gap: 0.5rem;
 }
 .u-stack--lg {
-  gap: var(--space-lg);
+  gap: 2rem;
 }
 /* Generic gap helpers (useful for grid/flex containers) */
 .u-gap {
   gap: var(--space-md) !important;
 }
 .u-gap-1 {
-  gap: var(--space-xs) !important;
+  gap: 0.5rem !important;
 }
 .u-gap-2 {
-  gap: var(--space-sm) !important;
+  gap: 0.75rem !important;
 }
 .u-gap-3 {
   gap: var(--space-md) !important;
 }
 .u-gap-4 {
-  gap: var(--space-lg) !important;
+  gap: 2rem !important;
 }
 /* sorting.scss
    purpose: see assets/css/partials/README.md for organisation.
@@ -5656,25 +5666,25 @@ See `display.css`, `grouping.css`, `typography-helpers.css`, `visibility.css` an
 */
 /* Utilities – border helpers */
 .u-border {
-  border: 1px solid var(--color-border, #ccc);
+  border: 1px solid #e1e1e1;
 }
 .u-border-radius {
   border-radius: 0.5rem;
 }
 .u-border-t {
-  border-top: 1px solid var(--color-border, #ccc) !important;
+  border-top: 1px solid #e1e1e1 !important;
 }
 .u-border-b {
-  border-bottom: 1px solid var(--color-border, #ccc) !important;
+  border-bottom: 1px solid #e1e1e1 !important;
 }
 .u-border-l {
-  border-left: 1px solid var(--color-border, #ccc) !important;
+  border-left: 1px solid #e1e1e1 !important;
 }
 .u-border-r {
-  border-right: 1px solid var(--color-border, #ccc) !important;
+  border-right: 1px solid #e1e1e1 !important;
 }
 .u-border-muted {
-  border-color: var(--color-muted) !important;
+  border-color: #6b7280 !important;
 }
 /* shapes.scss
    purpose: see assets/css/partials/README.md for organisation.
@@ -5763,13 +5773,13 @@ See `display.css`, `grouping.css`, `typography-helpers.css`, `visibility.css` an
 .u-reserve-16x9 {
   aspect-ratio: 16/9;
   width: 100% !important;
-  min-height: var(--space-md);
+  min-height: 1.25rem;
   display: block;
 }
 .u-reserve-4x3 {
   aspect-ratio: 4/3;
   width: 100% !important;
-  min-height: var(--space-sm);
+  min-height: 0.75rem;
   display: block;
 }
 .u-reserve-square {

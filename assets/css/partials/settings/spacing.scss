@@ -3,25 +3,27 @@
    import order: maintained by assets/css/main.scss.
 */
 
+@use "maps" as maps;
+
 /* ==========================================================================
 Spacing utilities (migrated from utilities.css)
 These helpers are small, semantic spacing utilities that map to design tokens
 ========================================================================== */
 
 .p-sm {
-  padding: var(--space-sm);
+  padding: maps.spacing(sm);
 }
 
 .p-md {
-  padding: var(--space-md);
+  padding: maps.spacing(md);
 }
 
 .mt-sm {
-  margin-top: var(--space-sm);
+  margin-top: maps.spacing(sm);
 }
 
 .mb-md {
-  margin-bottom: var(--space-md);
+  margin-bottom: maps.spacing(md);
 }
 
 /* Utility to reset list styling and spacing (used to replace inline style attributes) */

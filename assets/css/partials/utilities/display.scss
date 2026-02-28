@@ -5,6 +5,8 @@
 
 /* Utilities – display helpers */
 
+@use "../settings/maps" as maps;
+
 /* Display helpers: block, inline, flex, grid, none, etc. Mobile-first. */
 .u-d-block {
   display: block !important;
@@ -56,7 +58,7 @@
 /* Flex and grid helpers */
 .u-flex {
   display: flex;
-  gap: var(--space-sm);
+  gap: maps.spacing(sm);
 }
 
 .u-inline-flex {
@@ -65,7 +67,7 @@
 
 .u-grid {
   display: grid;
-  gap: var(--space-md);
+  gap: maps.spacing(md);
 }
 
 .u-auto-fit {

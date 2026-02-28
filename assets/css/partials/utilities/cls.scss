@@ -3,6 +3,8 @@
    import order: maintained by assets/css/main.scss.
 */
 
+@use "../settings/maps" as maps;
+
 /* Utilities – Cumulative Layout Shift (CLS) helpers */
 
 /* Small utility to ensure a minimum reserved height for dynamic content */
@@ -14,14 +16,14 @@
 .u-reserve-16x9 {
   aspect-ratio: 16 / 9;
   width: 100% !important;
-  min-height: var(--space-md);
+  min-height: maps.spacing(md);
   display: block;
 }
 
 .u-reserve-4x3 {
   aspect-ratio: 4 / 3;
   width: 100% !important;
-  min-height: var(--space-sm);
+  min-height: maps.spacing(sm);
   display: block;
 }
 

@@ -3,6 +3,8 @@
    import order: maintained by assets/css/main.scss.
 */
 
+@use "../settings/maps" as maps;
+
 /* Grid – CSS Grid utilities
    Modern grid helpers for responsive layouts.
 */
@@ -22,15 +24,15 @@
 
 /* Grid gaps */
 .u-gap-1 {
-  gap: var(--space-xs) !important;
+  gap: maps.spacing(xs) !important;
 }
 
 .u-gap-2 {
-  gap: var(--space-sm) !important;
+  gap: maps.spacing(sm) !important;
 }
 
 .u-gap-3 {
-  gap: var(--space-md) !important;
+  gap: maps.spacing(md) !important;
 }
 
 /* Grid placement */

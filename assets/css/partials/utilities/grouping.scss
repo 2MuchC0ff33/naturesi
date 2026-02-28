@@ -5,18 +5,20 @@
 
 /* Utilities – grouping helpers (stack, gap) */
 
+@use "../settings/maps" as maps;
+
 .u-stack {
   display: flex;
   flex-direction: column;
-  gap: var(--space-sm);
+  gap: maps.spacing(sm);
 }
 
 .u-stack--sm {
-  gap: var(--space-xs);
+  gap: maps.spacing(xs);
 }
 
 .u-stack--lg {
-  gap: var(--space-lg);
+  gap: maps.spacing(lg);
 }
 
 /* Generic gap helpers (useful for grid/flex containers) */
@@ -25,11 +27,11 @@
 }
 
 .u-gap-1 {
-  gap: var(--space-xs) !important;
+  gap: maps.spacing(xs) !important;
 }
 
 .u-gap-2 {
-  gap: var(--space-sm) !important;
+  gap: maps.spacing(sm) !important;
 }
 
 .u-gap-3 {
@@ -37,5 +39,5 @@
 }
 
 .u-gap-4 {
-  gap: var(--space-lg) !important;
+  gap: maps.spacing(lg) !important;
 }

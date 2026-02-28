@@ -63,9 +63,5 @@ just before the :root declaration.
 
   /* values that aren’t currently modelled; these can be moved into a map
      as needed. */
-  /* fluid-font calculation is still hand‑coded for now */
-  --fluid-font: clamp(var(--font-min),
-    calc(var(--font-min) + (var(--font-max) - var(--font-min)) * ((100vw - var(--layout-min-width)) / (var(--layout-max-width) - var(--layout-min-width)))),
-    var(--font-max));
 
 }

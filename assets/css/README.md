@@ -31,3 +31,30 @@ should be isolated in `partials/vendors/` and pulled in through the
 `_vendors.scss` aggregator.  This makes it easy to review external
 dependencies and ultimately remove the need for `postcss-import`.
 
+### Helper mixins
+
+`partials/utilities/helpers.scss` contains frequently used helper mixins
+that rely on the token maps from `partials/settings/_maps.scss`.  Common
+patterns include:
+
+```scss
+@use "../settings/maps" as maps;
+@use "utilities/helpers" as helpers;
+
+.my-component {
+  @include helpers.fluid-type();          /* responsive font-size */
+  @include helpers.bg-color(accent);      /* background from colour map */
+  @include helpers.grid(3, maps.spacing(md));
+  @include helpers.box-shadow(md);
+}
+```
+
+New code should favour these helpers or direct map lookups rather than
+hard‑coding `var(--foo)` tokens.  As existing partials are touched, convert
+manual CSS rules (borders, colours, layouts) to use maps and helpers; the
+build step flags any remaining `var(--` occurrences so they can be cleaned
+up.
+
+Once all tokens live in maps the `variables.scss` shim can be removed and
+styles will be driven entirely from Sass data structures.
+
