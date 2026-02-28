@@ -1,0 +1,34 @@
+/* mixins.scss
+   purpose: see assets/css/partials/README.md for organisation.
+   import order: maintained by assets/css/main.scss.
+*/
+
+/* ==========================================================================
+Mixins & small utility snippets
+Lightweight helpers that can be composed in components.
+
+NOTE: Display and grid helpers were moved to `partials/utilities/display.css` and
+`partials/utilities/grouping.css`. Keep only small, object-level helpers here.
+========================================================================== */
+
+/* Small display helpers moved to utilities/display.css (kept `.inline-block` here) */
+.inline-block {
+  display: inline-block;
+}
+
+/* `.center-row` moved to partials/objects/flexbox.css (Objects layer).
+   Keep compact utilities that are intended for one-off use here (u-* helpers). */
+
+/* Truncate helper moved to `partials/utilities/typography-helpers.css` */
+
+/* `.badge` styles moved to `partials/components/badges.css` to follow ITCSS components layer */
+
+/* Typography helpers */
+.font-mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Courier New', monospace;
+}
+
+.small-text {
+  font-size: 0.9rem;
+  line-height: 1.2;
+}

@@ -1,0 +1,77 @@
+/* media-object.scss
+   purpose: see assets/css/partials/README.md for organisation.
+   import order: maintained by assets/css/main.scss.
+*/
+
+/* ==========================================================================
+Objects — Media object
+
+Responsive media helpers for images, video and picture elements. Keep these
+layout-only (size, display, aspect) and move visual styles to elements.
+
+API: `.responsive-media` (images), `.media`, `.media__img`, `.media__body`,
+`.media--reverse`, and simple `.aspect-ratio--*` helpers.
+========================================================================== */
+
+/* Basic image/video responsive reset */
+.responsive-media,
+.responsive-media img,
+.responsive-media video,
+.responsive-media picture {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Classic media object pattern (stacked on mobile, side-by-side on larger screens) */
+.media {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.media__img {
+  width: 100%;
+  max-width: 100%;
+  flex: 0 0 auto;
+}
+
+.media__body {
+  flex: 1 1 auto;
+}
+
+@media (min-width: 900px) {
+  .media {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .media__img {
+    width: 40%;
+    max-width: 40%;
+  }
+
+  .media__body {
+    width: 60%;
+  }
+}
+
+/* Reverse order for media (visual only; DOM order preserved for accessibility) */
+.media--reverse {
+  flex-direction: column-reverse;
+}
+
+@media (min-width: 900px) {
+  .media--reverse {
+    flex-direction: row-reverse;
+  }
+}
+
+/* Basic aspect ratio helpers (useful for placeholders) */
+.aspect-ratio--1x1 {
+  aspect-ratio: 1 / 1;
+}
+
+.aspect-ratio--16x9 {
+  aspect-ratio: 16 / 9;
+}

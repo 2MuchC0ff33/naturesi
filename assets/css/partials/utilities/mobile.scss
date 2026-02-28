@@ -1,0 +1,22 @@
+/* mobile.scss
+   purpose: see assets/css/partials/README.md for organisation.
+   import order: maintained by assets/css/main.scss.
+*/
+
+/* Utilities – mobile-specific helpers */
+
+@media (max-width: 600px) {
+  .u-mobile-only {
+    display: block !important;
+  }
+
+  .u-hide-mobile {
+    display: none !important;
+  }
+}
+
+@media (min-width: 601px) {
+  .u-mobile-only {
+    display: none !important;
+  }
+}

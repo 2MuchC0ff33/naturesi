@@ -28,14 +28,14 @@ class Dotenv
 {
     private string $dir;
 
-    public static function createImmutable($dir)
+    public_html static function createImmutable($dir)
     {
         $instance = new self();
         $instance->dir = $dir;
         return $instance;
     }
 
-    public function load()
+    public_html function load()
     {
         // naive .env loader roughly matching our fallback logic above;
         // return an array so the bootstrap propagation loop can work.
@@ -96,7 +96,7 @@ PHP;
         }
     }
 
-    public function testBootstrapPrefersPhpDotenv(): void
+    public_html function testBootstrapPrefersPhpDotenv(): void
     {
         // phpunit.xml already includes php/bootstrap.php via the bootstrap
         // attribute, so the file has been loaded before setUp() ran.  That

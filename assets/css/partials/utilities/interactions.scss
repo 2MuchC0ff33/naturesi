@@ -1,0 +1,48 @@
+/* interactions.scss
+   purpose: see assets/css/partials/README.md for organisation.
+   import order: maintained by assets/css/main.scss.
+*/
+
+/* Interactions – Cursor, opacity, and focus utilities
+   Enhances user interaction and accessibility.
+*/
+
+/* Cursor */
+.u-cursor-pointer {
+  cursor: pointer !important;
+}
+
+.u-cursor-not-allowed {
+  cursor: not-allowed !important;
+}
+
+.u-cursor-default {
+  cursor: default !important;
+}
+
+/* Opacity */
+.u-opacity-0 {
+  opacity: 0 !important;
+}
+
+.u-opacity-25 {
+  opacity: 0.25 !important;
+}
+
+.u-opacity-50 {
+  opacity: 0.5 !important;
+}
+
+.u-opacity-75 {
+  opacity: 0.75 !important;
+}
+
+.u-opacity-100 {
+  opacity: 1 !important;
+}
+
+/* Focus */
+.u-focus-visible:focus-visible {
+  outline: 2px solid var(--color-focus) !important;
+  outline-offset: 2px !important;
+}

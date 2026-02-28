@@ -1,0 +1,85 @@
+/* interactions.scss
+   purpose: see assets/css/partials/README.md for organisation.
+   import order: maintained by assets/css/main.scss.
+*/
+
+/* ==========================================================================
+Interaction helpers
+Generic hover/focus interactions used across components (lift effect).
+========================================================================== */
+
+/* Add gentle lift and shadow for focus/hover states on interactive elements - scoped to `.interactive` and `.btn` to avoid layout shifts on all anchors */
+.interactive:hover,
+.interactive:focus-visible,
+.btn:hover,
+.btn:focus-visible {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+  will-change: transform, box-shadow;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .interactive,
+  .btn {
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: var(--btn-padding-vertical) var(--btn-padding-horizontal);
+  border-radius: var(--btn-radius);
+  background: var(--btn-bg);
+  color: var(--btn-color);
+  text-decoration: none;
+  border: 0;
+  cursor: pointer;
+  transition: box-shadow var(--transition-fast), transform var(--transition-fast), opacity var(--transition-fast);
+  font-weight: 600;
+}
+
+.btn:disabled,
+.btn[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.btn:hover,
+.btn:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* `.focus-ring` is consolidated in `partials/tools/accessibility.css` to provide a single canonical focus helper. */
+
+/* Button modifiers */
+.btn--primary {
+  background: var(--btn-bg);
+  color: var(--btn-color);
+}
+
+.btn--secondary {
+  background: transparent;
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+}
+
+/* Icon-only button */
+.btn--icon {
+  padding: 0.25rem;
+  width: 2.25rem;
+  height: 2.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn--icon svg {
+  width: 1rem;
+  height: 1rem;
+}

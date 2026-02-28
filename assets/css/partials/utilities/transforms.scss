@@ -1,0 +1,18 @@
+/* transforms.scss
+   purpose: see assets/css/partials/README.md for organisation.
+   import order: maintained by assets/css/main.scss.
+*/
+
+/* Utilities – transform helpers */
+
+.u-rotate-90 {
+  transform: rotate(90deg);
+}
+
+.u-rotate-180 {
+  transform: rotate(180deg);
+}
+
+.u-scale-110 {
+  transform: scale(1.1);
+}

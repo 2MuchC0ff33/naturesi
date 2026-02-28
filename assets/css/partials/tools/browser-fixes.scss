@@ -1,0 +1,32 @@
+/* browser-fixes.scss
+   purpose: see assets/css/partials/README.md for organisation.
+   import order: maintained by assets/css/main.scss.
+*/
+
+/* ==========================================================================
+Browser specific fixes and touch adjustments
+========================================================================== */
+
+/* Prevent iOS from highlighting links on long press */
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+
+.scroll-smooth {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Hide default scrollbars for aesthetic reasons (use sparingly) */
+.hide-scrollbar {
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Chrome/Safari */

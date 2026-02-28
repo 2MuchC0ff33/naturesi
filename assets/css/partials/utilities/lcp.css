@@ -1,6 +1,0 @@
-/* Utilities – Largest Contentful Paint (LCP) helpers */
-
-.u-lcp-priority {
-  content-visibility: auto;
-  contain-intrinsic-size: 300px 200px;
-}

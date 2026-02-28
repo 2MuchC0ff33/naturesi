@@ -1,0 +1,16 @@
+/* pagination.scss
+   purpose: see assets/css/partials/README.md for organisation.
+   import order: maintained by assets/css/main.scss.
+*/
+
+/* Utilities – pagination helpers */
+
+.u-pagination-current {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.u-pagination-disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}

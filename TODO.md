@@ -115,7 +115,7 @@
 **Files**
 
 *   `composer.json`
-*   `public/index.php` (bootstrap placeholder)
+*   `public_html/index.php` (bootstrap placeholder)
 *   Keep existing static pages untouched.
 *   `package.json`, `tools/` for build helpers
 *   `tsconfig.json`, `postcss.config.js`
@@ -204,7 +204,7 @@ Convert the static CSS to a Sass‑first workflow, add Open Props tokens and P
     *   Instantiate Slim app (`AppFactory::create()`).
     *   Add routing and error middleware.
     *   Instantiate `Plates\Engine` with `__DIR__ . '/../views'` and register helpers (for example `asset`, `uri`).
-*   Update `public/index.php` to route requests through Slim.
+*   Update `public_html/index.php` to route requests through Slim.
 *   Add pilot routes: `/`, `/about`, `/store`.
 *   Configure fallback so unmatched routes can still serve static files (for example Slim notFound handler serving from `pages/` where appropriate).
 
@@ -245,7 +245,7 @@ Convert the static CSS to a Sass‑first workflow, add Open Props tokens and P
 *   Run `pnpm run watch:css`; confirm live recompilation works when editing partials and that Ctrl‑C stops both processes.
 *   Run `composer install`; confirm Slim and Plates autoload.
 *   Launch dev server:
-    *   `php -S localhost:8000 -t public`
+    *   `php -S localhost:8000 -t public_html`
 *   Verify:
     *   Plates homepage renders at `http://localhost:8000/`.
     *   Visual parity with legacy `pages/index.html`.
@@ -274,7 +274,7 @@ Convert the static CSS to a Sass‑first workflow, add Open Props tokens and P
 *   `bootstrap.php`:
     *   Create Slim app, add routing and error middleware.
     *   Configure Plates engine pointing at `views/`, register `asset` and `uri` helpers.
-*   `public/index.php`:
+*   `public_html/index.php`:
     *   Route all requests through Slim.
     *   NotFound handling can serve static files where required during transition.
 *   Pilot routes: `/`, `/about`, `/store`.
@@ -295,7 +295,7 @@ Convert the static CSS to a Sass‑first workflow, add Open Props tokens and P
 *   `pnpm run build:css` completes without errors; output `assets/css/main.css` (or configured path) contains vendor prefixes and no `@import`.
 *   `pnpm run watch:css` rebuilds on editing `assets/css/partials/*` (verify both watchers exit together).
 *   `composer install` completes; Slim and Plates available.
-*   `php -S localhost:8000 -t public` serves Plates‑templated homepage with visual parity.
+*   `php -S localhost:8000 -t public_html` serves Plates‑templated homepage with visual parity.
 
 ***
 
@@ -337,7 +337,7 @@ Convert the static CSS to a Sass‑first workflow, add Open Props tokens and P
 
 **Actions**
 
-*   Ensure SW scope matches `public/` routing under Slim.
+*   Ensure SW scope matches `public_html/` routing under Slim.
 *   Test offline shell and background sync endpoints.
 *   Migrate cart to IndexedDB with deltas.
 
@@ -352,7 +352,7 @@ Convert the static CSS to a Sass‑first workflow, add Open Props tokens and P
 **Files**
 
 *   Slim middleware: caching, auth, compression
-*   `public/.htaccess` for clean URLs and Brotli
+*   `public_html/.htaccess` for clean URLs and Brotli
 *   SQL indices where needed
 
 **Actions**
@@ -470,7 +470,7 @@ Convert the static CSS to a Sass‑first workflow, add Open Props tokens and P
 
 ### 5) Directory Layout (Illustrative)
 
-    /public
+    /public_html
       index.php
       .htaccess
       assets/
@@ -501,11 +501,11 @@ Convert the static CSS to a Sass‑first workflow, add Open Props tokens and P
 ```json
 {
   "scripts": {
-    "build:css": "sass assets/css/main.scss public/assets/css/main.css --no-source-map && postcss public/assets/css/main.css -o public/assets/css/main.css",
-    "watch:css": "pnpm exec concurrently --kill-others \"sass --watch assets/css/main.scss:public/assets/css/main.css\" \"postcss --watch public/assets/css/main.css -o public/assets/css/main.css\"",
-    "build:ts": "esbuild assets/ts/index.ts --bundle --format=esm --outdir=public/assets/js --sourcemap",
-    "watch:ts": "esbuild assets/ts/index.ts --bundle --format=esm --outdir=public/assets/js --sourcemap --watch",
-    "dev": "php -S localhost:8080 -t public"
+    "build:css": "sass assets/css/main.scss public_html/assets/css/main.css --no-source-map && postcss public_html/assets/css/main.css -o public_html/assets/css/main.css",
+    "watch:css": "pnpm exec concurrently --kill-others \"sass --watch assets/css/main.scss:public_html/assets/css/main.css\" \"postcss --watch public_html/assets/css/main.css -o public_html/assets/css/main.css\"",
+    "build:ts": "esbuild assets/ts/index.ts --bundle --format=esm --outdir=public_html/assets/js --sourcemap",
+    "watch:ts": "esbuild assets/ts/index.ts --bundle --format=esm --outdir=public_html/assets/js --sourcemap --watch",
+    "dev": "php -S localhost:8080 -t public_html"
   },
   "dependencies": {
     "open-props": "^1.7.6"
@@ -557,7 +557,7 @@ Convert the static CSS to a Sass‑first workflow, add Open Props tokens and P
 
 *   PHP‑FPM, Apache 2.4 with Brotli are available in the target environments.
 *   MariaDB and Redis are available; Memcached is optional.
-*   A prior service worker exists and can be adapted to the new `public/` scope.
+*   A prior service worker exists and can be adapted to the new `public_html/` scope.
 *   WASM can be introduced progressively without blocking release timelines.
 *   Doctrine is optional and will be applied only when its benefits exceed its overhead.
 

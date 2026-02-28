@@ -10,9 +10,9 @@ const { readFileSync } = require('fs');
 
 try {
   // caller (usually the build script) is responsible for producing
-  // public/assets/css/main.css before executing this check. when run
+  // public_html_html/assets/css/main.css before executing this check. when run
   // standalone the user should ensure the file already exists.
-  const out = readFileSync('public/assets/css/main.css', 'utf-8');
+  const out = readFileSync('public_html_html/assets/css/main.css', 'utf-8');
   // no `@import` directives at all should remain (the Sass step may
   // have emitted them for compatibility, but PostCSS must collapse them).
   // strip comments first so explanatory text doesn’t trigger the check.

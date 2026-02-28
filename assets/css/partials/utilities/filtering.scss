@@ -1,0 +1,14 @@
+/* filtering.scss
+   purpose: see assets/css/partials/README.md for organisation.
+   import order: maintained by assets/css/main.scss.
+*/
+
+/* Utilities – filtering helpers */
+
+.u-filter-active {
+  filter: brightness(1.1);
+}
+
+.u-filter-inactive {
+  filter: grayscale(1);
+}

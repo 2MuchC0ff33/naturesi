@@ -1,0 +1,18 @@
+/* positioning.scss
+   purpose: see assets/css/partials/README.md for organisation.
+   import order: maintained by assets/css/main.scss.
+*/
+
+/* Utilities – positioning helpers */
+
+.u-fixed {
+  position: fixed !important;
+}
+
+.u-absolute {
+  position: absolute !important;
+}
+
+.u-relative {
+  position: relative !important;
+}

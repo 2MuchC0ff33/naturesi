@@ -1,0 +1,50 @@
+/* grid.scss
+   purpose: see assets/css/partials/README.md for organisation.
+   import order: maintained by assets/css/main.scss.
+*/
+
+/* ==========================================================================
+Objects — Grid
+
+Grid objects: simple, undecorated patterns for grid layout. Keep micro
+responsiveness and @supports wrappers here so components can reuse them.
+
+API: `.grid`, `.grid-auto-fit`, `.grid--cols-2`, `.grid--cols-3`,
+`.grid--gap-sm` (mobile-first; columns increase at larger breakpoints).
+========================================================================== */
+
+.grid {
+  display: grid;
+  gap: var(--space-md);
+}
+
+/* Optional object-prefixed alias */
+.o-grid {
+  display: grid;
+  gap: var(--space-md);
+}
+
+/* Small gap variant */
+.grid--gap-sm {
+  gap: var(--space-sm);
+}
+
+/* Column helpers (mobile-first: single column by default) */
+@media (min-width: 900px) {
+  .grid--cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1200px) {
+  .grid--cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Auto-fit responsive grid (cards) */
+@supports (width: min(240px, 100%)) {
+  .grid-auto-fit {
+    grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+  }
+}

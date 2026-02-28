@@ -1,0 +1,13 @@
+/* body.scss
+   purpose: see assets/css/partials/README.md for organisation.
+   import order: maintained by assets/css/main.scss.
+*/
+
+/* Base body defaults */
+
+body {
+  background: var(--color-background);
+  color: var(--color-text);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}

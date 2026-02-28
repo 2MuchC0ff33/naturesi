@@ -1,0 +1,89 @@
+/* buttons.scss
+   purpose: see assets/css/partials/README.md for organisation.
+   import order: maintained by assets/css/main.scss.
+*/
+
+/* Button defaults moved from settings/typography.css */
+
+button,
+[type="button"],
+[type="submit"],
+[type="reset"] {
+  font: inherit;
+  border-radius: var(--radius-sm);
+  padding: var(--space-xs) var(--space-sm);
+  color: var(--color-accent);
+  transition: background-color var(--transition-medium) ease, color var(--transition-medium) ease;
+  cursor: pointer;
+}
+
+button[disabled],
+[disabled][type="button"],
+[disabled][type="submit"],
+[disabled][type="reset"] {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Visible focus for keyboard users */
+button:focus-visible,
+[type="button"]:focus-visible,
+[type="submit"]:focus-visible,
+[type="reset"]:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--color-accent) 60%, transparent);
+  outline-offset: 2px;
+}
+
+/* Element utilities: .btn and variants (low-specificity, Elements layer) */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.85rem;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-accent);
+  border: 1px solid transparent;
+  transition: background-color var(--transition-medium), color var(--transition-medium), box-shadow var(--transition-medium);
+}
+
+.btn--primary {
+  background: var(--color-accent);
+  color: #fff;
+  /* subtle elevation to make primary CTAs stand out */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.10);
+  transition: transform var(--transition-fast) ease, box-shadow var(--transition-fast) ease;
+}
+
+.btn--primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.14);
+}
+
+.btn--primary:active,
+.btn--primary:focus {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.14);
+}
+
+.btn--ghost {
+  background: transparent;
+  border-color: var(--color-border);
+  color: var(--color-text);
+}
+
+.btn:focus-visible,
+.btn:focus {
+  outline: 3px solid color-mix(in srgb, var(--color-accent) 60%, transparent);
+  outline-offset: 2px;
+}
+
+@media (max-width: 640px) {
+  .btn {
+    min-height: 44px;
+    padding: 0.65rem 1rem;
+  }
+}

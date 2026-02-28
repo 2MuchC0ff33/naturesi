@@ -1,0 +1,11 @@
+/* fcp.scss
+   purpose: see assets/css/partials/README.md for organisation.
+   import order: maintained by assets/css/main.scss.
+*/
+
+/* Utilities – First Contentful Paint (FCP) helpers */
+
+.u-fcp-critical {
+  contain: content;
+  content-visibility: auto;
+}

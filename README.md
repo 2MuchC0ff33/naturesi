@@ -22,13 +22,13 @@ Autoprefixer 10.4.27
 
 * Build script (`pnpm run build:css`) runs PostCSS with `postcss-import` first
   (bundles `@import`‑ed partials) and then autoprefixer, producing a single
-  deployable stylesheet under `public/assets/css/main.css`.  The input file is
+  deployable stylesheet under `public_html/assets/css/main.css`.  The input file is
   `assets/css/main.css` which only contains an ordered list of partial imports.
   A post-build validation step (`node tests/check_css_build.cjs`) is executed
   automatically; it fails if any `@import` referencing the `partials/` tree
   remains or if autoprefixer appears not to have run. this prevents the
   disastrous case where a browser would request a missing partial and get a
-  404 when `public/` is served as the document root.
+  404 when `public_html/` is served as the document root.
 
 Stylelint 17.4.0
 
@@ -151,14 +151,14 @@ To get up and running in a fresh clone:
    ```
    The first command runs `sass` against `assets/css/main.scss`, writes a
    temporary `assets/css/output.css`, then pipes that through PostCSS
-   (import bundling + autoprefixer) to produce `public/assets/css/main.css`.
+   (import bundling + autoprefixer) to produce `public_html/assets/css/main.css`.
    You can also launch a continuous watcher for development; the script now
    uses `concurrently` so both the Sass and PostCSS watchers start together and
    a single Ctrl‑C will shut them both down cleanly:
    ```sh
    pnpm run watch:css
    ```
-   The resulting CSS and JS files land in `public/assets` but do not modify any
+   The resulting CSS and JS files land in `public_html/assets` but do not modify any
    existing page markup. The intermediary `assets/css/output.css` file is
    generated during the build for local debugging but is **not** tracked in
    source control (see `.gitignore`). No user‑facing changes occur in Phase 0.
@@ -167,8 +167,8 @@ To get up and running in a fresh clone:
    `$_ENV` and `$_SERVER`. A simple parser is included so no additional
    dependencies are required; `vlucas/phpdotenv` will be used automatically if
    installed later.
-6. Verify the bootstrap working by opening `public/index.php` in a browser or
-   running `php -S localhost:8000 -t public` and visiting
+6. Verify the bootstrap working by opening `public_html/index.php` in a browser or
+   running `php -S localhost:8000 -t public_html` and visiting
    `http://localhost:8000`. You should see the placeholder message.
 7. A quick sanity check script is provided (run from the repository root):
    ```sh

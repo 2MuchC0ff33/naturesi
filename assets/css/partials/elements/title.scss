@@ -1,0 +1,23 @@
+/* title.scss
+   purpose: see assets/css/partials/README.md for organisation.
+   import order: maintained by assets/css/main.scss.
+*/
+
+/* Page / site title styles (Elements layer)
+   Purpose: Provide a small, mobile-first title utility used for page headings
+   Keep low specificity, composable with .prose and existing headings */
+.page-title,
+.site-title {
+  display: block;
+  margin: 0 0 var(--space-xs);
+  line-height: 1.06;
+  font-weight: 700;
+  font-size: clamp(1.25rem, 3.5vw, 1.75rem);
+}
+
+.page-subtitle {
+  display: block;
+  margin: 0 0 var(--space-xs);
+  color: var(--color-muted);
+  font-size: 0.95rem;
+}

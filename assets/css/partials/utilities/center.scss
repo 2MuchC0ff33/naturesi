@@ -1,0 +1,22 @@
+/* center.scss
+   purpose: see assets/css/partials/README.md for organisation.
+   import order: maintained by assets/css/main.scss.
+*/
+
+/* Utilities – centering helpers */
+
+/* Centering helpers: use small, composable utilities */
+.u-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.u-flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Text alignment utilities are defined in `typography-helpers.css`.
+   Keep the single canonical definition there to avoid duplication. */

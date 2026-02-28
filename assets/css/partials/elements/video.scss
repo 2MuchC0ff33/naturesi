@@ -1,0 +1,19 @@
+/* video.scss
+   purpose: see assets/css/partials/README.md for organisation.
+   import order: maintained by assets/css/main.scss.
+*/
+
+/* elements/video.css
+   Purpose: Base styles for HTML <video> elements
+   Notes: Responsive, accessible video styling for reuse across components
+*/
+
+video {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  /* Maintains standard 16:9 aspect ratio for most videos */
+  border-radius: 10px;
+  /* Subtle rounding for modern look */
+  margin: 0 auto;
+  /* Center videos horizontally */
+}

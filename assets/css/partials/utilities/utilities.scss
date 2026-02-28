@@ -1,0 +1,16 @@
+/* utilities.scss
+   purpose: see assets/css/partials/README.md for organisation.
+   import order: maintained by assets/css/main.scss.
+*/
+
+/* ==========================================================================
+Utility helpers (small, documented utilities)
+Naming convention: prefix helpers with `u-` to avoid collisions with components.
+
+Helpers are now split into focused partials under `partials/utilities/`.
+See `display.css`, `grouping.css`, `typography-helpers.css`, `visibility.css` and `center.css`.
+========================================================================== */
+
+/* Deprecated: consolidated into focused utilities partials to improve discoverability
+   and avoid duplication across components and tools. Old `u-` names remain valid while
+   the new partials become the authoritative source. */

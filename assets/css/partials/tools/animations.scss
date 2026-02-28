@@ -1,0 +1,70 @@
+/* animations.scss
+   purpose: see assets/css/partials/README.md for organisation.
+   import order: maintained by assets/css/main.scss.
+*/
+
+/* ==========================================================================
+Animation keyframes and small animation utilities
+Centralised keyframes for reuse by components (keeps components focused on usage).
+========================================================================== */
+
+@keyframes nav-slide-down {
+  from {
+    transform: translateY(-8px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes search-spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Fade and slide animations */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade {
+  animation: fade-in var(--transition-medium) ease both;
+}
+
+.animate-slide-up {
+  animation: slide-up var(--transition-medium) ease both;
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+
+  .animate-fade,
+  .animate-slide-up {
+    animation: none !important;
+    transition: none !important;
+  }
+}

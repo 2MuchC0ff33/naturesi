@@ -1,0 +1,47 @@
+/* container.scss
+   purpose: see assets/css/partials/README.md for organisation.
+   import order: maintained by assets/css/main.scss.
+*/
+
+/* ==========================================================================
+Objects — Container
+
+Container object: mobile-first, token-driven container sizing. Keep layout
+properties only; move decorations (colours, borders) into components.
+
+API: `.container` (default), `.container--narrow`, `.container--lg`, `.container--fluid`
+Use `.container` inside `.wrapper` to constrain content width.
+========================================================================== */
+
+.container {
+  width: 100%;
+  /* mobile-first horizontal padding, increases at larger widths */
+  padding-inline: var(--space-inline-sm);
+  margin-inline: auto;
+  max-width: var(--max-width);
+  box-sizing: border-box;
+}
+
+/* Optional alias to ease migration */
+.o-container {
+  max-width: var(--max-width);
+  padding-inline: var(--space-inline-sm);
+  box-sizing: border-box;
+}
+
+/* Narrow / large modifiers (keep as modifiers, undecorated) */
+.container--narrow {
+  padding-inline: var(--space-inline-xs);
+  max-width: 880px;
+}
+
+.container--lg {
+  max-width: 64rem;
+  /* migrated from elements/groups.css */
+}
+
+/* Fluid variant: removes max-width to allow full-bleed content inside wrapper */
+.container--fluid {
+  max-width: none;
+  padding-inline: var(--space-inline-sm);
+}

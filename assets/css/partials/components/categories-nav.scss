@@ -1,0 +1,84 @@
+/* categories-nav.scss
+   purpose: see assets/css/partials/README.md for organisation.
+   import order: maintained by assets/css/main.scss.
+*/
+
+/* Categories nav component: single-row desktop, horizontal-scroll mobile */
+.site-header__categories {
+  border-top: 1px solid var(--color-border, #e6e6e6);
+  background: var(--color-light-background, #fff);
+}
+
+.site-header__categories-list {
+  margin: 0;
+  padding: 0 var(--space-sm, 0.5rem);
+  display: flex;
+  gap: var(--space-xs, 0.5rem);
+  list-style: none;
+  align-items: center;
+  overflow: hidden;
+  /* desktop: no scroll */
+  white-space: nowrap;
+  /* keep items on single row */
+}
+
+.site-header__categories-list li {
+  flex: 0 0 auto;
+}
+
+.site-header__categories-link {
+  display: inline-block;
+  padding: 4px 8px;
+  color: var(--color-text, #222);
+  text-decoration: none;
+  font-size: clamp(0.85rem, 0.9vw, 1rem);
+  line-height: 1.2;
+  max-width: 12rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Focus & accessible outline */
+.site-header__categories-link:focus,
+.site-header__categories-link:focus-visible {
+  outline: 3px solid var(--color-accent, #4CAF50);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Desktop / Tablet: prevent wrapping and try to keep all items on a single row */
+@media (min-width: 900px) {
+  .site-header__categories-list {
+    justify-content: flex-start;
+    overflow: visible;
+  }
+}
+
+/* Mobile: allow horizontal scrolling for overflow (touch-friendly) */
+@media (max-width: 899px) {
+  .site-header__categories-list {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
+    gap: 0.5rem;
+    padding: 0 0.5rem;
+  }
+
+  .site-header__categories-list li {
+    scroll-snap-align: start;
+  }
+
+  .site-header__categories-link {
+    white-space: nowrap;
+  }
+}
+
+/* Ensure sufficient contrast - use color variables for theming */
+
+
+/* Minor utilities */
+.site-header__categories .sr-only,
+.site-header__categories .visually-hidden {
+  margin: 0;
+}

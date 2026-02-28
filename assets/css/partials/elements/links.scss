@@ -1,0 +1,18 @@
+/* links.scss
+   purpose: see assets/css/partials/README.md for organisation.
+   import order: maintained by assets/css/main.scss.
+*/
+
+/* Link defaults moved from settings/typography.css */
+
+a {
+  color: var(--color-accent);
+  transition: color var(--transition-medium) ease;
+}
+
+/* Hover and keyboard focus for links */
+a:hover,
+a:focus-visible {
+  color: color-mix(in srgb, var(--color-accent) 90%, black);
+  text-decoration: underline;
+}
