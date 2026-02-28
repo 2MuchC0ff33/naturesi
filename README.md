@@ -28,7 +28,7 @@ Autoprefixer 10.4.27
   automatically; it fails if any `@import` referencing the `partials/` tree
   remains or if autoprefixer appears not to have run. this prevents the
   disastrous case where a browser would request a missing partial and get a
-  404 when `public/` is served as the document root.
+  404 when `public_html/` is served as the document root.
 
 ### Sass module architecture
 
@@ -214,7 +214,7 @@ To get up and running in a fresh clone:
    ```sh
    pnpm run watch:css
    ```
-   The resulting CSS and JS files land in `public/assets` but do not modify any
+   The resulting CSS and JS files land in `public_html/assets` but do not modify any
    existing page markup. The intermediary `assets/css/output.css` file is
    generated during the build for local debugging but is **not** tracked in
    source control (see `.gitignore`). No user‑facing changes occur in Phase 0.
@@ -223,7 +223,7 @@ To get up and running in a fresh clone:
    `$_ENV` and `$_SERVER`. A simple parser is included so no additional
    dependencies are required; `vlucas/phpdotenv` will be used automatically if
    installed later.
-6. Verify the bootstrap working by opening `public/index.php` in a browser or
+6. Verify the bootstrap working by opening `public_html_index.php` in a browser or
    running `php -S localhost:8000 -t public` and visiting
    `http://localhost:8000`. You should see the placeholder message.
 7. A quick sanity check script is provided (run from the repository root):
