@@ -15,19 +15,19 @@
   padding: maps.spacing(sm);
   border-radius: maps.radius(sm);
   border: 1px solid maps.color(border);
-  background: var(--alert-bg, #fff);
+  background: maps.color(alert-bg);
   color: maps.color(text);
 }
 
 .alert--error {
-  background: var(--color-error-bg, #fff3f3);
+  background: maps.color(error-bg);
   border-color: maps.color(error);
   color: maps.color(error);
 }
 
 .error-message {
   color: maps.color(error);
-  background-color: var(--color-error-bg);
+  background-color: maps.color(error-bg);
   border: 1px solid maps.color(error);
   border-radius: maps.radius(sm);
   padding: maps.spacing(sm);
@@ -36,7 +36,7 @@
 }
 
 .alert--success {
-  background: var(--color-success-bg, #f3fff7);
-  border-color: var(--color-success-border);
-  color: var(--color-success);
+  background: maps.color(success-bg);
+  border-color: maps.color(success-border);
+  color: maps.color(success);
 }

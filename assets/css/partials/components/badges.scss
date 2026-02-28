@@ -16,10 +16,10 @@
   padding: 0.15rem 0.5rem;
   font-size: 0.78rem;
   font-weight: 700;
-  border-radius: var(--radius-full, 999px);
+  border-radius: maps.radius(full);
   /* Prefer explicit component tokens with sensible fallbacks to previous values */
-  background: var(--badge-bg, var(--color-light-background));
-  color: var(--badge-fg, maps.color(text));
+  background: maps.color(badge-bg);
+  color: maps.color(badge-fg);
 }
 
 /* Product-specific badge alias */
@@ -28,9 +28,9 @@
   padding: 0.12rem 0.45rem;
   font-size: 0.78rem;
   font-weight: 700;
-  border-radius: var(--radius-pill, 999px);
-  background: var(--badge-bg, var(--color-light-background));
-  color: var(--badge-fg, maps.color(text));
+  border-radius: maps.radius(pill);
+  background: maps.color(badge-bg);
+  color: maps.color(badge-fg);
 }
 
 .product-card__badge {
@@ -38,7 +38,7 @@
   padding: 0.12rem 0.45rem;
   font-size: 0.78rem;
   font-weight: 700;
-  border-radius: var(--radius-pill, 999px);
+  border-radius: maps.radius(pill);
   background: color-mix(in srgb, maps.color(accent) 14%, transparent);
   color: maps.color(accent);
 }
