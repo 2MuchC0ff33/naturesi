@@ -152,7 +152,7 @@
 .product-card__badge {
   display: inline-block;
   padding: 0.15rem 0.4rem;
-  border-radius: settings.radius(pill, 9999px);
+  border-radius: maps.radius(pill);
   background: color-mix(in srgb, maps.color(accent) 14%, transparent);
   color: maps.color(accent);
   font-size: 0.8rem;
@@ -266,7 +266,7 @@
   flex: 0 0 84px;
   border-radius: 6px;
   overflow: hidden;
-  background: settings.color(light-background);
+  background: maps.color(light-background);
 }
 
 .search-result-thumb img {

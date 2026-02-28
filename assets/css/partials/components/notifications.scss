@@ -15,7 +15,7 @@
   transform: translateX(-50%);
   bottom: 1rem;
   z-index: 99999;
-  background: color-mix(in srgb, settings.color(surface, #fff) 92%, black 2%);
+  background: color-mix(in srgb, maps.color(surface, #fff) 92%, black 2%);
   border: 1px solid maps.color(border);
   padding: 0.6rem 0.8rem;
   border-radius: 8px;

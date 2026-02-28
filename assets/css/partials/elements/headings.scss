@@ -37,16 +37,16 @@ h3 {
 
 /* Utility heading classes (useful when styling non-semantic elements) */
 .h1 {
-  font-size: settings.fontSize(h1, clamp(1.5rem, 4.5vw, 2.25rem));
+  font-size: maps.fontSize(h1, clamp(1.5rem, 4.5vw, 2.25rem));
   font-weight: 700;
 }
 
 .h2 {
-  font-size: settings.fontSize(h2, clamp(1.25rem, 3.5vw, 1.75rem));
+  font-size: maps.fontSize(h2, clamp(1.25rem, 3.5vw, 1.75rem));
   font-weight: 600;
 }
 
 .h3 {
-  font-size: settings.fontSize(h3, clamp(1.1rem, 3vw, 1.25rem));
+  font-size: maps.fontSize(h3, clamp(1.1rem, 3vw, 1.25rem));
   font-weight: 600;
 }

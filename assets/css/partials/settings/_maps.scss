@@ -1,3 +1,5 @@
+@use "sass:map";
+
 // Helper for font sizes with fallback
 @function fontSize($key, $fallback: null) {
   $val: map.get($fonts, $key);
@@ -21,15 +23,13 @@
    can be simplified to a thin shim or removed entirely.
 */
 
-@use "sass:map";
-
 // colour palette: keys correspond to the `--color-<name>` props used in
 // the stylesheet. keep the naming consistent so generated loops are
 // predictable.
 $colors: (
   tabs-fade: rgba(255, 255, 255, 0.95),
   progress-bg: #eee,
-  progress-fg: map.get($colors, accent),
+  progress-fg: #346967,
   footer-text: #6b7280,
   // matches .text-muted utility, adjust as needed
   background: #ffffff,

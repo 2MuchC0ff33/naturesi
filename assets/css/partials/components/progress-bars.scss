@@ -13,14 +13,14 @@
 
 .progress {
   width: 100%;
-  background: settings.color(progress-bg, #eee);
+  background: maps.color(progress-bg);
   height: 8px;
   border-radius: 999px;
 }
 
 .progress__bar {
   height: 100%;
-  background: settings.color(progress-fg, maps.color(accent));
+  background: maps.color(progress-fg);
   border-radius: inherit;
   transition: width maps.transition(fast) ease;
 }
