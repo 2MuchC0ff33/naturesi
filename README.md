@@ -13,7 +13,7 @@ CSS Snapshot 2026
 
 #### Pre-processor
 
-Sass 1.97.3
+Sass 1.97.3 (installed as a local dev dependency via pnpm; `pnpm run build:css` uses the binary from `node_modules/.bin`)
 
 #### Post-processor
 

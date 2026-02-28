@@ -161,7 +161,7 @@ Convert the static CSS to a Sass‑first workflow, add Open Props tokens and P
 
 ###### 1) Tooling Setup
 
-*   Add dependencies via pnpm: `open-props`, `@picocss/pico`. (do not add `sass` via `pnpm` because Sass is available at `/home/galloa/.local/bin/sass`)
+*   Add dependencies via pnpm: `open-props`, `@picocss/pico`, and the Sass CLI (`sass`) as a dev dependency. This ensures builds work on CI and fresh clones.
 *   Update `package.json`:
     *   Add `build:css` script (sass → PostCSS → Autoprefixer → `check_css_build.cjs`).
     *   Add `watch:css` script (`sass --watch` + PostCSS watch, if used).
