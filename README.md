@@ -149,6 +149,13 @@ To get up and running in a fresh clone:
    ```sh
    pnpm run build:css && pnpm run build:ts
    ```
+   The first command runs `sass` against `assets/css/main.scss`, writes a
+   temporary `assets/css/output.css`, then pipes that through PostCSS
+   (import bundling + autoprefixer) to produce `public/assets/css/main.css`.
+   You can also launch a continuous watcher for development:
+   ```sh
+   pnpm run watch:css
+   ```
    The resulting CSS and JS files land in `public/assets` but do not modify any
    existing page markup. The intermediary `assets/css/output.css` file is
    generated during the build for local debugging but is **not** tracked in

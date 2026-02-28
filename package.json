@@ -5,10 +5,17 @@
   "description": "Nature's Infusions static e-commerce site",
   "author": "2MuchC0ff33",
   "scripts": {
-    "build:css": "postcss assets/css/main.css -o public/assets/css/main.css && node tests/check_css_build.cjs",
+    "build:css": "sass assets/css/main.scss assets/css/output.css && postcss assets/css/output.css -o public/assets/css/main.css && node tests/check_css_build.cjs",
+    "watch:css": "sass --watch assets/css/main.scss:assets/css/output.css & postcss --watch assets/css/output.css -o public/assets/css/main.css",
     "verify:css": "node tests/check_css_build.cjs",
     "build:ts": "tsc"
   },
+  "browserslist": [
+    "> 0.5%",
+    "last 2 versions",
+    "Firefox ESR",
+    "not dead"
+  ],
   "dependencies": {
     "assemblyscript": "^0.28.9",
     "autoprefixer": "^10.4.27",
