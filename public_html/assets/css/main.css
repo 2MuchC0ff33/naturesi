@@ -23,7 +23,6 @@ partials can reference CSS custom properties.
 
    Partial list (import order):
      - tokens.scss (Open Props & project token aliases)
-     - variables.scss (CSS custom properties)
      - config.scss (General global configuration)
      - settings.scss (Broad settings)
      - colours.scss (Color definitions)
@@ -195,128 +194,11 @@ site‑wide.
    the custom properties by hand; once maps are fully populated that file
    can be simplified to a thin shim or removed entirely.
 */
-:root {
-  --color-cart-badge-bg: #346967;
-  --color-cart-badge-fg: #fff;
-  --color-badge-bg: #bdd5d4;
-  --color-badge-fg: #050505;
-  --color-alert-bg: #fff;
-  --color-error-bg: #fff3f3;
-  --color-success-bg: #f3fff7;
-  --color-success-border: #4caf50;
-  --color-tabs-fade: rgba(255, 255, 255, 0.95);
-  --color-progress-bg: #eee;
-  --color-progress-fg: #346967;
-  --color-footer-text: #6b7280;
-  --color-background: #ffffff;
-  --color-text: #050505;
-  --color-primary: #2a9d8f;
-  --color-secondary: #e9c46a;
-  --color-focus: #264653;
-  --color-accent: #346967;
-  --color-light-background: #bdd5d4;
-  --color-highlight: #f6e6cd;
-  --color-border: #e1e1e1;
-  --color-success: #4caf50;
-  --color-warning: #ff9800;
-  --color-error: #f44336;
-  --color-muted: #6b7280;
-  --space-xxs: 0.25rem;
-  --space-xs: 0.5rem;
-  --space-sm: 0.75rem;
-  --space-md: 1.25rem;
-  --space-lg: 2rem;
-  --space-xl: 3.25rem;
-  --space-inline-xs: 0.5rem;
-  --space-inline-sm: 1rem;
-  --space-inline-md: 1.5rem;
-  --space-unit: 1rem;
-  --breakpoint-mobile: 320px;
-  --breakpoint-tablet: 768px;
-  --breakpoint-desktop: 1024px;
-}
 /* Open Props is now imported via the `vendors` aggregator
      (see partials/vendors/_open-props.scss).  keep this file focused on
      project‑specific token aliases. */
 /* optional Sass aliases for convenience */
 /* additional project token definitions can be added below */
-/* ==========================================================================
-Variables and theme tokens
-This file contains the project's CSS custom properties. Keep this first so other
-partials can reference variables safely.  Tokens from Open Props are imported
-just before the :root declaration.
-========================================================================== */
-:root {
-  --color-cart-badge-bg: #346967;
-  --color-cart-badge-fg: #fff;
-  --color-badge-bg: #bdd5d4;
-  --color-badge-fg: #050505;
-  --color-alert-bg: #fff;
-  --color-error-bg: #fff3f3;
-  --color-success-bg: #f3fff7;
-  --color-success-border: #4caf50;
-  --color-tabs-fade: rgba(255, 255, 255, 0.95);
-  --color-progress-bg: #eee;
-  --color-progress-fg: #346967;
-  --color-footer-text: #6b7280;
-  --color-background: #ffffff;
-  --color-text: #050505;
-  --color-primary: #2a9d8f;
-  --color-secondary: #e9c46a;
-  --color-focus: #264653;
-  --color-accent: #346967;
-  --color-light-background: #bdd5d4;
-  --color-highlight: #f6e6cd;
-  --color-border: #e1e1e1;
-  --color-success: #4caf50;
-  --color-warning: #ff9800;
-  --color-error: #f44336;
-  --color-muted: #6b7280;
-  --space-xxs: 0.25rem;
-  --space-xs: 0.5rem;
-  --space-sm: 0.75rem;
-  --space-md: 1.25rem;
-  --space-lg: 2rem;
-  --space-xl: 3.25rem;
-  --space-inline-xs: 0.5rem;
-  --space-inline-sm: 1rem;
-  --space-inline-md: 1.5rem;
-  --space-unit: 1rem;
-  --breakpoint-mobile: 320px;
-  --breakpoint-tablet: 768px;
-  --breakpoint-desktop: 1024px;
-  --font-min: 16px;
-  --font-max: 20px;
-  --font-line-height: 1.6;
-  --layout-min-width: 320px;
-  --layout-max-width: 1200px;
-  --layout-header-height: 3.75rem;
-  --layout-header-height-mobile: 3.25rem;
-  --layout-site-header-height: 96px;
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
-  --shadow-accent: 0 0 0 3px color-mix(in srgb, #346967 20%, transparent);
-  --radius-pill: 9999px;
-  --radius-sm: 0.25rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 1rem;
-  --radius-full: 9999px;
-  --transition-fast: 150ms;
-  --transition-medium: 300ms;
-  --transition-slow: 500ms;
-  --btn-padding-vertical: 0.6rem;
-  --btn-padding-horizontal: 1rem;
-  --btn-radius: 0.5rem;
-  --btn-bg: #346967;
-  --btn-color: #ffffff;
-  --btn-bg-hover: color-mix(in srgb, #346967 90%, black 10%);
-  --surface-color: #ffffff;
-  --elevation-1: 0 1px 3px rgba(0, 0, 0, 0.04);
-  --elevation-2: 0 6px 12px rgba(0, 0, 0, 0.06);
-  /* values that aren’t currently modelled; these can be moved into a map
-     as needed. */
-}
 /* config.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.

@@ -181,22 +181,3 @@ $elevation: (
 @function elevate($level) {
   @return map.get($elevation, $level);
 }
-
-// auto‑generate custom properties for backwards compatibility. this lets
-// downstream code continue to reference `var(--color-foo)` while we
-// migrate callers to the map helpers. once no Sass source imports
-// `variables.scss` or otherwise uses `var(--...)`, the entire :root block
-// (and the `variables.scss` shim) can be removed to shrink the build.
-:root {
-  @each $name, $val in $colors {
-    --color-#{$name}: #{$val};
-  }
-
-  @each $name, $val in $spacing {
-    --space-#{$name}: #{$val};
-  }
-
-  @each $name, $val in $breakpoints {
-    --breakpoint-#{$name}: #{$val};
-  }
-}

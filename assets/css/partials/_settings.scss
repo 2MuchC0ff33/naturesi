@@ -13,7 +13,6 @@ possible to switch `main.scss` over in one change.
 
 @forward "settings/tokens";
 @forward "settings/maps"; // new map module (generates custom props)
-@forward "settings/variables";
 @forward "settings/config";
 @forward "settings/settings";
 @forward "settings/colours";
