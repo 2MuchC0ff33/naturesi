@@ -75,3 +75,84 @@ if (file_exists(__DIR__ . '/../.env')) {
     }
   }
 }
+
+// --- Phase 1: Slim & Plates setup ------------------------------------------------
+
+if (!function_exists('asset')) {
+    /**
+     * URL helper for assets.  Simply prefix with `/assets/`.
+     */
+    function asset(string $path): string
+    {
+        return '/assets/' . ltrim($path, '/');
+    }
+}
+
+if (!function_exists('uri')) {
+    /**
+     * Return the current request URI or empty string when none available.
+     */
+    function uri(?\Psr\Http\Message\ServerRequestInterface $req = null): string
+    {
+        if ($req === null) {
+            return '';
+        }
+        return (string) $req->getUri();
+    }
+}
+
+use Slim\Factory\AppFactory;
+use League\Plates\Engine;
+
+$app = AppFactory::create();
+$basePath = getenv('BASE_PATH') ?: '';
+if ($basePath !== '') {
+    $app->setBasePath($basePath);
+}
+$app->addRoutingMiddleware();
+$app->addErrorMiddleware(true, true, true);
+
+$templates = new Engine(__DIR__ . '/../views');
+$templates->registerFunction('asset', 'asset');
+$templates->registerFunction('uri', 'uri');
+
+// pilot routes; index.php and tests both benefit from having these defined
+$app->get('/', function ($req, $res) use ($templates) {
+    $res->getBody()->write($templates->render('pages/index'));
+    return $res;
+});
+$app->get('/about', function ($req, $res) use ($templates) {
+    $res->getBody()->write($templates->render('pages/about'));
+    return $res;
+});
+$app->get('/store', function ($req, $res) use ($templates) {
+    $res->getBody()->write($templates->render('pages/store'));
+    return $res;
+});
+
+// static fallback; note ordering is important (last defined)
+$app->map(['GET','HEAD'], '/{path:.*}', function ($req, $res, $args) {
+    $raw = $args['path'];
+    if ($raw === '') {
+        $path = 'index';
+    } else {
+        // allow direct .html requests by stripping extension
+        if (substr($raw, -5) === '.html') {
+            $raw = substr($raw, 0, -5);
+        }
+        $path = $raw;
+    }
+
+    $file = __DIR__ . '/../pages/' . $path . '.html';
+    if (is_file($file)) {
+        $res->getBody()->write(file_get_contents($file));
+        return $res->withHeader('Content-Type', 'text/html');
+    }
+    throw new \Slim\Exception\HttpNotFoundException($req);
+});
+
+// expose instances for tests and simple scripts
+$GLOBALS['app'] = $app;
+$GLOBALS['templates'] = $templates;
+
+return ['app' => $app, 'templates' => $templates];

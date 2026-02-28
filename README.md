@@ -7,6 +7,30 @@
 HTML Living Standard
 Tidy 1:5.9.20-1+d08ddc2
 
+### PHP / Framework
+
+* Slim 4 with `slim/psr7` for routing and PSR‑7 support.
+* Plates 3 for server‑rendered templates.
+* `php/bootstrap.php` handles environment loading, creates the Slim
+  application and Plates engine, and registers pilot routes.  It returns an
+  array containing `['app' => $app, 'templates' => $templates]` which is
+  consumed by `public_html/index.php` and by unit tests.
+* Start the local server with the built‑in PHP web server:
+
+  ```sh
+  composer install      # install PHP dependencies
+  php -S localhost:8000 -t public_html
+  ```
+
+Routes `/`, `/about` and `/store` are rendered via Plates; all other
+requests are checked against `pages/*.html` as a static fallback.  This
+setup is part of the Phase 1 refactor and maintains visual parity with
+existing static pages.
+
+### CSS
+
+CSS Snapshot 2026
+
 ### CSS
 
 CSS Snapshot 2026

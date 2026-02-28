@@ -49,4 +49,10 @@ assert(output === 'ok', `bootstrap did not load TEST_BOOTSTRAP (got '${output}')
 const used = execSync("php -r \"require 'php/bootstrap.php'; echo getenv('DOTENV_USED');\"", { encoding: 'utf-8' }).trim();
 assert(used === '1', 'expected phpdotenv branch to run');
 
-console.log('bootstrap dotenv loading works');
+// ensure Slim app and Plates engine are provided by bootstrap
+const checkApp = execSync("php -r \"$r = require 'php/bootstrap.php'; echo (is_array($r) && isset($r['app']) && $r['app'] instanceof \\Slim\\App) ? 'yes' : 'no';\"", { encoding: 'utf-8' }).trim();
+assert(checkApp === 'yes', 'bootstrap must return Slim App instance');
+const checkTpl = execSync("php -r \"$r = require 'php/bootstrap.php'; echo (is_array($r) && isset($r['templates']) && $r['templates'] instanceof \\League\\Plates\\Engine) ? 'yes' : 'no';\"", { encoding: 'utf-8' }).trim();
+assert(checkTpl === 'yes', 'bootstrap must return Plates Engine instance');
+
+console.log('bootstrap dotenv loading works and Slim/Plates present');

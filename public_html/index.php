@@ -1,7 +1,13 @@
 <?php
 // index.php
 
-require_once __DIR__ . '/../php/bootstrap.php';
+// bootstrap returns Slim app and Plates engine for convenience in tests
+$loaded = require __DIR__ . '/../php/bootstrap.php';
+/** @var \Slim\App $app */
+$app = $loaded['app'];
+/** @var \League\Plates\Engine $templates */
+$templates = $loaded['templates'];
 
-// Placeholder for web front controller
-echo "Nature's Infusions - Web Front Controller";
+// routes are registered in bootstrap.php; nothing additional needed here
+
+$app->run();

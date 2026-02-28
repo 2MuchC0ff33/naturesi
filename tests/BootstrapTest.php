@@ -103,9 +103,16 @@ PHP;
         // initial invocation saw no .env file.  We explicitly require the
         // script again (not once) to force a second pass now that our test
         // has created the file and cleared the environment.
-        require __DIR__ . '/../php/bootstrap.php';
+        $result = require __DIR__ . '/../php/bootstrap.php';
 
         $this->assertSame('ok', getenv('TEST_BOOTSTRAP'));
         $this->assertSame('1', getenv('DOTENV_USED'), 'expected phpdotenv branch to run');
+
+        // new Phase 1 expectations
+        $this->assertIsArray($result);
+        $this->assertArrayHasKey('app', $result);
+        $this->assertArrayHasKey('templates', $result);
+        $this->assertInstanceOf(\Slim\App::class, $result['app']);
+        $this->assertInstanceOf(\League\Plates\Engine::class, $result['templates']);
     }
 }
