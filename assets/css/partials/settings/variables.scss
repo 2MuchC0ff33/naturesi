@@ -15,7 +15,8 @@ just before the :root declaration.
 
 :root {
 
-  // colours, spacing and breakpoints are generated from the Sass maps
+  // colours, spacing, breakpoints and all other token maps are generated
+  // from the corresponding Sass maps, avoiding manual duplication.
   @each $name, $val in maps.$colors {
     --color-#{$name}: #{$val};
   }
@@ -28,43 +29,43 @@ just before the :root declaration.
     --breakpoint-#{$name}: #{$val};
   }
 
-  /* remaining properties that aren’t yet represented as maps */
-  --min-font: 16px;
-  --max-font: 20px;
-  --min-width: 320px;
-  --max-width: 1200px;
-  --line-height: 1.6;
-  /* Mobile-first spacing tokens for responsive padding */
-  --space-inline-xs: 0.5rem;
-  --space-inline-sm: 1rem;
-  --space-inline-md: 1.5rem;
-  /* Fluid typography helper (used by base) */
-  --fluid-font: clamp(var(--min-font),
-    calc(var(--min-font) + (var(--max-font) - var(--min-font)) * ((100vw - var(--min-width)) / (var(--max-width) - var(--min-width)))),
-    var(--max-font));
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
-  --shadow-accent: 0 0 0 3px color-mix(in srgb, var(--color-accent) 20%, transparent);
-  --radius-sm: 0.25rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 1rem;
-  --radius-full: 9999px;
-  --transition-fast: 150ms;
-  --transition-medium: 300ms;
-  --transition-slow: 500ms;
+  @each $name, $val in maps.$fonts {
+    --font-#{$name}: #{$val};
+  }
 
-  /* Button tokens */
-  --btn-padding-vertical: 0.6rem;
-  --btn-padding-horizontal: 1rem;
-  --btn-radius: var(--radius-md);
-  --btn-bg: var(--color-accent);
-  --btn-color: #ffffff;
-  --btn-bg-hover: color-mix(in srgb, var(--btn-bg) 90%, black 10%);
+  @each $name, $val in maps.$layout {
+    --layout-#{$name}: #{$val};
+  }
 
-  /* Surface / elevation tokens */
-  --color-surface: #ffffff;
-  --elevation-1: 0 1px 3px rgba(0, 0, 0, 0.04);
-  --elevation-2: 0 6px 12px rgba(0, 0, 0, 0.06);
+  @each $name, $val in maps.$shadows {
+    --shadow-#{$name}: #{$val};
+  }
+
+  @each $name, $val in maps.$radius {
+    --radius-#{$name}: #{$val};
+  }
+
+  @each $name, $val in maps.$transitions {
+    --transition-#{$name}: #{$val};
+  }
+
+  @each $name, $val in maps.$buttons {
+    --btn-#{$name}: #{$val};
+  }
+
+  @each $name, $val in maps.$surface {
+    --surface-#{$name}: #{$val};
+  }
+
+  @each $name, $val in maps.$elevation {
+    --elevation-#{$name}: #{$val};
+  }
+
+  /* values that aren’t currently modelled; these can be moved into a map
+     as needed. */
+  /* fluid-font calculation is still hand‑coded for now */
+  --fluid-font: clamp(var(--font-min),
+    calc(var(--font-min) + (var(--font-max) - var(--font-min)) * ((100vw - var(--layout-min-width)) / (var(--layout-max-width) - var(--layout-min-width)))),
+    var(--font-max));
 
 }

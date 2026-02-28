@@ -212,6 +212,10 @@ site‑wide.
   --space-md: 1.25rem;
   --space-lg: 2rem;
   --space-xl: 3.25rem;
+  --space-inline-xs: 0.5rem;
+  --space-inline-sm: 1rem;
+  --space-inline-md: 1.5rem;
+  --space-unit: 1rem;
   --breakpoint-mobile: 320px;
   --breakpoint-tablet: 768px;
   --breakpoint-desktop: 1024px;
@@ -239,23 +243,18 @@ just before the :root declaration.
   --space-md: 1.25rem;
   --space-lg: 2rem;
   --space-xl: 3.25rem;
-  --breakpoint-mobile: 320px;
-  --breakpoint-tablet: 768px;
-  --breakpoint-desktop: 1024px;
-  /* remaining properties that aren’t yet represented as maps */
-  --min-font: 16px;
-  --max-font: 20px;
-  --min-width: 320px;
-  --max-width: 1200px;
-  --line-height: 1.6;
-  /* Mobile-first spacing tokens for responsive padding */
   --space-inline-xs: 0.5rem;
   --space-inline-sm: 1rem;
   --space-inline-md: 1.5rem;
-  /* Fluid typography helper (used by base) */
-  --fluid-font: clamp(var(--min-font),
-      calc(var(--min-font) + (var(--max-font) - var(--min-font)) * ((100vw - var(--min-width)) / (var(--max-width) - var(--min-width)))),
-      var(--max-font));
+  --space-unit: 1rem;
+  --breakpoint-mobile: 320px;
+  --breakpoint-tablet: 768px;
+  --breakpoint-desktop: 1024px;
+  --font-min: 16px;
+  --font-max: 20px;
+  --font-line-height: 1.6;
+  --layout-min-width: 320px;
+  --layout-max-width: 1200px;
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
@@ -267,17 +266,21 @@ just before the :root declaration.
   --transition-fast: 150ms;
   --transition-medium: 300ms;
   --transition-slow: 500ms;
-  /* Button tokens */
   --btn-padding-vertical: 0.6rem;
   --btn-padding-horizontal: 1rem;
-  --btn-radius: var(--radius-md);
-  --btn-bg: var(--color-accent);
+  --btn-radius: 0.5rem;
+  --btn-bg: #346967;
   --btn-color: #ffffff;
-  --btn-bg-hover: color-mix(in srgb, var(--btn-bg) 90%, black 10%);
-  /* Surface / elevation tokens */
-  --color-surface: #ffffff;
+  --btn-bg-hover: color-mix(in srgb, #346967 90%, black 10%);
+  --surface-color: #ffffff;
   --elevation-1: 0 1px 3px rgba(0, 0, 0, 0.04);
   --elevation-2: 0 6px 12px rgba(0, 0, 0, 0.06);
+  /* values that aren’t currently modelled; these can be moved into a map
+     as needed. */
+  /* fluid-font calculation is still hand‑coded for now */
+  --fluid-font: clamp(var(--font-min),
+    calc(var(--font-min) + (var(--font-max) - var(--font-min)) * ((100vw - var(--layout-min-width)) / (var(--layout-max-width) - var(--layout-min-width)))),
+    var(--font-max));
 }
 /* config.scss
    purpose: see assets/css/partials/README.md for organisation.
