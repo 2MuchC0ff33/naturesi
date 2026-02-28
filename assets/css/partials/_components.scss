@@ -1,7 +1,5 @@
-/* ==========================================================================
-Aggregator for component rules.  This is intentionally verbose; as each
-file migrates to `@use` the corresponding forward can be removed.
-========================================================================== */
+// Aggregator for component rules.  This is intentionally verbose; as each
+// file migrates to `@use` the corresponding forward can be removed.
 
 @forward "components/navigation-menu";
 @forward "components/categories";

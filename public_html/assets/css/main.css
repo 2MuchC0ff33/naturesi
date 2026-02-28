@@ -740,11 +740,6 @@ figure figcaption {
   color: #6b7280;
   margin-top: 0.5rem;
 }
-/* ==========================================================================
-Aggregator for tools partials (mixins, accessibility helpers, etc.).
-Migration scaffold – forwards maintain the existing load order while
-enabling `@use` in `main.scss`.
-========================================================================== */
 /* mixins.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -1137,9 +1132,6 @@ button {
   display: none;
 }
 /* Chrome/Safari */
-/* ==========================================================================
-Aggregator for generic resets, normalisation and base rules.
-========================================================================== */
 /* reset.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -1491,9 +1483,6 @@ Use theme tokens and prefer high-contrast defaults for readability.
   color: #071010;
 }
 /* Note: keep selection rules small and test with Accessibility Insights / contrast checks */
-/* ==========================================================================
-Aggregator for element-level rules.
-========================================================================== */
 /* all.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -2806,10 +2795,6 @@ footer[itemscope][itemtype*=WPFooter] a:hover {
     gap: 0.75rem;
   }
 }
-/* ==========================================================================
-Aggregator for object and template rules.  Templates are included here
-because they were originally adjacent in main.scss; they can be split later.
-========================================================================== */
 /* wrapper.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -3214,10 +3199,6 @@ API examples: `.hide--sm-up`, `.hide--md-up`, `.show--md-up` — mobile-first he
   outline: 2px solid #346967;
   outline-offset: 2px;
 }
-/* ==========================================================================
-Aggregator for component rules.  This is intentionally verbose; as each
-file migrates to `@use` the corresponding forward can be removed.
-========================================================================== */
 /* navigation-menu.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -5108,10 +5089,6 @@ Accessibility:
     animation: none;
   }
 }
-/* ==========================================================================
-Aggregator for utility rules.  Plenty of forwards to keep import order
-unchanged.
-========================================================================== */
 /* utilities.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.

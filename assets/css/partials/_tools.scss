@@ -1,8 +1,6 @@
-/* ==========================================================================
-Aggregator for tools partials (mixins, accessibility helpers, etc.).
-Migration scaffold – forwards maintain the existing load order while
-enabling `@use` in `main.scss`.
-========================================================================== */
+// Aggregator for tools partials (mixins, accessibility helpers, etc.).
+// Migration scaffold – forwards maintain the existing load order while
+// enabling `@use` in `main.scss`.
 
 @forward "tools/mixins";
 @forward "tools/clearfix";

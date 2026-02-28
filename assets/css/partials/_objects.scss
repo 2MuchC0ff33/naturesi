@@ -1,7 +1,5 @@
-/* ==========================================================================
-Aggregator for object and template rules.  Templates are included here
-because they were originally adjacent in main.scss; they can be split later.
-========================================================================== */
+// Aggregator for object and template rules.  Templates are included here
+// because they were originally adjacent in main.scss; they can be split later.
 
 @forward "objects/wrapper";
 @forward "objects/container";

@@ -137,9 +137,6 @@ partials can reference CSS custom properties.
 // ordering required by TODO.md is therefore satisfied here.
 @use 'partials/vendors' as vendors; // PicoCSS + Open Props
 
-// project-specific tokens are pulled in via the `settings` aggregator
-// (see assets/css/partials/_settings.scss). this keeps the import list
-// in main.scss smaller and avoids duplicate module loads.
 
 // module-based imports are now aggregated
 @use 'partials/settings' as settings;
