@@ -133,15 +133,6 @@ partials can reference CSS custom properties.
      - tablet.scss (Tablet-specific utilities)
      - desktop.scss (Desktop-specific utilities)
 */
-/* aggregator for external vendor stylesheets.
-   during the Sass module migration we keep third-party CSS separated
-   from the project’s own partials.  this file forwards each vendor
-   partial so `main.scss` can pull them in via a single `@use`.
-
-   the order of forwards matters because some vendors (like PicoCSS)
-   establish custom properties that Open Props should see.  always
-   list Pico first so its utilities can be overridden by later tokens.
-*/
 /* third-party vendor stylesheet for PicoCSS
    the package delivers plain CSS under node_modules/@picocss/pico/css/
    which we import here so Sass/PostCSS can bundle it alongside our own
@@ -531,13 +522,6 @@ progress::-moz-progress-bar{background-color:var(--pico-progress-color)}
    ever removed the original import can be restored.
 */
 /* (import removed – Open Props comes from postcss-jit-props) */
-/* maps.scss – centralised design tokens expressed as Sass maps.
-   this is the first step towards theming and allows us to reuse values
-   in mixins, functions and even generate the corresponding CSS custom
-   properties automatically.  the existing `variables.scss` file lists
-   the custom properties by hand; once maps are fully populated that file
-   can be simplified to a thin shim or removed entirely.
-*/
 /* Open Props is now imported via the `vendors` aggregator
      (see partials/vendors/_open-props.scss).  keep this file focused on
      project‑specific token aliases. */
@@ -547,18 +531,6 @@ progress::-moz-progress-bar{background-color:var(--pico-progress-color)}
   --radius-sm: 0.25rem;
 }
 /* additional project token definitions can be added below */
-/* ==========================================================================
-Aggregator for settings-related partials. This file is part of the
-migration from legacy `@import` to the Sass module system.  Each of the
-forwarded modules still uses `@import` internally; they will be converted
-one by one in subsequent commits.  Keeping a single entry point makes it
-possible to switch `main.scss` over in one change.
-
-// NOTE: most of these modules currently only emit raw CSS.  When a module
-// begins exporting Sass variables, functions or mixins it should be
-// forwarded with an explicit namespace (e.g. `@forward "settings/colours"
-// as colours-*;`) to avoid global name collisions.
-========================================================================== */
 /* config.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.

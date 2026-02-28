@@ -133,6 +133,9 @@ Conventions
 - When a partial may be loaded more than once (via forwards/uses), prefer
   `//` Sass comments instead of `/*…*/` so the final build isn’t bloated with
   repeated header blocks.
+- Aggregator modules and other frequently-referenced partials should use
+  `//` comments to avoid accidental duplication when the module is imported
+  both directly and via another namespace.
 
 Quick checklist for changes
 
