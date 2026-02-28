@@ -161,10 +161,10 @@ Convert the static CSS to a Sass‑first workflow, add Open Props tokens and P
 
 ###### 1) Tooling Setup
 
-*   Add dependencies via pnpm: `sass` (dart‑sass), `open-props`, `@picocss/pico`.
+*   Add dependencies via pnpm: `open-props`, `@picocss/pico`, and the Sass CLI (`sass`) as a dev dependency. This ensures builds work on CI and fresh clones.
 *   Update `package.json`:
     *   Add `build:css` script (sass → PostCSS → Autoprefixer → `check_css_build.cjs`).
-    *   Add `watch:css` script (`sass --watch` + PostCSS watch, if used).
+    *   Add `watch:css` script using `concurrently` to run Sass and PostCSS watchers together.
 *   Ensure `postcss-import` runs **before** Autoprefixer in `postcss.config.js` and document the order in comments.
 *   Add Autoprefixer targets via `.browserslistrc` or `package.json#browserslist`.
 *   Confirm PostCSS pipeline still writes the temporary `assets/css/output.css` (gitignored) if applicable.
@@ -243,7 +243,7 @@ Convert the static CSS to a Sass‑first workflow, add Open Props tokens and P
 ###### 8) Verification
 
 *   Run `pnpm install` then `pnpm run build:css`; confirm no errors.
-*   Run `pnpm run watch:css`; confirm live recompilation works when editing partials.
+*   Run `pnpm run watch:css`; confirm live recompilation works when editing partials and that Ctrl‑C stops both processes.
 *   Run `composer install`; confirm Slim and Plates autoload.
 *   Launch dev server:
     *   `php -S localhost:8000 -t public`
@@ -294,7 +294,7 @@ Convert the static CSS to a Sass‑first workflow, add Open Props tokens and P
 ##### Ready‑to‑run Checks
 
 *   `pnpm run build:css` completes without errors; output `assets/css/main.css` (or configured path) contains vendor prefixes and no `@import`.
-*   `pnpm run watch:css` rebuilds on editing `assets/css/partials/*`.
+*   `pnpm run watch:css` rebuilds on editing `assets/css/partials/*` (verify both watchers exit together).
 *   `composer install` completes; Slim and Plates available.
 *   `php -S localhost:8000 -t public` serves Plates‑templated homepage with visual parity.
 
@@ -503,7 +503,7 @@ Convert the static CSS to a Sass‑first workflow, add Open Props tokens and P
 {
   "scripts": {
     "build:css": "sass assets/css/main.scss public/assets/css/main.css --no-source-map && postcss public/assets/css/main.css -o public/assets/css/main.css",
-    "watch:css": "sass --watch assets/css/main.scss:public/assets/css/main.css",
+    "watch:css": "pnpm exec concurrently --kill-others \"sass --watch assets/css/main.scss:public/assets/css/main.css\" \"postcss --watch public/assets/css/main.css -o public/assets/css/main.css\"",
     "build:ts": "esbuild assets/ts/index.ts --bundle --format=esm --outdir=public/assets/js --sourcemap",
     "watch:ts": "esbuild assets/ts/index.ts --bundle --format=esm --outdir=public/assets/js --sourcemap --watch",
     "dev": "php -S localhost:8080 -t public"

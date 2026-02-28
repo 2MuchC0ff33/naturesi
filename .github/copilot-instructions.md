@@ -12,25 +12,38 @@ Purpose: concise guidance so an AI coding agent can start work quickly in this r
 ## Developer workflows
 
 ### Setup
-1. Install PHP 8.1+ and Composer, then run `composer install` in project root.
+1. Install PHP 8.1+ and Composer, then run `composer install` in project root (this also executes the PHP bootstrap sanity check).
 2. Install Node v25+ and PNPM; run `pnpm install` (all CLI examples use **pnpm** — do **not** default to `npm`).
 3. Build front‑end assets:
    ```sh
    pnpm run build:css && pnpm run build:ts
    ```
-   CSS appears at `public/assets/css/main.css`; TypeScript compiles to `public/assets/js` as defined in `tsconfig.json`.
+   - `build:css` runs `sass`, pipes the output through PostCSS (import bundling + autoprefixer) and then invokes `node tests/check_css_build.cjs`.
+   - `build:ts` invokes `tsc`; the compiler is configured by `tsconfig.json` to emit to `public/assets/js`.
+   - A temporary intermediate file `assets/css/output.css` is created during the CSS build but is git‑ignored.
 
-> **Wrapper scripts:** earlier versions kept `pnpm-wrapper.sh` etc. in `tools/`. those were moved to `~/.local/share/wrappers` and are **not** part of the repo; invoke the npm scripts directly.
+   Development watchers are available:
+   ```sh
+   pnpm run watch:css   # concurrently runs Sass+PostCSS with automatic rebuilds
+   pnpm run watch:ts    # `tsc --watch` (see package.json)
+   ```
+   Use these during active editing; the `watch:css` task uses `concurrently` so a single Ctrl‑C stops both watchers.
+
+> **Wrapper scripts:** prior phases stored helper wrappers (`pnpm-wrapper.sh`, etc.) in `tools/`, but they were migrated to `~/.local/share/wrappers` and are **not** part of the repo. Always call the npm scripts directly rather than relying on those wrappers.
 
 ### Running & configuration
-- Launch a dev server with `php -S localhost:8000 -t public` or open `public/index.php` in a browser. The placeholder message indicates phase‑0 bootstrap is working.
-- A `.env` file at the repo root is parsed by bootstrapping code; values are available via `getenv()`, `$_ENV` and `$_SERVER`. If `vlucas/phpdotenv` is installed, it will be used automatically.
+- Start a quick PHP server from the repo root:
+  ```sh
+  php -S localhost:8000 -t public
+  ```
+  or open `public/index.php` in a browser. A placeholder message indicates the bootstrap is active.
+- A `.env` file at the project root is parsed by `php/bootstrap.php`. Values are then available via `getenv()`, `$_ENV`, and `$_SERVER` throughout PHP. A lightweight parser is included; if `vlucas/phpdotenv` is added in the future it will be used automatically.
 
 ### Tests & validation
 - `node tests/check_csaf.js` validates CSAF/provider metadata and `security.txt`.
-- `node tests/check_bootstrap.cjs` ensures `php/bootstrap.php` prefers `.env` variables and exposes them correctly.
-- CSS build runs `node tests/check_css_build.cjs` automatically; it fails on leftover `@import` or missing autoprefixer run.
-- PHP unit tests live in `tests/BootstrapTest.php` and can be executed via `composer test` (requires phpunit). If phpunit cannot install, fallback to the JS check above.
+- `node tests/check_bootstrap.cjs` verifies the bootstrap respects `.env` overrides and exports them correctly.
+- Building CSS runs `node tests/check_css_build.cjs`, which fails if any `@import` remains or autoprefixer didn’t run; you can also invoke this directly using `pnpm run verify:css`.
+- PHP unit tests live in `tests/BootstrapTest.php` and can be executed via `composer test` (requires phpunit). If required PHP extensions aren’t available and phpunit fails to install, simply run the JS bootstrap check as a fallback.
 
 ## Conventions & patterns
 - **CSS**: `assets/css/main.css` is an ordered import list; maintain variable definitions first. Build uses PostCSS > `postcss-import` > Autoprefixer as described in `README.md`.

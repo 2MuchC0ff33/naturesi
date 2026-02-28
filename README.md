@@ -13,7 +13,7 @@ CSS Snapshot 2026
 
 #### Pre-processor
 
-Sass 1.97.3
+Sass 1.97.3 (installed as a local dev dependency via pnpm; `pnpm run build:css` uses the binary from `node_modules/.bin`)
 
 #### Post-processor
 
@@ -148,6 +148,15 @@ To get up and running in a fresh clone:
 4. Build front‑end assets:
    ```sh
    pnpm run build:css && pnpm run build:ts
+   ```
+   The first command runs `sass` against `assets/css/main.scss`, writes a
+   temporary `assets/css/output.css`, then pipes that through PostCSS
+   (import bundling + autoprefixer) to produce `public/assets/css/main.css`.
+   You can also launch a continuous watcher for development; the script now
+   uses `concurrently` so both the Sass and PostCSS watchers start together and
+   a single Ctrl‑C will shut them both down cleanly:
+   ```sh
+   pnpm run watch:css
    ```
    The resulting CSS and JS files land in `public/assets` but do not modify any
    existing page markup. The intermediary `assets/css/output.css` file is
