@@ -1,96 +1,141 @@
 # Copilot / AI agent instructions — Nature's Infusions
 
-Purpose: concise guidance so an AI coding agent can start work quickly in this repository.
+Purpose: quickly bring an AI coding agent up to speed on the repository's structure,
+build system, and ongoing refactor strategy so that generated code fits the
+project’s style and workflow.
 
 ## Big picture
-- The repo currently holds a **pre‑refactor, mostly static e‑commerce site**. Changes are being rolled out in small, reversible phases.
-- Static source is under `pages/`, `assets/` (CSS partials) and `js/` (runtime modules + `js/data/*.json`).
-- Built artifacts land in `public_html/`; `public_html/index.php` routes through `php/bootstrap.php` which is a minimal Slim‑style bootstrap for future expansion.
-- Service‑worker logic lives in `service-worker.js` with helpers in `js/modules/sw-*`.
-- Phase 0 established PHP/composer bootstrap and Node tooling; later phases migrate to Slim+Plates, Sass/Open Props, HTMX/Hyperscript/Alpine.js, etc. Refer to `TODO.md` for the current roadmap.
+- This is a **pre‑refactor, mostly static e‑commerce site** being converted in
+  incremental, reversible phases. Refer to `TODO.md` for the current roadmap and
+  phase‑specific instructions.
+- Static source lives under `pages/`, `assets/` (Sass partials), and `js/` (runtime
+  modules plus `js/data/*.json` for configuration/fixtures).  The old files are
+  intentionally left untouched during migrations to maintain visual parity.
+- Build artifacts and the serving root are under `public_html/`.  `public_html/index.php`
+  proxies into `php/bootstrap.php`, a minimal Slim‑style bootstrap that later
+  phases will expand with Slim routes and Plates templates.
+- Client‑side logic is divided between traditional JS/TS (`ts/` → compiled
+  output) and runtime modules (`js/modules`).  The service worker lives at the
+  repo root; helpers are in `js/modules/sw-*`.
+- Phase 0 introduced the PHP/composer baseline and Node tooling.  Later phases
+  layer on Slim+Plates, Sass/Open Props/PicoCSS, HTMX/Hyperscript/Alpine, and
+  eventually AssemblyScript→WASM.  New contributors should scan `TODO.md` to
+  understand where their change lives.
 
 ## Developer workflows
 
-### Setup
-1. Install PHP 8.1+ and Composer, then run `composer install` in project root (this also executes the PHP bootstrap sanity check).
-2. Install Node v25+ and PNPM; run `pnpm install` (all CLI examples use **pnpm** — do **not** default to `npm`).
-3. Build front‑end assets:
+### Prerequisites & setup
+1. Install PHP 8.1+ (8.4+ preferred) with mysqli, curl and mbstring.  Composer is
+   required for the PHP bootstrap.
+2. Install Node v25+ and PNPM.  Run `pnpm install` from the repo root.  **Always**
+   invoke npm tasks via `pnpm` — the legacy wrappers in `tools/` were moved to
+   `~/.local/share/wrappers` and are not part of this repo.
+3. After dependency installation, build frontend assets once:
    ```sh
    pnpm run build:css && pnpm run build:ts
    ```
-   - `build:css` runs `sass`, pipes the output through PostCSS (import bundling + autoprefixer) and then invokes `node tests/check_css_build.cjs`.
-   - `build:ts` invokes `tsc`; the compiler is configured by `tsconfig.json` to emit to `public_html/assets/js`.
-   - A temporary intermediate file `assets/css/output.css` is created during the CSS build but is git‑ignored.
+   - `build:css` compiles `assets/css/main.scss` with Sass, feeds the result
+     through PostCSS (first `postcss-import`, then autoprefixer) and runs the
+     JS validation script (`tests/check_css_build.cjs`).
+   - `build:ts` runs `tsc` according to `tsconfig.json`, emitting to
+     `public_html/assets/js`.
+   - A temporary file `assets/css/output.css` is created during CSS build and is
+     intentionally git‑ignored.
 
-   Development watchers are available:
+   For active development use watchers:
    ```sh
-   pnpm run watch:css   # concurrently runs Sass+PostCSS with automatic rebuilds
-   pnpm run watch:ts    # `tsc --watch` (see package.json)
+   pnpm run watch:css   # Sass+PostCSS via concurrently (single Ctrl‑C stops both)
+   pnpm run watch:ts    # `tsc --watch`
    ```
-   Use these during active editing; the `watch:css` task uses `concurrently` so a single Ctrl‑C stops both watchers.
 
-> **Wrapper scripts:** prior phases stored helper wrappers (`pnpm-wrapper.sh`, etc.) in `tools/`, but they were migrated to `~/.local/share/wrappers` and are **not** part of the repo. Always call the npm scripts directly rather than relying on those wrappers.
-
-### Running & configuration
-- Start a quick PHP server from the repo root:
+### Running the app locally
+- A quick PHP server can be started from the project root:
   ```sh
   php -S localhost:8000 -t public_html
   ```
-  or open `public_html/index.php` in a browser. A placeholder message indicates the bootstrap is active.
-- A `.env` file at the project root is parsed by `php/bootstrap.php`. Values are then available via `getenv()`, `$_ENV`, and `$_SERVER` throughout PHP. A lightweight parser is included; if `vlucas/phpdotenv` is added in the future it will be used automatically.
+  Opening `http://localhost:8000` should show the bootstrap placeholder message.
+- Configuration values are read from a `.env` file at the repository root.  The
+  simple parser in `php/bootstrap.php` populates `getenv()`, `$_ENV` and
+  `$_SERVER`; migrating to `vlucas/phpdotenv` is planned but not required.
 
 ### Tests & validation
-- `node tests/check_csaf.js` validates CSAF/provider metadata and `security.txt`.
-- `node tests/check_bootstrap.cjs` verifies the bootstrap respects `.env` overrides and exports them correctly.
-- Building CSS runs `node tests/check_css_build.cjs`, which fails if any `@import` remains or autoprefixer didn’t run; you can also invoke this directly using `pnpm run verify:css`.
-- PHP unit tests live in `tests/BootstrapTest.php` and can be executed via `composer test` (requires phpunit). If required PHP extensions aren’t available and phpunit fails to install, simply run the JS bootstrap check as a fallback.
+- **CSS build check:** `node tests/check_css_build.cjs` (invoked automatically by
+  `build:css` and available via `pnpm run verify:css`).  It safeguards against
+  stray `@import` statements and confirms autoprefixer ran; a custom PostCSS
+  plugin ensures `@charset` remains at the top of the bundle.
+- **Bootstrap check:** `node tests/check_bootstrap.cjs` ensures environment
+  variables from `.env` are honoured; `composer test` runs the same check via a
+  lightweight PHPUnit wrapper (`tests/BootstrapTest.php`).  If phpunit cannot be
+  installed (e.g. missing extensions), the JS check acts as a fallback.
+- **Metadata validation:** `node tests/check_csaf.js` inspects CSAF/provider
+  metadata and `security.txt` for correctness.
+
+> Run the relevant check directly when touching related areas; the build
+> scripts already wire them into the normal workflow.
 
 ## Conventions & patterns
-- **CSS**: `assets/css/main.css` is an ordered import list; maintain variable definitions first. Build uses PostCSS > `postcss-import` > Autoprefixer as described in `README.md`.
-  * The Sass sources no longer use `@import` – everything lives under
-    `assets/css/partials/` and is pulled in via `@use` with explicit
-    namespaces (`settings`, `utilities`, `vendors`, etc.).  Aggregator
-    partials such as `_settings.scss` and `_utilities.scss` forward their
-    children so the import order remains deterministic.
-  * Design tokens (colors, spacing, breakpoints) are stored in Sass maps
-    (`partials/settings/_maps.scss`).  Functions like `maps.color()` and
-    mixins in `partials/utilities/helpers.scss` provide a namespaced API.
-    Generated `:root` custom-properties ensure runtime compatibility.  The
-    palette now includes `primary`, `secondary` and `focus` tokens; edit
-    `$colors` and run the build whenever branding colours change.
-  * For new mixins or helpers, always create a dedicated module and invoke
-    it via its namespace rather than polluting the global scope.  helper
-    mixins live in `partials/utilities/helpers.scss` and include
-    `bg-color`, `text-color`, `pad`, `margin`, `grid`, `grid-responsive`,
-    `btn`, `box-shadow`, `fluid-type`, and `respond-to`.
-  * When converting existing styles, replace `var(--token)` references with
-    `maps.color(token)`/`maps.spacing(token)` or the appropriate helper.  As
-    the migration progresses you should be able to drop
-    `partials/settings/variables.scss` entirely once no source file
-    references its custom properties.
-  * Vendor CSS that cannot be converted to Sass lives under
-    `partials/vendors`; once the final dependency is eliminated the
-    `postcss-import` plugin can be removed and the build command
-    simplified.
-- **JS/TS**: Source in `ts/` compiles to `public_html/assets/js`. Runtime modules live in `js/modules`. Data files in `js/data/*.json` drive UI.
-- **Service worker**: central file `service-worker.js`; registration and logic helpers in `js/modules/sw-client.js`, `sw-core.js`, `sw-handlers.js`.
-- **Client storage**: cart code spans `js/cart*.js`, `storageLocal.js`, `storageIDB.js` (multiple persistence layers).
-- **Routing**: mostly static pages. Avoid modifying `pages/` until later phases unless you're implementing a new Plates template.
-- **Server bootstrap**: `php/bootstrap.php` is the main entry; `public_html/index.php` is a thin wrapper.
+- **CSS architecture:**
+  - Entry point `assets/css/main.scss` contains only an ordered list of
+    `@use` statements (namespaced, never `as *`).  Partial modules live under
+    `assets/css/partials/` with subfolders for `settings`, `base`,
+    `components`, `utilities` and `vendors`.
+  - Tokens (colors, spacing, breakpoints) are defined in Sass maps
+    (`partials/settings/_maps.scss`) with helper functions (`maps.color()`)
+    and mixins in `partials/utilities/helpers.scss`.  Calling code should
+    migrate off `var(--token)` in favor of these helpers; once migration is
+    complete `partials/settings/variables.scss` can be deleted.
+  - Vendor CSS that can't be rewritten is imported under `partials/vendors`.
+    Once the last external dependency is gone, `postcss-import` can be
+    removed from the build pipeline.
+  - New utilities or mixins always reside in their own namespace (see
+    `helpers` for existing mixins like `pad`, `btn`, `grid-responsive` etc.).
+
+- **Javascript/Typescript:**
+  - Source `.ts` files are compiled to `public_html/assets/js` via `tsconfig`.
+  - Runtime modules live in `js/modules` and are consumed directly in
+    `public_html` pages.  Configuration data is stored in `js/data/*.json`.
+
+- **Service worker:**
+  - Single worker script at the repo root; registration logic in
+    `js/modules/sw-client.js`.  Core logic is split into `sw-core.js` and
+    `sw-handlers.js`.
+
+- **Client storage:** cart persistence is layered (`js/cart*.js`) with
+  storage backends `storageLocal.js` (localStorage) and `storageIDB.js`
+  (IndexedDB).  Changes here affect offline capability; testing should
+  include both backends.
+
+- **Routing & templating:**
+  - Existing pages are static HTML under `pages/`.  During refactor new
+    templates live in `views/` (Plates) and routes are added to
+    `php/bootstrap.php`/eventual Slim router.  Avoid editing `pages/` unless a
+    change cannot be accomplished through the template layer.
+
+- **Server bootstrap:**
+  - `php/bootstrap.php` is the central PHP entrypoint; it currently does litt le
+    more than parse `.env` and dispatch to `public_html/index.php`, but it will
+    grow Slim routes and service logic in later phases.
 
 ## Integration hotspots
-- **Checkout & payment**: `js/modules/payment-*.js` and `pages/payment/*.html` are sensitive areas.
-- **Cart persistence**: updates here affect offline behaviour; test with both localStorage and IndexedDB.
-- **Service worker/offline features**: changes require matching client and worker code.
-- **Asset path changes**: if assets move, update `bootstrap.php`/`index.php` accordingly.
+- **Checkout & payment** logic is sensitive; inspect `js/modules/payment-*.js`
+  and `pages/payment/*.html` when touching this area.
+- **Cart persistence** – any change may break offline/online sync; verify both
+  storage layers and service worker behaviour.
+- **Service worker/offline features** must be updated in tandem between the
+  client and the worker script to avoid mismatched caches or protocols.
+- **Asset path changes** require corresponding updates to `bootstrap.php` and
+  `public_html/index.php` which generate URLs for CSS/JS.
 
 ## Quick navigation
 1. `README.md` – full development setup, version matrix, and background rationale.
-2. `TODO.md` – detailed refactor roadmap and architecture notes.
-3. `package.json` – build/test scripts and dependencies.
-4. `postcss.config.js` & `assets/css/main.css` – watch import order and build pipeline.
-5. `tsconfig.json` – output paths for compiled TypeScript.
-6. `js/data/` & `js/modules/` – where runtime logic and configuration live.
-7. `tests/` – example validation scripts and PHP unit tests.
+2. `TODO.md` – the living refactor roadmap with phase‑by‑phase details.
+3. `package.json` – all build/test scripts and third‑party dependencies.
+4. `postcss.config.js` & `assets/css/main.scss` – examine here for CSS build
+   pipeline and import order requirements.
+5. `tsconfig.json` – output paths and compiler options for TypeScript.
+6. `js/data/` & `js/modules/` – primary locations for runtime logic and UI data.
+7. `tests/` – validation scripts and a minimal PHPUnit test.
 
-> When in doubt, read `README.md` or `TODO.md` first; the static markup in `pages/` is intentionally untouched for now.
+> When in doubt, refer back to `README.md` or `TODO.md` first; the static HTML
+> in `pages/` is intentionally LEFT UNTOUCHED until a refactor phase requires
+> migrating it.
