@@ -1,3 +1,18 @@
+// Helper for font sizes with fallback
+@function fontSize($key, $fallback: null) {
+  $val: map.get($fonts, $key);
+
+  @if $val !=null {
+    @return $val;
+  }
+
+  @else if $fallback !=null {
+    @return $fallback;
+  }
+
+  @return null;
+}
+
 /* maps.scss – centralised design tokens expressed as Sass maps.
    this is the first step towards theming and allows us to reuse values
    in mixins, functions and even generate the corresponding CSS custom
@@ -12,6 +27,11 @@
 // the stylesheet. keep the naming consistent so generated loops are
 // predictable.
 $colors: (
+  tabs-fade: rgba(255, 255, 255, 0.95),
+  progress-bg: #eee,
+  progress-fg: map.get($colors, accent),
+  footer-text: #6b7280,
+  // matches .text-muted utility, adjust as needed
   background: #ffffff,
   text: #050505,
   primary: #2a9d8f,
@@ -79,6 +99,7 @@ $shadows: (
 
 // radius tokens
 $radius: (
+  pill: 9999px,
   sm: 0.25rem,
   md: 0.5rem,
   lg: 1rem,

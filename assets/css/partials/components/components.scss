@@ -58,7 +58,7 @@ Accordion toggles, social icon variants and other small repeated components.
 
 @media (max-width: 480px) {
   .site-footer .links-grid ul li+li {
-    border-top: 1px solid color-mix(in srgb, var(--footer-text) 6%, transparent);
+    border-top: 1px solid color-mix(in srgb, settings.color(footer-text) 6%, transparent);
     margin-top: 0.15rem;
     padding-top: 0.35rem;
   }
