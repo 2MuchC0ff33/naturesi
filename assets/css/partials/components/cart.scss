@@ -27,8 +27,8 @@
   min-width: 2ch;
   padding: 0.15rem 0.45rem;
   border-radius: 999px;
-  background: maps.color(cart-badge-bg, maps.color(accent));
-  color: maps.color(cart-badge-fg, #fff);
+  background: maps.color(cart-badge-bg);
+  color: maps.color(cart-badge-fg);
   font-size: 0.95rem;
   line-height: 1;
   text-align: center;
@@ -39,7 +39,7 @@
 /* Focus-visible styling for keyboard users */
 .cart-option:focus-within .cart-count,
 .cart-option:focus-visible {
-  outline: 3px solid color-mix(in srgb, maps.color(cart-badge-bg, maps.color(accent)) 30%, #0000);
+  outline: 3px solid color-mix(in srgb, maps.color(cart-badge-bg) 30%, #0000);
   outline-offset: 3px;
 }
 
@@ -82,9 +82,9 @@
 @media (prefers-contrast: high) {
   .cart-count {
     box-shadow: none;
-    border: 2px solid maps.color(cart-badge-fg, #fff);
-    color: maps.color(cart-badge-bg, maps.color(accent));
-    background: maps.color(cart-badge-fg, #fff);
+    border: 2px solid maps.color(cart-badge-fg);
+    color: maps.color(cart-badge-bg);
+    background: maps.color(cart-badge-fg);
   }
 }
 
@@ -118,7 +118,7 @@
   flex-basis: 100%;
   margin: 0.25rem 0 0 0;
   font-size: 0.9rem;
-  color: maps.color(muted, #6b7280);
+  color: maps.color(muted);
 }
 
 /* Error message styling moved to `partials/components/alerts.css` to centralise alert visuals */
