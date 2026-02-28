@@ -15,4 +15,10 @@ site‑wide.
 $radius-sm: maps.radius(sm);
 $space-unit: maps.spacing("unit");
 
+
+/* Emit --radius-sm as a CSS custom property for build checks and runtime use */
+:root {
+   --radius-sm: #{$radius-sm};
+}
+
 /* additional project token definitions can be added below */

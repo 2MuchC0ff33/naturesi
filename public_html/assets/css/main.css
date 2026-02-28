@@ -198,6 +198,10 @@ site‑wide.
      (see partials/vendors/_open-props.scss).  keep this file focused on
      project‑specific token aliases. */
 /* optional Sass aliases for convenience */
+/* Emit --radius-sm as a CSS custom property for build checks and runtime use */
+:root {
+  --radius-sm: 0.25rem;
+}
 /* additional project token definitions can be added below */
 /* config.scss
    purpose: see assets/css/partials/README.md for organisation.
