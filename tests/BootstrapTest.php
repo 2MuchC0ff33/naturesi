@@ -96,7 +96,7 @@ PHP;
         }
     }
 
-    public_html function testBootstrapPrefersPhpDotenv(): void
+    public function testBootstrapPrefersPhpDotenv(): void
     {
         // phpunit.xml already includes php/bootstrap.php via the bootstrap
         // attribute, so the file has been loaded before setUp() ran.  That

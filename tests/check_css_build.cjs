@@ -2,7 +2,7 @@
 // simple validation that build:css produces a final stylesheet suitable for
 // deployment. originally the script only checked for stray `@import` calls
 // (to avoid 404s when partials are referenced), but the workflow now
-// compiles Sass before postcss and also injects tokens from Open Props/
+// compiles SCSS (Sass) before postcss and also injects tokens from Open Props/
 // project variables.  This file is invoked automatically from the npm build
 // pipeline; run `pnpm run verify:css` if you want to test manually.
 const { execSync } = require('child_process');
@@ -10,9 +10,15 @@ const { readFileSync } = require('fs');
 
 try {
   // caller (usually the build script) is responsible for producing
-  // public/assets/css/main.css before executing this check. when run
-  // standalone the user should ensure the file already exists.
-  const out = readFileSync('public/assets/css/main.css', 'utf-8');
+  // the bundled stylesheet before executing this check. depending on the
+  // package.json configuration it may live under public/ or public_html/;
+  // try both paths for convenience when running the script manually.
+  let out;
+  try {
+    out = readFileSync('public/assets/css/main.css', 'utf-8');
+  } catch (_e) {
+    out = readFileSync('public_html/assets/css/main.css', 'utf-8');
+  }
   // no `@import` directives at all should remain (the Sass step may
   // have emitted them for compatibility, but PostCSS must collapse them).
   // strip comments first so explanatory text doesn’t trigger the check.

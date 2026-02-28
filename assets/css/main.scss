@@ -1,13 +1,14 @@
-/* Category anchor removed from here — moved to partials/06-utilities.css
+/* Category anchor removed from here — moved to partials/06-utilities.scss
    (keeps this file a pure importer for maintenance).
 */
-/* main.css (refactor)
+/* main.scss (refactor)
    This file is now an aggregator that imports modular partials located in
-   assets/css/partials/. The order is important: variables must be imported
-   first so other partials can reference CSS custom properties.
+   assets/css/partials/. The order is important: tokens and variables must be
+   imported first so other partials can reference CSS custom properties.
 
    *IMPORTANT*: this stylesheet is never served directly. the build pipeline
-   (see `package.json`/"build:css") uses postcss-import to inline every
+   (see `package.json`/"build:css") uses the Sass CLI to compile
+   `assets/css/main.scss` to a temporary CSS file. PostCSS then inlines every
    @import and produces a single bundle at public/assets/css/main.css. a
    post‑build sanity check (`tests/check_css_build.cjs`) runs automatically
    to catch stray imports, preventing runtime 404s. do not add rules directly
@@ -17,234 +18,236 @@
    assets/css/partials/ and keep the import order in this file.
 
    Partial list (import order):
-     - variables.css (CSS custom properties)
-     - config.css (General global configuration)
-     - settings.css (Broad settings)
-     - colours.css (Color definitions)
-     - typography.css (Font styles)
-     - spacing.css (Margins and paddings)
-     - sizing.css (Width and height utilities)
-     - breakpoints.css (Responsive design breakpoints)
-     - layout.css (Overall layout styles)
-     - media.css (Media queries)
-     - mixins.css (Reusable CSS snippets)
-     - clearfix.css (Clearfix utility)
-     - hidden.css (Hidden utility)
-     - accessibility.css (Accessibility helpers)
-     - animations.css (Keyframes and animation utilities)
-     - interactions.css (Interaction helpers)
-     - state.css (State-based styles)
-     - performance.css (Performance optimizations)
-     - theme.css (Theming and skinning)
-     - browser-fixes.css (Browser-specific fixes)
-     - reset.css (Style resets)
-     - unstyle.css (Unstyled base elements)
-     - normalize.css (Normalization styles)
-     - sanitize.css (Sanitization styles)
-     - base.css (Base document styles)
-     - selections.css (Text selection styles)
-     - all.css (Global element styles)
-     - html.css (HTML element styles)
-     - body.css (Body element styles)
-     - title.css (Title element styles)
-     - headings.css (Heading element styles)
-     - paragraphs.css (Paragraph element styles)
-     - groups.css (Grouping element styles)
-     - lists.css (List element styles)
-     - links.css (Link element styles)
-     - images.css (Image element styles)
-     - tables.css (Table element styles)
-     - forms.css (Form element styles)
-     - labels.css (Label element styles)
-     - inputs.css (Input element styles)
-     - buttons.css (Button element styles)
-     - nav.css (Navigation element styles)
-     - header.css (Header element styles)
-     - footer.css (Footer element styles)
-     - wrapper.css (Object layer wrapper)
-     - container.css (Container object styles)
-     - flexbox.css (Flexbox object styles)
-     - grid.css (Grid object styles)
-     - media-object.css (Media object styles)
-     - modals.css (Modal object styles)
-     - responsive.css (Responsive object styles)
-     - templates.css (Template-specific styles)
-     - shadow-dom.css (Shadow DOM styles)
-     - navigation-menu.css (Navigation menu styles)
-     - categories.css (Category-specific styles)
-     - products.css (Product-specific styles)
-     - components.css (Component-specific styles)
-     - input-fields.css (Input field styles)
-     - badges.css (Badge component styles)
-     - progress-bars.css (Progress bar styles)
-     - loaders.css (Loader component styles)
-     - sliders.css (Slider component styles)
-     - carousels.css (Carousel component styles)
-     - accordions.css (Accordion component styles)
-     - tabs.css (Tab component styles)
-     - tooltips.css (Tooltip component styles)
-     - modals-overlays.css (Modal and overlay styles)
-     - popups.css (Popup component styles)
-     - alerts.css (Alert component styles)
-     - notifications.css (Notification component styles)
-     - toasts.css (Toast component styles)
-     - cart.css (Cart-specific styles)
-     - checkout.css (Checkout-specific styles)
-     - transitions.css (Transition component styles)
-     - utilities.css (General utility classes)
-     - display.css (Display helper utilities)
-     - visibility.css (Visibility utilities)
-     - hide.css (Hide utilities)
-     - show.css (Show utilities)
-     - sizing-helpers.css (Sizing helper utilities)
-     - spacing-helpers.css (Spacing helper utilities)
-     - margins.css (Margin utilities)
-     - paddings.css (Padding utilities)
-     - center.css (Centering utilities)
-     - grouping.css (Grouping utilities)
-     - sorting.css (Sorting utilities)
-     - filtering.css (Filtering utilities)
-     - pagination.css (Pagination utilities)
-     - typography-helpers.css (Typography helper utilities)
-     - positioning.css (Positioning helper utilities)
-     - z-index.css (Z-index helper utilities)
-     - layering.css (Layering helper utilities)
-     - transforms.css (Transform helper utilities)
-     - animate.css (Animation helper utilities)
-     - smoothing.css (Smoothing helper utilities)
-     - shadows.css (Shadow helper utilities)
-     - borders.css (Border helper utilities)
-     - shapes.css (Shape helper utilities)
-     - compression.css (Compression utilities)
-     - optimizations.css (Optimization utilities)
-     - lcp.css (Largest Contentful Paint utilities)
-     - fcp.css (First Contentful Paint utilities)
-     - tti.css (Time to Interactive utilities)
-     - cls.css (Cumulative Layout Shift utilities)
-     - fie.css (First Input Delay utilities)
-     - mobile.css (Mobile-specific utilities)
-     - tablet.css (Tablet-specific utilities)
-     - desktop.css (Desktop-specific utilities)
+     - tokens.scss (Open Props & project token aliases)
+     - variables.scss (CSS custom properties)
+     - config.scss (General global configuration)
+     - settings.scss (Broad settings)
+     - colours.scss (Color definitions)
+     - typography.scss (Font styles)
+     - spacing.scss (Margins and paddings)
+     - sizing.scss (Width and height utilities)
+     - breakpoints.scss (Responsive design breakpoints)
+     - layout.scss (Overall layout styles)
+     - media.scss (Media queries)
+     - mixins.scss (Reusable CSS snippets)
+     - clearfix.scss (Clearfix utility)
+     - hidden.scss (Hidden utility)
+     - accessibility.scss (Accessibility helpers)
+     - animations.scss (Keyframes and animation utilities)
+     - interactions.scss (Interaction helpers)
+     - state.scss (State-based styles)
+     - performance.scss (Performance optimizations)
+     - theme.scss (Theming and skinning)
+     - browser-fixes.scss (Browser-specific fixes)
+     - reset.scss (Style resets)
+     - unstyle.scss (Unstyled base elements)
+     - normalize.scss (Normalization styles)
+     - sanitize.scss (Sanitization styles)
+     - base.scss (Base document styles)
+     - selections.scss (Text selection styles)
+     - all.scss (Global element styles)
+     - html.scss (HTML element styles)
+     - body.scss (Body element styles)
+     - title.scss (Title element styles)
+     - headings.scss (Heading element styles)
+     - paragraphs.scss (Paragraph element styles)
+     - groups.scss (Grouping element styles)
+     - lists.scss (List element styles)
+     - links.scss (Link element styles)
+     - images.scss (Image element styles)
+     - tables.scss (Table element styles)
+     - forms.scss (Form element styles)
+     - labels.scss (Label element styles)
+     - inputs.scss (Input element styles)
+     - buttons.scss (Button element styles)
+     - nav.scss (Navigation element styles)
+     - header.scss (Header element styles)
+     - footer.scss (Footer element styles)
+     - wrapper.scss (Object layer wrapper)
+     - container.scss (Container object styles)
+     - flexbox.scss (Flexbox object styles)
+     - grid.scss (Grid object styles)
+     - media-object.scss (Media object styles)
+     - modals.scss (Modal object styles)
+     - responsive.scss (Responsive object styles)
+     - templates.scss (Template-specific styles)
+     - shadow-dom.scss (Shadow DOM styles)
+     - navigation-menu.scss (Navigation menu styles)
+     - categories.scss (Category-specific styles)
+     - products.scss (Product-specific styles)
+     - components.scss (Component-specific styles)
+     - input-fields.scss (Input field styles)
+     - badges.scss (Badge component styles)
+     - progress-bars.scss (Progress bar styles)
+     - loaders.scss (Loader component styles)
+     - sliders.scss (Slider component styles)
+     - carousels.scss (Carousel component styles)
+     - accordions.scss (Accordion component styles)
+     - tabs.scss (Tab component styles)
+     - tooltips.scss (Tooltip component styles)
+     - modals-overlays.scss (Modal and overlay styles)
+     - popups.scss (Popup component styles)
+     - alerts.scss (Alert component styles)
+     - notifications.scss (Notification component styles)
+     - toasts.scss (Toast component styles)
+     - cart.scss (Cart-specific styles)
+     - checkout.scss (Checkout-specific styles)
+     - transitions.scss (Transition component styles)
+     - utilities.scss (General utility classes)
+     - display.scss (Display helper utilities)
+     - visibility.scss (Visibility utilities)
+     - hide.scss (Hide utilities)
+     - show.scss (Show utilities)
+     - sizing-helpers.scss (Sizing helper utilities)
+     - spacing-helpers.scss (Spacing helper utilities)
+     - margins.scss (Margin utilities)
+     - paddings.scss (Padding utilities)
+     - center.scss (Centering utilities)
+     - grouping.scss (Grouping utilities)
+     - sorting.scss (Sorting utilities)
+     - filtering.scss (Filtering utilities)
+     - pagination.scss (Pagination utilities)
+     - typography-helpers.scss (Typography helper utilities)
+     - positioning.scss (Positioning helper utilities)
+     - z-index.scss (Z-index helper utilities)
+     - layering.scss (Layering helper utilities)
+     - transforms.scss (Transform helper utilities)
+     - animate.scss (Animation helper utilities)
+     - smoothing.scss (Smoothing helper utilities)
+     - shadows.scss (Shadow helper utilities)
+     - borders.scss (Border helper utilities)
+     - shapes.scss (Shape helper utilities)
+     - compression.scss (Compression utilities)
+     - optimizations.scss (Optimization utilities)
+     - lcp.scss (Largest Contentful Paint utilities)
+     - fcp.scss (First Contentful Paint utilities)
+     - tti.scss (Time to Interactive utilities)
+     - cls.scss (Cumulative Layout Shift utilities)
+     - fie.scss (First Input Delay utilities)
+     - mobile.scss (Mobile-specific utilities)
+     - tablet.scss (Tablet-specific utilities)
+     - desktop.scss (Desktop-specific utilities)
 */
 
-@import url('partials/settings/variables.css');
-@import url('partials/settings/config.css');
-@import url('partials/settings/settings.css');
-@import url('partials/settings/colours.css');
-@import url('partials/settings/typography.css');
-@import url('partials/settings/spacing.css');
-@import url('partials/settings/sizing.css');
-@import url('partials/settings/breakpoints.css');
-@import url('partials/settings/layout.css');
-@import url('partials/settings/media.css');
-@import url('partials/tools/mixins.css');
-@import url('partials/tools/clearfix.css');
-@import url('partials/tools/hidden.css');
-@import url('partials/tools/accessibility.css');
-@import url('partials/tools/animations.css');
-@import url('partials/tools/interactions.css');
-@import url('partials/tools/state.css');
-@import url('partials/tools/performance.css');
-@import url('partials/tools/theme.css');
-@import url('partials/tools/browser-fixes.css');
-@import url('partials/generic/reset.css');
-@import url('partials/generic/unstyle.css');
-@import url('partials/generic/normalize.css');
-@import url('partials/generic/sanitize.css');
-@import url('partials/generic/base.css');
-@import url('partials/generic/selections.css');
-@import url('partials/elements/all.css');
-@import url('partials/elements/html.css');
-@import url('partials/elements/body.css');
-@import url('partials/elements/title.css');
-@import url('partials/elements/headings.css');
-@import url('partials/elements/paragraphs.css');
-@import url('partials/elements/groups.css');
-@import url('partials/elements/lists.css');
-@import url('partials/elements/links.css');
-@import url('partials/elements/images.css');
-@import url('partials/elements/video.css');
-@import url('partials/elements/tables.css');
-@import url('partials/elements/forms.css');
-@import url('partials/elements/labels.css');
-@import url('partials/elements/inputs.css');
-@import url('partials/elements/buttons.css');
-@import url('partials/elements/nav.css');
-@import url('partials/elements/header.css');
-@import url('partials/elements/footer.css');
-@import url('partials/objects/wrapper.css');
-@import url('partials/objects/container.css');
-@import url('partials/objects/flexbox.css');
-@import url('partials/objects/grid.css');
-@import url('partials/objects/media-object.css');
-@import url('partials/objects/modals.css');
-@import url('partials/objects/responsive.css');
-@import url('partials/templates/templates.css');
-@import url('partials/templates/shadow-dom.css');
-@import url('partials/components/navigation-menu.css');
-@import url('partials/components/categories.css');
-@import url('partials/components/categories-nav.css');
-@import url('partials/components/products.css');
-@import url('partials/components/hero.css');
-@import url('partials/components/reviews.css');
-@import url('partials/components/components.css');
-@import url('partials/components/footer-overrides.css');
-@import url('partials/components/input-fields.css');
-@import url('partials/components/badges.css');
-@import url('partials/components/progress-bars.css');
-@import url('partials/components/loaders.css');
-@import url('partials/components/sliders.css');
-@import url('partials/components/carousels.css');
-@import url('partials/components/accordions.css');
-@import url('partials/components/tabs.css');
-@import url('partials/components/tooltips.css');
-@import url('partials/components/modals-overlays.css');
-@import url('partials/components/popups.css');
-@import url('partials/components/alerts.css');
-@import url('partials/components/notifications.css');
-@import url('partials/components/toasts.css');
-@import url('partials/components/cart.css');
-@import url('partials/components/checkout.css');
-@import url('partials/components/transitions.css');
-@import url('partials/utilities/utilities.css');
-@import url('partials/utilities/display.css');
-@import url('partials/utilities/visibility.css');
-@import url('partials/utilities/hide.css');
-@import url('partials/utilities/show.css');
-@import url('partials/utilities/sizing-helpers.css');
-@import url('partials/utilities/spacing-helpers.css');
-@import url('partials/utilities/margins.css');
-@import url('partials/utilities/paddings.css');
-@import url('partials/utilities/center.css');
-@import url('partials/utilities/grouping.css');
-@import url('partials/utilities/sorting.css');
-@import url('partials/utilities/filtering.css');
-@import url('partials/utilities/pagination.css');
-@import url('partials/utilities/typography-helpers.css');
-@import url('partials/utilities/positioning.css');
-@import url('partials/utilities/z-index.css');
-@import url('partials/utilities/layering.css');
-@import url('partials/utilities/transforms.css');
-@import url('partials/utilities/animate.css');
-@import url('partials/utilities/smoothing.css');
-@import url('partials/utilities/shadows.css');
-@import url('partials/utilities/borders.css');
-@import url('partials/utilities/shapes.css');
-@import url('partials/utilities/compression.css');
-@import url('partials/utilities/optimizations.css');
-@import url('partials/utilities/lcp.css');
-@import url('partials/utilities/fcp.css');
-@import url('partials/utilities/tti.css');
-@import url('partials/utilities/cls.css');
-@import url('partials/utilities/fie.css');
-@import url('partials/utilities/mobile.css');
-@import url('partials/utilities/tablet.css');
-@import url('partials/utilities/desktop.css');
-@import url('partials/utilities/colors.css');
-@import url('partials/utilities/interactions.css');
-@import url('partials/utilities/flex.css');
-@import url('partials/utilities/grid.css');
-@import url('partials/utilities/overflow.css');
-@import url('partials/utilities/responsive.css');
+@import 'partials/settings/tokens';
+@import 'partials/settings/variables';
+@import 'partials/settings/config';
+@import 'partials/settings/settings';
+@import 'partials/settings/colours';
+@import 'partials/settings/typography';
+@import 'partials/settings/spacing';
+@import 'partials/settings/sizing';
+@import 'partials/settings/breakpoints';
+@import 'partials/settings/layout';
+@import 'partials/settings/media';
+@import 'partials/tools/mixins';
+@import 'partials/tools/clearfix';
+@import 'partials/tools/hidden';
+@import 'partials/tools/accessibility';
+@import 'partials/tools/animations';
+@import 'partials/tools/interactions';
+@import 'partials/tools/state';
+@import 'partials/tools/performance';
+@import 'partials/tools/theme';
+@import 'partials/tools/browser-fixes';
+@import 'partials/generic/reset';
+@import 'partials/generic/unstyle';
+@import 'partials/generic/normalize';
+@import 'partials/generic/sanitize';
+@import 'partials/generic/base';
+@import 'partials/generic/selections';
+@import 'partials/elements/all';
+@import 'partials/elements/html';
+@import 'partials/elements/body';
+@import 'partials/elements/title';
+@import 'partials/elements/headings';
+@import 'partials/elements/paragraphs';
+@import 'partials/elements/groups';
+@import 'partials/elements/lists';
+@import 'partials/elements/links';
+@import 'partials/elements/images';
+@import 'partials/elements/video';
+@import 'partials/elements/tables';
+@import 'partials/elements/forms';
+@import 'partials/elements/labels';
+@import 'partials/elements/inputs';
+@import 'partials/elements/buttons';
+@import 'partials/elements/nav';
+@import 'partials/elements/header';
+@import 'partials/elements/footer';
+@import 'partials/objects/wrapper';
+@import 'partials/objects/container';
+@import 'partials/objects/flexbox';
+@import 'partials/objects/grid';
+@import 'partials/objects/media-object';
+@import 'partials/objects/modals';
+@import 'partials/objects/responsive';
+@import 'partials/templates/templates';
+@import 'partials/templates/shadow-dom';
+@import 'partials/components/navigation-menu';
+@import 'partials/components/categories';
+@import 'partials/components/categories-nav';
+@import 'partials/components/products';
+@import 'partials/components/hero';
+@import 'partials/components/reviews';
+@import 'partials/components/components';
+@import 'partials/components/footer-overrides';
+@import 'partials/components/input-fields';
+@import 'partials/components/badges';
+@import 'partials/components/progress-bars';
+@import 'partials/components/loaders';
+@import 'partials/components/sliders';
+@import 'partials/components/carousels';
+@import 'partials/components/accordions';
+@import 'partials/components/tabs';
+@import 'partials/components/tooltips';
+@import 'partials/components/modals-overlays';
+@import 'partials/components/popups';
+@import 'partials/components/alerts';
+@import 'partials/components/notifications';
+@import 'partials/components/toasts';
+@import 'partials/components/cart';
+@import 'partials/components/checkout';
+@import 'partials/components/transitions';
+@import 'partials/utilities/utilities';
+@import 'partials/utilities/display';
+@import 'partials/utilities/visibility';
+@import 'partials/utilities/hide';
+@import 'partials/utilities/show';
+@import 'partials/utilities/sizing-helpers';
+@import 'partials/utilities/spacing-helpers';
+@import 'partials/utilities/margins';
+@import 'partials/utilities/paddings';
+@import 'partials/utilities/center';
+@import 'partials/utilities/grouping';
+@import 'partials/utilities/sorting';
+@import 'partials/utilities/filtering';
+@import 'partials/utilities/pagination';
+@import 'partials/utilities/typography-helpers';
+@import 'partials/utilities/positioning';
+@import 'partials/utilities/z-index';
+@import 'partials/utilities/layering';
+@import 'partials/utilities/transforms';
+@import 'partials/utilities/animate';
+@import 'partials/utilities/smoothing';
+@import 'partials/utilities/shadows';
+@import 'partials/utilities/borders';
+@import 'partials/utilities/shapes';
+@import 'partials/utilities/compression';
+@import 'partials/utilities/optimizations';
+@import 'partials/utilities/lcp';
+@import 'partials/utilities/fcp';
+@import 'partials/utilities/tti';
+@import 'partials/utilities/cls';
+@import 'partials/utilities/fie';
+@import 'partials/utilities/mobile';
+@import 'partials/utilities/tablet';
+@import 'partials/utilities/desktop';
+@import 'partials/utilities/colors';
+@import 'partials/utilities/interactions';
+@import 'partials/utilities/flex';
+@import 'partials/utilities/grid';
+@import 'partials/utilities/overflow';
+@import 'partials/utilities/responsive';
 
 /* End of main.css importer — do not add large blocks of styles here. */

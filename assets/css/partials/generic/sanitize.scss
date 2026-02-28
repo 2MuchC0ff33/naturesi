@@ -6,7 +6,7 @@
 */
 
 /* Import centralised selection rules so selection theming is consistent */
-@import url('selections.css');
+@import 'selections';
 
 /* Placeholder styling: keep placeholders visible but deemphasised */
 ::placeholder {

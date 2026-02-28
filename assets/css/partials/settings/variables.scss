@@ -1,8 +1,12 @@
 /* ==========================================================================
 Variables and theme tokens
 This file contains the project's CSS custom properties. Keep this first so other
-partials can reference variables safely.
+partials can reference variables safely.  Tokens from Open Props are imported
+just before the :root declaration.
 ========================================================================== */
+
+@import 'tokens';
+
 :root {
   --color-background: #ffffff;
   /* WCAG AAA: background for 21:1 contrast with text */

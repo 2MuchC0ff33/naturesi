@@ -1,0 +1,15 @@
+/* ==========================================================================
+_tokens.scss – bring Open Props tokens into the project and expose any
+project‑specific aliases. This partial is imported by main.scss before
+variables.scss so that the resulting CSS custom properties are available
+site‑wide.
+========================================================================== */
+
+/* bring in all Open Props custom properties by importing the packaged CSS. PostCSS will resolve this from node_modules. */
+@import "open-props/open-props.min.css";
+
+/* optional Sass aliases for convenience */
+$radius-sm: var(--radius-sm);
+$space-unit: var(--space-unit);
+
+/* additional project token definitions can be added below */

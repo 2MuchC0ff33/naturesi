@@ -22,8 +22,8 @@ Autoprefixer 10.4.27
 
 * Build script (`pnpm run build:css`) runs PostCSS with `postcss-import` first
   (bundles `@import`‑ed partials) and then autoprefixer, producing a single
-  deployable stylesheet under `public/assets/css/main.css`.  The input file is
-  `assets/css/main.css` which only contains an ordered list of partial imports.
+  deployable stylesheet under `public_html/assets/css/main.css`.  The input file is
+  `assets/css/main.scss` which only contains an ordered list of partial imports.
   A post-build validation step (`node tests/check_css_build.cjs`) is executed
   automatically; it fails if any `@import` referencing the `partials/` tree
   remains or if autoprefixer appears not to have run. this prevents the
@@ -151,7 +151,7 @@ To get up and running in a fresh clone:
    ```
    The first command runs `sass` against `assets/css/main.scss`, writes a
    temporary `assets/css/output.css`, then pipes that through PostCSS
-   (import bundling + autoprefixer) to produce `public/assets/css/main.css`.
+   (import bundling + autoprefixer) to produce `public_html/assets/css/main.css`.
    You can also launch a continuous watcher for development; the script now
    uses `concurrently` so both the Sass and PostCSS watchers start together and
    a single Ctrl‑C will shut them both down cleanly:
