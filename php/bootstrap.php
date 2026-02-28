@@ -1,7 +1,7 @@
 <?php
 // php/bootstrap.php
 // Optional bootstrap: set PHP include_path from environment variable.
-// Include this early in your app (e.g., public/index.php) or via auto_prepend_file.
+// Include this early in your app (e.g., public_html/index.php) or via auto_prepend_file.
 //
 // When Composer is installed, some callers execute this file standalone
 // (notably the post-install-cmd script).  In those cases the autoloader

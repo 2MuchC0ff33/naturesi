@@ -1,0 +1,39 @@
+/* responsive.scss
+   purpose: see assets/css/partials/README.md for organisation.
+   import order: maintained by assets/css/main.scss.
+*/
+
+/* Responsive – Comprehensive responsive show/hide utilities
+   Device-specific visibility controls for mobile-first design.
+*/
+
+/* Hide/Show at breakpoints */
+@media (min-width: 600px) {
+  .u-hide-sm {
+    display: none !important;
+  }
+
+  .u-show-sm {
+    display: block !important;
+  }
+}
+
+@media (min-width: 900px) {
+  .u-hide-md {
+    display: none !important;
+  }
+
+  .u-show-md {
+    display: block !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  .u-hide-lg {
+    display: none !important;
+  }
+
+  .u-show-lg {
+    display: block !important;
+  }
+}

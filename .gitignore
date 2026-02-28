@@ -17,6 +17,10 @@ build/
 # generated CSS output – built during development and intentionally ignored
 assets/css/output.css
 
+# Sass build artefacts (cache + source maps are ephemeral)
+.sass-cache/
+*.scss.map
+
 # PHP/Composer
 vendor/
 composer.lock

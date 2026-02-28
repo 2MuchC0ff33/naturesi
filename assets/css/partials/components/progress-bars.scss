@@ -1,0 +1,32 @@
+/* progress-bars.scss
+   purpose: see assets/css/partials/README.md for organisation.
+   import order: maintained by assets/css/main.scss.
+*/
+
+@use "../settings/maps" as maps;
+
+/* components/progress-bars.css
+   Purpose: Progress bars and linear progress components.
+   Scope: `.progress`, `.progress__bar`, `.progress__value`.
+   Notes: Keep animations minimal and respect `prefers-reduced-motion`.
+*/
+
+.progress {
+  width: 100%;
+  background: maps.color(progress-bg);
+  height: 8px;
+  border-radius: 999px;
+}
+
+.progress__bar {
+  height: 100%;
+  background: maps.color(progress-fg);
+  border-radius: inherit;
+  transition: width maps.transition(fast) ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .progress__bar {
+    transition: none;
+  }
+}

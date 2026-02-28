@@ -1,0 +1,15 @@
+/* clearfix.scss
+   purpose: see assets/css/partials/README.md for organisation.
+   import order: maintained by assets/css/main.scss.
+*/
+
+/* ==========================================================================
+Clearfix utility
+Small helper to clear floats; centralised in the tools layer.
+========================================================================== */
+
+.clearfix::after {
+  content: '';
+  display: block;
+  clear: both;
+}

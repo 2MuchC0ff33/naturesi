@@ -1,0 +1,22 @@
+/* desktop.scss
+   purpose: see assets/css/partials/README.md for organisation.
+   import order: maintained by assets/css/main.scss.
+*/
+
+/* Utilities – desktop-specific helpers */
+
+@media (min-width: 1025px) {
+  .u-desktop-only {
+    display: block !important;
+  }
+
+  .u-hide-desktop {
+    display: none !important;
+  }
+}
+
+@media (max-width: 1024px) {
+  .u-desktop-only {
+    display: none !important;
+  }
+}

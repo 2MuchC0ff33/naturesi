@@ -1,0 +1,120 @@
+/* tabs.scss
+   purpose: see assets/css/partials/README.md for organisation.
+   import order: maintained by assets/css/main.scss.
+*/
+
+@use "../settings/maps" as maps;
+
+/* components/tabs.css
+   Purpose: Tablist/tabpanel component styles.
+   Scope: `.tabs`, `.tabs__list`, `.tabs__tab`, `.tabs__panel`.
+   Notes: Markup expects ARIA tablist roles; JS handles selection state with `aria-selected`.
+*/
+
+.tabs {
+  position: relative;
+}
+
+.tabs::before,
+.tabs::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 3.6rem;
+  pointer-events: none;
+  transition: opacity maps.transition(fast) ease;
+  opacity: 0;
+  z-index: 2;
+}
+
+/* left fade */
+.tabs::before {
+  left: 0;
+  background: linear-gradient(90deg, maps.color(tabs-fade), rgba(255, 255, 255, 0));
+}
+
+/* right fade */
+.tabs::after {
+  right: 0;
+  background: linear-gradient(270deg, maps.color(tabs-fade), rgba(255, 255, 255, 0));
+}
+
+/* Show fades when JS detects overflow on the respective side */
+.tabs--fade-left::before {
+  opacity: 1;
+}
+
+.tabs--fade-right::after {
+  opacity: 1;
+}
+
+.tabs__list {
+  display: flex;
+  gap: maps.spacing(sm);
+  /* Allow horizontal scrolling on narrow screens without wrapping */
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 0.2rem;
+  scroll-behavior: smooth;
+}
+
+.tabs__list::-webkit-scrollbar {
+  height: 6px;
+}
+
+.tabs__tab {
+  background: transparent;
+  border: 0;
+  padding: 0.42rem 0.64rem;
+  cursor: pointer;
+  font: inherit;
+  border-radius: 999px;
+  white-space: nowrap;
+  transition: background maps.transition(fast), transform maps.transition(fast), box-shadow maps.transition(fast);
+}
+
+.tabs__tab:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+}
+
+.tabs__tab[aria-selected='true'] {
+  font-weight: 700;
+  color: maps.color(accent);
+  background: color-mix(in srgb, maps.color(accent) 8%, transparent);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.04);
+  border-bottom: 0;
+  /* pill style replaces underline */
+}
+
+.tabs__tab:focus-visible {
+  outline: 3px solid color-mix(in srgb, maps.color(accent) 28%, #0000);
+  outline-offset: 3px;
+}
+
+.tabs__panel {
+  display: none;
+}
+
+.tabs__panel[hidden="false"],
+.tabs__panel[aria-hidden='false'] {
+  display: block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tabs__list {
+    scroll-behavior: auto;
+  }
+
+  .tabs__tab {
+    transition: none;
+    transform: none;
+  }
+
+  .tabs::before,
+  .tabs::after {
+    transition: none;
+  }
+}

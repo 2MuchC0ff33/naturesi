@@ -1,0 +1,12 @@
+/* third-party vendor stylesheet
+   this file isolates external CSS imports so they can be removed or
+   relocated later in the migration.  keeping it separate makes the
+   dependency obvious and gives us a single place to update when the
+   build pipeline stops using `postcss-import`.
+
+   currently we only pull in the Open Props custom-property library,
+   which is distributed as plain CSS and therefore cannot be handled
+   with Sass `@use`/`@forward`.
+*/
+
+@import "open-props/open-props.min.css";

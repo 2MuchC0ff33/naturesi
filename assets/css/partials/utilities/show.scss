@@ -1,0 +1,38 @@
+/* show.scss
+   purpose: see assets/css/partials/README.md for organisation.
+   import order: maintained by assets/css/main.scss.
+*/
+
+/* Utilities – show helpers (inverse of hide) */
+
+/* Show helpers: display helpers to make elements visible in a specific display context */
+.u-show-inline {
+  display: inline !important;
+}
+
+.u-show-block {
+  display: block !important;
+}
+
+.u-show-flex {
+  display: flex !important;
+}
+
+.u-show-inline-block {
+  display: inline-block !important;
+}
+
+/* Legacy alias */
+.show {
+  display: block !important;
+}
+
+@media (min-width: 600px) {
+  .u-show-block-md {
+    display: block !important;
+  }
+
+  .u-show-flex-md {
+    display: flex !important;
+  }
+}

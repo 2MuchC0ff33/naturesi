@@ -1,0 +1,61 @@
+/* colors.scss
+   purpose: see assets/css/partials/README.md for organisation.
+   import order: maintained by assets/css/main.scss.
+*/
+
+/* Colors – Background and text color utilities
+   Mobile-first utilities for theming and accessibility.
+   Uses CSS custom properties for consistency.
+*/
+
+/* Background colors */
+@use "../settings/maps" as maps;
+
+.u-bg-primary {
+  background-color: maps.color(primary) !important;
+}
+
+.u-bg-secondary {
+  background-color: maps.color(secondary) !important;
+}
+
+.u-bg-accent {
+  background-color: maps.color(accent) !important;
+}
+
+.u-bg-white {
+  background-color: #fff !important;
+}
+
+.u-bg-black {
+  background-color: #000 !important;
+}
+
+.u-bg-transparent {
+  background-color: transparent !important;
+}
+
+/* Text colors */
+.u-text-primary {
+  color: maps.color(primary) !important;
+}
+
+.u-text-secondary {
+  color: maps.color(secondary) !important;
+}
+
+.u-text-accent {
+  color: maps.color(accent) !important;
+}
+
+.u-text-white {
+  color: #fff !important;
+}
+
+.u-text-black {
+  color: #000 !important;
+}
+
+.u-text-muted {
+  color: maps.color(muted) !important;
+}

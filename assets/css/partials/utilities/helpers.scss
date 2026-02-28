@@ -1,0 +1,86 @@
+/* helpers.scss – mixins and functions that use Sass maps from the
+   `settings/maps` module. this demonstrates the namespaced utility pattern
+   and provides a place for small reusable snippets that don’t warrant
+   their own broad file. */
+
+@use "../settings/maps" as maps;
+
+// background color helper
+@mixin bg-color($name) {
+  background: maps.color($name);
+}
+
+// text color helper
+@mixin text-color($name) {
+  color: maps.color($name);
+}
+
+// spacing shorthand (padding)
+@mixin pad($size) {
+  padding: maps.spacing($size);
+}
+
+// spacing shorthand (margin)
+@mixin margin($size) {
+  margin: maps.spacing($size);
+}
+
+// responsive grid helper: specify number of columns (default 2) and gap
+@mixin grid($cols: 2, $gap: maps.spacing(unit)) {
+  display: grid;
+  grid-template-columns: repeat($cols, 1fr);
+  gap: $gap;
+}
+
+// more flexible responsive grid; pass a map of breakpoint => col-count
+// e.g. `@include helpers.grid-responsive((mobile:1, tablet:2, desktop:3));`
+@mixin grid-responsive($col-map, $gap: maps.spacing(unit)) {
+  display: grid;
+  gap: $gap;
+
+  @each $bp, $count in $col-map {
+    @include respond-to($bp) {
+      grid-template-columns: repeat($count, 1fr);
+    }
+  }
+}
+
+// simple button style helper, variant refers to a colour token (primary,
+// secondary, accent, etc.)
+@mixin btn($variant: accent, $text: #fff) {
+  display: inline-block;
+  padding: maps.button("padding-vertical") maps.button("padding-horizontal");
+  border-radius: maps.button("radius");
+  background-color: maps.color($variant);
+  color: $text;
+  text-decoration: none;
+  cursor: pointer;
+  @include box-shadow(sm);
+
+  &:hover {
+    background-color: maps.color($variant)
+      /* lighten/darken logic could go here */
+    ;
+  }
+}
+
+// simple shadow mixin referencing map tokens
+@mixin box-shadow($which: sm) {
+  box-shadow: maps.shadow($which);
+}
+
+// fluid typography calculator using font & layout tokens
+@function clamp-fluid($min, $max) {
+  @return clamp($min, calc($min + ($max - $min) * ((100vw - maps.layout("min-width")) / (maps.layout("max-width") - maps.layout("min-width")))), $max);
+}
+
+@mixin fluid-type() {
+  font-size: clamp-fluid(maps.font(min), maps.font(max));
+}
+
+// breakpoint media mixin for convenience
+@mixin respond-to($breakpoint) {
+  @media (min-width: maps.breakpoint($breakpoint)) {
+    @content;
+  }
+}

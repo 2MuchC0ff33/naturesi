@@ -1,0 +1,43 @@
+/* grouping.scss
+   purpose: see assets/css/partials/README.md for organisation.
+   import order: maintained by assets/css/main.scss.
+*/
+
+/* Utilities – grouping helpers (stack, gap) */
+
+@use "../settings/maps" as maps;
+
+.u-stack {
+  display: flex;
+  flex-direction: column;
+  gap: maps.spacing(sm);
+}
+
+.u-stack--sm {
+  gap: maps.spacing(xs);
+}
+
+.u-stack--lg {
+  gap: maps.spacing(lg);
+}
+
+/* Generic gap helpers (useful for grid/flex containers) */
+.u-gap {
+  gap: maps.spacing(md) !important;
+}
+
+.u-gap-1 {
+  gap: maps.spacing(xs) !important;
+}
+
+.u-gap-2 {
+  gap: maps.spacing(sm) !important;
+}
+
+.u-gap-3 {
+  gap: maps.spacing(md) !important;
+}
+
+.u-gap-4 {
+  gap: maps.spacing(lg) !important;
+}

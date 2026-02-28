@@ -1,0 +1,35 @@
+/* templates.scss
+   purpose: see assets/css/partials/README.md for organisation.
+   import order: maintained by assets/css/main.scss.
+*/
+
+@use "../settings/maps" as maps;
+
+/* templates/templates.css
+   Purpose: Template-specific page layout tweaks and helper styles for page templates.
+   Notes: Minimal component-level styles only when truly template-specific.
+*/
+
+/* templates/templates.css
+   Minimal template-specific helpers used by page templates.
+   Scope: `.template-home`, `.template-store`, `.template-checkout`
+   Keep these focused and small; prefer components for all UI pieces.
+*/
+
+.template-home .hero {
+  padding: maps.spacing(lg) 0;
+  text-align: center;
+}
+
+.template-checkout .checkout-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: maps.spacing(md);
+}
+
+@media (min-width: 900px) {
+  .template-checkout .checkout-layout {
+    grid-template-columns: minmax(320px, 1fr) 360px;
+    align-items: start;
+  }
+}

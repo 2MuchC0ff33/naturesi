@@ -1,0 +1,152 @@
+/* footer-overrides.scss
+   purpose: see assets/css/partials/README.md for organisation.
+   import order: maintained by assets/css/main.scss.
+*/
+
+/* assets/css/partials/components/footer-overrides.css
+   Scoped footer sizing / layout overrides to reduce vertical height
+   and replace old SVG sizing rules with image rules (mobile/tablet/desktop).
+*/
+
+/* Small spacing reduction & compact layout */
+.site-footer {
+  padding-block: 1rem;
+  /* smaller vertical spacing */
+  font-size: 0.95rem;
+}
+
+/* Use container to align items & keep layout responsive */
+.site-footer>.container {
+  display: flex;
+  gap: 1.25rem;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding-block: 0.25rem;
+}
+
+/* Branding & logo constraints */
+.site-footer .branding {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.site-footer .brand-text {
+  min-width: 0;
+}
+
+.site-footer .brand-text h3 {
+  margin: 0;
+  font-size: 1.125rem;
+}
+
+/* Footer logo: custom class + fallback override if u-img-cover remains */
+.site-footer .logo img.u-img-cover {
+  display: block;
+  width: auto;
+  max-height: 48px;
+  /* desktop default */
+  height: auto;
+  object-fit: contain;
+  vertical-align: middle;
+}
+
+/* Social icons area: horizontal compact list */
+.site-footer nav[aria-label="Social media links"] ul {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  align-items: center;
+}
+
+/* New WebP social icons */
+.site-footer nav[aria-label="Social media links"] a img.social-icon {
+  width: 20px;
+  height: 20px;
+  display: block;
+  object-fit: contain;
+}
+
+/* GitHub in legal bar: slightly smaller */
+.site-footer .legal-bar .legal a.github img.social-icon {
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* Ensure visible focus for keyboard users */
+.site-footer a:focus-visible {
+  outline: 3px solid Highlight;
+  /* adapt to your focus color variable if needed */
+  outline-offset: 2px;
+}
+
+/* Hide leftover inline SVGs while transitioning (safe override) */
+.site-footer nav[aria-label='Social media links'] a svg,
+.site-footer .legal-bar .legal a.github svg {
+  display: none !important;
+}
+
+/* ------------------
+   Responsive breakpoints
+   ------------------ */
+
+/* Mobile (<=640px) — stack and reduce sizes */
+@media (max-width: 640px) {
+  .site-footer {
+    padding-block: 0.75rem;
+  }
+
+  .site-footer>.container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .site-footer .branding {
+    width: 100%;
+    order: 1;
+  }
+
+  .site-footer .logo img.u-img-cover {
+    max-height: 28px;
+  }
+
+  .site-footer nav[aria-label="Social media links"] a img.social-icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .site-footer .legal-bar {
+    font-size: 0.9rem;
+    padding-block: 0.5rem;
+  }
+}
+
+/* Tablet (641–879px) */
+@media (min-width: 641px) and (max-width: 879px) {
+
+  .site-footer .logo img.u-img-cover {
+    max-height: 36px;
+  }
+
+  .site-footer>.container {
+    align-items: center;
+  }
+}
+
+/* Desktop (>=880px) */
+@media (min-width: 880px) {
+
+  .site-footer .logo img.u-img-cover {
+    max-height: 48px;
+  }
+
+  .site-footer>.container {
+    flex-wrap: nowrap;
+  }
+}

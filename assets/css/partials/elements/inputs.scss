@@ -1,0 +1,29 @@
+/* inputs.scss
+   purpose: see assets/css/partials/README.md for organisation.
+   import order: maintained by assets/css/main.scss.
+*/
+
+@use "../settings/maps" as maps;
+
+/* inputs.css - Basic input styles (placeholder to avoid 404/MIME errors)
+   Kept intentionally small; extend as needed in forms.css
+*/
+
+input,
+select,
+textarea {
+  font: inherit;
+  color: maps.color(text);
+  background: maps.color(background);
+  border: 1px solid maps.color(border);
+  padding: 0.45rem 0.6rem;
+  border-radius: maps.radius(sm);
+  box-sizing: border-box;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 3px solid color-mix(in srgb, maps.color(accent) 60%, transparent);
+  outline-offset: 2px;
+}

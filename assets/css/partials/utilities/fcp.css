@@ -1,6 +1,0 @@
-/* Utilities – First Contentful Paint (FCP) helpers */
-
-.u-fcp-critical {
-  contain: content;
-  content-visibility: auto;
-}

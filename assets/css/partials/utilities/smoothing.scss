@@ -1,0 +1,10 @@
+/* smoothing.scss
+   purpose: see assets/css/partials/README.md for organisation.
+   import order: maintained by assets/css/main.scss.
+*/
+
+/* Utilities – smoothing helpers */
+
+.u-smooth-scroll {
+  scroll-behavior: smooth;
+}

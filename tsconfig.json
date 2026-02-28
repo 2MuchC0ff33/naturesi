@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "es6",
     "module": "es6",
-    "outDir": "public/assets/js",
+    "outDir": "public_html/assets/js",
     "strict": true
   },
   "include": [

@@ -1,0 +1,30 @@
+/* sizing.scss
+   purpose: see assets/css/partials/README.md for organisation.
+   import order: maintained by assets/css/main.scss.
+*/
+
+@use "maps" as maps;
+
+/* ==========================================================================
+Sizing utilities
+Small, explicit helpers for common sizing patterns (non-opinionated)
+========================================================================== */
+
+/* Full width helper */
+.w-full {
+  width: 100%;
+}
+
+/* Height helpers */
+.h-auto {
+  height: auto;
+}
+
+/* Common max-width presets */
+.max-w-880 {
+  max-width: 880px;
+}
+
+.max-w-1200 {
+  max-width: maps.layout("max-width");
+}

@@ -1,0 +1,11 @@
+/* lcp.scss
+   purpose: see assets/css/partials/README.md for organisation.
+   import order: maintained by assets/css/main.scss.
+*/
+
+/* Utilities – Largest Contentful Paint (LCP) helpers */
+
+.u-lcp-priority {
+  content-visibility: auto;
+  contain-intrinsic-size: 300px 200px;
+}

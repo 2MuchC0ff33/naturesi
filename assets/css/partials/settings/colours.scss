@@ -1,0 +1,29 @@
+/* colours.scss
+   purpose: see assets/css/partials/README.md for organisation.
+   import order: maintained by assets/css/main.scss.
+*/
+
+/* ==========================================================================
+Color helpers and shared color tokens
+Keep tokens in `variables.css`; use this partial for derived color helpers and
+small, non-invasive utility classes that are safe across components.
+========================================================================== */
+@use "maps" as maps;
+
+:root {
+  /* Muted text color used across components when a soft visual tone is desired
+     moved into the Sass colour map for consistency; the custom property is
+     still emitted for backwards compatibility. */
+  --muted-color: #{maps.color(muted)};
+  /* fallback used by some components (explicitly defined here) */
+}
+
+/* Non-invasive utility for muted text (safe, semantic) */
+.text-muted {
+  color: maps.color(muted);
+}
+
+/* Light background utility useful for cards and callouts */
+.bg-muted {
+  background: color-mix(in srgb, maps.color(background) 96%, maps.color(highlight) 4%);
+}

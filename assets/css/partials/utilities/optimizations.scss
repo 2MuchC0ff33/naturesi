@@ -1,0 +1,18 @@
+/* optimizations.scss
+   purpose: see assets/css/partials/README.md for organisation.
+   import order: maintained by assets/css/main.scss.
+*/
+
+/* Utilities – performance/optimization helpers */
+
+.u-will-change-transform {
+  will-change: transform;
+}
+
+.u-will-change-opacity {
+  will-change: opacity;
+}
+
+.u-will-change-top {
+  will-change: top;
+}

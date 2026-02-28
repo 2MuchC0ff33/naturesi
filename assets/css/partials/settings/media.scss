@@ -1,0 +1,24 @@
+/* media.scss
+   purpose: see assets/css/partials/README.md for organisation.
+   import order: maintained by assets/css/main.scss.
+*/
+
+@use "./maps" as maps;
+
+/* ==========================================================================
+Media helpers and responsive utilities
+Use for image/video helpers and responsive media rules
+========================================================================== */
+
+/* Responsive media helpers moved to objects layer: partials/objects/media-object.css */
+
+/* Useful figure/figcaption baseline */
+figure {
+  margin: 0;
+}
+
+figure figcaption {
+  font-size: 0.95rem;
+  color: maps.color(muted);
+  margin-top: maps.spacing(xs);
+}

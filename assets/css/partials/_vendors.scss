@@ -1,0 +1,7 @@
+/* aggregator for external vendor stylesheets.
+   during the Sass module migration we keep third-party CSS separated
+   from the project’s own partials.  this file forwards each vendor
+   partial so `main.scss` can pull them in via a single `@use`.
+*/
+
+@forward "vendors/open-props";

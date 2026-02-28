@@ -1,0 +1,42 @@
+/* alerts.scss
+   purpose: see assets/css/partials/README.md for organisation.
+   import order: maintained by assets/css/main.scss.
+*/
+
+/* components/alerts.css
+   Purpose: Alert and inline error messages (non-modal alerts).
+   Scope: `.alert`, `.alert--error`, `.alert--success`, `.error-message`.
+   Notes: Alerts should be accessible; consider adding `role="alert" to markup when appropriate.
+*/
+@use "../settings/maps" as maps;
+
+
+.alert {
+  padding: maps.spacing(sm);
+  border-radius: maps.radius(sm);
+  border: 1px solid maps.color(border);
+  background: maps.color(alert-bg);
+  color: maps.color(text);
+}
+
+.alert--error {
+  background: maps.color(error-bg);
+  border-color: maps.color(error);
+  color: maps.color(error);
+}
+
+.error-message {
+  color: maps.color(error);
+  background-color: maps.color(error-bg);
+  border: 1px solid maps.color(error);
+  border-radius: maps.radius(sm);
+  padding: maps.spacing(sm);
+  margin-bottom: maps.spacing(unit);
+  font-weight: 500;
+}
+
+.alert--success {
+  background: maps.color(success-bg);
+  border-color: maps.color(success-border);
+  color: maps.color(success);
+}

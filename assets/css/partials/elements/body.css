@@ -1,8 +1,0 @@
-/* Base body defaults */
-
-body {
-  background: var(--color-background);
-  color: var(--color-text);
-  min-height: 100vh;
-  -webkit-font-smoothing: antialiased;
-}

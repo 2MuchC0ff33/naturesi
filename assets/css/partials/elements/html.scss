@@ -1,0 +1,23 @@
+/* html.scss
+   purpose: see assets/css/partials/README.md for organisation.
+   import order: maintained by assets/css/main.scss.
+*/
+
+/* Base html element styles moved from settings/typography.css */
+@use "../settings/maps" as maps;
+
+html {
+  color: maps.color(text);
+  /* Use a small, robust fluid typography scale via clamp (mobile-first) */
+  font-size: var(--fluid-font);
+  line-height: maps.font("line-height");
+  font-family:
+    'Arial',
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    'Helvetica Neue',
+    'Noto Sans',
+    'Liberation Sans',
+    sans-serif;
+}

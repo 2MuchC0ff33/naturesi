@@ -1,0 +1,49 @@
+@use "../settings/maps" as maps;
+/* notifications.scss
+  purpose: see assets/css/partials/README.md for organisation.
+  import order: maintained by assets/css/main.scss.
+*/
+
+/* components/notifications.css
+   Purpose: Notifications and update banners (non-modal, dismissible items).
+   Scope: `#sw-update-banner`, `.notification`, `.notification__content`, `.notification__actions`.
+   Notes: Notifications are typically injected by JS; ensure focus management for dismiss actions.
+*/
+
+#sw-update-banner {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 1rem;
+  z-index: 99999;
+  background: color-mix(in srgb, maps.color(surface) 92%, black 2%);
+  border: 1px solid maps.color(border);
+  padding: 0.6rem 0.8rem;
+  border-radius: 8px;
+  box-shadow: maps.shadow(md);
+  min-width: 260px;
+  max-width: 90%;
+}
+
+#sw-update-banner .sw-update-content {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sw-update-button,
+.sw-update-dismiss {
+  background: maps.color(accent);
+  color: #fff;
+  border: none;
+  padding: 0.4rem 0.6rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.sw-update-button:focus-visible,
+.sw-update-dismiss:focus-visible {
+  outline: 3px solid color-mix(in srgb, maps.color(accent) 32%, #0000);
+  outline-offset: 3px;
+}

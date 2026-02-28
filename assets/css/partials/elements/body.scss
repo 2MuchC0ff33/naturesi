@@ -1,0 +1,15 @@
+/* body.scss
+   purpose: see assets/css/partials/README.md for organisation.
+   import order: maintained by assets/css/main.scss.
+*/
+
+@use "../settings/maps" as maps;
+
+/* Base body defaults */
+
+body {
+  background: maps.color(background);
+  color: maps.color(text);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}

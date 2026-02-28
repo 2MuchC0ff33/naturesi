@@ -11,7 +11,7 @@ export default {
      Note: the current pipeline begins with Sass compiling
      `assets/css/main.scss` to `assets/css/output.css` (temporary).
      PostCSS reads that file, processes imports and prefixes, then
-     writes the final bundle to `public/assets/css/main.css`.
+     writes the final bundle to `public_html/assets/css/main.css`.
   */
   map: false,
 

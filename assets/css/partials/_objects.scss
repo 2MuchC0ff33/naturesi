@@ -1,0 +1,14 @@
+/* ==========================================================================
+Aggregator for object and template rules.  Templates are included here
+because they were originally adjacent in main.scss; they can be split later.
+========================================================================== */
+
+@forward "objects/wrapper";
+@forward "objects/container";
+@forward "objects/flexbox";
+@forward "objects/grid";
+@forward "objects/media-object";
+@forward "objects/modals";
+@forward "objects/responsive";
+@forward "templates/templates";
+@forward "templates/shadow-dom";

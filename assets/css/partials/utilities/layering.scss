@@ -1,0 +1,16 @@
+/* layering.scss
+   purpose: see assets/css/partials/README.md for organisation.
+   import order: maintained by assets/css/main.scss.
+*/
+
+/* Utilities – layering helpers */
+
+.u-layer-top {
+  z-index: 9999;
+  position: relative;
+}
+
+.u-layer-bottom {
+  z-index: 0;
+  position: relative;
+}

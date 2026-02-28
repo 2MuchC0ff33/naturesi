@@ -1,0 +1,78 @@
+@use "../settings/maps" as maps;
+/* typography-helpers.scss
+   purpose: see assets/css/partials/README.md for organisation.
+   import order: maintained by assets/css/main.scss.
+*/
+
+/* Utilities – typography helpers */
+
+/* Truncate text */
+.u-truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Aliases */
+.u-text-ellipsis {
+  /* alias of .u-truncate */
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+/* Text alignment helpers (canonical) */
+.u-text-center {
+  text-align: center !important;
+}
+
+.u-text-right {
+  text-align: right !important;
+}
+
+.u-text-left {
+  text-align: left !important;
+}
+
+/* Small typographic helpers */
+.u-text-small {
+  font-size: 0.875rem !important;
+}
+
+.u-text-uppercase {
+  text-transform: uppercase !important;
+}
+
+.u-text-muted {
+  color: maps.color(muted) !important;
+}
+
+/* Line height utilities */
+.u-leading-tight {
+  line-height: 1.25 !important;
+}
+
+.u-leading-normal {
+  line-height: 1.5 !important;
+}
+
+/* Font weight utilities */
+.u-font-light {
+  font-weight: 300 !important;
+}
+
+.u-font-normal {
+  font-weight: 400 !important;
+}
+
+.u-font-medium {
+  font-weight: 500 !important;
+}
+
+.u-font-semibold {
+  font-weight: 600 !important;
+}
+
+.u-font-bold {
+  font-weight: 700 !important;
+}

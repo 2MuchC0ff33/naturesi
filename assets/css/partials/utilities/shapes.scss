@@ -1,0 +1,31 @@
+/* shapes.scss
+   purpose: see assets/css/partials/README.md for organisation.
+   import order: maintained by assets/css/main.scss.
+*/
+
+/* Utilities – shape helpers */
+
+.u-rounded {
+  border-radius: 9999px;
+}
+
+.u-circle {
+  border-radius: 50%;
+}
+
+/* Border radius variants */
+.u-rounded-sm {
+  border-radius: 0.25rem !important;
+}
+
+.u-rounded-md {
+  border-radius: 0.5rem !important;
+}
+
+.u-rounded-lg {
+  border-radius: 0.75rem !important;
+}
+
+.u-rounded-xl {
+  border-radius: 1rem !important;
+}

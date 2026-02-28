@@ -1,0 +1,48 @@
+/* input.scss
+   purpose: see assets/css/partials/README.md for organisation.
+   import order: maintained by assets/css/main.scss.
+*/
+
+@use "../settings/maps" as maps;
+
+/* Input defaults: padding, borders, backgrounds and focus state */
+
+input,
+textarea,
+select {
+  padding: maps.spacing(xs) maps.spacing(sm);
+  border: 1px solid maps.color(border);
+  background: maps.color(background);
+  border-radius: maps.radius(sm);
+  transition: border-color maps.transition(fast), box-shadow maps.transition(fast);
+  color: inherit;
+  font: inherit;
+}
+
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid color-mix(in srgb, maps.color(accent) 60%, transparent);
+  outline-offset: 2px;
+  box-shadow: maps.shadow(accent);
+}
+
+input[disabled],
+textarea[disabled],
+select[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Validation state helpers */
+.input--error,
+input[aria-invalid="true"] {
+  border-color: color-mix(in srgb, maps.color(accent) 40%, red 60%);
+  box-shadow: 0 0 0 3px color-mix(in srgb, red 8%, transparent);
+}
+
+.help-text {
+  font-size: 0.9rem;
+  color: maps.color(muted);
+  margin-top: 0.25rem;
+}

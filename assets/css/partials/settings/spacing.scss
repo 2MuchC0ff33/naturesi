@@ -1,0 +1,34 @@
+/* spacing.scss
+   purpose: see assets/css/partials/README.md for organisation.
+   import order: maintained by assets/css/main.scss.
+*/
+
+@use "maps" as maps;
+
+/* ==========================================================================
+Spacing utilities (migrated from utilities.css)
+These helpers are small, semantic spacing utilities that map to design tokens
+========================================================================== */
+
+.p-sm {
+  padding: maps.spacing(sm);
+}
+
+.p-md {
+  padding: maps.spacing(md);
+}
+
+.mt-sm {
+  margin-top: maps.spacing(sm);
+}
+
+.mb-md {
+  margin-bottom: maps.spacing(md);
+}
+
+/* Utility to reset list styling and spacing (used to replace inline style attributes) */
+.list-reset {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}

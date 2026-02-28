@@ -1,0 +1,16 @@
+/* hidden.scss
+   purpose: see assets/css/partials/README.md for organisation.
+   import order: maintained by assets/css/main.scss.
+*/
+
+/* ==========================================================================
+Hidden utility
+Non-invasive `.hidden` helper centralised in the tools layer.
+========================================================================== */
+
+.hidden {
+  display: none;
+}
+
+/* NOTE: The native `[hidden]` attribute is still managed in `partials/generic/reset.css`.
+   Keep this class for cases where a class-based hide is required. */

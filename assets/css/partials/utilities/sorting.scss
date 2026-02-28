@@ -1,0 +1,14 @@
+/* sorting.scss
+   purpose: see assets/css/partials/README.md for organisation.
+   import order: maintained by assets/css/main.scss.
+*/
+
+/* Utilities – sorting helpers */
+
+.u-sort-asc {
+  order: 1;
+}
+
+.u-sort-desc {
+  order: 2;
+}

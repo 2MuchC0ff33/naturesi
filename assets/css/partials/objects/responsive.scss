@@ -1,0 +1,57 @@
+/* responsive.scss
+   purpose: see assets/css/partials/README.md for organisation.
+   import order: maintained by assets/css/main.scss.
+*/
+
+/* ==========================================================================
+Objects — Responsive
+
+Centralised responsive helpers and breakpoint-based object patterns.
+Keep general responsive objects here; avoid component-specific rules.
+
+API examples: `.hide--sm-up`, `.hide--md-up`, `.show--md-up` — mobile-first helpers
+========================================================================== */
+
+/* Hide at or above small breakpoint (useful for swapping content at narrow/large widths) */
+.hide--sm-up {
+   display: none;
+}
+
+@media (min-width: 640px) {
+   .hide--sm-up {
+      display: none;
+   }
+}
+
+/* Hide at or above medium breakpoint */
+.hide--md-up {
+   display: none;
+}
+
+@media (min-width: 900px) {
+   .hide--md-up {
+      display: none;
+   }
+}
+
+/* Show only at medium breakpoint and up (hidden by default) */
+.show--md-up {
+   display: none;
+}
+
+@media (min-width: 900px) {
+   .show--md-up {
+      display: block;
+   }
+}
+
+/* Orientation helpers */
+.o-media--landscape {
+   display: block;
+}
+
+@media (orientation: portrait) {
+   .o-media--landscape {
+      display: none;
+   }
+}

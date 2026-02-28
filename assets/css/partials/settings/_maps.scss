@@ -1,0 +1,186 @@
+@use "sass:map";
+
+// Helper for font sizes with fallback
+@function fontSize($key, $fallback: null) {
+  $val: map.get($fonts, $key);
+
+  @if $val !=null {
+    @return $val;
+  }
+
+  @else if $fallback !=null {
+    @return $fallback;
+  }
+
+  @return null;
+}
+
+/* maps.scss – centralised design tokens expressed as Sass maps.
+   this is the first step towards theming and allows us to reuse values
+   in mixins, functions and even generate the corresponding CSS custom
+   properties automatically.  the existing `variables.scss` file lists
+   the custom properties by hand; once maps are fully populated that file
+   can be simplified to a thin shim or removed entirely.
+*/
+
+// colour palette: keys correspond to the `--color-<name>` props used in
+// the stylesheet. keep the naming consistent so generated loops are
+// predictable.
+$colors: (
+  cart-badge-bg: #346967,
+  cart-badge-fg: #fff,
+  badge-bg: #bdd5d4,
+  badge-fg: #050505,
+  alert-bg: #fff,
+  error-bg: #fff3f3,
+  success-bg: #f3fff7,
+  success-border: #4caf50,
+  tabs-fade: rgba(255, 255, 255, 0.95),
+  progress-bg: #eee,
+  progress-fg: #346967,
+  footer-text: #6b7280,
+  // matches .text-muted utility, adjust as needed
+  background: #ffffff,
+  surface: #ffffff,
+  // added for maps.color(surface) compatibility
+  text: #050505,
+  primary: #2a9d8f,
+  // core branding colour
+  secondary: #e9c46a,
+  // accent/alternative button colour
+  focus: #264653,
+  // outline state for forms and focus-visible
+  accent: #346967,
+  "light-background": #bdd5d4,
+  highlight: #f6e6cd,
+  border: #e1e1e1,
+  success: #4caf50,
+  warning: #ff9800,
+  error: #f44336,
+  error-border: #f44336,
+  muted: #6b7280 // added for the .text-muted utility
+);
+
+// spacing tokens used for margins/padding. values mirror the
+// `--space-<size>` custom properties defined previously.  the map also
+// includes additional inline sizes and a base unit for convenience.
+$spacing: (
+  xxs: 0.25rem,
+  xs: 0.5rem,
+  sm: 0.75rem,
+  md: 1.25rem,
+  lg: 2rem,
+  xl: 3.25rem,
+  "inline-xs": 0.5rem,
+  "inline-sm": 1rem,
+  "inline-md": 1.5rem,
+  unit: 1rem
+);
+
+// typography tokens
+$fonts: (
+  "min": 16px,
+  "max": 20px,
+  "line-height": 1.6
+);
+
+// layout dimensions (used for fluid typography, wrappers, etc.)
+$layout: (
+  "min-width": 320px,
+  "max-width": 1200px,
+  "header-height": 3.75rem,
+  "header-height-mobile": 3.25rem,
+  "site-header-height": 96px
+);
+
+// breakpoints used throughout the site.
+$breakpoints: (
+  mobile: 320px,
+  tablet: 768px,
+  desktop: 1024px
+);
+
+// shadows for elevation etc.
+$shadows: (
+  sm: 0 1px 3px rgba(0, 0, 0, 0.1),
+  md: 0 4px 6px rgba(0, 0, 0, 0.1),
+  lg: 0 10px 15px rgba(0, 0, 0, 0.1),
+  accent: 0 0 0 3px color-mix(in srgb, map.get($colors, accent) 20%, transparent)
+);
+
+// radius tokens
+$radius: (
+  pill: 9999px,
+  sm: 0.25rem,
+  md: 0.5rem,
+  lg: 1rem,
+  full: 9999px
+);
+
+// transition durations
+$transitions: (
+  fast: 150ms,
+  medium: 300ms,
+  slow: 500ms
+);
+
+// button defaults
+$buttons: (
+  padding-vertical: 0.6rem,
+  padding-horizontal: 1rem,
+  radius: map.get($radius, md),
+  bg: map.get($colors, accent),
+  color: #ffffff,
+  "bg-hover": color-mix(in srgb, map.get($colors, accent) 90%, black 10%)
+);
+
+// surface / elevation tokens
+$surface: (
+  color: #ffffff
+);
+
+$elevation: (
+  1: 0 1px 3px rgba(0, 0, 0, 0.04),
+  2: 0 6px 12px rgba(0, 0, 0, 0.06)
+);
+
+// helper functions
+@function color($key) {
+  @return map.get($colors, $key);
+}
+
+@function spacing($key) {
+  @return map.get($spacing, $key);
+}
+
+@function font($key) {
+  @return map.get($fonts, $key);
+}
+
+@function layout($key) {
+  @return map.get($layout, $key);
+}
+
+@function breakpoint($key) {
+  @return map.get($breakpoints, $key);
+}
+
+@function shadow($key) {
+  @return map.get($shadows, $key);
+}
+
+@function radius($key) {
+  @return map.get($radius, $key);
+}
+
+@function transition($key) {
+  @return map.get($transitions, $key);
+}
+
+@function button($key) {
+  @return map.get($buttons, $key);
+}
+
+@function elevate($level) {
+  @return map.get($elevation, $level);
+}

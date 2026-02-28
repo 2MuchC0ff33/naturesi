@@ -5,7 +5,7 @@ Purpose: concise guidance so an AI coding agent can start work quickly in this r
 ## Big picture
 - The repo currently holds a **pre‑refactor, mostly static e‑commerce site**. Changes are being rolled out in small, reversible phases.
 - Static source is under `pages/`, `assets/` (CSS partials) and `js/` (runtime modules + `js/data/*.json`).
-- Built artifacts land in `public/`; `public/index.php` routes through `php/bootstrap.php` which is a minimal Slim‑style bootstrap for future expansion.
+- Built artifacts land in `public_html/`; `public_html/index.php` routes through `php/bootstrap.php` which is a minimal Slim‑style bootstrap for future expansion.
 - Service‑worker logic lives in `service-worker.js` with helpers in `js/modules/sw-*`.
 - Phase 0 established PHP/composer bootstrap and Node tooling; later phases migrate to Slim+Plates, Sass/Open Props, HTMX/Hyperscript/Alpine.js, etc. Refer to `TODO.md` for the current roadmap.
 
@@ -19,7 +19,7 @@ Purpose: concise guidance so an AI coding agent can start work quickly in this r
    pnpm run build:css && pnpm run build:ts
    ```
    - `build:css` runs `sass`, pipes the output through PostCSS (import bundling + autoprefixer) and then invokes `node tests/check_css_build.cjs`.
-   - `build:ts` invokes `tsc`; the compiler is configured by `tsconfig.json` to emit to `public/assets/js`.
+   - `build:ts` invokes `tsc`; the compiler is configured by `tsconfig.json` to emit to `public_html/assets/js`.
    - A temporary intermediate file `assets/css/output.css` is created during the CSS build but is git‑ignored.
 
    Development watchers are available:
@@ -34,9 +34,9 @@ Purpose: concise guidance so an AI coding agent can start work quickly in this r
 ### Running & configuration
 - Start a quick PHP server from the repo root:
   ```sh
-  php -S localhost:8000 -t public
+  php -S localhost:8000 -t public_html
   ```
-  or open `public/index.php` in a browser. A placeholder message indicates the bootstrap is active.
+  or open `public_html/index.php` in a browser. A placeholder message indicates the bootstrap is active.
 - A `.env` file at the project root is parsed by `php/bootstrap.php`. Values are then available via `getenv()`, `$_ENV`, and `$_SERVER` throughout PHP. A lightweight parser is included; if `vlucas/phpdotenv` is added in the future it will be used automatically.
 
 ### Tests & validation
@@ -47,11 +47,36 @@ Purpose: concise guidance so an AI coding agent can start work quickly in this r
 
 ## Conventions & patterns
 - **CSS**: `assets/css/main.css` is an ordered import list; maintain variable definitions first. Build uses PostCSS > `postcss-import` > Autoprefixer as described in `README.md`.
-- **JS/TS**: Source in `ts/` compiles to `public/assets/js`. Runtime modules live in `js/modules`. Data files in `js/data/*.json` drive UI.
+  * The Sass sources no longer use `@import` – everything lives under
+    `assets/css/partials/` and is pulled in via `@use` with explicit
+    namespaces (`settings`, `utilities`, `vendors`, etc.).  Aggregator
+    partials such as `_settings.scss` and `_utilities.scss` forward their
+    children so the import order remains deterministic.
+  * Design tokens (colors, spacing, breakpoints) are stored in Sass maps
+    (`partials/settings/_maps.scss`).  Functions like `maps.color()` and
+    mixins in `partials/utilities/helpers.scss` provide a namespaced API.
+    Generated `:root` custom-properties ensure runtime compatibility.  The
+    palette now includes `primary`, `secondary` and `focus` tokens; edit
+    `$colors` and run the build whenever branding colours change.
+  * For new mixins or helpers, always create a dedicated module and invoke
+    it via its namespace rather than polluting the global scope.  helper
+    mixins live in `partials/utilities/helpers.scss` and include
+    `bg-color`, `text-color`, `pad`, `margin`, `grid`, `grid-responsive`,
+    `btn`, `box-shadow`, `fluid-type`, and `respond-to`.
+  * When converting existing styles, replace `var(--token)` references with
+    `maps.color(token)`/`maps.spacing(token)` or the appropriate helper.  As
+    the migration progresses you should be able to drop
+    `partials/settings/variables.scss` entirely once no source file
+    references its custom properties.
+  * Vendor CSS that cannot be converted to Sass lives under
+    `partials/vendors`; once the final dependency is eliminated the
+    `postcss-import` plugin can be removed and the build command
+    simplified.
+- **JS/TS**: Source in `ts/` compiles to `public_html/assets/js`. Runtime modules live in `js/modules`. Data files in `js/data/*.json` drive UI.
 - **Service worker**: central file `service-worker.js`; registration and logic helpers in `js/modules/sw-client.js`, `sw-core.js`, `sw-handlers.js`.
 - **Client storage**: cart code spans `js/cart*.js`, `storageLocal.js`, `storageIDB.js` (multiple persistence layers).
 - **Routing**: mostly static pages. Avoid modifying `pages/` until later phases unless you're implementing a new Plates template.
-- **Server bootstrap**: `php/bootstrap.php` is the main entry; `public/index.php` is a thin wrapper.
+- **Server bootstrap**: `php/bootstrap.php` is the main entry; `public_html/index.php` is a thin wrapper.
 
 ## Integration hotspots
 - **Checkout & payment**: `js/modules/payment-*.js` and `pages/payment/*.html` are sensitive areas.

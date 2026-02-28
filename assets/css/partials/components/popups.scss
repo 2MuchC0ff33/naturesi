@@ -1,0 +1,20 @@
+/* popups.scss
+   purpose: see assets/css/partials/README.md for organisation.
+   import order: maintained by assets/css/main.scss.
+*/
+
+@use "../settings/maps" as maps;
+
+/* components/popups.css
+   Purpose: Small popup components such as small inline menus and contextual popups.
+   Scope: `.popup`, `.popup__content`, `.popup__arrow`.
+*/
+
+.popup {
+   position: absolute;
+   background: maps.color(surface);
+   border: 1px solid maps.color(border);
+   border-radius: 6px;
+   padding: 0.5rem;
+   box-shadow: maps.shadow(md);
+}

@@ -1,0 +1,20 @@
+/* links.scss
+   purpose: see assets/css/partials/README.md for organisation.
+   import order: maintained by assets/css/main.scss.
+*/
+
+@use "../settings/maps" as maps;
+
+/* Link defaults moved from settings/typography.css */
+
+a {
+  color: maps.color(accent);
+  transition: color maps.transition(medium) ease;
+}
+
+/* Hover and keyboard focus for links */
+a:hover,
+a:focus-visible {
+  color: color-mix(in srgb, maps.color(accent) 90%, black);
+  text-decoration: underline;
+}

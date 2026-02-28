@@ -1,0 +1,34 @@
+/* selections.scss
+   purpose: see assets/css/partials/README.md for organisation.
+   import order: maintained by assets/css/main.scss.
+*/
+
+@use "../settings/maps" as maps;
+
+/* ==========================================================================
+Accessible selection styles
+Centralised so theming and contrast checks are applied consistently.
+Use theme tokens and prefer high-contrast defaults for readability.
+========================================================================== */
+
+/* Use color-mix to ensure sufficient contrast with the accent color, with a solid fallback */
+::selection {
+  background: color-mix(in srgb, maps.color(accent) 80%, black 20%);
+  color: #ffffff;
+  text-shadow: none;
+}
+
+/* Firefox selection pseudo-element */
+::-moz-selection {
+  background: color-mix(in srgb, maps.color(accent) 80%, black 20%);
+  color: #ffffff;
+  text-shadow: none;
+}
+
+/* Dark theme: ensure selection remains readable when `data-theme="dark"` is present */
+:where([data-theme="dark"]) ::selection {
+  background: color-mix(in srgb, maps.color(accent) 60%, white 20%);
+  color: #071010;
+}
+
+/* Note: keep selection rules small and test with Accessibility Insights / contrast checks */
