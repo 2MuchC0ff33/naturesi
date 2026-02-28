@@ -136,6 +136,10 @@ Conventions
 - Aggregator modules and other frequently-referenced partials should use
   `//` comments to avoid accidental duplication when the module is imported
   both directly and via another namespace.
+- As individual partials are migrated off legacy `@import`, you can remove
+  their `@forward` lines from the aggregator; this trims the load graph and
+  slightly speeds compilation. Keep a note in the file header or TODO list
+  so forwards aren’t forgotten.
 
 Quick checklist for changes
 
