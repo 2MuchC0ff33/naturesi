@@ -18,6 +18,8 @@
     "typescript": "^5.9.3"
   },
   "devDependencies": {
+    "@picocss/pico": "^2.1.1",
+    "open-props": "^1.7.23",
     "postcss-cli": "^11.0.1"
   }
 }
