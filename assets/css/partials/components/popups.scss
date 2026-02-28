@@ -11,10 +11,10 @@
 */
 
 .popup {
-  position: absolute;
-  background: var(--surface);
-  border: 1px solid maps.color(border);
-  border-radius: 6px;
-  padding: 0.5rem;
-  box-shadow: maps.shadow(md);
+   position: absolute;
+   background: var(--surface);
+   border: 1px solid maps.color(border);
+   border-radius: 6px;
+   padding: 0.5rem;
+   box-shadow: maps.shadow(md);
 }
