@@ -9,7 +9,7 @@
    authoritative source for paragraph and `.prose` styles. */
 
 p {
-  margin: 0 0 var(--space-sm) 0;
+  margin: 0 0 maps.spacing(sm) 0;
   line-height: 1.6;
 }
 
@@ -17,15 +17,15 @@ p {
 .prose {
   font-size: 1rem;
   line-height: 1.6;
-  color: var(--color-text);
+  color: maps.color(text);
 }
 
 .prose p {
-  margin: 0 0 var(--space-sm) 0;
+  margin: 0 0 maps.spacing(sm) 0;
 }
 
 .lead {
   font-size: 1.075rem;
-  color: var(--color-text);
+  color: maps.color(text);
   line-height: 1.5;
 }

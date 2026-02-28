@@ -9,7 +9,7 @@
 .page-title,
 .site-title {
   display: block;
-  margin: 0 0 var(--space-xs);
+  margin: 0 0 maps.spacing(xs);
   line-height: 1.06;
   font-weight: 700;
   font-size: clamp(1.25rem, 3.5vw, 1.75rem);
@@ -17,7 +17,7 @@
 
 .page-subtitle {
   display: block;
-  margin: 0 0 var(--space-xs);
+  margin: 0 0 maps.spacing(xs);
   color: var(--color-muted);
   font-size: 0.95rem;
 }

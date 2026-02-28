@@ -25,5 +25,5 @@ small, non-invasive utility classes that are safe across components.
 
 /* Light background utility useful for cards and callouts */
 .bg-muted {
-  background: color-mix(in srgb, var(--color-background) 96%, var(--color-highlight) 4%);
+  background: color-mix(in srgb, maps.color(background) 96%, maps.color(highlight) 4%);
 }

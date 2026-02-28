@@ -8,8 +8,4 @@ Global layout settings
 Broad layout constants such as header heights and other structural defaults
 ========================================================================== */
 
-:root {
-  /* Default header heights (used by skip links and responsive header adjustments) */
-  --header-height: 3.75rem;
-  --header-height-mobile: 3.25rem;
-}
+/* header heights are now provided via settings/maps.scss */

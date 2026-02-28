@@ -5,7 +5,7 @@
 
 /* Base html element styles moved from settings/typography.css */
 html {
-  color: var(--color-text);
+  color: maps.color(text);
   /* Use a small, robust fluid typography scale via clamp (mobile-first) */
   font-size: var(--fluid-font);
   line-height: var(--line-height);

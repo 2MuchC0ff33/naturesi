@@ -14,7 +14,7 @@
 }
 
 .accordion__item+.accordion__item {
-  margin-top: var(--space-sm);
+  margin-top: maps.spacing(sm);
 }
 
 /* Toggle button presentation */
@@ -37,7 +37,7 @@
   content: '\25be';
   display: inline-block;
   transform-origin: center;
-  transition: transform var(--transition-fast) ease;
+  transition: transform maps.transition(fast) ease;
   font-size: 0.85rem;
 }
 

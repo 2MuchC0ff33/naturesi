@@ -35,8 +35,8 @@ Focus outlines, skip links and visually-hidden utilities live here.
 .skip-link:focus,
 .skip-link:focus-visible {
   position: fixed;
-  left: var(--space-md);
-  top: var(--header-height);
+  left: maps.spacing(md);
+  top: maps.layout("header-height");
   /* Position below header to prevent overlap with nav bar */
   outline: 2px solid color-mix(in srgb, maps.color(accent) 80%, white);
   background: maps.color(accent);
@@ -47,8 +47,8 @@ Focus outlines, skip links and visually-hidden utilities live here.
 
 @media (max-width: 640px) {
   .skip-link {
-    left: calc(var(--space-xs) + 0.25rem);
-    top: var(--header-height-mobile);
+    left: calc(maps.spacing(xs) + 0.25rem);
+    top: maps.layout("header-height-mobile");
     /* Position below header to prevent overlap with nav bar */
     font-size: 0.72rem;
   }
@@ -103,8 +103,8 @@ Focus outlines, skip links and visually-hidden utilities live here.
 }
 
 .focus-ring {
-  box-shadow: var(--shadow-accent);
-  border-radius: var(--radius-sm);
+  box-shadow: maps.shadow("accent");
+  border-radius: maps.radius(sm);
 }
 
 /* Ensure links and controls remove tap highlight on mobile */

@@ -10,7 +10,7 @@ site‑wide.
      project‑specific token aliases. */
 
 /* optional Sass aliases for convenience */
-$radius-sm: var(--radius-sm);
+$radius-sm: maps.radius(sm);
 $space-unit: var(--space-unit);
 
 /* additional project token definitions can be added below */

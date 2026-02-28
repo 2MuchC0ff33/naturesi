@@ -3,6 +3,8 @@
    import order: maintained by assets/css/main.scss.
 */
 
+@use "../settings/maps" as maps;
+
 /* ==========================================================================
 Objects — Wrapper
 
@@ -18,7 +20,7 @@ Use `.container` for content-width constraints.
 .wrapper {
   width: 100%;
   margin-inline: auto;
-  padding-inline: var(--space-inline-sm);
+  padding-inline: maps.spacing("inline-sm");
   box-sizing: border-box;
 }
 
@@ -26,7 +28,7 @@ Use `.container` for content-width constraints.
 .o-wrapper {
   width: 100%;
   margin-inline: auto;
-  padding-inline: var(--space-inline-sm);
+  padding-inline: maps.spacing("inline-sm");
   box-sizing: border-box;
 }
 

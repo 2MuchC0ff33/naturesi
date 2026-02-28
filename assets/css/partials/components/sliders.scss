@@ -25,20 +25,20 @@
 .slider input[type='range']:focus-visible {
   /* Keep native outline off but provide an accessible focus ring */
   outline: none;
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-accent) 18%, transparent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, maps.color(accent) 18%, transparent);
   border-radius: 999px;
 }
 
 /* Track */
 .slider input[type='range']::-webkit-slider-runnable-track {
   height: 6px;
-  background: var(--color-border);
+  background: maps.color(border);
   border-radius: 999px;
 }
 
 .slider input[type='range']::-moz-range-track {
   height: 6px;
-  background: var(--color-border);
+  background: maps.color(border);
   border-radius: 999px;
 }
 
@@ -48,8 +48,8 @@
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: var(--color-accent);
-  border: 2px solid color-mix(in srgb, var(--color-accent) 50%, #0000);
+  background: maps.color(accent);
+  border: 2px solid color-mix(in srgb, maps.color(accent) 50%, #0000);
   margin-top: -7px;
   /* center on track */
 }
@@ -58,14 +58,14 @@
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: var(--color-accent);
-  border: 2px solid color-mix(in srgb, var(--color-accent) 50%, #0000);
+  background: maps.color(accent);
+  border: 2px solid color-mix(in srgb, maps.color(accent) 50%, #0000);
 }
 
 /* Focus-visible on thumb for keyboard users */
 .slider input[type='range']:focus-visible::-webkit-slider-thumb,
 .slider input[type='range']:focus-visible::-moz-range-thumb {
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-accent) 18%, transparent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, maps.color(accent) 18%, transparent);
 }
 
 @media (prefers-reduced-motion: reduce) {

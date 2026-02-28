@@ -18,7 +18,7 @@
   border: 0;
   padding: 0.25rem;
   border-radius: 0.35rem;
-  color: var(--color-text);
+  color: maps.color(text);
   align-items: center;
   justify-content: center;
 }
@@ -30,7 +30,7 @@
 }
 
 .nav-toggle:focus-visible {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid maps.color(accent);
   outline-offset: 2px;
 }
 
@@ -54,7 +54,7 @@
     flex-direction: column;
     align-items: stretch;
     gap: 0.6rem;
-    width: calc(100% - var(--space-sm));
+    width: calc(100% - maps.spacing(sm));
     position: absolute;
     left: 0.5rem;
     right: 0.5rem;

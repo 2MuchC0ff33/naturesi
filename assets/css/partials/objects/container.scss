@@ -3,6 +3,8 @@
    import order: maintained by assets/css/main.scss.
 */
 
+@use "../settings/maps" as maps;
+
 /* ==========================================================================
 Objects — Container
 
@@ -16,22 +18,22 @@ Use `.container` inside `.wrapper` to constrain content width.
 .container {
   width: 100%;
   /* mobile-first horizontal padding, increases at larger widths */
-  padding-inline: var(--space-inline-sm);
+  padding-inline: maps.spacing("inline-sm");
   margin-inline: auto;
-  max-width: var(--max-width);
+  max-width: maps.layout("max-width");
   box-sizing: border-box;
 }
 
 /* Optional alias to ease migration */
 .o-container {
-  max-width: var(--max-width);
-  padding-inline: var(--space-inline-sm);
+  max-width: maps.layout("max-width");
+  padding-inline: maps.spacing("inline-sm");
   box-sizing: border-box;
 }
 
 /* Narrow / large modifiers (keep as modifiers, undecorated) */
 .container--narrow {
-  padding-inline: var(--space-inline-xs);
+  padding-inline: maps.spacing("inline-xs");
   max-width: 880px;
 }
 
@@ -43,5 +45,5 @@ Use `.container` inside `.wrapper` to constrain content width.
 /* Fluid variant: removes max-width to allow full-bleed content inside wrapper */
 .container--fluid {
   max-width: none;
-  padding-inline: var(--space-inline-sm);
+  padding-inline: maps.spacing("inline-sm");
 }

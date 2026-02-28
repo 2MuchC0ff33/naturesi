@@ -7,7 +7,7 @@
 
 ul,
 ol {
-  margin: 0 0 var(--space-sm) 0;
+  margin: 0 0 maps.spacing(sm) 0;
   padding-left: 1.25rem;
 }
 
@@ -21,7 +21,7 @@ li {
   padding: 0;
   margin: 0;
   display: flex;
-  gap: var(--space-xs);
+  gap: maps.spacing(xs);
   align-items: center;
 }
 

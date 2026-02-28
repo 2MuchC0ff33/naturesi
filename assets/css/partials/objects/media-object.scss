@@ -27,7 +27,7 @@ API: `.responsive-media` (images), `.media`, `.media__img`, `.media__body`,
 .media {
   display: flex;
   flex-direction: column;
-  gap: var(--space-sm);
+  gap: maps.spacing(sm);
 }
 
 .media__img {

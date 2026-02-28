@@ -56,7 +56,10 @@ $fonts: (
 // layout dimensions (used for fluid typography, wrappers, etc.)
 $layout: (
   "min-width": 320px,
-  "max-width": 1200px
+  "max-width": 1200px,
+  "header-height": 3.75rem,
+  "header-height-mobile": 3.25rem,
+  "site-header-height": 96px
 );
 
 // breakpoints used throughout the site.
@@ -71,7 +74,7 @@ $shadows: (
   sm: 0 1px 3px rgba(0, 0, 0, 0.1),
   md: 0 4px 6px rgba(0, 0, 0, 0.1),
   lg: 0 10px 15px rgba(0, 0, 0, 0.1),
-  accent: 0 0 0 3px color-mix(in srgb, var(--color-accent) 20%, transparent)
+  accent: 0 0 0 3px color-mix(in srgb, maps.color(accent) 20%, transparent)
 );
 
 // radius tokens

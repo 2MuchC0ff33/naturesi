@@ -3,6 +3,8 @@
    import order: maintained by assets/css/main.scss.
 */
 
+@use "../settings/maps" as maps;
+
 /* ==========================================================================
 Objects — Grid
 
@@ -15,18 +17,18 @@ API: `.grid`, `.grid-auto-fit`, `.grid--cols-2`, `.grid--cols-3`,
 
 .grid {
   display: grid;
-  gap: var(--space-md);
+  gap: maps.spacing(md);
 }
 
 /* Optional object-prefixed alias */
 .o-grid {
   display: grid;
-  gap: var(--space-md);
+  gap: maps.spacing(md);
 }
 
 /* Small gap variant */
 .grid--gap-sm {
-  gap: var(--space-sm);
+  gap: maps.spacing(sm);
 }
 
 /* Column helpers (mobile-first: single column by default) */

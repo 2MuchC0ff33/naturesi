@@ -52,11 +52,11 @@ Centralised keyframes for reuse by components (keeps components focused on usage
 }
 
 .animate-fade {
-  animation: fade-in var(--transition-medium) ease both;
+  animation: fade-in maps.transition(medium) ease both;
 }
 
 .animate-slide-up {
-  animation: slide-up var(--transition-medium) ease both;
+  animation: slide-up maps.transition(medium) ease both;
 }
 
 /* Respect reduced motion preferences */

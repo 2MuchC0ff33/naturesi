@@ -9,20 +9,20 @@ Legal bar, social links and footer layout go here for easier maintenance.
 ========================================================================== */
 .site-footer,
 footer[itemscope][itemtype*='WPFooter'] {
-  --footer-bg: color-mix(in srgb, var(--color-accent) 18%, black 6%);
+  --footer-bg: color-mix(in srgb, maps.color(accent) 18%, black 6%);
   --footer-text: #fff;
-  --footer-accent-outline: color-mix(in srgb, var(--color-accent) 36%, transparent);
+  --footer-accent-outline: color-mix(in srgb, maps.color(accent) 36%, transparent);
   background: var(--footer-bg);
   color: var(--footer-text);
   /* tightened vertical spacing for a cleaner footer */
-  padding: calc(var(--space-xs) * 0.8) var(--space-md);
+  padding: calc(maps.spacing(xs) * 0.8) maps.spacing(md);
 }
 
 .site-footer .container,
 footer[itemscope][itemtype*='WPFooter'] .container {
   display: grid;
   grid-template-columns: 1fr 1fr 180px;
-  gap: calc(var(--space-xs) / 1.6);
+  gap: calc(maps.spacing(xs) / 1.6);
   align-items: start;
   max-width: var(--max-width);
 }
@@ -39,7 +39,7 @@ footer[itemscope][itemtype*='WPFooter'] h3 {
 .site-footer li,
 footer[itemscope][itemtype*='WPFooter'] p,
 footer[itemscope][itemtype*='WPFooter'] li {
-  color: color-mix(in srgb, var(--footer-text) 92%, var(--color-accent) 8%);
+  color: color-mix(in srgb, var(--footer-text) 92%, maps.color(accent) 8%);
   line-height: 1.35;
   font-size: 0.95rem;
 }
@@ -79,8 +79,8 @@ footer[itemscope][itemtype*='WPFooter'] a:hover {
   margin-left: 0;
   margin-right: 0;
   box-sizing: border-box;
-  padding: var(--space-sm) var(--space-md);
-  background: color-mix(in srgb, var(--color-accent) 12%, black 4%);
+  padding: maps.spacing(sm) maps.spacing(md);
+  background: color-mix(in srgb, maps.color(accent) 12%, black 4%);
   color: var(--footer-text);
   border-top: 1px solid color-mix(in srgb, var(--footer-text) 6%, transparent);
   text-align: center;
@@ -88,7 +88,7 @@ footer[itemscope][itemtype*='WPFooter'] a:hover {
 
 @media (max-width: 640px) {
   .site-footer .legal-bar {
-    padding: var(--space-xs);
+    padding: maps.spacing(xs);
     text-align: center;
   }
 }
@@ -103,15 +103,15 @@ footer[itemscope][itemtype*='WPFooter'] a:hover {
   color: var(--footer-text);
   background: transparent;
   transition:
-    background var(--transition-fast),
-    color var(--transition-fast),
-    transform var(--transition-fast);
+    background maps.transition(fast),
+    color maps.transition(fast),
+    transform maps.transition(fast);
   text-decoration: none;
 }
 
 .site-footer nav[aria-label='Social media links'] a:focus-visible,
 .site-footer nav[aria-label='Social media links'] a:hover {
-  background: color-mix(in srgb, var(--color-accent) 18%, transparent);
+  background: color-mix(in srgb, maps.color(accent) 18%, transparent);
   color: #fff;
   transform: translateY(-1px);
   outline: 3px solid var(--footer-accent-outline);
@@ -135,6 +135,6 @@ footer[itemscope][itemtype*='WPFooter'] a:hover {
 @media (max-width: 880px) {
   footer[itemscope][itemtype*='WPFooter'] .container {
     grid-template-columns: 1fr;
-    gap: var(--space-sm);
+    gap: maps.spacing(sm);
   }
 }

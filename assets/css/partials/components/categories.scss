@@ -25,7 +25,7 @@ print fallbacks.
 #site-header .site-nav .category-dropdown ul a,
 #site-header .site-nav .category-dropdown li,
 #site-header .site-nav .category-dropdown li[role='option'] {
-  color: var(--color-text);
+  color: maps.color(text);
 }
 
 /* When JS enhances the select into an accessible horizontal tab list, hide the native select
@@ -81,35 +81,35 @@ print fallbacks.
 
 #category-tabs-container .tabs__tab {
   background: transparent;
-  border: 1px solid var(--color-border);
-  color: var(--color-text);
+  border: 1px solid maps.color(border);
+  color: maps.color(text);
   padding: 0.35rem 0.6rem;
   border-radius: 6px;
   cursor: pointer;
 }
 
 #category-tabs-container .tabs__tab[aria-selected='true'] {
-  background: color-mix(in srgb, var(--color-accent) 12%, white);
-  border-bottom: 2px solid var(--color-accent);
-  color: var(--color-accent);
+  background: color-mix(in srgb, maps.color(accent) 12%, white);
+  border-bottom: 2px solid maps.color(accent);
+  color: maps.color(accent);
 }
 
 #category-tabs-container .tabs__tab:focus-visible {
-  outline: 3px solid color-mix(in srgb, var(--color-accent) 18%, transparent);
+  outline: 3px solid color-mix(in srgb, maps.color(accent) 18%, transparent);
   outline-offset: 2px;
 }
 
 #site-header .site-nav .category-dropdown summary {
   /* make sure the summary remains visually distinct from the header while matching the
      site text colour in light/dark modes via variables */
-  background: var(--color-background);
+  background: maps.color(background);
 }
 
 #site-header .site-nav .category-dropdown ul a:hover,
 #site-header .site-nav .category-dropdown ul a:focus-visible {
-  background: color-mix(in srgb, var(--color-accent) 12%, white);
-  color: var(--color-text);
-  outline: 3px solid color-mix(in srgb, var(--color-accent) 18%, transparent);
+  background: color-mix(in srgb, maps.color(accent) 12%, white);
+  color: maps.color(text);
+  outline: 3px solid color-mix(in srgb, maps.color(accent) 18%, transparent);
   outline-offset: 2px;
 }
 
@@ -119,12 +119,12 @@ print fallbacks.
 #site-header.site-nav_override .site-nav .category-dropdown ul a,
 #site-header.site-nav_override .site-nav .category-dropdown li,
 #site-header.site-nav_override .site-nav .category-dropdown li[role='option'] {
-  color: var(--color-text) !important;
+  color: maps.color(text) !important;
 }
 
 /* Also address the summary when the header's top-level colour is set by #site-header */
 #site-header .category-dropdown summary,
 #site-header .category-dropdown ul,
 #site-header .category-dropdown ul a {
-  color: var(--color-text) !important;
+  color: maps.color(text) !important;
 }

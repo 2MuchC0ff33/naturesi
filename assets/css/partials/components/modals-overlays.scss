@@ -82,7 +82,7 @@ Accessibility:
 
 /* Visible focus for the dialog container when keyboard-focused */
 .modal__dialog:focus-visible {
-  outline: 4px solid color-mix(in srgb, var(--color-accent) 20%, transparent);
+  outline: 4px solid color-mix(in srgb, maps.color(accent) 20%, transparent);
   outline-offset: 4px;
 }
 

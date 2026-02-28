@@ -7,22 +7,22 @@
    Purpose: Styles for reviews/testimonials on the homepage
 */
 #reviews {
-  margin: var(--space-lg) 0;
+  margin: maps.spacing(lg) 0;
 }
 
 .reviews-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--space-md);
+  gap: maps.spacing(md);
 }
 
 .review {
   display: flex;
-  gap: var(--space-sm);
+  gap: maps.spacing(sm);
   align-items: flex-start;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent);
-  padding: var(--space-sm);
-  border-radius: var(--radius-sm);
+  padding: maps.spacing(sm);
+  border-radius: maps.radius(sm);
 }
 
 .review__avatar {
@@ -47,9 +47,9 @@
 
 .review__meta {
   display: flex;
-  gap: var(--space-xs);
+  gap: maps.spacing(xs);
   align-items: center;
-  margin-bottom: var(--space-xs);
+  margin-bottom: maps.spacing(xs);
 }
 
 .review__name {
@@ -57,7 +57,7 @@
 }
 
 .review__text {
-  color: color-mix(in srgb, var(--color-text) 78%, #0000);
+  color: color-mix(in srgb, maps.color(text) 78%, #0000);
   margin: 0;
 }
 

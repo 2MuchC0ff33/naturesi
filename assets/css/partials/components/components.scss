@@ -11,7 +11,7 @@ Accordion toggles, social icon variants and other small repeated components.
 
 .site-footer nav[aria-label='Social media links'] ul {
   display: flex;
-  gap: var(--space-xs);
+  gap: maps.spacing(xs);
   align-items: center;
 }
 

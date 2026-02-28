@@ -14,7 +14,7 @@ This file contains top-level typographic and document-level settings using desig
 @use "../utilities/helpers" as helpers;
 
 html {
-  line-height: var(--line-height, 1.6);
+  line-height: maps.font("line-height");
   -webkit-font-smoothing: antialiased;
 }
 
@@ -44,14 +44,14 @@ textarea {
 
 /* Focus management for keyboard navigation */
 :focus-visible {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid maps.color(accent);
   outline-offset: 2px;
 }
 
 /* Styled Horizontal Rule (site accent) */
 hr {
   border: 0;
-  border-top: 1px solid var(--color-light-background);
-  margin: var(--space-md) auto;
+  border-top: 1px solid maps.color("light-background");
+  margin: maps.spacing(md) auto;
   width: 80%;
 }

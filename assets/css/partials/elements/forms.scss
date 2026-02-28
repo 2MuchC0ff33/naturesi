@@ -35,7 +35,7 @@ input[type="radio"] {
   vertical-align: middle;
   margin: 0 0.5rem 0 0;
   cursor: pointer;
-  accent-color: var(--color-accent);
+  accent-color: maps.color(accent);
 }
 
 input[type="checkbox"] {
@@ -47,13 +47,13 @@ input[type="checkbox"] {
   vertical-align: middle;
   margin: 0 0.5rem 0 0;
   cursor: pointer;
-  accent-color: var(--color-accent);
+  accent-color: maps.color(accent);
 }
 
 /* Visible focus for assistive keyboard users */
 input[type="radio"]:focus-visible,
 input[type="checkbox"]:focus-visible {
-  outline: 3px solid color-mix(in srgb, var(--color-accent) 60%, transparent);
+  outline: 3px solid color-mix(in srgb, maps.color(accent) 60%, transparent);
   outline-offset: 2px;
   border-radius: 0.25rem;
 }
@@ -75,10 +75,10 @@ textarea {
 }
 
 button {
-  background-color: var(--color-accent);
+  background-color: maps.color(accent);
   color: white;
   border: none;
-  padding: var(--space-sm) var(--space-md);
+  padding: maps.spacing(sm) maps.spacing(md);
   border-radius: var(--radius-md);
   font-weight: 500;
   box-shadow: var(--shadow-sm);
@@ -106,20 +106,20 @@ button {
    This avoids editing multiple templates and keeps behaviour additive and safe. */
 .add-to-cart [type="submit"],
 .add-to-cart button[type="submit"] {
-  background: var(--color-accent) !important;
+  background: maps.color(accent) !important;
   color: #fff !important;
   border-color: transparent;
 }
 
 .add-to-cart [type="submit"]:focus-visible,
 .add-to-cart button[type="submit"]:focus-visible {
-  outline: 3px solid color-mix(in srgb, var(--color-accent) 60%, transparent);
+  outline: 3px solid color-mix(in srgb, maps.color(accent) 60%, transparent);
   outline-offset: 2px;
 }
 
 /* Specific styling for add-to-cart buttons with btn-add-to-cart class */
 .btn-add-to-cart {
-  background: var(--color-accent);
+  background: maps.color(accent);
   color: #fff;
   border-color: transparent;
 }
@@ -142,8 +142,8 @@ button {
 /* Button hover + focus (moved link hover to `partials/elements/links.css`) */
 button:hover,
 button:focus-visible {
-  color: color-mix(in srgb, var(--color-accent) 90%, black);
-  background-color: color-mix(in srgb, var(--color-accent) 90%, black);
+  color: color-mix(in srgb, maps.color(accent) 90%, black);
+  background-color: color-mix(in srgb, maps.color(accent) 90%, black);
 }
 
 .site-search .search-box {
@@ -151,18 +151,18 @@ button:focus-visible {
   min-width: 0;
   box-sizing: border-box;
   padding: 0 0.6rem;
-  border: 1px solid var(--color-border);
+  border: 1px solid maps.color(border);
   border-radius: 6px;
   line-height: 1.1;
   height: 36px;
   display: flex;
   align-items: center;
-  color: var(--color-text);
+  color: maps.color(text);
 }
 
 .site-search .search-box,
 .site-search .search-box::placeholder {
-  color: var(--color-text);
+  color: maps.color(text);
 }
 
 .site-search .search-icon {
@@ -170,8 +170,8 @@ button:focus-visible {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: var(--color-highlight);
-  border: 1px solid var(--color-border);
+  background: maps.color(highlight);
+  border: 1px solid maps.color(border);
   padding: 0.18rem;
   border-radius: 6px;
 }

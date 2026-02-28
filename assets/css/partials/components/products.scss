@@ -19,7 +19,7 @@
 .product-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--space-md);
+  gap: maps.spacing(md);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -27,11 +27,11 @@
 
 .product-card {
   display: block;
-  background: var(--color-background);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
-  padding: var(--space-sm);
-  transition: box-shadow var(--transition-fast) ease, transform var(--transition-fast) ease;
+  background: maps.color(background);
+  border: 1px solid maps.color(border);
+  border-radius: maps.radius(sm);
+  padding: maps.spacing(sm);
+  transition: box-shadow maps.transition(fast) ease, transform maps.transition(fast) ease;
   position: relative;
   /* for badge overlays */
 }
@@ -46,7 +46,7 @@
   font-size: 0.8rem;
   font-weight: 700;
   border-radius: 0.4rem;
-  background: var(--color-accent);
+  background: maps.color(accent);
   color: #fff;
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
 }
@@ -63,8 +63,8 @@
   height: auto;
   overflow: hidden;
   display: block;
-  border-radius: calc(var(--radius-sm) - 2px);
-  margin-bottom: var(--space-sm);
+  border-radius: calc(maps.radius(sm) - 2px);
+  margin-bottom: maps.spacing(sm);
 }
 
 .product-gallery img,
@@ -73,7 +73,7 @@
   height: auto;
   display: block;
   object-fit: cover;
-  transition: transform var(--transition-fast) ease, filter var(--transition-fast) ease;
+  transition: transform maps.transition(fast) ease, filter maps.transition(fast) ease;
 }
 
 .product-card__media:hover img,
@@ -92,7 +92,7 @@
 
 /* Generic product hover for legacy pages that use .product class */
 .product img {
-  transition: transform var(--transition-fast) ease, filter var(--transition-fast) ease;
+  transition: transform maps.transition(fast) ease, filter maps.transition(fast) ease;
 }
 
 .product:hover img,
@@ -102,10 +102,10 @@
 }
 
 .product-card__title {
-  margin: 0 0 var(--space-xs) 0;
+  margin: 0 0 maps.spacing(xs) 0;
   font-size: 1rem;
   font-weight: 700;
-  color: var(--color-accent);
+  color: maps.color(accent);
 }
 
 /* Make section headings bold within product cards */
@@ -126,40 +126,40 @@
 .product-card h3,
 .product-card__title {
   font-size: 1rem;
-  margin: 0 0 var(--space-xs) 0;
+  margin: 0 0 maps.spacing(xs) 0;
 }
 
 .product-card__price {
   font-weight: 700;
-  color: var(--color-text);
+  color: maps.color(text);
   display: inline-block;
 }
 
 .product-card__price {
   font-weight: 700;
-  color: var(--color-text);
+  color: maps.color(text);
   display: inline-block;
 }
 
 .product-card__price--original {
   text-decoration: line-through;
   opacity: 0.6;
-  margin-left: var(--space-xs);
+  margin-left: maps.spacing(xs);
 }
 
 .product-card__badge {
   display: inline-block;
   padding: 0.15rem 0.4rem;
   border-radius: var(--radius-pill);
-  background: color-mix(in srgb, var(--color-accent) 14%, transparent);
-  color: var(--color-accent);
+  background: color-mix(in srgb, maps.color(accent) 14%, transparent);
+  color: maps.color(accent);
   font-size: 0.8rem;
-  margin-left: var(--space-xs);
+  margin-left: maps.spacing(xs);
 }
 
 .product-card__body {
-  margin-top: var(--space-sm);
-  color: color-mix(in srgb, var(--color-text) 80%, #0000);
+  margin-top: maps.spacing(sm);
+  color: color-mix(in srgb, maps.color(text) 80%, #0000);
   font-size: 0.95rem;
 }
 
@@ -167,7 +167,7 @@
 @media (min-width: 640px) {
   .product-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-md);
+    gap: maps.spacing(md);
   }
 }
 
@@ -181,7 +181,7 @@
     padding: 0.85rem 1rem;
     font-weight: 700;
     border-radius: 0.5rem;
-    margin-top: var(--space-sm);
+    margin-top: maps.spacing(sm);
   }
 }
 
@@ -199,16 +199,16 @@
   align-items: center;
   gap: 0.6rem;
   font-size: 0.95rem;
-  color: var(--color-text);
-  margin-bottom: var(--space-sm);
+  color: maps.color(text);
+  margin-bottom: maps.spacing(sm);
 }
 
 .search-status.loading::before {
   content: '';
   width: 16px;
   height: 16px;
-  border: 2px solid color-mix(in srgb, var(--color-accent) 20%, #0000);
-  border-top-color: var(--color-accent);
+  border: 2px solid color-mix(in srgb, maps.color(accent) 20%, #0000);
+  border-top-color: maps.color(accent);
   border-radius: 50%;
   display: inline-block;
   animation: search-spinner 0.9s linear infinite;
@@ -216,8 +216,8 @@
 
 .search-count {
   font-weight: 600;
-  margin: 0 0 var(--space-md) 0;
-  color: color-mix(in srgb, var(--color-accent) 40%, var(--color-text));
+  margin: 0 0 maps.spacing(md) 0;
+  color: color-mix(in srgb, maps.color(accent) 40%, maps.color(text));
 }
 
 .search-results {
@@ -225,25 +225,25 @@
   margin: 0;
   padding: 0;
   display: grid;
-  gap: var(--space-md);
+  gap: maps.spacing(md);
 }
 
 .search-result-item {
-  padding: var(--space-sm);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
+  padding: maps.spacing(sm);
+  border: 1px solid maps.color(border);
+  border-radius: maps.radius(sm);
   background: linear-gradient(180deg,
-      color-mix(in srgb, var(--color-background) 96%, var(--color-highlight) 4%),
-      var(--color-background));
+      color-mix(in srgb, maps.color(background) 96%, maps.color(highlight) 4%),
+      maps.color(background));
   display: flex;
-  gap: var(--space-md);
+  gap: maps.spacing(md);
   align-items: flex-start;
 }
 
 .search-result-item a {
   display: inline-block;
   font-weight: 700;
-  color: var(--color-accent);
+  color: maps.color(accent);
   text-decoration: none;
 }
 
@@ -253,8 +253,8 @@
 }
 
 .search-result-description {
-  margin-top: var(--space-xs);
-  color: color-mix(in srgb, var(--color-text) 70%, #0000);
+  margin-top: maps.spacing(xs);
+  color: color-mix(in srgb, maps.color(text) 70%, #0000);
   font-size: 0.95rem;
 }
 
@@ -283,7 +283,7 @@
 @media (max-width: 640px) {
   .search-result-item {
     flex-direction: column;
-    gap: var(--space-sm);
+    gap: maps.spacing(sm);
   }
 
   .search-result-thumb {

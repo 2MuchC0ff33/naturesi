@@ -16,8 +16,8 @@
 
 .carousel__track {
   display: flex;
-  gap: var(--space-sm);
-  transition: transform var(--transition-medium) ease;
+  gap: maps.spacing(sm);
+  transition: transform maps.transition(medium) ease;
 }
 
 .carousel__slide {
@@ -54,7 +54,7 @@
 }
 
 .carousel__nav button:focus-visible {
-  outline: 3px solid color-mix(in srgb, var(--color-accent) 30%, #0000);
+  outline: 3px solid color-mix(in srgb, maps.color(accent) 30%, #0000);
   outline-offset: 3px;
 }
 
@@ -63,22 +63,22 @@
   display: flex;
   gap: 0.5rem;
   justify-content: center;
-  margin-top: var(--space-sm);
+  margin-top: maps.spacing(sm);
 }
 
 .carousel__dot {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: var(--color-border);
+  background: maps.color(border);
   border: 0;
 }
 
 .carousel__dot[aria-current='true'] {
-  background: var(--color-accent);
+  background: maps.color(accent);
 }
 
 .carousel__dot:focus-visible {
-  outline: 2px solid color-mix(in srgb, var(--color-accent) 32%, #0000);
+  outline: 2px solid color-mix(in srgb, maps.color(accent) 32%, #0000);
   outline-offset: 2px;
 }

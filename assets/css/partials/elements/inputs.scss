@@ -11,17 +11,17 @@ input,
 select,
 textarea {
   font: inherit;
-  color: var(--color-text);
-  background: var(--color-background);
-  border: 1px solid var(--color-border);
+  color: maps.color(text);
+  background: maps.color(background);
+  border: 1px solid maps.color(border);
   padding: 0.45rem 0.6rem;
-  border-radius: var(--radius-sm);
+  border-radius: maps.radius(sm);
   box-sizing: border-box;
 }
 
 input:focus,
 select:focus,
 textarea:focus {
-  outline: 3px solid color-mix(in srgb, var(--color-accent) 60%, transparent);
+  outline: 3px solid color-mix(in srgb, maps.color(accent) 60%, transparent);
   outline-offset: 2px;
 }

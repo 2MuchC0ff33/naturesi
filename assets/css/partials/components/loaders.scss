@@ -21,7 +21,7 @@
   height: 18px;
   border-radius: 50%;
   border: 2px solid rgba(0, 0, 0, 0.08);
-  border-top-color: var(--color-accent);
+  border-top-color: maps.color(accent);
   animation: spinner-rotate 0.9s linear infinite;
   display: inline-block;
 }

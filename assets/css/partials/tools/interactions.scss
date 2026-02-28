@@ -54,15 +54,15 @@ Generic hover/focus interactions used across components (lift effect).
 .btn:hover,
 .btn:focus-visible {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
+  box-shadow: maps.shadow(md);
 }
 
 /* `.focus-ring` is consolidated in `partials/tools/accessibility.css` to provide a single canonical focus helper. */
 
 /* Button modifiers */
 .btn--primary {
-  background: var(--btn-bg);
-  color: var(--btn-color);
+  background: maps.button(bg);
+  color: maps.button(color);
 }
 
 .btn--secondary {

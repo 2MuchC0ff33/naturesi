@@ -317,11 +317,7 @@ Holds broad configuration tokens and feature flags (non-design tokens)
 Global layout settings
 Broad layout constants such as header heights and other structural defaults
 ========================================================================== */
-:root {
-  /* Default header heights (used by skip links and responsive header adjustments) */
-  --header-height: 3.75rem;
-  --header-height-mobile: 3.25rem;
-}
+/* header heights are now provided via settings/maps.scss */
 /* colours.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -591,8 +587,7 @@ Focus outlines, skip links and visually-hidden utilities live here.
 .skip-link:focus,
 .skip-link:focus-visible {
   position: fixed;
-  left: var(--space-md);
-  top: var(--header-height);
+  left: 1.25rem;
   /* Position below header to prevent overlap with nav bar */
   outline: 2px solid color-mix(in srgb, #346967 80%, white);
   background: #346967;
@@ -602,8 +597,7 @@ Focus outlines, skip links and visually-hidden utilities live here.
 }
 @media (max-width: 640px) {
   .skip-link {
-    left: calc(var(--space-xs) + 0.25rem);
-    top: var(--header-height-mobile);
+    left: 0.75rem;
     /* Position below header to prevent overlap with nav bar */
     font-size: 0.72rem;
   }
@@ -1181,7 +1175,7 @@ This file contains top-level typographic and document-level settings using desig
    and provides a place for small reusable snippets that don’t warrant
    their own broad file. */
 html {
-  line-height: var(--line-height, 1.6);
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
 body {
@@ -1207,14 +1201,14 @@ textarea {
 }
 /* Focus management for keyboard navigation */
 :focus-visible {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid #346967;
   outline-offset: 2px;
 }
 /* Styled Horizontal Rule (site accent) */
 hr {
   border: 0;
-  border-top: 1px solid var(--color-light-background);
-  margin: var(--space-md) auto;
+  border-top: 1px solid #bdd5d4;
+  margin: 1.25rem auto;
   width: 80%;
 }
 /* selections.scss
@@ -2623,9 +2617,9 @@ Use `.container` inside `.wrapper` to constrain content width.
 .container {
   width: 100%;
   /* mobile-first horizontal padding, increases at larger widths */
-  padding-inline: var(--space-inline-sm);
+  padding-inline: 1rem;
   margin-inline: auto;
-  max-width: var(--max-width);
+  max-width: 1200px;
   box-sizing: border-box;
 }
 /* Optional alias to ease migration */
@@ -2636,7 +2630,7 @@ Use `.container` inside `.wrapper` to constrain content width.
 }
 /* Narrow / large modifiers (keep as modifiers, undecorated) */
 .container--narrow {
-  padding-inline: var(--space-inline-xs);
+  padding-inline: 0.5rem;
   max-width: 880px;
 }
 .container--lg {
@@ -2668,10 +2662,10 @@ API highlights: `.stack`, `.stack--sm`, `.stack--lg`, `.row`, `.center-row`,
   gap: var(--space-sm);
 }
 .stack--sm {
-  gap: var(--space-xs);
+  gap: 0.5rem;
 }
 .stack--lg {
-  gap: var(--space-md);
+  gap: 1.25rem;
 }
 .stack--reverse {
   flex-direction: column-reverse;
@@ -2727,16 +2721,16 @@ API: `.grid`, `.grid-auto-fit`, `.grid--cols-2`, `.grid--cols-3`,
 ========================================================================== */
 .grid {
   display: grid;
-  gap: var(--space-md);
+  gap: 1.25rem;
 }
 /* Optional object-prefixed alias */
 .o-grid {
   display: grid;
-  gap: var(--space-md);
+  gap: 1.25rem;
 }
 /* Small gap variant */
 .grid--gap-sm {
-  gap: var(--space-sm);
+  gap: 0.75rem;
 }
 /* Column helpers (mobile-first: single column by default) */
 @media (min-width: 900px) {
@@ -5166,42 +5160,42 @@ This file contains top-level typographic and document-level settings using desig
 }
 /* Padding aliases */
 .u-p-sm {
-  padding: var(--space-sm);
+  padding: 0.75rem;
 }
 .u-p-md {
-  padding: var(--space-md);
+  padding: 1.25rem;
 }
 /* Margin aliases */
 .u-mt-sm {
-  margin-top: var(--space-sm);
+  margin-top: 0.75rem;
 }
 .u-mb-md {
-  margin-bottom: var(--space-md);
+  margin-bottom: 1.25rem;
 }
 /* Simple single-step spacing helpers */
 .u-mt-1 {
-  margin-top: var(--space-xs);
+  margin-top: 0.5rem;
 }
 .u-mt-2 {
-  margin-top: var(--space-sm);
+  margin-top: 0.75rem;
 }
 .u-mt-3 {
-  margin-top: var(--space-md);
+  margin-top: 1.25rem;
 }
 .u-mt-4 {
-  margin-top: var(--space-lg);
+  margin-top: 2rem;
 }
 .u-mb-1 {
-  margin-bottom: var(--space-xs);
+  margin-bottom: 0.5rem;
 }
 .u-mb-2 {
-  margin-bottom: var(--space-sm);
+  margin-bottom: 0.75rem;
 }
 .u-mb-3 {
-  margin-bottom: var(--space-md);
+  margin-bottom: 1.25rem;
 }
 .u-mb-4 {
-  margin-bottom: var(--space-lg);
+  margin-bottom: 2rem;
 }
 /* Axis helpers (composable) */
 .u-ml-0 {
@@ -5215,34 +5209,34 @@ This file contains top-level typographic and document-level settings using desig
   margin-right: 0 !important;
 }
 .u-ml-1 {
-  margin-left: var(--space-xs) !important;
+  margin-left: 0.5rem !important;
 }
 .u-mr-1 {
-  margin-right: var(--space-xs) !important;
+  margin-right: 0.5rem !important;
 }
 .u-mx-1 {
-  margin-left: var(--space-xs) !important;
-  margin-right: var(--space-xs) !important;
+  margin-left: 0.5rem !important;
+  margin-right: 0.5rem !important;
 }
 .u-ml-2 {
-  margin-left: var(--space-sm) !important;
+  margin-left: 0.75rem !important;
 }
 .u-mr-2 {
-  margin-right: var(--space-sm) !important;
+  margin-right: 0.75rem !important;
 }
 .u-mx-2 {
-  margin-left: var(--space-sm) !important;
-  margin-right: var(--space-sm) !important;
+  margin-left: 0.75rem !important;
+  margin-right: 0.75rem !important;
 }
 .u-ml-3 {
-  margin-left: var(--space-md) !important;
+  margin-left: 1.25rem !important;
 }
 .u-mr-3 {
-  margin-right: var(--space-md) !important;
+  margin-right: 1.25rem !important;
 }
 .u-mx-3 {
-  margin-left: var(--space-md) !important;
-  margin-right: var(--space-md) !important;
+  margin-left: 1.25rem !important;
+  margin-right: 1.25rem !important;
 }
 /* Vertical axis helpers */
 .u-my-0 {
@@ -5250,16 +5244,16 @@ This file contains top-level typographic and document-level settings using desig
   margin-bottom: 0 !important;
 }
 .u-my-1 {
-  margin-top: var(--space-xs) !important;
-  margin-bottom: var(--space-xs) !important;
+  margin-top: 0.5rem !important;
+  margin-bottom: 0.5rem !important;
 }
 .u-my-2 {
-  margin-top: var(--space-sm) !important;
-  margin-bottom: var(--space-sm) !important;
+  margin-top: 0.75rem !important;
+  margin-bottom: 0.75rem !important;
 }
 .u-my-3 {
-  margin-top: var(--space-md) !important;
-  margin-bottom: var(--space-md) !important;
+  margin-top: 1.25rem !important;
+  margin-bottom: 1.25rem !important;
 }
 /* Padding axis helpers */
 .u-pl-0 {
@@ -5273,60 +5267,60 @@ This file contains top-level typographic and document-level settings using desig
   padding-right: 0 !important;
 }
 .u-pl-1 {
-  padding-left: var(--space-xs) !important;
+  padding-left: 0.5rem !important;
 }
 .u-pr-1 {
-  padding-right: var(--space-xs) !important;
+  padding-right: 0.5rem !important;
 }
 .u-px-1 {
-  padding-left: var(--space-xs) !important;
-  padding-right: var(--space-xs) !important;
+  padding-left: 0.5rem !important;
+  padding-right: 0.5rem !important;
 }
 .u-pl-2 {
-  padding-left: var(--space-sm) !important;
+  padding-left: 0.75rem !important;
 }
 .u-pr-2 {
-  padding-right: var(--space-sm) !important;
+  padding-right: 0.75rem !important;
 }
 .u-px-2 {
-  padding-left: var(--space-sm) !important;
-  padding-right: var(--space-sm) !important;
+  padding-left: 0.75rem !important;
+  padding-right: 0.75rem !important;
 }
 .u-py-0 {
   padding-top: 0 !important;
   padding-bottom: 0 !important;
 }
 .u-py-1 {
-  padding-top: var(--space-xs) !important;
-  padding-bottom: var(--space-xs) !important;
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
 }
 .u-py-2 {
-  padding-top: var(--space-sm) !important;
-  padding-bottom: var(--space-sm) !important;
+  padding-top: 0.75rem !important;
+  padding-bottom: 0.75rem !important;
 }
 /* Responsive spacing modifiers (mobile-first — apply at larger viewports) */
 @media (min-width: 601px) {
   .u-mt-md {
-    margin-top: var(--space-md) !important;
+    margin-top: 1.25rem !important;
   }
   .u-mb-md {
-    margin-bottom: var(--space-md) !important;
+    margin-bottom: 1.25rem !important;
   }
   .u-mx-md {
-    margin-left: var(--space-md) !important;
-    margin-right: var(--space-md) !important;
+    margin-left: 1.25rem !important;
+    margin-right: 1.25rem !important;
   }
 }
 @media (min-width: 1025px) {
   .u-mt-lg {
-    margin-top: var(--space-lg) !important;
+    margin-top: 2rem !important;
   }
   .u-mb-lg {
-    margin-bottom: var(--space-lg) !important;
+    margin-bottom: 2rem !important;
   }
   .u-mx-lg {
-    margin-left: var(--space-lg) !important;
-    margin-right: var(--space-lg) !important;
+    margin-left: 2rem !important;
+    margin-right: 2rem !important;
   }
 }
 /* margins.scss

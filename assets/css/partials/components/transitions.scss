@@ -16,7 +16,7 @@
 }
 
 .fade-in {
-  animation: fade-in var(--transition-medium) ease both;
+  animation: fade-in maps.transition(medium) ease both;
 }
 
 @keyframes fade-in {

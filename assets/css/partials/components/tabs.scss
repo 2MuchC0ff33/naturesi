@@ -21,7 +21,7 @@
   bottom: 0;
   width: 3.6rem;
   pointer-events: none;
-  transition: opacity var(--transition-fast) ease;
+  transition: opacity maps.transition(fast) ease;
   opacity: 0;
   z-index: 2;
 }
@@ -49,7 +49,7 @@
 
 .tabs__list {
   display: flex;
-  gap: var(--space-sm);
+  gap: maps.spacing(sm);
   /* Allow horizontal scrolling on narrow screens without wrapping */
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
@@ -69,7 +69,7 @@
   font: inherit;
   border-radius: 999px;
   white-space: nowrap;
-  transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+  transition: background maps.transition(fast), transform maps.transition(fast), box-shadow maps.transition(fast);
 }
 
 .tabs__tab:hover {
@@ -79,8 +79,8 @@
 
 .tabs__tab[aria-selected='true'] {
   font-weight: 700;
-  color: var(--color-accent);
-  background: color-mix(in srgb, var(--color-accent) 8%, transparent);
+  color: maps.color(accent);
+  background: color-mix(in srgb, maps.color(accent) 8%, transparent);
   transform: translateY(-1px);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.04);
   border-bottom: 0;
@@ -88,7 +88,7 @@
 }
 
 .tabs__tab:focus-visible {
-  outline: 3px solid color-mix(in srgb, var(--color-accent) 28%, #0000);
+  outline: 3px solid color-mix(in srgb, maps.color(accent) 28%, #0000);
   outline-offset: 3px;
 }
 

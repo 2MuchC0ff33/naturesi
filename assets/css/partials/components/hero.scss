@@ -50,7 +50,7 @@
   /* keep aspect ratio */
   object-fit: contain;
   /* preserve full frame */
-  max-height: calc(100vh - var(--site-header-height, 96px));
+  max-height: calc(100vh - maps.layout("site-header-height"));
   margin: 0 auto;
   /* center horizontally */
   align-self: center;
@@ -117,27 +117,27 @@
 }
 
 .hero h1 {
-  margin: 0 0 var(--space-xs) 0;
+  margin: 0 0 maps.spacing(xs) 0;
   font-size: 1.6rem;
   line-height: 1.05;
   letter-spacing: -0.01em;
 }
 
 .hero blockquote {
-  margin: var(--space-sm) 0;
+  margin: maps.spacing(sm) 0;
   font-style: italic;
-  color: color-mix(in srgb, var(--color-text) 78%, #0000);
+  color: color-mix(in srgb, maps.color(text) 78%, #0000);
 }
 
 .hero p {
-  margin: 0 0 var(--space-md) 0;
-  color: color-mix(in srgb, var(--color-text) 82%, #0000);
+  margin: 0 0 maps.spacing(md) 0;
+  color: color-mix(in srgb, maps.color(text) 82%, #0000);
   max-width: 58ch;
 }
 
 #cta-buttons .button {
   display: inline-block;
-  margin-right: var(--space-xs);
+  margin-right: maps.spacing(xs);
 }
 
 #cta-buttons .button.btn--primary {
@@ -215,7 +215,7 @@
   margin-left: auto;
   margin-right: auto;
   width: auto;
-  max-width: min(90%, var(--max-width, 1200px));
+  max-width: min(90%, maps.layout("max-width"));
   max-height: 200px;
   object-fit: contain;
 }
@@ -266,7 +266,7 @@
 
 .hero__media--logo img.hero__logo-img {
   /* constrain the logo so it doesn't exceed the readable measure on large screens */
-  max-width: min(90%, var(--max-width, 1200px));
+  max-width: min(90%, maps.layout("max-width"));
   width: auto;
   display: block;
   margin-left: auto;

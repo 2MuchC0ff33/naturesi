@@ -11,10 +11,10 @@ Core header bar, logo treatment and colour gradient live here.
   /* header height is sourced from settings.css (default) and may be
      overridden in responsive contexts where appropriate. */
   background: linear-gradient(180deg,
-      color-mix(in srgb, var(--color-accent) 72%, white 28%),
-      color-mix(in srgb, var(--color-accent) 60%, black 40%));
+      color-mix(in srgb, maps.color(accent) 72%, white 28%),
+      color-mix(in srgb, maps.color(accent) 60%, black 40%));
   color: white;
-  border-bottom: 1px solid color-mix(in srgb, var(--color-accent) 20%, black);
+  border-bottom: 1px solid color-mix(in srgb, maps.color(accent) 20%, black);
   position: relative;
   /* Positioning context for skip-link to prevent overlap with nav bar */
 }
@@ -43,9 +43,9 @@ Core header bar, logo treatment and colour gradient live here.
   grid-template-columns: auto 1fr auto;
   gap: var(--space-xxs);
   align-items: center;
-  padding: 0.26rem var(--space-sm);
-  border-bottom: 1px solid var(--color-border);
-  background: color-mix(in srgb, var(--color-accent) 4%, transparent);
+  padding: 0.26rem maps.spacing(sm);
+  border-bottom: 1px solid maps.color(border);
+  background: color-mix(in srgb, maps.color(accent) 4%, transparent);
   font-size: 0.9rem;
   line-height: 1.02;
   min-height: 44px;
@@ -72,7 +72,7 @@ Core header bar, logo treatment and colour gradient live here.
   padding: 0.02rem 0.35rem;
   border-radius: 0.4rem;
   background: rgba(255, 255, 255, 0.95);
-  color: color-mix(in srgb, var(--color-accent) 70%, black);
+  color: color-mix(in srgb, maps.color(accent) 70%, black);
   text-decoration: none;
 }
 
@@ -146,7 +146,7 @@ Core header bar, logo treatment and colour gradient live here.
 .nav-right {
   flex: 1 1 160px;
   justify-content: flex-end;
-  gap: var(--space-xs);
+  gap: maps.spacing(xs);
 }
 
 /* Base cart styles are defined in assets/css/partials/cart.css.
@@ -156,7 +156,7 @@ Core header bar, logo treatment and colour gradient live here.
   background: transparent;
   padding: 0.08rem 0.35rem;
   border-radius: 6px;
-  color: var(--color-text);
+  color: maps.color(text);
   text-decoration: none;
 }
 
@@ -203,7 +203,7 @@ Core header bar, logo treatment and colour gradient live here.
   padding: 0.08rem 0.5rem;
   border-radius: 0.5rem;
   background: rgba(255, 255, 255, 0.9);
-  color: color-mix(in srgb, var(--color-accent) 70%, black);
+  color: color-mix(in srgb, maps.color(accent) 70%, black);
   text-decoration: none;
 }
 
@@ -221,8 +221,8 @@ Core header bar, logo treatment and colour gradient live here.
 
 @media (min-width: 1200px) {
   .site-nav {
-    gap: var(--space-sm);
-    padding-inline: var(--space-md);
+    gap: maps.spacing(sm);
+    padding-inline: maps.spacing(md);
   }
 
   .site-search .search-dropdown {
@@ -272,11 +272,11 @@ Core header bar, logo treatment and colour gradient live here.
 
 .hero blockquote,
 .hero #tagline {
-  color: color-mix(in srgb, var(--color-text) 86%, #0000);
+  color: color-mix(in srgb, maps.color(text) 86%, #0000);
 }
 
 .hero .button.btn--primary {
-  background: var(--color-accent);
+  background: maps.color(accent);
   color: white;
 }
 
@@ -398,9 +398,9 @@ body.nav-open {
   .site-nav {
     grid-template-columns: 1fr;
     align-items: start;
-    gap: var(--space-xs);
+    gap: maps.spacing(xs);
     min-height: 36px;
-    padding: 0.15rem var(--space-sm);
+    padding: 0.15rem maps.spacing(sm);
     padding-top: calc(0.15rem + env(safe-area-inset-top));
   }
 
@@ -533,9 +533,9 @@ navigation elements in a single compact row while maintaining accessibility.
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    gap: var(--space-xs);
+    gap: maps.spacing(xs);
     min-height: 48px;
-    padding: 0.25rem var(--space-sm);
+    padding: 0.25rem maps.spacing(sm);
   }
 
   /* Reset grid-specific properties that conflict with flexbox */

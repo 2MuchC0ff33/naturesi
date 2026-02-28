@@ -18,5 +18,5 @@ figure {
 figure figcaption {
   font-size: 0.95rem;
   color: var(--muted-color, #6b7280);
-  margin-top: var(--space-xs);
+  margin-top: maps.spacing(xs);
 }
