@@ -39,6 +39,9 @@ importers:
       postcss-cli:
         specifier: ^11.0.1
         version: 11.0.1(postcss@8.5.6)
+      postcss-jit-props:
+        specifier: ^1.0.16
+        version: 1.0.16(postcss@8.5.6)
       sass:
         specifier: ^1.97.3
         version: 1.97.3
@@ -453,12 +456,18 @@ packages:
     resolution: {integrity: sha512-awConJSVCHVGND6x3tmMaKcQvwXLhjdkmomy2W+Goaui8YPgYgXJZewhg3fWC+DlfqqQuWg8AwqjGTD2nAPVWg==}
     engines: {node: '>=6'}
 
+  globalyzer@0.1.0:
+    resolution: {integrity: sha512-40oNTM9UfG6aBmuKxk/giHn5nQ8RVz/SS4Ir6zgzOv9/qC3kKZ9v4etGTcJbEl/NyVQH7FGU7d+X1egr57Md2Q==}
+
   globby@16.1.1:
     resolution: {integrity: sha512-dW7vl+yiAJSp6aCekaVnVJxurRv7DCOLyXqEG3RYMYUg7AuJ2jCqPkZTA8ooqC2vtnkaMcV5WfFBMuEnTu1OQg==}
     engines: {node: '>=20'}
 
   globjoin@0.1.4:
     resolution: {integrity: sha512-xYfnw62CKG8nLkZBfWbhWwDw02CHty86jfPcc2cr3ZfeuK9ysoVPPEUxf21bAD/rWAgk52SuBrLJlefNy8mvFg==}
+
+  globrex@0.1.2:
+    resolution: {integrity: sha512-uHJgbwAMwNFf5mLst7IWLNg14x1CkeqglJb/K3doi4dw6q2IvAAmM/Y81kevy83wP+Sst+nutFTYOGg3d1lsxg==}
 
   graceful-fs@4.2.11:
     resolution: {integrity: sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==}
@@ -662,6 +671,12 @@ packages:
     peerDependencies:
       postcss: ^8.0.0
 
+  postcss-jit-props@1.0.16:
+    resolution: {integrity: sha512-EXHA65umJ3+BiMnd6kOCargYe+QXS72hGrkW9nqaCdt6aeOp4fT3Nme6qn6yIDBmzv19mx3zeVU0PdiqJBCwoA==}
+    engines: {node: '>=10.0.0'}
+    peerDependencies:
+      postcss: ^8.2.8
+
   postcss-load-config@5.1.0:
     resolution: {integrity: sha512-G5AJ+IX0aD0dygOE0yFZQ/huFFMSNneyfp0e3/bT05a8OfPC5FUoZRPfGijUdGOJNMewJiwzcHJXFafFzeKFVA==}
     engines: {node: '>= 18'}
@@ -827,6 +842,9 @@ packages:
 
   thenby@1.3.4:
     resolution: {integrity: sha512-89Gi5raiWA3QZ4b2ePcEwswC3me9JIg+ToSgtE0JWeCynLnLxNr/f9G+xfo9K+Oj4AFdom8YNJjibIARTJmapQ==}
+
+  tiny-glob@0.2.9:
+    resolution: {integrity: sha512-g/55ssRPUjShh+xkfx9UPDXqhckHEsHr4Vd9zX55oSdGZc/MD0m3sferOkwWtp98bv+kcVfEHtRJgBVJzelrzg==}
 
   tinyglobby@0.2.15:
     resolution: {integrity: sha512-j2Zq4NyQYG5XMST4cbs02Ak8iJUdxRM0XI5QyxXuZOzKOINmWurp3smXu3y5wDcJrptwpSjgXHzIQxR0omXljQ==}
@@ -1256,6 +1274,8 @@ snapshots:
       kind-of: 6.0.3
       which: 1.3.1
 
+  globalyzer@0.1.0: {}
+
   globby@16.1.1:
     dependencies:
       '@sindresorhus/merge-streams': 4.0.0
@@ -1266,6 +1286,8 @@ snapshots:
       unicorn-magic: 0.4.0
 
   globjoin@0.1.4: {}
+
+  globrex@0.1.2: {}
 
   graceful-fs@4.2.11: {}
 
@@ -1429,6 +1451,11 @@ snapshots:
       postcss-value-parser: 4.2.0
       read-cache: 1.0.0
       resolve: 1.22.11
+
+  postcss-jit-props@1.0.16(postcss@8.5.6):
+    dependencies:
+      postcss: 8.5.6
+      tiny-glob: 0.2.9
 
   postcss-load-config@5.1.0(postcss@8.5.6):
     dependencies:
@@ -1614,6 +1641,11 @@ snapshots:
       strip-ansi: 6.0.1
 
   thenby@1.3.4: {}
+
+  tiny-glob@0.2.9:
+    dependencies:
+      globalyzer: 0.1.0
+      globrex: 0.1.2
 
   tinyglobby@0.2.15:
     dependencies:

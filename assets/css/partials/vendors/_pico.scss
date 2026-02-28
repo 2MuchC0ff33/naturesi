@@ -1,0 +1,8 @@
+/* third-party vendor stylesheet for PicoCSS
+   the package delivers plain CSS under node_modules/@picocss/pico/css/
+   which we import here so Sass/PostCSS can bundle it alongside our own
+   styles.  we keep vendor imports isolated to simplify eventual removal or
+   replacement.
+*/
+
+@import "@picocss/pico/css/pico.min.css";

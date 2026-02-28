@@ -63,6 +63,21 @@ try {
     process.exit(1);
   }
 
+  // ensure PicoCSS variables made it into the bundle; any one variable
+  // proves the library was included and its utilities can be overridden.
+  if (!/--pico-font-family/.test(out)) {
+    console.error('✗ build output missing PicoCSS custom property');
+    process.exit(1);
+  }
+
+  // ensure at least one Open Props property is present post-build. this
+  // demonstrates the tokens survive Sass/PostCSS and are available for
+  // postcss-jit-props to scan if needed.
+  if (!/--font-size-3/.test(out)) {
+    console.error('✗ build output missing Open Props variable --font-size-3');
+    process.exit(1);
+  }
+
   // ensure watcher script is modern and cross-platform
   try {
     const pkg = JSON.parse(readFileSync('package.json', 'utf-8'));

@@ -1,5 +1,6 @@
 import autoprefixer from 'autoprefixer';
 import importPlugin from 'postcss-import';
+import jitProps from 'postcss-jit-props';
 
 export default {
   /*
@@ -26,6 +27,13 @@ export default {
   */
   plugins: [
     importPlugin(),       // inline @import statements from partials
+    // just-in-time custom properties: scans compiled CSS for `var()`
+    // usages and emits only the referenced tokens.  we point it at the
+    // Open Props source so JIT can pull in all vars when required.
+    jitProps({
+      files: ['node_modules/open-props/open-props.min.css']
+      // additional props may be added here if the project defines its own
+    }),
     autoprefixer()        // add vendor prefixes afterwards
   ]
 };

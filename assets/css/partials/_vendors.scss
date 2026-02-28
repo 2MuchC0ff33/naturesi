@@ -2,6 +2,11 @@
    during the Sass module migration we keep third-party CSS separated
    from the project’s own partials.  this file forwards each vendor
    partial so `main.scss` can pull them in via a single `@use`.
+
+   the order of forwards matters because some vendors (like PicoCSS)
+   establish custom properties that Open Props should see.  always
+   list Pico first so its utilities can be overridden by later tokens.
 */
 
+@forward "vendors/pico";
 @forward "vendors/open-props";
