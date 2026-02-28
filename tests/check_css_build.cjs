@@ -65,7 +65,10 @@ try {
 
   // ensure PicoCSS variables made it into the bundle; any one variable
   // proves the library was included and its utilities can be overridden.
-  if (!/--pico-font-family/.test(out)) {
+  // the previous regex was too loose and matched extended names such as
+  // "--pico-font-family-emoji"; require a colon (and optional whitespace)
+  // to assert the base property is declared rather than merely referenced.
+  if (!/--pico-font-family\s*:\s*/.test(out)) {
     console.error('✗ build output missing PicoCSS custom property');
     process.exit(1);
   }
