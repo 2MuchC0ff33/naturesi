@@ -189,7 +189,7 @@ Convert the static CSS to a Sass‑first workflow, add Open Props tokens and P
     4.  Project partials (settings → base → components → utilities)
 *   Confirm PicoCSS utilities are present and overrideable via custom properties.
 *   Confirm Open Props variables compile and appear as CSS custom properties.
-*   Add a TODO for potential `postcss-jit-props` adoption later if desired.
+*   Add `postcss-jit-props` implementation.
 
 ###### 4) Slim + Plates Framework Setup
 

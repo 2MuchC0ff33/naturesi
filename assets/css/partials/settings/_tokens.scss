@@ -1,9 +1,7 @@
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
+// _tokens.scss – bring Open Props tokens into the project and expose any
+// project‑specific aliases. This partial is imported by main.scss before
+// variables.scss so that the resulting CSS custom properties are available
+// site‑wide.
 
 @use "../settings/maps" as maps;
 

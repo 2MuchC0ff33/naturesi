@@ -1,5 +1,6 @@
 import autoprefixer from 'autoprefixer';
 import importPlugin from 'postcss-import';
+import jitProps from 'postcss-jit-props';
 
 export default {
   /*
@@ -26,6 +27,34 @@ export default {
   */
   plugins: [
     importPlugin(),       // inline @import statements from partials
+    // just-in-time custom properties: scans compiled CSS for `var()`
+    // usages and emits only the referenced tokens. the build now relies on
+    // this plugin exclusively for Open Props values; the static import in
+    // `partials/vendors/_open-props.scss` was removed to avoid duplicating
+    // declarations. the `files` array still points at the upstream package
+    // so the extractor knows which props are available.
+    jitProps({
+      files: ['node_modules/open-props/open-props.min.css']
+      // additional props may be added here if the project defines its own
+    }),
+    // Ensure any @charset rule is the very first thing in the output. the
+    // JIT token injector may add a `:root` block early; this plugin moves
+    // the charset back to the front, preserving compliance with the CSS spec.
+    {
+      postcssPlugin: 'ensure-charset-first',
+      OnceExit(root) {
+        // run after all other plugins (jitProps etc.) have finished adding
+        // rules; move any charset rule to the front before output.
+        let charsetRule;
+        root.walkAtRules('charset', atRule => {
+          charsetRule = atRule.clone();
+          atRule.remove();
+        });
+        if (charsetRule) {
+          root.prepend(charsetRule);
+        }
+      }
+    },
     autoprefixer()        // add vendor prefixes afterwards
   ]
 };

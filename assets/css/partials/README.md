@@ -130,6 +130,16 @@ Conventions
 - Use `--` CSS custom properties for theming tokens; prefer semantic names.
 
 - Use Australian English for comments and any text (e.g. "organise").
+- When a partial may be loaded more than once (via forwards/uses), prefer
+  `//` Sass comments instead of `/*…*/` so the final build isn’t bloated with
+  repeated header blocks.
+- Aggregator modules and other frequently-referenced partials should use
+  `//` comments to avoid accidental duplication when the module is imported
+  both directly and via another namespace.
+- As individual partials are migrated off legacy `@import`, you can remove
+  their `@forward` lines from the aggregator; this trims the load graph and
+  slightly speeds compilation. Keep a note in the file header or TODO list
+  so forwards aren’t forgotten.
 
 Quick checklist for changes
 

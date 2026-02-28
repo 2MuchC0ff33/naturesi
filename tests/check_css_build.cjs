@@ -27,6 +27,15 @@ try {
   // postcss-import is removed we’ll tighten this check further.
   // strip comments first so explanatory text doesn’t trigger the check.
   const stripped = out.replace(/\/\*[\s\S]*?\*\//g, '');
+  // after comments are gone, ensure the very first token is @charset – a
+  // PostCSS plugin in the build pipeline moves any existing charset rule to
+  // the front, so this check guards against plug-in regressions or the
+  // charset being accidentally dropped by Sass/PostCSS.
+  const leading = stripped.replace(/^[\uFEFF\s]*/, '');
+  if (!leading.startsWith('@charset')) {
+    console.error('✗ build output does not begin with @charset declaration');
+    process.exit(1);
+  }
   if (/\@import\s+/.test(stripped)) {
     console.error('✗ build output still contains an @import directive');
     process.exit(1);
@@ -60,6 +69,42 @@ try {
   // stable example.
   if (!/--radius-sm/.test(out)) {
     console.error('✗ build output does not include expected token --radius-sm');
+    process.exit(1);
+  }
+
+  // ensure PicoCSS variables made it into the bundle; any one variable
+  // proves the library was included and its utilities can be overridden.
+  // the previous regex was too loose and matched extended names such as
+  // "--pico-font-family-emoji"; require a colon (and optional whitespace)
+  // to assert the base property is declared rather than merely referenced.
+  if (!/--pico-font-family\s*:\s*/.test(out)) {
+    console.error('✗ build output missing PicoCSS custom property');
+    process.exit(1);
+  }
+
+  // previously we checked for `--font-size-3` as a stand-in for any
+  // Open Props variable, but some builds don’t actually reference that
+  // token so the test could fail spuriously. radius-sm is guaranteed by
+  // our configuration, and we can reuse it both for presence and duplicate
+  // detection.
+  if (!/--radius-sm/.test(out)) {
+    console.error('✗ build output does not include expected token --radius-sm');
+    process.exit(1);
+  }
+
+  // ensure that JIT hasn't duplicated the same property due to a
+  // static import; we only count actual definitions (i.e. followed by
+  // a colon) to avoid comments or references triggering a false positive.
+  const radiusMatches = out.match(/--radius-sm\s*:/g) || [];
+  if (radiusMatches.length !== 1) {
+    console.error('✗ Open Props token --radius-sm definition found ' + radiusMatches.length + ' times (should be 1)');
+    process.exit(1);
+  }
+
+  // ensure header comments from tokens partial are not duplicated
+  const commentMatches = out.match(/_tokens\.scss/g) || [];
+  if (commentMatches.length > 1) {
+    console.error('✗ _tokens.scss header comment appears ' + commentMatches.length + ' times (should be ≤1)');
     process.exit(1);
   }
 

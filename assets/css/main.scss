@@ -131,7 +131,14 @@ partials can reference CSS custom properties.
      - desktop.scss (Desktop-specific utilities)
 */
 
-// module-based imports are now aggregated
+/* vendor libraries come first so their custom properties are available
+   for aliasing and so that our tokens can override them if needed.
+   the `vendors` aggregator forwards PicoCSS before Open Props; the
+   ordering required by TODO.md is therefore satisfied here. */
+@use 'partials/vendors' as vendors; // PicoCSS + Open Props
+
+
+/* module-based imports are now aggregated */
 @use 'partials/settings' as settings;
 @use 'partials/tools' as tools;
 @use 'partials/generic' as generic;
@@ -139,7 +146,7 @@ partials can reference CSS custom properties.
 @use 'partials/objects' as objects;
 @use 'partials/components' as components;
 @use 'partials/utilities' as utilities;
-@use 'partials/vendors' as vendors; // third‑party css imports
 
 
 /* End of main.css importer — do not add large blocks of styles here. */
+/* rebuild test */
