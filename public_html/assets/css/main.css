@@ -133,6 +133,10 @@ partials can reference CSS custom properties.
      - tablet.scss (Tablet-specific utilities)
      - desktop.scss (Desktop-specific utilities)
 */
+/* vendor libraries come first so their custom properties are available
+   for aliasing and so that our tokens can override them if needed.
+   the `vendors` aggregator forwards PicoCSS before Open Props; the
+   ordering required by TODO.md is therefore satisfied here. */
 /* third-party vendor stylesheet for PicoCSS
    the package delivers plain CSS under node_modules/@picocss/pico/css/
    which we import here so Sass/PostCSS can bundle it alongside our own
@@ -522,6 +526,7 @@ progress::-moz-progress-bar{background-color:var(--pico-progress-color)}
    ever removed the original import can be restored.
 */
 /* (import removed – Open Props comes from postcss-jit-props) */
+/* module-based imports are now aggregated */
 /* Open Props is now imported via the `vendors` aggregator
      (see partials/vendors/_open-props.scss).  keep this file focused on
      project‑specific token aliases. */
