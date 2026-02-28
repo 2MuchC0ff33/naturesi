@@ -174,8 +174,7 @@ Convert the static CSS to a Sass‑first workflow, add Open Props tokens and P
 
 *   Rename `assets/css/main.css` → `assets/css/main.scss`.
 *   Replace CSS `@import url(...)` calls with Sass `@use`/`@forward` (or interim Sass `@import` during migration).
-*   Create/confirm `assets/css/partials/` subfolders:
-    *   `settings/`, `tools/`, `base/`, `components/`, `utilities/`.
+*   Create/confirm `assets/css/partials/` all subfolders.
 *   Convert existing partials to `.scss`.
 *   Create `_tokens.scss` that imports Open Props and exposes project variables (CSS custom properties and/or Sass variables).
 *   Add documentation comments at top of each partial describing purpose and import order.
