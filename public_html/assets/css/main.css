@@ -4394,6 +4394,7 @@ Accessibility:
   /* Dialog visual surface */
 }
 .modal__overlay .modal__dialog {
+  background: #ffffff;
   color: #050505;
   border-radius: 0.5rem;
   padding: 1.25rem;
@@ -4467,6 +4468,7 @@ Accessibility:
 */
 .popup {
   position: absolute;
+  background: #ffffff;
   border: 1px solid #e1e1e1;
   border-radius: 6px;
   padding: 0.5rem;
@@ -4522,7 +4524,7 @@ Accessibility:
   transform: translateX(-50%);
   bottom: 1rem;
   z-index: 99999;
-  background: color-mix(in srgb, 92%, black 2%);
+  background: color-mix(in srgb, #ffffff 92%, black 2%);
   border: 1px solid #e1e1e1;
   padding: 0.6rem 0.8rem;
   border-radius: 8px;
@@ -4564,6 +4566,7 @@ Accessibility:
   right: 1rem;
   bottom: 1rem;
   z-index: 99999;
+  background: #ffffff;
   border: 1px solid #e1e1e1;
   padding: 0.5rem 0.75rem;
   border-radius: 8px;

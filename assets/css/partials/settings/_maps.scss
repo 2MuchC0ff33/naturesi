@@ -41,6 +41,8 @@ $colors: (
   footer-text: #6b7280,
   // matches .text-muted utility, adjust as needed
   background: #ffffff,
+  surface: #ffffff,
+  // added for maps.color(surface) compatibility
   text: #050505,
   primary: #2a9d8f,
   // core branding colour
