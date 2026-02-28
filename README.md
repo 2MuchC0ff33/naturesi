@@ -121,13 +121,16 @@ Memcached 1.6.40
 [Redis Docs](https://redis.io/docs/latest/)
 [Memcached Documentation](https://docs.memcached.org/)
 [PNPM Docs](https://pnpm.io/pnpm-cli)
-[HTML Tidy Documentation](https://www.html-tidy.org/documentation/)
 [PHP Manual](https://www.php.net/manual/en/)
 [Composer Documentation](https://getcomposer.org/doc/01-basic-usage.md)
 [JSON Schema Specification](https://json-schema.org/specification#specification-section)
 [JSON Schema Documentation](https://json-schema.org/docs)
 [Composer JSON Schema](https://getcomposer.org/schema.json)
 [security.txt - RFC 9116 A File Format to Aid in Security Vulnerability Disclosure](https://www.rfc-editor.org/rfc/rfc9116)
+[Slim Micro-Framework](https://www.slimframework.com/docs/v4/)
+[Plates](https://platesphp.com/)
+[Open Props](https://open-props.style/#getting-started)
+[PicoCSS](https://picocss.com/docs)
 
 ## Development setup
 

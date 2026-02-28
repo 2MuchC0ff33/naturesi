@@ -132,34 +132,171 @@
 
 ***
 
-#### Phase 1 — Sass + Open Props + Plates Foundations (Weeks 1–2)
+Here is the **combined, paste‑ready** Phase 1 snippet for your `TODO.md`, merging the detailed plan with the small, actionable task list. Australian English; no contractions.
 
-**Files**
+***
 
-*   Convert `assets/css/main.css` → `assets/css/main.scss`
-*   Create `assets/css/partials/` and token mapping file
-*   Add Open Props via pnpm
-*   Add pico.css (via pnpm) and include it in the build
-*   `views/layout.php`, `views/partials/` (head/meta, header, footer)
-*   Promote 8 pilot pages into Plates templates:
-    *   `index`, `accessories`, `wellness-blends`, `cart`, `checkout`, `about`, `contact`, `success`
+#### Phase 1 — Sass + Open Props + PicoCSS & Plates/Slim (Weeks 1–2)
 
-**Actions**
+**TL;DR**
+Convert the static CSS to a Sass‑first workflow, add Open Props tokens and PicoCSS, and introduce Slim + Plates for server‑rendered templates. Update build scripts and tests, refactor pages into Plates, and serve a small set of pilot routes via Slim while keeping static fallback.
 
-*   Integrate **Slim** routing for the pilot pages and fragment endpoints.
-*   Wire npm scripts: `build:css`, `watch:css` (dart‑sass + PostCSS/Autoprefixer).  CSS build already uses `postcss-import` so (note: builds now create
-    a temporary `assets/css/output.css` which is gitignored),
-    partials referenced from `assets/css/main.css` are bundled at build time.
-    Ensure that `postcss-import` runs *before* Autoprefixer so vendor prefixes
-    are added to inlined rules from the partials rather than just the root file.
-*   Import **Open Props** tokens in `main.scss`; expose CSS custom properties.
-*   Import `pico.css` into `main.scss` (import pico first, then Open Props, then custom partials) so base styles load before tokens and overrides.
-*   Optionally enable **CSS Typed OM**, **Properties & Values API**, **CSS Font Loading** where supported.
+***
 
-**Outcome**
+##### Files & Structure
 
-*   Server‑rendered layout with Plates partials.
-*   Tokenised design via Open Props; initial visual parity.
+*   Rename `assets/css/main.css` → `assets/css/main.scss`.
+*   Create `assets/css/partials/` and migrate partials to `.scss` in logical layers:
+    *   `settings/`, `tools/`, `base/`, `components/`, `utilities/`.
+*   Add token mapping partial `assets/css/partials/_tokens.scss` (imports Open Props and exposes project variables).
+*   Add `views/`:
+    *   `views/layout.php` (HTML skeleton and asset links).
+    *   `views/partials/` (`head_meta.php`, `header.php`, `footer.php`).
+    *   `views/pages/` (Plates versions of current static pages).
+*   Keep original static HTML under `pages/` temporarily for visual parity checks.
+
+***
+
+##### Task Breakdown (Small, Sequential Tasks)
+
+###### 1) Tooling Setup
+
+*   Add dependencies via pnpm: `sass` (dart‑sass), `open-props`, `@picocss/pico`.
+*   Update `package.json`:
+    *   Add `build:css` script (sass → PostCSS → Autoprefixer → `check_css_build.cjs`).
+    *   Add `watch:css` script (`sass --watch` + PostCSS watch, if used).
+*   Ensure `postcss-import` runs **before** Autoprefixer in `postcss.config.js` and document the order in comments.
+*   Add Autoprefixer targets via `.browserslistrc` or `package.json#browserslist`.
+*   Confirm PostCSS pipeline still writes the temporary `assets/css/output.css` (gitignored) if applicable.
+*   Update `check_css_build.cjs` to validate SCSS output rules (no legacy `@import` in final CSS, expected tokens present).
+
+###### 2) Convert CSS → Sass
+
+*   Rename `assets/css/main.css` → `assets/css/main.scss`.
+*   Replace CSS `@import url(...)` calls with Sass `@use`/`@forward` (or interim Sass `@import` during migration).
+*   Create/confirm `assets/css/partials/` subfolders:
+    *   `settings/`, `tools/`, `base/`, `components/`, `utilities/`.
+*   Convert existing partials to `.scss`.
+*   Create `_tokens.scss` that imports Open Props and exposes project variables (CSS custom properties and/or Sass variables).
+*   Add documentation comments at top of each partial describing purpose and import order.
+*   Update `check_css_build.cjs` to accept SCSS build and to assert no `@import` remains in the emitted CSS.
+
+###### 3) Integrate PicoCSS + Open Props
+
+*   In `main.scss`, import in this order:
+    1.  PicoCSS
+    2.  Open Props
+    3.  `_tokens.scss`
+    4.  Project partials (settings → base → components → utilities)
+*   Confirm PicoCSS utilities are present and overrideable via custom properties.
+*   Confirm Open Props variables compile and appear as CSS custom properties.
+*   Add a TODO for potential `postcss-jit-props` adoption later if desired.
+
+###### 4) Slim + Plates Framework Setup
+
+*   Add Composer dependencies: `slim/slim`, `league/plates` and run `composer install`.
+*   Create `views/` with:
+    *   `views/layout.php`
+    *   `views/partials/head_meta.php`
+    *   `views/partials/header.php`
+    *   `views/partials/footer.php`
+    *   `views/pages/` for page templates
+*   Update `bootstrap.php`:
+    *   Instantiate Slim app (`AppFactory::create()`).
+    *   Add routing and error middleware.
+    *   Instantiate `Plates\Engine` with `__DIR__ . '/../views'` and register helpers (for example `asset`, `uri`).
+*   Update `public/index.php` to route requests through Slim.
+*   Add pilot routes: `/`, `/about`, `/store`.
+*   Configure fallback so unmatched routes can still serve static files (for example Slim notFound handler serving from `pages/` where appropriate).
+
+###### 5) Refactor Static HTML Pages → Plates Templates
+
+*   For each file in `pages/`:
+    *   Move body content into `views/pages/*`.
+    *   Use Plates section/yield where appropriate (for example `$this->section('content')`).
+    *   Replace hardcoded asset paths with helper calls (for example `$this->asset('js/app.js')`).
+*   Keep original static HTML in `pages/` until visual parity is confirmed.
+
+###### 6) Testing & Validation
+
+*   Extend `check_bootstrap.cjs` to detect Slim + Plates initialisation or environment flags.
+*   Add/update a simple PHP test (for example `BootstrapTest.php`) to assert Slim responds to pilot routes.
+*   Ensure SCSS build tests verify:
+    *   No `@import` leakage in output CSS.
+    *   Vendor prefixes present.
+    *   Open Props tokens present where expected.
+*   Run Stylelint or existing CSS validation.
+
+###### 7) Documentation
+
+*   In `TODO.md` under Phase 1, list references to Sass, PostCSS, Autoprefixer, Open Props, PicoCSS, Slim, Plates, pnpm, Composer, and JSON Schema resources used.
+*   Optionally add `docs/phase1.md` outlining:
+    *   Sass workflow
+    *   Build commands
+    *   Directory structure
+    *   Slim + Plates overview
+*   Update `README.md`:
+    *   Note Sass is now part of the workflow.
+    *   Add CSS build steps and dev server instructions.
+    *   Update developer setup for PHP + pnpm.
+
+###### 8) Verification
+
+*   Run `pnpm install` then `pnpm run build:css`; confirm no errors.
+*   Run `pnpm run watch:css`; confirm live recompilation works when editing partials.
+*   Run `composer install`; confirm Slim and Plates autoload.
+*   Launch dev server:
+    *   `php -S localhost:8000 -t public`
+*   Verify:
+    *   Plates homepage renders at `http://localhost:8000/`.
+    *   Visual parity with legacy `pages/index.html`.
+    *   Static fallback still works for direct navigation where intended.
+*   Inspect built CSS:
+    *   PicoCSS base styles present.
+    *   Open Props custom properties present.
+*   Confirm templates exist in `views/` and static markup has been removed or flagged for deletion.
+*   Linting and style checks still pass.
+
+***
+
+##### CSS Migration Details
+
+*   Replace legacy CSS imports with Sass `@use`/`@forward` where possible; use interim Sass `@import` only as a temporary step.
+*   Recommended compile order in `main.scss`:
+    1.  PicoCSS
+    2.  Open Props
+    3.  Project partials (tokens/settings → base → components → utilities)
+*   Keep `postcss-import` only if required for third‑party CSS resolution (for example Pico path); otherwise rely on Sass resolution.
+
+***
+
+##### Slim & Plates Notes
+
+*   `bootstrap.php`:
+    *   Create Slim app, add routing and error middleware.
+    *   Configure Plates engine pointing at `views/`, register `asset` and `uri` helpers.
+*   `public/index.php`:
+    *   Route all requests through Slim.
+    *   NotFound handling can serve static files where required during transition.
+*   Pilot routes: `/`, `/about`, `/store`.
+
+***
+
+##### Decisions
+
+*   **Sass syntax**: Prefer `@use`/`@forward` for modularity; avoid legacy `@import`.
+*   **Build order**: Compile with Sass first, then PostCSS/Autoprefixer; ensure `postcss-import` precedes Autoprefixer if retained.
+*   **Templating fallback**: Retain original `pages/` HTML until Slim/Plates routes are stable in a later phase.
+*   **Package manager**: Continue with pnpm; adjust scripts rather than switching to npm.
+
+***
+
+##### Ready‑to‑run Checks
+
+*   `pnpm run build:css` completes without errors; output `assets/css/main.css` (or configured path) contains vendor prefixes and no `@import`.
+*   `pnpm run watch:css` rebuilds on editing `assets/css/partials/*`.
+*   `composer install` completes; Slim and Plates available.
+*   `php -S localhost:8000 -t public` serves Plates‑templated homepage with visual parity.
 
 ***
 
