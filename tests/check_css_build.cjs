@@ -42,6 +42,24 @@ try {
     process.exit(1);
   }
 
+  // ensure watcher script is modern and cross-platform
+  try {
+    const pkg = JSON.parse(readFileSync('package.json', 'utf-8'));
+    const script = pkg.scripts && pkg.scripts['watch:css'];
+    if (script) {
+      if (script.includes('&')) {
+        console.error('✗ watch:css script still uses shell background operator (&)');
+        process.exit(1);
+      }
+      if (!/concurrently/.test(script)) {
+        console.error('✗ watch:css script does not invoke concurrently');
+        process.exit(1);
+      }
+    }
+  } catch (e) {
+    // ignore failures when package.json is unavailable
+  }
+
   console.log('✓ build output contains no @import from partials, no source map,' +
               ' and includes vendor prefixes');
 } catch (e) {

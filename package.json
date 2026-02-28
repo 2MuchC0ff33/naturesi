@@ -6,7 +6,7 @@
   "author": "2MuchC0ff33",
   "scripts": {
     "build:css": "sass assets/css/main.scss assets/css/output.css && postcss assets/css/output.css -o public/assets/css/main.css && node tests/check_css_build.cjs",
-    "watch:css": "sass --watch assets/css/main.scss:assets/css/output.css & postcss --watch assets/css/output.css -o public/assets/css/main.css",
+    "watch:css": "pnpm exec concurrently --kill-others \"sass --watch assets/css/main.scss:assets/css/output.css\" \"postcss --watch assets/css/output.css -o public/assets/css/main.css\"",
     "verify:css": "node tests/check_css_build.cjs",
     "build:ts": "tsc"
   },
@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "@picocss/pico": "^2.1.1",
+    "concurrently": "^8.2.2",
     "open-props": "^1.7.23",
     "postcss-cli": "^11.0.1",
     "sass": "^1.97.3"
