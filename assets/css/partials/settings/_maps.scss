@@ -14,6 +14,12 @@
 $colors: (
   background: #ffffff,
   text: #050505,
+  primary: #2a9d8f,
+  // core branding colour
+  secondary: #e9c46a,
+  // accent/alternative button colour
+  focus: #264653,
+  // outline state for forms and focus-visible
   accent: #346967,
   "light-background": #bdd5d4,
   highlight: #f6e6cd,
@@ -146,7 +152,9 @@ $elevation: (
 
 // auto‑generate custom properties for backwards compatibility. this lets
 // downstream code continue to reference `var(--color-foo)` while we
-// migrate callers to the map helpers.
+// migrate callers to the map helpers. once no Sass source imports
+// `variables.scss` or otherwise uses `var(--...)`, the entire :root block
+// (and the `variables.scss` shim) can be removed to shrink the build.
 :root {
   @each $name, $val in $colors {
     --color-#{$name}: #{$val};

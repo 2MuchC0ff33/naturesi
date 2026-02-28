@@ -3,18 +3,20 @@
    import order: maintained by assets/css/main.scss.
 */
 
+@use "../utilities/helpers" as helpers;
+
 /* Utilities – shadow helpers */
 
 .u-shadow-sm {
-  box-shadow: var(--shadow-sm);
+  @include helpers.box-shadow(sm);
 }
 
 .u-shadow-md {
-  box-shadow: var(--shadow-md);
+  @include helpers.box-shadow(md);
 }
 
 .u-shadow-lg {
-  box-shadow: var(--shadow-lg);
+  @include helpers.box-shadow(lg);
 }
 
 .u-shadow-xl {

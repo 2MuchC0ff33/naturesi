@@ -3,6 +3,8 @@
    import order: maintained by assets/css/main.scss.
 */
 
+@use "../settings/maps" as maps;
+
 /* Utilities – padding helpers (alias layer)
    Canonical padding helpers are defined in `spacing-helpers.css` to avoid duplication.
    This partial provides axis helpers and convenience aliases only. */
@@ -24,21 +26,21 @@
 }
 
 .u-pl-1 {
-  padding-left: var(--space-xs) !important;
+  padding-left: maps.spacing(xs) !important;
 }
 
 .u-pr-1 {
-  padding-right: var(--space-xs) !important;
+  padding-right: maps.spacing(xs) !important;
 }
 
 /* axis shorthand aliases are defined in spacing-helpers.css to avoid duplication */
 
 .u-pl-2 {
-  padding-left: var(--space-sm) !important;
+  padding-left: maps.spacing(sm) !important;
 }
 
 .u-pr-2 {
-  padding-right: var(--space-sm) !important;
+  padding-right: maps.spacing(sm) !important;
 }
 
 /* use canonical `.u-px-2` in `spacing-helpers.css` */
@@ -49,11 +51,11 @@
 }
 
 .u-py-1 {
-  padding-top: var(--space-xs) !important;
-  padding-bottom: var(--space-xs) !important;
+  padding-top: maps.spacing(xs) !important;
+  padding-bottom: maps.spacing(xs) !important;
 }
 
 .u-py-2 {
-  padding-top: var(--space-sm) !important;
-  padding-bottom: var(--space-sm) !important;
+  padding-top: maps.spacing(sm) !important;
+  padding-bottom: maps.spacing(sm) !important;
 }

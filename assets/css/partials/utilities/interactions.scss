@@ -43,6 +43,6 @@
 
 /* Focus */
 .u-focus-visible:focus-visible {
-  outline: 2px solid var(--color-focus) !important;
+  outline: 2px solid maps.color(focus) !important;
   outline-offset: 2px !important;
 }

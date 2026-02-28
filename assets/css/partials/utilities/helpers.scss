@@ -32,6 +32,38 @@
   gap: $gap;
 }
 
+// more flexible responsive grid; pass a map of breakpoint => col-count
+// e.g. `@include helpers.grid-responsive((mobile:1, tablet:2, desktop:3));`
+@mixin grid-responsive($col-map, $gap: maps.spacing(unit)) {
+  display: grid;
+  gap: $gap;
+
+  @each $bp, $count in $col-map {
+    @include respond-to($bp) {
+      grid-template-columns: repeat($count, 1fr);
+    }
+  }
+}
+
+// simple button style helper, variant refers to a colour token (primary,
+// secondary, accent, etc.)
+@mixin btn($variant: accent, $text: #fff) {
+  display: inline-block;
+  padding: maps.button("padding-vertical") maps.button("padding-horizontal");
+  border-radius: maps.button("radius");
+  background-color: maps.color($variant);
+  color: $text;
+  text-decoration: none;
+  cursor: pointer;
+  @include box-shadow(sm);
+
+  &:hover {
+    background-color: maps.color($variant)
+      /* lighten/darken logic could go here */
+    ;
+  }
+}
+
 // simple shadow mixin referencing map tokens
 @mixin box-shadow($which: sm) {
   box-shadow: maps.shadow($which);

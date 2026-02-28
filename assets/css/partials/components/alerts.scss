@@ -6,35 +6,37 @@
 /* components/alerts.css
    Purpose: Alert and inline error messages (non-modal alerts).
    Scope: `.alert`, `.alert--error`, `.alert--success`, `.error-message`.
-   Notes: Alerts should be accessible; consider adding `role="alert"` to markup when appropriate.
+   Notes: Alerts should be accessible; consider adding `role="alert" to markup when appropriate.
 */
+@use "../settings/maps" as maps;
+
 
 .alert {
-  padding: 0.75rem;
-  border-radius: 4px;
-  border: 1px solid var(--color-border);
+  padding: maps.spacing(sm);
+  border-radius: maps.radius(sm);
+  border: 1px solid maps.color(border);
   background: var(--alert-bg, #fff);
-  color: var(--text);
+  color: maps.color(text);
 }
 
 .alert--error {
   background: var(--color-error-bg, #fff3f3);
-  border-color: var(--color-error-border);
-  color: var(--color-error);
+  border-color: maps.color(error);
+  color: maps.color(error);
+}
+
+.error-message {
+  color: maps.color(error);
+  background-color: var(--color-error-bg);
+  border: 1px solid maps.color(error);
+  border-radius: maps.radius(sm);
+  padding: maps.spacing(sm);
+  margin-bottom: maps.spacing(unit);
+  font-weight: 500;
 }
 
 .alert--success {
   background: var(--color-success-bg, #f3fff7);
   border-color: var(--color-success-border);
   color: var(--color-success);
-}
-
-.error-message {
-  color: var(--color-error);
-  background-color: var(--color-error-bg);
-  border: 1px solid var(--color-error-border);
-  border-radius: 4px;
-  padding: 0.75rem;
-  margin-bottom: 1rem;
-  font-weight: 500;
 }

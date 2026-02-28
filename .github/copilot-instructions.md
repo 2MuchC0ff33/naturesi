@@ -55,14 +55,19 @@ Purpose: concise guidance so an AI coding agent can start work quickly in this r
   * Design tokens (colors, spacing, breakpoints) are stored in Sass maps
     (`partials/settings/_maps.scss`).  Functions like `maps.color()` and
     mixins in `partials/utilities/helpers.scss` provide a namespaced API.
-    Generated `:root` custom-properties ensure runtime compatibility.
+    Generated `:root` custom-properties ensure runtime compatibility.  The
+    palette now includes `primary`, `secondary` and `focus` tokens; edit
+    `$colors` and run the build whenever branding colours change.
   * For new mixins or helpers, always create a dedicated module and invoke
     it via its namespace rather than polluting the global scope.  helper
     mixins live in `partials/utilities/helpers.scss` and include
-    `bg-color`, `text-color`, `pad`, `margin`, `grid`, `box-shadow`,
-    `fluid-type`, and `respond-to`.
+    `bg-color`, `text-color`, `pad`, `margin`, `grid`, `grid-responsive`,
+    `btn`, `box-shadow`, `fluid-type`, and `respond-to`.
   * When converting existing styles, replace `var(--token)` references with
-    `maps.color(token)`/`maps.spacing(token)` or the appropriate helper.
+    `maps.color(token)`/`maps.spacing(token)` or the appropriate helper.  As
+    the migration progresses you should be able to drop
+    `partials/settings/variables.scss` entirely once no source file
+    references its custom properties.
   * Vendor CSS that cannot be converted to Sass lives under
     `partials/vendors`; once the final dependency is eliminated the
     `postcss-import` plugin can be removed and the build command

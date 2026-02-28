@@ -62,7 +62,10 @@ principles:
     accessing colour tokens from the map.
   * `@include helpers.pad(size)` and `helpers.margin(size)` for spacing.
   * `@include helpers.grid(columns, $gap?)` to quickly create simple
-    CSS grids.
+    CSS grids.  A more flexible variant, `@include helpers.grid-responsive( $map )`,
+    accepts a breakpoint‑to‑columns map for responsive layouts.
+  * `@include helpers.btn($variant)` produces a basic button style using the
+    specified colour token (`primary`, `secondary`, `accent`, etc.).
   * `@include helpers.box-shadow(size)` to apply one of the predefined
     shadow tokens.
   * `@include helpers.fluid-type()` generates a fluid font size using the
@@ -71,9 +74,11 @@ principles:
   * `@mixin respond-to()` remains for media query convenience.
 
 - When converting an existing partial, replace `var(--color-foo)` with
-  `maps.color(foo)` or the `helpers` mixins.  Similarly, border utilities now
-  reference `maps.color(border)` though the old custom‑property fallback is
-  still available via `@use "../settings/maps"` if necessary.
+  `maps.color(foo)` or the `helpers` mixins.  The `$colors` map now includes
+  `primary`, `secondary` and `focus` tokens; update these values as needed and
+  run the build to regenerate the legacy custom properties.  Similarly, border
+  utilities now reference `maps.color(border)` though the old custom‑property
+  fallback is still available via `@use "../settings/maps"` if necessary.
 
 - The goal is to make `partials/settings/variables.scss` a tiny shim; after
   every token has a map and the global styles no longer depend on

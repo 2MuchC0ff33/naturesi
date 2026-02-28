@@ -16,23 +16,23 @@
 }
 
 .u-ml-2 {
-  margin-left: var(--space-sm) !important;
+  margin-left: maps.spacing(sm) !important;
 }
 
 .u-ml-3 {
-  margin-left: var(--space-md) !important;
+  margin-left: maps.spacing(md) !important;
 }
 
 .u-mr-1 {
-  margin-right: var(--space-xs) !important;
+  margin-right: maps.spacing(xs) !important;
 }
 
 .u-mr-2 {
-  margin-right: var(--space-sm) !important;
+  margin-right: maps.spacing(sm) !important;
 }
 
 .u-mr-3 {
-  margin-right: var(--space-md) !important;
+  margin-right: maps.spacing(md) !important;
 }
 
 /* Use `.u-mx-*` canonical helpers defined in `spacing-helpers.css` */

@@ -12,12 +12,11 @@
 @use "../settings/maps" as maps;
 
 .u-bg-primary {
-  /* primary/secondary are defined by vendor CSS; keep var fallback */
-  background-color: var(--color-primary) !important;
+  background-color: maps.color(primary) !important;
 }
 
 .u-bg-secondary {
-  background-color: var(--color-secondary) !important;
+  background-color: maps.color(secondary) !important;
 }
 
 .u-bg-accent {
@@ -38,11 +37,11 @@
 
 /* Text colors */
 .u-text-primary {
-  color: var(--color-primary) !important;
+  color: maps.color(primary) !important;
 }
 
 .u-text-secondary {
-  color: var(--color-secondary) !important;
+  color: maps.color(secondary) !important;
 }
 
 .u-text-accent {

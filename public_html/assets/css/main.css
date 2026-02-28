@@ -203,6 +203,9 @@ site‑wide.
 :root {
   --color-background: #ffffff;
   --color-text: #050505;
+  --color-primary: #2a9d8f;
+  --color-secondary: #e9c46a;
+  --color-focus: #264653;
   --color-accent: #346967;
   --color-light-background: #bdd5d4;
   --color-highlight: #f6e6cd;
@@ -234,6 +237,9 @@ just before the :root declaration.
 :root {
   --color-background: #ffffff;
   --color-text: #050505;
+  --color-primary: #2a9d8f;
+  --color-secondary: #e9c46a;
+  --color-focus: #264653;
   --color-accent: #346967;
   --color-light-background: #bdd5d4;
   --color-highlight: #f6e6cd;
@@ -3160,14 +3166,14 @@ print fallbacks.
 */
 /* Categories nav component: single-row desktop, horizontal-scroll mobile */
 .site-header__categories {
-  border-top: 1px solid var(--color-border, #e6e6e6);
-  background: var(--color-light-background, #fff);
+  border-top: 1px solid #e1e1e1;
+  background: #bdd5d4;
 }
 .site-header__categories-list {
   margin: 0;
-  padding: 0 var(--space-sm, 0.5rem);
+  padding: 0 0.75rem;
   display: flex;
-  gap: var(--space-xs, 0.5rem);
+  gap: 0.5rem;
   list-style: none;
   align-items: center;
   overflow: hidden;
@@ -3181,7 +3187,7 @@ print fallbacks.
 .site-header__categories-link {
   display: inline-block;
   padding: 4px 8px;
-  color: var(--color-text, #222);
+  color: #050505;
   text-decoration: none;
   font-size: clamp(0.85rem, 0.9vw, 1rem);
   line-height: 1.2;
@@ -3193,9 +3199,9 @@ print fallbacks.
 /* Focus & accessible outline */
 .site-header__categories-link:focus,
 .site-header__categories-link:focus-visible {
-  outline: 3px solid var(--color-accent, #4CAF50);
+  outline: 3px solid #346967;
   outline-offset: 3px;
-  border-radius: 4px;
+  border-radius: 0.25rem;
 }
 /* Desktop / Tablet: prevent wrapping and try to keep all items on a single row */
 @media (min-width: 900px) {
@@ -3211,7 +3217,7 @@ print fallbacks.
     -webkit-overflow-scrolling: touch;
     scroll-snap-type: x proximity;
     gap: 0.5rem;
-    padding: 0 0.5rem;
+    padding: 0 0.75rem;
   }
   .site-header__categories-list li {
     scroll-snap-align: start;
@@ -4563,33 +4569,33 @@ Accessibility:
 /* components/alerts.css
    Purpose: Alert and inline error messages (non-modal alerts).
    Scope: `.alert`, `.alert--error`, `.alert--success`, `.error-message`.
-   Notes: Alerts should be accessible; consider adding `role="alert"` to markup when appropriate.
+   Notes: Alerts should be accessible; consider adding `role="alert" to markup when appropriate.
 */
 .alert {
   padding: 0.75rem;
-  border-radius: 4px;
-  border: 1px solid var(--color-border);
+  border-radius: 0.25rem;
+  border: 1px solid #e1e1e1;
   background: var(--alert-bg, #fff);
-  color: var(--text);
+  color: #050505;
 }
 .alert--error {
   background: var(--color-error-bg, #fff3f3);
-  border-color: var(--color-error-border);
-  color: var(--color-error);
+  border-color: #f44336;
+  color: #f44336;
+}
+.error-message {
+  color: #f44336;
+  background-color: var(--color-error-bg);
+  border: 1px solid #f44336;
+  border-radius: 0.25rem;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  font-weight: 500;
 }
 .alert--success {
   background: var(--color-success-bg, #f3fff7);
   border-color: var(--color-success-border);
   color: var(--color-success);
-}
-.error-message {
-  color: var(--color-error);
-  background-color: var(--color-error-bg);
-  border: 1px solid var(--color-error-border);
-  border-radius: 4px;
-  padding: 0.75rem;
-  margin-bottom: 1rem;
-  font-weight: 500;
 }
 /* notifications.scss
    purpose: see assets/css/partials/README.md for organisation.
@@ -5336,19 +5342,19 @@ This file contains top-level typographic and document-level settings using desig
   margin-left: 0.5rem !important;
 }
 .u-ml-2 {
-  margin-left: var(--space-sm) !important;
+  margin-left: 0.75rem !important;
 }
 .u-ml-3 {
-  margin-left: var(--space-md) !important;
+  margin-left: 1.25rem !important;
 }
 .u-mr-1 {
-  margin-right: var(--space-xs) !important;
+  margin-right: 0.5rem !important;
 }
 .u-mr-2 {
-  margin-right: var(--space-sm) !important;
+  margin-right: 0.75rem !important;
 }
 .u-mr-3 {
-  margin-right: var(--space-md) !important;
+  margin-right: 1.25rem !important;
 }
 /* Use `.u-mx-*` canonical helpers defined in `spacing-helpers.css` */
 /* paddings.scss
@@ -5371,17 +5377,17 @@ This file contains top-level typographic and document-level settings using desig
   padding-right: 0 !important;
 }
 .u-pl-1 {
-  padding-left: var(--space-xs) !important;
+  padding-left: 0.5rem !important;
 }
 .u-pr-1 {
-  padding-right: var(--space-xs) !important;
+  padding-right: 0.5rem !important;
 }
 /* axis shorthand aliases are defined in spacing-helpers.css to avoid duplication */
 .u-pl-2 {
-  padding-left: var(--space-sm) !important;
+  padding-left: 0.75rem !important;
 }
 .u-pr-2 {
-  padding-right: var(--space-sm) !important;
+  padding-right: 0.75rem !important;
 }
 /* use canonical `.u-px-2` in `spacing-helpers.css` */
 .u-py-0 {
@@ -5389,12 +5395,12 @@ This file contains top-level typographic and document-level settings using desig
   padding-bottom: 0 !important;
 }
 .u-py-1 {
-  padding-top: var(--space-xs) !important;
-  padding-bottom: var(--space-xs) !important;
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
 }
 .u-py-2 {
-  padding-top: var(--space-sm) !important;
-  padding-bottom: var(--space-sm) !important;
+  padding-top: 0.75rem !important;
+  padding-bottom: 0.75rem !important;
 }
 /* center.scss
    purpose: see assets/css/partials/README.md for organisation.
@@ -5432,7 +5438,7 @@ This file contains top-level typographic and document-level settings using desig
 }
 /* Generic gap helpers (useful for grid/flex containers) */
 .u-gap {
-  gap: var(--space-md) !important;
+  gap: 1.25rem !important;
 }
 .u-gap-1 {
   gap: 0.5rem !important;
@@ -5441,7 +5447,7 @@ This file contains top-level typographic and document-level settings using desig
   gap: 0.75rem !important;
 }
 .u-gap-3 {
-  gap: var(--space-md) !important;
+  gap: 1.25rem !important;
 }
 .u-gap-4 {
   gap: 2rem !important;
@@ -5637,19 +5643,28 @@ This file contains top-level typographic and document-level settings using desig
 .u-smooth-scroll {
   scroll-behavior: smooth;
 }
+/* base.scss
+   purpose: see assets/css/partials/README.md for organisation.
+   import order: maintained by assets/css/main.scss.
+*/
+/* ==========================================================================
+Base document styles
+This file contains top-level typographic and document-level settings using design tokens.
+========================================================================== */
+/* HTML5 document base styles */
 /* shadows.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
 */
 /* Utilities – shadow helpers */
 .u-shadow-sm {
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 .u-shadow-md {
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 .u-shadow-lg {
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
 }
 .u-shadow-xl {
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;

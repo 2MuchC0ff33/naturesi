@@ -23,7 +23,7 @@
 
 /* Generic gap helpers (useful for grid/flex containers) */
 .u-gap {
-  gap: var(--space-md) !important;
+  gap: maps.spacing(md) !important;
 }
 
 .u-gap-1 {
@@ -35,7 +35,7 @@
 }
 
 .u-gap-3 {
-  gap: var(--space-md) !important;
+  gap: maps.spacing(md) !important;
 }
 
 .u-gap-4 {
