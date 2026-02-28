@@ -101,6 +101,13 @@ try {
     process.exit(1);
   }
 
+  // ensure header comments from tokens partial are not duplicated
+  const commentMatches = out.match(/_tokens\.scss/g) || [];
+  if (commentMatches.length > 1) {
+    console.error('✗ _tokens.scss header comment appears ' + commentMatches.length + ' times (should be ≤1)');
+    process.exit(1);
+  }
+
   // ensure watcher script is modern and cross-platform
   try {
     const pkg = JSON.parse(readFileSync('package.json', 'utf-8'));

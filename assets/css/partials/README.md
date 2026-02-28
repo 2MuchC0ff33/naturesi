@@ -130,6 +130,9 @@ Conventions
 - Use `--` CSS custom properties for theming tokens; prefer semantic names.
 
 - Use Australian English for comments and any text (e.g. "organise").
+- When a partial may be loaded more than once (via forwards/uses), prefer
+  `//` Sass comments instead of `/*…*/` so the final build isn’t bloated with
+  repeated header blocks.
 
 Quick checklist for changes
 

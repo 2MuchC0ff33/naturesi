@@ -531,12 +531,6 @@ progress::-moz-progress-bar{background-color:var(--pico-progress-color)}
    ever removed the original import can be restored.
 */
 /* (import removed – Open Props comes from postcss-jit-props) */
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* maps.scss – centralised design tokens expressed as Sass maps.
    this is the first step towards theming and allows us to reuse values
    in mixins, functions and even generate the corresponding CSS custom
@@ -553,12 +547,6 @@ site‑wide.
   --radius-sm: 0.25rem;
 }
 /* additional project token definitions can be added below */
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* ==========================================================================
 Aggregator for settings-related partials. This file is part of the
 migration from legacy `@import` to the Sass module system.  Each of the
@@ -600,12 +588,6 @@ Global layout settings
 Broad layout constants such as header heights and other structural defaults
 ========================================================================== */
 /* header heights are now provided via settings/maps.scss */
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* colours.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -681,12 +663,6 @@ caption {
 }
 /* Headings - discretionary ligatures moved to `partials/elements/headings.css` */
 /* Link/button base moved to `partials/elements/links.css` and `partials/elements/buttons.css` */
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* spacing.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -713,12 +689,6 @@ These helpers are small, semantic spacing utilities that map to design tokens
   padding: 0;
   margin: 0;
 }
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* sizing.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -780,12 +750,6 @@ Contains container/grid helpers and small generic layout utilities
 */
 /* Note: `.center-row` moved to `partials/objects/flexbox.css` and `.inline-block` remains in
    `partials/tools/mixins.css` for lightweight utilities. */
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* media.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -862,12 +826,6 @@ Non-invasive `.hidden` helper centralised in the tools layer.
 }
 /* NOTE: The native `[hidden]` attribute is still managed in `partials/generic/reset.css`.
    Keep this class for cases where a class-based hide is required. */
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* accessibility.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -971,12 +929,6 @@ select,
 textarea {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* animations.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -1035,12 +987,6 @@ Centralised keyframes for reuse by components (keeps components focused on usage
     transition: none !important;
   }
 }
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* interactions.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -1114,12 +1060,6 @@ Generic hover/focus interactions used across components (lift effect).
   width: 1rem;
   height: 1rem;
 }
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* state.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -1493,12 +1433,6 @@ input[type=number]::-webkit-outer-spin-button {
     display: revert;
 }
 */
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* base.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -1508,12 +1442,6 @@ Base document styles
 This file contains top-level typographic and document-level settings using design tokens.
 ========================================================================== */
 /* HTML5 document base styles */
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* helpers.scss – mixins and functions that use Sass maps from the
    `settings/maps` module. this demonstrates the namespaced utility pattern
    and provides a place for small reusable snippets that don’t warrant
@@ -1555,12 +1483,6 @@ hr {
   margin: 1.25rem auto;
   width: 80%;
 }
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* selections.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -1658,12 +1580,6 @@ table {
 }
 /* Prose styles were consolidated into `partials/elements/paragraphs.css` to
    avoid duplicate definitions and keep paragraph rules in one canonical file. */
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* html.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -1676,12 +1592,6 @@ html {
   line-height: 1.6;
   font-family: "Arial", system-ui, -apple-system, "Segoe UI", "Helvetica Neue", "Noto Sans", "Liberation Sans", sans-serif;
 }
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* body.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -1693,12 +1603,6 @@ body {
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
 }
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* title.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -1720,12 +1624,6 @@ site‑wide.
   color: #6b7280;
   font-size: 0.95rem;
 }
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* headings.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -1766,12 +1664,6 @@ h3 {
   font-size: clamp(1.1rem, 3vw, 1.25rem);
   font-weight: 600;
 }
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* paragraphs.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -1814,12 +1706,6 @@ p {
   flex-direction: column;
   gap: 0.35rem;
 }
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* lists.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -1847,12 +1733,6 @@ li {
   padding: 0;
   margin: 0;
 }
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* links.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -1920,12 +1800,6 @@ video {
   margin: 0 auto;
   /* Center videos horizontally */
 }
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* tables.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -1952,12 +1826,6 @@ td {
 .table--compact td {
   padding: 0.35rem;
 }
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* forms.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -2179,12 +2047,6 @@ label {
   margin-bottom: 0.25rem;
   font-weight: 600;
 }
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* inputs.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -2209,12 +2071,6 @@ textarea:focus {
   outline: 3px solid color-mix(in srgb, #346967 60%, transparent);
   outline-offset: 2px;
 }
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* buttons.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -2317,12 +2173,6 @@ svg[aria-hidden=true] {
   min-width: 32px;
   height: 36px;
 }
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* header.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -2861,12 +2711,6 @@ navigation elements in a single compact row while maintaining accessibility.
     flex-shrink: 1;
   }
 }
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* footer.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -2994,12 +2838,6 @@ footer[itemscope][itemtype*=WPFooter] a:hover {
 Aggregator for object and template rules.  Templates are included here
 because they were originally adjacent in main.scss; they can be split later.
 ========================================================================== */
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* wrapper.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -3035,12 +2873,6 @@ Use `.container` for content-width constraints.
   padding-left: env(safe-area-inset-left);
   padding-right: env(safe-area-inset-right);
 }
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* container.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -3082,12 +2914,6 @@ Use `.container` inside `.wrapper` to constrain content width.
   max-width: none;
   padding-inline: 1rem;
 }
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* flexbox.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -3152,12 +2978,6 @@ API highlights: `.stack`, `.stack--sm`, `.stack--lg`, `.row`, `.center-row`,
 .flex--no-wrap {
   flex-wrap: nowrap;
 }
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* grid.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -3201,12 +3021,6 @@ API: `.grid`, `.grid-auto-fit`, `.grid--cols-2`, `.grid--cols-3`,
     grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
   }
 }
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* media-object.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -3377,12 +3191,6 @@ API examples: `.hide--sm-up`, `.hide--md-up`, `.show--md-up` — mobile-first he
     display: none;
   }
 }
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* templates.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -3411,12 +3219,6 @@ site‑wide.
     align-items: start;
   }
 }
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* shadow-dom.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -3443,12 +3245,6 @@ site‑wide.
 /* ==========================================================================
 Aggregator for component rules.  This is intentionally verbose; as each
 file migrates to `@use` the corresponding forward can be removed.
-========================================================================== */
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
 ========================================================================== */
 /* navigation-menu.scss
    purpose: see assets/css/partials/README.md for organisation.
@@ -3517,12 +3313,6 @@ site‑wide.
   display: inline-block;
 }
 /* Placeholder: additional navigation menu rules can be added here */
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* categories.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -3636,12 +3426,6 @@ print fallbacks.
 #site-header .category-dropdown ul a {
   color: #050505 !important;
 }
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* categories-nav.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -3714,12 +3498,6 @@ site‑wide.
 .site-header__categories .visually-hidden {
   margin: 0;
 }
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* products.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -3974,12 +3752,6 @@ site‑wide.
     flex: 0 0 auto;
   }
 }
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* hero.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -4216,12 +3988,6 @@ site‑wide.
   margin-right: auto;
   pointer-events: auto;
 }
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* reviews.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -4286,12 +4052,6 @@ site‑wide.
     grid-template-columns: repeat(3, 1fr);
   }
 }
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* components.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -4473,12 +4233,6 @@ Accordion toggles, social icon variants and other small repeated components.
     flex-wrap: nowrap;
   }
 }
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* input-fields.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -4521,12 +4275,6 @@ input:-webkit-autofill {
   -webkit-transition: background-color 5000s ease-in-out 0s;
   transition: background-color 5000s ease-in-out 0s;
 }
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* badges.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -4585,12 +4333,6 @@ site‑wide.
   align-items: center;
   flex-wrap: wrap;
 }
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* progress-bars.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -4617,12 +4359,6 @@ site‑wide.
     transition: none;
   }
 }
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* loaders.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -4653,12 +4389,6 @@ site‑wide.
     animation: none;
   }
 }
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* sliders.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -4727,12 +4457,6 @@ site‑wide.
     transition: none;
   }
 }
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* carousels.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -4806,12 +4530,6 @@ site‑wide.
   outline: 2px solid color-mix(in srgb, #346967 32%, rgba(0, 0, 0, 0));
   outline-offset: 2px;
 }
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* accordions.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -4870,12 +4588,6 @@ site‑wide.
     padding-top: 0.35rem;
   }
 }
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* tabs.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -4976,12 +4688,6 @@ site‑wide.
     transition: none;
   }
 }
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* tooltips.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -5011,12 +4717,6 @@ site‑wide.
   outline: 2px solid color-mix(in srgb, #346967 32%, rgba(0, 0, 0, 0));
   outline-offset: 2px;
 }
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* modals-overlays.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -5114,12 +4814,6 @@ Accessibility:
 .modal__overlay {
   pointer-events: auto;
 }
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* popups.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -5136,12 +4830,6 @@ site‑wide.
   padding: 0.5rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* alerts.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -5177,12 +4865,6 @@ site‑wide.
   border-color: #4caf50;
   color: #4caf50;
 }
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* notifications.scss
   purpose: see assets/css/partials/README.md for organisation.
   import order: maintained by assets/css/main.scss.
@@ -5226,12 +4908,6 @@ site‑wide.
   outline: 3px solid color-mix(in srgb, #346967 32%, rgba(0, 0, 0, 0));
   outline-offset: 3px;
 }
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* toasts.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -5276,12 +4952,6 @@ site‑wide.
   outline: 2px solid #346967;
   outline-offset: 2px;
 }
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* cart.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -5434,12 +5104,6 @@ site‑wide.
     gap: 2rem;
   }
 }
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* transitions.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -5490,12 +5154,6 @@ See `display.css`, `grouping.css`, `typography-helpers.css`, `visibility.css` an
 /* Deprecated: consolidated into focused utilities partials to improve discoverability
    and avoid duplication across components and tools. Old `u-` names remain valid while
    the new partials become the authoritative source. */
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* display.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -5738,12 +5396,6 @@ This file contains top-level typographic and document-level settings using desig
   -o-object-fit: cover;
      object-fit: cover;
 }
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* spacing-helpers.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -5945,12 +5597,6 @@ site‑wide.
     margin-right: 2rem !important;
   }
 }
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* margins.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -5979,12 +5625,6 @@ site‑wide.
   margin-right: 1.25rem !important;
 }
 /* Use `.u-mx-*` canonical helpers defined in `spacing-helpers.css` */
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* paddings.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -6048,12 +5688,6 @@ site‑wide.
 }
 /* Text alignment utilities are defined in `typography-helpers.css`.
    Keep the single canonical definition there to avoid duplication. */
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* grouping.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -6121,12 +5755,6 @@ site‑wide.
   opacity: 0.5;
   pointer-events: none;
 }
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* typography-helpers.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -6315,12 +5943,6 @@ This file contains top-level typographic and document-level settings using desig
 .u-shadow-none {
   box-shadow: none !important;
 }
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* borders.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -6421,12 +6043,6 @@ site‑wide.
 .u-tti-delay {
   transition-delay: 0.2s;
 }
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
 /* cls.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
