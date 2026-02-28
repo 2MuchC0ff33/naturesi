@@ -3,6 +3,8 @@
    import order: maintained by assets/css/main.scss.
 */
 
+@use "../settings/maps" as maps;
+
 /* components/sliders.css
    Purpose: Range sliders and related UI parts.
    Scope: `.slider`, `.slider__track`, `.slider__thumb`.

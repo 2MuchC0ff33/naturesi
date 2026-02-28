@@ -3,6 +3,8 @@
    import order: maintained by assets/css/main.scss.
 */
 
+@use "../settings/maps" as maps;
+
 /* ==========================================================================
 Footer styles
 Legal bar, social links and footer layout go here for easier maintenance.

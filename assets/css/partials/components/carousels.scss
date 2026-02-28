@@ -3,6 +3,8 @@
    import order: maintained by assets/css/main.scss.
 */
 
+@use "../settings/maps" as maps;
+
 /* components/carousels.css
    Purpose: Carousel & slide track components for hero or product galleries.
    Scope: `.carousel`, `.carousel__track`, `.carousel__slide`, `.carousel__nav`.

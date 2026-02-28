@@ -3,6 +3,8 @@
    import order: maintained by assets/css/main.scss.
 */
 
+@use "../settings/maps" as maps;
+
 /* components/tooltips.css
    Purpose: Tooltip visual styles; content should be visually hidden by default and shown on hover/focus of host element.
    Scope: `.tooltip`, `.tooltip__content`, `.has-tooltip`.

@@ -3,6 +3,8 @@
    import order: maintained by assets/css/main.scss.
 */
 
+@use "../settings/maps" as maps;
+
 /* ==========================================================================
 Accessible selection styles
 Centralised so theming and contrast checks are applied consistently.

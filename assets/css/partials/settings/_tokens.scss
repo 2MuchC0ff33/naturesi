@@ -5,12 +5,14 @@ variables.scss so that the resulting CSS custom properties are available
 site‑wide.
 ========================================================================== */
 
+@use "../settings/maps" as maps;
+
 /* Open Props is now imported via the `vendors` aggregator
      (see partials/vendors/_open-props.scss).  keep this file focused on
      project‑specific token aliases. */
 
 /* optional Sass aliases for convenience */
 $radius-sm: maps.radius(sm);
-$space-unit: var(--space-unit);
+$space-unit: maps.spacing("unit");
 
 /* additional project token definitions can be added below */

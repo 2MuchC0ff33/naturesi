@@ -3,6 +3,8 @@
    import order: maintained by assets/css/main.scss.
 */
 
+@use "../settings/maps" as maps;
+
 /* components/progress-bars.css
    Purpose: Progress bars and linear progress components.
    Scope: `.progress`, `.progress__bar`, `.progress__value`.

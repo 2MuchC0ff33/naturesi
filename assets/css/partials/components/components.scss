@@ -3,6 +3,8 @@
    import order: maintained by assets/css/main.scss.
 */
 
+@use "../settings/maps" as maps;
+
 /* ==========================================================================
 Small components
 Accordion toggles, social icon variants and other small repeated components.

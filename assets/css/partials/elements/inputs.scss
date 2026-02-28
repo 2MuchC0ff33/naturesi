@@ -3,6 +3,8 @@
    import order: maintained by assets/css/main.scss.
 */
 
+@use "../settings/maps" as maps;
+
 /* inputs.css - Basic input styles (placeholder to avoid 404/MIME errors)
    Kept intentionally small; extend as needed in forms.css
 */

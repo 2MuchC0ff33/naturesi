@@ -3,6 +3,8 @@
    import order: maintained by assets/css/main.scss.
 */
 
+@use "../settings/maps" as maps;
+
 /* ==========================================================================
 Animation keyframes and small animation utilities
 Centralised keyframes for reuse by components (keeps components focused on usage).

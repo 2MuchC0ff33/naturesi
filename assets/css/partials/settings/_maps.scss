@@ -74,7 +74,7 @@ $shadows: (
   sm: 0 1px 3px rgba(0, 0, 0, 0.1),
   md: 0 4px 6px rgba(0, 0, 0, 0.1),
   lg: 0 10px 15px rgba(0, 0, 0, 0.1),
-  accent: 0 0 0 3px color-mix(in srgb, maps.color(accent) 20%, transparent)
+  accent: 0 0 0 3px color-mix(in srgb, map.get($colors, accent) 20%, transparent)
 );
 
 // radius tokens

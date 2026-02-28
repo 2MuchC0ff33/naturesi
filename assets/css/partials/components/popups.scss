@@ -3,6 +3,8 @@
    import order: maintained by assets/css/main.scss.
 */
 
+@use "../settings/maps" as maps;
+
 /* components/popups.css
    Purpose: Small popup components such as small inline menus and contextual popups.
    Scope: `.popup`, `.popup__content`, `.popup__arrow`.

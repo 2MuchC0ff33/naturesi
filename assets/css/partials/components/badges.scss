@@ -3,6 +3,8 @@
    import order: maintained by assets/css/main.scss.
 */
 
+@use "../settings/maps" as maps;
+
 /* components/badges.css
    Purpose: Badge components and modifiers (e.g., `.badge`, `.badge--sale`, `.badge--new`).
    Scope: Small inline elements that annotate products, categories, and nav items.

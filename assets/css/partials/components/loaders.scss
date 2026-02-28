@@ -3,6 +3,8 @@
    import order: maintained by assets/css/main.scss.
 */
 
+@use "../settings/maps" as maps;
+
 /* components/loaders.css
    Purpose: Loader and spinner components used for async states.
    Scope: `.loader`, `.spinner`, `.search-spinner`.

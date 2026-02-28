@@ -3,6 +3,8 @@
    import order: maintained by assets/css/main.scss.
 */
 
+@use "../settings/maps" as maps;
+
 /* components/accordions.css
    Purpose: Accordion component styles and expanded/collapsed states.
    Scope: `.accordion`, `.accordion__item`, `.accordion-toggle`, `.accordion-panel`.

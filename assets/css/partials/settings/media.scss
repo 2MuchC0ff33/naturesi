@@ -3,6 +3,8 @@
    import order: maintained by assets/css/main.scss.
 */
 
+@use "./maps" as maps;
+
 /* ==========================================================================
 Media helpers and responsive utilities
 Use for image/video helpers and responsive media rules
@@ -17,6 +19,6 @@ figure {
 
 figure figcaption {
   font-size: 0.95rem;
-  color: var(--muted-color, #6b7280);
+  color: maps.color(muted);
   margin-top: maps.spacing(xs);
 }

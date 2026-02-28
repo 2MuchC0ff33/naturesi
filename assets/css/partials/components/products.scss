@@ -3,6 +3,8 @@
    import order: maintained by assets/css/main.scss.
 */
 
+@use "../settings/maps" as maps;
+
 /* components/products.css
    Purpose: Product list and product card component styles used across store pages.
    Scope: `.product-card`, `.product-grid`, `.product-meta`, `.product-price`, `.product-badge` etc.

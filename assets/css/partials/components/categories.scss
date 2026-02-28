@@ -3,6 +3,8 @@
    import order: maintained by assets/css/main.scss.
 */
 
+@use "../settings/maps" as maps;
+
 /* ==========================================================================
 Category dropdown and theme/print rules
 Contains header category dropdown specifics, system theme adjustments and

@@ -3,6 +3,8 @@
    import order: maintained by assets/css/main.scss.
 */
 
+@use "../settings/maps" as maps;
+
 /* Input defaults: padding, borders, backgrounds and focus state */
 
 input,
@@ -41,6 +43,6 @@ input[aria-invalid="true"] {
 
 .help-text {
   font-size: 0.9rem;
-  color: var(--color-muted);
+  color: maps.color(muted);
   margin-top: 0.25rem;
 }

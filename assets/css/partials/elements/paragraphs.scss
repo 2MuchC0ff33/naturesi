@@ -3,6 +3,8 @@
    import order: maintained by assets/css/main.scss.
 */
 
+@use "../settings/maps" as maps;
+
 /* Paragraph defaults (canonical location)
    Consolidated on 2026-01-26: moved `.prose` and related paragraph helpers here
    from `paragraph.css` and `all.css` to avoid duplication. This file is the

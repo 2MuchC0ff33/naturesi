@@ -3,6 +3,8 @@
    import order: maintained by assets/css/main.scss.
 */
 
+@use "../settings/maps" as maps;
+
 /* ==========================================================================
 Form controls and buttons
 Contains inputs, selects, textarea and button styles as well as the primary
@@ -79,9 +81,9 @@ button {
   color: white;
   border: none;
   padding: maps.spacing(sm) maps.spacing(md);
-  border-radius: var(--radius-md);
+  border-radius: maps.radius(md);
   font-weight: 500;
-  box-shadow: var(--shadow-sm);
+  box-shadow: maps.shadow(sm);
 }
 
 /* Field and help text utilities */
@@ -99,7 +101,7 @@ button {
 
 .help-text {
   font-size: 0.9rem;
-  color: var(--color-muted);
+  color: maps.color(muted);
 }
 
 /* Add-to-cart buttons: style submit buttons inside `.add-to-cart` forms as primary CTAs

@@ -3,6 +3,8 @@
    import order: maintained by assets/css/main.scss.
 */
 
+@use "../settings/maps" as maps;
+
 /* components/navigation-menu.css
    Purpose: Styles for the primary and secondary navigation menus.
    Scope: Goal is to contain navigation-specific presentation (menus, toggles, dropdowns).

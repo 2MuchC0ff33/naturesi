@@ -3,6 +3,8 @@
    import order: maintained by assets/css/main.scss.
 */
 
+@use "../settings/maps" as maps;
+
 /* components/reviews.css
    Purpose: Styles for reviews/testimonials on the homepage
 */
@@ -31,7 +33,7 @@
   height: 56px;
   border-radius: 999px;
   overflow: hidden;
-  background: var(--color-light-background);
+  background: maps.color("light-background");
 }
 
 .review__avatar img {

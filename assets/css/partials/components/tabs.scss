@@ -3,6 +3,8 @@
    import order: maintained by assets/css/main.scss.
 */
 
+@use "../settings/maps" as maps;
+
 /* components/tabs.css
    Purpose: Tablist/tabpanel component styles.
    Scope: `.tabs`, `.tabs__list`, `.tabs__tab`, `.tabs__panel`.

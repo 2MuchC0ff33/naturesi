@@ -3,6 +3,8 @@
    import order: maintained by assets/css/main.scss.
 */
 
+@use "../settings/maps" as maps;
+
 /* Page / site title styles (Elements layer)
    Purpose: Provide a small, mobile-first title utility used for page headings
    Keep low specificity, composable with .prose and existing headings */
@@ -18,6 +20,6 @@
 .page-subtitle {
   display: block;
   margin: 0 0 maps.spacing(xs);
-  color: var(--color-muted);
+  color: maps.color(muted);
   font-size: 0.95rem;
 }
