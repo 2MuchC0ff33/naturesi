@@ -17,10 +17,10 @@ if (!fs.existsSync('vendor/autoload.php')) {
 namespace Dotenv;
 
 class Dotenv {
-    public_html static function createImmutable($dir) {
+    public static function createImmutable($dir) {
         return new self();
     }
-    public_html function load() {
+    public function load() {
         // mark that the phpdotenv branch executed
         putenv('DOTENV_USED=1');
         $_ENV['DOTENV_USED'] = '1';

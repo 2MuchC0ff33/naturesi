@@ -28,14 +28,14 @@ class Dotenv
 {
     private string $dir;
 
-    public_html static function createImmutable($dir)
+    public static function createImmutable($dir)
     {
         $instance = new self();
         $instance->dir = $dir;
         return $instance;
     }
 
-    public_html function load()
+    public function load()
     {
         // naive .env loader roughly matching our fallback logic above;
         // return an array so the bootstrap propagation loop can work.
