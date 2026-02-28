@@ -13,7 +13,7 @@ partials can reference CSS custom properties.
    *IMPORTANT*: this stylesheet is never served directly. the build pipeline
    (see `package.json`/"build:css") uses the Sass CLI to compile
    `assets/css/main.scss` to a temporary CSS file. PostCSS then inlines every
-   @import and produces a single bundle at public/assets/css/main.css. a
+   @import and produces a single bundle at public_html/assets/css/main.css. a
    post‑build sanity check (`tests/check_css_build.cjs`) runs automatically
    to catch stray imports, preventing runtime 404s. do not add rules directly
    to the output file.
@@ -4567,6 +4567,9 @@ Accessibility:
 }
 .toast--success {
   border-color: #4caf50;
+}
+.toast--error {
+  border-color: #f44336;
 }
 .toast__content {
   display: flex;
