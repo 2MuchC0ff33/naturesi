@@ -37,6 +37,24 @@ export default {
       files: ['node_modules/open-props/open-props.min.css']
       // additional props may be added here if the project defines its own
     }),
+    // Ensure any @charset rule is the very first thing in the output. the
+    // JIT token injector may add a `:root` block early; this plugin moves
+    // the charset back to the front, preserving compliance with the CSS spec.
+    {
+      postcssPlugin: 'ensure-charset-first',
+      OnceExit(root) {
+        // run after all other plugins (jitProps etc.) have finished adding
+        // rules; move any charset rule to the front before output.
+        let charsetRule;
+        root.walkAtRules('charset', atRule => {
+          charsetRule = atRule.clone();
+          atRule.remove();
+        });
+        if (charsetRule) {
+          root.prepend(charsetRule);
+        }
+      }
+    },
     autoprefixer()        // add vendor prefixes afterwards
   ]
 };

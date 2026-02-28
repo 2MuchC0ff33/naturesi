@@ -27,6 +27,15 @@ try {
   // postcss-import is removed we’ll tighten this check further.
   // strip comments first so explanatory text doesn’t trigger the check.
   const stripped = out.replace(/\/\*[\s\S]*?\*\//g, '');
+  // after comments are gone, ensure the very first token is @charset – a
+  // PostCSS plugin in the build pipeline moves any existing charset rule to
+  // the front, so this check guards against plug-in regressions or the
+  // charset being accidentally dropped by Sass/PostCSS.
+  const leading = stripped.replace(/^[\uFEFF\s]*/, '');
+  if (!leading.startsWith('@charset')) {
+    console.error('✗ build output does not begin with @charset declaration');
+    process.exit(1);
+  }
   if (/\@import\s+/.test(stripped)) {
     console.error('✗ build output still contains an @import directive');
     process.exit(1);

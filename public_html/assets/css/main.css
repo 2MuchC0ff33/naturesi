@@ -1,6 +1,6 @@
 
-:root{}
 @charset "UTF-8";
+:root{}
 /* Category anchor removed from here — moved to partials/06-utilities.scss
    (keeps this file a pure importer for maintenance).
 */
@@ -6520,3 +6520,4 @@ site‑wide.
   }
 }
 /* End of main.css importer — do not add large blocks of styles here. */
+/* rebuild test */
