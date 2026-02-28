@@ -5,8 +5,9 @@ variables.scss so that the resulting CSS custom properties are available
 site‑wide.
 ========================================================================== */
 
-/* bring in all Open Props custom properties by importing the packaged CSS. PostCSS will resolve this from node_modules. */
-@import "open-props/open-props.min.css";
+/* Open Props is now imported via the `vendors` aggregator
+     (see partials/vendors/_open-props.scss).  keep this file focused on
+     project‑specific token aliases. */
 
 /* optional Sass aliases for convenience */
 $radius-sm: var(--radius-sm);

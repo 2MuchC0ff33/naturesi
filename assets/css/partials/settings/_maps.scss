@@ -1,0 +1,73 @@
+/* maps.scss – centralised design tokens expressed as Sass maps.
+   this is the first step towards theming and allows us to reuse values
+   in mixins, functions and even generate the corresponding CSS custom
+   properties automatically.  the existing `variables.scss` file lists
+   the custom properties by hand; once maps are fully populated that file
+   can be simplified to a thin shim or removed entirely.
+*/
+
+@use "sass:map";
+
+// colour palette: keys correspond to the `--color-<name>` props used in
+// the stylesheet. keep the naming consistent so generated loops are
+// predictable.
+$colors: (
+  background: #ffffff,
+  text: #050505,
+  accent: #346967,
+  "light-background": #bdd5d4,
+  highlight: #f6e6cd,
+  border: #e1e1e1,
+  success: #4caf50,
+  warning: #ff9800,
+  error: #f44336,
+  muted: #6b7280 // added for the .text-muted utility
+);
+
+// spacing tokens used for margins/padding. values mirror the
+// `--space-<size>` custom properties defined previously.
+$spacing: (
+  xxs: 0.25rem,
+  xs: 0.5rem,
+  sm: 0.75rem,
+  md: 1.25rem,
+  lg: 2rem,
+  xl: 3.25rem
+);
+
+// breakpoints used throughout the site.
+$breakpoints: (
+  mobile: 320px,
+  tablet: 768px,
+  desktop: 1024px
+);
+
+// helper functions
+@function color($key) {
+  @return map.get($colors, $key);
+}
+
+@function spacing($key) {
+  @return map.get($spacing, $key);
+}
+
+@function breakpoint($key) {
+  @return map.get($breakpoints, $key);
+}
+
+// auto‑generate custom properties for backwards compatibility. this lets
+// downstream code continue to reference `var(--color-foo)` while we
+// migrate callers to the map helpers.
+:root {
+  @each $name, $val in $colors {
+    --color-#{$name}: #{$val};
+  }
+
+  @each $name, $val in $spacing {
+    --space-#{$name}: #{$val};
+  }
+
+  @each $name, $val in $breakpoints {
+    --breakpoint-#{$name}: #{$val};
+  }
+}

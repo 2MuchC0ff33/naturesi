@@ -1,0 +1,28 @@
+/* helpers.scss – mixins and functions that use Sass maps from the
+   `settings/maps` module. this demonstrates the namespaced utility pattern
+   and provides a place for small reusable snippets that don’t warrant
+   their own broad file. */
+
+@use "../settings/maps" as maps;
+
+// background color helper
+@mixin bg-color($name) {
+  background: maps.color($name);
+}
+
+// text color helper
+@mixin text-color($name) {
+  color: maps.color($name);
+}
+
+// spacing shorthand (padding)
+@mixin pad($size) {
+  padding: maps.spacing($size);
+}
+
+// breakpoint media mixin for convenience
+@mixin respond-to($breakpoint) {
+  @media (min-width: maps.breakpoint($breakpoint)) {
+    @content;
+  }
+}

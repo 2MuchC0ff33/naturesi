@@ -21,6 +21,10 @@ try {
   }
   // no `@import` directives at all should remain (the Sass step may
   // have emitted them for compatibility, but PostCSS must collapse them).
+  // any remaining imports would indicate a pipeline problem or forgotten
+  // vendor stylesheet. note that vendor imports (e.g. open‑props) are
+  // currently inlined by postcss-import so they won’t be seen here; once
+  // postcss-import is removed we’ll tighten this check further.
   // strip comments first so explanatory text doesn’t trigger the check.
   const stripped = out.replace(/\/\*[\s\S]*?\*\//g, '');
   if (/\@import\s+/.test(stripped)) {

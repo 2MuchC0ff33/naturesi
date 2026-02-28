@@ -47,6 +47,21 @@ Purpose: concise guidance so an AI coding agent can start work quickly in this r
 
 ## Conventions & patterns
 - **CSS**: `assets/css/main.css` is an ordered import list; maintain variable definitions first. Build uses PostCSS > `postcss-import` > Autoprefixer as described in `README.md`.
+  * The Sass sources no longer use `@import` – everything lives under
+    `assets/css/partials/` and is pulled in via `@use` with explicit
+    namespaces (`settings`, `utilities`, `vendors`, etc.).  Aggregator
+    partials such as `_settings.scss` and `_utilities.scss` forward their
+    children so the import order remains deterministic.
+  * Design tokens (colors, spacing, breakpoints) are stored in Sass maps
+    (`partials/settings/_maps.scss`).  Functions like `maps.color()` and
+    mixins in `partials/utilities/helpers.scss` provide a namespaced API.
+    Generated `:root` custom-properties ensure runtime compatibility.
+  * For new mixins or helpers, always create a dedicated module and invoke
+    it via its namespace rather than polluting the global scope.
+  * Vendor CSS that cannot be converted to Sass lives under
+    `partials/vendors`; once the final dependency is eliminated the
+    `postcss-import` plugin can be removed and the build command
+    simplified.
 - **JS/TS**: Source in `ts/` compiles to `public_html/assets/js`. Runtime modules live in `js/modules`. Data files in `js/data/*.json` drive UI.
 - **Service worker**: central file `service-worker.js`; registration and logic helpers in `js/modules/sw-client.js`, `sw-core.js`, `sw-handlers.js`.
 - **Client storage**: cart code spans `js/cart*.js`, `storageLocal.js`, `storageIDB.js` (multiple persistence layers).

@@ -26,3 +26,8 @@ files will be rewritten to use `@use`/`@forward` themselves.
 contain `@import` temporarily, but contributors should avoid adding new
 imports and instead place their file under an appropriate aggregator.
 
+Vendor stylesheets (third‑party CSS that cannot be referenced via Sass)
+should be isolated in `partials/vendors/` and pulled in through the
+`_vendors.scss` aggregator.  This makes it easy to review external
+dependencies and ultimately remove the need for `postcss-import`.
+

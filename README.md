@@ -30,6 +30,33 @@ Autoprefixer 10.4.27
   disastrous case where a browser would request a missing partial and get a
   404 when `public/` is served as the document root.
 
+### Sass module architecture
+
+The project has migrated completely off legacy `@import` and relies on the
+Sass module system (`@use` / `@forward`) for all internal styles.  Key
+principles:
+
+1. **Single entrypoint** – `assets/css/main.scss` uses named `@use`
+   statements (`as settings`, `as utilities`, etc.) and never exposes the
+   global namespace (`as *`).  Modules are re‑exported via a small set of
+   aggregator partials (`_settings.scss`, `_utilities.scss`, `_vendors.scss`).
+2. **Design tokens** – colour, spacing and breakpoint values live in
+   Sass maps (`partials/settings/_maps.scss`).  Helper functions and mixins
+   generate corresponding `:root` custom properties for backwards
+   compatibility; gradually, callers may switch to `maps.color()`/
+   `maps.spacing()` etc.
+3. **Utility modules** – common mixins and helpers (e.g. `@mixin respond-to()`)
+   are defined in `partials/utilities/helpers.scss` and are always invoked via
+   their namespace (`@include helpers.pad(sm);`).  This keeps names scoped and
+   avoids collisions during future theming work.
+4. **Vendor CSS isolation** – third‑party styles that cannot be rewritten as
+   Sass (currently only Open Props) are housed under `partials/vendors` and
+   imported with a single `@use 'partials/vendors'` call in `main.scss`.
+   Once the remaining external dependency is removed the `postcss-import`
+   plugin can also be dropped.
+
+Documentation and examples are maintained in `assets/css/README.md`.
+
 Stylelint 17.4.0
 
 A minimal `stylelint.config.cjs` is included in the project root so the

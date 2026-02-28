@@ -3,6 +3,8 @@
    import order: maintained by assets/css/main.scss.
 */
 
+@use "../settings/maps" as maps;
+
 /* ==========================================================================
 Base document styles
 This file contains top-level typographic and document-level settings using design tokens.
@@ -19,8 +21,8 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-size: var(--fluid-font, 1rem);
   line-height: var(--line-height, 1.6);
-  color: var(--color-text);
-  background-color: var(--color-background);
+  color: maps.color(text);
+  background-color: maps.color(background);
 }
 
 /* Ensure main element displays correctly */

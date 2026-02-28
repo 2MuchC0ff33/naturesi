@@ -2,9 +2,12 @@
    (keeps this file a pure importer for maintenance).
 */
 /* main.scss (refactor)
-   This file is now an aggregator that imports modular partials located in
-   assets/css/partials/. The order is important: tokens and variables must be
-   imported first so other partials can reference CSS custom properties.
+This file is now an aggregator that pulls in modular partials located in
+assets/css/partials/ via `@use`.  Rather than relying on `as *`, every
+module is imported with an explicit namespace (`settings`, `generic`,
+`utilities`, etc.) so downstream Sass code can reference symbols unambiguously.
+The order is important: tokens and variables must be imported first so other
+partials can reference CSS custom properties.
 
    *IMPORTANT*: this stylesheet is never served directly. the build pipeline
    (see `package.json`/"build:css") uses the Sass CLI to compile
@@ -130,13 +133,14 @@
 */
 
 // module-based imports are now aggregated
-@use 'partials/settings' as *;
-@use 'partials/tools' as *;
-@use 'partials/generic' as *;
-@use 'partials/elements' as *;
-@use 'partials/objects' as *;
-@use 'partials/components' as *;
-@use 'partials/utilities' as *;
+@use 'partials/settings' as settings;
+@use 'partials/tools' as tools;
+@use 'partials/generic' as generic;
+@use 'partials/elements' as elements;
+@use 'partials/objects' as objects;
+@use 'partials/components' as components;
+@use 'partials/utilities' as utilities;
+@use 'partials/vendors' as vendors; // third‑party css imports
 
 
 /* End of main.css importer — do not add large blocks of styles here. */
