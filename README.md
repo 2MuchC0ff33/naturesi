@@ -50,10 +50,14 @@ principles:
    their namespace (`@include helpers.pad(sm);`).  This keeps names scoped and
    avoids collisions during future theming work.
 4. **Vendor CSS isolation** – third‑party styles that cannot be rewritten as
-   Sass (currently only Open Props) are housed under `partials/vendors` and
-   imported with a single `@use 'partials/vendors'` call in `main.scss`.
-   Once the remaining external dependency is removed the `postcss-import`
-   plugin can also be dropped.
+   Sass are housed under `partials/vendors` and imported with a single
+   `@use 'partials/vendors'` call in `main.scss`.  Open Props used to be
+   added here via a plain CSS `@import`, but the build now relies on the
+   `postcss-jit-props` plugin to inject only the tokens actually used.
+   Consequently the static import has been removed; dropping the plugin would
+   require restoring it or including the full library again.  Once the
+   last external dependency is removed the `postcss-import` plugin can also
+   be dropped.
 
 ### Migration notes
 

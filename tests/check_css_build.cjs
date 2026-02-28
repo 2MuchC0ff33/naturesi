@@ -73,11 +73,22 @@ try {
     process.exit(1);
   }
 
-  // ensure at least one Open Props property is present post-build. this
-  // demonstrates the tokens survive Sass/PostCSS and are available for
-  // postcss-jit-props to scan if needed.
-  if (!/--font-size-3/.test(out)) {
-    console.error('✗ build output missing Open Props variable --font-size-3');
+  // previously we checked for `--font-size-3` as a stand-in for any
+  // Open Props variable, but some builds don’t actually reference that
+  // token so the test could fail spuriously. radius-sm is guaranteed by
+  // our configuration, and we can reuse it both for presence and duplicate
+  // detection.
+  if (!/--radius-sm/.test(out)) {
+    console.error('✗ build output does not include expected token --radius-sm');
+    process.exit(1);
+  }
+
+  // ensure that JIT hasn't duplicated the same property due to a
+  // static import; we only count actual definitions (i.e. followed by
+  // a colon) to avoid comments or references triggering a false positive.
+  const radiusMatches = out.match(/--radius-sm\s*:/g) || [];
+  if (radiusMatches.length !== 1) {
+    console.error('✗ Open Props token --radius-sm definition found ' + radiusMatches.length + ' times (should be 1)');
     process.exit(1);
   }
 

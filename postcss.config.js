@@ -28,8 +28,11 @@ export default {
   plugins: [
     importPlugin(),       // inline @import statements from partials
     // just-in-time custom properties: scans compiled CSS for `var()`
-    // usages and emits only the referenced tokens.  we point it at the
-    // Open Props source so JIT can pull in all vars when required.
+    // usages and emits only the referenced tokens. the build now relies on
+    // this plugin exclusively for Open Props values; the static import in
+    // `partials/vendors/_open-props.scss` was removed to avoid duplicating
+    // declarations. the `files` array still points at the upstream package
+    // so the extractor knows which props are available.
     jitProps({
       files: ['node_modules/open-props/open-props.min.css']
       // additional props may be added here if the project defines its own
