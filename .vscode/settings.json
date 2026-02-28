@@ -22,6 +22,5 @@
   // override file (see README). kept here only so the JSON stays valid
   "terminal.integrated.profiles.windows": {},
   "postcssense.cssPath": "./node_modules/postcss",
-  "php.validate.executablePath": "/usr/bin/php",
   "intelephense.environment.phpVersion": "8.1.28"
 }
