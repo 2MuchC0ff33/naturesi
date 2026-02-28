@@ -1,0 +1,39 @@
+/* ==========================================================================
+Aggregator for utility rules.  Plenty of forwards to keep import order
+unchanged.
+========================================================================== */
+
+@forward "utilities/utilities";
+@forward "utilities/display";
+@forward "utilities/visibility";
+@forward "utilities/hide";
+@forward "utilities/show";
+@forward "utilities/sizing-helpers";
+@forward "utilities/spacing-helpers";
+@forward "utilities/margins";
+@forward "utilities/paddings";
+@forward "utilities/center";
+@forward "utilities/grouping";
+@forward "utilities/sorting";
+@forward "utilities/filtering";
+@forward "utilities/pagination";
+@forward "utilities/typography-helpers";
+@forward "utilities/positioning";
+@forward "utilities/z-index";
+@forward "utilities/layering";
+@forward "utilities/transforms";
+@forward "utilities/animate";
+@forward "utilities/smoothing";
+@forward "utilities/shadows";
+@forward "utilities/borders";
+@forward "utilities/shapes";
+@forward "utilities/compression";
+@forward "utilities/optimizations";
+@forward "utilities/lcp";
+@forward "utilities/fcp";
+@forward "utilities/tti";
+@forward "utilities/cls";
+@forward "utilities/fie";
+@forward "utilities/mobile";
+@forward "utilities/tablet";
+@forward "utilities/desktop";

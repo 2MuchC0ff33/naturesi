@@ -12,3 +12,17 @@ Do **not** use JavaScript-style `//` comments in any CSS file. This ensures comp
 - Remove or convert any `//` comments found in CSS files.
 
 This rule is mandatory for all contributors. PRs with `//` comments in CSS will not be accepted.
+
+## Sass module migration
+
+The project is transitioning from legacy `@import` to the newer module system
+(`@use`/`@forward`).  A set of aggregator partials (`_settings.scss`,
+`_tools.scss`, etc.) lives in `assets/css/partials/` and are pulled in from
+`main.scss` with a handful of `@use` statements.  Each aggregator forwards the
+original partials in the established order; during the migration individual
+files will be rewritten to use `@use`/`@forward` themselves.
+
+*New partials should always be authored as modules.*  Existing files may still
+contain `@import` temporarily, but contributors should avoid adding new
+imports and instead place their file under an appropriate aggregator.
+

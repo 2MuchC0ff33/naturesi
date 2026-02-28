@@ -261,6 +261,10 @@ Convert the static CSS to a Sass‑first workflow, add Open Props tokens and P
 ##### CSS Migration Details
 
 *   Replace legacy CSS imports with Sass `@use`/`@forward` where possible; use interim Sass `@import` only as a temporary step.
+    *   created aggregator partials (`_settings.scss`, `_tools.scss`, etc.) and
+        updated `main.scss` to use them.
+    *   sanitized `sanitize.scss` to remove redundant import and eliminated a
+        deprecation warning.  Remaining partials can be refactored incrementally.
 *   Recommended compile order in `main.scss`:
     1.  PicoCSS
     2.  Open Props

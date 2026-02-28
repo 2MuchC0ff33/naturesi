@@ -130,6 +130,13 @@
      - desktop.scss (Desktop-specific utilities)
 */
 /* ==========================================================================
+Aggregator for settings-related partials. This file is part of the
+migration from legacy `@import` to the Sass module system.  Each of the
+forwarded modules still uses `@import` internally; they will be converted
+one by one in subsequent commits.  Keeping a single entry point makes it
+possible to switch `main.scss` over in one change.
+========================================================================== */
+/* ==========================================================================
 _tokens.scss – bring Open Props tokens into the project and expose any
 project‑specific aliases. This partial is imported by main.scss before
 variables.scss so that the resulting CSS custom properties are available
@@ -172,15 +179,6 @@ This file contains the project's CSS custom properties. Keep this first so other
 partials can reference variables safely.  Tokens from Open Props are imported
 just before the :root declaration.
 ========================================================================== */
-/* ==========================================================================
-_tokens.scss – bring Open Props tokens into the project and expose any
-project‑specific aliases. This partial is imported by main.scss before
-variables.scss so that the resulting CSS custom properties are available
-site‑wide.
-========================================================================== */
-/* bring in all Open Props custom properties by importing the packaged CSS. PostCSS will resolve this from node_modules. */
-/* optional Sass aliases for convenience */
-/* additional project token definitions can be added below */
 :root {
   --color-background: #ffffff;
   /* WCAG AAA: background for 21:1 contrast with text */
@@ -448,6 +446,11 @@ figure figcaption {
   color: var(--muted-color, #6b7280);
   margin-top: var(--space-xs);
 }
+/* ==========================================================================
+Aggregator for tools partials (mixins, accessibility helpers, etc.).
+Migration scaffold – forwards maintain the existing load order while
+enabling `@use` in `main.scss`.
+========================================================================== */
 /* mixins.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -840,6 +843,9 @@ button {
   display: none;
 }
 /* Chrome/Safari */
+/* ==========================================================================
+Aggregator for generic resets, normalisation and base rules.
+========================================================================== */
 /* reset.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -1058,43 +1064,8 @@ td, th {
    This partial is intentionally conservative. For aggressive resets use the
    opt-in `.sanitize-strong` pattern below (commented out).
 */
-/* Import centralised selection rules so selection theming is consistent */
-/* selections.scss
-   purpose: see assets/css/partials/README.md for organisation.
-   import order: maintained by assets/css/main.scss.
-*/
-/* ==========================================================================
-Accessible selection styles
-Centralised so theming and contrast checks are applied consistently.
-Use theme tokens and prefer high-contrast defaults for readability.
-========================================================================== */
-/* Use color-mix to ensure sufficient contrast with the accent color, with a solid fallback */
-::-moz-selection {
-  background: color-mix(in srgb, var(--color-accent) 80%, black 20%);
-  color: #ffffff;
-  text-shadow: none;
-}
-::selection {
-  background: color-mix(in srgb, var(--color-accent) 80%, black 20%);
-  color: #ffffff;
-  text-shadow: none;
-}
-/* Firefox selection pseudo-element */
-::-moz-selection {
-  background: color-mix(in srgb, var(--color-accent) 80%, black 20%);
-  color: #ffffff;
-  text-shadow: none;
-}
-/* Dark theme: ensure selection remains readable when `data-theme="dark"` is present */
-:where([data-theme=dark]) ::-moz-selection {
-  background: color-mix(in srgb, var(--color-accent) 60%, white 20%);
-  color: #071010;
-}
-:where([data-theme=dark]) ::selection {
-  background: color-mix(in srgb, var(--color-accent) 60%, white 20%);
-  color: #071010;
-}
-/* Note: keep selection rules small and test with Accessibility Insights / contrast checks */
+/* selection rules are injected by the generic aggregator; no need
+   to import them here during migration (avoids Sass deprecation warning) */
 /* Placeholder styling: keep placeholders visible but deemphasised */
 ::-moz-placeholder {
   color: inherit;
@@ -1222,6 +1193,9 @@ Use theme tokens and prefer high-contrast defaults for readability.
   color: #071010;
 }
 /* Note: keep selection rules small and test with Accessibility Insights / contrast checks */
+/* ==========================================================================
+Aggregator for element-level rules.
+========================================================================== */
 /* all.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -2534,6 +2508,10 @@ footer[itemscope][itemtype*=WPFooter] a:hover {
     gap: var(--space-sm);
   }
 }
+/* ==========================================================================
+Aggregator for object and template rules.  Templates are included here
+because they were originally adjacent in main.scss; they can be split later.
+========================================================================== */
 /* wrapper.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -2938,6 +2916,10 @@ API examples: `.hide--sm-up`, `.hide--md-up`, `.show--md-up` — mobile-first he
   outline: 2px solid var(--color-accent);
   outline-offset: 2px;
 }
+/* ==========================================================================
+Aggregator for component rules.  This is intentionally verbose; as each
+file migrates to `@use` the corresponding forward can be removed.
+========================================================================== */
 /* navigation-menu.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -4826,6 +4808,10 @@ Accessibility:
     animation: none;
   }
 }
+/* ==========================================================================
+Aggregator for utility rules.  Plenty of forwards to keep import order
+unchanged.
+========================================================================== */
 /* utilities.scss
    purpose: see assets/css/partials/README.md for organisation.
    import order: maintained by assets/css/main.scss.
@@ -5801,247 +5787,6 @@ See `display.css`, `grouping.css`, `typography-helpers.css`, `visibility.css` an
 @media (max-width: 1024px) {
   .u-desktop-only {
     display: none !important;
-  }
-}
-/* colors.scss
-   purpose: see assets/css/partials/README.md for organisation.
-   import order: maintained by assets/css/main.scss.
-*/
-/* Colors – Background and text color utilities
-   Mobile-first utilities for theming and accessibility.
-   Uses CSS custom properties for consistency.
-*/
-/* Background colors */
-.u-bg-primary {
-  background-color: var(--color-primary) !important;
-}
-.u-bg-secondary {
-  background-color: var(--color-secondary) !important;
-}
-.u-bg-accent {
-  background-color: var(--color-accent) !important;
-}
-.u-bg-white {
-  background-color: #fff !important;
-}
-.u-bg-black {
-  background-color: #000 !important;
-}
-.u-bg-transparent {
-  background-color: transparent !important;
-}
-/* Text colors */
-.u-text-primary {
-  color: var(--color-primary) !important;
-}
-.u-text-secondary {
-  color: var(--color-secondary) !important;
-}
-.u-text-accent {
-  color: var(--color-accent) !important;
-}
-.u-text-white {
-  color: #fff !important;
-}
-.u-text-black {
-  color: #000 !important;
-}
-.u-text-muted {
-  color: var(--color-muted) !important;
-}
-/* interactions.scss
-   purpose: see assets/css/partials/README.md for organisation.
-   import order: maintained by assets/css/main.scss.
-*/
-/* Interactions – Cursor, opacity, and focus utilities
-   Enhances user interaction and accessibility.
-*/
-/* Cursor */
-.u-cursor-pointer {
-  cursor: pointer !important;
-}
-.u-cursor-not-allowed {
-  cursor: not-allowed !important;
-}
-.u-cursor-default {
-  cursor: default !important;
-}
-/* Opacity */
-.u-opacity-0 {
-  opacity: 0 !important;
-}
-.u-opacity-25 {
-  opacity: 0.25 !important;
-}
-.u-opacity-50 {
-  opacity: 0.5 !important;
-}
-.u-opacity-75 {
-  opacity: 0.75 !important;
-}
-.u-opacity-100 {
-  opacity: 1 !important;
-}
-/* Focus */
-.u-focus-visible:focus-visible {
-  outline: 2px solid var(--color-focus) !important;
-  outline-offset: 2px !important;
-}
-/* flex.scss
-   purpose: see assets/css/partials/README.md for organisation.
-   import order: maintained by assets/css/main.scss.
-*/
-/* Flex – Flexbox alignment and direction utilities
-   Mobile-first flexbox helpers for responsive layouts.
-*/
-/* Flex direction */
-.u-flex-row {
-  flex-direction: row !important;
-}
-.u-flex-column {
-  flex-direction: column !important;
-}
-/* Responsive flex direction */
-@media (min-width: 900px) {
-  .u-flex-column\@md {
-    flex-direction: column !important;
-  }
-  .u-flex-row\@md {
-    flex-direction: row !important;
-  }
-}
-/* Justify content */
-.u-justify-start {
-  justify-content: flex-start !important;
-}
-.u-justify-center {
-  justify-content: center !important;
-}
-.u-justify-end {
-  justify-content: flex-end !important;
-}
-.u-justify-between {
-  justify-content: space-between !important;
-}
-.u-justify-around {
-  justify-content: space-around !important;
-}
-/* Align items */
-.u-items-start {
-  align-items: flex-start !important;
-}
-.u-items-center {
-  align-items: center !important;
-}
-.u-items-end {
-  align-items: flex-end !important;
-}
-.u-items-stretch {
-  align-items: stretch !important;
-}
-/* Align self */
-.u-self-start {
-  align-self: flex-start !important;
-}
-.u-self-center {
-  align-self: center !important;
-}
-.u-self-end {
-  align-self: flex-end !important;
-}
-/* Flex wrap */
-.u-flex-wrap {
-  flex-wrap: wrap !important;
-}
-.u-flex-nowrap {
-  flex-wrap: nowrap !important;
-}
-/* grid.scss
-   purpose: see assets/css/partials/README.md for organisation.
-   import order: maintained by assets/css/main.scss.
-*/
-/* Grid – CSS Grid utilities
-   Modern grid helpers for responsive layouts.
-*/
-/* Grid templates */
-.u-grid-cols-1 {
-  grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
-}
-.u-grid-cols-2 {
-  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-}
-.u-grid-cols-3 {
-  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-}
-/* Grid gaps */
-.u-gap-1 {
-  gap: var(--space-xs) !important;
-}
-.u-gap-2 {
-  gap: var(--space-sm) !important;
-}
-.u-gap-3 {
-  gap: var(--space-md) !important;
-}
-/* Grid placement */
-.u-col-span-1 {
-  grid-column: span 1/span 1 !important;
-}
-.u-col-span-2 {
-  grid-column: span 2/span 2 !important;
-}
-/* overflow.scss
-   purpose: see assets/css/partials/README.md for organisation.
-   import order: maintained by assets/css/main.scss.
-*/
-/* Overflow – Overflow utilities
-   Control content overflow for responsive design.
-*/
-.u-overflow-hidden {
-  overflow: hidden !important;
-}
-.u-overflow-auto {
-  overflow: auto !important;
-}
-.u-overflow-scroll {
-  overflow: scroll !important;
-}
-.u-overflow-x-hidden {
-  overflow-x: hidden !important;
-}
-.u-overflow-y-auto {
-  overflow-y: auto !important;
-}
-/* responsive.scss
-   purpose: see assets/css/partials/README.md for organisation.
-   import order: maintained by assets/css/main.scss.
-*/
-/* Responsive – Comprehensive responsive show/hide utilities
-   Device-specific visibility controls for mobile-first design.
-*/
-/* Hide/Show at breakpoints */
-@media (min-width: 600px) {
-  .u-hide-sm {
-    display: none !important;
-  }
-  .u-show-sm {
-    display: block !important;
-  }
-}
-@media (min-width: 900px) {
-  .u-hide-md {
-    display: none !important;
-  }
-  .u-show-md {
-    display: block !important;
-  }
-}
-@media (min-width: 1200px) {
-  .u-hide-lg {
-    display: none !important;
-  }
-  .u-show-lg {
-    display: block !important;
   }
 }
 /* End of main.css importer — do not add large blocks of styles here. */

@@ -1,0 +1,30 @@
+/* ==========================================================================
+Aggregator for component rules.  This is intentionally verbose; as each
+file migrates to `@use` the corresponding forward can be removed.
+========================================================================== */
+
+@forward "components/navigation-menu";
+@forward "components/categories";
+@forward "components/categories-nav";
+@forward "components/products";
+@forward "components/hero";
+@forward "components/reviews";
+@forward "components/components";
+@forward "components/footer-overrides";
+@forward "components/input-fields";
+@forward "components/badges";
+@forward "components/progress-bars";
+@forward "components/loaders";
+@forward "components/sliders";
+@forward "components/carousels";
+@forward "components/accordions";
+@forward "components/tabs";
+@forward "components/tooltips";
+@forward "components/modals-overlays";
+@forward "components/popups";
+@forward "components/alerts";
+@forward "components/notifications";
+@forward "components/toasts";
+@forward "components/cart";
+@forward "components/checkout";
+@forward "components/transitions";

@@ -5,7 +5,10 @@ partials can reference variables safely.  Tokens from Open Props are imported
 just before the :root declaration.
 ========================================================================== */
 
-@import 'tokens';
+// tokens are now pulled in by the settings aggregator (`@use 'partials/settings'`)
+// earlier this file imported them directly; remove the legacy rule to avoid
+// duplicate Sass variables.
+
 
 :root {
   --color-background: #ffffff;

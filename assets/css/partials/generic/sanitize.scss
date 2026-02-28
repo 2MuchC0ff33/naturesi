@@ -5,8 +5,8 @@
    opt-in `.sanitize-strong` pattern below (commented out).
 */
 
-/* Import centralised selection rules so selection theming is consistent */
-@import 'selections';
+/* selection rules are injected by the generic aggregator; no need
+   to import them here during migration (avoids Sass deprecation warning) */
 
 /* Placeholder styling: keep placeholders visible but deemphasised */
 ::placeholder {

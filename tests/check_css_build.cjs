@@ -40,6 +40,17 @@ try {
     process.exit(1);
   }
 
+  // compile again in quiet mode to catch any Sass deprecation warnings.
+  // using pnpm exec ensures the local `sass` binary is invoked.
+  const { spawnSync } = require('child_process');
+  const sassCheck = spawnSync('pnpm', ['exec', 'sass', 'assets/css/main.scss', 'assets/css/output.css', '--no-source-map'], { encoding: 'utf-8' });
+  const warningLog = (sassCheck.stderr || '') + (sassCheck.stdout || '');
+  if (/Deprecation Warning/.test(warningLog)) {
+    console.error('✗ Sass emitted deprecation warnings during compilation');
+    console.error(warningLog);
+    process.exit(1);
+  }
+
   // check for a known custom‑property token that will be defined once Open
   // Props or project variables are imported upstream; use radius-sm as a
   // stable example.

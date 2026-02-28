@@ -1,0 +1,10 @@
+/* ==========================================================================
+Aggregator for generic resets, normalisation and base rules.
+========================================================================== */
+
+@forward "generic/reset";
+@forward "generic/unstyle";
+@forward "generic/normalize";
+@forward "generic/sanitize";
+@forward "generic/base";
+@forward "generic/selections";

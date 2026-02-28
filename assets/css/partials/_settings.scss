@@ -1,0 +1,19 @@
+/* ==========================================================================
+Aggregator for settings-related partials. This file is part of the
+migration from legacy `@import` to the Sass module system.  Each of the
+forwarded modules still uses `@import` internally; they will be converted
+one by one in subsequent commits.  Keeping a single entry point makes it
+possible to switch `main.scss` over in one change.
+========================================================================== */
+
+@forward "settings/tokens";
+@forward "settings/variables";
+@forward "settings/config";
+@forward "settings/settings";
+@forward "settings/colours";
+@forward "settings/typography";
+@forward "settings/spacing";
+@forward "settings/sizing";
+@forward "settings/breakpoints";
+@forward "settings/layout";
+@forward "settings/media";
