@@ -112,7 +112,7 @@ project’s style and workflow.
     change cannot be accomplished through the template layer.
 
 - **Server bootstrap:**
-  - `php/bootstrap.php` is the central PHP entrypoint; it currently does litt le
+  - `php/bootstrap.php` is the central PHP entrypoint; it currently does little
     more than parse `.env` and dispatch to `public_html/index.php`, but it will
     grow Slim routes and service logic in later phases.
 
