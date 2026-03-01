@@ -27,13 +27,7 @@ requests are checked against `pages/*.html` as a static fallback.  This
 setup is part of the Phase 1 refactor and maintains visual parity with
 existing static pages.
 
-### CSS
 
-CSS Snapshot 2026
-
-### CSS
-
-CSS Snapshot 2026
 
 #### Pre-processor
 
