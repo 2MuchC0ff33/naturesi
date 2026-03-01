@@ -84,11 +84,18 @@ if (file_exists(__DIR__ . '/../.env')) {
 
 if (!function_exists('asset')) {
     /**
-     * URL helper for assets.  Simply prefix with `/assets/`.
+     * URL helper for assets. Prefix with the configured BASE_PATH (if any)
+     * and then `/assets/`.
      */
     function asset(string $path): string
     {
-        return '/assets/' . ltrim($path, '/');
+        $basePath = getenv('BASE_PATH') ?: '';
+        if ($basePath !== '') {
+            // Normalise to a single leading slash and no trailing slash.
+            $basePath = '/' . trim($basePath, '/');
+        }
+
+        return $basePath . '/assets/' . ltrim($path, '/');
     }
 }
 
