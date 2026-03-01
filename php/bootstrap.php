@@ -111,8 +111,17 @@ if ($basePath !== '') {
     $app->setBasePath($basePath);
 }
 $app->addRoutingMiddleware();
-$app->addErrorMiddleware(true, true, true);
 
+// Configure error middleware based on APP_DEBUG; default to false for safety.
+$debugFlag = getenv('APP_DEBUG');
+$displayErrorDetails = filter_var(
+    $debugFlag,
+    FILTER_VALIDATE_BOOLEAN,
+    ['options' => ['default' => false]]
+);
+$logErrors = $displayErrorDetails;
+$logErrorDetails = $displayErrorDetails;
+$app->addErrorMiddleware($displayErrorDetails, $logErrors, $logErrorDetails);
 $templates = new Engine(__DIR__ . '/../views');
 $templates->registerFunction('asset', 'asset');
 $templates->registerFunction('uri', 'uri');
