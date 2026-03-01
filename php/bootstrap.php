@@ -160,10 +160,39 @@ $app->map(['GET', 'HEAD'], '/{path:.*}', function ($req, $res, $args) {
         $path = $raw;
     }
 
-    $file = __DIR__ . '/../pages/' . $path . '.html';
-    if (is_file($file)) {
-        $res->getBody()->write(file_get_contents($file));
-        return $res->withHeader('Content-Type', 'text/html');
+    // Resolve base pages directory and normalize the requested path to
+    // prevent path traversal outside of pages/.
+    $pagesDir = realpath(__DIR__ . '/../pages');
+    if ($pagesDir === false) {
+        // If the pages directory cannot be resolved, treat as not found.
+        throw new \Slim\Exception\HttpNotFoundException($req);
+    }
+
+    // Normalize path segments and reject any attempts to traverse upwards.
+    $segments = explode('/', $path);
+    $normalizedSegments = [];
+    foreach ($segments as $segment) {
+        if ($segment === '' || $segment === '.') {
+            continue;
+        }
+        if ($segment === '..') {
+            // Explicitly reject traversal.
+            throw new \Slim\Exception\HttpNotFoundException($req);
+        }
+        $normalizedSegments[] = $segment;
+    }
+
+    $normalizedPath = implode(DIRECTORY_SEPARATOR, $normalizedSegments);
+    $file = $pagesDir . DIRECTORY_SEPARATOR . $normalizedPath . '.html';
+
+    $realFile = realpath($file);
+    if ($realFile !== false) {
+        // Ensure the resolved file remains within the pages directory.
+        $pagesDirWithSep = $pagesDir . DIRECTORY_SEPARATOR;
+        if (strncmp($realFile, $pagesDirWithSep, strlen($pagesDirWithSep)) === 0 && is_file($realFile)) {
+            $res->getBody()->write(file_get_contents($realFile));
+            return $res->withHeader('Content-Type', 'text/html');
+        }
     }
     throw new \Slim\Exception\HttpNotFoundException($req);
 });
