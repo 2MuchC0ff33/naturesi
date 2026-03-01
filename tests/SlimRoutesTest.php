@@ -43,20 +43,26 @@ class SlimRoutesTest extends TestCase
 
     public function testStaticFallback(): void
     {
-        // create a temp static page file
-        $path = __DIR__ . '/../pages/foo.html';
-        file_put_contents($path, '<p>fallback content</p>');
+        // create a temp static page file with a unique name to avoid conflicts
+        $slug = 'foo_' . bin2hex(random_bytes(8));
+        $path = __DIR__ . '/../pages/' . $slug . '.html';
 
-        $res = $this->handle('GET', '/foo');
-        $this->assertSame(200, $res->getStatusCode());
-        $this->assertStringContainsString('fallback content', (string)$res->getBody());
+        try {
+            file_put_contents($path, '<p>fallback content</p>');
 
-        // also exercise .html variant
-        $res2 = $this->handle('GET', '/foo.html');
-        $this->assertSame(200, $res2->getStatusCode());
-        $this->assertStringContainsString('fallback content', (string)$res2->getBody());
+            $res = $this->handle('GET', '/' . $slug);
+            $this->assertSame(200, $res->getStatusCode());
+            $this->assertStringContainsString('fallback content', (string)$res->getBody());
 
-        unlink($path);
+            // also exercise .html variant
+            $res2 = $this->handle('GET', '/' . $slug . '.html');
+            $this->assertSame(200, $res2->getStatusCode());
+            $this->assertStringContainsString('fallback content', (string)$res2->getBody());
+        } finally {
+            if (file_exists($path)) {
+                unlink($path);
+            }
+        }
     }
 
     public function testMissingPageReturnsNotFound(): void
