@@ -53,7 +53,7 @@ project’s style and workflow.
   ```sh
   php -S localhost:8000 -t public_html
   ```
-  Opening `http://localhost:8000` should show the bootstrap placeholder message.
+  Opening `http://localhost:8000` should load the Slim app via `public_html/index.php` and render the default Plates-powered page, confirming the PHP bootstrap is working.
 - Configuration values are read from a `.env` file at the repository root.  The
   simple parser in `php/bootstrap.php` populates `getenv()`, `$_ENV` and
   `$_SERVER`; migrating to `vlucas/phpdotenv` is planned but not required.
