@@ -5,11 +5,9 @@ Core header bar, logo treatment and colour gradient live here.
 #site-header {
   /* header height is sourced from settings.css (default) and may be
      overridden in responsive contexts where appropriate. */
-  background: linear-gradient(180deg,
-      color-mix(in srgb, var(--color-accent) 72%, white 28%),
-      color-mix(in srgb, var(--color-accent) 60%, black 40%));
-  color: white;
-  border-bottom: 1px solid color-mix(in srgb, var(--color-accent) 20%, black);
+  background: #fff;
+  color: #1a1a1a;
+  border-bottom: 1px solid #e0e0e0;
   position: relative;
   /* Positioning context for skip-link to prevent overlap with nav bar */
 }
@@ -39,8 +37,8 @@ Core header bar, logo treatment and colour gradient live here.
   gap: var(--space-xxs);
   align-items: center;
   padding: 0.26rem var(--space-sm);
-  border-bottom: 1px solid var(--color-border);
-  background: color-mix(in srgb, var(--color-accent) 4%, transparent);
+  border-bottom: 1px solid #e8e8e8;
+  background: #fff;
   font-size: 0.9rem;
   line-height: 1.02;
   min-height: 44px;
@@ -67,13 +65,13 @@ Core header bar, logo treatment and colour gradient live here.
   padding: 0.02rem 0.35rem;
   border-radius: 0.4rem;
   background: rgba(255, 255, 255, 0.95);
-  color: color-mix(in srgb, var(--color-accent) 70%, black);
+  color: #1a1a1a;
   text-decoration: none;
 }
 
 .site-nav .logo img,
 .site-nav .all-logo img {
-  max-height: 64px;
+  max-height: 80px;
   width: auto;
   height: auto;
 }
@@ -100,7 +98,7 @@ Core header bar, logo treatment and colour gradient live here.
 @media (min-width: 640px) {
   .site-nav .logo img,
   .site-nav .all-logo img {
-    max-height: 80px;
+    max-height: 96px;
   }
 
   .site-nav .nav-left .site-tagline {
@@ -112,7 +110,7 @@ Core header bar, logo treatment and colour gradient live here.
 
   .site-nav .logo img,
   .site-nav .all-logo img {
-    max-height: 80px;
+    max-height: 96px;
   }
 }
 
@@ -120,7 +118,7 @@ Core header bar, logo treatment and colour gradient live here.
 
   .site-nav .logo img,
   .site-nav .all-logo img {
-    max-height: 88px;
+    max-height: 112px;
   }
 }
 
@@ -219,7 +217,7 @@ Core header bar, logo treatment and colour gradient live here.
   padding: 0.08rem 0.5rem;
   border-radius: 0.5rem;
   background: rgba(255, 255, 255, 0.9);
-  color: color-mix(in srgb, var(--color-accent) 70%, black);
+  color: #1a1a1a;
   text-decoration: none;
 }
 
