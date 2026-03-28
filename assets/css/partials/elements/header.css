@@ -71,7 +71,7 @@ Core header bar, logo treatment and colour gradient live here.
 
 .site-nav .logo img,
 .site-nav .all-logo img {
-  max-height: 80px;
+  max-height: 96px;
   width: auto;
   height: auto;
 }
@@ -95,32 +95,32 @@ Core header bar, logo treatment and colour gradient live here.
   }
 }
 
-@media (min-width: 640px) {
-  .site-nav .logo img,
-  .site-nav .all-logo img {
-    max-height: 96px;
+  @media (min-width: 640px) {
+    .site-nav .logo img,
+    .site-nav .all-logo img {
+      max-height: 120px;
+    }
+
+    .site-nav .nav-left .site-tagline {
+      font-size: 0.65rem;
+    }
   }
 
-  .site-nav .nav-left .site-tagline {
-    font-size: 0.65rem;
+  @media (min-width: 900px) {
+
+    .site-nav .logo img,
+    .site-nav .all-logo img {
+      max-height: 120px;
+    }
   }
-}
 
-@media (min-width: 900px) {
+  @media (min-width: 1200px) {
 
-  .site-nav .logo img,
-  .site-nav .all-logo img {
-    max-height: 96px;
+    .site-nav .logo img,
+    .site-nav .all-logo img {
+      max-height: 140px;
+    }
   }
-}
-
-@media (min-width: 1200px) {
-
-  .site-nav .logo img,
-  .site-nav .all-logo img {
-    max-height: 112px;
-  }
-}
 
 /* When JS replaces the native <select> with tabs we hide the native category control
    visually (it remains in the DOM as an accessibility fallback when necessary). */
