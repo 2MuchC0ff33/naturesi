@@ -12,6 +12,14 @@
   padding: 0.25rem;
 }
 
+.cart-option img[aria-hidden="true"] {
+  width: 24px !important;
+  height: 24px !important;
+  display: inline-block !important;
+  vertical-align: middle;
+  object-fit: contain;
+}
+
 .cart-text {
   font-weight: 600;
 }
