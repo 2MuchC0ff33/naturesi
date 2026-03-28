@@ -1,0 +1,6 @@
+        <div class="branding">
+          <div class="brand-text">
+            <h3>Nature's Infusions</h3>
+            <p itemprop="description">Premium organic teas and herbal remedies — handcrafted in Perth.</p>
+          </div>
+        </div>

@@ -107,8 +107,71 @@
       </div>
     </section>
   </main>
-  <script type="module" src="/assets/js/app.js"></script>
-  <script type="module" src="/assets/js/modules/checkout-bootstrap.js"></script>
+  <script>
+(function () {
+  var CART_KEY = 'naturesi_cart';
+  var form = document.getElementById('paypal-redirect-form');
+  var summary = document.getElementById('summary-content');
+  var errorEl = document.getElementById('checkout-error');
+  var btn = document.getElementById('pay-now-redirect');
+
+  function parseCart(raw) {
+    try {
+      var p = raw ? JSON.parse(raw) : null;
+      if (Array.isArray(p)) return { cart: p, shipping: 0 };
+      if (p && typeof p === 'object') return { cart: p.cart || [], shipping: p.shipping || 0 };
+    } catch (e) {}
+    return { cart: [], shipping: 0 };
+  }
+
+  function init() {
+    var raw = localStorage.getItem(CART_KEY);
+    var data = parseCart(raw);
+    var items = data.cart || [];
+    if (!items.length) {
+      if (errorEl) errorEl.textContent = 'Your cart is empty.';
+      if (btn) btn.disabled = true;
+      return;
+    }
+
+    var subtotal = 0;
+    var lines = items.map(function (it) {
+      var price = Number(it.price) || 0;
+      var qty = Number(it.qty || it.quantity || 1);
+      subtotal += price * qty;
+      return '<li>' + (it.name || it.title || it.id || 'Item') + ' &times; ' + qty + ' &mdash; $' + price.toFixed(2) + '</li>';
+    });
+
+    var shipping = Number(data.shipping) || 0;
+    var total = subtotal + shipping;
+    if (summary) {
+      summary.innerHTML = '<ul class="checkout-line-items">' + lines.join('') + '</ul><p>Subtotal: $' + subtotal.toFixed(2) + ' + Shipping: $' + shipping.toFixed(2) + ' = <strong>Total: $' + total.toFixed(2) + '</strong></p>';
+    }
+
+    var itemLabel = items.map(function (it) { return (it.qty || 1) + 'x ' + (it.name || it.title || it.id || ''); }).join(', ');
+    if (itemLabel.length > 127) itemLabel = itemLabel.slice(0, 124) + '...';
+
+    var amountEl = document.getElementById('pp-amount');
+    var itemNameEl = document.getElementById('pp-item_name');
+    var invoiceEl = document.getElementById('pp-invoice');
+
+    if (amountEl) amountEl.value = total.toFixed(2);
+    if (itemNameEl) itemNameEl.value = itemLabel;
+    if (invoiceEl) invoiceEl.value = 'NI-' + Date.now();
+    if (btn) btn.disabled = false;
+
+    if (form) {
+      form.addEventListener('submit', function () { form.submit(); });
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+  </script>
 
 </body>
 </html>

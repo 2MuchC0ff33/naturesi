@@ -1,4 +1,4 @@
-#!/usr/bin/env yash
+#!/bin/sh
 # test/smoke/links.test.sh — smoke test: all internal links resolve to existing files
 
 set -u

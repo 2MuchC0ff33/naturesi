@@ -1,4 +1,4 @@
-#!/usr/bin/env yash
+#!/bin/sh
 # test/unit/autoplay-loop.test.sh — unit test: autoplay-loop.js structure
 # Checks: video autoplay, loop, playsinline attributes
 

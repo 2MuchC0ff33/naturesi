@@ -1,4 +1,4 @@
-#!/usr/bin/env yash
+#!/bin/sh
 # test/unit/cart-ui.test.sh — unit test: cart-ui.js structure
 # Checks: cart UI updates, badge rendering, event listeners
 

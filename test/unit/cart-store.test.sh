@@ -1,4 +1,4 @@
-#!/usr/bin/env yash
+#!/bin/sh
 # test/unit/cart-store.test.sh — unit test: cartStore.js module structure and consistency
 # Checks: CartStore class, exported functions, cart key naming, data file references
 

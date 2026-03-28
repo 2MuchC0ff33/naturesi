@@ -1,4 +1,4 @@
-#!/usr/bin/env yash
+#!/bin/sh
 # scripts/lint-html.sh — POSIX HTML lint checks
 # Checks: DOCTYPE, lang="en-AU", charset, viewport, <label for>, alt on images
 

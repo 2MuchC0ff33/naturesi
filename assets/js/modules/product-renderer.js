@@ -1,208 +1,28 @@
-let _products = null;
-let _fetchedAt = 0;
-const CACHE_TTL = 60 * 1000;
-
-async function fetchProducts() {
-  const now = Date.now();
-  if (_products && (now - _fetchedAt) < CACHE_TTL) return _products;
-  try {
-    const res = await fetch('/assets/js/data/products.json');
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const data = await res.json();
-    _products = Array.isArray(data.products) ? data.products : [];
-    _fetchedAt = now;
-    return _products;
-  } catch (err) {
-    console.error('product-renderer: failed to load products', err);
-    return [];
-  }
-}
-
-function escapeHtml(s) {
-  return String(s || '')
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
-}
-
-function priceText(n) {
-  return typeof n === 'number' ? `$${n.toFixed(2)}` : '';
-}
-
-function renderOptionRadios(product, selectedId) {
-  if (!product.options || product.options.length <= 1) return '';
-  const lines = product.options.map((opt) => {
-    const checked = opt.id === selectedId ? ' checked' : '';
-    const p = typeof opt.price === 'number' ? priceText(opt.price) : '';
-    return (
-      `<label class="u-d-flex u-items-center u-gap-2">` +
-      `<input type="radio" name="product-option-${escapeHtml(product.id)}"` +
-      ` value="${escapeHtml(opt.id)}"${checked} data-price="${opt.price}" data-weight="${escapeHtml(opt.weight || '')}"> ` +
-      `${escapeHtml(opt.label)} ${p ? `(${p})` : ''}</label>`
-    );
-  });
-  return `<div class="product-options-list" role="radiogroup" aria-label="Select size">${lines.join('')}</div>`;
-}
-
-function renderQuantitySelect(product) {
-  const opts = [];
-  for (let i = 1; i <= 10; i++) {
-    const sel = i === 1 ? ' selected' : '';
-    opts.push(`<option value="${i}"${sel}>${i}</option>`);
-  }
-  return (
-    `<div class="quantity-selector">` +
-    `<label for="qty-${escapeHtml(product.id)}">Quantity:</label> ` +
-    `<select id="qty-${escapeHtml(product.id)}" name="quantity" min="1" max="10" required>` +
-    opts.join('') + `</select></div>`
-  );
-}
-
-function renderAddToCartBtn(product) {
-  return `<button type="submit">Add to Cart</button>`;
-}
-
-function getDisclaimer(category) {
-  const external = ['balms', 'creams', 'selfcare'];
-  if (external.includes(category)) {
-    return 'For external use only. Avoid contact with eyes. Discontinue use if irritation occurs. Not intended to diagnose, treat, cure, or prevent any disease.';
-  }
-  return 'This product is not intended to diagnose, treat, cure, or prevent any disease. Always consult with a healthcare provider before starting any new supplement or wellness regimen.';
-}
-
-function renderProductCard(product, selectedOption, featured = false, featuredLink = '#') {
-  const opt = selectedOption || product.options?.[0] || null;
-  const displayPrice = opt ? opt.price : product.price;
-  const optionRadios = featured ? '' : renderOptionRadios(product, opt?.id);
-
-  const imgAlt = escapeHtml(product.imageAlt || product.name);
-  const imgSrc = escapeHtml(product.image || '');
-
-  const stockText = product.inStock ? 'In Stock' : 'Out of Stock';
-  const stockClass = product.inStock ? '' : ' out-of-stock';
-
-  const featuredAttr = product.featured ? ' data-featured="true"' : '';
-
-  const slugId = escapeHtml(product.slug || product.id);
-  const anchorId = escapeHtml(product.id);
-
-  return (
-    `<article id="product-${anchorId}"${featuredAttr} class="product product-card" ` +
-    `itemprop="itemListElement" itemscope itemtype="https://schema.org/Product" ` +
-    `data-image="${escapeHtml(product.image || '')}" data-sku="${escapeHtml(product.sku || product.id)}">` +
-
-    `<header>` +
-    `<figure class="product-gallery product-card__media">` +
-    `<picture>` +
-    `<source srcset="${imgSrc}" type="image/webp"> ` +
-    `<img src="${imgSrc}" alt="${imgAlt}" width="300" height="300" loading="lazy" ` +
-    `itemprop="image" class="u-img-cover">` +
-    `</picture>` +
-    `</figure>` +
-    `<h3 itemprop="name">${featured ? `<a href="${featuredLink}">${escapeHtml(product.name)}</a>` : escapeHtml(product.name)}</h3>` +
-    (featured ? '' : `<div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">` +
-    `<link itemprop="availability" href="https://schema.org/InStock">` +
-    `<meta itemprop="priceCurrency" content="AUD">` +
-    `<p>${product.inStock ? '✓ ' : ''}<span itemprop="itemCondition">${stockText}</span></p>` +
-    `</div>`) +
-    `</header>` +
-
-    (featured ? '' : `<section class="product-description" itemprop="description">` +
-    `<p>${escapeHtml(product.description)}</p>` +
-    `</section>`) +
-
-    (featured ? '' : `<form action="/add-to-cart" method="post" class="product-options add-to-cart" ` +
-    `data-product="${escapeHtml(product.id)}" data-sku="${escapeHtml(product.sku || product.id)}">` +
-    `<fieldset>` +
-    `<legend>Product Options</legend>` +
-    optionRadios +
-    renderQuantitySelect(product) +
-    renderAddToCartBtn(product) +
-    `</fieldset>` +
-    `</form>`) +
-
-    (featured || !product.ingredients ? '' :
-    `<section class="product-ingredients" itemprop="nutrition" itemscope itemtype="https://schema.org/NutritionInformation">` +
-    `<h4>Ingredients</h4>` +
-    `<p itemprop="ingredients">${escapeHtml(product.ingredients)}</p>` +
-    `<p><small>Sourced from multiple origins</small></p>` +
-    `</section>`) +
-
-    (featured || !product.ingredients ? '' :
-    `<footer class="product-disclaimer">` +
-    `<details>` +
-    `<summary><small>${/selfcare|balms|creams/.test(product.category) ? 'Important Information' : 'Important Disclaimer'}</small></summary>` +
-    `<p itemprop="disambiguatingDescription"><small>${escapeHtml(getDisclaimer(product.category))}</small></p>` +
-    `</details>` +
-    `</footer>`) +
-
-    `</article>`
-  );
-}
-
-function renderGrid(container, products) {
-  if (!products.length) {
-    container.innerHTML = '<p>No products found.</p>';
-    return;
-  }
-  const featured = container.dataset.layout === 'featured';
-  const links = {};
-  if (featured && container.dataset.links) {
-    container.dataset.links.split(',').forEach((entry) => {
-      const [id, url] = entry.split(':');
-      if (id && url) links[id.trim()] = url.trim();
+/* product-renderer.js — simplified: only option price handlers remain (product grids are static HTML) */
+(function () {
+  function attachOptionHandlers(container) {
+    container.querySelectorAll('input[type="radio"][data-price]').forEach(function (radio) {
+      radio.addEventListener('change', function () {
+        var article = radio.closest('article');
+        if (!article) return;
+        var price = radio.dataset.price;
+        var btn = article.querySelector('button[type="submit"]');
+        if (btn) {
+          btn.textContent = price ? 'Add to Cart \u2014 $' + Number(price).toFixed(2) : 'Add to Cart';
+        }
+      });
     });
   }
-  container.innerHTML = products.map((p) => renderProductCard(p, featured ? null : p.options?.[0], featured, links[p.id] || '#')).join('');
-  if (!featured) attachOptionHandlers(container);
-}
 
-function attachOptionHandlers(container) {
-  container.querySelectorAll('input[type="radio"][data-price]').forEach((radio) => {
-    radio.addEventListener('change', () => {
-      const article = radio.closest('article');
-      if (!article) return;
-      const price = radio.dataset.price;
-      const btn = article.querySelector('button[type="submit"]');
-      if (btn) {
-        btn.textContent = price ? `Add to Cart — $${Number(price).toFixed(2)}` : 'Add to Cart';
-      }
+  function init() {
+    document.querySelectorAll('.product-grid').forEach(function (grid) {
+      attachOptionHandlers(grid);
     });
-  });
-}
+  }
 
-export async function initProductGrid(selector = '#product-grid') {
-  const container =
-    typeof document !== 'undefined'
-      ? document.querySelector(selector)
-      : null;
-  if (!container) return;
-
-  const ids = container.dataset.ids;
-  const category = container.dataset.category;
-  const products = await fetchProducts();
-  const filtered = ids
-    ? products.filter((p) => ids.split(',').includes(p.id))
-    : category
-      ? products.filter((p) => p.category === category)
-      : products;
-
-  renderGrid(container, filtered);
-}
-
-export async function renderProductsByIds(selector, ids) {
-  const container =
-    typeof document !== 'undefined'
-      ? document.querySelector(selector)
-      : null;
-  if (!container) return;
-
-  const products = await fetchProducts();
-  const filtered = ids
-    ? products.filter((p) => ids.includes(p.id))
-    : products;
-
-  renderGrid(container, filtered);
-}
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();

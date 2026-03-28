@@ -1,4 +1,4 @@
-#!/usr/bin/env yash
+#!/bin/sh
 # scripts/test-one.sh — Run a single test script
 # Usage: scripts/test-one.sh test/smoke/example.test.sh
 

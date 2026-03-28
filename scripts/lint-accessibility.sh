@@ -1,4 +1,4 @@
-#!/usr/bin/env yash
+#!/bin/sh
 # scripts/lint-accessibility.sh — Accessibility checks
 # FAIL on: invalid ARIA roles, positive tabindex, aria-hidden on focusable
 
@@ -15,7 +15,7 @@ usage() {
 }
 
 if [ $# -eq 0 ] || [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
-    find . -name '*.html' -type f 2>/dev/null | grep -v '/node_modules/' | while IFS= read -r f; do
+    find . -name '*.html' -type f 2>/dev/null | grep -v '/node_modules/' | while IFS= read -r f || [ -n "$f" ]; do
         "$0" "$f"
     done
     exit 0

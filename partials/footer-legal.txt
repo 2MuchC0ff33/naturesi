@@ -1,0 +1,5 @@
+      <footer class="legal-bar" aria-label="Legal and credits">
+        <div class="legal">
+          <p>© <time datetime="2025">2025</time> Nature's Infusions. All rights reserved.</p>
+        </div>
+      </footer>

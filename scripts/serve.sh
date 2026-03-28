@@ -1,4 +1,4 @@
-#!/usr/bin/env yash
+#!/bin/sh
 # scripts/serve.sh — Apache2 local dev server control
 # Usage: scripts/serve.sh start|stop|reload|status
 

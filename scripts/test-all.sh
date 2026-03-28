@@ -1,4 +1,4 @@
-#!/usr/bin/env yash
+#!/bin/sh
 # scripts/test-all.sh — Run all tests under test/ directory
 # Tests must be standalone shell scripts with .test.sh suffix
 

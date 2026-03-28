@@ -1,4 +1,4 @@
-#!/usr/bin/env yash
+#!/bin/sh
 # scripts/watch.sh — File change watcher
 # Polls file mtimes; outputs changed file paths to stdout
 # Usage: scripts/watch.sh [--dir <root>] [--sleep <seconds>]

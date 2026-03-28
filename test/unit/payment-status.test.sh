@@ -1,4 +1,4 @@
-#!/usr/bin/env yash
+#!/bin/sh
 # test/unit/payment-status.test.sh — unit test: payment-status.js structure
 # Checks: PayPal token validation, payment status detection
 

@@ -1,4 +1,4 @@
-#!/usr/bin/env yash
+#!/bin/sh
 # test/unit/cart-key.test.sh — unit test: consistent cart key naming
 # Checks: all JS files reference the same cart storage key
 

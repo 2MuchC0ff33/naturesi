@@ -1,4 +1,4 @@
-#!/usr/bin/env yash
+#!/bin/sh
 # scripts/generate-products.sh — POSIX CSV to JSON generator (pipe-delimited)
 # Reads products.csv (pipe-delimited), emits products.json for browser
 # Usage: scripts/generate-products.sh [csv_path] [json_out_path]

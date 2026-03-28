@@ -1,4 +1,4 @@
-#!/usr/bin/env yash
+#!/bin/sh
 # test/unit/sw-core.test.sh — unit test: sw-core.js structure
 # Checks: service worker install, caching strategy, offline handling
 

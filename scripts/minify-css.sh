@@ -1,4 +1,4 @@
-#!/usr/bin/env yash
+#!/bin/sh
 # scripts/minify-css.sh — conservative POSIX CSS minifier
 # Removes excess whitespace; preserves /* ... */ block comments
 # Usage: scripts/minify-css.sh <in.css> [out.css]

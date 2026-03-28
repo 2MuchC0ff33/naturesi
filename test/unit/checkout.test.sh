@@ -1,4 +1,4 @@
-#!/usr/bin/env yash
+#!/bin/sh
 # test/unit/checkout.test.sh — unit test: checkout.js structure
 # Checks: cart data loading, totals calculation, form validation
 

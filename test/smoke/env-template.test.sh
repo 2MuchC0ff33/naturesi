@@ -1,4 +1,4 @@
-#!/usr/bin/env yash
+#!/bin/sh
 # test/smoke/env-template.test.sh — smoke test: .env.template has expected keys
 # Checks: all required keys are present in .env.template
 

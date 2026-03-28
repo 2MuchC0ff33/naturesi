@@ -1,0 +1,3 @@
+platform|label|url
+facebook|Facebook|https://www.facebook.com/naturesinfusions.herbaltea/
+instagram|Instagram|https://www.instagram.com/natures_infusions_au/

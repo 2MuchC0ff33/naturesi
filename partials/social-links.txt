@@ -1,0 +1,20 @@
+        <section>
+          <h4>Connect</h4>
+          <nav aria-label="Social media links">
+            <ul>
+              <li>
+                <a class="facebook" href="https://www.facebook.com/naturesinfusions.herbaltea/"
+                  rel="noopener noreferrer" itemprop="sameAs" target="_blank"
+                  aria-label="Nature's Infusions on Facebook (opens in new tab)"><img
+                    src="/assets/img/icons/facebook.webp" alt="" class="social-icon" width="20" height="20"
+                    loading="lazy"> <span class="visually-hidden">Facebook</span></a>
+              </li>
+              <li>
+                <a class="instagram" href="https://www.instagram.com/natures_infusions_au/" rel="noopener noreferrer"
+                  itemprop="sameAs" target="_blank" aria-label="Nature's Infusions on Instagram (opens in new tab)"><img
+                    src="/assets/img/icons/instagram.webp" alt="" class="social-icon" width="20" height="20"
+                    loading="lazy"> <span class="visually-hidden">Instagram</span></a>
+              </li>
+            </ul>
+          </nav>
+        </section>

@@ -1,4 +1,4 @@
-#!/usr/bin/env yash
+#!/bin/sh
 # test/smoke/products.test.sh — smoke test: products.csv validation
 # Checks: CSV has required fields, unique IDs, valid prices
 

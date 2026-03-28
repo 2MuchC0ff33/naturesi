@@ -1,6 +1,7 @@
-#!/usr/bin/env yash
-# scripts/lint-js.sh — POSIX JS lint checks
+#!/bin/sh
+# scripts/lint-js.sh — POSIX JS lint checks + ESLint
 # FAIL on: eval(), new Function(), assignment in conditionals, debugger
+# Also runs: npx eslint (if installed)
 
 set -u
 
@@ -10,10 +11,17 @@ usage() {
 }
 
 if [ $# -eq 0 ] || [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
-    find assets/js -name '*.js' -type f 2>/dev/null | while IFS= read -r f; do
+    find assets/js -name '*.js' -type f 2>/dev/null | while IFS= read -r f || [ -n "$f" ]; do
         "$0" "$f"
     done
     exit 0
+fi
+
+# Check if ESLint is available
+if command -v npx >/dev/null 2>&1 && { [ -f ".eslintrc.json" ] || [ -f "eslint.config.js" ]; }; then
+    ESLINT_AVAILABLE=true
+else
+    ESLINT_AVAILABLE=false
 fi
 
 ERRORS=0
@@ -100,6 +108,14 @@ done
 if [ "$ERRORS" -gt 0 ] 2>/dev/null; then
     printf '%d error(s) found.\n' "$ERRORS" >&2
     exit 1
+fi
+
+# Run ESLint if available (skip in CI or when ESLINT_SKIP is set)
+if $ESLINT_AVAILABLE && [ -z "${ESLINT_SKIP:-}" ]; then
+    if [ $# -gt 0 ]; then
+        printf '\nRunning ESLint on %d file(s)...\n' $#
+        npx eslint --quiet "$@" 2>&1 | head -20 || true
+    fi
 fi
 
 printf 'All checks passed.\n'

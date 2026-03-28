@@ -1,4 +1,4 @@
-#!/usr/bin/env yash
+#!/bin/sh
 # test/smoke/css-files.test.sh — smoke test: no // comments in CSS
 # Checks: all .css files use /* ... */ block comments only
 

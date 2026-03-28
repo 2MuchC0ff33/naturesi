@@ -233,7 +233,9 @@ export class CartStore {
 
 // Module-level caches for JSON data
 let cachedPostcodes = null;
-let cachedPostage = null;
+
+// Inlined postage rates from postage.json (updated 2026-01-21)
+const POSTAGE_RATES = {"baseRates":{"pouch":{"sameCity":13,"nearMetro":13,"outerPerth":13,"national":13},"satchel":{"sameCity":15,"nearMetro":15,"outerPerth":15,"national":15},"handbag":{"sameCity":19,"nearMetro":19,"outerPerth":19,"national":19},"shoebox":{"sameCity":24,"nearMetro":24,"outerPerth":24,"national":24},"briefcase":{"sameCity":29,"nearMetro":29,"outerPerth":29,"national":29}},"regionalSurcharge":{"pouch":0,"satchel":0,"handbag":0,"shoebox":0,"briefcase":0},"remoteSurcharge":{"pouch":0,"satchel":0,"handbag":0,"shoebox":0,"briefcase":0}};
 
 // Shared utility: parse weight string to grams
 export function parseWeightString(wstr) {
@@ -331,10 +333,7 @@ export async function getPostcodeZone(postcode, opts = {}) {
 export async function calculateParcelRate(parcelType, postcode, opts = {}) {
   const p = (parcelType || '').toString().toLowerCase();
   const zone = await getPostcodeZone(postcode, opts);
-  if (!cachedPostage) {
-    cachedPostage = await loadJSONResource('/assets/js/data/postage.json');
-  }
-  const postage = cachedPostage;
+  const postage = POSTAGE_RATES;
   if (!postage || !postage.baseRates) return { zone, rate: null };
 
   const typeRates = postage.baseRates[p];
@@ -350,14 +349,11 @@ export async function calculateShippingByWeight(totalWeightGrams, postcode, opts
   const w = Number(totalWeightGrams) || 0;
   const pc = normalizePostcode(postcode);
 
-  // Load cached data (uses module-level cache)
-  if (!cachedPostage) {
-    cachedPostage = await loadJSONResource('/assets/js/data/postage.json');
-  }
+  // Load postcodes data (postage is inlined)
   if (!cachedPostcodes) {
     cachedPostcodes = await loadJSONResource('/assets/js/data/australian_postcodes.json');
   }
-  const postage = cachedPostage;
+  const postage = POSTAGE_RATES;
   const postcodesData = cachedPostcodes;
 
   // Choose smallest parcel type that can accommodate weight
@@ -428,7 +424,6 @@ export function __setCachedPostage(data) {
 }
 export function __resetCaches() {
   cachedPostcodes = null;
-  cachedPostage = null;
 }
 
 // Backwards-compatibility helpers: allow modules to obtain the global window.CartStore

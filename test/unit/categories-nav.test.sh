@@ -1,4 +1,4 @@
-#!/usr/bin/env yash
+#!/bin/sh
 # test/unit/categories-nav.test.sh — unit test: categories-nav.js structure
 # Checks: categories data loading, nav rendering, categories.json reference
 

@@ -1,4 +1,4 @@
-#!/usr/bin/env yash
+#!/bin/sh
 # test/smoke/css-vars.test.sh — smoke test: CSS custom properties defined before use
 # Aggregates all definitions across all CSS files, then checks each file's usage
 
@@ -9,8 +9,8 @@ CSS_FILES=$(find assets/css -name '*.css' -type f 2>/dev/null)
 # Step 1: Collect ALL variable definitions across all CSS files
 ALL_DEFS=""
 for FILE in $CSS_FILES; do
-    DEFS=$(grep -oE '--[a-zA-Z0-9_-]+[[:space:]]*:' "$FILE" 2>/dev/null \
-        | sed 's/:.*//' | sort | uniq)
+    DEFS=$(grep -oE -- '--[a-zA-Z0-9_-]+[[:space:]]*:' "$FILE" 2>/dev/null \
+        | sed 's/:.*//;s/^--//' | sort | uniq)
     ALL_DEFS="$ALL_DEFS
 $DEFS"
 done
@@ -24,7 +24,7 @@ CHECKED=0
 for FILE in $CSS_FILES; do
     CHECKED=$((CHECKED + 1))
     # Find all var(--name) usages in this file
-    VARS=$(grep -oE 'var\(--[a-zA-Z0-9_-]+\)' "$FILE" 2>/dev/null \
+    VARS=$(grep -oE -- 'var\(--[a-zA-Z0-9_-]+\)' "$FILE" 2>/dev/null \
         | sed "s/var(--//;s/)//" | sort | uniq)
 
     for VAR in $VARS; do

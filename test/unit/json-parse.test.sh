@@ -1,4 +1,4 @@
-#!/usr/bin/env yash
+#!/bin/sh
 # test/unit/json-parse.test.sh — unit test: all JSON files parse without error
 # Uses jq for parsing validation
 

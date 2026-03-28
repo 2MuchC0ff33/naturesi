@@ -1,4 +1,4 @@
-#!/usr/bin/env yash
+#!/bin/sh
 # test/smoke/images.test.sh — smoke test: all referenced images exist on disk
 
 set -u

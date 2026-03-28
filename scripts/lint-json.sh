@@ -1,4 +1,4 @@
-#!/usr/bin/env yash
+#!/bin/sh
 # scripts/lint-json.sh — POSIX JSON lint
 # Runs jq . on all *.json files; reports errors
 
@@ -10,9 +10,9 @@ trap 'rm -f "$TMP"' EXIT
 ERRORS=0
 PASS=0
 
-find . -name '*.json' -type f 2>/dev/null | sort > "$TMP"
+find . -name '*.json' -type f 2>/dev/null | grep -v '/node_modules/' | sort > "$TMP"
 
-while IFS= read -r f; do
+while IFS= read -r f || [ -n "$f" ]; do
     if jq . "$f" >/dev/null 2>&1; then
         printf 'OK:   %s\n' "$f"
         PASS=$((PASS + 1))

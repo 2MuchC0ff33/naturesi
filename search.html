@@ -376,6 +376,54 @@
       </div>
     </footer>
   </div>
+  <script>
+(function () {
+  var list = document.querySelector('[data-product-list]');
+  if (!list) return;
+  var form = document.querySelector('form#site-search-form');
+  var input = form ? form.querySelector('input[name="q"]') : null;
+  var products = [];
+  var q = new URLSearchParams(location.search).get('q') || '';
+  if (input && q) input.value = q;
+  function esc(s) {
+    return String(s || '').replace(/[&<>"']/g, function (m) {
+      return {'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[m];
+    });
+  }
+  function render(items) {
+    if (!items.length) {
+      list.innerHTML = '<li>No results found.</li>';
+      return;
+    }
+    var html = items.map(function (it) {
+      return '<li><a href="/pages/store/' + esc(it.category || 'store') + '.html#' + esc(it.slug || it.id) + '">' + esc(it.name) + ' <small>(' + esc(it.category || '') + ')</small></a></li>';
+    }).join('');
+    list.innerHTML = html;
+  }
+  function search(q) {
+    var needle = (q || '').trim().toLowerCase();
+    if (!needle) { render([]); return; }
+    var fields = ['name', 'category', 'description'];
+    var results = products.filter(function (p) {
+      return fields.some(function (f) { return (p[f] || '').toLowerCase().includes(needle); });
+    });
+    render(results.slice(0, 20));
+  }
+  function init() { search(q); }
+  fetch('/assets/js/data/products.json').then(function (r) { return r.json(); }).then(function (d) {
+    products = d.products || d || [];
+    init();
+  }).catch(function () { products = []; });
+  if (input) {
+    input.addEventListener('input', function () { search(input.value); });
+  }
+  if (form) {
+    form.addEventListener('submit', function () {
+      if (input && input.value) search(input.value);
+    });
+  }
+})();
+  </script>
 
 </body>
 

@@ -1,6 +1,7 @@
-#!/usr/bin/env yash
-# test/unit/product-renderer.test.sh — unit test: product-renderer.js structure
-# Checks: expected functions, CSV reference, grid targeting
+#!/bin/sh
+# test/unit/product-renderer.test.sh — unit test: simplified product-renderer.js
+# After static-first refactor: module only handles option price updates
+# Checks: IIFE structure, attachOptionHandlers, auto-init, no old APIs
 
 set -u
 
@@ -14,52 +15,52 @@ fi
 
 printf 'ok 1 %s exists\n' "$FILE"
 
-# Check init function
-if grep -q 'export function init' "$FILE" || grep -q 'export async function init' "$FILE"; then
-    printf 'ok 2 init function exported\n'
+# Check IIFE structure (auto-initializing)
+if grep -q '(function' "$FILE" || grep -q 'function ()' "$FILE"; then
+    printf 'ok 2 IIFE/function wrapper found\n'
 else
-    printf 'not ok 2 init function not exported\n'
+    printf 'not ok 2 IIFE/function wrapper missing\n'
     FAIL=$((FAIL + 1))
 fi
 
-# Check renderProducts function
-if grep -q 'function renderProducts' "$FILE"; then
-    printf 'ok 3 renderProducts function present\n'
+# Check attachOptionHandlers function exists
+if grep -q 'attachOptionHandlers' "$FILE"; then
+    printf 'ok 3 attachOptionHandlers function present\n'
 else
-    printf 'not ok 3 renderProducts not found\n'
+    printf 'not ok 3 attachOptionHandlers not found\n'
     FAIL=$((FAIL + 1))
 fi
 
-# Check #product-grid targeting (the ID-based selector)
-if grep -q 'getElementById.*product-grid' "$FILE" || grep -q "'#product-grid'" "$FILE"; then
-    printf 'ok 4 targets #product-grid by ID\n'
-else
-    printf 'not ok 4 #product-grid ID targeting missing\n'
+# Check no initProductGrid (removed after static grids)
+if grep -q 'initProductGrid' "$FILE"; then
+    printf 'not ok 4 initProductGrid still present (should be removed)\n'
     FAIL=$((FAIL + 1))
+else
+    printf 'ok 4 initProductGrid correctly removed\n'
 fi
 
-# Check products data reference (JSON or CSV)
-if grep -q 'products\.json\|products\.csv' "$FILE"; then
-    printf 'ok 5 products data reference found\n'
-else
-    printf 'not ok 5 products data reference missing\n'
+# Check no fetchProducts (removed — data is static HTML)
+if grep -q 'fetchProducts\|products\.json\|products\.csv' "$FILE"; then
+    printf 'not ok 5 product data fetching still present (should be static)\n'
     FAIL=$((FAIL + 1))
+else
+    printf 'ok 5 product data fetching correctly removed\n'
 fi
 
-# Check no .media class usage (should be removed after fix)
+# Check no renderProductCard (removed — HTML is static)
+if grep -q 'renderProductCard\|renderGrid' "$FILE"; then
+    printf 'not ok 6 renderProductCard/renderGrid still present (should be removed)\n'
+    FAIL=$((FAIL + 1))
+else
+    printf 'ok 6 renderProductCard/renderGrid correctly removed\n'
+fi
+
+# Check no .media class usage
 if grep -q "'.media'" "$FILE"; then
-    printf 'not ok 6 .media class still in use (regression)\n'
+    printf 'not ok 7 .media class still in use\n'
     FAIL=$((FAIL + 1))
 else
-    printf 'ok 6 .media class correctly removed\n'
-fi
-
-# Check no anchor wrappers in grid (should be removed after fix)
-if grep -q "'.product-anchor'" "$FILE"; then
-    printf 'not ok 7 .product-anchor elements still rendered (regression)\n'
-    FAIL=$((FAIL + 1))
-else
-    printf 'ok 7 .product-anchor elements correctly removed\n'
+    printf 'ok 7 .media class correctly absent\n'
 fi
 
 printf 'ok 8 %d failures\n' "$FAIL"

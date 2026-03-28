@@ -1,4 +1,4 @@
-#!/usr/bin/env yash
+#!/bin/sh
 # test/unit/csv-generate.test.sh — unit test: CSV→JSON pipeline
 # Runs generate-products.sh and validates the output JSON
 

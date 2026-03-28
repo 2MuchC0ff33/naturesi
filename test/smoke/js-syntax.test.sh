@@ -1,4 +1,4 @@
-#!/usr/bin/env yash
+#!/bin/sh
 # test/smoke/js-syntax.test.sh — smoke test: all JS files have valid syntax
 
 set -u

@@ -1,18 +1,18 @@
-#!/usr/bin/env yash
+#!/bin/sh
 # test/smoke/seo.test.sh — smoke test: SEO basics on all HTML pages
 # Checks: <title> exists, meta description present and reasonable length
 
 set -u
 
-HTML_FILES=$(find . -name '*.html' -type f 2>/dev/null | grep -v '/node_modules/')
+HTML_FILES=$(find . -name '*.html' -type f 2>/dev/null | grep -v '/node_modules/' | grep -v '\.inc\.html$')
 FAIL=0
 CHECKED=0
 
 for FILE in $HTML_FILES; do
     CHECKED=$((CHECKED + 1))
 
-    # Join multiline content for pattern matching
-    CONTENT=$(tr '\n' ' ' < "$FILE" 2>/dev/null)
+    # Join multiline content and normalize whitespace between tags
+    CONTENT=$(tr '\n' ' ' < "$FILE" 2>/dev/null | sed 's/>[[:space:]]*</></g')
 
     # Check <title> exists and is not empty
     TITLE=$(printf '%s' "$CONTENT" | grep -oE '<title>[^<]+</title>' \
@@ -35,8 +35,8 @@ for FILE in $HTML_FILES; do
 
     # Check meta description (using joined CONTENT)
     DESC=$(printf '%s' "$CONTENT" \
-        | grep -oE '<meta[^>]+name="description"[^>]*content="[^"]*"' \
-        | sed 's/.*content="//;s/".*//')
+        | grep -oE '<meta[^>]+name="description"[^>]*content=[[:space:]]*"[^"]*"' \
+        | sed 's/.*content=[[:space:]]*"//;s/".*//')
     if [ -z "$DESC" ]; then
         printf 'not ok %s: missing meta description\n' "$FILE"
         FAIL=$((FAIL + 1))

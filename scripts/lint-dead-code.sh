@@ -1,4 +1,4 @@
-#!/usr/bin/env yash
+#!/bin/sh
 # scripts/lint-dead-code.sh — Dead code and orphaned file detection
 # REPORT/WARN on: orphaned files, dead code, empty files, duplicate files
 

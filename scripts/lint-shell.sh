@@ -1,4 +1,4 @@
-#!/usr/bin/env yash
+#!/bin/sh
 # scripts/lint-shell.sh — POSIX Shell lint checks
 # FAIL on: bash-isms ([[, $RANDOM, local in sh), wrong shebang, missing set flags
 
@@ -33,7 +33,7 @@ for FILE in "$@"; do
     if [ -z "$SHEBANG" ]; then
         printf '  WARN: no shebang found\n'
     elif printf '%s' "$SHEBANG" | grep -qE '^#!/'; then
-        if printf '%s' "$SHEBANG" | grep -qE '#!/usr/bin/env\s+(yash|sh|bash)'; then
+        if printf '%s' "$SHEBANG" | grep -qE '#!/usr/bin/env\s+(sh|bash)'; then
             printf '  OK: shebang: %s\n' "$SHEBANG"
         elif printf '%s' "$SHEBANG" | grep -qE '#!/bin/(sh|bash)'; then
             printf '  OK: shebang: %s\n' "$SHEBANG"
@@ -42,8 +42,8 @@ for FILE in "$@"; do
         fi
     fi
 
-    # 2. No [[ bash-ism in yash/sh scripts (but allow [[ in sed character classes)
-    if printf '%s' "$SHEBANG" | grep -qE '(yash|sh)$'; then
+    # 2. No [[ bash-ism in sh scripts (but allow [[ in sed character classes)
+    if printf '%s' "$SHEBANG" | grep -qE '/sh$'; then
         BASHISM=$(grep -nE '\[\[' "$FILE" 2>/dev/null \
             | sed 's/^[0-9]*://' \
             | grep -vE '^[[:space:]]*#' \
@@ -116,7 +116,7 @@ for FILE in "$@"; do
     fi
 
     # 8. No tabs for indentation
-    if grep -qE $'\t' "$FILE" 2>/dev/null; then
+    if grep -qE "$(printf '\t')" "$FILE" 2>/dev/null; then
         printf '  WARN: tabs found for indentation (use spaces)\n'
     else
         printf '  OK: no tabs for indentation\n'

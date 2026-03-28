@@ -1,4 +1,4 @@
-#!/usr/bin/env yash
+#!/bin/sh
 # test/smoke/a11y-core.test.sh — smoke test: core accessibility checks
 # Checks: form labels, image alt text, heading hierarchy, button vs link
 

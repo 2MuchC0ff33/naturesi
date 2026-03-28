@@ -1,4 +1,4 @@
-#!/usr/bin/env yash
+#!/bin/sh
 # test/unit/modal.test.sh — unit test: modal.js structure and exports
 # Checks: init function, modal open/close, keyboard trap
 

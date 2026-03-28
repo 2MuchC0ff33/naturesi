@@ -1,4 +1,4 @@
-#!/usr/bin/env yash
+#!/bin/sh
 # test/unit/product-search.test.sh — unit test: product-search.js structure
 # Checks: search function, filter logic, CSV data reference
 

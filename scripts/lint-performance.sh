@@ -1,4 +1,4 @@
-#!/usr/bin/env yash
+#!/bin/sh
 # scripts/lint-performance.sh — Performance baseline checks
 # FAIL on: images > 3MB, videos > 10MB, CSS > 50KB, JS > 50KB
 

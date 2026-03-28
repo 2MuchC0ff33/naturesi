@@ -4,8 +4,6 @@ import { initCart } from './modules/cart-init.js';
 import './modules/categories-nav.js';
 import './modules/pricing-index.js';
 import './modules/products-guard.js';
-import './modules/search-autocomplete.js';
-import './modules/search-bootstrap.js';
 import { registerServiceWorker } from './modules/sw-register.js';
 import './modules/worker-registry.js';
 
@@ -28,7 +26,7 @@ if (typeof document !== 'undefined') {
   (async function start() {
     try {
       async function ensureGlobalCartStore() {
-        if (typeof window !== 'undefined' && window.CartStore) return;
+        if (typeof window !== 'undefined' && window.CartStore) {return;}
         try {
           const { CartStore } = await import('./modules/cartStore.js');
           const instance = new CartStore();
@@ -43,6 +41,7 @@ if (typeof document !== 'undefined') {
       const store = await initCart();
       window.NaturesCart = { store };
     } catch (_e) {
+      /* empty */
     }
   })();
 
@@ -54,19 +53,16 @@ if (typeof document !== 'undefined') {
           cf.attachFormHandler({ documentRoot: document, storage: localStorage });
         }
       }
-      if (document.getElementById('paypal-form') || document.getElementById('summary-content')) {
-        await import('./modules/checkout.js');
-      };
 
       const path = (location?.pathname) || '';
       try {
         if (path.endsWith('/pages/payment/success.html')) {
           const m = await import('./modules/payment-status.js');
-          if (m && typeof m.initPaymentReturn === 'function') m.initPaymentReturn();
+          if (m && typeof m.initPaymentReturn === 'function') {m.initPaymentReturn();}
         }
         if (path.endsWith('/pages/payment/fail.html')) {
           const m2 = await import('./modules/payment-status.js');
-          if (m2 && typeof m2.initPaymentCancel === 'function') m2.initPaymentCancel();
+          if (m2 && typeof m2.initPaymentCancel === 'function') {m2.initPaymentCancel();}
         }
       } catch (err) {
         console.error('Payment module init failed', err);
@@ -74,14 +70,14 @@ if (typeof document !== 'undefined') {
 
       try {
         const navMod = await import('./modules/nav-toggle.js');
-        if (navMod && typeof navMod.init === 'function') navMod.init(document);
+        if (navMod && typeof navMod.init === 'function') {navMod.init(document);}
       } catch (err) {
         console.warn('Nav toggle init failed', err);
       }
 
       try {
         const modalMod = await import('./modules/modal.js');
-        if (modalMod && typeof modalMod.init === 'function') modalMod.init(document);
+        if (modalMod && typeof modalMod.init === 'function') {modalMod.init(document);}
       } catch (err) {
         console.warn('Modal init failed', err);
       }
@@ -89,17 +85,10 @@ if (typeof document !== 'undefined') {
       try {
         if (document.querySelector('figure.product-gallery')) {
           const ph = await import('./modules/product-helpers.js');
-          if (ph && typeof ph.init === 'function') ph.init(document);
+          if (ph && typeof ph.init === 'function') {ph.init(document);}
         }
       } catch (err) {
         console.warn('Product helpers init failed', err);
-      }
-
-      try {
-        const fb = await import('./modules/featured-badges.js');
-        if (fb && typeof fb.initFeaturedBadges === 'function') fb.initFeaturedBadges(document);
-      } catch (err) {
-        console.warn('Featured badges init failed', err);
       }
 
       try {
@@ -119,7 +108,7 @@ if (typeof document !== 'undefined') {
               out = document.createElement('div');
               out.id = outputId;
               out.className = 'postcode-lookup-result';
-              if (form?.parentNode) form.parentNode.insertBefore(out, form.nextSibling);
+              if (form?.parentNode) {form.parentNode.insertBefore(out, form.nextSibling);}
             }
             return out;
           }
@@ -135,7 +124,7 @@ if (typeof document !== 'undefined') {
                   const r = await ship.calculateParcelRate(t, pc, { storePostcode: '6147', storeState: 'WA' });
                   return { type: t, zone: r.zone, rate: r.rate || r.baseRate || r.totalRate };
                 }));
-                out.innerHTML = `<ul>${rows.map(r => `<li>${r.type}: ${r.rate == null ? 'N/A' : `AUD $${Number(r.rate).toFixed(2)}`} (${r.zone})</li>`).join('')}</ul>`;
+                out.innerHTML = `<ul>${rows.map(r => `<li>${r.type}: ${r.rate === null ? 'N/A' : `AUD $${Number(r.rate).toFixed(2)}`} (${r.zone})</li>`).join('')}</ul>`;
               } catch (_err) {
                 out.textContent = 'Lookup failed';
               }

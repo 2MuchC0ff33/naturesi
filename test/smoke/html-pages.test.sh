@@ -1,4 +1,4 @@
-#!/usr/bin/env yash
+#!/bin/sh
 # test/smoke/html-pages.test.sh — smoke test: HTML page conventions
 # Checks: all HTML pages have DOCTYPE, lang="en-AU", charset, viewport
 

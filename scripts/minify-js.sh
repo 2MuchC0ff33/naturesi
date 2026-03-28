@@ -1,4 +1,4 @@
-#!/usr/bin/env yash
+#!/bin/sh
 # scripts/minify-js.sh — conservative POSIX JS minifier
 # Whitespace-only collapse; preserves // and /* ... */ comments
 # Usage: scripts/minify-js.sh <in.js> [out.js]

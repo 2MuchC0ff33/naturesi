@@ -1,4 +1,4 @@
-#!/usr/bin/env yash
+#!/bin/sh
 # test/smoke/categories.test.sh — smoke test: categories consistency
 # Checks: categories.json is valid JSON and has expected structure
 

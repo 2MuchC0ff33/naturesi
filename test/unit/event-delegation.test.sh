@@ -1,4 +1,4 @@
-#!/usr/bin/env yash
+#!/bin/sh
 # test/unit/event-delegation.test.sh — unit test: event-delegation.js exports
 # Checks: delegate and addKeyListener functions are exported
 

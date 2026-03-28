@@ -1,4 +1,4 @@
-#!/usr/bin/env yash
+#!/bin/sh
 # scripts/lint-css.sh — POSIX CSS lint checks
 # Checks: no // comments, block comments /* ... */ only
 

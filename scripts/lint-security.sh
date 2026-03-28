@@ -1,4 +1,4 @@
-#!/usr/bin/env yash
+#!/bin/sh
 # scripts/lint-security.sh — Security surface checks
 # FAIL on: inline event handlers, javascript: URLs, hardcoded secrets
 
