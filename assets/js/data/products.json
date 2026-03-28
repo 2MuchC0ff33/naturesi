@@ -237,7 +237,7 @@
       "images": ["/assets/img/logo.webp"],
       "inStock": true,
       "price": 14,
-      "options": [{"id":"product-lemonlift-50g","label":"50g","price":14,"weight":"50g"},{"id":"product-lemonlift-80g","label":"80g","price":22,"weight":"80g"}],
+      "options": [{"id":"product-lemonlift-50g","label":"50g","price":14,"weight":"50g"}],
       "featured": false
     },
     {
