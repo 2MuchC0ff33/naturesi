@@ -390,30 +390,36 @@ Delete a remote branch:
   git push origin --delete feat/my-feature
 
 ━━━━━━━━━━━━━━━━━━━━━━━━
-3m. MERGING AND PULL REQUESTS
-━━━━━━━━━━━━━━━━━━━━━━━━
+ 3m. MERGING (on feature branch, before PR)
+ ━━━━━━━━━━━━━━━━━━━━━━━━
 
-Merge a feature branch into main (on main):
-  git checkout main && git pull
-  git merge feat/my-feature
-  git push
+ Before opening a PR, squash your work on the feature branch into a
+ small number of logical commits. The user manages PRs on GitHub.
 
-Squash-merge a feature branch (preferred — clean main history):
-  git checkout main
-  git merge --squash feat/my-feature
-  git commit -m "feat(search): add autocomplete and fix form attributes"
+ Squash commits on the current branch (interactively or non-interactively):
 
-Abort a merge in progress:
-  git merge --abort
+   # Non-interactive: squash last N commits into 1
+   git reset --soft HEAD~N
+   git commit -m "fix(scope): concise summary"
 
-Check if branch is fully merged:
-  git branch --merged main
-  git branch --no-merged main
+   # Interactive: rewrite last N commits
+   git rebase -i HEAD~N
+   # pick, squash, drop as needed
 
-Create a GitHub PR from the command line:
-  gh pr create --title "feat(search): add autocomplete and fix form attributes" \
-               --body "## Summary\n- Add autocomplete dropdown to search\n- Fix missing form id on contact.html" \
-               --base main --head feat/search
+   # Then force-push
+   git push --force-with-lease origin feat/my-feature
+
+ Check if branch is fully merged (after PR is approved):
+   git branch --merged main
+   git branch --no-merged main
+
+ Merge a feature branch into main (user does this on GitHub):
+   # Do NOT merge locally unless user explicitly requests it.
+   # Squash-merge on GitHub is preferred for a clean main history.
+   # User manages PRs — agent only prepares the branch.
+
+ Abort a merge in progress:
+   git merge --abort
 
 ━━━━━━━━━━━━━━━━━━━━━━━━
 3n. INSPECTION AND RECOVERY
@@ -467,9 +473,8 @@ Remove a large file from history (use with caution):
   git log --oneline -5
   git diff --stat
 
-  # Push
+  # Push (user manages PRs on GitHub)
   git push -u origin feat/my-feature
-  gh pr create ...
 
 ━━━━━━━━━━━━━━━━━━━━━━━━
 3p. LOCAL DEVELOPMENT (apache2 + opencode simultaneous editing)
