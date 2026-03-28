@@ -38,6 +38,7 @@
 .review__text {
   color: color-mix(in srgb, var(--color-text) 78%, #0000);
   margin: 0;
+  font-style: italic;
 }
 
 @media (min-width: 640px) {
