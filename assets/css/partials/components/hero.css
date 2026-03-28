@@ -13,7 +13,6 @@
   overflow: visible;
   /* ensure hero doesn't clip positioned media */
   /* Added for absolute positioning of content on desktop */
-  border-radius: 10px;
   /* Removed min-height to allow auto-sizing based on video aspect ratio */
 }
 
