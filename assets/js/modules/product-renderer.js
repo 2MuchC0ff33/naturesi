@@ -46,10 +46,10 @@ function renderOptionRadios(product, selectedId) {
   return `<div class="product-options-list" role="radiogroup" aria-label="Select size">${lines.join('')}</div>`;
 }
 
-function renderQuantitySelect(qty) {
+function renderQuantitySelect(product) {
   const opts = [];
   for (let i = 1; i <= 10; i++) {
-    const sel = i === qty ? ' selected' : '';
+    const sel = i === 1 ? ' selected' : '';
     opts.push(`<option value="${i}"${sel}>${i}</option>`);
   }
   return (
@@ -112,7 +112,7 @@ function renderProductCard(product, selectedOption) {
     `<fieldset>` +
     `<legend>Product Options</legend>` +
     optionRadios +
-    renderQuantitySelect(1) +
+    renderQuantitySelect(product) +
     renderAddToCartBtn(product) +
     `</fieldset>` +
     `</form>` +
