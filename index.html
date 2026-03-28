@@ -120,15 +120,7 @@
       </div>
       <div class="nav-right" data-header-right="">
         <a class="cart-option" href="/pages/cart.html" aria-label="Cart">
-          <div class="cart-logo" aria-hidden="true">
-            <svg width="20" height="18" viewbox="0 0 24 24" fill="none" aria-hidden="true" tabindex="-1">
-              <rect x="3" y="4" width="14" height="10" rx="1" stroke="currentColor" stroke-width="1.25" fill="none">
-              </rect>
-              <path d="M7 4 6 2H3" stroke="currentColor" stroke-width="1.25" fill="none"></path>
-              <circle cx="8.5" cy="17.5" r="1.25" fill="currentColor"></circle>
-              <circle cx="17.5" cy="17.5" r="1.25" fill="currentColor"></circle>
-            </svg>
-          </div><span class="cart-text">Cart</span> <output class="cart-count" name="cart-count"
+          <img src="/assets/img/cart.webp" alt="" width="24" height="24" aria-hidden="true"><output class="cart-count" name="cart-count"
             aria-live="polite">0</output>
         </a>
       </div>
@@ -142,7 +134,6 @@
       </ul>
     </nav>
   </header>
-  <div class="hero-spacer" aria-hidden="true"></div>
   <section id="home" class="template-home" itemscope itemtype="https://schema.org/Store">
     <header id="hero" class="hero">
       <div class="hero__media">
@@ -156,6 +147,10 @@
       </div>
     </header>
   </section>
+  <section id="about-home" aria-labelledby="about-home-heading">
+    <h2 id="about-home-heading">Welcome to Nature's Infusions</h2>
+    <p>A small-batch, Perth-based business formulating organic teas and herbal remedies for everyday wellness. Our blends are inspired by naturopathic principles — supporting balance and vitality the natural way.</p>
+  </section>
   <main id="main-content" tabindex="-1" class="prose container">
       <section id="featured-products" aria-labelledby="featured-heading" itemscope
         itemtype="https://schema.org/ItemList">
@@ -163,10 +158,47 @@
           <h2 id="featured-heading">Featured Products</h2>
           <p id="product-description">Discover our most popular organic tea blends and herbal remedies</p>
         </header>
-        <div id="featured-grid" data-ids="product-calming,product-turmeric,product-sleeping,product-energiser" data-layout="featured" aria-live="polite"></div>
+        <div id="featured-grid" role="list">
+          <a href="/pages/store/wellness-blends.html" class="product-card" role="listitem">
+            <div class="product-card__media">
+              <picture>
+                <source srcset="/assets/img/calmingtea.webp" type="image/webp">
+                <img src="/assets/img/calmingtea.webp" alt="Calming Garden" width="300" height="300" loading="lazy">
+              </picture>
+            </div>
+            <h3>Calming Garden</h3>
+          </a>
+          <a href="/pages/store/wellness-blends.html" class="product-card" role="listitem">
+            <div class="product-card__media">
+              <picture>
+                <source srcset="/assets/img/enchantedturmeric1.webp" type="image/webp">
+                <img src="/assets/img/enchantedturmeric1.webp" alt="Enchanted Turmeric" width="300" height="300" loading="lazy">
+              </picture>
+            </div>
+            <h3>Enchanted Turmeric</h3>
+          </a>
+          <a href="/pages/store/wellness-blends.html" class="product-card" role="listitem">
+            <div class="product-card__media">
+              <picture>
+                <source srcset="/assets/img/sleepingsoundly1.webp" type="image/webp">
+                <img src="/assets/img/sleepingsoundly1.webp" alt="Sleeping Soundly" width="300" height="300" loading="lazy">
+              </picture>
+            </div>
+            <h3>Sleeping Soundly</h3>
+          </a>
+          <a href="/pages/store/green-tea.html" class="product-card" role="listitem">
+            <div class="product-card__media">
+              <picture>
+                <source srcset="/assets/img/energizer1.webp" type="image/webp">
+                <img src="/assets/img/energizer1.webp" alt="Energiser" width="300" height="300" loading="lazy">
+              </picture>
+            </div>
+            <h3>Energiser</h3>
+          </a>
+        </div>
         <footer id="view-all">
-          <a href="pages/store.html" itemprop="url">View Complete Product Catalog - Browse All Organic Teas & Wellness
-            Blends</a>
+          <p><a href="pages/store.html" itemprop="url">View Complete Product Catalog - Browse All Organic Teas & Wellness
+              Blends</a></p>
         </footer>
       </section>
       <section id="reviews" aria-labelledby="reviews-heading">
@@ -175,34 +207,51 @@
           <article class="review">
             <div class="review__body">
               <div class="review__meta">
-                <span class="review__name">Samantha R.</span><span aria-hidden="true">•</span><span
-                  class="review__rating">★★★★★</span>
+                <span class="review__name">Sarah K.</span><span aria-hidden="true">•</span><span class="review__rating">★★★★★</span>
               </div>
-              <p class="review__text">Beautifully fragrant blends — I noticed a real improvement in my sleep
-                routine.</p>
+              <p class="review__text">This is my third purchase of Sleeping Soundly and I love the taste. I dont like chamomile or lavender so this blend is perfect for me.</p>
+              <p class="review__product">Purchased: Sleeping Soundly</p>
             </div>
           </article>
           <article class="review">
             <div class="review__body">
               <div class="review__meta">
-                <span class="review__name">Marcus T.</span><span aria-hidden="true">•</span><span
-                  class="review__rating">★★★★★</span>
+                <span class="review__name">Olivia M.</span><span aria-hidden="true">•</span><span class="review__rating">★★★★★</span>
               </div>
-              <p class="review__text">Fast shipping and a lovely, clean taste — delightful.</p>
+              <p class="review__text">I love this tea, I've tried other turmeric blends from other popular tea companies and this blend is so unique and I just feel good on it.</p>
+              <p class="review__product">Purchased: Enchanted Turmeric</p>
             </div>
           </article>
           <article class="review">
             <div class="review__body">
               <div class="review__meta">
-                <span class="review__name">Aisha P.</span><span aria-hidden="true">•</span><span
-                  class="review__rating">★★★★☆</span>
+                <span class="review__name">Chloe R.</span><span aria-hidden="true">•</span><span class="review__rating">★★★★★</span>
               </div>
-              <p class="review__text">Lovely packaging and a calming aroma — highly recommend.</p>
+              <p class="review__text">This tea is so delicate and floral, I love it to help me wind down.</p>
+              <p class="review__product">Purchased: Calming Garden</p>
+            </div>
+          </article>
+          <article class="review">
+            <div class="review__body">
+              <div class="review__meta">
+                <span class="review__name">Isabelle B.</span><span aria-hidden="true">•</span><span class="review__rating">★★★★★</span>
+              </div>
+              <p class="review__text">I love this blend! It's caffiene free and I love the added fennel, I brew a pot most nights for the family.</p>
+              <p class="review__product">Purchased: African Chai</p>
+            </div>
+          </article>
+          <article class="review">
+            <div class="review__body">
+              <div class="review__meta">
+                <span class="review__name">Hannah W.</span><span aria-hidden="true">•</span><span class="review__rating">★★★★★</span>
+              </div>
+              <p class="review__text">This green tea is delicious. I usually don't like the taste of green tea but want the benefits and this tea blends the green tea with tulsi perfectly so its very palatable and easy to drink.</p>
+              <p class="review__product">Purchased: Energiser</p>
             </div>
           </article>
         </div>
       </section>
-      <section id="newsletter" aria-labelledby="newsletter-heading">
+      <section id="newsletter" class="newsletter-panel" aria-labelledby="newsletter-heading">
         <h2 id="newsletter-heading">Join Our Wellness Community</h2>
         <form id="newsletter-form" novalidate="" name="newsletter-form">
           <label for="newsletter-email">Email:</label> <input id="newsletter-email" type="email" name="email"
@@ -300,9 +349,7 @@
 
 <script type="module">
   import { initAutoplayLoop } from '/assets/js/modules/autoplay-loop.js';
-  import { initProductGrid } from '/assets/js/modules/product-renderer.js';
   initAutoplayLoop();
-  initProductGrid('#featured-grid');
 </script>
 </body>
 
