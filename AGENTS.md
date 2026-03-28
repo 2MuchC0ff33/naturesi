@@ -269,6 +269,39 @@ When to use this pattern vs. committing directly:
   - NEVER leave a worktree unused for more than one session
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+3e3. BRANCH-PER-CHANGE PATTERN (alternative to worktrees)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Use a dedicated feature branch instead of a worktree when:
+  - The change is isolated to one or two files (e.g. a single CSS component)
+  - No risk of conflicting with other in-progress work on the main feature branch
+  - The change is simple enough that commit history is self-explanatory
+  - You want a clean PR ready for review without squash-merging
+
+When to use branch-per-change:
+  1. Create a short-lived feature branch from the main feature branch:
+       git checkout -b feat/enhance-header-ui feature/enhance-ui-ux
+  2. Make targeted changes, commit, push:
+       git push -u origin feat/enhance-header-ui
+  3. Open a PR or merge when ready (squash or rebase-merge preferred)
+  4. Delete the branch after merging:
+       git branch -d feat/enhance-header-ui
+
+Use BRANCH-PER-CHANGE when:
+  - You want a clean PR for code review
+  - The change touches only 1-2 files in one area
+  - You need the change reviewed separately before merging
+  - The work can be done in a single session
+
+Use WORKTREE-PER-CHANGE when:
+  - You need to work on multiple things simultaneously
+  - The change is exploratory or experimental
+  - You want to keep the main feature branch clean during development
+  - The change touches many files and will be squash-merged anyway
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+3f. COMMITTING: RULES AND STYLE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 3f. COMMITTING: RULES AND STYLE
 ━━━━━━━━━━━━━━━━━━━━━━━━
 
