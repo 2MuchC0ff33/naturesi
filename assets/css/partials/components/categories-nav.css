@@ -22,12 +22,12 @@
 }
 
 .site-header__categories-link {
-  display: inline-block;
-  padding: 4px 8px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.6rem;
   color: #fff;
   text-decoration: none;
   font-size: clamp(0.85rem, 0.9vw, 1rem);
-  line-height: 1.2;
   max-width: 12rem;
   overflow: hidden;
   text-overflow: ellipsis;
