@@ -151,11 +151,14 @@ export async function initProductGrid(selector = '#product-grid') {
       : null;
   if (!container) return;
 
+  const ids = container.dataset.ids;
   const category = container.dataset.category;
   const products = await fetchProducts();
-  const filtered = category
-    ? products.filter((p) => p.category === category)
-    : products;
+  const filtered = ids
+    ? products.filter((p) => ids.split(',').includes(p.id))
+    : category
+      ? products.filter((p) => p.category === category)
+      : products;
 
   renderGrid(container, filtered);
 }

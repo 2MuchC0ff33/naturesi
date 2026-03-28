@@ -161,7 +161,7 @@
           <h2 id="featured-heading">Featured Products</h2>
           <p id="product-description">Discover our most popular organic tea blends and herbal remedies</p>
         </header>
-        <div id="product-grid" data-category="wellness-blends" aria-live="polite"></div>
+        <div id="featured-grid" data-ids="product-calming,product-turmeric,product-sleeping,product-energiser" aria-live="polite"></div>
         <footer id="view-all">
           <a href="pages/store.html" itemprop="url">View Complete Product Catalog - Browse All Organic Teas & Wellness
             Blends</a>
@@ -311,9 +311,9 @@
 
 <script type="module">
   import { initAutoplayLoop } from '/assets/js/modules/autoplay-loop.js';
-  import { initProductGrid } from '/assets/js/modules/product-renderer.js';
+  import { renderProductsByIds } from '/assets/js/modules/product-renderer.js';
   initAutoplayLoop();
-  initProductGrid('#product-grid');
+  renderProductsByIds('#featured-grid', ['product-calming', 'product-turmeric', 'product-sleeping', 'product-energiser']);
 </script>
 </body>
 
