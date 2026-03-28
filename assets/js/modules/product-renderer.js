@@ -64,10 +64,10 @@ function renderAddToCartBtn(product) {
   return `<button type="submit">Add to Cart</button>`;
 }
 
-function renderProductCard(product, selectedOption) {
+function renderProductCard(product, selectedOption, featured = false) {
   const opt = selectedOption || product.options?.[0] || null;
   const displayPrice = opt ? opt.price : product.price;
-  const optionRadios = renderOptionRadios(product, opt?.id);
+  const optionRadios = featured ? '' : renderOptionRadios(product, opt?.id);
 
   const imgAlt = escapeHtml(product.imageAlt || product.name);
   const imgSrc = escapeHtml(product.image || '');
@@ -95,19 +95,19 @@ function renderProductCard(product, selectedOption) {
     `itemprop="image" class="u-img-cover">` +
     `</picture>` +
     `</figure>` +
-    `<h3 itemprop="name">${escapeHtml(product.name)}</h3>` +
-    `<div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">` +
+    `<h3 itemprop="name">${featured ? `<a href="#${slugId}">${escapeHtml(product.name)}</a>` : escapeHtml(product.name)}</h3>` +
+    (featured ? '' : `<div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">` +
     `<link itemprop="availability" href="https://schema.org/InStock">` +
     `<meta itemprop="priceCurrency" content="AUD">` +
     `<p>${product.inStock ? '✓ ' : ''}<span itemprop="itemCondition">${stockText}</span></p>` +
-    `</div>` +
+    `</div>`) +
     `</header>` +
 
-    `<section class="product-description" itemprop="description">` +
+    (featured ? '' : `<section class="product-description" itemprop="description">` +
     `<p>${escapeHtml(product.description)}</p>` +
-    `</section>` +
+    `</section>`) +
 
-    `<form action="/add-to-cart" method="post" class="product-options add-to-cart" ` +
+    (featured ? '' : `<form action="/add-to-cart" method="post" class="product-options add-to-cart" ` +
     `data-product="${escapeHtml(product.id)}" data-sku="${escapeHtml(product.sku || product.id)}">` +
     `<fieldset>` +
     `<legend>Product Options</legend>` +
@@ -115,7 +115,7 @@ function renderProductCard(product, selectedOption) {
     renderQuantitySelect(product) +
     renderAddToCartBtn(product) +
     `</fieldset>` +
-    `</form>` +
+    `</form>`) +
 
     `</article>`
   );
@@ -126,8 +126,9 @@ function renderGrid(container, products) {
     container.innerHTML = '<p>No products found.</p>';
     return;
   }
-  container.innerHTML = products.map((p) => renderProductCard(p, p.options?.[0])).join('');
-  attachOptionHandlers(container);
+  const featured = container.dataset.layout === 'featured';
+  container.innerHTML = products.map((p) => renderProductCard(p, featured ? null : p.options?.[0], featured)).join('');
+  if (!featured) attachOptionHandlers(container);
 }
 
 function attachOptionHandlers(container) {
