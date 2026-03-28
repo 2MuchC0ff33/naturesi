@@ -41,6 +41,7 @@
   min-width: 240px;
   height: 320px;
   overflow: hidden;
+  border-radius: 120px 120px 8px 8px;
 }
 
 #featured-grid .product-card__media,
@@ -49,6 +50,7 @@
   flex: 0 0 200px;
   overflow: hidden;
   margin-bottom: 0;
+  border-radius: 120px 120px 0 0;
 }
 
 #featured-grid .product-card__media img,
@@ -94,12 +96,14 @@
     flex: 0 0 200px;
     min-width: 200px;
     height: 280px;
+    border-radius: 100px 100px 8px 8px;
   }
 
   #featured-grid .product-card__media,
   .product-grid--featured .product-card__media {
     height: 160px;
     flex: 0 0 160px;
+    border-radius: 100px 100px 0 0;
   }
 
   #featured-grid .product-card h3,
