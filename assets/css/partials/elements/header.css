@@ -71,6 +71,35 @@ Core header bar, logo treatment and colour gradient live here.
   text-decoration: none;
 }
 
+.site-nav .logo .site-tagline {
+  display: block;
+  font-size: 0.65rem;
+  font-weight: 400;
+  color: color-mix(in srgb, var(--color-accent) 70%, black);
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+@media (max-width: 639px) {
+  .site-nav .logo {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.1rem;
+  }
+}
+
+@media (min-width: 640px) {
+  .site-nav .logo {
+    flex-wrap: nowrap;
+    gap: 0.4rem;
+  }
+
+  .site-nav .logo .site-tagline {
+    display: inline;
+    font-size: 0.7rem;
+  }
+}
+
 .site-nav .logo img,
 .site-nav .all-logo img {
   /* larger baseline for improved brand visibility on phones */
