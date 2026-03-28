@@ -42,7 +42,7 @@
       "images": ["/assets/img/sleepingsoundly1.webp"],
       "inStock": true,
       "price": 14,
-      "options": [{"id":"product-sleeping-50g","label":"50g","price":14,"weight":"50g"},{"id":"product-sleeping-80g","label":"80g","price":22,"weight":"80g"}],
+      "options": [{"id":"product-sleeping-50g","label":"50g","price":14,"weight":"50g"},{"id":"product-sleeping-70g","label":"70g","price":22,"weight":"70g"}],
       "featured": false
     },
     {
