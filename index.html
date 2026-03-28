@@ -144,7 +144,7 @@
   <section id="home" class="template-home" itemscope itemtype="https://schema.org/Store">
     <header id="hero" class="hero">
       <div class="hero__media">
-        <video id="hero-video" muted controls=""
+        <video id="hero-video" muted controls="" data-autoplay-loop="true"
           poster="/assets/video/poster.webp?v=3" preload="auto"
           style="object-fit:contain;object-position:center center"
           aria-label="Hero video showcasing Nature's Infusions teas and wellness products">
@@ -310,7 +310,9 @@
   </dialog>
 
 <script type="module">
+  import { initAutoplayLoop } from '/assets/js/modules/autoplay-loop.js';
   import { initProductGrid } from '/assets/js/modules/product-renderer.js';
+  initAutoplayLoop();
   initProductGrid('#product-grid');
 </script>
 </body>
