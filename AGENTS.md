@@ -133,6 +133,7 @@ At the START of EVERY session (before writing any code):
   git status
   git log --oneline -3
   git branch -a
+  git worktree list
 
 If fsck reports dangling/blobs with "missing" — investigate before proceeding.
 If there are uncommitted changes from a previous session — ask the user
@@ -393,21 +394,44 @@ Delete a remote branch:
  3m. MERGING (on feature branch, before PR)
  ━━━━━━━━━━━━━━━━━━━━━━━━
 
- Before opening a PR, squash your work on the feature branch into a
- small number of logical commits. The user manages PRs on GitHub.
+Before opening a PR, squash your work on the feature branch into a
+  small number of logical commits. The user manages PRs on GitHub.
 
- Squash commits on the current branch (interactively or non-interactively):
+  Stale files: before committing, check for deleted or unused files (e.g. a .svg
+  replaced by a .webp) and stage the deletion. Run `git status` to catch any
+  untracked or deleted files before committing.
 
-   # Non-interactive: squash last N commits into 1
-   git reset --soft HEAD~N
-   git commit -m "fix(scope): concise summary"
+  Branch hygiene: BEFORE starting new work on a feature branch, check whether
+  the branch has accumulated many small commits (20+). If so, offer to squash
+  into logical groups BEFORE adding more commits. This keeps history clean and
+  review faster.
 
-   # Interactive: rewrite last N commits
-   git rebase -i HEAD~N
-   # pick, squash, drop as needed
+  Worktree hygiene: AFTER completing work in a worktree (review, refactor, etc.),
+  remove the worktree immediately. Check for stale worktrees with git worktree list
+  before and after every session.
 
-   # Then force-push
-   git push --force-with-lease origin feat/my-feature
+  Squash commits on the current branch (interactively or non-interactively):
+
+    # Non-interactive: squash last N commits into 1
+    # (keeps changes staged, re-commit with clean message)
+    git reset --soft HEAD~N
+    git commit -m "fix(scope): concise summary"
+
+    # Interactive: rewrite last N commits
+    git rebase -i HEAD~N
+    # pick, squash, drop as needed
+
+    # Logical grouping method (recommended for large squash):
+    # 1. Count enhancement commits: git log --oneline | grep -n BASE
+    # 2. Reset to base: git reset --soft HEAD~N
+    # 3. Stage and commit in logical groups:
+    #    git add <group1-files> && git commit -m "feat(scope): summary"
+    #    git add <group2-files> && git commit -m "feat(scope): summary"
+    #    (repeat for each logical unit)
+    # 4. Force-push: git push --force-with-lease origin feat/my-feature
+
+    # Then force-push
+    git push --force-with-lease origin feat/my-feature
 
  Check if branch is fully merged (after PR is approved):
    git branch --merged main
