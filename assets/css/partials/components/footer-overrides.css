@@ -59,10 +59,11 @@
 
 /* New WebP social icons */
 .site-footer nav[aria-label="Social media links"] a img.social-icon {
-  width: 20px;
-  height: 20px;
+  width: 40px;
+  height: 40px;
   display: block;
   object-fit: contain;
+  border-radius: 50%;
 }
 
 /* GitHub in legal bar: slightly smaller */
@@ -112,8 +113,8 @@
   }
 
   .site-footer nav[aria-label="Social media links"] a img.social-icon {
-    width: 18px;
-    height: 18px;
+    width: 36px;
+    height: 36px;
   }
 
   .site-footer .legal-bar {

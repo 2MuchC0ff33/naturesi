@@ -92,23 +92,19 @@ footer[itemscope][itemtype*='WPFooter'] a:hover {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 0.5rem;
-  color: var(--footer-text);
-  background: transparent;
-  transition:
-    background var(--transition-fast),
-    color var(--transition-fast),
-    transform var(--transition-fast);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
   text-decoration: none;
+  transition:
+    opacity var(--transition-fast),
+    transform var(--transition-fast);
 }
 
 .site-footer nav[aria-label='Social media links'] a:focus-visible,
 .site-footer nav[aria-label='Social media links'] a:hover {
-  background: color-mix(in srgb, var(--color-accent) 18%, transparent);
-  color: #fff;
-  transform: translateY(-1px);
+  opacity: 0.85;
+  transform: translateY(-2px) scale(1.05);
   outline: 3px solid var(--footer-accent-outline);
   outline-offset: 2px;
 }
