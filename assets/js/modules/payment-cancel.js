@@ -1,18 +1,8 @@
-export function hasPayPalReturnParams(searchString) {
-  try {
-    const params = new URLSearchParams(
-      searchString || (typeof location !== 'undefined' ? location.search : '')
-    );
-    return ['PayerID', 'tx', 'paymentId', 'token'].some((k) => params.has(k));
-  } catch (e) {
-    return false;
-  }
-}
+import { hasPayPalReturnParams } from './payment-helpers.js';
 
 export function handlePaymentCancel(searchString) {
   if (!hasPayPalReturnParams(searchString)) return false;
   try {
-    // Do not clear cart; inform the user and emit an event
     if (typeof document !== 'undefined') {
       const params = new URLSearchParams(searchString || location.search);
       const detail = Object.fromEntries([...params.entries()]);

@@ -1,5 +1,5 @@
 // IndexedDB wrapper to store/retrieve the cart when localStorage isn't available
-export function loadCartFromIDB(dbName = 'naturesi_cart_db', key = 'naturesi-cart') {
+export function loadCartFromIDB(dbName = 'naturesi_cart_db', key = 'naturesi_cart') {
   return new Promise((resolve) => {
     if (typeof window === 'undefined' || !('indexedDB' in window)) return resolve(null);
     const req = indexedDB.open(dbName, 1);
@@ -19,7 +19,7 @@ export function loadCartFromIDB(dbName = 'naturesi_cart_db', key = 'naturesi-car
   });
 }
 
-export function saveCartToIDB(cart, dbName = 'naturesi_cart_db', key = 'naturesi-cart') {
+export function saveCartToIDB(cart, dbName = 'naturesi_cart_db', key = 'naturesi_cart') {
   return new Promise((resolve) => {
     if (!('indexedDB' in window)) {
       console.error('IndexedDB is not supported in this browser.');

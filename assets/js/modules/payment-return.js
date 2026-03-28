@@ -1,23 +1,11 @@
-export function hasPayPalReturnParams(searchString) {
-  try {
-    const params = new URLSearchParams(
-      searchString || (typeof location !== 'undefined' ? location.search : '')
-    );
-    return ['PayerID', 'tx', 'paymentId', 'token'].some((k) => params.has(k));
-  } catch (e) {
-    return false;
-  }
-}
+import { hasPayPalReturnParams } from './payment-helpers.js';
 
 export function handlePaymentReturn(searchString) {
   if (!hasPayPalReturnParams(searchString)) return false;
   try {
-    // Clear cart keys
     if (typeof localStorage !== 'undefined') {
       localStorage.removeItem('naturesi_cart');
-      localStorage.removeItem('naturesi-cart');
     }
-    // Dispatch custom event
     if (typeof document !== 'undefined') {
       document.dispatchEvent(new CustomEvent('cart:cleared:payment'));
       const main = document.querySelector('main.container') || document.body;

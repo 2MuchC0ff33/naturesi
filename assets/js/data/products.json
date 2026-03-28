@@ -1,773 +1,454 @@
 {
   "products": [
     {
-      "id": "calming-garden-50g",
-      "sku": "calming-garden-50g",
-      "name": "Calming Garden",
-      "image": "/assets/img/calmingtea.webp",
-      "imageAlt": "",
-      "images": [
-        "/assets/img/calmingtea.webp"
-      ],
-      "description": "Crafted with a calming blend of rosemary, passionflower, lavender, chamomile, and rose petals, this tea offers a soothing floral experience inspired by traditional herbal gardens. Each sip provides a comforting moment, ideal for relaxation and unwinding.",
-      "inStock": true,
-      "options": [
-        {
-          "id": "calming-garden-50g--14-00",
-          "label": "$14.00",
-          "price": 14,
-          "weight": "50 g"
-        },
-        {
-          "id": "calming-garden-50g--22-00",
-          "label": "$22.00",
-          "price": 22,
-          "weight": "70 g"
-        }
-      ],
-      "price": 14
-    },
-    {
-      "id": "enchanted-turmeric-60g",
-      "sku": "enchanted-turmeric-60g",
-      "name": "Enchanted Turmeric",
-      "featured": true,
-      "image": "/assets/img/enchantedturmeric2.webp",
-      "imageAlt": "",
-      "images": [
-        "/assets/img/enchantedturmeric2.webp"
-      ],
-      "description": "A warming blend of turmeric, ginger root, rose petals, licorice root, juniper berries, and cardamom, thoughtfully crafted to support your body's natural response to inflammation. This infusion combines the earthly flavour to turmeric with aromatic spices, making it a delightful addition to self-care rituals.",
-      "inStock": true,
-      "options": [
-        {
-          "id": "enchanted-turmeric-60g--14-00",
-          "label": "$14.00",
-          "price": 14,
-          "weight": "60 g"
-        },
-        {
-          "id": "enchanted-turmeric-60g--22-00",
-          "label": "$22.00",
-          "price": 22,
-          "weight": "100 g"
-        }
-      ],
-      "price": 14
-    },
-    {
-      "id": "product-apple",
-      "sku": "product-apple",
-      "name": "Apple Delight",
-      "image": "/assets/img/summerbreeze.webp",
-      "imageAlt": "",
-      "images": [
-        "/assets/img/summerbreeze.webp"
-      ],
-      "description": "Savour the taste of summer with this refreshing blend of dried apple pieces, rosehip, lemongrass, and spearmint. This naturally sweet, fruity tea can be enjoyed hot or cold, offering a revitalising experience in each sip.",
-      "inStock": false,
-      "options": [],
-      "price": null
-    },
-    {
-      "id": "product-bag",
-      "sku": "product-bag",
-      "name": "Biodegradable Tea Bags - 10 pack",
-      "image": "/assets/img/general1.webp",
-      "imageAlt": "",
-      "images": [
-        "/assets/img/general1.webp"
-      ],
-      "description": "Compostable tea bags made from plant-based materials. 10 pack for convenient single-serving brews.",
-      "inStock": true,
-      "options": [
-        {
-          "id": "product-bag--4-00",
-          "label": "$4.00",
-          "price": 4
-        }
-      ],
-      "price": 4
-    },
-    {
-      "id": "product-botanic",
-      "sku": "product-botanic",
-      "name": "Botanic Glow",
-      "image": "/assets/img/botanicglow1.webp",
-      "imageAlt": "",
-      "images": [
-        "/assets/img/botanicglow1.webp"
-      ],
-      "description": "A revitalising blend of nettle, spearmint, linseed, and echinacea, thoughtfully crafted to support immune health and promote skin vitality. With nurturing properties, this refreshing infusion is designed to be a delightful addition to your daily routine.",
-      "inStock": true,
-      "options": [
-        {
-          "id": "product-botanic--14-00",
-          "label": "$14.00",
-          "price": 14,
-          "weight": "50 g"
-        },
-        {
-          "id": "product-botanic--22-00",
-          "label": "$22.00",
-          "price": 22,
-          "weight": "80 g"
-        }
-      ],
-      "price": 14
-    },
-    {
-      "id": "product-calendula",
-      "sku": "product-calendula",
-      "name": "Calendula Cream",
-      "image": "/assets/img/calmbalm.webp",
-      "imageAlt": "",
-      "images": [
-        "/assets/img/calmbalm.webp"
-      ],
-      "description": "A soothing cream infused with calendula flowers and a chamomile essential oil, known for their skin-nourishing properties. This rich avocado-cream base is a non-greasy formula helping to moisturise and comfort dry or sensitive skin.",
-      "inStock": true,
-      "options": [
-        {
-          "id": "product-calendula--18-00",
-          "label": "$18.00",
-          "price": 18
-        }
-      ],
-      "price": 18
-    },
-    {
-      "id": "product-calmbalm",
-      "sku": "product-calmbalm",
-      "name": "Calm Balm",
-      "image": "/assets/img/calmbalm.webp",
-      "imageAlt": "",
-      "images": [
-        "/assets/img/calmbalm.webp"
-      ],
-      "description": "Calm your mind and ease tension with our soothing Calm Balm. Infused with the tranquil scents of bergamot and ylang-ylang, this balm is perfect for a relaxing massage or as a nightly ritual to promote tranquility.",
-      "inStock": true,
-      "options": [
-        {
-          "id": "product-calmbalm--12-00",
-          "label": "$12.00",
-          "price": 12
-        }
-      ],
-      "price": 12
-    },
-    {
       "id": "product-calming",
       "sku": "product-calming",
       "name": "Calming Garden",
-      "featured": true,
+      "slug": "calming-garden",
+      "category": "wellness-blends",
+      "description": "Crafted with a calming blend of rosemary; passionflower; lavender; chamomile and rose petals; a soothing floral experience for relaxation and unwinding",
       "image": "/assets/img/calmingtea.webp",
-      "imageAlt": "",
-      "images": [
-        "/assets/img/calmingtea.webp"
-      ],
-      "description": "Crafted with a calming blend of rosemary, passionflower, lavender, chamomile, and rose petals, this tea offers a soothing floral experience inspired by traditional herbal gardens. Each sip provides a comforting moment, ideal for relaxation and unwinding.",
-      "ingredients": [
-        "Rosemary",
-        "Passionflower",
-        "Lavender",
-        "Chamomile",
-        "Rose Petals"
-      ],
+      "imageAlt": "Calming Garden",
+      "images": ["/assets/img/calmingtea.webp"],
       "inStock": true,
-      "options": [
-        {
-          "id": "product-calming--14-00",
-          "label": "$14.00",
-          "price": 14,
-          "weight": "50 g"
-        },
-        {
-          "id": "product-calming--22-00",
-          "label": "$22.00",
-          "price": 22,
-          "weight": "70 g"
-        }
-      ],
       "price": 14,
-      "rating": 4,
-      "reviewCount": 5
-    },
-    {
-      "id": "product-ceylon",
-      "sku": "product-ceylon",
-      "name": "Ceylon Chai",
-      "image": "/assets/img/ceylonchai1.webp",
-      "imageAlt": "",
-      "images": [
-        "/assets/img/ceylonchai1.webp"
-      ],
-      "description": "Enjoy the vibrant warmth of our Ceylon Chai, a delightful fusion of rich Ceylon Black Tea and aromatic spices. This invigorating blend features ginger, cardamom, cinnamon, star anise, cloves, and peppercorn, offering a cozy and uplifting experience.",
-      "inStock": true,
-      "options": [
-        {
-          "id": "product-ceylon--14-00",
-          "label": "$14.00",
-          "price": 14,
-          "weight": "50 g"
-        },
-        {
-          "id": "product-ceylon--22-00",
-          "label": "$22.00",
-          "price": 22,
-          "weight": "100 g"
-        }
-      ],
-      "price": 14
-    },
-    {
-      "id": "product-detox",
-      "sku": "product-detox",
-      "name": "Nature's Detox",
-      "image": "/assets/img/general3.webp",
-      "imageAlt": "",
-      "images": [
-        "/assets/img/general3.webp"
-      ],
-      "description": "A gentle blend of dandelion root, tulsi, lemon peel, dandelion leaf, lemongrass, and blue cornflower petals, thoughtfully crafted to support the body's natural cleansing processes. This soothing infusion is designed to be easy on the tummy, making it a refreshing choice for everyday wellness.",
-      "inStock": false,
-      "options": [],
-      "price": null
-    },
-    {
-      "id": "product-digestive",
-      "sku": "product-digestive",
-      "name": "Digestive Bliss",
-      "image": "/assets/img/digestivebliss.webp",
-      "imageAlt": "",
-      "images": [
-        "/assets/img/digestivebliss.webp"
-      ],
-      "description": "A delightful blend of meadowsweet, aniseed, ginger root, and peppermint, thoughtfully crafted to support digestive comfort. This soothing infusion is designed to be a refreshing choice for those seeking gentle stomach support and overall digestive well-being.",
-      "inStock": false,
-      "options": [
-        {
-          "id": "50g-pouch",
-          "label": "Pouch — 50 g",
-          "weight": "50 g",
-          "price": 14
-        }
-      ],
-      "price": 14,
-      "rating": 4,
-      "reviewCount": 1
-    },
-    {
-      "id": "product-energiser",
-      "sku": "product-energiser",
-      "name": "Energiser",
-      "image": "/assets/img/energizer1.webp",
-      "imageAlt": "",
-      "images": [
-        "/assets/img/energizer1.webp"
-      ],
-      "description": "Ignite your day with our Energiser blend, featuring premium Sencha Green Tea and aromatic Tulsi. This refreshing tea, rich in antioxidants, supports overall wellness and vitality. With its holy basil twist, Energiser is an ideal choice for a revitalising post-workout beverage.",
-      "inStock": true,
-      "options": [
-        {
-          "id": "product-energiser--14-00",
-          "label": "$14.00",
-          "price": 14,
-          "weight": "50 g"
-        },
-        {
-          "id": "product-energiser--22-00",
-          "label": "$22.00",
-          "price": 22,
-          "weight": "80 g"
-        }
-      ],
-      "price": 14
-    },
-    {
-      "id": "product-english",
-      "sku": "product-english",
-      "name": "English Breakfast",
-      "image": "/assets/img/englishbreakfast1.webp",
-      "imageAlt": "",
-      "images": [
-        "/assets/img/englishbreakfast1.webp"
-      ],
-      "description": "Start your day with the robust and hearty flavor of our English Breakfast tea. This classic blend combines a selection of premium black teas, delivering a strong and invigorating brew perfect with or without milk.",
-      "inStock": true,
-      "options": [
-        {
-          "id": "product-english--14-00",
-          "label": "$14.00",
-          "price": 14,
-          "weight": "50 g"
-        },
-        {
-          "id": "product-english--22-00",
-          "label": "$22.00",
-          "price": 22,
-          "weight": "80 g"
-        }
-      ],
-      "price": 14
-    },
-    {
-      "id": "product-flask",
-      "sku": "product-flask",
-      "name": "Vacuum Flask with Infuser",
-      "image": "/assets/img/general1.webp",
-      "imageAlt": "",
-      "images": [
-        "/assets/img/general1.webp"
-      ],
-      "description": "High-quality vacuum flask with built-in stainless steel tea infuser. Maintains temperature for hours while allowing you to brew loose leaf tea on the go. Perfect for tea enthusiasts who want fresh tea anytime, anywhere. Product Features 500ml capacity Stainless steel construction Double-walled vacuum insulation Removable infuser basket Leak-proof lid BPA-free materials",
-      "inStock": true,
-      "options": [
-        {
-          "id": "product-flask--30-00",
-          "label": "$30.00",
-          "price": 30
-        }
-      ],
-      "price": 30
-    },
-    {
-      "id": "product-floralspray",
-      "sku": "product-floralspray",
-      "name": "Lavender Floral Spray",
-      "image": "/assets/img/flowers.webp",
-      "imageAlt": "",
-      "images": [
-        "/assets/img/flowers.webp"
-      ],
-      "description": "Calm your senses with this refreshing lavender floral spray. Perfect for freshening linens, pillows, or as a gentle room spray to promote relaxation and restful sleep.",
-      "inStock": true,
-      "options": [
-        {
-          "id": "product-floralspray--10-00",
-          "label": "$10.00",
-          "price": 10
-        }
-      ],
-      "price": 10
-    },
-    {
-      "id": "product-french",
-      "sku": "product-french",
-      "name": "French Earl Grey",
-      "image": "/assets/img/frenchearlgrey1.webp",
-      "imageAlt": "",
-      "images": [
-        "/assets/img/frenchearlgrey1.webp"
-      ],
-      "description": "Indulge in the elegance of our French Earl Grey, a refined blend of classic black tea infused with aromatic bergamot oil, and enriched with delicate rose petals, vibrant calendula petals, and enchanting blue cornflower petals.",
-      "inStock": true,
-      "options": [
-        {
-          "id": "product-french--14-00",
-          "label": "$14.00",
-          "price": 14,
-          "weight": "50 g"
-        },
-        {
-          "id": "product-french--22-00",
-          "label": "$22.00",
-          "price": 22,
-          "weight": "70 g"
-        }
-      ],
-      "price": 14
-    },
-    {
-      "id": "product-hormone",
-      "sku": "product-hormone",
-      "name": "Hormone Harmony",
-      "image": "/assets/img/hormoneharmony1.webp",
-      "imageAlt": "",
-      "images": [
-        "/assets/img/hormoneharmony1.webp"
-      ],
-      "description": "A harmonious blend of honeybush, rose petals, chasteberry, fennel, lemon verbena, and sage, thoughtfully crafted to support overall wellness. With fragrant floral notes and a soothing herbal character, this tea offers a comforting sip for those seeking balance and serenity.",
-      "inStock": true,
-      "options": [
-        {
-          "id": "product-hormone--14-00",
-          "label": "$14.00",
-          "price": 14,
-          "weight": "50 g"
-        },
-        {
-          "id": "product-hormone--22-00",
-          "label": "$22.00",
-          "price": 22,
-          "weight": "80 g"
-        }
-      ],
-      "price": 14,
-      "rating": 5,
-      "reviewCount": 20
-    },
-    {
-      "id": "product-infuser",
-      "sku": "product-infuser",
-      "name": "Tea Infuser Stick",
-      "image": "/assets/img/general2.webp",
-      "imageAlt": "",
-      "images": [
-        "/assets/img/general2.webp"
-      ],
-      "description": "Convenient tea infuser stick for brewing loose leaf tea directly in your cup. The fine mesh prevents leaves from escaping while allowing full flavour extraction. Details Made from food-grade stainless steel. Easy to clean and suitable for most cup sizes.",
-      "inStock": false,
-      "options": [],
-      "price": null
-    },
-    {
-      "id": "product-lemonginger",
-      "sku": "product-lemonginger",
-      "name": "Lemongrass and Ginger",
-      "image": "/assets/img/lemongrassginger1.webp",
-      "imageAlt": "",
-      "images": [
-        "/assets/img/lemongrassginger1.webp"
-      ],
-      "description": "Aromatic and invigorating, this tea combines the zesty brightness of lemongrass with the warm spice of ginger. A delightful choice for any time of the day, it can be enjoyed hot to soothe and relax or iced for a refreshing pick-me-up.",
-      "inStock": true,
-      "options": [
-        {
-          "id": "product-lemonginger--14-00",
-          "label": "$14.00",
-          "price": 14,
-          "weight": "40 g"
-        },
-        {
-          "id": "product-lemonginger--22-00",
-          "label": "$22.00",
-          "price": 22,
-          "weight": "70 g"
-        }
-      ],
-      "price": 14
-    },
-    {
-      "id": "product-lemonlift",
-      "sku": "product-lemonlift",
-      "name": "Lemon Lift",
-      "image": "/assets/img/lemonlift1.webp",
-      "imageAlt": "",
-      "images": [
-        "/assets/img/lemonlift1.webp"
-      ],
-      "description": "Awaken your senses with our Lemon Lift, a zesty and refreshing blend of premium black tea infused with natural lemon myrtle and lemon verbena. This uplifting tea is perfect for a revitalizing pick-me-up any time of the day.",
-      "inStock": true,
-      "options": [
-        {
-          "id": "product-lemonlift--14-00",
-          "label": "$14.00",
-          "price": 14,
-          "weight": "50 g"
-        },
-        {
-          "id": "product-lemonlift--22-00",
-          "label": "$22.00",
-          "price": 22,
-          "weight": "80 g"
-        }
-      ],
-      "price": 14
-    },
-    {
-      "id": "product-magnesium",
-      "sku": "product-magnesium",
-      "name": "Magnesium Chloride Flakes",
-      "image": "/assets/img/general2.webp",
-      "imageAlt": "",
-      "images": [
-        "/assets/img/general2.webp"
-      ],
-      "description": "Soothing bath flakes rich in magnesium to help relax muscles and promote overall wellness. Add to warm bath water for a restorative soak or include in a foot-bath ritual.",
-      "inStock": true,
-      "options": [
-        {
-          "id": "product-magnesium--10-00",
-          "label": "$10.00",
-          "price": 10
-        }
-      ],
-      "price": 10
-    },
-    {
-      "id": "product-orangeginger",
-      "sku": "product-orangeginger",
-      "name": "Orange and Ginger",
-      "image": "/assets/img/lemongrassginger1.webp",
-      "imageAlt": "",
-      "images": [
-        "/assets/img/lemongrassginger1.webp"
-      ],
-      "description": "",
-      "inStock": false,
-      "options": [],
-      "price": null
-    },
-    {
-      "id": "product-pillow",
-      "sku": "product-pillow",
-      "name": "Herbal Eye Pillow",
-      "image": "/assets/img/herbaleyepillow.webp",
-      "imageAlt": "",
-      "images": [
-        "/assets/img/herbaleyepillow.webp"
-      ],
-      "description": "Washable and refillable herbal eye pillow filled with a soothing blend of flaxseeds and calming herbs. Perfect for relaxation, meditation, or relieving tired eyes.",
-      "inStock": true,
-      "options": [
-        {
-          "id": "product-pillow--20-00",
-          "label": "$20.00",
-          "price": 20
-        }
-      ],
-      "price": 20
-    },
-    {
-      "id": "product-pot",
-      "sku": "product-pot",
-      "name": "800mL Glass Tea Pot",
-      "image": "/assets/img/general1.webp",
-      "imageAlt": "",
-      "images": [
-        "/assets/img/general1.webp"
-      ],
-      "description": "Elegant borosilicate glass teapot with stainless steel infuser. Perfect for brewing and serving loose leaf tea while watching the leaves unfurl. Heat-resistant and durable.",
-      "inStock": true,
-      "options": [
-        {
-          "id": "product-pot--30-00",
-          "label": "$30.00",
-          "price": 30
-        }
-      ],
-      "price": 30
-    },
-    {
-      "id": "product-rainforest",
-      "sku": "product-rainforest",
-      "name": "Australian Rainforest",
-      "image": "/assets/img/rainforest1.webp",
-      "imageAlt": "",
-      "images": [
-        "/assets/img/rainforest1.webp"
-      ],
-      "description": "Experience the essence of the Australian bush with our Australian Rainforest tea. This unique blend combines premium black tea with the natural sweetness of Australian honey and a hint of native wattleseed, creating a smooth and aromatic infusion.",
-      "inStock": true,
-      "options": [
-        {
-          "id": "product-rainforest--14-00",
-          "label": "$14.00",
-          "price": 14,
-          "weight": "50 g"
-        },
-        {
-          "id": "product-rainforest--22-00",
-          "label": "$22.00",
-          "price": 22,
-          "weight": "80 g"
-        }
-      ],
-      "price": 14
-    },
-    {
-      "id": "product-red",
-      "sku": "product-red",
-      "name": "product-red",
-      "image": "/assets/img/general2.webp",
-      "imageAlt": "",
-      "images": [
-        "/assets/img/general2.webp"
-      ],
-      "description": "A comforting blend of roobios, honeybush, and cinnamon — naturally caffeine-free and gentle on the stomach.",
-      "inStock": true,
-      "options": [
-        {
-          "id": "product-red--14-00",
-          "label": "$14.00",
-          "price": 14,
-          "weight": "60 g"
-        },
-        {
-          "id": "product-red--22-00",
-          "label": "$22.00",
-          "price": 22,
-          "weight": "100 g"
-        }
-      ],
-      "price": 14
-    },
-    {
-      "id": "product-scoop",
-      "sku": "product-scoop",
-      "name": "Tea Scoop",
-      "image": "/assets/img/general1.webp",
-      "imageAlt": "",
-      "images": [
-        "/assets/img/general1.webp"
-      ],
-      "description": "Perfectly sized scoop for measuring loose leaf tea. Made from durable materials with a comfortable grip.",
-      "inStock": true,
-      "options": [
-        {
-          "id": "product-scoop--3-00",
-          "label": "$3.00",
-          "price": 3
-        }
-      ],
-      "price": 3
-    },
-    {
-      "id": "product-sleepbalm",
-      "sku": "product-sleepbalm",
-      "name": "Sleep Balm",
-      "image": "/assets/img/sleepingsoundly1.webp",
-      "imageAlt": "",
-      "images": [
-        "/assets/img/sleepingsoundly1.webp"
-      ],
-      "description": "Soothe your senses and prepare for a restful night's slumber with the aroma of lavender and chamomile. This natural sleep balm helps promote relaxation when applied to pulse points before bedtime.",
-      "inStock": true,
-      "options": [
-        {
-          "id": "product-sleepbalm--12-00",
-          "label": "$12.00",
-          "price": 12
-        }
-      ],
-      "price": 12
-    },
-    {
-      "id": "product-sleeping",
-      "sku": "product-sleeping",
-      "name": "Sleeping Soundly",
-      "image": "/assets/img/sleepingsoundly1.webp",
-      "imageAlt": "",
-      "images": [
-        "/assets/img/sleepingsoundly1.webp"
-      ],
-      "description": "An evening blend of lemon balm, passionflower ginger root, and tulsi, thoughtfully created to support a peaceful transition into rest. With its gentle herbal aroma and cosy warmth, this tea is a comforting choice for relaxing the mind and preparing for a restful night.",
-      "ingredients": [
-        "Lemon Balm",
-        "Passionflower",
-        "Ginger Root",
-        "Tulsi"
-      ],
-      "inStock": true,
-      "options": [
-        {
-          "id": "product-sleeping--14-00",
-          "label": "$14.00",
-          "price": 14,
-          "weight": "50 g"
-        },
-        {
-          "id": "product-sleeping--22-00",
-          "label": "$22.00",
-          "price": 22,
-          "weight": "80 g"
-        }
-      ],
-      "price": 14,
-      "rating": 5,
-      "reviewCount": 6
-    },
-    {
-      "id": "product-summer",
-      "sku": "product-summer",
-      "name": "Summer Breeze",
-      "image": "/assets/img/summerbreeze1.webp",
-      "imageAlt": "",
-      "images": [
-        "/assets/img/summerbreeze1.webp"
-      ],
-      "description": "A vibrant pink blend of hibiscus, peppermint and lemon balm, this tea is perfect for warm days and can be enjoyed hot or cold. Hibiscus brings refreshing qualities, while peppermint and lemon balm add gentle, soothing notes to each sip.",
-      "inStock": true,
-      "options": [
-        {
-          "id": "product-summer--14-00",
-          "label": "$14.00",
-          "price": 14,
-          "weight": "40 g"
-        },
-        {
-          "id": "product-summer--22-00",
-          "label": "$22.00",
-          "price": 22,
-          "weight": "70 g"
-        }
-      ],
-      "price": 14
+      "options": [{"id":"product-calming-50g","label":"50g","price":14,"weight":"50g"},{"id":"product-calming-70g","label":"70g","price":22,"weight":"70g"}],
+      "featured": false
     },
     {
       "id": "product-turmeric",
       "sku": "product-turmeric",
       "name": "Enchanted Turmeric",
+      "slug": "enchanted-turmeric",
+      "category": "wellness-blends",
+      "description": "A warming blend of turmeric; ginger root; rose petals; licorice root; juniper berries and cardamom; crafted to support the bodys natural response to inflammation",
       "image": "/assets/img/enchantedturmeric1.webp",
-      "imageAlt": "",
-      "images": [
-        "/assets/img/enchantedturmeric1.webp"
-      ],
-      "description": "A warming blend of turmeric, ginger root, rose petals, licorice root, juniper berries, and cardamom, thoughtfully crafted to support your body's natural response to inflammation. This infusion combines the earthly flavour to turmeric with aromatic spices, making it a delightful addition to self-care rituals.",
-      "ingredients": [
-        "Turmeric",
-        "Ginger Root",
-        "Rose Petals",
-        "Liquorice Root",
-        "Juniper Berries",
-        "Cardamom"
-      ],
+      "imageAlt": "Enchanted Turmeric",
+      "images": ["/assets/img/enchantedturmeric1.webp"],
       "inStock": true,
-      "options": [
-        {
-          "id": "product-turmeric--14-00",
-          "label": "$14.00",
-          "price": 14,
-          "weight": "60 g"
-        },
-        {
-          "id": "product-turmeric--22-00",
-          "label": "$22.00",
-          "price": 22,
-          "weight": "100 g"
-        }
-      ],
       "price": 14,
-      "rating": 5,
-      "reviewCount": 12
+      "options": [{"id":"product-turmeric-60g","label":"60g","price":14,"weight":"60g"},{"id":"product-turmeric-100g","label":"100g","price":22,"weight":"100g"}],
+      "featured": false
+    },
+    {
+      "id": "product-sleeping",
+      "sku": "product-sleeping",
+      "name": "Sleeping Soundly",
+      "slug": "sleeping-soundly",
+      "category": "wellness-blends",
+      "description": "An evening blend of lemon balm; passionflower; ginger root and tulsi; crafted to support a peaceful transition into rest",
+      "image": "/assets/img/sleepingsoundly1.webp",
+      "imageAlt": "Sleeping Soundly",
+      "images": ["/assets/img/sleepingsoundly1.webp"],
+      "inStock": true,
+      "price": 14,
+      "options": [{"id":"product-sleeping-50g","label":"50g","price":14,"weight":"50g"},{"id":"product-sleeping-80g","label":"80g","price":22,"weight":"80g"}],
+      "featured": false
+    },
+    {
+      "id": "product-hormone",
+      "sku": "product-hormone",
+      "name": "Hormone Harmony",
+      "slug": "hormone-harmony",
+      "category": "wellness-blends",
+      "description": "A harmonious blend of honeybush; rose petals; chasteberry; fennel; lemon verbena and sage; supporting overall wellness with fragrant floral notes",
+      "image": "/assets/img/hormoneharmony1.webp",
+      "imageAlt": "Hormone Harmony",
+      "images": ["/assets/img/hormoneharmony1.webp"],
+      "inStock": true,
+      "price": 14,
+      "options": [{"id":"product-hormone-50g","label":"50g","price":14,"weight":"50g"},{"id":"product-hormone-80g","label":"80g","price":22,"weight":"80g"}],
+      "featured": false
     },
     {
       "id": "product-winter",
       "sku": "product-winter",
       "name": "Winter Wellness",
+      "slug": "winter-wellness",
+      "category": "wellness-blends",
+      "description": "A comforting blend of ginger root; lemon balm; yarrow and echinacea; crafted to offer gentle throat-soothing qualities and warmth during colder months",
       "image": "/assets/img/winterwellness1.webp",
-      "imageAlt": "",
-      "images": [
-        "/assets/img/winterwellness1.webp"
-      ],
-      "description": "A comforting blend of ginger root, lemon balm, yarrow, and echinacea, thoughtfully crafted to offer gentle throat-soothing qualities and warmth. This soothing infusion is designed for comfort during colder months, making it an ideal companion for your seasonal wellness routine.",
+      "imageAlt": "Winter Wellness",
+      "images": ["/assets/img/winterwellness1.webp"],
       "inStock": true,
-      "options": [
-        {
-          "id": "product-winter--14-00",
-          "label": "$14.00",
-          "price": 14,
-          "weight": "50 g"
-        },
-        {
-          "id": "product-winter--22-00",
-          "label": "$22.00",
-          "price": 22,
-          "weight": "70 g"
-        }
-      ],
-      "price": 14
+      "price": 14,
+      "options": [{"id":"product-winter-50g","label":"50g","price":14,"weight":"50g"},{"id":"product-winter-70g","label":"70g","price":22,"weight":"70g"}],
+      "featured": false
+    },
+    {
+      "id": "product-digestive",
+      "sku": "product-digestive",
+      "name": "Digestive Bliss",
+      "slug": "digestive-bliss",
+      "category": "wellness-blends",
+      "description": "A delightful blend of meadowsweet; aniseed; ginger root and peppermint; crafted to support digestive comfort and overall well-being",
+      "image": "/assets/img/digestivebliss.webp",
+      "imageAlt": "Digestive Bliss",
+      "images": ["/assets/img/digestivebliss.webp"],
+      "inStock": true,
+      "price": 14,
+      "options": [{"id":"product-digestive-50g","label":"50g","price":14,"weight":"50g"}],
+      "featured": false
+    },
+    {
+      "id": "product-botanic",
+      "sku": "product-botanic",
+      "name": "Botanic Glow",
+      "slug": "botanic-glow",
+      "category": "wellness-blends",
+      "description": "A revitalising blend of nettle; spearmint; linseed and echinacea; crafted to support immune health and promote skin vitality",
+      "image": "/assets/img/botanicglow1.webp",
+      "imageAlt": "Botanic Glow",
+      "images": ["/assets/img/botanicglow1.webp"],
+      "inStock": true,
+      "price": 14,
+      "options": [{"id":"product-botanic-50g","label":"50g","price":14,"weight":"50g"},{"id":"product-botanic-80g","label":"80g","price":22,"weight":"80g"}],
+      "featured": false
+    },
+    {
+      "id": "product-detox",
+      "sku": "product-detox",
+      "name": "Natures Detox",
+      "slug": "natures-detox",
+      "category": "wellness-blends",
+      "description": "A gentle blend of dandelion root; tulsi; lemon peel; dandelion leaf; lemongrass and blue cornflower petals; crafted to support the bodys natural cleansing processes",
+      "image": "/assets/img/general3.webp",
+      "imageAlt": "Natures Detox",
+      "images": ["/assets/img/general3.webp"],
+      "inStock": false,
+      "price": 14,
+      "options": [],
+      "featured": false
+    },
+    {
+      "id": "product-summer",
+      "sku": "product-summer",
+      "name": "Summer Breeze",
+      "slug": "summer-breeze",
+      "category": "wellness-blends",
+      "description": "A vibrant pink blend of hibiscus; peppermint and lemon balm; perfect for warm days and can be enjoyed hot or cold",
+      "image": "/assets/img/summerbreeze1.webp",
+      "imageAlt": "Summer Breeze",
+      "images": ["/assets/img/summerbreeze1.webp"],
+      "inStock": true,
+      "price": 14,
+      "options": [{"id":"product-summer-40g","label":"40g","price":14,"weight":"40g"},{"id":"product-summer-70g","label":"70g","price":22,"weight":"70g"}],
+      "featured": false
+    },
+    {
+      "id": "product-red",
+      "sku": "product-red",
+      "name": "Rooibos",
+      "slug": "rooibos",
+      "category": "artisan-blends",
+      "description": "A comforting blend of rooibos; honeybush and cinnamon; naturally caffeine-free and gentle on the stomach",
+      "image": "/assets/img/naturesred.webp",
+      "imageAlt": "Rooibos",
+      "images": ["/assets/img/naturesred.webp"],
+      "inStock": true,
+      "price": 14,
+      "options": [{"id":"product-red-60g","label":"60g","price":14,"weight":"60g"},{"id":"product-red-100g","label":"100g","price":22,"weight":"100g"}],
+      "featured": false
+    },
+    {
+      "id": "product-apple",
+      "sku": "product-apple",
+      "name": "Apple Delight",
+      "slug": "apple-delight",
+      "category": "herbal-infusions",
+      "description": "Savour the taste of summer with dried apple pieces; rosehip; lemongrass and spearmint; a naturally sweet and fruity tea enjoyed hot or cold",
+      "image": "/assets/img/summerbreeze.webp",
+      "imageAlt": "Apple Delight",
+      "images": ["/assets/img/summerbreeze.webp"],
+      "inStock": false,
+      "price": 14,
+      "options": [],
+      "featured": false
+    },
+    {
+      "id": "product-lemonginger",
+      "sku": "product-lemonginger",
+      "name": "Lemongrass and Ginger",
+      "slug": "lemongrass-ginger",
+      "category": "herbal-infusions",
+      "description": "Aromatic and invigorating; combines the zesty brightness of lemongrass with the warm spice of ginger; perfect hot or iced",
+      "image": "/assets/img/lemongrassginger1.webp",
+      "imageAlt": "Lemongrass and Ginger",
+      "images": ["/assets/img/lemongrassginger1.webp"],
+      "inStock": true,
+      "price": 14,
+      "options": [{"id":"product-lemonginger-40g","label":"40g","price":14,"weight":"40g"},{"id":"product-lemonginger-70g","label":"70g","price":22,"weight":"70g"}],
+      "featured": false
+    },
+    {
+      "id": "product-ceylon",
+      "sku": "product-ceylon",
+      "name": "Ceylon Chai",
+      "slug": "ceylon-chai",
+      "category": "black-tea",
+      "description": "Enjoy the vibrant warmth of Ceylon Chai; a fusion of rich Ceylon Black Tea with ginger; cardamom; cinnamon; star anise; cloves and peppercorn",
+      "image": "/assets/img/ceylonchai1.webp",
+      "imageAlt": "Ceylon Chai",
+      "images": ["/assets/img/ceylonchai1.webp"],
+      "inStock": true,
+      "price": 14,
+      "options": [{"id":"product-ceylon-50g","label":"50g","price":14,"weight":"50g"},{"id":"product-ceylon-100g","label":"100g","price":22,"weight":"100g"}],
+      "featured": false
+    },
+    {
+      "id": "product-french",
+      "sku": "product-french",
+      "name": "French Earl Grey",
+      "slug": "french-earl-grey",
+      "category": "black-tea",
+      "description": "A refined blend of classic black tea infused with aromatic bergamot oil; enriched with rose petals and blue cornflower petals",
+      "image": "/assets/img/frenchearlgrey1.webp",
+      "imageAlt": "French Earl Grey",
+      "images": ["/assets/img/frenchearlgrey1.webp"],
+      "inStock": true,
+      "price": 14,
+      "options": [{"id":"product-french-50g","label":"50g","price":14,"weight":"50g"},{"id":"product-french-70g","label":"70g","price":22,"weight":"70g"}],
+      "featured": false
+    },
+    {
+      "id": "product-english",
+      "sku": "product-english",
+      "name": "English Breakfast",
+      "slug": "english-breakfast",
+      "category": "black-tea",
+      "description": "Start your day with the robust and hearty flavour of English Breakfast tea; a classic blend of premium black teas; perfect with or without milk",
+      "image": "/assets/img/general1.webp",
+      "imageAlt": "English Breakfast",
+      "images": ["/assets/img/general1.webp"],
+      "inStock": true,
+      "price": 14,
+      "options": [{"id":"product-english-50g","label":"50g","price":14,"weight":"50g"},{"id":"product-english-80g","label":"80g","price":22,"weight":"80g"}],
+      "featured": false
+    },
+    {
+      "id": "product-lemonlift",
+      "sku": "product-lemonlift",
+      "name": "Lemon Lift",
+      "slug": "lemon-lift",
+      "category": "black-tea",
+      "description": "Awaken your senses with a zesty and refreshing blend of premium black tea with natural lemon myrtle and lemon verbena; a perfect revitalising pick-me-up",
+      "image": "/assets/img/general2.webp",
+      "imageAlt": "Lemon Lift",
+      "images": ["/assets/img/general2.webp"],
+      "inStock": true,
+      "price": 14,
+      "options": [{"id":"product-lemonlift-50g","label":"50g","price":14,"weight":"50g"},{"id":"product-lemonlift-80g","label":"80g","price":22,"weight":"80g"}],
+      "featured": false
+    },
+    {
+      "id": "product-rainforest",
+      "sku": "product-rainforest",
+      "name": "Australian Rainforest",
+      "slug": "australian-rainforest",
+      "category": "black-tea",
+      "description": "Experience the essence of the Australian bush; combines premium black tea with natural Australian honey and wattleseed for a smooth and aromatic infusion",
+      "image": "/assets/img/rainforest1.webp",
+      "imageAlt": "Australian Rainforest",
+      "images": ["/assets/img/rainforest1.webp"],
+      "inStock": true,
+      "price": 14,
+      "options": [{"id":"product-rainforest-50g","label":"50g","price":14,"weight":"50g"},{"id":"product-rainforest-80g","label":"80g","price":22,"weight":"80g"}],
+      "featured": false
+    },
+    {
+      "id": "product-energiser",
+      "sku": "product-energiser",
+      "name": "Energiser",
+      "slug": "energiser",
+      "category": "green-tea",
+      "description": "Ignite your day with Sencha Green Tea and aromatic Tulsi; rich in antioxidants; supporting overall wellness and vitality",
+      "image": "/assets/img/energizer1.webp",
+      "imageAlt": "Energiser",
+      "images": ["/assets/img/energizer1.webp"],
+      "inStock": true,
+      "price": 14,
+      "options": [{"id":"product-energiser-50g","label":"50g","price":14,"weight":"50g"},{"id":"product-energiser-80g","label":"80g","price":22,"weight":"80g"}],
+      "featured": false
+    },
+    {
+      "id": "product-orangeginger",
+      "sku": "product-orangeginger",
+      "name": "Orange and Ginger",
+      "slug": "orange-ginger",
+      "category": "green-tea",
+      "description": "A warming and citrus-forward blend combining the brightness of orange with the spice of ginger; perfect for a soothing and energising cup",
+      "image": "/assets/img/lemongrassginger1.webp",
+      "imageAlt": "Orange and Ginger",
+      "images": ["/assets/img/lemongrassginger1.webp"],
+      "inStock": false,
+      "price": 14,
+      "options": [],
+      "featured": false
+    },
+    {
+      "id": "product-calendula",
+      "sku": "product-calendula",
+      "name": "Calendula Cream",
+      "slug": "calendula-cream",
+      "category": "creams",
+      "description": "A soothing cream infused with calendula flowers and chamomile essential oil; a rich avocado-cream base for moisturising dry or sensitive skin",
+      "image": "/assets/img/calmbalm.webp",
+      "imageAlt": "Calendula Cream",
+      "images": ["/assets/img/calmbalm.webp"],
+      "inStock": true,
+      "price": 18,
+      "options": [{"id":"product-calendula-50ml","label":"50ml","price":18}],
+      "featured": false
+    },
+    {
+      "id": "product-calmbalm",
+      "sku": "product-calmbalm",
+      "name": "Calm Balm",
+      "slug": "calm-balm",
+      "category": "balms",
+      "description": "Calm your mind and ease tension with bergamot and ylang-ylang; perfect for a relaxing massage or nightly ritual to promote tranquility",
+      "image": "/assets/img/calmbalm.webp",
+      "imageAlt": "Calm Balm",
+      "images": ["/assets/img/calmbalm.webp"],
+      "inStock": true,
+      "price": 12,
+      "options": [{"id":"product-calmbalm-30ml","label":"30ml","price":12}],
+      "featured": false
+    },
+    {
+      "id": "product-sleepbalm",
+      "sku": "product-sleepbalm",
+      "name": "Sleep Balm",
+      "slug": "sleep-balm",
+      "category": "balms",
+      "description": "Prepare for restful sleep with lavender and chamomile aroma; a natural sleep balm for pulse point application before bedtime",
+      "image": "/assets/img/sleepingsoundly1.webp",
+      "imageAlt": "Sleep Balm",
+      "images": ["/assets/img/sleepingsoundly1.webp"],
+      "inStock": true,
+      "price": 12,
+      "options": [{"id":"product-sleepbalm-30ml","label":"30ml","price":12}],
+      "featured": false
+    },
+    {
+      "id": "product-floralspray",
+      "sku": "product-floralspray",
+      "name": "Lavender Floral Spray",
+      "slug": "lavender-floral-spray",
+      "category": "selfcare",
+      "description": "Calm your senses with this refreshing lavender floral spray; perfect for freshening linens; pillows or as a gentle room spray",
+      "image": "/assets/img/flowers.webp",
+      "imageAlt": "Lavender Floral Spray",
+      "images": ["/assets/img/flowers.webp"],
+      "inStock": true,
+      "price": 10,
+      "options": [{"id":"product-floralspray-50ml","label":"50ml","price":10}],
+      "featured": false
+    },
+    {
+      "id": "product-magnesium",
+      "sku": "product-magnesium",
+      "name": "Magnesium Chloride Flakes",
+      "slug": "magnesium-chloride-flakes",
+      "category": "selfcare",
+      "description": "Soothing bath flakes rich in magnesium to help relax muscles and promote overall wellness; add to warm bath water for a restorative soak",
+      "image": "/assets/img/general2.webp",
+      "imageAlt": "Magnesium Chloride Flakes",
+      "images": ["/assets/img/general2.webp"],
+      "inStock": true,
+      "price": 10,
+      "options": [{"id":"product-magnesium-200g","label":"200g","price":10}],
+      "featured": false
+    },
+    {
+      "id": "product-pillow",
+      "sku": "product-pillow",
+      "name": "Herbal Eye Pillow",
+      "slug": "herbal-eye-pillow",
+      "category": "accessories",
+      "description": "Washable and refillable herbal eye pillow filled with flaxseeds and calming herbs; perfect for relaxation; meditation or relieving tired eyes",
+      "image": "/assets/img/herbaleyepillow.webp",
+      "imageAlt": "Herbal Eye Pillow",
+      "images": ["/assets/img/herbaleyepillow.webp"],
+      "inStock": true,
+      "price": 20,
+      "options": [{"id":"product-pillow-1","label":"1 pillow","price":20}],
+      "featured": false
+    },
+    {
+      "id": "product-bag",
+      "sku": "product-bag",
+      "name": "Biodegradable Tea Bags",
+      "slug": "biodegradable-tea-bags",
+      "category": "accessories",
+      "description": "Compostable tea bags made from plant-based materials; 10 pack for convenient single-serving brews",
+      "image": "/assets/img/general1.webp",
+      "imageAlt": "Biodegradable Tea Bags",
+      "images": ["/assets/img/general1.webp"],
+      "inStock": true,
+      "price": 4,
+      "options": [{"id":"product-bag-10pack","label":"10 pack","price":4}],
+      "featured": false
+    },
+    {
+      "id": "product-infuser",
+      "sku": "product-infuser",
+      "name": "Tea Infuser Stick",
+      "slug": "tea-infuser-stick",
+      "category": "accessories",
+      "description": "Convenient tea infuser stick for brewing loose leaf tea directly in your cup; fine mesh prevents leaves from escaping",
+      "image": "/assets/img/general2.webp",
+      "imageAlt": "Tea Infuser Stick",
+      "images": ["/assets/img/general2.webp"],
+      "inStock": false,
+      "price": 10,
+      "options": [],
+      "featured": false
+    },
+    {
+      "id": "product-flask",
+      "sku": "product-flask",
+      "name": "Vacuum Flask with Infuser",
+      "slug": "vacuum-flask-infuser",
+      "category": "accessories",
+      "description": "High-quality vacuum flask with built-in stainless steel tea infuser; maintains temperature for hours; 500ml capacity; BPA-free",
+      "image": "/assets/img/general1.webp",
+      "imageAlt": "Vacuum Flask with Infuser",
+      "images": ["/assets/img/general1.webp"],
+      "inStock": true,
+      "price": 30,
+      "options": [{"id":"product-flask-500ml","label":"500ml","price":30}],
+      "featured": false
+    },
+    {
+      "id": "product-pot",
+      "sku": "product-pot",
+      "name": "800mL Glass Tea Pot",
+      "slug": "glass-tea-pot",
+      "category": "accessories",
+      "description": "Elegant borosilicate glass teapot with stainless steel infuser; perfect for brewing and serving loose leaf tea",
+      "image": "/assets/img/general1.webp",
+      "imageAlt": "800mL Glass Tea Pot",
+      "images": ["/assets/img/general1.webp"],
+      "inStock": true,
+      "price": 30,
+      "options": [{"id":"product-pot-800ml","label":"800ml","price":30}],
+      "featured": false
+    },
+    {
+      "id": "product-scoop",
+      "sku": "product-scoop",
+      "name": "Tea Scoop",
+      "slug": "tea-scoop",
+      "category": "accessories",
+      "description": "Perfectly sized scoop for measuring loose leaf tea; made from durable materials with a comfortable grip",
+      "image": "/assets/img/general1.webp",
+      "imageAlt": "Tea Scoop",
+      "images": ["/assets/img/general1.webp"],
+      "inStock": true,
+      "price": 3,
+      "options": [{"id":"product-scoop-1","label":"1 scoop","price":3}],
+      "featured": false
     }
   ]
 }

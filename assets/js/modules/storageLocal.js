@@ -1,5 +1,5 @@
 // Lightweight localStorage wrapper for cart persistence
-export function getLocalCart(key = 'naturesi-cart') {
+export function getLocalCart(key = 'naturesi_cart') {
   try {
     const raw = localStorage.getItem(key);
     return raw ? JSON.parse(raw) : null;
@@ -8,7 +8,7 @@ export function getLocalCart(key = 'naturesi-cart') {
   }
 }
 
-export function setLocalCart(cart, key = 'naturesi-cart') {
+export function setLocalCart(cart, key = 'naturesi_cart') {
   try {
     localStorage.setItem(key, JSON.stringify(cart));
     return true;
@@ -18,7 +18,7 @@ export function setLocalCart(cart, key = 'naturesi-cart') {
   }
 }
 
-export function removeLocalCart(key = 'naturesi-cart') {
+export function removeLocalCart(key = 'naturesi_cart') {
   try {
     localStorage.removeItem(key);
     return true;
