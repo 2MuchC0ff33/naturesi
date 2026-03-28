@@ -146,11 +146,13 @@ whether to commit, stash, or abandon them before starting new work.
 Before every git commit:
 
   1. Run validation sequence (see Section 4) — all lints and tests must pass.
-  2. git status — review what changed
-  3. git diff --stat — verify scope of changes
-  4. Stage only the files related to this logical change
-  5. git diff --cached — inspect staged diff before committing
-  6. Commit with a meaningful message following the format in 3d.
+  2. git status — review what changed (including deleted or unused files).
+     Check for: replaced files (e.g. .svg replaced by .webp), orphaned assets.
+  3. git worktree list — check for stale worktrees to clean up.
+  4. git diff --stat — verify scope of changes.
+  5. Stage only the files related to this logical change.
+  6. git diff --cached — inspect staged diff before committing.
+  7. Commit with a meaningful message following the format in 3d.
 
 DO NOT commit broken code, failing lints, or failing tests.
 
@@ -212,8 +214,61 @@ Worktree rules:
     from one worktree at a time (edit scripts/serve.sh DOCUMENT_ROOT if needed)
   - Never push from a worktree that is behind its tracking branch
   - Keep worktree names short and descriptive (dir names are visible in prompt)
+  - ALWAYS remove a worktree immediately after the task is complete and
+    changes are squash-merged into the feature branch
+  - Never leave stale worktrees lying around — they create confusion about
+    which directory is active and which is the canonical worktree
 
-━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+3e2. WORKTREE-PER-CHANGE PATTERN (preferred for significant changes)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+For each significant change or feature area, create a dedicated worktree.
+This keeps the main feature branch clean and avoids polluting it with
+many small experimental commits.
+
+Recommended workflow for each change:
+
+  1. START: On feature branch, create a new worktree for this change:
+       git checkout feature/enhance-ui-ux
+       git worktree add ../naturesi-change-name feature/enhance-ui-ux
+
+  2. SWITCH: Checkout the new worktree and implement the change:
+       cd ../naturesi-change-name
+       # edit files, lint, test
+       ./scripts/lint-html.sh <file>
+       ./scripts/lint-css.sh <file>
+       ./scripts/test-all.sh
+
+  3. COMMIT: On the worktree, commit the logical unit:
+       git add <changed files>
+       git commit -m "feat(scope): concise summary"
+
+  4. INTEGRATE: Switch back to feature branch, cherry-pick or merge:
+       cd /path/to/feature/enhance-ui-ux
+       git cherry-pick <commit-hash>
+       # OR merge: git merge --no-ff ../naturesi-change-name
+
+  5. SQUASH: If merging a worktree, squash into one clean commit on feature:
+       git merge --squash ../naturesi-change-name
+       git commit -m "feat(scope): concise summary"
+
+  6. CLEANUP: Remove worktree immediately after integrating:
+       git worktree remove ../naturesi-change-name
+       git worktree prune
+
+  7. VERIFY: Confirm clean state:
+       git fsck --full
+       git worktree list
+
+When to use this pattern vs. committing directly:
+  - USE worktree-per-change: new feature areas, refactors, cross-cutting changes,
+    or anything that touches 5+ files across multiple systems
+  - COMMIT DIRECTLY (OK): small targeted changes, single-file fixes, obvious
+    incremental improvements within the same feature area
+  - NEVER leave a worktree unused for more than one session
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 3f. COMMITTING: RULES AND STYLE
 ━━━━━━━━━━━━━━━━━━━━━━━━
 
