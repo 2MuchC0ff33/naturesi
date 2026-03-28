@@ -416,6 +416,19 @@
       </footer>
     </div>
   </dialog>
+
+<script>
+!function(){
+  var l=null;
+  setInterval(function(){
+    fetch("/reload.txt?t="+Date.now()).then(function(r){
+      if(r.ok)return r.text()
+    }).then(function(t){
+      if(t&&t!==l){l=t;location.reload()}
+    }).catch(function(){})
+  },1000)
+}()
+</script>
 </body>
 
 </html>

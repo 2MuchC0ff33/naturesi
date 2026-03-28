@@ -41,5 +41,18 @@
     </section>
   </main>
   <nav class="site-nav" aria-label="Site navigation" data-site-nav=""></nav>
+
+<script>
+!function(){
+  var l=null;
+  setInterval(function(){
+    fetch("/reload.txt?t="+Date.now()).then(function(r){
+      if(r.ok)return r.text()
+    }).then(function(t){
+      if(t&&t!==l){l=t;location.reload()}
+    }).catch(function(){})
+  },1000)
+}()
+</script>
 </body>
 </html>
