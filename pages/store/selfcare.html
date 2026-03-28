@@ -298,39 +298,7 @@ All</a></li>
 <main id="main-content" class="prose container">
 <section aria-labelledby="selfcare-heading">
 <h2 id="selfcare-heading">Self Care</h2>
-<!-- Self Care products moved from pages/store.html -->
-<a id="herbal-eye-pillow" class="product-anchor slug-anchor"
-aria-hidden="true"></a> <a id="product-pillow-anchor" class=
-"product-anchor"></a>
-<article id="product-pillow" class="product product-card" itemprop=
-"itemListElement" itemscope itemtype="https://schema.org/Product"
-data-image="/assets/img/herbaleyepillow.webp" data-sku=
-"product-pillow">
-<header class="media">
-<figure class="product-gallery product-card__media">
-<picture><source srcset="assets/img/Natures2_with_fonts.webp" type=
-"image/webp"> <img src="assets/img/Natures2_with_fonts.webp" alt=
-"Herbal Eye Pillow" width="300" height="300" loading="lazy"
-itemprop="image" class="u-img-cover"></picture>
-<figcaption>Product image</figcaption>
-</figure>
-<h3 itemprop="name">Herbal Eye Pillow</h3>
-<div class="availability" itemprop="offers" itemscope itemtype=
-"https://schema.org/Offer">
-<link itemprop="availability" href="https://schema.org/InStock">
-<meta itemprop="priceCurrency" content="AUD">
-<p>✓ <span itemprop="itemCondition">In Stock</span></p>
-</div>
-<div class="reviews" itemprop="aggregateRating" itemscope itemtype=
-"https://schema.org/AggregateRating"><span aria-hidden=
-"true">★★★★</span> <span>(<span itemprop="ratingCount">5</span>
-reviews, Rating: <span itemprop=
-"ratingValue">4</span>/5)</span></div>
-</header>
-<section class="product-description" itemprop="description">
-<p>Washable and refillable herbal eye pillow filled with a soothing
-blend of flaxseeds and calming herbs. Perfect for relaxation,
-meditation, or relieving tired eyes.</p>
+<div id="product-grid" data-category="selfcare" aria-live="polite"></div>
 </section>
 <section class="product-ingredients" itemprop="nutrition" itemscope
 itemtype="https://schema.org/NutritionInformation">
@@ -575,17 +543,9 @@ on GitHub</span></a></p>
 </footer>
 </div>
 
-<script>
-!function(){
-  var l=null;
-  setInterval(function(){
-    fetch("/reload.txt?t="+Date.now()).then(function(r){
-      if(r.ok)return r.text()
-    }).then(function(t){
-      if(t&&t!==l){l=t;location.reload()}
-    }).catch(function(){})
-  },1000)
-}()
+<script type="module">
+  import { initProductGrid } from '/assets/js/modules/product-renderer.js';
+  initProductGrid('#product-grid');
 </script>
 </body>
 </html>

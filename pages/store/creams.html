@@ -256,79 +256,7 @@ All</a></li>
 <main id="main-content" class="prose container">
 <section aria-labelledby="creams-heading">
 <h2 id="creams-heading">Creams</h2>
-<!-- Creams products moved from pages/store.html -->
-<a id="calendula-cream" class="product-anchor slug-anchor"
-aria-hidden="true"></a> <a id="product-calendula-anchor" class=
-"product-anchor"></a>
-<article id="product-calendula" class="product product-card"
-itemprop="itemListElement" itemscope itemtype=
-"https://schema.org/Product" data-image="/assets/img/calmbalm.webp"
-data-sku="product-calendula">
-<header class=
-"media u-d-flex u-flex-column u-flex-row\@md u-items-center u-justify-center">
-<figure class="product-gallery product-card__media">
-<picture><source srcset="assets/img/Natures2_with_fonts.webp" type=
-"image/webp"> <img src="assets/img/Natures2_with_fonts.webp" alt=
-"Calendula Cream" width="300" height="300" class="u-img-cover"
-loading="lazy" itemprop="image"></picture>
-<figcaption>Product image</figcaption>
-</figure>
-<h3 itemprop="name">Calendula Cream</h3>
-<div class="availability" itemprop="offers" itemscope itemtype=
-"https://schema.org/Offer">
-<link itemprop="availability" href="https://schema.org/InStock">
-<meta itemprop="priceCurrency" content="AUD">
-<p>✓ <span itemprop="itemCondition">In Stock</span></p>
-</div>
-<div class="reviews" itemprop="aggregateRating" itemscope itemtype=
-"https://schema.org/AggregateRating"><span aria-hidden=
-"true">★★★★</span> <span>(<span itemprop="ratingCount">5</span>
-reviews, Rating: <span itemprop=
-"ratingValue">4</span>/5)</span></div>
-</header>
-<section class="product-description" itemprop="description">
-<p>A soothing cream infused with calendula flowers and a chamomile
-essential oil, known for their skin-nourishing properties. This
-rich avocado-cream base is a non-greasy formula helping to
-moisturise and comfort dry or sensitive skin.</p>
-</section>
-<section class="product-ingredients" itemprop="nutrition" itemscope
-itemtype="https://schema.org/NutritionInformation">
-<h4>Ingredients</h4>
-<p itemprop="ingredients">Purified Water, Avocado Oil, Sweet Almond
-Oil, Soybean Oil, Calendula Flowers (<i>Calendula Officinalus</i>),
-Cetearyl Alcohol, PE-20 Stearate, Cocoa Butter, Glycerine,
-Phenoxyethanol, Ethylhexylglycerin, Rosehip Oil, Jojoba Oil,
-Chamomile Essential Oil (<i>Matricaria Chamomilla</i>), Natural
-Vitamin E, Propanediol and Rosemary Leaf Extract (<i>Rosemarinus
-Officinalus</i>).</p>
-<p><small>Size: 50 milliliters</small></p>
-</section>
-<form action="/add-to-cart" method="post" class=
-"product-options add-to-cart">
-<fieldset><legend>Product Options</legend>
-<div class="quantity-selector"><label for=
-"qty-calendula">Quantity:</label> <select id="qty-calendula" name=
-"quantity" min="1" max="10" required="">
-<option value="1">1</option>
-<option value="2">2</option>
-<option value="3">3</option>
-<option value="4">4</option>
-<option value="5">5</option>
-</select></div>
-<button type="submit" class="btn btn--primary">Add to
-Cart</button></fieldset>
-</form>
-<footer class="product-disclaimer">
-<details>
-<summary><small>Important Information</small></summary>
-<p itemprop="disambiguatingDescription"><small>For external use
-only. Avoid contact with eyes. Discontinue use if irritation
-occurs. Not intended to diagnose, treat, cure, or prevent any
-disease.</small></p>
-</details>
-</footer>
-</article>
+<div id="product-grid" data-category="creams" aria-live="polite"></div>
 </section>
 </main>
 <hr aria-hidden="true">
@@ -415,17 +343,9 @@ on GitHub</span></a></p>
 </footer>
 </div>
 
-<script>
-!function(){
-  var l=null;
-  setInterval(function(){
-    fetch("/reload.txt?t="+Date.now()).then(function(r){
-      if(r.ok)return r.text()
-    }).then(function(t){
-      if(t&&t!==l){l=t;location.reload()}
-    }).catch(function(){})
-  },1000)
-}()
-</script>
+  <script type="module">
+    import { initProductGrid } from '/assets/js/modules/product-renderer.js';
+    initProductGrid('#product-grid');
+  </script>
 </body>
 </html>

@@ -112,6 +112,7 @@ done < "$CSV"
 } >> "$TMPOUT"
 
 mv "$TMPOUT" "$OUT"
+chmod 644 "$OUT"
 if jq . "$OUT" >/dev/null 2>&1; then
     PRODUCTS=$(jq '.products | length' "$OUT" 2>/dev/null || echo '?')
     printf '  OK: generated %s with %s products\n' "$OUT" "$PRODUCTS"

@@ -1,7 +1,72 @@
-import { getLocalCart, setLocalCart } from './storageLocal.js';
-import { loadCartFromIDB, saveCartToIDB } from './storageIDB.js';
-
 const DEFAULT = { items: [] };
+
+function getLocalCart(key) {
+  try {
+    const raw = localStorage.getItem(key);
+    return raw ? JSON.parse(raw) : null;
+  } catch (e) {
+    return null;
+  }
+}
+
+function setLocalCart(cart, key) {
+  try {
+    localStorage.setItem(key, JSON.stringify(cart));
+    return true;
+  } catch (e) {
+    console.error('Error saving cart to localStorage:', e);
+    return false;
+  }
+}
+
+function loadCartFromIDB(dbName, key) {
+  return new Promise((resolve) => {
+    if (typeof window === 'undefined' || !('indexedDB' in window)) return resolve(null);
+    const req = indexedDB.open(dbName, 1);
+    req.onupgradeneeded = (evt) => {
+      const db = evt.target.result;
+      if (!db.objectStoreNames.contains('cart')) db.createObjectStore('cart');
+    };
+    req.onsuccess = (evt) => {
+      const db = evt.target.result;
+      const tx = db.transaction('cart', 'readonly');
+      const store = tx.objectStore('cart');
+      const getReq = store.get(key);
+      getReq.onsuccess = () => resolve(getReq.result || null);
+      getReq.onerror = () => resolve(null);
+    };
+    req.onerror = () => resolve(null);
+  });
+}
+
+function saveCartToIDB(cart, dbName, key) {
+  return new Promise((resolve) => {
+    if (!('indexedDB' in window)) {
+      console.error('IndexedDB is not supported in this browser.');
+      return resolve(false);
+    }
+    const req = indexedDB.open(dbName, 1);
+    req.onupgradeneeded = (evt) => {
+      const db = evt.target.result;
+      if (!db.objectStoreNames.contains('cart')) db.createObjectStore('cart');
+    };
+    req.onsuccess = (evt) => {
+      const db = evt.target.result;
+      const tx = db.transaction('cart', 'readwrite');
+      const store = tx.objectStore('cart');
+      const putReq = store.put(cart, key);
+      putReq.onsuccess = () => resolve(true);
+      putReq.onerror = (err) => {
+        console.error('Error saving cart to IndexedDB:', err);
+        resolve(false);
+      };
+    };
+    req.onerror = (err) => {
+      console.error('Error opening IndexedDB:', err);
+      resolve(false);
+    };
+  });
+}
 
 export class CartStore {
   constructor(opts = {}) {

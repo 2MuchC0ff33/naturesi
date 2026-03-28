@@ -14,6 +14,11 @@ SKIP=0
 # Find all test scripts
 TESTS=$(find "$TEST_DIR" -name '*.test.sh' -type f 2>/dev/null | sort)
 
+# Filter by TEST_PATTERN env var (e.g. TEST_PATTERN="cart" ./test-all.sh)
+if [ -n "${TEST_PATTERN:-}" ]; then
+    TESTS=$(printf '%s\n' "$TESTS" | grep "$TEST_PATTERN")
+fi
+
 if [ -z "$TESTS" ]; then
     printf 'No tests found under %s\n' "$TEST_DIR"
     exit 0

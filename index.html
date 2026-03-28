@@ -155,120 +155,7 @@
           <h2 id="featured-heading">Featured Products</h2>
           <p id="product-description">Discover our most popular organic tea blends and herbal remedies</p>
         </header>
-        <div id="product-grid-featured" class="product-grid" aria-live="polite">
-          <article class="product product-card" data-featured="true" tabindex="0" itemprop="itemListElement" itemscope
-            itemtype="https://schema.org/Product">
-            <figure class="product-card__media">
-              <picture>
-                <source srcset="assets/img/enchantedturmeric2.webp" type="image/webp"><img
-                  src="assets/img/enchantedturmeric2.webp" alt="Enchanted Turmeric Tea Package" loading="lazy"
-                  width="300" height="300" itemprop="image" class="u-img-cover">
-              </picture>
-              <figcaption>
-                <h3 itemprop="name">Enchanted Turmeric Tea</h3>
-                <div class="product-badges">
-                  <span class="badge badge--popular">Popular</span> <span class="sr-only">Popular</span> <span
-                    class="badge badge--origin">Australian made</span> <span class="sr-only">Australian made</span>
-                </div><span class="product-card__badge">Featured</span>
-                <details>
-                  <summary>
-                    Product Details
-                  </summary>
-                  <p itemprop="description">A soothing blend of turmeric and botanicals, traditionally enjoyed to
-                    support comfort and ease of movement.</p>
-                </details>
-              </figcaption>
-            </figure>
-            <form class="add-to-cart">
-              <fieldset>
-                <legend>Options</legend><label>Size: <select name="size">
-                    <option value="60g">
-                      60g ($14.00)
-                    </option>
-                    <option value="100g">
-                      100g ($22.00)
-                    </option>
-                  </select></label> <label>Quantity: <input type="number" name="quantity" min="1" max="10"
-                    value="1"></label>
-              </fieldset><button class="btn-add-to-cart">Add to Cart</button>
-            </form>
-          </article>
-          <article class="product product-card" data-featured="true" tabindex="0" itemprop="itemListElement" itemscope
-            itemtype="https://schema.org/Product">
-            <figure class="product-card__media">
-              <picture>
-                <source srcset="assets/img/calmingtea.webp" type="image/webp"><img src="assets/img/calmingtea.webp"
-                  alt="Calming Garden Tea" loading="lazy" width="300" height="300" itemprop="image" class="u-img-cover">
-              </picture>
-              <figcaption>
-                <h3 itemprop="name">Calming Garden Tea</h3>
-                <div class="product-badges">
-                  <span class="badge badge--popular">Popular</span> <span class="sr-only">Popular</span> <span
-                    class="badge badge--origin">Australian made</span> <span class="sr-only">Australian made</span>
-                </div><span class="product-card__badge">Featured</span>
-                <details>
-                  <summary>
-                    Product Details
-                  </summary>
-                  <p itemprop="description">A soothing blend of calming herbs, featuring rosemary, lavender and
-                    passionflower to promote relaxation and reduce stress.</p>
-                </details>
-              </figcaption>
-            </figure>
-            <form class="add-to-cart">
-              <fieldset>
-                <legend>Options</legend><label>Size: <select name="size">
-                    <option value="50g" data-price="14.00">
-                      50g ($14.00)
-                    </option>
-                    <option value="100g" data-price="22.00">
-                      100g ($22.00)
-                    </option>
-                  </select></label> <label>Quantity: <input type="number" name="quantity" min="1" max="10"
-                    value="1"></label>
-              </fieldset><button class="btn-add-to-cart">Add to Cart</button>
-            </form>
-          </article>
-          <article class="product product-card" data-featured="true" tabindex="0" itemprop="itemListElement" itemscope
-            itemtype="https://schema.org/Product">
-            <figure class="product-card__media">
-              <picture>
-                <source srcset="/assets/img/sleepingsoundly1.webp" type="image/webp"><img
-                  src="/assets/img/sleepingsoundly1.webp" alt="Sleeping Soundly Tea Package" loading="lazy" width="300"
-                  height="300" itemprop="image" class="u-img-cover">
-              </picture>
-              <figcaption>
-                <h3 itemprop="name">Sleeping Soundly Tea</h3>
-                <div class="product-badges">
-                  <span class="badge badge--popular">Popular</span> <span class="sr-only">Popular</span> <span
-                    class="badge badge--origin">Australian made</span> <span class="sr-only">Australian made</span>
-                </div><span class="product-card__badge">Featured</span>
-                <details>
-                  <summary>
-                    Product Details
-                  </summary>
-                  <p itemprop="description">An evening blend of lemon balm, passionflower, ginger root, and tulsi,
-                    thoughtfully created to support a peaceful transition into rest. With its gentle herbal aroma and
-                    cosy warmth, this tea is a comforting choice for relaxing the mind and preparing for a restful
-                    night.</p>
-                </details>
-              </figcaption>
-            </figure>
-            <form class="add-to-cart">
-              <fieldset>
-                <legend>Options</legend><label>Size: <select name="size">
-                    <option value="50g" data-price="14.00">
-                      50g ($14.00)
-                    </option>
-                    <option value="80g" data-price="22.00">
-                      80g ($22.00)
-                    </option>
-                  </select></label> <label>Quantity: <input type="number" name="quantity" min="1" max="10"
-                    value="1"></label>
-              </fieldset><button class="btn-add-to-cart">Add to Cart</button>
-            </form>
-          </article>
-        </div>
+        <div id="product-grid" data-category="wellness-blends" aria-live="polite"></div>
         <footer id="view-all">
           <a href="pages/store.html" itemprop="url">View Complete Product Catalog - Browse All Organic Teas & Wellness
             Blends</a>
@@ -417,17 +304,9 @@
     </div>
   </dialog>
 
-<script>
-!function(){
-  var l=null;
-  setInterval(function(){
-    fetch("/reload.txt?t="+Date.now()).then(function(r){
-      if(r.ok)return r.text()
-    }).then(function(t){
-      if(t&&t!==l){l=t;location.reload()}
-    }).catch(function(){})
-  },1000)
-}()
+<script type="module">
+  import { initProductGrid } from '/assets/js/modules/product-renderer.js';
+  initProductGrid('#product-grid');
 </script>
 </body>
 

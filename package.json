@@ -5,5 +5,11 @@
   "description": "Nature's Infusions static e-commerce site",
   "author": "2MuchC0ff33",
   "devDependencies": {},
-  "scripts": {}
+  "scripts": {
+    "test": "scripts/test-all.sh",
+    "test:smoke": "scripts/test-all.sh test/smoke",
+    "test:unit": "scripts/test-all.sh test/unit",
+    "lint": "scripts/lint-json.sh",
+    "validate": "scripts/lint-json.sh && scripts/test-all.sh"
+  }
 }

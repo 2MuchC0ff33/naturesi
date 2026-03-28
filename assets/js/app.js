@@ -49,7 +49,10 @@ if (typeof document !== 'undefined') {
   (async () => {
     try {
       if (document.getElementById('confirm-cart-form')) {
-        await import('./modules/cart.js');
+        const cf = await import('./modules/checkout.js');
+        if (cf && typeof cf.attachFormHandler === 'function') {
+          cf.attachFormHandler({ documentRoot: document, storage: localStorage });
+        }
       }
       if (document.getElementById('paypal-form') || document.getElementById('summary-content')) {
         await import('./modules/checkout.js');
@@ -58,11 +61,11 @@ if (typeof document !== 'undefined') {
       const path = (location?.pathname) || '';
       try {
         if (path.endsWith('/pages/payment/success.html')) {
-          const m = await import('./modules/payment-return.js');
+          const m = await import('./modules/payment-status.js');
           if (m && typeof m.initPaymentReturn === 'function') m.initPaymentReturn();
         }
         if (path.endsWith('/pages/payment/fail.html')) {
-          const m2 = await import('./modules/payment-cancel.js');
+          const m2 = await import('./modules/payment-status.js');
           if (m2 && typeof m2.initPaymentCancel === 'function') m2.initPaymentCancel();
         }
       } catch (err) {
