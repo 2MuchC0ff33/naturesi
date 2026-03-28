@@ -62,8 +62,6 @@
   height: 100%;
   margin: 0;
   padding: 0;
-  object-fit: cover;
-  object-position: center center;
 }
 
 #featured-grid .product-card > :not(.product-card__media),
