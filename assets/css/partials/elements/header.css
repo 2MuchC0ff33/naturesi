@@ -71,48 +71,40 @@ Core header bar, logo treatment and colour gradient live here.
   text-decoration: none;
 }
 
-.site-nav .logo .site-tagline {
-  display: block;
-  font-size: 0.65rem;
-  font-weight: 400;
-  color: color-mix(in srgb, var(--color-accent) 70%, black);
-  line-height: 1.2;
-  white-space: nowrap;
-}
-
-@media (max-width: 639px) {
-  .site-nav .logo {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.1rem;
-  }
-}
-
-@media (min-width: 640px) {
-  .site-nav .logo {
-    flex-wrap: nowrap;
-    gap: 0.4rem;
-  }
-
-  .site-nav .logo .site-tagline {
-    display: inline;
-    font-size: 0.7rem;
-  }
-}
-
 .site-nav .logo img,
 .site-nav .all-logo img {
-  /* larger baseline for improved brand visibility on phones */
-  max-height: 48px;
+  max-height: 52px;
   width: auto;
   height: auto;
 }
 
-@media (min-width: 640px) {
+.site-nav .nav-left .site-tagline {
+  display: block;
+  font-style: italic;
+  font-size: 0.7rem;
+  font-weight: 400;
+  color: color-mix(in srgb, var(--color-accent) 80%, white 20%);
+  line-height: 1.4;
+  white-space: normal;
+  letter-spacing: 0.01em;
+}
 
+@media (max-width: 639px) {
+  .site-nav .nav-left {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.15rem;
+  }
+}
+
+@media (min-width: 640px) {
   .site-nav .logo img,
   .site-nav .all-logo img {
-    max-height: 56px;
+    max-height: 64px;
+  }
+
+  .site-nav .nav-left .site-tagline {
+    font-size: 0.75rem;
   }
 }
 
