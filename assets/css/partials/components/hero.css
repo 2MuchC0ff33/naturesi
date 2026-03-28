@@ -1,6 +1,11 @@
 /* components/hero.css
    Purpose: Homepage hero section styles (mobile-first)
-*/
+ */
+
+.hero-spacer {
+  height: 12px;
+  background: color-mix(in srgb, var(--color-accent) 18%, black 6%);
+}
 
 .hero {
   display: block;
