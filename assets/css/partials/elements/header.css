@@ -82,8 +82,8 @@ Core header bar, logo treatment and colour gradient live here.
   display: block;
   font-style: italic;
   font-size: 0.7rem;
-  font-weight: 400;
-  color: color-mix(in srgb, var(--color-accent) 80%, white 20%);
+  font-weight: 700;
+  color: #fff;
   line-height: 1.4;
   white-space: normal;
   letter-spacing: 0.01em;
