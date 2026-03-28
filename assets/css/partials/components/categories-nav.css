@@ -27,7 +27,7 @@
   padding: 0.35rem 0.6rem;
   color: #fff;
   text-decoration: none;
-  font-size: clamp(0.85rem, 0.9vw, 1rem);
+  font-size: clamp(0.75rem, 0.8vw, 0.875rem);
   max-width: 12rem;
   overflow: hidden;
   text-overflow: ellipsis;
