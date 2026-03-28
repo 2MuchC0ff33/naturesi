@@ -81,7 +81,7 @@ Core header bar, logo treatment and colour gradient live here.
   font-style: italic;
   font-size: 0.6rem;
   font-weight: 500;
-  color: #fff;
+  color: #346967;
   line-height: 1.4;
   white-space: normal;
   letter-spacing: 0.01em;
@@ -244,7 +244,7 @@ Core header bar, logo treatment and colour gradient live here.
   }
 
   .site-nav .logo img {
-    max-height: 56px;
+    max-height: 140px;
   }
 }
 
@@ -565,7 +565,7 @@ navigation elements in a single compact row while maintaining accessibility.
 
   /* Logo: reduce size and constrain width */
   .site-nav .logo img {
-    max-height: 36px;
+    max-height: 72px;
     width: auto;
     height: auto;
   }
