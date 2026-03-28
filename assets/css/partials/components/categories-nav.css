@@ -1,7 +1,7 @@
 /* Categories nav component: single-row desktop, horizontal-scroll mobile */
 .site-header__categories {
   border-top: 1px solid var(--color-border, #e6e6e6);
-  background: var(--color-light-background, #fff);
+  background: #346967;
 }
 
 .site-header__categories-list {
@@ -24,7 +24,7 @@
 .site-header__categories-link {
   display: inline-block;
   padding: 4px 8px;
-  color: var(--color-text, #222);
+  color: #fff;
   text-decoration: none;
   font-size: clamp(0.85rem, 0.9vw, 1rem);
   line-height: 1.2;
@@ -32,12 +32,13 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  font-weight: 700;
 }
 
 /* Focus & accessible outline */
 .site-header__categories-link:focus,
 .site-header__categories-link:focus-visible {
-  outline: 3px solid var(--color-accent, #4CAF50);
+  outline: 3px solid rgba(255, 255, 255, 0.5);
   outline-offset: 3px;
   border-radius: 4px;
 }
