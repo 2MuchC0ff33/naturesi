@@ -5,7 +5,7 @@ Legal bar, social links and footer layout go here for easier maintenance.
 .site-footer,
 footer[itemscope][itemtype*='WPFooter'] {
   --footer-bg: color-mix(in srgb, var(--color-accent) 18%, black 6%);
-  --footer-text: #fff;
+  --footer-text: var(--color-accent);
   --footer-accent-outline: color-mix(in srgb, var(--color-accent) 36%, transparent);
   background: var(--footer-bg);
   color: var(--footer-text);
