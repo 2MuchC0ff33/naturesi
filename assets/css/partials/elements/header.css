@@ -73,7 +73,7 @@ Core header bar, logo treatment and colour gradient live here.
 
 .site-nav .logo img,
 .site-nav .all-logo img {
-  max-height: 52px;
+  max-height: 64px;
   width: auto;
   height: auto;
 }
@@ -81,8 +81,8 @@ Core header bar, logo treatment and colour gradient live here.
 .site-nav .nav-left .site-tagline {
   display: block;
   font-style: italic;
-  font-size: 0.7rem;
-  font-weight: 700;
+  font-size: 0.6rem;
+  font-weight: 500;
   color: #fff;
   line-height: 1.4;
   white-space: normal;
@@ -100,11 +100,11 @@ Core header bar, logo treatment and colour gradient live here.
 @media (min-width: 640px) {
   .site-nav .logo img,
   .site-nav .all-logo img {
-    max-height: 64px;
+    max-height: 80px;
   }
 
   .site-nav .nav-left .site-tagline {
-    font-size: 0.75rem;
+    font-size: 0.65rem;
   }
 }
 
@@ -112,7 +112,7 @@ Core header bar, logo treatment and colour gradient live here.
 
   .site-nav .logo img,
   .site-nav .all-logo img {
-    max-height: 64px;
+    max-height: 80px;
   }
 }
 
@@ -120,7 +120,7 @@ Core header bar, logo treatment and colour gradient live here.
 
   .site-nav .logo img,
   .site-nav .all-logo img {
-    max-height: 72px;
+    max-height: 88px;
   }
 }
 
