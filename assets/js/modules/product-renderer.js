@@ -64,7 +64,7 @@ function renderAddToCartBtn(product) {
   return `<button type="submit">Add to Cart</button>`;
 }
 
-function renderProductCard(product, selectedOption, featured = false) {
+function renderProductCard(product, selectedOption, featured = false, featuredLink = '#') {
   const opt = selectedOption || product.options?.[0] || null;
   const displayPrice = opt ? opt.price : product.price;
   const optionRadios = featured ? '' : renderOptionRadios(product, opt?.id);
@@ -81,13 +81,11 @@ function renderProductCard(product, selectedOption, featured = false) {
   const anchorId = escapeHtml(product.id);
 
   return (
-    `<a id="${slugId}" class="product-anchor slug-anchor" aria-hidden="true"></a>` +
-    `<a id="${anchorId}-anchor" class="product-anchor"></a>` +
     `<article id="product-${anchorId}"${featuredAttr} class="product product-card" ` +
     `itemprop="itemListElement" itemscope itemtype="https://schema.org/Product" ` +
     `data-image="${escapeHtml(product.image || '')}" data-sku="${escapeHtml(product.sku || product.id)}">` +
 
-    `<header class="media">` +
+    `<header>` +
     `<figure class="product-gallery product-card__media">` +
     `<picture>` +
     `<source srcset="${imgSrc}" type="image/webp"> ` +
@@ -95,7 +93,7 @@ function renderProductCard(product, selectedOption, featured = false) {
     `itemprop="image" class="u-img-cover">` +
     `</picture>` +
     `</figure>` +
-    `<h3 itemprop="name">${featured ? `<a href="#${slugId}">${escapeHtml(product.name)}</a>` : escapeHtml(product.name)}</h3>` +
+    `<h3 itemprop="name">${featured ? `<a href="${featuredLink}">${escapeHtml(product.name)}</a>` : escapeHtml(product.name)}</h3>` +
     (featured ? '' : `<div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">` +
     `<link itemprop="availability" href="https://schema.org/InStock">` +
     `<meta itemprop="priceCurrency" content="AUD">` +
@@ -127,7 +125,14 @@ function renderGrid(container, products) {
     return;
   }
   const featured = container.dataset.layout === 'featured';
-  container.innerHTML = products.map((p) => renderProductCard(p, featured ? null : p.options?.[0], featured)).join('');
+  const links = {};
+  if (featured && container.dataset.links) {
+    container.dataset.links.split(',').forEach((entry) => {
+      const [id, url] = entry.split(':');
+      if (id && url) links[id.trim()] = url.trim();
+    });
+  }
+  container.innerHTML = products.map((p) => renderProductCard(p, featured ? null : p.options?.[0], featured, links[p.id] || '#')).join('');
   if (!featured) attachOptionHandlers(container);
 }
 
