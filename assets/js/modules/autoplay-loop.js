@@ -32,8 +32,4 @@ export function initAutoplayLoop() {
             video.play().catch(() => {});
         }, pauseDuration);
     });
-
-    video.addEventListener('error', () => {
-        video.style.display = 'none';
-    });
 }
