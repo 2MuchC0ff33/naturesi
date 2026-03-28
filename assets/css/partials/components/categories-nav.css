@@ -33,6 +33,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   font-weight: 700;
+  text-align: center;
 }
 
 /* Focus & accessible outline */
@@ -46,7 +47,7 @@
 /* Desktop / Tablet: prevent wrapping and try to keep all items on a single row */
 @media (min-width: 900px) {
   .site-header__categories-list {
-    justify-content: flex-start;
+    justify-content: center;
     overflow: visible;
   }
 }
