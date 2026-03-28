@@ -64,6 +64,14 @@ function renderAddToCartBtn(product) {
   return `<button type="submit">Add to Cart</button>`;
 }
 
+function getDisclaimer(category) {
+  const external = ['balms', 'creams', 'selfcare'];
+  if (external.includes(category)) {
+    return 'For external use only. Avoid contact with eyes. Discontinue use if irritation occurs. Not intended to diagnose, treat, cure, or prevent any disease.';
+  }
+  return 'This product is not intended to diagnose, treat, cure, or prevent any disease. Always consult with a healthcare provider before starting any new supplement or wellness regimen.';
+}
+
 function renderProductCard(product, selectedOption, featured = false, featuredLink = '#') {
   const opt = selectedOption || product.options?.[0] || null;
   const displayPrice = opt ? opt.price : product.price;
@@ -114,6 +122,21 @@ function renderProductCard(product, selectedOption, featured = false, featuredLi
     renderAddToCartBtn(product) +
     `</fieldset>` +
     `</form>`) +
+
+    (featured || !product.ingredients ? '' :
+    `<section class="product-ingredients" itemprop="nutrition" itemscope itemtype="https://schema.org/NutritionInformation">` +
+    `<h4>Ingredients</h4>` +
+    `<p itemprop="ingredients">${escapeHtml(product.ingredients)}</p>` +
+    `<p><small>Sourced from multiple origins</small></p>` +
+    `</section>`) +
+
+    (featured || !product.ingredients ? '' :
+    `<footer class="product-disclaimer">` +
+    `<details>` +
+    `<summary><small>${/selfcare|balms|creams/.test(product.category) ? 'Important Information' : 'Important Disclaimer'}</small></summary>` +
+    `<p itemprop="disambiguatingDescription"><small>${escapeHtml(getDisclaimer(product.category))}</small></p>` +
+    `</details>` +
+    `</footer>`) +
 
     `</article>`
   );

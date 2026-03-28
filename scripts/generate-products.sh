@@ -16,11 +16,11 @@ printf 'Generating %s from %s\n' "$OUT" "$CSV"
 TMPOUT=$(mktemp)
 TMPERR=$(mktemp)
 
-# Write JSON header
-{
-    printf '{\n'
-    printf '  "products": [\n'
-} > "$TMPOUT"
+    # Write JSON header
+    {
+        printf '{\n'
+        printf '  "products": [\n'
+    } > "$TMPOUT"
 
 FIRST_ROW=1
 ROW_NUM=0
@@ -41,13 +41,9 @@ while IFS= read -r line; do
     inStock=$(printf '%s' "$line" | cut -d'|' -f7)
     price=$(printf '%s' "$line" | cut -d'|' -f8)
 
-    # Get options: join fields 9+ (pipe-separated, may contain JSON)
-    opts=""
-    total_fields=$(printf '%s' "$line" | tr -cd '|' | wc -c | tr -d ' ')
-    total_fields=$((total_fields + 1))
-    if [ "$total_fields" -ge 9 ]; then
-        opts=$(printf '%s' "$line" | cut -d'|' -f9-)
-    fi
+    # Get options (field 9) and ingredients (field 10, last field)
+    opts=$(printf '%s' "$line" | cut -d'|' -f9)
+    ingredients=$(printf '%s' "$line" | cut -d'|' -f10-)
 
     # Validate required fields
     if [ -z "$id" ]; then
@@ -81,6 +77,14 @@ while IFS= read -r line; do
         opts_json="[]"
     fi
 
+    # Ingredients: plain text, escape for JSON
+    if [ -n "$ingredients" ]; then
+        ing_esc=$(j_escape "$ingredients")
+        ing_json="\"$ing_esc\""
+    else
+        ing_json="null"
+    fi
+
     # Separator
     if [ "$FIRST_ROW" -eq 0 ]; then
         printf '    },\n' >> "$TMPOUT"
@@ -101,6 +105,7 @@ while IFS= read -r line; do
     printf '      "inStock": %s,\n' "$inStock" >> "$TMPOUT"
     printf '      "price": %s,\n' "$price_json" >> "$TMPOUT"
     printf '      "options": %s,\n' "$opts_json" >> "$TMPOUT"
+    printf '      "ingredients": %s,\n' "$ing_json" >> "$TMPOUT"
     printf '      "featured": false\n' >> "$TMPOUT"
 
 done < "$CSV"

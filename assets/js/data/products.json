@@ -13,6 +13,7 @@
       "inStock": true,
       "price": 14,
       "options": [{"id":"product-calming-50g","label":"50g","price":14,"weight":"50g"},{"id":"product-calming-70g","label":"70g","price":22,"weight":"70g"}],
+      "ingredients": "Rosemary, Passionflower, Lavender, Chamomile and Rose Petals",
       "featured": false
     },
     {
@@ -28,6 +29,7 @@
       "inStock": true,
       "price": 14,
       "options": [{"id":"product-turmeric-60g","label":"60g","price":14,"weight":"60g"},{"id":"product-turmeric-100g","label":"100g","price":22,"weight":"100g"}],
+      "ingredients": "Turmeric, Ginger Root, Rose Petals, Liquorice Root, Juniper Berries and Cardamom",
       "featured": false
     },
     {
@@ -43,6 +45,7 @@
       "inStock": true,
       "price": 14,
       "options": [{"id":"product-sleeping-50g","label":"50g","price":14,"weight":"50g"},{"id":"product-sleeping-70g","label":"70g","price":22,"weight":"70g"}],
+      "ingredients": "Lemon Balm, Passionflower, Ginger Root and Tulsi",
       "featured": false
     },
     {
@@ -58,6 +61,7 @@
       "inStock": true,
       "price": 14,
       "options": [{"id":"product-hormone-50g","label":"50g","price":14,"weight":"50g"},{"id":"product-hormone-80g","label":"80g","price":22,"weight":"80g"}],
+      "ingredients": "Honeybush, Rose Petals, Chasteberry, Fennel, Lemon Verbena and Sage",
       "featured": false
     },
     {
@@ -73,6 +77,7 @@
       "inStock": true,
       "price": 14,
       "options": [{"id":"product-winter-50g","label":"50g","price":14,"weight":"50g"},{"id":"product-winter-70g","label":"70g","price":22,"weight":"70g"}],
+      "ingredients": "Ginger Root, Lemon Balm, Yarrow and Echinacea",
       "featured": false
     },
     {
@@ -88,6 +93,7 @@
       "inStock": true,
       "price": 14,
       "options": [{"id":"product-digestive-50g","label":"50g","price":14,"weight":"50g"}],
+      "ingredients": "Meadowsweet, Aniseed, Ginger Root and Peppermint",
       "featured": false
     },
     {
@@ -103,6 +109,7 @@
       "inStock": true,
       "price": 14,
       "options": [{"id":"product-botanic-50g","label":"50g","price":14,"weight":"50g"},{"id":"product-botanic-70g","label":"70g","price":22,"weight":"70g"}],
+      "ingredients": "Nettle, Spearmint, Linseed and Echinacea",
       "featured": false
     },
     {
@@ -118,6 +125,7 @@
       "inStock": false,
       "price": 14,
       "options": [],
+      "ingredients": "Dandelion Root, Tulsi, Lemon Peel, Dandelion Leaf, Lemongrass and Blue Cornflower Petals",
       "featured": false
     },
     {
@@ -133,6 +141,7 @@
       "inStock": true,
       "price": 14,
       "options": [{"id":"product-summer-40g","label":"40g","price":14,"weight":"40g"},{"id":"product-summer-70g","label":"70g","price":22,"weight":"70g"}],
+      "ingredients": "Hibiscus, Peppermint and Lemon Balm",
       "featured": false
     },
     {
@@ -148,6 +157,7 @@
       "inStock": true,
       "price": 14,
       "options": [{"id":"product-red-60g","label":"60g","price":14,"weight":"60g"},{"id":"product-red-100g","label":"100g","price":22,"weight":"100g"}],
+      "ingredients": "Roobios, Honeybush and Cinnamon",
       "featured": false
     },
     {
@@ -163,6 +173,7 @@
       "inStock": false,
       "price": 14,
       "options": [],
+      "ingredients": "Apple Pieces, Rosehip, Lemongrass and Spearmint",
       "featured": false
     },
     {
@@ -178,6 +189,7 @@
       "inStock": true,
       "price": 14,
       "options": [{"id":"product-lemonginger-40g","label":"40g","price":14,"weight":"40g"},{"id":"product-lemonginger-70g","label":"70g","price":22,"weight":"70g"}],
+      "ingredients": "Lemongrass and Ginger",
       "featured": false
     },
     {
@@ -193,6 +205,7 @@
       "inStock": true,
       "price": 14,
       "options": [{"id":"product-ceylon-50g","label":"50g","price":14,"weight":"50g"},{"id":"product-ceylon-100g","label":"100g","price":22,"weight":"100g"}],
+      "ingredients": "Ceylon Black Tea, Ginger, Cardamon, Cinnamon, Star Anise, Cloves and Peppercorn",
       "featured": false
     },
     {
@@ -208,6 +221,7 @@
       "inStock": true,
       "price": 14,
       "options": [{"id":"product-french-50g","label":"50g","price":14,"weight":"50g"},{"id":"product-french-70g","label":"70g","price":22,"weight":"70g"}],
+      "ingredients": "Black Tea, Bergamot, Rose Petals, Calendula Petals and Blue Cornflower Petals",
       "featured": false
     },
     {
@@ -223,6 +237,7 @@
       "inStock": true,
       "price": 14,
       "options": [{"id":"product-english-50g","label":"50g","price":14,"weight":"50g"},{"id":"product-english-80g","label":"80g","price":22,"weight":"80g"}],
+      "ingredients": "Black Tea",
       "featured": false
     },
     {
@@ -238,6 +253,7 @@
       "inStock": true,
       "price": 14,
       "options": [{"id":"product-lemonlift-50g","label":"50g","price":14,"weight":"50g"}],
+      "ingredients": "Black Tea, Lemon Myrtle, Lemon Peel, Lemon Verbena and Lemongrass",
       "featured": false
     },
     {
@@ -253,6 +269,7 @@
       "inStock": true,
       "price": 14,
       "options": [{"id":"product-rainforest-50g","label":"50g","price":14,"weight":"50g"},{"id":"product-rainforest-80g","label":"80g","price":22,"weight":"80g"}],
+      "ingredients": "Black Tea and Lemon Myrtle",
       "featured": false
     },
     {
@@ -268,6 +285,7 @@
       "inStock": true,
       "price": 14,
       "options": [{"id":"product-energiser-50g","label":"50g","price":14,"weight":"50g"},{"id":"product-energiser-80g","label":"80g","price":22,"weight":"80g"}],
+      "ingredients": "Sencha Green Tea and Tulsi",
       "featured": false
     },
     {
@@ -283,6 +301,7 @@
       "inStock": false,
       "price": 14,
       "options": [],
+      "ingredients": null,
       "featured": false
     },
     {
@@ -298,6 +317,7 @@
       "inStock": true,
       "price": 18,
       "options": [{"id":"product-calendula-50ml","label":"50ml","price":18}],
+      "ingredients": "Purified Water, Avocado Oil, Sweet Almond Oil, Soybean Oil, Calendula Flowers, Cetearyl Alcohol, PE-20 Stearate, Cocoa Butter, Glycerine, Phenoxyethanol, Ethylhexylglycerin, Rosehip Oil, Jojoba Oil, Chamomile Essential Oil, Natural Vitamin E, Propanediol and Rosemary Leaf Extract",
       "featured": false
     },
     {
@@ -313,6 +333,7 @@
       "inStock": true,
       "price": 12,
       "options": [{"id":"product-calmbalm-30ml","label":"30ml","price":12}],
+      "ingredients": "Lavender, Rosemary and Peppermint Essential Oil",
       "featured": false
     },
     {
@@ -328,6 +349,7 @@
       "inStock": true,
       "price": 12,
       "options": [{"id":"product-sleepbalm-30ml","label":"30ml","price":12}],
+      "ingredients": "Lavender and Chamomile",
       "featured": false
     },
     {
@@ -343,6 +365,7 @@
       "inStock": true,
       "price": 10,
       "options": [{"id":"product-floralspray-50ml","label":"50ml","price":10}],
+      "ingredients": "Purified Water, Lavender Essential Oil and Polysorbate 80",
       "featured": false
     },
     {
@@ -358,6 +381,7 @@
       "inStock": true,
       "price": 10,
       "options": [{"id":"product-magnesium-200g","label":"200g","price":10}],
+      "ingredients": "Magnesium Chloride Flakes",
       "featured": false
     },
     {
@@ -373,6 +397,7 @@
       "inStock": true,
       "price": 20,
       "options": [{"id":"product-pillow-1","label":"1 pillow","price":20}],
+      "ingredients": "Flaxseed and Calming Herbs",
       "featured": false
     },
     {
@@ -388,6 +413,7 @@
       "inStock": true,
       "price": 4,
       "options": [{"id":"product-bag-10pack","label":"10 pack","price":4}],
+      "ingredients": "Plant-based Materials",
       "featured": false
     },
     {
@@ -403,6 +429,7 @@
       "inStock": false,
       "price": 10,
       "options": [],
+      "ingredients": null,
       "featured": false
     },
     {
@@ -418,6 +445,7 @@
       "inStock": true,
       "price": 30,
       "options": [{"id":"product-flask-500ml","label":"500ml","price":30}],
+      "ingredients": "Stainless Steel and BPA-free Materials",
       "featured": false
     },
     {
@@ -433,6 +461,7 @@
       "inStock": true,
       "price": 30,
       "options": [{"id":"product-pot-800ml","label":"800ml","price":30}],
+      "ingredients": "Borosilicate Glass and Stainless Steel",
       "featured": false
     },
     {
@@ -448,6 +477,7 @@
       "inStock": true,
       "price": 3,
       "options": [{"id":"product-scoop-1","label":"1 scoop","price":3}],
+      "ingredients": "Durable Materials",
       "featured": false
     }
   ]
