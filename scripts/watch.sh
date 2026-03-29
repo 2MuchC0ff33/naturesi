@@ -7,6 +7,14 @@
 ROOT="."
 SLEEP=1
 
+# Portable mtime: GNU stat uses -c '%Y', BSD/macOS stat uses -f '%m'
+get_mtime() {
+    case "$(uname -s)" in
+        Darwin|*BSD) stat -f '%m' "$1" 2>/dev/null ;;
+        *)           stat -c '%Y' "$1" 2>/dev/null ;;
+    esac
+}
+
 while [ $# -gt 0 ]; do
     case "$1" in
         --dir)   ROOT="$2"; shift 2 ;;
@@ -31,7 +39,8 @@ find "$ROOT" -type f \( \
 
 LAST_FILE=$(mktemp)
 while IFS= read -r f; do
-    stat -c '%Y %n' "$f" 2>/dev/null || true
+    mtime=$(get_mtime "$f") || true
+    printf '%s %s\n' "${mtime:-0}" "$f"
 done < "$INITIAL" > "$LAST_FILE"
 rm -f "$INITIAL"
 
@@ -51,7 +60,7 @@ while true; do
         \) 2>/dev/null > "$CURRENT"
 
     while IFS= read -r f; do
-        mtime=$(stat -c '%Y' "$f" 2>/dev/null || echo "0")
+        mtime=$(get_mtime "$f" || echo "0")
         prev=$(grep -F "$f" "$LAST_FILE" 2>/dev/null | cut -d' ' -f1 || true)
         if [ -n "$prev" ] && [ "$mtime" != "$prev" ]; then
             on_change "$f"
@@ -63,7 +72,7 @@ while true; do
 
     TMP_LAST=$(mktemp)
     while IFS= read -r f; do
-        mtime=$(stat -c '%Y' "$f" 2>/dev/null || echo "0")
+        mtime=$(get_mtime "$f" || echo "0")
         printf '%s %s\n' "$mtime" "$f"
     done < "$CURRENT" > "$TMP_LAST"
     mv "$TMP_LAST" "$LAST_FILE"

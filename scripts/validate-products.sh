@@ -25,6 +25,11 @@ for COL in id name category inStock price; do
     fi
 done
 
+# Compute column indices from header (1-indexed, pipe-delimited)
+INSTOCK_COL=$(awk -F'\|' 'NR==1 { for(i=1;i<=NF;i++) if($i=="inStock") { print i; exit } }' "$CSV")
+PRICE_COL=$(awk -F'\|' 'NR==1 { for(i=1;i<=NF;i++) if($i=="price") { print i; exit } }' "$CSV")
+CAT_COL=$(awk -F'\|' 'NR==1 { for(i=1;i<=NF;i++) if($i=="category") { print i; exit } }' "$CSV")
+
 # Count data rows (skip header)
 DATA_ROWS=$(awk -F'\|' 'NR>1 && NF>0' "$CSV" | wc -l)
 printf '  INFO: %d product rows\n' "$DATA_ROWS"
@@ -50,7 +55,7 @@ else
 fi
 
 # Check inStock is boolean (true/false) or 0/1
-BAD_STOCK=$(awk -F'\|' 'NR>1 && $7 !~ /^(true|false|0|1)$/' "$CSV" | wc -l | tr -d ' ')
+BAD_STOCK=$(awk -F'\|' -v col="${INSTOCK_COL:-7}" 'NR>1 && $col !~ /^(true|false|0|1)$/' "$CSV" | wc -l | tr -d ' ')
 if [ "$BAD_STOCK" -eq 0 ] 2>/dev/null; then
     printf '  OK: all inStock values valid\n'
     PASS=$((PASS + 1))
@@ -60,7 +65,7 @@ else
 fi
 
 # Check price is numeric
-BAD_PRICE=$(awk -F'\|' 'NR>1 && $8 != "" && $8 ~ /[^0-9.]/' "$CSV" | wc -l | tr -d ' ')
+BAD_PRICE=$(awk -F'\|' -v col="${PRICE_COL:-8}" 'NR>1 && $col != "" && $col ~ /[^0-9.]/' "$CSV" | wc -l | tr -d ' ')
 if [ "$BAD_PRICE" -eq 0 ] 2>/dev/null; then
     printf '  OK: all prices numeric\n'
     PASS=$((PASS + 1))
@@ -70,7 +75,7 @@ else
 fi
 
 # Check categories are non-empty slugs (no pipe chars = not field-split errors)
-BAD_CATS=$(awk -F'\|' 'NR>1 && $4 == ""' "$CSV" | wc -l | tr -d ' ')
+BAD_CATS=$(awk -F'\|' -v col="${CAT_COL:-4}" 'NR>1 && $col == ""' "$CSV" | wc -l | tr -d ' ')
 if [ "$BAD_CATS" -eq 0 ] 2>/dev/null; then
     printf '  OK: all categories present\n'
     PASS=$((PASS + 1))
