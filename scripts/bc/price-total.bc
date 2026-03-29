@@ -1,12 +1,11 @@
-#!/bin/sh
-# scripts/bc/price-total.bc — Compute line totals and grand total
-# Usage: awk '{print $1*$2}' <<< "14 2" | bc -q scripts/bc/price-total.bc
-# Or use shell wrapper: scripts/bc/price-total.sh
-# SELF-TEST: echo "14 2" | awk '{print $1*$2}' | bc -q scripts/bc/price-total.bc -> 28.00
+/* scripts/bc/price-total.bc — Compute line totals and grand total */
+/* Usage: awk '{print $1*$2}' <<< "14 2" | bc -q scripts/bc/price-total.bc */
+/* Or use shell wrapper: scripts/bc/price-total.sh */
+/* SELF-TEST: echo "14 2" | awk '{print $1*$2}' | bc -q scripts/bc/price-total.bc -> 28.00 */
 
 scale = 2
 x = 0
 
-# SELF-TEST: uncomment: x = 28
-# x = 28
+/* SELF-TEST: uncomment: x = 28 */
+/* x = 28 */
 x

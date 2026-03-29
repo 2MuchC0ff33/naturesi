@@ -1,10 +1,9 @@
-#!/bin/sh
-# scripts/bc/tax-calc.bc — Compute 10% GST on a subtotal
-# Usage: bc -q scripts/bc/tax-calc.bc <<< "SUBTOTAL"
-# Example: echo "100" | bc -q scripts/bc/tax-calc.bc  -> 110.00
-# SELF-TEST: echo "100" | bc -q scripts/bc/tax-calc.bc  -> 110.00
-# SELF-TEST: echo "14"  | bc -q scripts/bc/tax-calc.bc  -> 15.40
-# SELF-TEST: echo "39"  | bc -q scripts/bc/tax-calc.bc  -> 42.90
+/* scripts/bc/tax-calc.bc — Compute 10% GST on a subtotal */
+/* Usage: bc -q scripts/bc/tax-calc.bc <<< "SUBTOTAL" */
+/* Example: echo "100" | bc -q scripts/bc/tax-calc.bc  -> 110.00 */
+/* SELF-TEST: echo "100" | bc -q scripts/bc/tax-calc.bc  -> 110.00 */
+/* SELF-TEST: echo "14"  | bc -q scripts/bc/tax-calc.bc  -> 15.40 */
+/* SELF-TEST: echo "39"  | bc -q scripts/bc/tax-calc.bc  -> 42.90 */
 
 scale = 2
 
