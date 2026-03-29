@@ -14,6 +14,8 @@ export function initAutoplayLoop() {
     let wasPlaying = false;
     let loopScheduled = false;
 
+    video.play().catch(() => {});
+
     function handleVisibilityChange() {
         if (document.hidden) {
             wasPlaying = !video.paused;
