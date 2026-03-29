@@ -118,14 +118,14 @@
       "name": "Natures Detox",
       "slug": "natures-detox",
       "category": "wellness-blends",
-      "description": "A gentle blend of dandelion root; tulsi; lemon peel; dandelion leaf; lemongrass and blue cornflower petals; crafted to support the bodys natural cleansing processes",
-      "image": "/assets/img/general3.webp",
+      "description": "A gentle blend of dandelion root; tulsi; lemon peel; dandelion leaf and lemongrass; crafted to support the bodys natural cleansing processes",
+      "image": "/assets/img/logo.webp",
       "imageAlt": "Natures Detox",
-      "images": ["/assets/img/general3.webp"],
+      "images": ["/assets/img/logo.webp"],
       "inStock": false,
       "price": 14,
       "options": [],
-      "ingredients": "Dandelion Root, Tulsi, Lemon Peel, Dandelion Leaf, Lemongrass and Blue Cornflower Petals",
+      "ingredients": "Dandelion Root, Tulsi, Lemon Peel, Dandelion Leaf and Lemongrass",
       "featured": false
     },
     {
@@ -172,8 +172,8 @@
       "images": ["/assets/img/africanchai.webp"],
       "inStock": true,
       "price": 14,
-      "options": [{"id":"product-africanchai-50g","label":"50g","price":14,"weight":"50g"},{"id":"product-africanchai-80g","label":"80g","price":22,"weight":"80g"}],
-      "ingredients": null,
+      "options": [{"id":"product-africanchai-70g","label":"70g","price":14,"weight":"70g"},{"id":"product-africanchai-100g","label":"100g Cylinder","price":22,"weight":"100g"}],
+      "ingredients": "Rooibos, Cardamon, Honeybush, Ginger, Cinnamon, Star Anise, Fennel, Cloves and Peppercorn",
       "featured": false
     },
     {
