@@ -57,4 +57,7 @@ rm -f "$HTML_FILES"
 TOTAL_CHECKS=$((TOTAL * 4))
 printf 'ok %d %d checks total (%d failures)\n' $((TOTAL_CHECKS + 2)) "$TOTAL_CHECKS" "$FAIL"
 
+if [ "$FAIL" -gt 0 ]; then
+    exit 1
+fi
 exit 0
