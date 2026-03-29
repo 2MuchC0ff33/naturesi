@@ -29,6 +29,7 @@ if [ -z "$REAL_EMAIL" ]; then
     printf 'ok %d PAYPAL_EMAIL does not contain a real email\n' "$COUNT"
 else
     printf 'not ok %d PAYPAL_EMAIL contains a real email\n' "$COUNT"
+    exit 1
 fi
 
 exit 0
