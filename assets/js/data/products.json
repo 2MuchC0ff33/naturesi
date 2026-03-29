@@ -12,7 +12,7 @@
       "images": ["/assets/img/calmingtea.webp"],
       "inStock": true,
       "price": 14,
-      "options": [{"id":"product-calming-50g","label":"50g","price":14,"weight":"50g"},{"id":"product-calming-70g","label":"70g","price":22,"weight":"70g"}],
+      "options": [{"id":"product-calming-50g","label":"50g Pouch","price":14,"weight":"50g"},{"id":"product-calming-70g","label":"70g Cylinder","price":22,"weight":"70g"}],
       "ingredients": "Rosemary, Passionflower, Lavender, Chamomile and Rose Petals",
       "featured": false
     },
@@ -28,7 +28,7 @@
       "images": ["/assets/img/enchantedturmeric1.webp"],
       "inStock": true,
       "price": 14,
-      "options": [{"id":"product-turmeric-60g","label":"60g","price":14,"weight":"60g"},{"id":"product-turmeric-100g","label":"100g","price":22,"weight":"100g"}],
+      "options": [{"id":"product-turmeric-60g","label":"60g Pouch","price":14,"weight":"60g"},{"id":"product-turmeric-100g","label":"100g Cylinder","price":22,"weight":"100g"}],
       "ingredients": "Turmeric, Ginger Root, Rose Petals, Liquorice Root, Juniper Berries and Cardamom",
       "featured": false
     },
@@ -44,7 +44,7 @@
       "images": ["/assets/img/sleepingsoundly1.webp"],
       "inStock": true,
       "price": 14,
-      "options": [{"id":"product-sleeping-50g","label":"50g","price":14,"weight":"50g"},{"id":"product-sleeping-70g","label":"70g","price":22,"weight":"70g"}],
+      "options": [{"id":"product-sleeping-50g","label":"50g Pouch","price":14,"weight":"50g"},{"id":"product-sleeping-70g","label":"70g Cylinder","price":22,"weight":"70g"}],
       "ingredients": "Lemon Balm, Passionflower, Ginger Root and Tulsi",
       "featured": false
     },
@@ -60,7 +60,7 @@
       "images": ["/assets/img/hormoneharmony1.webp"],
       "inStock": true,
       "price": 14,
-      "options": [{"id":"product-hormone-50g","label":"50g","price":14,"weight":"50g"},{"id":"product-hormone-80g","label":"80g","price":22,"weight":"80g"}],
+      "options": [{"id":"product-hormone-50g","label":"50g Pouch","price":14,"weight":"50g"},{"id":"product-hormone-80g","label":"80g Cylinder","price":22,"weight":"80g"}],
       "ingredients": "Honeybush, Rose Petals, Chasteberry, Fennel, Lemon Verbena and Sage",
       "featured": false
     },
@@ -76,7 +76,7 @@
       "images": ["/assets/img/winterwellness1.webp"],
       "inStock": true,
       "price": 14,
-      "options": [{"id":"product-winter-50g","label":"50g","price":14,"weight":"50g"},{"id":"product-winter-70g","label":"70g","price":22,"weight":"70g"}],
+      "options": [{"id":"product-winter-50g","label":"50g Pouch","price":14,"weight":"50g"},{"id":"product-winter-70g","label":"70g Cylinder","price":22,"weight":"70g"}],
       "ingredients": "Ginger Root, Lemon Balm, Yarrow and Echinacea",
       "featured": false
     },
@@ -92,7 +92,7 @@
       "images": ["/assets/img/digestivebliss.webp"],
       "inStock": true,
       "price": 14,
-      "options": [{"id":"product-digestive-50g","label":"50g","price":14,"weight":"50g"}],
+      "options": [{"id":"product-digestive-50g","label":"50g Pouch","price":14,"weight":"50g"}],
       "ingredients": "Meadowsweet, Aniseed, Ginger Root and Peppermint",
       "featured": false
     },
@@ -108,7 +108,7 @@
       "images": ["/assets/img/botanicglow1.webp"],
       "inStock": true,
       "price": 14,
-      "options": [{"id":"product-botanic-50g","label":"50g","price":14,"weight":"50g"},{"id":"product-botanic-70g","label":"70g","price":22,"weight":"70g"}],
+      "options": [{"id":"product-botanic-50g","label":"50g Pouch","price":14,"weight":"50g"},{"id":"product-botanic-70g","label":"70g Cylinder","price":22,"weight":"70g"}],
       "ingredients": "Nettle, Spearmint, Linseed and Echinacea",
       "featured": false
     },
@@ -140,7 +140,7 @@
       "images": ["/assets/img/summerbreeze1.webp"],
       "inStock": true,
       "price": 14,
-      "options": [{"id":"product-summer-40g","label":"40g","price":14,"weight":"40g"},{"id":"product-summer-70g","label":"70g","price":22,"weight":"70g"}],
+      "options": [{"id":"product-summer-40g","label":"40g Pouch","price":14,"weight":"40g"},{"id":"product-summer-70g","label":"70g Cylinder","price":22,"weight":"70g"}],
       "ingredients": "Hibiscus, Peppermint and Lemon Balm",
       "featured": false
     },
@@ -156,7 +156,7 @@
       "images": ["/assets/img/naturesred.webp"],
       "inStock": true,
       "price": 14,
-      "options": [{"id":"product-red-60g","label":"60g","price":14,"weight":"60g"},{"id":"product-red-100g","label":"100g","price":22,"weight":"100g"}],
+      "options": [{"id":"product-red-60g","label":"60g Pouch","price":14,"weight":"60g"},{"id":"product-red-100g","label":"100g Cylinder","price":22,"weight":"100g"}],
       "ingredients": "Roobios, Honeybush and Cinnamon",
       "featured": false
     },
@@ -172,7 +172,7 @@
       "images": ["/assets/img/africanchai.webp"],
       "inStock": true,
       "price": 14,
-      "options": [{"id":"product-africanchai-70g","label":"70g","price":14,"weight":"70g"},{"id":"product-africanchai-100g","label":"100g Cylinder","price":22,"weight":"100g"}],
+      "options": [{"id":"product-africanchai-70g","label":"70g Pouch","price":14,"weight":"70g"},{"id":"product-africanchai-100g","label":"100g Cylinder","price":22,"weight":"100g"}],
       "ingredients": "Rooibos, Cardamon, Honeybush, Ginger, Cinnamon, Star Anise, Fennel, Cloves and Peppercorn",
       "featured": false
     },
@@ -204,7 +204,7 @@
       "images": ["/assets/img/lemongrassginger1.webp"],
       "inStock": true,
       "price": 14,
-      "options": [{"id":"product-lemonginger-40g","label":"40g","price":14,"weight":"40g"},{"id":"product-lemonginger-70g","label":"70g","price":22,"weight":"70g"}],
+      "options": [{"id":"product-lemonginger-40g","label":"40g Pouch","price":14,"weight":"40g"},{"id":"product-lemonginger-70g","label":"70g Cylinder","price":22,"weight":"70g"}],
       "ingredients": "Lemongrass and Ginger",
       "featured": false
     },
@@ -220,7 +220,7 @@
       "images": ["/assets/img/ceylonchai1.webp"],
       "inStock": true,
       "price": 14,
-      "options": [{"id":"product-ceylon-50g","label":"50g","price":14,"weight":"50g"},{"id":"product-ceylon-100g","label":"100g","price":22,"weight":"100g"}],
+      "options": [{"id":"product-ceylon-50g","label":"50g Pouch","price":14,"weight":"50g"},{"id":"product-ceylon-100g","label":"100g Cylinder","price":22,"weight":"100g"}],
       "ingredients": "Ceylon Black Tea, Ginger, Cardamon, Cinnamon, Star Anise, Cloves and Peppercorn",
       "featured": false
     },
@@ -236,7 +236,7 @@
       "images": ["/assets/img/frenchearlgrey1.webp"],
       "inStock": true,
       "price": 14,
-      "options": [{"id":"product-french-50g","label":"50g","price":14,"weight":"50g"},{"id":"product-french-70g","label":"70g","price":22,"weight":"70g"}],
+      "options": [{"id":"product-french-50g","label":"50g Pouch","price":14,"weight":"50g"},{"id":"product-french-70g","label":"70g Cylinder","price":22,"weight":"70g"}],
       "ingredients": "Black Tea, Bergamot, Rose Petals, Calendula Petals and Blue Cornflower Petals",
       "featured": false
     },
@@ -252,7 +252,7 @@
       "images": ["/assets/img/logo.webp"],
       "inStock": true,
       "price": 14,
-      "options": [{"id":"product-english-50g","label":"50g","price":14,"weight":"50g"},{"id":"product-english-80g","label":"80g","price":22,"weight":"80g"}],
+      "options": [{"id":"product-english-50g","label":"50g Pouch","price":14,"weight":"50g"},{"id":"product-english-80g","label":"80g Cylinder","price":22,"weight":"80g"}],
       "ingredients": "Black Tea",
       "featured": false
     },
@@ -268,7 +268,7 @@
       "images": ["/assets/img/logo.webp"],
       "inStock": true,
       "price": 14,
-      "options": [{"id":"product-lemonlift-50g","label":"50g","price":14,"weight":"50g"}],
+      "options": [{"id":"product-lemonlift-50g","label":"50g Pouch","price":14,"weight":"50g"}],
       "ingredients": "Black Tea, Lemon Myrtle, Lemon Peel, Lemon Verbena and Lemongrass",
       "featured": false
     },
@@ -284,7 +284,7 @@
       "images": ["/assets/img/rainforest1.webp"],
       "inStock": true,
       "price": 14,
-      "options": [{"id":"product-rainforest-50g","label":"50g","price":14,"weight":"50g"},{"id":"product-rainforest-80g","label":"80g","price":22,"weight":"80g"}],
+      "options": [{"id":"product-rainforest-50g","label":"50g Pouch","price":14,"weight":"50g"},{"id":"product-rainforest-80g","label":"80g Cylinder","price":22,"weight":"80g"}],
       "ingredients": "Black Tea and Lemon Myrtle",
       "featured": false
     },
@@ -300,7 +300,7 @@
       "images": ["/assets/img/energizer1.webp"],
       "inStock": true,
       "price": 14,
-      "options": [{"id":"product-energiser-50g","label":"50g","price":14,"weight":"50g"},{"id":"product-energiser-80g","label":"80g","price":22,"weight":"80g"}],
+      "options": [{"id":"product-energiser-50g","label":"50g Pouch","price":14,"weight":"50g"},{"id":"product-energiser-80g","label":"80g Cylinder","price":22,"weight":"80g"}],
       "ingredients": "Sencha Green Tea and Tulsi",
       "featured": false
     },
