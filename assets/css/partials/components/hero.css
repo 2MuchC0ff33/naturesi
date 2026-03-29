@@ -136,20 +136,6 @@
 /* -----------------------
    Hero logo placeholder styles
    ----------------------- */
-/* When using the logo as a temporary hero media, center it and constrain its height */
-
-.hero__media--logo img.hero__logo-img {
-  /* Keep logo centred within the full-bleed media. Constrain size for readability. */
-  position: relative;
-  z-index: 0;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: auto;
-  max-width: min(90%, var(--max-width, 1200px));
-  max-height: 200px;
-  object-fit: contain;
-}
 
 @media (max-width: 640px) {
   .hero__media--logo {
