@@ -266,6 +266,9 @@
   <form action="/add-to-cart" method="post" class="product-options add-to-cart" data-product="product-digestive" data-sku="product-digestive">
     <fieldset>
       <legend>Product Options</legend>
+      <div class="product-options-list" role="radiogroup" aria-label="Select size"><label class="u-d-flex u-items-center u-gap-2"><input type="radio" name="product-option-product-digestive" value="product-digestive-50g" checked data-price="14">50g Pouch ($14)</label>
+<label class="u-d-flex u-items-center u-gap-2"><input type="radio" name="product-option-product-digestive" value="product-digestive-70g" data-price="22">70g Cylinder ($22)</label>
+      </div>
       <div class="quantity-selector">
         <label for="qty-product-digestive">Quantity:</label>
         <select id="qty-product-digestive" name="quantity" min="1" max="10" required>
@@ -350,9 +353,9 @@
     </figure>
     <h3 itemprop="name">Natures Detox</h3>
     <div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-      <link itemprop="availability" href="https://schema.org/OutOfStock">
+      <link itemprop="availability" href="https://schema.org/InStock">
       <meta itemprop="priceCurrency" content="AUD">
-      <p><span itemprop="itemCondition">Out of Stock</span></p>
+      <p>&#10003; <span itemprop="itemCondition">In Stock</span></p>
     </div>
   </header>
   <section class="product-description" itemprop="description">
@@ -361,6 +364,8 @@
   <form action="/add-to-cart" method="post" class="product-options add-to-cart" data-product="product-detox" data-sku="product-detox">
     <fieldset>
       <legend>Product Options</legend>
+      <div class="product-options-list" role="radiogroup" aria-label="Select size"><label class="u-d-flex u-items-center u-gap-2"><input type="radio" name="product-option-product-detox" value="product-detox-50g" checked data-price="14">50g Pouch ($14)</label>
+      </div>
       <div class="quantity-selector">
         <label for="qty-product-detox">Quantity:</label>
         <select id="qty-product-detox" name="quantity" min="1" max="10" required>
@@ -376,7 +381,7 @@
   </form>
   <section class="product-ingredients" itemprop="nutrition" itemscope itemtype="https://schema.org/NutritionInformation">
     <h4>Ingredients</h4>
-    <p itemprop="ingredients">Dandelion Root, Tulsi, Lemon Peel, Dandelion Leaf, Lemongrass and Lemongrass</p>
+    <p itemprop="ingredients">Dandelion Root, Tulsi, Lemon Peel, Dandelion Leaf and Lemongrass</p>
     <p><small>Sourced from multiple origins</small></p>
   </section>
   <footer class="product-disclaimer">

@@ -476,6 +476,8 @@
   <form action="/add-to-cart" method="post" class="product-options add-to-cart" data-product="product-lemonlift" data-sku="product-lemonlift">
     <fieldset>
       <legend>Product Options</legend>
+      <div class="product-options-list" role="radiogroup" aria-label="Select size"><label class="u-d-flex u-items-center u-gap-2"><input type="radio" name="product-option-product-lemonlift" value="product-lemonlift-50g" checked data-price="14">50g Pouch ($14)</label>
+      </div>
       <div class="quantity-selector">
         <label for="qty-product-lemonlift">Quantity:</label>
         <select id="qty-product-lemonlift" name="quantity" min="1" max="10" required>
@@ -633,6 +635,17 @@
       <button type="submit">Add to Cart</button>
     </fieldset>
   </form>
+  <section class="product-ingredients" itemprop="nutrition" itemscope itemtype="https://schema.org/NutritionInformation">
+    <h4>Ingredients</h4>
+    <p itemprop="ingredients">Sencha Green Tea, Ginger Root, Orange Peel, Spearmint and Licorice Root</p>
+    <p><small>Sourced from multiple origins</small></p>
+  </section>
+  <footer class="product-disclaimer">
+    <details>
+      <summary><small>Important Disclaimer</small></summary>
+      <p itemprop="disambiguatingDescription"><small>This product is not intended to diagnose, treat, cure, or prevent any disease. Always consult with a healthcare provider before starting any new supplement or wellness regimen.</small></p>
+    </details>
+  </footer>
 </article>
 <article id="product-summer" class="product product-card" itemprop="itemListElement" itemscope itemtype="https://schema.org/Product" data-image="/assets/img/summerbreeze1.webp" data-sku="product-summer">
   <header>

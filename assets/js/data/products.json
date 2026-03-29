@@ -92,7 +92,7 @@
       "images": ["/assets/img/digestivebliss.webp"],
       "inStock": true,
       "price": 14,
-      "options": [{"id":"product-digestive-50g","label":"50g Pouch","price":14,"weight":"50g"}],
+      "options": [{"id":"product-digestive-50g","label":"50g Pouch","price":14,"weight":"50g"},{"id":"product-digestive-70g","label":"70g Cylinder","price":22,"weight":"70g"}],
       "ingredients": "Meadowsweet, Aniseed, Ginger Root and Peppermint",
       "featured": false
     },
@@ -122,9 +122,9 @@
       "image": "/assets/img/logo.webp",
       "imageAlt": "Natures Detox",
       "images": ["/assets/img/logo.webp"],
-      "inStock": false,
+      "inStock": true,
       "price": 14,
-      "options": [],
+      "options": [{"id":"product-detox-50g","label":"50g Pouch","price":14,"weight":"50g"}],
       "ingredients": "Dandelion Root, Tulsi, Lemon Peel, Dandelion Leaf and Lemongrass",
       "featured": false
     },
