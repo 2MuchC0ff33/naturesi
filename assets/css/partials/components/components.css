@@ -6,7 +6,7 @@ Accordion toggles, social icon variants and other small repeated components.
 
 .site-footer nav[aria-label='Social media links'] ul {
   display: flex;
-  gap: var(--space-xs);
+  gap: var(--space-sm);
   align-items: center;
 }
 
@@ -18,25 +18,27 @@ Accordion toggles, social icon variants and other small repeated components.
 }
 
 .site-footer nav[aria-label='Social media links'] a.facebook {
-  color: #1877f2;
+  color: #fff;
+  background: #1877f2;
 }
 
 .site-footer nav[aria-label='Social media links'] a.facebook:focus-visible,
 .site-footer nav[aria-label='Social media links'] a.facebook:hover {
-  background: rgba(24, 119, 242, 0.12);
+  background: #1557b0;
   color: #fff;
-  outline-color: rgba(24, 119, 242, 0.36);
+  outline-color: rgba(24, 119, 242, 0.5);
 }
 
 .site-footer nav[aria-label='Social media links'] a.instagram {
-  color: #e4405f;
+  color: #fff;
+  background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #bc1888 75%);
 }
 
 .site-footer nav[aria-label='Social media links'] a.instagram:focus-visible,
 .site-footer nav[aria-label='Social media links'] a.instagram:hover {
-  background: linear-gradient(45deg, rgba(228, 64, 95, 0.12), rgba(252, 175, 69, 0.12));
+  background: linear-gradient(135deg, #d8801f 0%, #cc5a2f 25%, #9e1470 75%);
   color: #fff;
-  outline-color: rgba(228, 64, 95, 0.36);
+  outline-color: rgba(228, 64, 95, 0.5);
 }
 
 /* Accordion presentation moved to `partials/components/accordions.css` to avoid duplication. */

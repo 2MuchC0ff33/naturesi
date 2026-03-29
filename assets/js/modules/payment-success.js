@@ -4,7 +4,6 @@
 try {
   if (typeof localStorage !== 'undefined') {
     localStorage.removeItem('naturesi_cart');
-    localStorage.removeItem('naturesi-cart');
   }
 } catch (e) {
   // Non-fatal: log for diagnostics

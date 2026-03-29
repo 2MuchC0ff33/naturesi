@@ -1,0 +1,29 @@
+        <section class="quick-links-wrapper">
+          <h4><button type="button" class="accordion-toggle btn btn--ghost" aria-expanded="false"
+              aria-controls="quick-links-panel" data-controls="quick-links-panel">Quick Links</button></h4>
+          <nav id="quick-links-panel" class="links-grid" aria-label="Quick links" aria-hidden="true" hidden>
+            <ul>
+              <li>
+                <a href="." itemprop="url">Home</a>
+              </li>
+              <li>
+                <a href="pages/about.html" itemprop="url">About</a>
+              </li>
+              <li>
+                <a href="pages/store.html" itemprop="url">Store</a>
+              </li>
+              <li>
+                <a href="pages/stockists.html" itemprop="url">Stockists</a>
+              </li>
+              <li>
+                <a href="pages/contact.html" itemprop="url">Contact & Support</a>
+              </li>
+              <li>
+                <a href="pages/terms.html" itemprop="url">Terms & Conditions</a>
+              </li>
+              <li>
+                <a href="pages/social.html" itemprop="url">Social</a>
+              </li>
+            </ul>
+          </nav>
+        </section>

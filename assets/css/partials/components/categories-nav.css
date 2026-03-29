@@ -1,7 +1,7 @@
 /* Categories nav component: single-row desktop, horizontal-scroll mobile */
 .site-header__categories {
   border-top: 1px solid var(--color-border, #e6e6e6);
-  background: var(--color-light-background, #fff);
+  background: #346967;
 }
 
 .site-header__categories-list {
@@ -22,22 +22,24 @@
 }
 
 .site-header__categories-link {
-  display: inline-block;
-  padding: 4px 8px;
-  color: var(--color-text, #222);
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.6rem;
+  color: #fff;
   text-decoration: none;
-  font-size: clamp(0.85rem, 0.9vw, 1rem);
-  line-height: 1.2;
+  font-size: clamp(0.75rem, 0.8vw, 0.875rem);
   max-width: 12rem;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  font-weight: 700;
+  text-align: center;
 }
 
 /* Focus & accessible outline */
 .site-header__categories-link:focus,
 .site-header__categories-link:focus-visible {
-  outline: 3px solid var(--color-accent, #4CAF50);
+  outline: 3px solid rgba(255, 255, 255, 0.5);
   outline-offset: 3px;
   border-radius: 4px;
 }
@@ -45,7 +47,7 @@
 /* Desktop / Tablet: prevent wrapping and try to keep all items on a single row */
 @media (min-width: 900px) {
   .site-header__categories-list {
-    justify-content: flex-start;
+    justify-content: center;
     overflow: visible;
   }
 }

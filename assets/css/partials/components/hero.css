@@ -1,6 +1,11 @@
 /* components/hero.css
    Purpose: Homepage hero section styles (mobile-first)
-*/
+ */
+
+.hero-spacer {
+  height: 12px;
+  background: color-mix(in srgb, var(--color-accent) 18%, black 6%);
+}
 
 .hero {
   display: block;
@@ -8,75 +13,26 @@
   overflow: visible;
   /* ensure hero doesn't clip positioned media */
   /* Added for absolute positioning of content on desktop */
-  border-radius: 10px;
   /* Removed min-height to allow auto-sizing based on video aspect ratio */
 }
 
 .hero__media {
-  position: static;
-  /* Keep media in flow so hero's height is determined by media */
-  z-index: 0;
-  overflow: visible;
   width: 100%;
-
-  /* Center media visually and allow video to size itself */
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  overflow: hidden;
+  border-radius: inherit;
+  /* No position:relative — avoids stacking context issues */
 }
 
-/* Make hero media full-width inside .container */
-.container .hero__media {
-  width: 100%;
-  margin-inline-start: 0;
-  margin-inline-end: 0;
-  padding-inline: 0;
-  box-sizing: border-box;
-}
-
-/* Ensure the video element is visible and contributes to layout */
+/* Video fills the hero media area with object-fit contain */
 .hero__media>video,
 .hero__media video {
   display: block;
-  width: auto;
-  max-width: 100%;
+  width: 100%;
   height: auto;
   aspect-ratio: 16 / 9;
-  /* keep aspect ratio */
-  object-fit: contain;
-  /* preserve full frame */
-  max-height: calc(100vh - var(--site-header-height, 96px));
+  object-fit: contain !important;
+  object-position: center center !important;
   margin: 0 auto;
-  /* center horizontally */
-  align-self: center;
-  /* ensure vertical centring in flex container */
-  flex: 0 1 auto;
-  /* avoid unintended stretching */
-}
-
-/* Responsive caps to keep the hero balanced across viewports */
-@media (max-width: 640px) {
-
-  .hero__media>video,
-  .hero__media video {
-    max-height: 50vh;
-  }
-}
-
-@media (min-width: 641px) and (max-width: 899px) {
-
-  .hero__media>video,
-  .hero__media video {
-    max-height: 60vh;
-  }
-}
-
-@media (min-width: 900px) {
-
-  .hero__media>video,
-  .hero__media video {
-    max-height: 85vh;
-  }
 }
 
 /* Developer helper — enable by adding `debug-video-outline` class to <body> for visual debugging */
@@ -177,43 +133,9 @@
   }
 }
 
-/* Scoped override: make hero full-bleed when placed inside a centered .container
-   Keeps inner .hero__content constrained to the site max-width for readable measure */
-.container .hero {
-  width: 100vw;
-  /* span full viewport width */
-  margin-inline-start: calc(50% - 50vw);
-  margin-inline-end: calc(50% - 50vw);
-  padding-inline: 0;
-  border-radius: 0;
-  /* flush edges for full-bleed background; adjust if rounded corners desired */
-  box-sizing: border-box;
-}
-
-/* Optional: mitigate tiny horizontal scrollbar caused by 100vw including scrollbar width */
-@supports (width: calc(100vw - (100vw - 100%))) {
-  .container .hero {
-    width: calc(100vw - (100vw - 100%));
-  }
-}
-
 /* -----------------------
    Hero logo placeholder styles
    ----------------------- */
-/* When using the logo as a temporary hero media, center it and constrain its height */
-
-.hero__media--logo img.hero__logo-img {
-  /* Keep logo centred within the full-bleed media. Constrain size for readability. */
-  position: relative;
-  z-index: 0;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: auto;
-  max-width: min(90%, var(--max-width, 1200px));
-  max-height: 200px;
-  object-fit: contain;
-}
 
 @media (max-width: 640px) {
   .hero__media--logo {

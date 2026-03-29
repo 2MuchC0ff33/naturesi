@@ -4,6 +4,20 @@
   "type": "module",
   "description": "Nature's Infusions static e-commerce site",
   "author": "2MuchC0ff33",
-  "devDependencies": {},
-  "scripts": {}
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.1.0",
+    "prettier": "^3.8.1"
+  },
+  "scripts": {
+    "test": "scripts/test-all.sh",
+    "test:smoke": "scripts/test-all.sh test/smoke",
+    "test:unit": "scripts/test-all.sh test/unit",
+    "lint": "scripts/lint-json.sh && scripts/lint-shellcheck.sh && scripts/lint-js.sh && scripts/lint-css.sh",
+    "format:js": "scripts/format-js.sh",
+    "format:css": "scripts/format-css.sh",
+    "format:html": "scripts/format-html.sh",
+    "format": "scripts/format-js.sh && scripts/format-css.sh && scripts/format-html.sh",
+    "validate": "scripts/lint-json.sh && scripts/lint-shellcheck.sh && scripts/test-all.sh"
+  }
 }

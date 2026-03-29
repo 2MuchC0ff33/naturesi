@@ -5,11 +5,9 @@ Core header bar, logo treatment and colour gradient live here.
 #site-header {
   /* header height is sourced from settings.css (default) and may be
      overridden in responsive contexts where appropriate. */
-  background: linear-gradient(180deg,
-      color-mix(in srgb, var(--color-accent) 72%, white 28%),
-      color-mix(in srgb, var(--color-accent) 60%, black 40%));
-  color: white;
-  border-bottom: 1px solid color-mix(in srgb, var(--color-accent) 20%, black);
+  background: #fff;
+  color: #1a1a1a;
+  border-bottom: 1px solid #e0e0e0;
   position: relative;
   /* Positioning context for skip-link to prevent overlap with nav bar */
 }
@@ -39,8 +37,8 @@ Core header bar, logo treatment and colour gradient live here.
   gap: var(--space-xxs);
   align-items: center;
   padding: 0.26rem var(--space-sm);
-  border-bottom: 1px solid var(--color-border);
-  background: color-mix(in srgb, var(--color-accent) 4%, transparent);
+  border-bottom: 1px solid #e8e8e8;
+  background: #fff;
   font-size: 0.9rem;
   line-height: 1.02;
   min-height: 44px;
@@ -67,23 +65,44 @@ Core header bar, logo treatment and colour gradient live here.
   padding: 0.02rem 0.35rem;
   border-radius: 0.4rem;
   background: rgba(255, 255, 255, 0.95);
-  color: color-mix(in srgb, var(--color-accent) 70%, black);
+  color: #1a1a1a;
   text-decoration: none;
 }
 
 .site-nav .logo img,
 .site-nav .all-logo img {
-  /* larger baseline for improved brand visibility on phones */
-  max-height: 48px;
+  max-height: 96px;
   width: auto;
   height: auto;
 }
 
-@media (min-width: 640px) {
+.site-nav .nav-left .site-tagline {
+  display: block;
+  font-style: italic;
+  font-size: 0.6rem;
+  font-weight: 500;
+  color: #346967;
+  line-height: 1.4;
+  white-space: normal;
+  letter-spacing: 0.01em;
+}
 
+@media (max-width: 639px) {
+  .site-nav .nav-left {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.15rem;
+  }
+}
+
+@media (min-width: 640px) {
   .site-nav .logo img,
   .site-nav .all-logo img {
-    max-height: 56px;
+    max-height: 120px;
+  }
+
+  .site-nav .nav-left .site-tagline {
+    font-size: 0.65rem;
   }
 }
 
@@ -91,7 +110,7 @@ Core header bar, logo treatment and colour gradient live here.
 
   .site-nav .logo img,
   .site-nav .all-logo img {
-    max-height: 64px;
+    max-height: 120px;
   }
 }
 
@@ -99,7 +118,7 @@ Core header bar, logo treatment and colour gradient live here.
 
   .site-nav .logo img,
   .site-nav .all-logo img {
-    max-height: 72px;
+    max-height: 140px;
   }
 }
 
@@ -198,7 +217,7 @@ Core header bar, logo treatment and colour gradient live here.
   padding: 0.08rem 0.5rem;
   border-radius: 0.5rem;
   background: rgba(255, 255, 255, 0.9);
-  color: color-mix(in srgb, var(--color-accent) 70%, black);
+  color: #1a1a1a;
   text-decoration: none;
 }
 
@@ -225,7 +244,7 @@ Core header bar, logo treatment and colour gradient live here.
   }
 
   .site-nav .logo img {
-    max-height: 56px;
+    max-height: 140px;
   }
 }
 
@@ -546,7 +565,7 @@ navigation elements in a single compact row while maintaining accessibility.
 
   /* Logo: reduce size and constrain width */
   .site-nav .logo img {
-    max-height: 36px;
+    max-height: 72px;
     width: auto;
     height: auto;
   }

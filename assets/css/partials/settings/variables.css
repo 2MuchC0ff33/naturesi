@@ -61,4 +61,20 @@ partials can reference variables safely.
   --elevation-1: 0 1px 3px rgba(0, 0, 0, 0.04);
   --elevation-2: 0 6px 12px rgba(0, 0, 0, 0.06);
 
+  /* Semantic color aliases (used by alerts, toasts, popups, etc.) */
+  --color-error-bg: rgba(244, 67, 54, 0.08);
+  --color-error-border: #f44336;
+  --color-success-border: #4caf50;
+  --color-focus: rgba(52, 105, 103, 0.4);
+  --color-muted: #6b7280;
+  --color-primary: #346967;
+  --color-secondary: #5a8a88;
+
+  /* Short aliases (used by components) */
+  --surface: var(--color-surface);
+  --text: var(--color-text);
+
+  /* Additional radius tokens */
+  --radius-pill: 9999px;
+
 }

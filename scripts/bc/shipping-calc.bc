@@ -1,0 +1,16 @@
+/* scripts/bc/shipping-calc.bc — Compute shipping with GST */
+/* Usage: bc -q -f scripts/bc/shipping-calc.bc */
+/* Then set: base=X; s(base); prints base*1.10 */
+/* SELF-TEST: set base=13; s(base) -> 14.30 */
+/* SELF-TEST: set base=15; s(base) -> 16.50 */
+
+scale = 2
+
+define s(b) {
+    return b * 1.10
+}
+
+/* Run self-test if no argument passed */
+if (1 == 1) {
+    s(13)
+}

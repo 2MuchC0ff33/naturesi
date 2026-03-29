@@ -1,0 +1,15 @@
+/* scripts/bc/price-breakdown.bc — Full price breakdown */
+/* Usage: bc -q -f scripts/bc/price-breakdown.bc */
+/* Then: breakdown(subtotal, shipping) prints grand total */
+/* SELF-TEST: breakdown(36, 13) -> 53.90 */
+
+scale = 2
+
+define breakdown(sub, ship) {
+    sg = sub * 1.10
+    shg = ship * 1.10
+    return sg + shg
+}
+
+# Self-test: print breakdown(36, 13)
+breakdown(36, 13)

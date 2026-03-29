@@ -1,0 +1,6 @@
+label|href|class
+Home|.|nav-link
+About|pages/about.html|nav-link
+Store|pages/store.html|nav-link
+Stockists|pages/stockists.html|nav-link
+Contact & Support|pages/contact.html|nav-link
