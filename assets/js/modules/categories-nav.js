@@ -1,7 +1,7 @@
 // categories-nav.js
 // Small client-side DOM builder for the header categories nav.
-const CATEGORIES_JSON = '/assets/js/data/categories.json';
-const DEFAULT_CATEGORIES = [
+// Categories are inlined from categories.json — no fetch needed.
+const CATEGORIES = [
   { label: 'Show All', href: '/pages/store.html' },
   { label: 'Wellness Blends', href: '/pages/store/wellness-blends.html' },
   { label: 'Artisan Blends', href: '/pages/store/artisan-blends.html' },
@@ -98,50 +98,9 @@ function attachPrefetchHandlers(container) {
   });
 }
 
-function tryFetchCategories() {
-  return fetch(CATEGORIES_JSON, { cache: 'no-store' })
-    .then(resp => {
-      if (!resp.ok) throw new Error('Network response not ok');
-      return resp.json();
-    })
-    .then(data => {
-      // Expecting an array of categories with label and href or slug
-      // Accept two shapes: either the JSON is an array, or an object with `categories` array.
-      const arr = Array.isArray(data) ? data : (Array.isArray(data.categories) ? data.categories : null);
-      if (arr?.length) return arr.map(item => {
-        const label = item.label || item.name || item.title || item;
-        // prefer explicit href or slug; otherwise derive a safe filename from slug or label
-        let href = item.href || null;
-        const slug = item.slug || item.id || null;
-        if (!href) {
-          if (slug) {
-            href = `/pages/store/${String(slug).toLowerCase()}.html`;
-          } else {
-            // derive slug from label: lowercase, remove apostrophes, replace non-word chars with hyphen
-            const derived = String(label).toLowerCase().replace(/'/g, '').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-            href = `/pages/store/${derived}.html`;
-          }
-        }
-        return { label, href };
-      });
-      throw new Error('Unexpected data');
-    });
-}
-
 document.addEventListener('DOMContentLoaded', () => {
   const list = document.querySelector('.site-header__categories-list');
   if (!list) return;
-
-  // Populate with default immediately for perceived performance
-  buildCategoriesList(list, DEFAULT_CATEGORIES);
+  buildCategoriesList(list, CATEGORIES);
   list.removeAttribute('aria-hidden');
-
-  // Try load canonical categories.json and replace list if successful
-  tryFetchCategories()
-    .then(items => {
-      if (items?.length) buildCategoriesList(list, items);
-    })
-    .catch(() => {
-      // keep defaults on failure
-    });
 });

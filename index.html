@@ -14,7 +14,6 @@
     content="organic tea,herbal infusion,naturopath,Perth,wellness,detox,chamomile,peppermint,turmeric">
   <meta name="author" content="Nature's Infusions">
   <meta name="copyright" content="© 2025 Nature's Infusions">
-  <meta name="generator" content="Ultra-Simple StaticEStore Framework">
   <base href="/">
   <meta name="robots" content="index,follow,max-image-preview:large">
   <meta name="referrer" content="strict-origin-when-cross-origin">
@@ -42,10 +41,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="Nature's Infusions">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="format-detection" content="telephone=yes,email=yes,address=yes">
-  <meta name="full-screen" content="yes">
-  <meta name="browsermode" content="application">
-  <meta name="screen-orientation" content="portrait-primary">
+
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#4CAF50">
@@ -65,7 +61,7 @@
   <link rel="apple-touch-icon" href="/apple-icon-180x180.png" sizes="180x180">
   <link rel="apple-touch-startup-image" href="/launch-640x1136.png"
     media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)">
-  <link rel="manifest" href="/manifest.json" crossorigin="use-credentials">
+  <link rel="manifest" href="/manifest.json" crossorigin="anonymous">
   <link rel="dns-prefetch" href="//www.naturesinfusions.com.au">
   <link rel="preload" href="/assets/css/main.css" as="style">
   <link rel="preload" href="/assets/video/poster.webp" as="image">
@@ -75,7 +71,7 @@
   <meta http-equiv="Permissions-Policy" content="geolocation=(),microphone=(),camera=()">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta http-equiv="Strict-Transport-Security" content="max-age=63072000; includeSubDomains; preload">
-  <meta http-equiv="Expect-CT" content="max-age=86400, enforce">
+
   <meta name="google-site-verification" content="v_tU6K8nwyC7GsB8lB40ylqHmpu9V_TDoARsAYuxY_U">
   <meta name="msvalidate.01" content="B279BB1A64D31F7EC1A04AFAEFE05314">
   <meta name="yandex-verification" content="7847a6427bfa1388">
@@ -100,6 +96,7 @@
       <div class="nav-left">
         <a class="logo" href="/" aria-label="Nature's Infusions home"><img src="/assets/img/logo.svg"
             alt="Nature's Infusions logo" class="u-img-cover"></a>
+          <span class="site-tagline">Premium Teas for Daily Wellbeing</span>
       </div>
       <div id="primary-nav-menu" class="nav-center" data-primary-nav="">
         <div class="nav-center-flex center-row">
@@ -108,22 +105,18 @@
             <label for="site-search" class="visually-hidden">Search Nature's Infusions</label> <input id="site-search"
               name="q" type="search" placeholder="Search Nature's Infusions" class="search-box"
               aria-label="Search site">
-            <button class="search-icon btn btn--ghost" aria-label="Submit search"><span
-                class="sr-only">Search</span></button>
+            <button class="search-icon btn btn--ghost" aria-label="Submit search" type="submit">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+                <circle cx="10" cy="10" r="6" stroke="currentColor" stroke-width="2"/>
+                <line x1="14.5" y1="14.5" x2="20" y2="20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </button>
           </form>
         </div>
       </div>
       <div class="nav-right" data-header-right="">
         <a class="cart-option" href="/pages/cart.html" aria-label="Cart">
-          <div class="cart-logo" aria-hidden="true">
-            <svg width="20" height="18" viewbox="0 0 24 24" fill="none" aria-hidden="true" tabindex="-1">
-              <rect x="3" y="4" width="14" height="10" rx="1" stroke="currentColor" stroke-width="1.25" fill="none">
-              </rect>
-              <path d="M7 4 6 2H3" stroke="currentColor" stroke-width="1.25" fill="none"></path>
-              <circle cx="8.5" cy="17.5" r="1.25" fill="currentColor"></circle>
-              <circle cx="17.5" cy="17.5" r="1.25" fill="currentColor"></circle>
-            </svg>
-          </div><span class="cart-text">Cart</span> <output class="cart-count" name="cart-count"
+          <img src="/assets/img/cart.webp" alt="" width="24" height="24" aria-hidden="true"><output class="cart-count" name="cart-count"
             aria-live="polite">0</output>
         </a>
       </div>
@@ -137,184 +130,126 @@
       </ul>
     </nav>
   </header>
+  <section id="home" class="template-home" itemscope itemtype="https://schema.org/Store">
+    <header id="hero" class="hero">
+      <div class="hero__media">
+        <video id="hero-video" muted playsinline data-autoplay-loop="true"
+          poster="/assets/video/poster.webp?v=4" preload="auto"
+          style="object-fit:contain;object-position:center center"
+          aria-label="Hero video showcasing Nature's Infusions teas and wellness products">
+          <source src="/assets/video/production.mp4" type="video/mp4">
+          <track kind="captions" src="/assets/video/captions.vtt" srclang="en" label="English captions" default="">
+        </video>
+      </div>
+    </header>
+  </section>
+  <section id="about-home" aria-labelledby="about-home-heading">
+    <h2 id="about-home-heading">Welcome to Nature's Infusions</h2>
+    <p>A small-batch, Perth-based business formulating organic teas and herbal remedies for everyday wellness. Our blends are inspired by naturopathic principles — supporting balance and vitality the natural way.</p>
+  </section>
   <main id="main-content" tabindex="-1" class="prose container">
-    <section id="home" itemscope itemtype="https://schema.org/Store">
-      <header id="hero" class="hero">
-        <div class="hero__media">
-          <video id="hero-video" data-autoplay-loop="true" autoplay="" muted controls=""
-            poster="/assets/video/poster.webp" preload="auto" width="800" height="450"
-            aria-label="Hero video showcasing Nature's Infusions teas and wellness products">
-            <source src="/assets/video/production.webm" type="video/webm">
-            <track kind="captions" src="/assets/video/captions.vtt" srclang="en" label="English captions" default="">
-          </video>
-        </div>
-      </header>
       <section id="featured-products" aria-labelledby="featured-heading" itemscope
         itemtype="https://schema.org/ItemList">
         <header>
           <h2 id="featured-heading">Featured Products</h2>
           <p id="product-description">Discover our most popular organic tea blends and herbal remedies</p>
         </header>
-        <div id="product-grid-featured" class="product-grid" aria-live="polite">
-          <article class="product product-card" data-featured="true" tabindex="0" itemprop="itemListElement" itemscope
-            itemtype="https://schema.org/Product">
-            <figure class="product-card__media">
+        <div id="featured-grid" role="list">
+          <a href="/pages/store/wellness-blends.html" class="product-card" role="listitem">
+            <div class="product-card__media">
               <picture>
-                <source srcset="assets/img/enchantedturmeric2.webp" type="image/webp"><img
-                  src="assets/img/enchantedturmeric2.webp" alt="Enchanted Turmeric Tea Package" loading="lazy"
-                  width="300" height="300" itemprop="image" class="u-img-cover">
+                <source srcset="/assets/img/calmingtea.webp" type="image/webp">
+                <img src="/assets/img/calmingtea.webp" alt="Calming Garden" width="300" height="300" loading="lazy">
               </picture>
-              <figcaption>
-                <h3 itemprop="name">Enchanted Turmeric Tea</h3>
-                <div class="product-badges">
-                  <span class="badge badge--popular">Popular</span> <span class="sr-only">Popular</span> <span
-                    class="badge badge--origin">Australian made</span> <span class="sr-only">Australian made</span>
-                </div><span class="product-card__badge">Featured</span>
-                <details>
-                  <summary>
-                    Product Details
-                  </summary>
-                  <p itemprop="description">A soothing blend of turmeric and botanicals, traditionally enjoyed to
-                    support comfort and ease of movement.</p>
-                </details>
-              </figcaption>
-            </figure>
-            <form class="add-to-cart">
-              <fieldset>
-                <legend>Options</legend><label>Size: <select name="size">
-                    <option value="60g">
-                      60g ($14.00)
-                    </option>
-                    <option value="100g">
-                      100g ($22.00)
-                    </option>
-                  </select></label> <label>Quantity: <input type="number" name="quantity" min="1" max="10"
-                    value="1"></label>
-              </fieldset><button class="btn-add-to-cart">Add to Cart</button>
-            </form>
-          </article>
-          <article class="product product-card" data-featured="true" tabindex="0" itemprop="itemListElement" itemscope
-            itemtype="https://schema.org/Product">
-            <figure class="product-card__media">
+            </div>
+            <h3>Calming Garden</h3>
+          </a>
+          <a href="/pages/store/wellness-blends.html" class="product-card" role="listitem">
+            <div class="product-card__media">
               <picture>
-                <source srcset="assets/img/calmingtea.webp" type="image/webp"><img src="assets/img/calmingtea.webp"
-                  alt="Calming Garden Tea" loading="lazy" width="300" height="300" itemprop="image" class="u-img-cover">
+                <source srcset="/assets/img/enchantedturmeric1.webp" type="image/webp">
+                <img src="/assets/img/enchantedturmeric1.webp" alt="Enchanted Turmeric" width="300" height="300" loading="lazy">
               </picture>
-              <figcaption>
-                <h3 itemprop="name">Calming Garden Tea</h3>
-                <div class="product-badges">
-                  <span class="badge badge--popular">Popular</span> <span class="sr-only">Popular</span> <span
-                    class="badge badge--origin">Australian made</span> <span class="sr-only">Australian made</span>
-                </div><span class="product-card__badge">Featured</span>
-                <details>
-                  <summary>
-                    Product Details
-                  </summary>
-                  <p itemprop="description">A soothing blend of calming herbs, featuring rosemary, lavender and
-                    passionflower to promote relaxation and reduce stress.</p>
-                </details>
-              </figcaption>
-            </figure>
-            <form class="add-to-cart">
-              <fieldset>
-                <legend>Options</legend><label>Size: <select name="size">
-                    <option value="50g" data-price="14.00">
-                      50g ($14.00)
-                    </option>
-                    <option value="100g" data-price="22.00">
-                      100g ($22.00)
-                    </option>
-                  </select></label> <label>Quantity: <input type="number" name="quantity" min="1" max="10"
-                    value="1"></label>
-              </fieldset><button class="btn-add-to-cart">Add to Cart</button>
-            </form>
-          </article>
-          <article class="product product-card" data-featured="true" tabindex="0" itemprop="itemListElement" itemscope
-            itemtype="https://schema.org/Product">
-            <figure class="product-card__media">
+            </div>
+            <h3>Enchanted Turmeric</h3>
+          </a>
+          <a href="/pages/store/wellness-blends.html" class="product-card" role="listitem">
+            <div class="product-card__media">
               <picture>
-                <source srcset="/assets/img/sleepingsoundly1.webp" type="image/webp"><img
-                  src="/assets/img/sleepingsoundly1.webp" alt="Sleeping Soundly Tea Package" loading="lazy" width="300"
-                  height="300" itemprop="image" class="u-img-cover">
+                <source srcset="/assets/img/sleepingsoundly1.webp" type="image/webp">
+                <img src="/assets/img/sleepingsoundly1.webp" alt="Sleeping Soundly" width="300" height="300" loading="lazy">
               </picture>
-              <figcaption>
-                <h3 itemprop="name">Sleeping Soundly Tea</h3>
-                <div class="product-badges">
-                  <span class="badge badge--popular">Popular</span> <span class="sr-only">Popular</span> <span
-                    class="badge badge--origin">Australian made</span> <span class="sr-only">Australian made</span>
-                </div><span class="product-card__badge">Featured</span>
-                <details>
-                  <summary>
-                    Product Details
-                  </summary>
-                  <p itemprop="description">An evening blend of lemon balm, passionflower, ginger root, and tulsi,
-                    thoughtfully created to support a peaceful transition into rest. With its gentle herbal aroma and
-                    cosy warmth, this tea is a comforting choice for relaxing the mind and preparing for a restful
-                    night.</p>
-                </details>
-              </figcaption>
-            </figure>
-            <form class="add-to-cart">
-              <fieldset>
-                <legend>Options</legend><label>Size: <select name="size">
-                    <option value="50g" data-price="14.00">
-                      50g ($14.00)
-                    </option>
-                    <option value="80g" data-price="22.00">
-                      80g ($22.00)
-                    </option>
-                  </select></label> <label>Quantity: <input type="number" name="quantity" min="1" max="10"
-                    value="1"></label>
-              </fieldset><button class="btn-add-to-cart">Add to Cart</button>
-            </form>
-          </article>
+            </div>
+            <h3>Sleeping Soundly</h3>
+          </a>
+          <a href="/pages/store/green-tea.html" class="product-card" role="listitem">
+            <div class="product-card__media">
+              <picture>
+                <source srcset="/assets/img/energizer1.webp" type="image/webp">
+                <img src="/assets/img/energizer1.webp" alt="Energiser" width="300" height="300" loading="lazy">
+              </picture>
+            </div>
+            <h3>Energiser</h3>
+          </a>
         </div>
         <footer id="view-all">
-          <a href="pages/store.html" itemprop="url">View Complete Product Catalog - Browse All Organic Teas & Wellness
-            Blends</a>
+          <p><a href="pages/store.html" itemprop="url">View Complete Product Catalog - Browse All Organic Teas & Wellness
+              Blends</a></p>
         </footer>
       </section>
       <section id="reviews" aria-labelledby="reviews-heading">
         <h2 id="reviews-heading">What Customers Are Saying</h2>
         <div class="reviews-grid">
           <article class="review">
-            <div class="review__avatar"><img src="/assets/img/avatar1.webp" alt="Avatar: Samantha R."></div>
             <div class="review__body">
               <div class="review__meta">
-                <span class="review__name">Samantha R.</span><span aria-hidden="true">•</span><span
-                  class="review__rating">★★★★★</span>
+                <span class="review__name">Sarah K.</span><span aria-hidden="true">•</span><span class="review__rating" aria-label="5 out of 5 stars">★★★★★</span>
               </div>
-              <p class="review__text">Beautifully fragrant blends — I noticed a real improvement in my sleep
-                routine.</p>
+              <p class="review__text">This is my third purchase of Sleeping Soundly and I love the taste. I dont like chamomile or lavender so this blend is perfect for me.</p>
+              <p class="review__product">Purchased: Sleeping Soundly</p>
             </div>
           </article>
           <article class="review">
-            <div class="review__avatar"><img src="/assets/img/avatar2.webp" alt="Avatar: Marcus T.">
-            </div>
             <div class="review__body">
               <div class="review__meta">
-                <span class="review__name">Marcus T.</span><span aria-hidden="true">•</span><span
-                  class="review__rating">★★★★★</span>
+                <span class="review__name">Olivia M.</span><span aria-hidden="true">•</span><span class="review__rating" aria-label="5 out of 5 stars">★★★★★</span>
               </div>
-              <p class="review__text">Fast shipping and a lovely, clean taste — delightful.</p>
+              <p class="review__text">I love this tea, I've tried other turmeric blends from other popular tea companies and this blend is so unique and I just feel good on it.</p>
+              <p class="review__product">Purchased: Enchanted Turmeric</p>
             </div>
           </article>
           <article class="review">
-            <div class="review__avatar"><img src="/assets/img/avatar3.webp" alt="Avatar: Aisha P.">
-            </div>
             <div class="review__body">
               <div class="review__meta">
-                <span class="review__name">Aisha P.</span><span aria-hidden="true">•</span><span
-                  class="review__rating">★★★★☆</span>
+                <span class="review__name">Chloe R.</span><span aria-hidden="true">•</span><span class="review__rating" aria-label="5 out of 5 stars">★★★★★</span>
               </div>
-              <p class="review__text">Lovely packaging and a calming aroma — highly recommend.</p>
+              <p class="review__text">This tea is so delicate and floral, I love it to help me wind down.</p>
+              <p class="review__product">Purchased: Calming Garden</p>
+            </div>
+          </article>
+          <article class="review">
+            <div class="review__body">
+              <div class="review__meta">
+                <span class="review__name">Isabelle B.</span><span aria-hidden="true">•</span><span class="review__rating" aria-label="5 out of 5 stars">★★★★★</span>
+              </div>
+              <p class="review__text">I love this blend! It's caffiene free and I love the added fennel, I brew a pot most nights for the family.</p>
+              <p class="review__product">Purchased: African Chai</p>
+            </div>
+          </article>
+          <article class="review">
+            <div class="review__body">
+              <div class="review__meta">
+                <span class="review__name">Hannah W.</span><span aria-hidden="true">•</span><span class="review__rating" aria-label="5 out of 5 stars">★★★★★</span>
+              </div>
+              <p class="review__text">This green tea is delicious. I usually don't like the taste of green tea but want the benefits and this tea blends the green tea with tulsi perfectly so its very palatable and easy to drink.</p>
+              <p class="review__product">Purchased: Energiser</p>
             </div>
           </article>
         </div>
       </section>
-      <section id="newsletter" aria-labelledby="newsletter-heading">
+      <section id="newsletter" class="newsletter-panel" aria-labelledby="newsletter-heading">
         <h2 id="newsletter-heading">Join Our Wellness Community</h2>
-        <form id="newsletter-form" novalidate="" name="newsletter-form">
+        <form id="newsletter-form" action="#" method="post" novalidate="" name="newsletter-form">
           <label for="newsletter-email">Email:</label> <input id="newsletter-email" type="email" name="email"
             required="" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="your@email.com"
             aria-describedby="newsletter-error"> <span id="newsletter-error" class="visually-hidden"
@@ -325,9 +260,8 @@
           </div>
         </form>
       </section>
-    </section>
     <hr aria-hidden="true">
-    <div class="site-footer" itemscope itemtype="https://schema.org/WPFooter">
+    <footer class="site-footer" itemscope itemtype="https://schema.org/WPFooter">
       <div class="container">
         <div class="branding">
           <div class="brand-text">
@@ -388,17 +322,9 @@
       <footer class="legal-bar" aria-label="Legal and credits">
         <div class="legal">
           <p>© <time datetime="2025">2025</time> Nature's Infusions. All rights reserved.</p>
-          <p>Powered by Ultra-Simple Static EStore Framework</p>
-          <p>Author: <span itemprop="author">Adrian Gallo (2MuchC0ff33)</span> <a class="github"
-              href="https://2muchc0ff33.github.io" itemprop="url" target="_blank" rel="noopener noreferrer"
-              aria-label="Adrian Gallo on GitHub (opens in new tab)"><img src="/assets/img/icons/github.webp" alt=""
-                class="social-icon" width="18" height="18" loading="lazy"> <span class="visually-hidden">Adrian Gallo
-                (aka
-                2MuchC0ff33) on GitHub</span></a></p>
-          <p>Website generated: <time datetime="2025-07-21" itemprop="datePublished">21/07/2025</time></p>
         </div>
       </footer>
-    </div>
+    </footer>
   </main>
   <dialog id="newsletter-modal" class="modal" aria-hidden="true" data-modal="">
     <div class="modal__overlay" data-modal-close=""></div>
@@ -416,6 +342,11 @@
       </footer>
     </div>
   </dialog>
+
+<script type="module">
+  import { initAutoplayLoop } from '/assets/js/modules/autoplay-loop.js';
+  initAutoplayLoop();
+</script>
 </body>
 
 </html>

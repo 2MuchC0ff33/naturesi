@@ -94,11 +94,12 @@
 
 <body itemscope itemtype="https://schema.org/WebPage">
   <header id="site-header">
-    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <a class="skip-link" href="#main-content">Skip to main content replacer placeholder 
     <nav class="site-nav" aria-label="Site navigation" data-site-nav="">
       <div class="nav-left">
         <a class="logo" href="/" aria-label="Nature's Infusions home"><img src="/assets/img/logo.svg"
             alt="Nature's Infusions logo"></a>
+          <span class="site-tagline">Premium Teas for Daily Wellbeing</span>
       </div>
       <div id="primary-nav-menu" class="nav-center" data-primary-nav="">
         <div class="nav-center-flex center-row">
@@ -107,7 +108,12 @@
             <label for="site-search" class="visually-hidden">Search Nature's Infusions</label> <input id="site-search"
               name="q" type="search" placeholder="Search Nature's Infusions" class="search-box"
               aria-label="Search site">
-            <button class="search-icon btn btn--ghost" aria-label="Submit search">&nbsp;</button>
+            <button class="search-icon btn btn--ghost" aria-label="Submit search" type="submit">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+                <circle cx="10" cy="10" r="6" stroke="currentColor" stroke-width="2"/>
+                <line x1="14.5" y1="14.5" x2="20" y2="20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </button>
           </form>
         </div>
       </div>
@@ -140,34 +146,34 @@
     <p>Or browse by category:</p>
     <ul>
       <li>
-        <a href="/pages/search/wellness-blends.html">Wellness Blends</a>
+        <a href="/pages/store/wellness-blends.html">Wellness Blends</a>
       </li>
       <li>
-        <a href="/pages/search/artisan-blends.html">Artisan Blends</a>
+        <a href="/pages/store/artisan-blends.html">Artisan Blends</a>
       </li>
       <li>
-        <a href="/pages/search/herbal-infusions.html">Herbal Infusions</a>
+        <a href="/pages/store/herbal-infusions.html">Herbal Infusions</a>
       </li>
       <li>
-        <a href="/pages/search/black-tea.html">Black Tea</a>
+        <a href="/pages/store/black-tea.html">Black Tea</a>
       </li>
       <li>
-        <a href="/pages/search/green-tea.html">Green Tea</a>
+        <a href="/pages/store/green-tea.html">Green Tea</a>
       </li>
       <li>
-        <a href="/pages/search/ice-tea.html">Ice Tea</a>
+        <a href="/pages/store/ice-tea.html">Ice Tea</a>
       </li>
       <li>
-        <a href="/pages/search/balms.html">Herbal Balms</a>
+        <a href="/pages/store/balms.html">Herbal Balms</a>
       </li>
       <li>
-        <a href="/pages/search/creams.html">Herbal Creams</a>
+        <a href="/pages/store/creams.html">Herbal Creams</a>
       </li>
       <li>
-        <a href="/pages/search/selfcare.html">Self Care</a>
+        <a href="/pages/store/selfcare.html">Self Care</a>
       </li>
       <li>
-        <a href="/pages/search/accessories.html">Accessories</a>
+        <a href="/pages/store/accessories.html">Accessories</a>
       </li>
     </ul>
     <section id="search-results">
@@ -370,6 +376,55 @@
       </div>
     </footer>
   </div>
+  <script>
+(function () {
+  var list = document.querySelector('[data-product-list]');
+  if (!list) return;
+  var form = document.querySelector('form#site-search-form');
+  var input = form ? form.querySelector('input[name="q"]') : null;
+  var products = [];
+  var q = new URLSearchParams(location.search).get('q') || '';
+  if (input && q) input.value = q;
+  function esc(s) {
+    return String(s || '').replace(/[&<>"']/g, function (m) {
+      return {'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[m];
+    });
+  }
+  function render(items) {
+    if (!items.length) {
+      list.innerHTML = '<li>No results found.</li>';
+      return;
+    }
+    var html = items.map(function (it) {
+      return '<li><a href="/pages/store/' + esc(it.category || 'store') + '.html#' + esc(it.slug || it.id) + '">' + esc(it.name) + ' <small>(' + esc(it.category || '') + ')</small></a></li>';
+    }).join('');
+    list.innerHTML = html;
+  }
+  function search(q) {
+    var needle = (q || '').trim().toLowerCase();
+    if (!needle) { render([]); return; }
+    var fields = ['name', 'category', 'description'];
+    var results = products.filter(function (p) {
+      return fields.some(function (f) { return (p[f] || '').toLowerCase().includes(needle); });
+    });
+    render(results.slice(0, 20));
+  }
+  function init() { search(q); }
+  fetch('/assets/js/data/products.json').then(function (r) { return r.json(); }).then(function (d) {
+    products = d.products || d || [];
+    init();
+  }).catch(function () { products = []; });
+  if (input) {
+    input.addEventListener('input', function () { search(input.value); });
+  }
+  if (form) {
+    form.addEventListener('submit', function () {
+      if (input && input.value) search(input.value);
+    });
+  }
+})();
+  </script>
+
 </body>
 
 </html>

@@ -7,6 +7,10 @@ video {
   width: 100%;
   aspect-ratio: 16 / 9;
   /* Maintains standard 16:9 aspect ratio for most videos */
+  object-fit: contain;
+  /* preserve full frame and center content */
+  object-position: center;
+  /* explicitly centre poster/video content */
   border-radius: 10px;
   /* Subtle rounding for modern look */
   margin: 0 auto;

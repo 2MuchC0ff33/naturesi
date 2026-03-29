@@ -1,0 +1,39 @@
+.newsletter-panel {
+  background: var(--color-background);
+  border: 2px solid var(--color-accent, #346967);
+  border-radius: 8px;
+  padding: var(--space-lg);
+  margin: var(--space-lg) 0;
+  text-align: center;
+}
+
+.newsletter-panel h2 {
+  color: var(--color-accent);
+  margin-bottom: var(--space-sm);
+}
+
+.newsletter-panel form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.newsletter-panel input[type="email"] {
+  flex: 1 1 220px;
+  max-width: 300px;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+}
+
+.newsletter-panel .btn--primary {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+.newsletter-panel .btn--ghost {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}

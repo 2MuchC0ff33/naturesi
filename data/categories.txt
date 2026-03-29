@@ -1,0 +1,12 @@
+slug|label|href
+|Show All|/pages/store.html
+wellness-blends|Wellness Blends|/pages/store/wellness-blends.html
+artisan-blends|Artisan Blends|/pages/store/artisan-blends.html
+herbal-infusions|Herbal Infusions|/pages/store/herbal-infusions.html
+black-tea|Black Tea|/pages/store/black-tea.html
+green-tea|Green Tea|/pages/store/green-tea.html
+ice-tea|Ice Tea|/pages/store/ice-tea.html
+balms|Herbal Balms|/pages/store/balms.html
+creams|Herbal Creams|/pages/store/creams.html
+selfcare|Self Care|/pages/store/selfcare.html
+accessories|Accessories|/pages/store/accessories.html

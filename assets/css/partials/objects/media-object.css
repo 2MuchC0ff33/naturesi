@@ -36,19 +36,31 @@ API: `.responsive-media` (images), `.media`, `.media__img`, `.media__body`,
 }
 
 @media (min-width: 900px) {
-  .media {
+  .media:not(.product-card .media) {
     flex-direction: row;
     align-items: flex-start;
   }
 
-  .media__img {
+  .media:not(.product-card .media) .media__img {
     width: 40%;
     max-width: 40%;
   }
 
-  .media__body {
+  .media:not(.product-card .media) .media__body {
     width: 60%;
   }
+}
+
+/* Ensure product card headers don't inherit media object layout */
+.product-card header {
+  display: flex;
+  flex-direction: column;
+}
+
+.product-card .media__img,
+.product-card .media__body {
+  width: 100% !important;
+  max-width: 100% !important;
 }
 
 /* Reverse order for media (visual only; DOM order preserved for accessibility) */

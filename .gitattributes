@@ -1,99 +1,92 @@
-﻿# Global attributes: auto-detect text files and enforce LF line endings
+# Gitattributes — valid attributes only
+# Run: git check-attr --all --cached to verify
+
+# Global: auto-detect text, enforce LF line endings
 * text=auto eol=lf
 
-# POSIX utilities / Bourne Shell (merged: added UTF-8 encoding)
-*.sh text eol=lf diff=bash working-tree-encoding=UTF-8
+# Shell scripts
+*.sh text eol=lf diff=bash
 
-# awk
-*.awk text eol=lf
+# Build tool languages
+*.awk text eol=lf diff=awk
+*.sed text eol=lf diff=sed
+*.m4 text eol=lf diff=m4
+*.cmake text eol=lf diff=cmake
+Makefile text eol=lf diff=cmake
+makefile text eol=lf diff=cmake
 
-# bc
-*.bc text eol=lf
+# Data formats
+*.json text eol=lf diff=ruby
+*.yaml text eol=lf diff=yaml
+*.yml text eol=lf diff=yaml
+*.xml text eol=lf
+*.csv text eol=lf
 
-# sed
-*.sed text eol=lf
-
-# JSON (merged: added UTF-8 encoding)
-*.json text eol=lf working-tree-encoding=UTF-8
-
-# HTML (merged: added UTF-8 encoding)
-*.html text eol=lf diff=html working-tree-encoding=UTF-8
+# Web
+*.html text eol=lf diff=html
 *.htm text eol=lf diff=html
 *.xhtml text eol=lf diff=html
-
-# Markdown (merged: added UTF-8 encoding to *.md)
-*.md text eol=lf diff=markdown working-tree-encoding=UTF-8
-*.markdown text eol=lf diff=markdown
-*.mdwn text eol=lf diff=markdown
-*.mdown text eol=lf diff=markdown
-*.mkd text eol=lf diff=markdown
-*.mkdn text eol=lf diff=markdown
-
-# Javascript (merged: added UTF-8 encoding to *.js)
-*.js text eol=lf working-tree-encoding=UTF-8
-*.mjs text eol=lf
-*.cjs text eol=lf
-*.jsx text eol=lf
-*.ts text eol=lf
-*.tsx text eol=lf
-
-# CSS (merged: added UTF-8 encoding)
-*.css text eol=lf diff=css working-tree-encoding=UTF-8
+*.css text eol=lf diff=css
 *.scss text eol=lf diff=css
 *.sass text eol=lf diff=css
 *.less text eol=lf diff=css
 *.styl text eol=lf diff=css
 
-# dotenv
-*.env text eol=lf
-
-# C99
+# Programming languages (built-in diff drivers)
+*.js text eol=lf
+*.mjs text eol=lf
+*.cjs text eol=lf
+*.jsx text eol=lf
+*.ts text eol=lf
+*.tsx text eol=lf
+*.php text eol=lf diff=php
+*.py text eol=lf diff=python
+*.rb text eol=lf diff=ruby
+*.pl text eol=lf diff=perl
+*.java text eol=lf diff=java
 *.c text eol=lf diff=cpp
 *.h text eol=lf diff=cpp
+*.cpp text eol=lf diff=cpp
+*.cc text eol=lf diff=cpp
+*.cxx text eol=lf diff=cpp
+*.go text eol=lf diff=rust
+*.rs text eol=lf diff=rust
+*.swift text eol=lf diff=swift
+*.lua text eol=lf diff=lua
+*.sh text eol=lf diff=bash
+*.bash text eol=lf diff=bash
+*.dash text eol=lf diff=dash
+*.ksh text eol=lf diff=ksh
+*.zsh text eol=lf diff=bash
 
-# Fort77
-*.f text eol=lf diff=fortran
-*.for text eol=lf diff=fortran
-*.f77 text eol=lf diff=fortran
+# Documentation
+*.md text eol=lf diff=markdown
+*.markdown text eol=lf diff=markdown
+*.rst text eol=lf diff=rst
+*.tex text eol=lf diff=tex
 
-# Lex
-*.l text eol=lf diff=cpp
-*.lex text eol=lf diff=cpp
+# Config & env
+.env text eol=lf
+.gitignore text eol=lf
+.gitattributes text eol=lf
+*.env text eol=lf
 
-# Assembly
-*.s text eol=lf
-*.asm text eol=lf
-
-# CSV (merged: added UTF-8 encoding)
-*.csv text eol=lf working-tree-encoding=UTF-8
-
-# m4
-*.m4 text eol=lf
-
-# yacc
-*.y text eol=lf diff=cpp
-*.yacc text eol=lf diff=cpp
-
-# XML (merged: added UTF-8 encoding)
-*.xml text eol=lf working-tree-encoding=UTF-8
-
-# Additional text files (from user's version)
-*.txt text eol=lf working-tree-encoding=UTF-8
-*.yml text eol=lf working-tree-encoding=UTF-8
-*.yaml text eol=lf working-tree-encoding=UTF-8
-
-# Pages and assets (from user's version)
-pages/** text eol=lf working-tree-encoding=UTF-8
-assets/** text eol=lf working-tree-encoding=UTF-8
-
-# Images and other binary formats (from user's version)
+# Images and binary
 *.png binary
 *.jpg binary
 *.jpeg binary
 *.gif binary
 *.ico binary
-*.svg binary
 *.webp binary
+*.svg binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.eot binary
 *.zip binary
 *.gz binary
 *.7z binary
+*.pdf binary
+*.mp4 binary
+*.webm binary
+*.mp3 binary

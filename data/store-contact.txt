@@ -1,0 +1,5 @@
+email|2MuchC0ff33@example.org
+support_email|2MuchC0ff33@example.org
+phone|+61-XXX-XXX-XXX
+address|Perth, Western Australia
+ABN|XX XXX XXX XXX

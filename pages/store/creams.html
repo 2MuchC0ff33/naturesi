@@ -203,13 +203,14 @@ href="/opensearch.xml" title="Nature's Infusions">
 </head>
 <body itemscope itemtype="https://schema.org/WebPage">
 <!-- WCAG: Skip link for keyboard navigation, visible on focus -->
-<a class="skip-link" href="#main-content">Skip to main content</a>
+<a class="skip-link" href="#main-content">Skip to main content replacer placeholder 
 <header id="site-header">
 <nav class="site-nav" aria-label="Site navigation" data-site-nav=
 "">
 <div class="nav-left"><a class="logo" href="/" aria-label=
 "Nature's Infusions home"><img src="/assets/img/logo.svg" alt=
-"Nature's Infusions logo"></a></div>
+"Nature's Infusions logo"></a>
+          <span class="site-tagline">Premium Teas for Daily Wellbeing</span></div>
 <!-- Improved nav-center: group search in a flex wrapper -->
 <div id="primary-nav-menu" class="nav-center" data-primary-nav="">
 <div class="nav-center-flex center-row">
@@ -221,23 +222,18 @@ name="site-search-form"><label for="site-search" class=
 "visually-hidden">Search Nature's Infusions</label> <input id=
 "site-search" name="q" type="search" placeholder=
 "Search Nature's Infusions" class="search-box" aria-label=
-"Search site"></form>
+"Search site">
+          <button class="search-icon btn btn--ghost" aria-label="Submit search" type="submit">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+              <circle cx="10" cy="10" r="6" stroke="currentColor" stroke-width="2"/>
+              <line x1="14.5" y1="14.5" x2="20" y2="20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button></form>
 </div>
 </div>
 <div class="nav-right" data-header-right=""><a class="cart-option"
 href="/pages/cart.html" aria-label="Cart">
-<div class="cart-logo" aria-hidden="true"><!-- inline svg cart -->
-<svg width="20" height="18" viewbox="0 0 24 24" fill="none" xmlns=
-"http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"> 
-<!-- Simple cart shape (rectangle body + wheels) -->
-<rect x="3" y="4" width="14" height="10" rx="1" stroke=
-"currentColor" stroke-width="1.25" fill="none"></rect>
-<path d="M7 4L6 2H3" stroke="currentColor" stroke-width="1.25"
-fill="none"></path>
-<circle cx="8.5" cy="17.5" r="1.25" fill="currentColor"></circle>
-<circle cx="17.5" cy="17.5" r="1.25" fill="currentColor"></circle>
-</svg></div>
-<span class="cart-text">Cart</span> <output class="cart-count"
+<img src="/assets/img/cart.webp" alt="" width="24" height="24" aria-hidden="true"><output class="cart-count"
 name="cart-count" aria-live="polite">0</output></a></div>
 </nav>
 <!-- Categories nav: dynamic list will be populated by assets/js/modules/categories-nav.js -->
@@ -256,79 +252,55 @@ All</a></li>
 <main id="main-content" class="prose container">
 <section aria-labelledby="creams-heading">
 <h2 id="creams-heading">Creams</h2>
-<!-- Creams products moved from pages/store.html -->
-<a id="calendula-cream" class="product-anchor slug-anchor"
-aria-hidden="true"></a> <a id="product-calendula-anchor" class=
-"product-anchor"></a>
-<article id="product-calendula" class="product product-card"
-itemprop="itemListElement" itemscope itemtype=
-"https://schema.org/Product" data-image="/assets/img/calmbalm.webp"
-data-sku="product-calendula">
-<header class=
-"media u-d-flex u-flex-column u-flex-row\@md u-items-center u-justify-center">
-<figure class="product-gallery product-card__media">
-<picture><source srcset="assets/img/Natures2_with_fonts.webp" type=
-"image/webp"> <img src="assets/img/Natures2_with_fonts.webp" alt=
-"Calendula Cream" width="300" height="300" class="u-img-cover"
-loading="lazy" itemprop="image"></picture>
-<figcaption>Product image</figcaption>
-</figure>
-<h3 itemprop="name">Calendula Cream</h3>
-<div class="availability" itemprop="offers" itemscope itemtype=
-"https://schema.org/Offer">
-<link itemprop="availability" href="https://schema.org/InStock">
-<meta itemprop="priceCurrency" content="AUD">
-<p>✓ <span itemprop="itemCondition">In Stock</span></p>
-</div>
-<div class="reviews" itemprop="aggregateRating" itemscope itemtype=
-"https://schema.org/AggregateRating"><span aria-hidden=
-"true">★★★★</span> <span>(<span itemprop="ratingCount">5</span>
-reviews, Rating: <span itemprop=
-"ratingValue">4</span>/5)</span></div>
-</header>
-<section class="product-description" itemprop="description">
-<p>A soothing cream infused with calendula flowers and a chamomile
-essential oil, known for their skin-nourishing properties. This
-rich avocado-cream base is a non-greasy formula helping to
-moisturise and comfort dry or sensitive skin.</p>
-</section>
-<section class="product-ingredients" itemprop="nutrition" itemscope
-itemtype="https://schema.org/NutritionInformation">
-<h4>Ingredients</h4>
-<p itemprop="ingredients">Purified Water, Avocado Oil, Sweet Almond
-Oil, Soybean Oil, Calendula Flowers (<i>Calendula Officinalus</i>),
-Cetearyl Alcohol, PE-20 Stearate, Cocoa Butter, Glycerine,
-Phenoxyethanol, Ethylhexylglycerin, Rosehip Oil, Jojoba Oil,
-Chamomile Essential Oil (<i>Matricaria Chamomilla</i>), Natural
-Vitamin E, Propanediol and Rosemary Leaf Extract (<i>Rosemarinus
-Officinalus</i>).</p>
-<p><small>Size: 50 milliliters</small></p>
-</section>
-<form action="/add-to-cart" method="post" class=
-"product-options add-to-cart">
-<fieldset><legend>Product Options</legend>
-<div class="quantity-selector"><label for=
-"qty-calendula">Quantity:</label> <select id="qty-calendula" name=
-"quantity" min="1" max="10" required="">
-<option value="1">1</option>
-<option value="2">2</option>
-<option value="3">3</option>
-<option value="4">4</option>
-<option value="5">5</option>
-</select></div>
-<button type="submit" class="btn btn--primary">Add to
-Cart</button></fieldset>
-</form>
-<footer class="product-disclaimer">
-<details>
-<summary><small>Important Information</small></summary>
-<p itemprop="disambiguatingDescription"><small>For external use
-only. Avoid contact with eyes. Discontinue use if irritation
-occurs. Not intended to diagnose, treat, cure, or prevent any
-disease.</small></p>
-</details>
-</footer>
+<!-- Generated by scripts/generate-product-grids.sh from products.csv -->
+<div class="product-grid" data-category="creams">
+<article id="product-calendula" class="product product-card" itemprop="itemListElement" itemscope itemtype="https://schema.org/Product" data-image="/assets/img/logo.webp" data-sku="product-calendula">
+  <header>
+    <figure class="product-gallery product-card__media">
+      <picture>
+        <source srcset="/assets/img/logo.webp" type="image/webp">
+        <img src="/assets/img/logo.webp" alt="Calendula Cream" width="300" height="300" loading="lazy" itemprop="image" class="u-img-cover">
+      </picture>
+    </figure>
+    <h3 itemprop="name">Calendula Cream</h3>
+    <div class="availability" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+      <link itemprop="availability" href="https://schema.org/InStock">
+      <meta itemprop="priceCurrency" content="AUD">
+      <p>&#10003; <span itemprop="itemCondition">In Stock</span></p>
+    </div>
+  </header>
+  <section class="product-description" itemprop="description">
+    <p>A soothing cream infused with calendula flowers and chamomile essential oil; a rich avocado-cream base for moisturising dry or sensitive skin</p>
+  </section>
+  <form action="/add-to-cart" method="post" class="product-options add-to-cart" data-product="product-calendula" data-sku="product-calendula">
+    <fieldset>
+      <legend>Product Options</legend>
+      <div class="quantity-selector">
+        <label for="qty-product-calendula">Quantity:</label>
+        <select id="qty-product-calendula" name="quantity" min="1" max="10" required>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+      </div>
+      <button type="submit">Add to Cart</button>
+    </fieldset>
+  </form>
+  <section class="product-ingredients" itemprop="nutrition" itemscope itemtype="https://schema.org/NutritionInformation">
+    <h4>Ingredients</h4>
+    <p itemprop="ingredients">Purified Water, Avocado Oil, Sweet Almond Oil, Soybean Oil, Calendula Flowers, Cetearyl Alcohol, PE-20 Stearate, Cocoa Butter, Glycerine, Phenoxyethanol, Ethylhexylglycerin, Rosehip Oil, Jojoba Oil, Chamomile Essential Oil, Natural Vitamin E, Propanediol and Rosemary Leaf Extract</p>
+    <p><small>Sourced from multiple origins</small></p>
+  </section>
+  <footer class="product-disclaimer">
+    <details>
+      <summary><small>Important Information</small></summary>
+      <p itemprop="disambiguatingDescription"><small>For external use only. Avoid contact with eyes. Discontinue use if irritation occurs. Not intended to diagnose, treat, cure, or prevent any disease.</small></p>
+    </details>
+  </footer>
 </article>
+</div>
 </section>
 </main>
 <hr aria-hidden="true">
@@ -414,5 +386,8 @@ on GitHub</span></a></p>
 </div>
 </footer>
 </div>
+
+  
+<script src="/assets/js/modules/product-renderer.js"></script>
 </body>
 </html>
