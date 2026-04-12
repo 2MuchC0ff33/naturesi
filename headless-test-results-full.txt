@@ -1,0 +1,78 @@
+Running 23 headless test(s) with chromium...
+
+== cart-add.test.sh ==
+PASS: cart-add.test.sh (1.0s)
+
+== cart-icon-visibility.test.sh ==
+PASS: cart-icon-visibility.test.sh (3.0s)
+
+== cart-render.test.sh ==
+PASS: cart-render.test.sh (1.0s)
+
+== checkout-form.test.sh ==
+PASS: checkout-form.test.sh (2.0s)
+
+== dom-structure.test.sh ==
+PASS: dom-structure.test.sh (0.0s)
+
+== full-checkout-flow.test.sh ==
+FAIL: full-checkout-flow.test.sh (9.0s)
+# === LocalStorage cart ===
+not ok 8 - Cart JS localStorage key incorrect
+# === PayPal SDK configuration ===
+ok 9 - PayPal SDK mode enabled
+ok 10 - Checkout JS has SDK setup function
+# === Cart count display ===
+ok 11 - Cart count element exists
+
+1..11
+# tests: 11  passed: 10  failed: 1
+
+== modal.test.sh ==
+PASS: modal.test.sh (2.0s)
+
+== payment-cancel.test.sh ==
+PASS: payment-cancel.test.sh (1.0s)
+
+== payment-success.test.sh ==
+PASS: payment-success.test.sh (1.0s)
+
+== paypal-cart-checkout.test.sh ==
+PASS: paypal-cart-checkout.test.sh (3.0s)
+
+== paypal-customer-journeys.test.sh ==
+PASS: paypal-customer-journeys.test.sh (20.0s)
+
+== paypal-edge-cases.test.sh ==
+FAIL: paypal-edge-cases.test.sh (14.0s)
+ok 14 - Mixed categories: Handles tea + cream + accessory
+# === Test 14: Back navigation ===
+ok 15 - Cart persistence logic exists
+# === Test 15: Zero console errors ===
+not ok 16 - Zero JS errors on checkout load (found 4)
+# === Test 16: Session clear handling ===
+ok 17 - Session clear: Empty cart error handled
+
+1..17
+# 12 passed, 5 failed
+
+== paypal-sdk-flow.test.sh ==
+PASS: paypal-sdk-flow.test.sh (2.0s)
+
+== paypal-sdk-load.test.sh ==
+FAIL: paypal-sdk-load.test.sh (5.0s)
+TAP version 14
+ok 1 - Site reachable (HTTP 200)
+ok 2 - Chromium available
+ok 3 - paypal-button-container exists
+ok 4 - app.js script loaded
+not ok 5 - Zero JS errors in console (found 4 errors)
+ok 6 - Checkout error element exists for empty cart
+
+1..6
+FAIL: 1 test(s) failed
+
+== prod-customer-journeys.test.sh ==
+PASS: prod-customer-journeys.test.sh (23.0s)
+
+== prod-paypal-button-render.test.sh ==

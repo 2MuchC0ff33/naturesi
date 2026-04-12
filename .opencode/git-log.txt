@@ -1,0 +1,61 @@
+*-.   a55e35f (refs/stash) On staging: agent: stash all changes for branch maintenance, enable checkout
+|\ \  
+| | * e1e01ee untracked files on staging: 3ff0174 docs(staging): add production snapshot, deployment workflow, and CI monitoring scripts
+| * a487943 index on staging: 3ff0174 docs(staging): add production snapshot, deployment workflow, and CI monitoring scripts
+|/  
+* 3ff0174 (HEAD -> staging, origin/staging) docs(staging): add production snapshot, deployment workflow, and CI monitoring scripts
+* f47a5fe (origin/development, new-feature, feat/posix-infra, development) fix(products): update product grids with latest CSV data and add selfcare product descriptions
+* fdf9f0c feat(partials): regenerate product grids with updated descriptions and moved Herbal Eye Pillow to selfcare
+* 58a3e1c feat(products): update selfcare product descriptions with botanical names and improved sizing
+* 6b72eea fix(store): replace inline SVG social icons with WebP images and consolidate African Chai review
+* d31a563 feat(homepage): add Winter Wellness testimonial as 6th review
+| * 1721ebd (origin/fix/social-icons) feat(homepage): add Winter Wellness review as 6th testimonial
+| * 91f52f5 fix(store): replace inline SVG icons with WebP images
+| * 1a0ad17 fix(reviews): move African Chai review from wellness-blends to artisan-blends
+| * 3a3f74f feat(selfcare): update Herbal Eye Pillow description with cooling compress usage
+| * 13df286 feat(selfcare): add botanical names to Herbal Eye Pillow ingredients
+| * 539101b refactor(categories): move Herbal Eye Pillow from accessories to selfcare
+| * 1c7d809 feat(selfcare): update Lavender Floral Spray and Magnesium Chloride Flakes
+| * a3b41a2 feat(creams): add botanical names to Calendula Cream ingredients
+| * 3817165 feat(creams): update Calendula Cream description, add size label, and make ingredients collapsible
+|/  
+* 634ba8e feat(balms): update Sleep Balm description for evening wind-down messaging
+* 5b2db42 style(balms): add custom chevron arrow to collapsible ingredients
+* f2a3c6a style(balms): align ingredients disclosure triangle inline with heading
+* b4c4eb3 feat(balms): make ingredients section collapsible like disclaimer
+* a3a6da6 feat(balms): display 20ml Aluminium Tin — 2 as product size label
+* 97943c6 feat(balms): update descriptions and change both to 20ml at 2
+* cf063b2 fix(mobile): single-column product grid, search bar UX, and review product labels
+* ad7bcc4 feat(balms): update Calm and Sleep Balm ingredients with botanical names
+* dc1c8c4 refactor(AGENTS): streamline for better agent readability
+* 1d007f7 Squashed commit of the following:
+* 69bfcc8 squash: merge feature/checkout-paypal-merged into development, all checkout, PayPal, and test enhancements (no conflicts, full integration)
+* b152bf0 (origin/main, origin/HEAD, main) Feature/enhance UI ux (#39)
+* b3190db Implement structural updates and optimizations across multiple modules
+* 7398b51 fix: update maintenance script to use current branch dynamically
+* cea3198 chore: aggressive Git maintenance cleanup
+* 9907b00 Fix/UI ux (#32)
+* 9e7a63a Fix/UI appearance (#31)
+* 6478aa5 chore(payments): integrate PayPal support and related updates (#30)
+* 5f52189 New feature shipping (#20)
+* a01cc72 Build(deps): bump actions/checkout from 5 to 6 (#19)
+* a609028 Build(deps): bump actions/setup-node from 5 to 6 (#18)
+* eb25e73 Enhance responsive design for small screens: adjust header layout, prevent overflow, and refine footer width handling
+* 2cb4b08 Delete .github/workflows/stale.yml
+* 2b1ae27 Design/mobile first (#17)
+* bf827be Fix/update cart (#16)
+* b7dcc53 Feature/shopping cart implementation (#15)
+* 9ab28c1 Refactor site structure for improved accessibility and SEO (#10)
+* 1a1f1d6 Bump eslint from 8.57.1 to 9.37.0 (#8)
+* 499372a Bump actions/checkout from 4 to 5 (#7)
+* 5a9497e Bump actions/setup-node from 4 to 5 (#6)
+* 7300639 Bump actions/stale from 4 to 10 (#5)
+* f46fcfe Feature/search client products (#9)
+* cce5fcf Refactor HTML files for consistency and formatting
+* ccc07f6 Refactor/store category navigation (#3)
+* 563cdac fix: category navigation
+* 3608dc6 Development (#1)
+* 1923702 Add search functionality and category anchors
+* c1d961d Replace XHTML error page with HTML5 404.html
+* 4bca645 adding github copilot instructions and prompts
+* 2544a85 initial import from CVS

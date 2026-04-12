@@ -21,7 +21,7 @@ textarea {
    removes UA-rendered controls (radio/checkbox visuals). Add explicit
    rules so these controls remain visible, keyboard-accessible and match
    the site's accent color. */
-input[type="radio"] {
+input[type='radio'] {
   -webkit-appearance: radio;
   appearance: auto;
   width: 1.15em;
@@ -33,7 +33,7 @@ input[type="radio"] {
   accent-color: var(--color-accent);
 }
 
-input[type="checkbox"] {
+input[type='checkbox'] {
   -webkit-appearance: checkbox;
   appearance: auto;
   width: 1.15em;
@@ -46,8 +46,8 @@ input[type="checkbox"] {
 }
 
 /* Visible focus for assistive keyboard users */
-input[type="radio"]:focus-visible,
-input[type="checkbox"]:focus-visible {
+input[type='radio']:focus-visible,
+input[type='checkbox']:focus-visible {
   outline: 3px solid color-mix(in srgb, var(--color-accent) 60%, transparent);
   outline-offset: 2px;
   border-radius: 0.25rem;
@@ -55,7 +55,6 @@ input[type="checkbox"]:focus-visible {
 
 /* Increase baseline touch area on small screens */
 @media (max-width: 640px) {
-
   button,
   input,
   select,
@@ -99,15 +98,15 @@ button {
 
 /* Add-to-cart buttons: style submit buttons inside `.add-to-cart` forms as primary CTAs
    This avoids editing multiple templates and keeps behaviour additive and safe. */
-.add-to-cart [type="submit"],
-.add-to-cart button[type="submit"] {
+.add-to-cart [type='submit'],
+.add-to-cart button[type='submit'] {
   background: var(--color-accent) !important;
   color: #fff !important;
   border-color: transparent;
 }
 
-.add-to-cart [type="submit"]:focus-visible,
-.add-to-cart button[type="submit"]:focus-visible {
+.add-to-cart [type='submit']:focus-visible,
+.add-to-cart button[type='submit']:focus-visible {
   outline: 3px solid color-mix(in srgb, var(--color-accent) 60%, transparent);
   outline-offset: 2px;
 }
@@ -150,8 +149,7 @@ button:focus-visible {
   border-radius: 6px;
   line-height: 1.1;
   height: 36px;
-  display: flex;
-  align-items: center;
+  background: white;
   color: var(--color-text);
 }
 
@@ -173,7 +171,6 @@ button:focus-visible {
 
 /* make search dropdown and controls more forgiving on small screens */
 @media (max-width: 640px) {
-
   /* Mobile-first stacking: canonical search presentation for small screens */
   .site-search {
     display: flex;
@@ -196,6 +193,11 @@ button:focus-visible {
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
+  }
+
+  /* Hide search icon on mobile - just show the input field */
+  .site-search .search-icon {
+    display: none;
   }
 }
 

@@ -34,6 +34,7 @@ sed \
     -e 's/[[:space:]]\+$//' \
     -e '/^[[:space:]]*$/d' \
     -e 's/[[:space:]]\+/ /g' \
+
     "$IN" > "$OUT"
 
 IN_LINES=$(wc -c < "$IN")
