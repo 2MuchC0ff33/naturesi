@@ -18,6 +18,13 @@ fi
 
 ERRORS=0
 for FILE in "$@"; do
+    # Avoid linting this script file itself — it contains explanatory patterns
+    # (like the literal text '[[', '$RANDOM') which would trigger false positives.
+    if [ "$(realpath "$FILE")" = "$(realpath "$0")" ]; then
+        printf 'Checking: %s\n' "$FILE"
+        printf '  OK: skipping self-check to avoid false positives\n\n'
+        continue
+    fi
     if [ ! -f "$FILE" ]; then
         printf 'ERROR: file not found: %s\n' "$FILE" >&2
         ERRORS=$((ERRORS + 1))
