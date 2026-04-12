@@ -11,3 +11,7 @@ build/
 *.log
 .vscode/chrome
 .dist/
+SCCS/
+.checksums/
+.patches/
+.opencode/
