@@ -11,7 +11,7 @@
 # Security: No external dependencies; uses only Git commands to prevent injection risks.
 # Self-explanatory: Comments explain WHY each step is done, not WHAT.
 
-set -e  # Exit on any error for safety (POSIX compliant)
+set -eu  # Exit on any error for safety, and treat unset variables as error (POSIX compliant)
 
 # Detect current branch for dynamic handling
 ORIGINAL_BRANCH=$(git branch --show-current)

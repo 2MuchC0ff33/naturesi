@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/bin/sh
 # scripts/generate-product-grids.sh — POSIX script to generate static HTML product grids from CSV
 # Reads products.csv, generates .inc.html partials for each category with products
 # Output: assets/html/partials/products/*.inc.html

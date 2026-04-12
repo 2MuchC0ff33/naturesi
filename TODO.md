@@ -6,9 +6,18 @@
 
 ---
 
+## ⚡️ NEW: MAKEFILE-AUTOMATION PHASE — POSIX Audit, SCCS, Checksums, Patch
+
+- [x] Scaffold SCCS/, .checksums/, .patches/ directories
+- [x] Created Makefile (POSIX/agent-ready): sccs-init, checksums, patches, validate-audit, lint, test, validate
+- [x] Documented infra in .opencode/README.md, .opencode/skills/README.md, AGENTS.md, TODO.md
+- [x] Ran full SCCS/checksums/patch/validate flow (all pass)
+- [ ] Integrate as agent/human workflow/pre-commit default for all infra and doc changes
+
 ## Phase 1 — POSIX + ShellCheck Foundation + Fix Failing Tests ✅
 
 ### 1.1 — Change all shebangs to #!/bin/sh
+
 - [x] scripts/lint-shellcheck.sh (NEW — POSIX wrapper for shellcheck -s sh -S warning)
 - [x] scripts/lint-shell.sh (UPDATE — add shellcheck as step 0)
 - [x] scripts/test-all.sh (UPDATE shebang)
@@ -17,20 +26,24 @@
 - [x] All 25 test files in test/smoke/ and test/unit/ (UPDATE shebangs)
 
 ### 1.2 — Fix non-POSIX scripts
+
 - [x] process_html.sh (convert bash arrays → while-read, #!/bin/sh)
 - [x] generate-product-grids.sh (replace ${RANDOM} with awk random)
 - [x] lint-shell.sh (UPDATE — remove [[ check, update #!/bin/sh)
 
 ### 1.3 — Integrate ShellCheck
+
 - [x] Create scripts/lint-shellcheck.sh
 - [x] Add as step 0 of lint-shell.sh
 - [x] Fix all SCxxxx errors found
 
 ### 1.4 — Fix 2 failing test bugs
+
 - [x] test/smoke/css-vars.test.sh (grep -oE → grep -oE --)
 - [x] test/smoke/seo.test.sh (sed normalize before meta description grep)
 
 ### 1.5 — Verify
+
 - [x] scripts/test-all.sh → 25/25 pass (later 49/49)
 - [x] scripts/lint-shellcheck.sh → 0 errors
 
@@ -39,6 +52,7 @@
 ## Phase 2 — AWK / SED / JQ / BC Standalone Scripts
 
 ### 2.1 — scripts/awk/
+
 - [ ] scripts/awk/extract-css-vars.awk
 - [ ] scripts/awk/csv-stats.awk
 - [ ] scripts/awk/css-complexity.awk
@@ -48,6 +62,7 @@
 - [ ] Commit: feat(scripts): add awk scripts
 
 ### 2.2 — scripts/sed/
+
 - [ ] scripts/sed/normalize-meta.sed
 - [ ] scripts/sed/strip-css-comments.sed
 - [ ] scripts/sed/strip-js-comments.sed
@@ -56,6 +71,7 @@
 - [ ] Commit: feat(scripts): add sed scripts
 
 ### 2.3 — scripts/jq/
+
 - [ ] scripts/jq/validate-products.jq
 - [ ] scripts/jq/summarize-products.jq
 - [ ] scripts/jq/extract-categories.jq
@@ -65,6 +81,7 @@
 - [ ] Commit: feat(scripts): add jq scripts
 
 ### 2.4 — scripts/bc/
+
 - [ ] scripts/bc/shipping-calc.bc (with self-test)
 - [ ] scripts/bc/price-total.bc (with self-test)
 - [ ] scripts/bc/tax-calc.bc (with self-test)
@@ -76,16 +93,18 @@
 ## Phase 3 — Improved HTML + CSS Linting
 
 ### 3.1 — Upgrade lint-html.sh
+
 - [ ] Add: duplicate ID detection (awk)
 - [ ] Add: heading hierarchy h1→h2→h3 (awk)
 - [ ] Add: HTML5 semantic elements (grep)
-- [ ] Add: data-* attribute validity (grep)
+- [ ] Add: data-\* attribute validity (grep)
 - [ ] Add: required attribute on inputs (grep)
 - [ ] Add: autocomplete on form fields (grep)
 - [ ] Add: noscript fallback on scripts (grep)
 - [ ] Add: viewport maximum-scale abuse (grep)
 
 ### 3.2 — Upgrade lint-css.sh
+
 - [ ] Add: unused CSS classes vs HTML (awk)
 - [ ] Add: duplicate property declarations (awk)
 - [ ] Add: specificity warnings — id selectors (awk)
@@ -95,6 +114,7 @@
 - [ ] Add: flex/grid gap fallbacks (grep)
 
 ### 3.3 — Create new lint scripts
+
 - [ ] scripts/lint-html-full.sh (full HTML lint)
 - [ ] scripts/lint-css-full.sh (full CSS lint)
 - [ ] scripts/lint-a11y.sh (expanded accessibility)
@@ -106,15 +126,18 @@
 ## Phase 4 — Headless Browser Testing (Chromium)
 
 ### 4.1 — Test runner
+
 - [ ] Create scripts/test-headless.sh (POSIX wrapper, checks chromium availability)
 - [ ] Create test/headless/ directory
 - [ ] scripts/test-headless.sh → verify chromium available, skip with WARN if not
 
 ### 4.2 — Layer 1: file:// smoke (no server needed)
+
 - [ ] test/headless/site-smoke.test.sh (load every HTML page, no crash)
 - [ ] test/headless/dom-structure.test.sh (key DOM elements exist)
 
 ### 4.3 — Layer 2: localhost (requires apache running)
+
 - [ ] test/headless/cart-render.test.sh
 - [ ] test/headless/cart-add.test.sh
 - [ ] test/headless/checkout-form.test.sh
@@ -128,6 +151,7 @@
 - [ ] test/headless/search.test.sh
 
 ### 4.4 — Verify
+
 - [ ] Start apache: scripts/serve.sh start
 - [ ] scripts/test-headless.sh → all pass
 - [ ] Stop apache: scripts/serve.sh stop
@@ -138,6 +162,7 @@
 ## Phase 5 — Cart + Checkout + Payment Tests
 
 ### 5.1 — POSIX shell tests (no JS execution)
+
 - [ ] test/unit/checkout-form-structure.test.sh
 - [ ] test/unit/paypal-urls.test.sh
 - [ ] test/unit/shipping-zone.test.sh (awk + mock postcode data)
@@ -146,6 +171,7 @@
 - [ ] test/unit/deleted-modules-regression.test.sh
 
 ### 5.2 — Node.js + JSDOM tests (install jsdom as dev dep)
+
 - [ ] npm install --save-dev jsdom
 - [ ] test/unit/cart-add.test.sh
 - [ ] test/unit/cart-remove.test.sh
@@ -165,6 +191,7 @@
 - [ ] test/unit/shipping-weight.test.sh
 
 ### 5.3 — E2E flow tests
+
 - [ ] test/e2e/cart-to-checkout.test.sh
 - [ ] test/e2e/checkout-to-paypal.test.sh
 - [ ] test/e2e/payment-success-flow.test.sh
@@ -172,6 +199,7 @@
 - [ ] test/e2e/product-add-flow.test.sh
 
 ### 5.4 — Verify
+
 - [ ] scripts/test-all.sh → all pass
 - [ ] Commit: test(cart): add cart unit and e2e tests
 - [ ] Commit: test(checkout): add checkout and payment tests
@@ -182,6 +210,7 @@
 ## Phase 6 — .txt Partials + Flat-File Data
 
 ### 6.1 — Extract content to partials/
+
 - [ ] partials/header.txt (full <header> block)
 - [ ] partials/footer.txt (full <footer> block)
 - [ ] partials/quick-links.txt
@@ -191,16 +220,19 @@
 - [ ] partials/category-nav.txt
 
 ### 6.2 — Build pipeline
+
 - [ ] scripts/generate-partials.sh (pre-deploy: inject partials into HTML at INCLUDE markers)
 - [ ] scripts/lint-partials.sh (verify all INCLUDE markers resolve)
 
 ### 6.3 — Create data/ directory
+
 - [ ] data/categories.txt (replace categories.json — slug|label|href)
 - [ ] data/shipping-zones.txt (postcode_prefix|zone|state)
 - [ ] data/nav-links.txt (label|href|class)
 - [ ] data/social-links.txt (platform|url|icon)
 
 ### 6.4 — Cleanup
+
 - [ ] Remove products.json (generated from CSV, inlined into JS)
 - [ ] Commit: refactor(content): extract .txt partials and flat-file data
 
@@ -209,21 +241,25 @@
 ## Phase 7 — ESLint + Prettier
 
 ### 7.1 — Install + configure
+
 - [ ] npm install --save-dev eslint prettier
 - [ ] Create .eslintrc.json
 - [ ] Create .prettierrc
 - [ ] Create .prettierignore
 
 ### 7.2 — Scripts
+
 - [ ] Update scripts/lint-js.sh (keep grep checks + add npx eslint)
 - [ ] Create scripts/format-js.sh (npx prettier --write .js)
 - [ ] Create scripts/format-css.sh (npx prettier --write .css)
 - [ ] Create scripts/format-html.sh (npx prettier --write .html)
 
 ### 7.3 — Fix ESLint errors
+
 - [ ] Run npx eslint, fix all errors to zero
 
 ### 7.4 — Verify
+
 - [ ] Commit: chore(eslint): install ESLint + Prettier, add format scripts
 
 ---
@@ -231,6 +267,7 @@
 ## Phase 8 — SEO Fixes
 
 ### 8.1 — Add meta descriptions
+
 - [ ] 404.html
 - [ ] google-site-verification.html
 - [ ] yandex_7847a6427bfa1388.html
@@ -243,10 +280,12 @@
 - [ ] pages/payment/success.html
 
 ### 8.2 — Shorten long <title> tags (>70 chars)
+
 - [ ] Detect all: awk '/<title>/{gsub(/<[^>]+>/,"",$0); if(length($0)>70) print FILENAME": "$0}'
 - [ ] Fix ~12 pages (terms.html, contact.html, herbal-infusions.html, etc.)
 
 ### 8.3 — Verify
+
 - [ ] scripts/test-one.sh test/smoke/seo.test.sh → pass
 - [ ] Commit: fix(seo): add meta descriptions and shorten long titles
 
@@ -255,6 +294,7 @@
 ## Phase 9 — AGENTS.md + TODO.md
 
 ### 9.1 — Update AGENTS.md
+
 - [ ] Shell section: yash → /bin/sh (POSIX)
 - [ ] File layout: add scripts/awk/, scripts/sed/, scripts/jq/, scripts/bc/, data/, test/headless/, test/e2e/, partials/
 - [ ] Commands: add lint-shellcheck, format-js/css/html, test-headless, generate-partials, lint-partials, lint-data, all new AWK/SED/JQ/BC scripts
@@ -265,6 +305,7 @@
 - [ ] Validation sequence: expand to all new lint scripts and test directories
 
 ### 9.2 — Rewrite TODO.md
+
 - [ ] Remove all npm-based conflicting tasks
 - [ ] POSIX-aligned task list grouped by phase
 - [ ] Status banner: current phase at top
@@ -275,6 +316,7 @@
 ## Phase 10 — Validate + Commit + Squash-Merge
 
 ### 10.1 — Full validation
+
 - [ ] scripts/lint-json.sh
 - [ ] scripts/lint-shellcheck.sh
 - [ ] scripts/lint-shell.sh
@@ -287,11 +329,13 @@
 - [ ] scripts/serve.sh start && scripts/test-headless.sh && scripts/serve.sh stop
 
 ### 10.2 — Squash-merge
+
 - [ ] git checkout feature/enhance-ui-ux
 - [ ] git merge --squash feature/static-first
 - [ ] git commit -m "refactor(static-first): comprehensive infrastructure + tests + POSIX migration"
 
 ### 10.3 — Post-merge cleanup
+
 - [ ] git fsck --full
 - [ ] git worktree list (clean up any stale)
 - [ ] git log --oneline -3
@@ -301,6 +345,7 @@
 ## Commit History Reference
 
 feature/static-first has 115 commits total. Recent infrastructure commits:
+
 - a498a6d feat(eslint): add ESLint + Prettier with format scripts and fix lint errors
 - 4b499a7 feat(partials): add .txt partials infrastructure and flat-file data
 - 73b6be3 fix(seo): shorten titles to <=70 chars and add meta descriptions

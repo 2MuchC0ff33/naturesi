@@ -1,4 +1,5 @@
 #!/bin/sh
+set -eu
 # scripts/format-html.sh — Format HTML files with Prettier
 # Usage: scripts/format-html.sh [file.html...]
 
@@ -13,7 +14,7 @@ if [ $# -eq 0 ]; then
         printf 'No HTML files found.\n'
         exit 0
     fi
-    npx prettier --write $FILES 2>&1 | head -20
+    npx prettier --write "$FILES" 2>&1 | head -20
 else
     npx prettier --write "$@" 2>&1
 fi

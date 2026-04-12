@@ -1,4 +1,5 @@
 #!/bin/sh
+set -eu
 # scripts/format-css.sh — Format CSS files with Prettier
 # Usage: scripts/format-css.sh [file.css...]
 
@@ -13,7 +14,7 @@ if [ $# -eq 0 ]; then
         printf 'No CSS files found.\n'
         exit 0
     fi
-    npx prettier --write $FILES 2>&1 | head -20
+    npx prettier --write "$FILES" 2>&1 | head -20
 else
     npx prettier --write "$@" 2>&1
 fi

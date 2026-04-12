@@ -1,4 +1,5 @@
 #!/bin/sh
+set -eu
 # scripts/validate-products.sh — POSIX product CSV validator (pipe-delimited)
 # Checks: required fields present, unique IDs, valid prices, valid categories
 

@@ -10,7 +10,7 @@ set -u
 TOTAL=0
 ERRORS=0
 
-for f in $(find . -name '*.sh' -type f 2>/dev/null | grep -v '/node_modules/'); do
+for f in $(find . -name '*.sh' -type f 2>/dev/null | grep -v '/node_modules/' | grep -v '/.checksums/' | grep -v '/.patches/' | grep -v '/SCCS/'); do
     TOTAL=$((TOTAL + 1))
     result=$(shellcheck -s sh \
         --exclude=SC2034 \
