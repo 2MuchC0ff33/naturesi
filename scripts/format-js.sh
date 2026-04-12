@@ -1,4 +1,5 @@
 #!/bin/sh
+set -eu
 # scripts/format-js.sh — Format JS files with Prettier
 # Usage: scripts/format-js.sh [file.js...]
 
@@ -13,7 +14,7 @@ if [ $# -eq 0 ]; then
         printf 'No JS files found.\n'
         exit 0
     fi
-    npx prettier --write $FILES 2>&1 | head -20
+    npx prettier --write "$FILES" 2>&1 | head -20
 else
     npx prettier --write "$@" 2>&1
 fi

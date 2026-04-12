@@ -10,7 +10,7 @@ usage() {
 }
 
 if [ $# -eq 0 ] || [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
-    find . -name '*.sh' -type f 2>/dev/null | grep -v '/node_modules/' | while IFS= read -r f; do
+    find . -name '*.sh' -type f 2>/dev/null | grep -v '/node_modules/' | grep -v '/.checksums/' | grep -v '/.patches/' | grep -v '/SCCS/' | while IFS= read -r f; do
         "$0" "$f"
     done
     exit 0

@@ -1,4 +1,5 @@
 #!/bin/sh
+set -eu
 # scripts/lint-css.sh — POSIX CSS lint checks
 # Checks: no // comments, block comments /* ... */ only
 

@@ -1,4 +1,5 @@
 #!/bin/sh
+set -eu
 # scripts/watch.sh — File change watcher
 # Polls file mtimes; outputs changed file paths to stdout
 # Usage: scripts/watch.sh [--dir <root>] [--sleep <seconds>]
@@ -60,7 +61,8 @@ while true; do
         \) 2>/dev/null > "$CURRENT"
 
     while IFS= read -r f; do
-        mtime=$(get_mtime "$f" || echo "0")
+        # POSIX-correct fallback: mtime=0 if get_mtime fails
+        mtime=$(get_mtime "$f") || mtime=0
         prev=$(grep -F "$f" "$LAST_FILE" 2>/dev/null | cut -d' ' -f1 || true)
         if [ -n "$prev" ] && [ "$mtime" != "$prev" ]; then
             on_change "$f"
@@ -72,10 +74,11 @@ while true; do
 
     TMP_LAST=$(mktemp)
     while IFS= read -r f; do
-        mtime=$(get_mtime "$f" || echo "0")
-        printf '%s %s\n' "$mtime" "$f"
-    done < "$CURRENT" > "$TMP_LAST"
-    mv "$TMP_LAST" "$LAST_FILE"
+    # POSIX-correct fallback: mtime=0 if get_mtime fails
+    mtime=$(get_mtime "$f") || mtime=0
+    printf '%s %s\n' "$mtime" "$f"
+done < "$CURRENT" > "$TMP_LAST"
+mv "$TMP_LAST" "$LAST_FILE"
     rm -f "$CURRENT"
 
     sleep "$SLEEP"

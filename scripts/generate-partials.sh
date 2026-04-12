@@ -1,4 +1,5 @@
 #!/bin/sh
+set -eu
 # scripts/generate-partials.sh — Pre-deploy: inject .txt partials into HTML at INCLUDE markers
 # Usage: scripts/generate-partials.sh [--dry-run]
 # Run from repo root: ./scripts/generate-partials.sh

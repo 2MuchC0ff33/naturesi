@@ -1,4 +1,5 @@
 #!/bin/sh
+set -eu
 # scripts/process_html.sh — POSIX: process HTML files with Tidy (run once, fail fast)
 
 set -u
@@ -36,8 +37,8 @@ run_tidy() {
         rm -f "$log_file"
     elif [ "$exit_code" -eq 2 ]; then
         echo "Errors in $file. Log: $PWD/$log_file"
-        echo "Key errors:"
-        head -20 "$log_file"  # Print first 20 lines of log for visibility
+echo "Key errors:"
+head -20 "$log_file"
         rm -f tidy_config.txt "$TMP_FILES"
         exit 1  # Fail fast
     else
