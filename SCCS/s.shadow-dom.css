@@ -1,0 +1,35 @@
+h01178
+s 00023/00000/00000
+d D 1.1 26/04/12 13:56:43 twomuchcoffee 1 0
+c date and time created 26/04/12 13:56:43 by twomuchcoffee
+e
+u
+U
+f e 0
+t
+T
+I 1
+/* templates/shadow-dom.css
+   Purpose: Styles intended for Shadow DOM hosts or to be injected into shadow roots.
+   Notes: Use only when a component requires encapsulation (web components) — keep minimal.
+*/
+
+/* templates/shadow-dom.css
+   Styles intended for Shadow DOM hosts or to be injected into shadow roots.
+   Keep minimal and only for components that actually use Shadow DOM.
+*/
+
+:root {
+  /* host-level variables that may be reflected into shadow hosts */
+}
+
+/* Example host utilities - to be used sparingly */
+.shadow-host {
+  display: block;
+}
+
+.shadow-host:focus-within {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+E 1

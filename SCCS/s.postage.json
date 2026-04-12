@@ -1,0 +1,80 @@
+h30212
+s 00068/00000/00000
+d D 1.1 26/04/12 13:56:44 twomuchcoffee 1 0
+c date and time created 26/04/12 13:56:44 by twomuchcoffee
+e
+u
+U
+f e 0
+t
+T
+I 1
+{
+  "meta": {
+    "version": "1.0.0",
+    "source": "Australia Post (Flat Rate, Parkwood WA)",
+    "lastUpdated": "2026-01-21"
+  },
+  "baseRates": {
+    "pouch": {
+      "sameCity": 13,
+      "nearMetro": 13,
+      "outerPerth": 13,
+      "national": 13
+    },
+    "satchel": {
+      "sameCity": 15,
+      "nearMetro": 15,
+      "outerPerth": 15,
+      "national": 15
+    },
+    "handbag": {
+      "sameCity": 19,
+      "nearMetro": 19,
+      "outerPerth": 19,
+      "national": 19
+    },
+    "shoebox": {
+      "sameCity": 24,
+      "nearMetro": 24,
+      "outerPerth": 24,
+      "national": 24
+    },
+    "briefcase": {
+      "sameCity": 29,
+      "nearMetro": 29,
+      "outerPerth": 29,
+      "national": 29
+    },
+    "carryon": null,
+    "duffle": null,
+    "checkin": null
+  },
+  "regionalSurcharge": {
+    "pouch": 0.0,
+    "satchel": 0.0,
+    "handbag": 0.0,
+    "shoebox": 0.0,
+    "briefcase": 0.0,
+    "carryon": null,
+    "duffle": null,
+    "checkin": null
+  },
+  "remoteSurcharge": {
+    "pouch": 0.0,
+    "satchel": 0.0,
+    "handbag": 0.0,
+    "shoebox": 0.0,
+    "briefcase": 0.0,
+    "carryon": null,
+    "duffle": null,
+    "checkin": null
+  },
+  "remoteWaNtExtra": {
+    "briefcase": null,
+    "carryon": null,
+    "checkin": null
+  },
+  "overLengthSurcharge": null
+}
+E 1

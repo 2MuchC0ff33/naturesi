@@ -1,0 +1,71 @@
+h33286
+s 00059/00000/00000
+d D 1.1 26/04/12 13:56:44 twomuchcoffee 1 0
+c date and time created 26/04/12 13:56:44 by twomuchcoffee
+e
+u
+U
+f e 0
+t
+T
+I 1
+{
+  "categories": [
+    {
+      "slug": "",
+      "label": "Show All",
+      "href": "/pages/store.html"
+    },
+    {
+      "slug": "wellness-blends",
+      "label": "Wellness Blends",
+      "href": "/pages/store/wellness-blends.html"
+    },
+    {
+      "slug": "artisan-blends",
+      "label": "Artisan Blends",
+      "href": "/pages/store/artisan-blends.html"
+    },
+    {
+      "slug": "herbal-infusions",
+      "label": "Herbal Infusions",
+      "href": "/pages/store/herbal-infusions.html"
+    },
+    {
+      "slug": "black-tea",
+      "label": "Black Tea",
+      "href": "/pages/store/black-tea.html"
+    },
+    {
+      "slug": "green-tea",
+      "label": "Green Tea",
+      "href": "/pages/store/green-tea.html"
+    },
+    {
+      "slug": "ice-tea",
+      "label": "Ice Tea",
+      "href": "/pages/store/ice-tea.html"
+    },
+    {
+      "slug": "balms",
+      "label": "Herbal Balms",
+      "href": "/pages/store/balms.html"
+    },
+    {
+      "slug": "creams",
+      "label": "Herbal Creams",
+      "href": "/pages/store/creams.html"
+    },
+    {
+      "slug": "selfcare",
+      "label": "Self Care",
+      "href": "/pages/store/selfcare.html"
+    },
+    {
+      "slug": "accessories",
+      "label": "Accessories",
+      "href": "/pages/store/accessories.html"
+    }
+  ]
+}
+E 1

@@ -1,0 +1,30 @@
+h49629
+s 00018/00000/00000
+d D 1.1 26/04/12 13:56:43 twomuchcoffee 1 0
+c date and time created 26/04/12 13:56:43 by twomuchcoffee
+e
+u
+U
+f e 0
+t
+T
+I 1
+/* Page / site title styles (Elements layer)
+   Purpose: Provide a small, mobile-first title utility used for page headings
+   Keep low specificity, composable with .prose and existing headings */
+.page-title,
+.site-title {
+  display: block;
+  margin: 0 0 var(--space-xs);
+  line-height: 1.06;
+  font-weight: 700;
+  font-size: clamp(1.25rem, 3.5vw, 1.75rem);
+}
+
+.page-subtitle {
+  display: block;
+  margin: 0 0 var(--space-xs);
+  color: var(--color-muted);
+  font-size: 0.95rem;
+}
+E 1

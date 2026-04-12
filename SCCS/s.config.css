@@ -1,0 +1,30 @@
+h51793
+s 00018/00000/00000
+d D 1.1 26/04/12 13:56:43 twomuchcoffee 1 0
+c date and time created 26/04/12 13:56:43 by twomuchcoffee
+e
+u
+U
+f e 0
+t
+T
+I 1
+/* ==========================================================================
+Global configuration
+Holds broad configuration tokens and feature flags (non-design tokens)
+========================================================================== */
+
+:root {
+  /* Feature flags / system defaults */
+  --enable-experimental-grid: 0;
+}
+
+/* Respect user preference for reduced motion by default */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition-fast: 0ms;
+    --transition-medium: 0ms;
+    --transition-slow: 0ms;
+  }
+}
+E 1

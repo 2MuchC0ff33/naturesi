@@ -1,0 +1,265 @@
+h62898
+s 00253/00000/00000
+d D 1.1 26/04/12 13:56:43 twomuchcoffee 1 0
+c date and time created 26/04/12 13:56:43 by twomuchcoffee
+e
+u
+U
+f e 0
+t
+T
+I 1
+/* Utilities – spacing helper aliases (map to design tokens in settings) */
+
+/* Spacing helpers: gap, space, padding, margin. Mobile-first, rem-based. */
+.u-p-0 {
+  padding: 0 !important;
+}
+
+.u-p-1 {
+  padding: 0.25rem !important;
+}
+
+.u-p-2 {
+  padding: 0.5rem !important;
+}
+
+.u-p-3 {
+  padding: 1rem !important;
+}
+
+.u-p-4 {
+  padding: 2rem !important;
+}
+
+.u-m-0 {
+  margin: 0 !important;
+}
+
+.u-m-1 {
+  margin: 0.25rem !important;
+}
+
+.u-m-2 {
+  margin: 0.5rem !important;
+}
+
+.u-m-3 {
+  margin: 1rem !important;
+}
+
+.u-m-4 {
+  margin: 2rem !important;
+}
+
+/* Padding aliases */
+.u-p-sm {
+  padding: var(--space-sm);
+}
+
+.u-p-md {
+  padding: var(--space-md);
+}
+
+/* Margin aliases */
+.u-mt-sm {
+  margin-top: var(--space-sm);
+}
+
+.u-mb-md {
+  margin-bottom: var(--space-md);
+}
+
+/* Simple single-step spacing helpers */
+.u-mt-1 {
+  margin-top: var(--space-xs);
+}
+
+.u-mt-2 {
+  margin-top: var(--space-sm);
+}
+
+.u-mt-3 {
+  margin-top: var(--space-md);
+}
+
+.u-mt-4 {
+  margin-top: var(--space-lg);
+}
+
+.u-mb-1 {
+  margin-bottom: var(--space-xs);
+}
+
+.u-mb-2 {
+  margin-bottom: var(--space-sm);
+}
+
+.u-mb-3 {
+  margin-bottom: var(--space-md);
+}
+
+.u-mb-4 {
+  margin-bottom: var(--space-lg);
+}
+
+/* Axis helpers (composable) */
+.u-ml-0 {
+  margin-left: 0 !important;
+}
+
+.u-mr-0 {
+  margin-right: 0 !important;
+}
+
+.u-mx-0 {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.u-ml-1 {
+  margin-left: var(--space-xs) !important;
+}
+
+.u-mr-1 {
+  margin-right: var(--space-xs) !important;
+}
+
+.u-mx-1 {
+  margin-left: var(--space-xs) !important;
+  margin-right: var(--space-xs) !important;
+}
+
+.u-ml-2 {
+  margin-left: var(--space-sm) !important;
+}
+
+.u-mr-2 {
+  margin-right: var(--space-sm) !important;
+}
+
+.u-mx-2 {
+  margin-left: var(--space-sm) !important;
+  margin-right: var(--space-sm) !important;
+}
+
+.u-ml-3 {
+  margin-left: var(--space-md) !important;
+}
+
+.u-mr-3 {
+  margin-right: var(--space-md) !important;
+}
+
+.u-mx-3 {
+  margin-left: var(--space-md) !important;
+  margin-right: var(--space-md) !important;
+}
+
+/* Vertical axis helpers */
+.u-my-0 {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.u-my-1 {
+  margin-top: var(--space-xs) !important;
+  margin-bottom: var(--space-xs) !important;
+}
+
+.u-my-2 {
+  margin-top: var(--space-sm) !important;
+  margin-bottom: var(--space-sm) !important;
+}
+
+.u-my-3 {
+  margin-top: var(--space-md) !important;
+  margin-bottom: var(--space-md) !important;
+}
+
+/* Padding axis helpers */
+.u-pl-0 {
+  padding-left: 0 !important;
+}
+
+.u-pr-0 {
+  padding-right: 0 !important;
+}
+
+.u-px-0 {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.u-pl-1 {
+  padding-left: var(--space-xs) !important;
+}
+
+.u-pr-1 {
+  padding-right: var(--space-xs) !important;
+}
+
+.u-px-1 {
+  padding-left: var(--space-xs) !important;
+  padding-right: var(--space-xs) !important;
+}
+
+.u-pl-2 {
+  padding-left: var(--space-sm) !important;
+}
+
+.u-pr-2 {
+  padding-right: var(--space-sm) !important;
+}
+
+.u-px-2 {
+  padding-left: var(--space-sm) !important;
+  padding-right: var(--space-sm) !important;
+}
+
+.u-py-0 {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.u-py-1 {
+  padding-top: var(--space-xs) !important;
+  padding-bottom: var(--space-xs) !important;
+}
+
+.u-py-2 {
+  padding-top: var(--space-sm) !important;
+  padding-bottom: var(--space-sm) !important;
+}
+
+/* Responsive spacing modifiers (mobile-first — apply at larger viewports) */
+@media (min-width: 601px) {
+  .u-mt-md {
+    margin-top: var(--space-md) !important;
+  }
+
+  .u-mb-md {
+    margin-bottom: var(--space-md) !important;
+  }
+
+  .u-mx-md {
+    margin-left: var(--space-md) !important;
+    margin-right: var(--space-md) !important;
+  }
+}
+
+@media (min-width: 1025px) {
+  .u-mt-lg {
+    margin-top: var(--space-lg) !important;
+  }
+
+  .u-mb-lg {
+    margin-bottom: var(--space-lg) !important;
+  }
+
+  .u-mx-lg {
+    margin-left: var(--space-lg) !important;
+    margin-right: var(--space-lg) !important;
+  }
+}
+E 1

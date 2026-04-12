@@ -1,0 +1,59 @@
+h19037
+s 00047/00000/00000
+d D 1.1 26/04/12 13:56:43 twomuchcoffee 1 0
+c date and time created 26/04/12 13:56:43 by twomuchcoffee
+e
+u
+U
+f e 0
+t
+T
+I 1
+/* Migrated from reset.css — Normalize primitives
+   Purpose: cross-browser normalization for media elements, tables and frames.
+   Extracted from assets/css/partials/reset.css.
+*/
+
+/* Media elements */
+img,
+svg,
+video {
+  /* Prevent baseline alignment gaps on inline replaced elements */
+  vertical-align: middle;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Ensure media does not overflow its container */
+img { max-inline-size: 100%; max-block-size: 100%; }
+
+/* Embedded content */
+iframe {
+  border: 0;
+}
+
+/* Tables */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+td, th {
+  padding: 0;
+}
+
+/* Form-related micro-fixes */
+::-webkit-inner-spin-button,
+::-webkit-outer-spin-button {
+  height: auto;
+}
+
+::-webkit-input-placeholder { color: inherit; opacity: .5; }
+
+:where(dialog) { display: block; }
+:where(dialog:not([open])) { display: none; }
+E 1

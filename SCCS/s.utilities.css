@@ -1,0 +1,23 @@
+h03048
+s 00011/00000/00000
+d D 1.1 26/04/12 13:56:43 twomuchcoffee 1 0
+c date and time created 26/04/12 13:56:43 by twomuchcoffee
+e
+u
+U
+f e 0
+t
+T
+I 1
+/* ==========================================================================
+Utility helpers (small, documented utilities)
+Naming convention: prefix helpers with `u-` to avoid collisions with components.
+
+Helpers are now split into focused partials under `partials/utilities/`.
+See `display.css`, `grouping.css`, `typography-helpers.css`, `visibility.css` and `center.css`.
+========================================================================== */
+
+/* Deprecated: consolidated into focused utilities partials to improve discoverability
+   and avoid duplication across components and tools. Old `u-` names remain valid while
+   the new partials become the authoritative source. */
+E 1

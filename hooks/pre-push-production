@@ -1,0 +1,49 @@
+#!/bin/sh
+# .git/hooks/pre-push — Block direct pushes to main branch
+# Purpose: Enforce code review workflow
+# To enable: cp .git/hooks/pre-push-production .git/hooks/pre-push && chmod +x .git/hooks/pre-push
+
+REMOTE="$1"
+URL="$2"
+
+Z40=0000000000000000000000000000000000000000
+
+while IFS= read -r LOCAL_REF LOCAL_SHA REMOTE_REF REMOTE_SHA; do
+    case "$REMOTE_REF" in
+        refs/heads/main)
+            if [ "$LOCAL_SHA" != "$Z40" ]; then
+                echo "=============================================="
+                echo "PRE-PUSH HOOK: BLOCKED"
+                echo "=============================================="
+                echo ""
+                echo "You are attempting to push directly to main."
+                echo ""
+                echo "Workflow:"
+                echo "  1. Merge to staging first"
+                echo "  2. Review changes in staging"
+                echo "  3. Merge staging to main"
+                echo ""
+                echo "To push to staging:"
+                echo "  git push origin <branch>:staging"
+                echo ""
+                echo "To temporarily bypass (NOT recommended):"
+                echo "  git push --no-verify origin <branch>:main"
+                echo ""
+                exit 1
+            fi
+            ;;
+        refs/heads/staging)
+            echo "=============================================="
+            echo "INFO: Pushing to staging branch"
+            echo "=============================================="
+            echo ""
+            echo "Remember:"
+            echo "  - Review changes before merging to main"
+            echo "  - Run production diff check"
+            echo "  - Test thoroughly before production"
+            echo ""
+            ;;
+    esac
+done
+
+exit 0

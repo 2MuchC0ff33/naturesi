@@ -1,0 +1,243 @@
+h11789
+s 00231/00000/00000
+d D 1.1 26/04/12 13:56:43 twomuchcoffee 1 0
+c date and time created 26/04/12 13:56:43 by twomuchcoffee
+e
+u
+U
+f e 0
+t
+T
+I 1
+/* ==========================================================================
+Form controls and buttons
+Contains inputs, selects, textarea and button styles as well as the primary
+button look used across the site.
+========================================================================== */
+button,
+input,
+select,
+textarea {
+  margin: 0;
+  min-width: 24px;
+  /* WCAG 2.2: Ensure minimum target size */
+  min-height: 24px;
+  /* Ensure controls inherit typography and colour after global resets */
+  font: inherit;
+  color: inherit;
+}
+
+/* Restore native markers and accessible sizing for radios and checkboxes.
+   The project reset applies `all: unset` to inputs in `reset.css`, which
+   removes UA-rendered controls (radio/checkbox visuals). Add explicit
+   rules so these controls remain visible, keyboard-accessible and match
+   the site's accent color. */
+input[type='radio'] {
+  -webkit-appearance: radio;
+  appearance: auto;
+  width: 1.15em;
+  height: 1.15em;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 0.5rem 0 0;
+  cursor: pointer;
+  accent-color: var(--color-accent);
+}
+
+input[type='checkbox'] {
+  -webkit-appearance: checkbox;
+  appearance: auto;
+  width: 1.15em;
+  height: 1.15em;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 0.5rem 0 0;
+  cursor: pointer;
+  accent-color: var(--color-accent);
+}
+
+/* Visible focus for assistive keyboard users */
+input[type='radio']:focus-visible,
+input[type='checkbox']:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--color-accent) 60%, transparent);
+  outline-offset: 2px;
+  border-radius: 0.25rem;
+}
+
+/* Increase baseline touch area on small screens */
+@media (max-width: 640px) {
+  button,
+  input,
+  select,
+  textarea {
+    min-height: 44px;
+    padding: 0.6rem 0.75rem;
+  }
+}
+
+textarea {
+  resize: vertical;
+}
+
+button {
+  background-color: var(--color-accent);
+  color: white;
+  border: none;
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
+  font-weight: 500;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Field and help text utilities */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.field--inline {
+  flex-direction: row;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.help-text {
+  font-size: 0.9rem;
+  color: var(--color-muted);
+}
+
+/* Add-to-cart buttons: style submit buttons inside `.add-to-cart` forms as primary CTAs
+   This avoids editing multiple templates and keeps behaviour additive and safe. */
+.add-to-cart [type='submit'],
+.add-to-cart button[type='submit'] {
+  background: var(--color-accent) !important;
+  color: #fff !important;
+  border-color: transparent;
+}
+
+.add-to-cart [type='submit']:focus-visible,
+.add-to-cart button[type='submit']:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--color-accent) 60%, transparent);
+  outline-offset: 2px;
+}
+
+/* Specific styling for add-to-cart buttons with btn-add-to-cart class */
+.btn-add-to-cart {
+  background: var(--color-accent);
+  color: #fff;
+  border-color: transparent;
+}
+
+/* Ensure buttons in the cart section have white text for visibility */
+#cart button {
+  color: white;
+}
+
+/* Ensure the Proceed to Checkout button has white text for visibility */
+#btn-proceed-checkout {
+  color: white;
+}
+
+/* Ensure the PayPal redirect button has white text for visibility */
+#pay-now-redirect {
+  color: white;
+}
+
+/* Button hover + focus (moved link hover to `partials/elements/links.css`) */
+button:hover,
+button:focus-visible {
+  color: color-mix(in srgb, var(--color-accent) 90%, black);
+  background-color: color-mix(in srgb, var(--color-accent) 90%, black);
+}
+
+.site-search .search-box {
+  flex: 1 1 auto;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: 0 0.6rem;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  line-height: 1.1;
+  height: 36px;
+  background: white;
+  color: var(--color-text);
+}
+
+.site-search .search-box,
+.site-search .search-box::placeholder {
+  color: var(--color-text);
+}
+
+.site-search .search-icon {
+  color: #2a3d3c;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-highlight);
+  border: 1px solid var(--color-border);
+  padding: 0.18rem;
+  border-radius: 6px;
+}
+
+/* make search dropdown and controls more forgiving on small screens */
+@media (max-width: 640px) {
+  /* Mobile-first stacking: canonical search presentation for small screens */
+  .site-search {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .site-search .search-box {
+    height: 44px;
+  }
+
+  .site-search .search-box,
+  .site-search .search-dropdown,
+  #site-category-select,
+  .category-dropdown,
+  .category-dropdown summary {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Hide search icon on mobile - just show the input field */
+  .site-search .search-icon {
+    display: none;
+  }
+}
+
+/* Compact mobile search styles for very small screens */
+@media (max-width: 480px) {
+  .site-search {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.25rem;
+    width: 100%;
+    max-width: none;
+  }
+
+  .site-search .search-box {
+    height: 40px;
+    /* Increased from 32px to match button height for balanced alignment */
+    padding: 0 0.75rem;
+    /* Increased padding for less cramped appearance */
+    border-radius: 4px;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .site-search .search-icon {
+    min-width: 40px;
+    min-height: 40px;
+    padding: 0.25rem;
+    border-radius: 4px;
+  }
+}
+E 1

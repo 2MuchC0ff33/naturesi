@@ -1,0 +1,29 @@
+h50707
+s 00017/00000/00000
+d D 1.1 26/04/12 13:56:43 twomuchcoffee 1 0
+c date and time created 26/04/12 13:56:43 by twomuchcoffee
+e
+u
+U
+f e 0
+t
+T
+I 1
+/* ==========================================================================
+Media helpers and responsive utilities
+Use for image/video helpers and responsive media rules
+========================================================================== */
+
+/* Responsive media helpers moved to objects layer: partials/objects/media-object.css */
+
+/* Useful figure/figcaption baseline */
+figure {
+  margin: 0;
+}
+
+figure figcaption {
+  font-size: 0.95rem;
+  color: var(--muted-color, #6b7280);
+  margin-top: var(--space-xs);
+}
+E 1

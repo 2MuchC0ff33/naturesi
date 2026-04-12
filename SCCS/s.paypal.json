@@ -1,0 +1,21 @@
+h30077
+s 00009/00000/00000
+d D 1.1 26/04/12 13:56:44 twomuchcoffee 1 0
+c date and time created 26/04/12 13:56:44 by twomuchcoffee
+e
+u
+U
+f e 0
+t
+T
+I 1
+{
+  "clientId": "AckDjNxIe4cxbIzmY_MURmDXTf1S5fta02QZ0e7e536TWm1WEhzBMbIt6BNMopb54WPhamt5rCHV14s_",
+  "merchantId": "3L28UMMX3VYCG",
+  "env": "production",
+  "email": "tea@naturesinfusions.com.au",
+  "useSdk": true,
+  "currency": "AUD",
+  "intent": "capture"
+}
+E 1

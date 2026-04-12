@@ -1,0 +1,25 @@
+h27179
+s 00013/00000/00000
+d D 1.1 26/04/12 13:56:43 twomuchcoffee 1 0
+c date and time created 26/04/12 13:56:43 by twomuchcoffee
+e
+u
+U
+f e 0
+t
+T
+I 1
+/* Utilities – performance/optimization helpers */
+
+.u-will-change-transform {
+  will-change: transform;
+}
+
+.u-will-change-opacity {
+  will-change: opacity;
+}
+
+.u-will-change-top {
+  will-change: top;
+}
+E 1

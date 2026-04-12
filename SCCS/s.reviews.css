@@ -1,0 +1,72 @@
+h33010
+s 00060/00000/00000
+d D 1.1 26/04/12 13:56:43 twomuchcoffee 1 0
+c date and time created 26/04/12 13:56:43 by twomuchcoffee
+e
+u
+U
+f e 0
+t
+T
+I 1
+/* components/reviews.css
+   Purpose: Styles for reviews/testimonials on the homepage
+*/
+#reviews {
+  margin: var(--space-lg) 0;
+}
+
+.reviews-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.review {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: flex-start;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent);
+  padding: var(--space-sm);
+  border-radius: var(--radius-sm);
+}
+
+.review__body {
+  flex: 1 1 auto;
+}
+
+.review__meta {
+  display: flex;
+  gap: var(--space-xs);
+  align-items: center;
+  margin-bottom: var(--space-xs);
+}
+
+.review__name {
+  font-weight: 700;
+}
+
+.review__product {
+  font-size: 0.8rem;
+  color: color-mix(in srgb, var(--color-accent) 75%, var(--color-text));
+  margin: var(--space-xs) 0 0;
+}
+
+.review__text {
+  color: color-mix(in srgb, var(--color-text) 78%, #0000);
+  margin: 0;
+  font-style: italic;
+}
+
+@media (min-width: 640px) {
+  .reviews-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1000px) {
+  .reviews-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+E 1

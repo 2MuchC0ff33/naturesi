@@ -1,7 +1,9 @@
 {
-  "clientId": "AXWUIJd-0IpLUHC0n08wc9WwWrNT902tOTUxmN5l-xkphu_p0Jzlncl_zMZV4mmwa-RVVprlfYENVYD6",
-  "env": "sandbox",
+  "clientId": "AckDjNxIe4cxbIzmY_MURmDXTf1S5fta02QZ0e7e536TWm1WEhzBMbIt6BNMopb54WPhamt5rCHV14s_",
+  "merchantId": "3L28UMMX3VYCG",
+  "env": "production",
   "email": "tea@naturesinfusions.com.au",
-  "sandboxMerchant": "sb-bd25a46998755@business.example.com",
-  "useSdk": false
+  "useSdk": true,
+  "currency": "AUD",
+  "intent": "capture"
 }

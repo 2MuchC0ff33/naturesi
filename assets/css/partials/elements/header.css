@@ -107,7 +107,6 @@ Core header bar, logo treatment and colour gradient live here.
 }
 
 @media (min-width: 900px) {
-
   .site-nav .logo img,
   .site-nav .all-logo img {
     max-height: 120px;
@@ -115,7 +114,6 @@ Core header bar, logo treatment and colour gradient live here.
 }
 
 @media (min-width: 1200px) {
-
   .site-nav .logo img,
   .site-nav .all-logo img {
     max-height: 140px;
@@ -283,7 +281,6 @@ Core header bar, logo treatment and colour gradient live here.
   pointer-events: none;
 }
 
-
 .hero blockquote,
 .hero #tagline {
   color: color-mix(in srgb, var(--color-text) 86%, #0000);
@@ -337,7 +334,6 @@ Core header bar, logo treatment and colour gradient live here.
 
 /* Nav toggle (presentation and mobile behaviour) moved to `partials/components/navigation-menu.css` */
 
-
 /* Small screens: hide the center area by default and show the nav-toggle.
    When the navigation is opened (.site-nav--open) the nav-center becomes visible. */
 @media (max-width: 900px) {
@@ -389,7 +385,6 @@ body.nav-open {
 
 /* Ensure touch targets meet WCAG / mobile guidelines on small screens */
 @media (max-width: 640px) {
-
   /* increase hit area for icons and interactive nav items */
   .site-nav .logo,
   .site-nav .search-icon,
@@ -407,7 +402,6 @@ body.nav-open {
    Acceptance: header stacks vertically on phones, no horizontal overflow,
    category select and search become full-width, skip-link placement adjusted. */
 @media (max-width: 640px) {
-
   /* Make the header a single column so the center controls can't force a wide row */
   .site-nav {
     grid-template-columns: 1fr;
@@ -456,7 +450,6 @@ body.nav-open {
      specificity. Any layout overrides specific to header should be added
      in a tightly-scoped rule here when absolutely necessary. */
 
-
   /* Category select to full width so long option text doesn't cause overflow */
   #site-category-select {
     width: 100%;
@@ -469,13 +462,11 @@ body.nav-open {
     flex: 0 0 auto;
   }
 }
-}
 
 /* Small-screen overflow safeguards: prevent horizontal scrolling caused by
    elements with fixed/min-widths or viewport-width calculations. These are
    conservative rules applied only on small screens. */
 @media (max-width: 640px) {
-
   /* Ensure header cannot exceed viewport width and allow children to shrink */
   #site-header,
   .site-nav {
@@ -502,7 +493,6 @@ body.nav-open {
 
 /* Extra strong overrides for small screens to eliminate header overflow */
 @media (max-width: 640px) {
-
   /* Allow nav sections to wrap content instead of forcing no-wrap */
   .site-nav .nav-left,
   .site-nav .nav-center,
@@ -541,7 +531,6 @@ navigation elements in a single compact row while maintaining accessibility.
 ========================================================================== */
 
 @media (max-width: 480px) {
-
   /* Switch from stacked grid to horizontal flexbox for compact layout */
   .site-nav {
     display: flex;

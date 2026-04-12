@@ -1,0 +1,93 @@
+h35408
+s 00081/00000/00000
+d D 1.1 26/04/12 13:56:43 twomuchcoffee 1 0
+c date and time created 26/04/12 13:56:43 by twomuchcoffee
+e
+u
+U
+f e 0
+t
+T
+I 1
+/* Categories nav component: single-row desktop, horizontal-scroll mobile */
+.site-header__categories {
+  border-top: 1px solid var(--color-border, #e6e6e6);
+  background: #346967;
+}
+
+.site-header__categories-list {
+  margin: 0;
+  padding: 0 var(--space-sm, 0.5rem);
+  display: flex;
+  gap: var(--space-xs, 0.5rem);
+  list-style: none;
+  align-items: center;
+  overflow: hidden;
+  /* desktop: no scroll */
+  white-space: nowrap;
+  /* keep items on single row */
+}
+
+.site-header__categories-list li {
+  flex: 0 0 auto;
+}
+
+.site-header__categories-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.6rem;
+  color: #fff;
+  text-decoration: none;
+  font-size: clamp(0.75rem, 0.8vw, 0.875rem);
+  max-width: 12rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* Focus & accessible outline */
+.site-header__categories-link:focus,
+.site-header__categories-link:focus-visible {
+  outline: 3px solid rgba(255, 255, 255, 0.5);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Desktop / Tablet: prevent wrapping and try to keep all items on a single row */
+@media (min-width: 900px) {
+  .site-header__categories-list {
+    justify-content: center;
+    overflow: visible;
+  }
+}
+
+/* Mobile: allow horizontal scrolling for overflow (touch-friendly) */
+@media (max-width: 899px) {
+  .site-header__categories-list {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
+    gap: 0.5rem;
+    padding: 0 0.5rem;
+  }
+
+  .site-header__categories-list li {
+    scroll-snap-align: start;
+  }
+
+  .site-header__categories-link {
+    white-space: nowrap;
+  }
+}
+
+/* Ensure sufficient contrast - use color variables for theming */
+
+
+/* Minor utilities */
+.site-header__categories .sr-only,
+.site-header__categories .visually-hidden {
+  margin: 0;
+}
+E 1

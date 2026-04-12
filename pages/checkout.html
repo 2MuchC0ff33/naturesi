@@ -53,8 +53,8 @@
         <div class="nav-center-flex center-row">
           <form id="site-search-form" class="site-search" action="/search.html" role="search" aria-label="Search site"
           name="site-search-form">
-            <label for="site-search" class="visually-hidden">Search Nature's Infusions</label> <input id="site-search"
-            name="q" type="search" placeholder="Search Nature's Infusions" class="search-box" aria-label="Search site">
+            <label for="site-search" class="visually-hidden">Search</label> <input id="site-search"
+            name="q" type="search" placeholder="Search" class="search-box" aria-label="Search site">
             <button class="search-icon btn btn--ghost" aria-label="Submit search" type="submit">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
                 <circle cx="10" cy="10" r="6" stroke="currentColor" stroke-width="2"/>
@@ -66,7 +66,7 @@
       </div>
       <div class="nav-right" data-header-right="">
         <a class="cart-option" href="/pages/cart.html" aria-label="Cart">
-        <img src="/assets/img/cart.webp" alt="" width="24" height="24" aria-hidden="true"><output class="cart-count" name="cart-count" aria-live=
+        <img src="/assets/img/cart.webp" alt="Shopping cart" width="24" height="24"><output class="cart-count" name="cart-count" aria-live=
         "polite">0</output></a>
       </div>
     </nav>
@@ -92,86 +92,9 @@
       <p class="muted">No JavaScript required for product purchases — use the Buy Now buttons on product
       pages.</p></noscript>
       <div id="paypal-button-container" aria-label="PayPal payment options" data-paypal-button=""></div>
-      <form id="paypal-redirect-form" method="post" class="paypal-redirect" data-paypal-redirect-form="" action=
-      "https://www.sandbox.paypal.com/cgi-bin/webscr" aria-label="Proceed to PayPal" name="paypal-redirect-form">
-        <input type="hidden" name="cmd" value="_xclick"> <input type="hidden" name="business"> <input type="hidden"
-        name="item_name" id="pp-item_name" data-paypal-item_name=""> <input type="hidden" name="amount" id="pp-amount"
-        data-paypal-amount="" value="0.00"> <input type="hidden" name="currency_code" value="AUD"> <input type="hidden"
-        name="return" value="/pages/payment/success.html"> <input type="hidden" name="cancel_return" value=
-        "/pages/payment/fail.html"> <input type="hidden" name="rm" value="2"> <input type="hidden" name="notify_url"
-        id="pp-notify" data-paypal-notify=""> <input type="hidden" name="invoice" id="pp-invoice" data-paypal-invoice=
-        ""> <button id="pay-now-redirect" disabled data-pay-now="">Proceed to PayPal (Redirect)</button>
-      </form>
-      <div id="paypal-debug" class="muted visually-hidden font-mono small-text mt-sm" data-paypal-debug="">
-        Debug info hidden. Add ?debug=1 to the URL to view prepared PayPal form values.
-      </div>
     </section>
   </main>
-  <script>
-(function () {
-  var CART_KEY = 'naturesi_cart';
-  var form = document.getElementById('paypal-redirect-form');
-  var summary = document.getElementById('summary-content');
-  var errorEl = document.getElementById('checkout-error');
-  var btn = document.getElementById('pay-now-redirect');
-
-  function parseCart(raw) {
-    try {
-      var p = raw ? JSON.parse(raw) : null;
-      if (Array.isArray(p)) return { cart: p, shipping: 0 };
-      if (p && typeof p === 'object') return { cart: p.cart || [], shipping: p.shipping || 0 };
-    } catch (e) {}
-    return { cart: [], shipping: 0 };
-  }
-
-  function init() {
-    var raw = localStorage.getItem(CART_KEY);
-    var data = parseCart(raw);
-    var items = data.cart || [];
-    if (!items.length) {
-      if (errorEl) errorEl.textContent = 'Your cart is empty.';
-      if (btn) btn.disabled = true;
-      return;
-    }
-
-    var subtotal = 0;
-    var lines = items.map(function (it) {
-      var price = Number(it.price) || 0;
-      var qty = Number(it.qty || it.quantity || 1);
-      subtotal += price * qty;
-      return '<li>' + (it.name || it.title || it.id || 'Item') + ' &times; ' + qty + ' &mdash; $' + price.toFixed(2) + '</li>';
-    });
-
-    var shipping = Number(data.shipping) || 0;
-    var total = subtotal + shipping;
-    if (summary) {
-      summary.innerHTML = '<ul class="checkout-line-items">' + lines.join('') + '</ul><p>Subtotal: $' + subtotal.toFixed(2) + ' + Shipping: $' + shipping.toFixed(2) + ' = <strong>Total: $' + total.toFixed(2) + '</strong></p>';
-    }
-
-    var itemLabel = items.map(function (it) { return (it.qty || 1) + 'x ' + (it.name || it.title || it.id || ''); }).join(', ');
-    if (itemLabel.length > 127) itemLabel = itemLabel.slice(0, 124) + '...';
-
-    var amountEl = document.getElementById('pp-amount');
-    var itemNameEl = document.getElementById('pp-item_name');
-    var invoiceEl = document.getElementById('pp-invoice');
-
-    if (amountEl) amountEl.value = total.toFixed(2);
-    if (itemNameEl) itemNameEl.value = itemLabel;
-    if (invoiceEl) invoiceEl.value = 'NI-' + Date.now();
-    if (btn) btn.disabled = false;
-
-    if (form) {
-      form.addEventListener('submit', function () { form.submit(); });
-    }
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
-})();
-  </script>
+  <script type="module" src="/assets/js/app.js"></script>
 
 </body>
 </html>

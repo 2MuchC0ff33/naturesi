@@ -1,0 +1,75 @@
+diff --git a/scripts/validate-ftp.sh b/scripts/validate-ftp.sh
+index cdd803c..501794d 100755
+--- a/scripts/validate-ftp.sh
++++ b/scripts/validate-ftp.sh
+@@ -4,6 +4,9 @@
+ # Usage: scripts/validate-ftp.sh [--fix]
+ # Requires: .env with FTP_HOST, FTP_USER, FTP_PASS, FTP_REMOTE_PATH
+ # Exit: 0 = match, 1 = mismatch, 2 = FTP error
++# WARNING: This script only lists and validates files at the top level of the specified FTP directory (REMOTE_PATH) using curl/MLSD commands.
++# It does NOT scan recursively. Files and folders inside subdirectories on the server will NOT be seen or compared.
++# For full recursive FTP validation, an external tool (like lftp) must be integrated. This script is intentionally shallow for portability and minimum dependencies.
+ 
+ set -e
+ 
+diff --git a/test/headless/cart-add.test.sh b/test/headless/cart-add.test.sh
+index 5a81f54..31d6a51 100755
+--- a/test/headless/cart-add.test.sh
++++ b/test/headless/cart-add.test.sh
+@@ -16,24 +16,24 @@
+ fi
+ 
+ # Use JS to add item to localStorage then check cart count updates
+-JS='
+-(function() {
+-    // Clear cart first
+-    localStorage.removeItem("naturesi_cart");
+-    // Add test item
+-    var cart = { items: [{ id: "PROD-001", name: "Test Tea", size: "50g", price: 14.95, qty: 2 }] };
+-    localStorage.setItem("naturesi_cart", JSON.stringify(cart));
+-    // Return cart count
+-    return cart.items.reduce(function(s, i) { return s + i.qty; }, 0);
+-})();
+-'
++TMP_DIR="pages/tmp"
++mkdir -p "$TMP_DIR"
++TMP_PAGE="$TMP_DIR/__naturesi_set_cart.html"
++HTML='<!doctype html><html><head><meta charset="utf-8"><title></title><script>\n(function(){\n  try{\n    localStorage.removeItem("naturesi_cart");\n    var cart = { items: [{ id: "PROD-001", name: "Test Tea", size: "50g", price: 14.95, qty: 2 }] };\n    localStorage.setItem("naturesi_cart", JSON.stringify(cart));\n    document.title = cart.items.reduce(function(s,i){return s + i.qty;},0);\n  }catch(e){ document.title = "0"; }\n})();\n</script></head><body>Set cart</body></html>'
+ 
++printf '%s' "$HTML" > "$TMP_PAGE"
++
++# Build correct URL and load the temp page via HTTP so localStorage is available for the same origin
++BASE="${SITE_BASE_URL:-http://localhost:8000}"
++URL="$BASE/tmp/__naturesi_set_cart.html"
+ COUNT=$("$CHROMIUM" --headless --disable-gpu --no-sandbox \
+     --enable-logging --v=1 \
+     --virtual-time-budget=3000 \
+     --run-all-compositor-stages-before-draw \
+-    "data:text/html,<script>document.title=eval('${JS}');<\/script>" \
+-    --dump-dom 2>/dev/null | grep -oE '<title>[^<]+</title>' | sed 's/<[^>]*>//g') || COUNT="0"
++    "$URL" --dump-dom 2>/dev/null | grep -oE '<title>[^<]+</title>' | sed 's/<[^>]*>//g') || COUNT="0"
++
++# Clean up the temp file
++rm -f "$TMP_PAGE" || true
+ 
+ COUNT=${COUNT:-0}
+ 
+diff --git a/test/headless/full-checkout-flow.test.sh b/test/headless/full-checkout-flow.test.sh
+index f6e7f32..6167db9 100755
+--- a/test/headless/full-checkout-flow.test.sh
++++ b/test/headless/full-checkout-flow.test.sh
+@@ -122,9 +122,11 @@ test_checkout_form()
+ test_localstorage() {
+     diag "=== LocalStorage cart ==="
+     CART_JS=$(curl -s -L "$TARGET_BASE/assets/js/modules/cart.js" 2>/dev/null)
+-    
+-    if echo "$CART_JS" | grep -q 'localStorage.*naturesi_cart\|naturesi_cart.*localStorage'; then
+-        pass 8 "Cart JS uses localStorage with correct key"
++    CARTSTORE_JS=$(curl -s -L "$TARGET_BASE/assets/js/modules/cartStore.js" 2>/dev/null)
++    if \
++        echo "$CART_JS$CARTSTORE_JS" | grep -q 'localStorage\.setItem' && \
++        echo "$CART_JS$CARTSTORE_JS" | grep -q 'naturesi_cart'; then
++        pass 8 "Cart JS or cartStore.js uses localStorage with correct key"
+     else
+         fail 8 "Cart JS localStorage key incorrect"
+     fi

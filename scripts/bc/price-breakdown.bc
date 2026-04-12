@@ -1,7 +1,7 @@
-/* scripts/bc/price-breakdown.bc — Full price breakdown */
-/* Usage: bc -q -f scripts/bc/price-breakdown.bc */
-/* Then: breakdown(subtotal, shipping) prints grand total */
-/* SELF-TEST: breakdown(36, 13) -> 53.90 */
+# scripts/bc/price-breakdown.bc  Full price breakdown
+# Usage: bc -q -f scripts/bc/price-breakdown.bc
+# Then: breakdown(subtotal, shipping) prints grand total
+# SELF-TEST: breakdown(36, 13) -> 53.90
 
 scale = 2
 

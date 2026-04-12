@@ -1,0 +1,22 @@
+h41960
+s 00010/00000/00000
+d D 1.1 26/04/12 13:56:43 twomuchcoffee 1 0
+c date and time created 26/04/12 13:56:43 by twomuchcoffee
+e
+u
+U
+f e 0
+t
+T
+I 1
+/* ==========================================================================
+Global layout settings
+Broad layout constants such as header heights and other structural defaults
+========================================================================== */
+
+:root {
+  /* Default header heights (used by skip links and responsive header adjustments) */
+  --header-height: 3.75rem;
+  --header-height-mobile: 3.25rem;
+}
+E 1

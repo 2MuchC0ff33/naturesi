@@ -7,7 +7,11 @@ import './modules/products-guard.js';
 import { registerServiceWorker } from './modules/sw-register.js';
 import './modules/worker-registry.js';
 
-if (typeof window !== 'undefined' && typeof navigator !== 'undefined' && 'serviceWorker' in navigator) {
+if (
+  typeof window !== 'undefined' &&
+  typeof navigator !== 'undefined' &&
+  'serviceWorker' in navigator
+) {
   registerServiceWorker();
 }
 
@@ -26,7 +30,9 @@ if (typeof document !== 'undefined') {
   (async function start() {
     try {
       async function ensureGlobalCartStore() {
-        if (typeof window !== 'undefined' && window.CartStore) {return;}
+        if (typeof window !== 'undefined' && window.CartStore) {
+          return;
+        }
         try {
           const { CartStore } = await import('./modules/cartStore.js');
           const instance = new CartStore();
@@ -54,30 +60,49 @@ if (typeof document !== 'undefined') {
         }
       }
 
-      const path = (location?.pathname) || '';
+      const path = location?.pathname || '';
       try {
         if (path.endsWith('/pages/payment/success.html')) {
           const m = await import('./modules/payment-status.js');
-          if (m && typeof m.initPaymentReturn === 'function') {m.initPaymentReturn();}
+          if (m && typeof m.initPaymentReturn === 'function') {
+            m.initPaymentReturn();
+          }
         }
         if (path.endsWith('/pages/payment/fail.html')) {
           const m2 = await import('./modules/payment-status.js');
-          if (m2 && typeof m2.initPaymentCancel === 'function') {m2.initPaymentCancel();}
+          if (m2 && typeof m2.initPaymentCancel === 'function') {
+            m2.initPaymentCancel();
+          }
         }
       } catch (err) {
         console.error('Payment module init failed', err);
       }
 
       try {
+        if (document.getElementById('paypal-button-container')) {
+          const cf = await import('./modules/checkout.js');
+          if (cf && typeof cf.runCheckout === 'function') {
+            cf.runCheckout({ documentRoot: document, fetchPath: '/assets/js/data/paypal.json' });
+          }
+        }
+      } catch (err) {
+        console.error('Checkout init failed', err);
+      }
+
+      try {
         const navMod = await import('./modules/nav-toggle.js');
-        if (navMod && typeof navMod.init === 'function') {navMod.init(document);}
+        if (navMod && typeof navMod.init === 'function') {
+          navMod.init(document);
+        }
       } catch (err) {
         console.warn('Nav toggle init failed', err);
       }
 
       try {
         const modalMod = await import('./modules/modal.js');
-        if (modalMod && typeof modalMod.init === 'function') {modalMod.init(document);}
+        if (modalMod && typeof modalMod.init === 'function') {
+          modalMod.init(document);
+        }
       } catch (err) {
         console.warn('Modal init failed', err);
       }
@@ -85,7 +110,9 @@ if (typeof document !== 'undefined') {
       try {
         if (document.querySelector('figure.product-gallery')) {
           const ph = await import('./modules/product-helpers.js');
-          if (ph && typeof ph.init === 'function') {ph.init(document);}
+          if (ph && typeof ph.init === 'function') {
+            ph.init(document);
+          }
         }
       } catch (err) {
         console.warn('Product helpers init failed', err);
@@ -108,23 +135,34 @@ if (typeof document !== 'undefined') {
               out = document.createElement('div');
               out.id = outputId;
               out.className = 'postcode-lookup-result';
-              if (form?.parentNode) {form.parentNode.insertBefore(out, form.nextSibling);}
+              if (form?.parentNode) {
+                form.parentNode.insertBefore(out, form.nextSibling);
+              }
             }
             return out;
           }
           if (form) {
             form.addEventListener('submit', async (ev) => {
               ev.preventDefault();
-              const pc = (form.querySelector('input[name="postcode"]') || document.getElementById('postcode')).value || '';
+              const pc =
+                (
+                  form.querySelector('input[name="postcode"]') ||
+                  document.getElementById('postcode')
+                ).value || '';
               const types = ['pouch', 'satchel', 'handbag', 'shoebox', 'briefcase'];
               const out = ensureOutput();
               out.innerHTML = 'Looking up...';
               try {
-                const rows = await Promise.all(types.map(async (t) => {
-                  const r = await ship.calculateParcelRate(t, pc, { storePostcode: '6147', storeState: 'WA' });
-                  return { type: t, zone: r.zone, rate: r.rate || r.baseRate || r.totalRate };
-                }));
-                out.innerHTML = `<ul>${rows.map(r => `<li>${r.type}: ${r.rate === null ? 'N/A' : `AUD $${Number(r.rate).toFixed(2)}`} (${r.zone})</li>`).join('')}</ul>`;
+                const rows = await Promise.all(
+                  types.map(async (t) => {
+                    const r = await ship.calculateParcelRate(t, pc, {
+                      storePostcode: '6147',
+                      storeState: 'WA'
+                    });
+                    return { type: t, zone: r.zone, rate: r.rate || r.baseRate || r.totalRate };
+                  })
+                );
+                out.innerHTML = `<ul>${rows.map((r) => `<li>${r.type}: ${r.rate === null ? 'N/A' : `AUD $${Number(r.rate).toFixed(2)}`} (${r.zone})</li>`).join('')}</ul>`;
               } catch (_err) {
                 out.textContent = 'Lookup failed';
               }

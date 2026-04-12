@@ -1,0 +1,17 @@
+h27908
+s 00005/00000/00000
+d D 1.1 26/04/12 13:56:43 twomuchcoffee 1 0
+c date and time created 26/04/12 13:56:43 by twomuchcoffee
+e
+u
+U
+f e 0
+t
+T
+I 1
+Nature's Infusions – MTA-STS Policy
+
+This static website does not provide email services or accept SMTP connections.
+No MTA-STS policy is applicable for this domain.
+For more information, see privacy.txt.
+E 1

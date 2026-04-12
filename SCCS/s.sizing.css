@@ -1,0 +1,35 @@
+h44263
+s 00023/00000/00000
+d D 1.1 26/04/12 13:56:43 twomuchcoffee 1 0
+c date and time created 26/04/12 13:56:43 by twomuchcoffee
+e
+u
+U
+f e 0
+t
+T
+I 1
+/* ==========================================================================
+Sizing utilities
+Small, explicit helpers for common sizing patterns (non-opinionated)
+========================================================================== */
+
+/* Full width helper */
+.w-full {
+  width: 100%;
+}
+
+/* Height helpers */
+.h-auto {
+  height: auto;
+}
+
+/* Common max-width presets */
+.max-w-880 {
+  max-width: 880px;
+}
+
+.max-w-1200 {
+  max-width: var(--max-width, 1200px);
+}
+E 1

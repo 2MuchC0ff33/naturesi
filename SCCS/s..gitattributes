@@ -1,0 +1,104 @@
+h47943
+s 00092/00000/00000
+d D 1.1 26/04/12 13:56:42 twomuchcoffee 1 0
+c date and time created 26/04/12 13:56:42 by twomuchcoffee
+e
+u
+U
+f e 0
+t
+T
+I 1
+# Gitattributes — valid attributes only
+# Run: git check-attr --all --cached to verify
+
+# Global: auto-detect text, enforce LF line endings
+* text=auto eol=lf
+
+# Shell scripts
+*.sh text eol=lf diff=bash
+
+# Build tool languages
+*.awk text eol=lf diff=awk
+*.sed text eol=lf diff=sed
+*.m4 text eol=lf diff=m4
+*.cmake text eol=lf diff=cmake
+Makefile text eol=lf diff=cmake
+makefile text eol=lf diff=cmake
+
+# Data formats
+*.json text eol=lf diff=ruby
+*.yaml text eol=lf diff=yaml
+*.yml text eol=lf diff=yaml
+*.xml text eol=lf
+*.csv text eol=lf
+
+# Web
+*.html text eol=lf diff=html
+*.htm text eol=lf diff=html
+*.xhtml text eol=lf diff=html
+*.css text eol=lf diff=css
+*.scss text eol=lf diff=css
+*.sass text eol=lf diff=css
+*.less text eol=lf diff=css
+*.styl text eol=lf diff=css
+
+# Programming languages (built-in diff drivers)
+*.js text eol=lf
+*.mjs text eol=lf
+*.cjs text eol=lf
+*.jsx text eol=lf
+*.ts text eol=lf
+*.tsx text eol=lf
+*.php text eol=lf diff=php
+*.py text eol=lf diff=python
+*.rb text eol=lf diff=ruby
+*.pl text eol=lf diff=perl
+*.java text eol=lf diff=java
+*.c text eol=lf diff=cpp
+*.h text eol=lf diff=cpp
+*.cpp text eol=lf diff=cpp
+*.cc text eol=lf diff=cpp
+*.cxx text eol=lf diff=cpp
+*.go text eol=lf diff=rust
+*.rs text eol=lf diff=rust
+*.swift text eol=lf diff=swift
+*.lua text eol=lf diff=lua
+*.sh text eol=lf diff=bash
+*.bash text eol=lf diff=bash
+*.dash text eol=lf diff=dash
+*.ksh text eol=lf diff=ksh
+*.zsh text eol=lf diff=bash
+
+# Documentation
+*.md text eol=lf diff=markdown
+*.markdown text eol=lf diff=markdown
+*.rst text eol=lf diff=rst
+*.tex text eol=lf diff=tex
+
+# Config & env
+.env text eol=lf
+.gitignore text eol=lf
+.gitattributes text eol=lf
+*.env text eol=lf
+
+# Images and binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.webp binary
+*.svg binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.eot binary
+*.zip binary
+*.gz binary
+*.7z binary
+*.pdf binary
+*.mp4 binary
+*.webm binary
+*.mp3 binary
+E 1

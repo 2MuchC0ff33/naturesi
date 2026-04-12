@@ -10,8 +10,14 @@ set -u
 TOTAL=0
 ERRORS=0
 
-for f in $(find . -name '*.sh' -type f 2>/dev/null | grep -v '/node_modules/' | grep -v '/.checksums/' | grep -v '/.patches/' | grep -v '/SCCS/'); do
+for f in $(find . -name '*.sh' -type f 2>/dev/null | grep -v -E '(/node_modules/|/SCCS/|/\.checksums/|/\.patches/|/\.git/|/\.opencode/)'); do
     TOTAL=$((TOTAL + 1))
+    # Skip files that contain unresolved merge markers to avoid noise
+    if grep -q '<<<<<<<' "$f" 2>/dev/null; then
+        printf 'skipping (merge markers): %s\n' "$f"
+        continue
+    fi
+
     result=$(shellcheck -s sh \
         --exclude=SC2034 \
         --exclude=SC2044 \

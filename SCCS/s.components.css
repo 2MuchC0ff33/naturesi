@@ -1,0 +1,74 @@
+h47082
+s 00062/00000/00000
+d D 1.1 26/04/12 13:56:43 twomuchcoffee 1 0
+c date and time created 26/04/12 13:56:43 by twomuchcoffee
+e
+u
+U
+f e 0
+t
+T
+I 1
+/* ==========================================================================
+Small components
+Accordion toggles, social icon variants and other small repeated components.
+========================================================================== */
+/* Removed duplicate logo/image sizing. See 07-header.css for canonical rules. */
+
+.site-footer nav[aria-label='Social media links'] ul {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: center;
+}
+
+.site-footer nav[aria-label='Social media links'] a svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+  fill: currentColor;
+}
+
+.site-footer nav[aria-label='Social media links'] a.facebook {
+  color: #fff;
+  background: #1877f2;
+}
+
+.site-footer nav[aria-label='Social media links'] a.facebook:focus-visible,
+.site-footer nav[aria-label='Social media links'] a.facebook:hover {
+  background: #1557b0;
+  color: #fff;
+  outline-color: rgba(24, 119, 242, 0.5);
+}
+
+.site-footer nav[aria-label='Social media links'] a.instagram {
+  color: #fff;
+  background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #bc1888 75%);
+}
+
+.site-footer nav[aria-label='Social media links'] a.instagram:focus-visible,
+.site-footer nav[aria-label='Social media links'] a.instagram:hover {
+  background: linear-gradient(135deg, #d8801f 0%, #cc5a2f 25%, #9e1470 75%);
+  color: #fff;
+  outline-color: rgba(228, 64, 95, 0.5);
+}
+
+/* Accordion presentation moved to `partials/components/accordions.css` to avoid duplication. */
+
+/* Search-related presentation moved to `partials/components/products.css` (search results and product listing visuals) */
+
+/* Loading spinner for status region moved to `partials/tools/animations.css` */
+
+.links-grid[aria-hidden='true'] {
+  display: none;
+}
+
+@media (max-width: 480px) {
+  .site-footer .links-grid ul li+li {
+    border-top: 1px solid color-mix(in srgb, var(--footer-text) 6%, transparent);
+    margin-top: 0.15rem;
+    padding-top: 0.35rem;
+  }
+}
+
+/* Service worker update banner styling moved to `partials/components/notifications.css` */
+E 1

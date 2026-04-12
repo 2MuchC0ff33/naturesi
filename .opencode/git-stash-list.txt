@@ -1,0 +1,1 @@
+stash@{0}: On staging: agent: stash all changes for branch maintenance, enable checkout

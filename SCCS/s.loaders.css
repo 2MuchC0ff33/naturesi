@@ -1,0 +1,42 @@
+h64426
+s 00030/00000/00000
+d D 1.1 26/04/12 13:56:43 twomuchcoffee 1 0
+c date and time created 26/04/12 13:56:43 by twomuchcoffee
+e
+u
+U
+f e 0
+t
+T
+I 1
+/* components/loaders.css
+   Purpose: Loader and spinner components used for async states.
+   Scope: `.loader`, `.spinner`, `.search-spinner`.
+   Notes: Use accessible patterns (aria-hidden, `role='status'` in markup) and respect reduced motion.
+*/
+
+@keyframes spinner-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loader,
+.spinner {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid rgba(0, 0, 0, 0.08);
+  border-top-color: var(--color-accent);
+  animation: spinner-rotate 0.9s linear infinite;
+  display: inline-block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .loader,
+  .spinner {
+    animation: none;
+  }
+}
+E 1

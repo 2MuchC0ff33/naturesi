@@ -1,0 +1,74 @@
+h04308
+s 00062/00000/00000
+d D 1.1 26/04/12 13:56:43 twomuchcoffee 1 0
+c date and time created 26/04/12 13:56:43 by twomuchcoffee
+e
+u
+U
+f e 0
+t
+T
+I 1
+/* Utilities – visibility helpers */
+
+/* Visibility helpers: visible, invisible, and a11y-friendly visually hidden state */
+.u-visible {
+  visibility: visible !important;
+}
+
+.u-invisible {
+  visibility: hidden !important;
+}
+
+/* Alias of `.visually-hidden` from tools/accessibility.css for convenience */
+.u-visually-hidden {
+  border: 0;
+  clip-path: inset(50%);
+  -webkit-clip-path: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.u-visually-hidden.focusable:active,
+.u-visually-hidden.focusable:focus {
+  clip-path: none;
+  -webkit-clip-path: none;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  white-space: inherit;
+  width: auto;
+}
+
+/* Alias for screen-reader-only utilities - use in HTML as `class="u-sr-only"` */
+.u-sr-only {
+  border: 0 !important;
+  clip-path: inset(50%) !important;
+  -webkit-clip-path: inset(50%) !important;
+  height: 1px !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  position: absolute !important;
+  white-space: nowrap !important;
+  width: 1px !important;
+}
+
+.u-sr-only.focusable:active,
+.u-sr-only.focusable:focus {
+  clip-path: none !important;
+  -webkit-clip-path: none !important;
+  height: auto !important;
+  margin: 0 !important;
+  overflow: visible !important;
+  position: static !important;
+  white-space: inherit !important;
+  width: auto !important;
+}
+E 1

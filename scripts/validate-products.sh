@@ -56,7 +56,8 @@ else
 fi
 
 # Check inStock is boolean (true/false) or 0/1
-BAD_STOCK=$(awk -F'\|' -v col="${INSTOCK_COL:-7}" 'NR>1 && $col !~ /^(true|false|0|1)$/' "$CSV" | wc -l | tr -d ' ')
+BAD_STOCK=$(awk -F'|' -v col="${INSTOCK_COL:-7}" 'NR>1 && $col !~ /^(true|false|0|1)$/' "$CSV" | wc -l | tr -d ' ')
+
 if [ "$BAD_STOCK" -eq 0 ] 2>/dev/null; then
     printf '  OK: all inStock values valid\n'
     PASS=$((PASS + 1))
@@ -66,7 +67,8 @@ else
 fi
 
 # Check price is numeric
-BAD_PRICE=$(awk -F'\|' -v col="${PRICE_COL:-8}" 'NR>1 && $col != "" && $col ~ /[^0-9.]/' "$CSV" | wc -l | tr -d ' ')
+BAD_PRICE=$(awk -F'|' -v col="${PRICE_COL:-8}" 'NR>1 && $col != "" && $col ~ /[^0-9.]/' "$CSV" | wc -l | tr -d ' ')
+
 if [ "$BAD_PRICE" -eq 0 ] 2>/dev/null; then
     printf '  OK: all prices numeric\n'
     PASS=$((PASS + 1))
@@ -76,7 +78,8 @@ else
 fi
 
 # Check categories are non-empty slugs (no pipe chars = not field-split errors)
-BAD_CATS=$(awk -F'\|' -v col="${CAT_COL:-4}" 'NR>1 && $col == ""' "$CSV" | wc -l | tr -d ' ')
+BAD_CATS=$(awk -F'|' -v col="${CAT_COL:-4}" 'NR>1 && $col == ""' "$CSV" | wc -l | tr -d ' ')
+
 if [ "$BAD_CATS" -eq 0 ] 2>/dev/null; then
     printf '  OK: all categories present\n'
     PASS=$((PASS + 1))

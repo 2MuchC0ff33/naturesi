@@ -1,0 +1,204 @@
+h16643
+s 00192/00000/00000
+d D 1.1 26/04/12 13:56:43 twomuchcoffee 1 0
+c date and time created 26/04/12 13:56:43 by twomuchcoffee
+e
+u
+U
+f e 0
+t
+T
+I 1
+/* components/hero.css
+   Purpose: Homepage hero section styles (mobile-first)
+ */
+
+.hero-spacer {
+  height: 12px;
+  background: color-mix(in srgb, var(--color-accent) 18%, black 6%);
+}
+
+.hero {
+  display: block;
+  position: relative;
+  overflow: visible;
+  /* ensure hero doesn't clip positioned media */
+  /* Added for absolute positioning of content on desktop */
+  /* Removed min-height to allow auto-sizing based on video aspect ratio */
+}
+
+.hero__media {
+  width: 100%;
+  overflow: hidden;
+  border-radius: inherit;
+  /* No position:relative — avoids stacking context issues */
+}
+
+/* Video fills the hero media area with object-fit contain */
+.hero__media>video,
+.hero__media video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: contain !important;
+  object-position: center center !important;
+  margin: 0 auto;
+}
+
+/* Developer helper — enable by adding `debug-video-outline` class to <body> for visual debugging */
+.debug-video-outline .hero__media>video,
+.debug-video-outline .hero__media video {
+  outline: 3px dashed rgba(0, 0, 0, 0.35);
+  outline-offset: -3px;
+}
+
+/* sensible minimums so the poster is visible during load and on quirks */
+.hero {
+  min-height: 240px;
+}
+
+@media (min-width: 640px) {
+  .hero {
+    min-height: 360px;
+  }
+}
+
+/* Make hero CTAs more tappable on small screens (stacked, full width) */
+@media (max-width: 640px) {
+  #cta-buttons .button {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 0.6rem;
+  }
+
+  #cta-buttons .button.btn--primary {
+    margin-bottom: 0.4rem;
+  }
+}
+
+.hero h1 {
+  margin: 0 0 var(--space-xs) 0;
+  font-size: 1.6rem;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+
+.hero blockquote {
+  margin: var(--space-sm) 0;
+  font-style: italic;
+  color: color-mix(in srgb, var(--color-text) 78%, #0000);
+}
+
+.hero p {
+  margin: 0 0 var(--space-md) 0;
+  color: color-mix(in srgb, var(--color-text) 82%, #0000);
+  max-width: 58ch;
+}
+
+#cta-buttons .button {
+  display: inline-block;
+  margin-right: var(--space-xs);
+}
+
+#cta-buttons .button.btn--primary {
+  padding: 0.7rem 1rem;
+  border-radius: 0.45rem;
+  font-weight: 700;
+  box-shadow: 0 8px 20px rgba(76, 175, 80, 0.12);
+}
+
+#cta-buttons .button.btn--ghost {
+  padding: 0.64rem 0.9rem;
+  border-radius: 0.45rem;
+}
+
+/* Responsive adjustments */
+@media (min-width: 640px) {
+  .hero h1 {
+    font-size: 2.4rem;
+  }
+}
+
+@media (min-width: 900px) {
+  .hero h1 {
+    font-size: 3rem;
+  }
+
+  .hero p {
+    font-size: 1.05rem;
+  }
+}
+
+/* Reduced motion: remove motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+
+  .hero__media picture,
+  .hero__media img {
+    transition: none;
+  }
+
+  .product-card__media img {
+    transition: none;
+  }
+}
+
+/* -----------------------
+   Hero logo placeholder styles
+   ----------------------- */
+
+@media (max-width: 640px) {
+  .hero__media--logo {
+    min-height: 100px;
+  }
+
+  .hero__media--logo img.hero__logo-img {
+    max-height: 100px;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 879px) {
+  .hero__media--logo {
+    min-height: 140px;
+  }
+
+  .hero__media--logo img.hero__logo-img {
+    max-height: 140px;
+  }
+}
+
+@media (min-width: 880px) {
+  .hero__media--logo {
+    min-height: 200px;
+  }
+
+  .hero__media--logo img.hero__logo-img {
+    max-height: 200px;
+  }
+}
+
+/* Ensure hero media spans the full viewport and the logo remains centered
+   even when the hero is placed inside a constrained .container. These
+   rules are intentionally specific to avoid affecting other .hero usages. */
+.hero__media--logo {
+  /* Force full-bleed appearance even within centered .container.
+     Use left/transform method which is robust across parent transforms. */
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  transform: translateX(-50%);
+  box-sizing: border-box;
+  padding-inline: 0;
+}
+
+.hero__media--logo img.hero__logo-img {
+  /* constrain the logo so it doesn't exceed the readable measure on large screens */
+  max-width: min(90%, var(--max-width, 1200px));
+  width: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  pointer-events: auto;
+}
+E 1

@@ -1,0 +1,16 @@
+h21390
+s 00004/00000/00000
+d D 1.1 26/04/12 13:56:44 twomuchcoffee 1 0
+c date and time created 26/04/12 13:56:44 by twomuchcoffee
+e
+u
+U
+f e 0
+t
+T
+I 1
+[
+  { "id": "sku-100", "title": "Chamomile Infusion 50g", "price": 9.95, "qty": 2 },
+  { "id": "sku-101", "title": "Eucalyptus Steam 30g", "price": 6.5, "qty": 1 }
+]
+E 1

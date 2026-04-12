@@ -1,0 +1,149 @@
+h46537
+s 00137/00000/00000
+d D 1.1 26/04/12 13:56:43 twomuchcoffee 1 0
+c date and time created 26/04/12 13:56:43 by twomuchcoffee
+e
+u
+U
+f e 0
+t
+T
+I 1
+/* Cart component styles - accessible, mobile-first, and minimal */
+:root {
+  --cart-badge-bg: var(--color-accent, #4caf50);
+  --cart-badge-fg: #fff;
+}
+
+.cart-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  /* larger hit area on small screens */
+  padding: 0.25rem;
+}
+
+.cart-option img {
+  width: 24px !important;
+  height: 24px !important;
+  display: inline-block !important;
+  vertical-align: middle;
+  object-fit: contain;
+}
+
+.cart-option .cart-logo {
+  display: inline-flex !important;
+  align-items: center;
+}
+
+.cart-option .cart-logo svg {
+  width: 24px !important;
+  height: 24px !important;
+}
+
+.cart-text {
+  font-weight: 600;
+}
+
+.cart-count {
+  display: inline-block;
+  min-width: 2ch;
+  padding: 0.15rem 0.45rem;
+  border-radius: 999px;
+  background: var(--cart-badge-bg);
+  color: var(--cart-badge-fg);
+  font-size: 0.95rem;
+  line-height: 1;
+  text-align: center;
+  /* ensure readable badge on small screens */
+  font-weight: 700;
+}
+
+/* Focus-visible styling for keyboard users */
+.cart-option:focus-within .cart-count,
+.cart-option:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--cart-badge-bg) 30%, #0000);
+  outline-offset: 3px;
+}
+
+/* Small screens: show only icon and badge */
+@media (max-width: 480px) {
+  .cart-text {
+    display: none;
+  }
+
+  .cart-option {
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+
+/* Cart table styles for cart.html */
+.cart-table img {
+  border-radius: 6px;
+}
+
+.order-summary {
+  border: 1px solid var(--color-border);
+  padding: 0.75rem;
+  border-radius: var(--radius-sm);
+}
+
+/* Move inline spacing from pages/cart.html into CSS */
+.order-summary {
+  margin-top: 1.5rem;
+}
+
+.cart-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+/* Ensure high contrast for badge */
+@media (prefers-contrast: high) {
+  .cart-count {
+    box-shadow: none;
+    border: 2px solid var(--cart-badge-fg);
+    color: var(--cart-badge-bg);
+    background: var(--cart-badge-fg);
+  }
+}
+
+/* End of cart partial */
+
+/* Shipping estimator controls (moved from inline markup) */
+#shipping-estimator {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+#shipping-estimator label {
+  font-size: 0.95rem;
+  margin-right: 0.25rem;
+}
+
+#checkout-postcode {
+  width: 7ch;
+  padding: 0.35rem 0.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  font-size: 0.95rem;
+}
+
+/* parcel type dropdown removed from markup; no styles required */
+
+#shipping-help {
+  flex-basis: 100%;
+  margin: 0.25rem 0 0 0;
+  font-size: 0.9rem;
+  color: var(--muted-color, #6b7280);
+}
+
+/* Error message styling moved to `partials/components/alerts.css` to centralise alert visuals */
+/* Keep cart-specific structure and behaviour in this file but reuse `.error-message` from alerts.css */
+E 1

@@ -1,0 +1,26 @@
+h65159
+s 00014/00000/00000
+d D 1.1 26/04/12 13:56:43 twomuchcoffee 1 0
+c date and time created 26/04/12 13:56:43 by twomuchcoffee
+e
+u
+U
+f e 0
+t
+T
+I 1
+{
+  "issuer": "https://www.naturesinfusions.com.au",
+  "openid_provider": false,
+  "authorization_endpoint": null,
+  "token_endpoint": null,
+  "userinfo_endpoint": null,
+  "registration_endpoint": null,
+  "scopes_supported": [],
+  "response_types_supported": [],
+  "subject_types_supported": [],
+  "id_token_signing_alg_values_supported": [],
+  "claims_supported": [],
+  "service_description": "Nature's Infusions is a static, privacy-focused, non-federated artisan marketplace. No OpenID Connect, OAuth, or dynamic authentication/identity services are provided. See /privacy.txt and documentation for details."
+}
+E 1

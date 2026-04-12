@@ -1,0 +1,17 @@
+h25793
+s 00005/00000/00000
+d D 1.1 26/04/12 13:56:44 twomuchcoffee 1 0
+c date and time created 26/04/12 13:56:44 by twomuchcoffee
+e
+u
+U
+f e 0
+t
+T
+I 1
+      <footer class="legal-bar" aria-label="Legal and credits">
+        <div class="legal">
+          <p>© <time datetime="2025">2025</time> Nature's Infusions. All rights reserved.</p>
+        </div>
+      </footer>
+E 1

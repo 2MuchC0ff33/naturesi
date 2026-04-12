@@ -1,0 +1,64 @@
+h37988
+s 00052/00000/00000
+d D 1.1 26/04/12 13:56:43 twomuchcoffee 1 0
+c date and time created 26/04/12 13:56:43 by twomuchcoffee
+e
+u
+U
+f e 0
+t
+T
+I 1
+/* templates/templates.css
+   Purpose: Template-specific page layout tweaks and helper styles for page templates.
+   Notes: Minimal component-level styles only when truly template-specific.
+*/
+
+/* templates/templates.css
+   Minimal template-specific helpers used by page templates.
+   Scope: `.template-home`, `.template-store`, `.template-checkout`
+   Keep these focused and small; prefer components for all UI pieces.
+*/
+
+.template-home .hero {
+  padding: 0;
+  text-align: center;
+}
+
+#home {
+  margin-bottom: var(--space-lg);
+}
+
+#about-home {
+  text-align: center;
+  padding: var(--space-lg) 0;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+#about-home h2 {
+  color: var(--color-accent);
+  margin-bottom: var(--space-sm);
+  font-size: 1.5rem;
+}
+
+#about-home p {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-text);
+}
+
+.template-checkout .checkout-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+@media (min-width: 900px) {
+  .template-checkout .checkout-layout {
+    grid-template-columns: minmax(320px, 1fr) 360px;
+    align-items: start;
+  }
+}
+E 1

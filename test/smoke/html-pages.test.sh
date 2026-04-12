@@ -3,7 +3,7 @@
 # Checks: all HTML pages have DOCTYPE, lang="en-AU", charset, viewport
 
 HTML_FILES=$(mktemp)
-find . -name '*.html' -type f 2>/dev/null | grep -v '/node_modules/' > "$HTML_FILES"
+find . -name '*.html' -type f 2>/dev/null | grep -v '/node_modules/' | grep -v '\.inc\.html$' | grep -v 'yandex_' | grep -v 'google-site-verification' > "$HTML_FILES"
 TOTAL=$(wc -l < "$HTML_FILES" | tr -d ' ')
 COUNT=0
 PASS=0

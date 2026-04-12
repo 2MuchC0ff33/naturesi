@@ -1,0 +1,73 @@
+h24742
+s 00061/00000/00000
+d D 1.1 26/04/12 13:56:43 twomuchcoffee 1 0
+c date and time created 26/04/12 13:56:43 by twomuchcoffee
+e
+u
+U
+f e 0
+t
+T
+I 1
+# Contributing to This Project
+
+Thank you for your interest in contributing! Your help is greatly appreciated. Please follow these guidelines to make the process smooth for everyone.
+
+## How to Contribute
+
+1. **Fork the Repository**
+   - Click the "Fork" button at the top of the repository page to create your own copy.
+
+2. **Clone Your Fork**
+   - Clone your fork to your local machine:
+     ```
+     git clone https://github.com/your-username/your-fork.git
+     ```
+
+3. **Create a Branch**
+   - Create a new branch for your feature or bugfix:
+     ```
+     git checkout -b my-feature
+     ```
+
+4. **Make Changes**
+   - Make your changes, following the project's coding style and best practices.
+   - Add or update tests as needed.
+
+5. **Commit Your Changes**
+   - Write clear, concise commit messages.
+     ```
+     git add .
+     git commit -m "Add feature X"
+     ```
+
+6. **Push to Your Fork**
+   - Push your branch to your forked repository:
+     ```
+     git push origin my-feature
+     ```
+
+7. **Open a Pull Request**
+   - Go to the original repository and open a Pull Request from your branch.
+   - Describe your changes and reference any related issues.
+
+## Code of Conduct
+
+Please note that this project is governed by a [Code of Conduct](CODE_OF_CONDUCT). By participating, you agree to abide by its terms.
+
+## Reporting Issues
+
+If you find a bug or have a feature request, please open an issue with a clear description and steps to reproduce if applicable.
+
+## Style Guide
+
+- Write clear, readable code.
+- Follow existing code conventions.
+- Document public methods and major changes.
+
+## Questions?
+
+If you have any questions, feel free to open an issue or contact the maintainers.
+
+Thank you for contributing!
+E 1

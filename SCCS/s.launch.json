@@ -1,0 +1,30 @@
+h44135
+s 00018/00000/00000
+d D 1.1 26/04/12 13:56:42 twomuchcoffee 1 0
+c date and time created 26/04/12 13:56:42 by twomuchcoffee
+e
+u
+U
+f e 0
+t
+T
+I 1
+{
+  "version": "1.0.0",
+  "configurations": [
+    {
+      "name": "Launch Chrome",
+      "request": "launch",
+      "type": "chrome",
+      "runtimeExecutable": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+      "url": "http://localhost:8000",
+      "webRoot": "${workspaceFolder}",
+      "userDataDir": "${workspaceFolder}/.vscode/chrome",
+      "postDebugTask": "stop-httpd",
+      "runtimeArgs": [
+        "--incognito"
+      ]
+    }
+  ]
+}
+E 1

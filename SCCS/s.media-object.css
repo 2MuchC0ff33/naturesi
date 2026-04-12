@@ -1,0 +1,96 @@
+h29467
+s 00084/00000/00000
+d D 1.1 26/04/12 13:56:43 twomuchcoffee 1 0
+c date and time created 26/04/12 13:56:43 by twomuchcoffee
+e
+u
+U
+f e 0
+t
+T
+I 1
+/* ==========================================================================
+Objects — Media object
+
+Responsive media helpers for images, video and picture elements. Keep these
+layout-only (size, display, aspect) and move visual styles to elements.
+
+API: `.responsive-media` (images), `.media`, `.media__img`, `.media__body`,
+`.media--reverse`, and simple `.aspect-ratio--*` helpers.
+========================================================================== */
+
+/* Basic image/video responsive reset */
+.responsive-media,
+.responsive-media img,
+.responsive-media video,
+.responsive-media picture {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Classic media object pattern (stacked on mobile, side-by-side on larger screens) */
+.media {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.media__img {
+  width: 100%;
+  max-width: 100%;
+  flex: 0 0 auto;
+}
+
+.media__body {
+  flex: 1 1 auto;
+}
+
+@media (min-width: 900px) {
+  .media:not(.product-card .media) {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .media:not(.product-card .media) .media__img {
+    width: 40%;
+    max-width: 40%;
+  }
+
+  .media:not(.product-card .media) .media__body {
+    width: 60%;
+  }
+}
+
+/* Ensure product card headers don't inherit media object layout */
+.product-card header {
+  display: flex;
+  flex-direction: column;
+}
+
+.product-card .media__img,
+.product-card .media__body {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* Reverse order for media (visual only; DOM order preserved for accessibility) */
+.media--reverse {
+  flex-direction: column-reverse;
+}
+
+@media (min-width: 900px) {
+  .media--reverse {
+    flex-direction: row-reverse;
+  }
+}
+
+/* Basic aspect ratio helpers (useful for placeholders) */
+.aspect-ratio--1x1 {
+  aspect-ratio: 1 / 1;
+}
+
+.aspect-ratio--16x9 {
+  aspect-ratio: 16 / 9;
+}
+E 1

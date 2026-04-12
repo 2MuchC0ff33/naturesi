@@ -1,0 +1,39 @@
+h59044
+s 00027/00000/00000
+d D 1.1 26/04/12 13:56:43 twomuchcoffee 1 0
+c date and time created 26/04/12 13:56:43 by twomuchcoffee
+e
+u
+U
+f e 0
+t
+T
+I 1
+/* ==========================================================================
+Browser specific fixes and touch adjustments
+========================================================================== */
+
+/* Prevent iOS from highlighting links on long press */
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+
+.scroll-smooth {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Hide default scrollbars for aesthetic reasons (use sparingly) */
+.hide-scrollbar {
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Chrome/Safari */
+E 1

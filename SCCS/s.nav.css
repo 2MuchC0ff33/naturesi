@@ -1,0 +1,34 @@
+h00336
+s 00022/00000/00000
+d D 1.1 26/04/12 13:56:43 twomuchcoffee 1 0
+c date and time created 26/04/12 13:56:43 by twomuchcoffee
+e
+u
+U
+f e 0
+t
+T
+I 1
+/* ==========================================================================
+Navigation extras and dropdowns
+This partial contains additional nav rules such as the category dropdown and
+small icon sizing rules that extend the header styles.
+========================================================================== */
+/* Removed duplicate .site-search .search-icon style. See 04-forms.css for canonical rules. */
+/* Removed dropdown menu styles */
+
+svg[aria-hidden='true'] {
+  display: inline-block;
+  fill: currentColor;
+  max-height: 20px;
+  width: auto;
+}
+
+.site-nav .search-icon,
+.site-nav .cart-option,
+.site-nav .all-logo {
+  min-height: 32px;
+  min-width: 32px;
+  height: 36px;
+}
+E 1

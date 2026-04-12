@@ -157,7 +157,9 @@
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
   padding: var(--space-sm);
-  transition: box-shadow var(--transition-fast) ease, transform var(--transition-fast) ease;
+  transition:
+    box-shadow var(--transition-fast) ease,
+    transform var(--transition-fast) ease;
   position: relative;
 }
 
@@ -198,7 +200,9 @@
   height: auto;
   display: block;
   object-fit: cover;
-  transition: transform var(--transition-fast) ease, filter var(--transition-fast) ease;
+  transition:
+    transform var(--transition-fast) ease,
+    filter var(--transition-fast) ease;
 }
 
 .product-card__media:hover img,
@@ -214,10 +218,11 @@
   transform: translateY(-4px);
 }
 
-
 /* Generic product hover for legacy pages that use .product class */
 .product img {
-  transition: transform var(--transition-fast) ease, filter var(--transition-fast) ease;
+  transition:
+    transform var(--transition-fast) ease,
+    filter var(--transition-fast) ease;
 }
 
 .product:hover img,
@@ -239,6 +244,38 @@
 .product-card summary,
 .product-card legend {
   font-weight: 700;
+}
+
+/* Display disclosure triangle inline with summary text */
+.product-card summary {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  cursor: pointer;
+}
+
+/* Custom disclosure arrow - chevron pointing right by default */
+.product-card summary::after {
+  content: '';
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9 18 15 12 9 6'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+/* Rotate arrow down when details is open */
+details[open] .product-card summary::after {
+  transform: rotate(90deg);
+}
+
+/* Remove default marker in Safari */
+.product-card summary::-webkit-details-marker {
+  display: none;
 }
 
 /* Make disclaimer text italic and regular weight */
@@ -288,19 +325,23 @@
   font-size: 0.95rem;
 }
 
-/* 3-column grid on all screen sizes — see base rule above */
+/* 3-column grid on desktop; single column on mobile */
 
 /* Mobile-first: make add-to-cart buttons easy targets on small screens */
 @media (max-width: 640px) {
-
-  .add-to-cart button[type="submit"],
-  .add-to-cart [type="submit"] {
+  .add-to-cart button[type='submit'],
+  .add-to-cart [type='submit'] {
     display: block;
     width: 100%;
     padding: 0.85rem 1rem;
     font-weight: 700;
     border-radius: 0.5rem;
     margin-top: var(--space-sm);
+  }
+
+  .product-grid,
+  #product-grid {
+    grid-template-columns: 1fr !important;
   }
 }
 
@@ -356,9 +397,11 @@
   padding: var(--space-sm);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
-  background: linear-gradient(180deg,
-      color-mix(in srgb, var(--color-background) 96%, var(--color-highlight) 4%),
-      var(--color-background));
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--color-background) 96%, var(--color-highlight) 4%),
+    var(--color-background)
+  );
   display: flex;
   gap: var(--space-md);
   align-items: flex-start;

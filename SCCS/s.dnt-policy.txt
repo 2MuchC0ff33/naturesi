@@ -1,0 +1,21 @@
+h47719
+s 00009/00000/00000
+d D 1.1 26/04/12 13:56:43 twomuchcoffee 1 0
+c date and time created 26/04/12 13:56:43 by twomuchcoffee
+e
+u
+U
+f e 0
+t
+T
+I 1
+Nature's Infusions – Do Not Track (DNT) Policy
+
+This static website does not track, profile, or analyze visitors in any way.
+- No cookies, analytics, or third-party tracking scripts are used.
+- No behavioral advertising or cross-site tracking is performed.
+- Do Not Track (DNT) signals are respected by default, as no tracking occurs.
+- No personal data is collected, stored, or shared.
+
+For more information, see privacy.txt.
+E 1

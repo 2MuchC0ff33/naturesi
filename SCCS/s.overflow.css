@@ -1,0 +1,35 @@
+h41495
+s 00023/00000/00000
+d D 1.1 26/04/12 13:56:43 twomuchcoffee 1 0
+c date and time created 26/04/12 13:56:43 by twomuchcoffee
+e
+u
+U
+f e 0
+t
+T
+I 1
+/* Overflow – Overflow utilities
+   Control content overflow for responsive design.
+*/
+
+.u-overflow-hidden {
+  overflow: hidden !important;
+}
+
+.u-overflow-auto {
+  overflow: auto !important;
+}
+
+.u-overflow-scroll {
+  overflow: scroll !important;
+}
+
+.u-overflow-x-hidden {
+  overflow-x: hidden !important;
+}
+
+.u-overflow-y-auto {
+  overflow-y: auto !important;
+}
+E 1

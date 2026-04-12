@@ -1,0 +1,65 @@
+h64885
+s 00053/00000/00000
+d D 1.1 26/04/12 13:56:43 twomuchcoffee 1 0
+c date and time created 26/04/12 13:56:43 by twomuchcoffee
+e
+u
+U
+f e 0
+t
+T
+I 1
+/* css */
+.checkout-line-items {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem 0;
+}
+
+.checkout-line-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.line-title {
+  flex: 1;
+}
+
+.line-meta {
+  color: #6c757d;
+  min-width: 6rem;
+  text-align: right;
+}
+
+.line-total {
+  font-weight: 600;
+  min-width: 4rem;
+  text-align: right;
+}
+
+.grand-total {
+  margin-top: 1rem;
+  font-size: 1.05rem;
+}
+
+#checkout-note.muted {
+  color: #6c757d;
+  font-size: 0.95rem;
+}
+
+.error {
+  color: #b00020;
+}
+
+/* .hidden migrated to partials/tools/hidden.css */
+
+
+@media (min-width: 640px) {
+  .checkout-line-item {
+    gap: 2rem;
+  }
+}
+E 1

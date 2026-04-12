@@ -1,0 +1,35 @@
+h40137
+s 00023/00000/00000
+d D 1.1 26/04/12 13:56:44 twomuchcoffee 1 0
+c date and time created 26/04/12 13:56:44 by twomuchcoffee
+e
+u
+U
+f e 0
+t
+T
+I 1
+{
+  "description": "Simple cart item schema used for client-side validation and examples",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "size": {
+      "type": "string"
+    },
+    "quantity": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "price": {
+      "type": ["number", "null"]
+    }
+  },
+  "required": ["id", "name", "quantity"]
+}
+E 1

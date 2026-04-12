@@ -1,0 +1,27 @@
+h02838
+s 00015/00000/00000
+d D 1.1 26/04/12 13:56:43 twomuchcoffee 1 0
+c date and time created 26/04/12 13:56:43 by twomuchcoffee
+e
+u
+U
+f e 0
+t
+T
+I 1
+# Nature's Infusions does not provide a Tor onion service.
+# This is a static, privacy-focused, non-federated, non-identity, non-dynamic site.
+# No .onion address is available or planned.
+# No dynamic services, user accounts, or authentication are present.
+# For privacy, terms, and compliance, see:
+#   /privacy.txt
+#   /terms.txt
+#   /docs/architecture_documentation.txt
+#   /docs/privacy_documentation.txt
+#   /docs/requirements_documentation.txt
+#   /docs/quality_requirements_documentation.txt
+#   /docs/accessibility_documentation.txt
+#   /docs/security_documentation.txt
+#   /docs/test_documentation.txt
+#   /docs/user_documentation.txt
+E 1

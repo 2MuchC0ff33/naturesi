@@ -1,0 +1,143 @@
+h54673
+s 00131/00000/00000
+d D 1.1 26/04/12 13:56:43 twomuchcoffee 1 0
+c date and time created 26/04/12 13:56:43 by twomuchcoffee
+e
+u
+U
+f e 0
+t
+T
+I 1
+/* ==========================================================================
+Footer styles
+Legal bar, social links and footer layout go here for easier maintenance.
+========================================================================== */
+.site-footer,
+footer[itemscope][itemtype*='WPFooter'] {
+  --footer-bg: color-mix(in srgb, var(--color-accent) 18%, black 6%);
+  --footer-text: #f5f5f5;
+  --footer-accent-outline: color-mix(in srgb, var(--color-accent) 36%, transparent);
+  background: var(--footer-bg);
+  color: var(--footer-text);
+  /* tightened vertical spacing for a cleaner footer */
+  padding: calc(var(--space-xs) * 0.8) var(--space-md);
+}
+
+.site-footer .container,
+footer[itemscope][itemtype*='WPFooter'] .container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 180px;
+  gap: calc(var(--space-xs) / 1.6);
+  align-items: start;
+  max-width: var(--max-width);
+}
+
+.site-footer h3,
+footer[itemscope][itemtype*='WPFooter'] h3 {
+  color: var(--footer-text);
+  margin: 0 0 0.25rem 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.site-footer p,
+.site-footer li,
+footer[itemscope][itemtype*='WPFooter'] p,
+footer[itemscope][itemtype*='WPFooter'] li {
+  color: color-mix(in srgb, var(--footer-text) 92%, var(--color-accent) 8%);
+  line-height: 1.35;
+  font-size: 0.95rem;
+}
+
+footer[itemscope][itemtype*='WPFooter'] ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.site-footer a,
+footer[itemscope][itemtype*='WPFooter'] a {
+  color: var(--footer-text);
+  text-decoration: none;
+}
+
+.site-footer a:focus-visible,
+.site-footer a:hover,
+footer[itemscope][itemtype*='WPFooter'] a:focus-visible,
+footer[itemscope][itemtype*='WPFooter'] a:hover {
+  text-decoration: underline;
+  outline: 3px solid var(--footer-accent-outline);
+  outline-offset: 2px;
+}
+
+.site-footer .legal-bar {
+  /* Use full width without forcing 100vw which can create horizontal scrollbar
+     when the page has padding or when scrollbars are present. Keep visual
+     full-bleed using calc() and avoid overflow. */
+  /* Use a safe full-width bar that does not rely on viewport-unit arithmetic
+    which can cause overflow on some mobile browsers. This keeps the bar
+    contained within the page width to avoid creating a horizontal scroll. */
+  width: 100%;
+  position: relative;
+  left: 0;
+  right: 0;
+  margin-left: 0;
+  margin-right: 0;
+  box-sizing: border-box;
+  padding: var(--space-sm) var(--space-md);
+  background: color-mix(in srgb, var(--color-accent) 12%, black 4%);
+  color: var(--footer-text);
+  border-top: 1px solid color-mix(in srgb, var(--footer-text) 6%, transparent);
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .site-footer .legal-bar {
+    padding: var(--space-xs);
+    text-align: center;
+  }
+}
+
+.site-footer nav[aria-label='Social media links'] a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  text-decoration: none;
+  transition:
+    opacity var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.site-footer nav[aria-label='Social media links'] a:focus-visible,
+.site-footer nav[aria-label='Social media links'] a:hover {
+  opacity: 0.85;
+  transform: translateY(-2px) scale(1.05);
+  outline: 3px solid var(--footer-accent-outline);
+  outline-offset: 2px;
+}
+
+.site-footer .legal a.github {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--footer-text);
+  text-decoration: none;
+}
+
+.footer-logo {
+  width: 120px;
+  height: auto;
+  display: inline-block;
+}
+
+@media (max-width: 880px) {
+  footer[itemscope][itemtype*='WPFooter'] .container {
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+  }
+}
+E 1

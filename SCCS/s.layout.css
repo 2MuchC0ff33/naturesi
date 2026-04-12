@@ -1,0 +1,27 @@
+h11982
+s 00015/00000/00000
+d D 1.1 26/04/12 13:56:43 twomuchcoffee 1 0
+c date and time created 26/04/12 13:56:43 by twomuchcoffee
+e
+u
+U
+f e 0
+t
+T
+I 1
+/* ==========================================================================
+Layout helpers and structural utilities (migrated from utilities.css)
+Contains container/grid helpers and small generic layout utilities
+========================================================================== */
+
+/* Structural layout helpers have been migrated to the Objects layer (partials/objects) to keep
+   layout patterns reusable and undecorated:
+   - `.container` -> partials/objects/container.css
+   - `.grid` -> partials/objects/grid.css
+   - `.container--narrow` -> partials/objects/container.css
+   - `.grid-auto-fit` -> partials/objects/grid.css
+*/
+
+/* Note: `.center-row` moved to `partials/objects/flexbox.css` and `.inline-block` remains in
+   `partials/tools/mixins.css` for lightweight utilities. */
+E 1

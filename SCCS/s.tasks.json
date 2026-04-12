@@ -1,0 +1,152 @@
+h22933
+s 00140/00000/00000
+d D 1.1 26/04/12 13:56:43 twomuchcoffee 1 0
+c date and time created 26/04/12 13:56:43 by twomuchcoffee
+e
+u
+U
+f e 0
+t
+T
+I 1
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "start-httpd",
+      "type": "shell",
+      "command": "apachectl",
+      "args": [
+        "start"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "silent",
+        "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "stop-httpd",
+      "type": "shell",
+      "command": "apachectl",
+      "args": [
+        "stop"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "silent",
+        "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "wait-for-httpd",
+      "type": "process",
+      "command": "node",
+      "args": [
+        "${workspaceFolder}/scripts/wait-for-port.cjs",
+        "8000",
+        "30"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [],
+      "group": "build",
+      "presentation": {
+        "echo": false,
+        "reveal": "silent",
+        "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "dev-httpd",
+      "dependsOn": [
+        "start-httpd",
+        "wait-for-httpd"
+      ],
+      "problemMatcher": [],
+      "group": "build",
+      "presentation": {
+        "echo": false,
+        "reveal": "silent",
+        "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "minify-current-file",
+      "type": "shell",
+      "command": "mkdir -p dist/$(dirname \"${relativeFile}\") && minify \"${relativeFile}\" -o dist/\"${relativeFile}\"",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "silent",
+        "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "lint-current-file-biome",
+      "type": "shell",
+      "command": "biome lint --write \"${file}\"",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "build",
+      "problemMatcher": [
+        "$eslint-stylish"
+      ],
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "lint-current-file-html",
+      "type": "shell",
+      "command": "mkdir -p dist/$(dirname \"${relativeFile}\") && tidy -o dist/\"${relativeFile}\" \"${relativeFile}\"",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "build",
+      "problemMatcher": {
+        "owner": "html",
+        "source": "tidy",
+        "fileLocation": "relative",
+        "pattern": {
+          "regexp": "^line (\\d+) column (\\d+) - (Error|Warning): (.*)$",
+          "line": 1,
+          "column": 2,
+          "severity": 3,
+          "message": 4
+        }
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "shared"
+      }
+    }
+  ]
+}
+E 1

@@ -1,0 +1,38 @@
+h57638
+s 00026/00000/00000
+d D 1.1 26/04/12 13:56:43 twomuchcoffee 1 0
+c date and time created 26/04/12 13:56:43 by twomuchcoffee
+e
+u
+U
+f e 0
+t
+T
+I 1
+/* Paragraph defaults (canonical location)
+   Consolidated on 2026-01-26: moved `.prose` and related paragraph helpers here
+   from `paragraph.css` and `all.css` to avoid duplication. This file is the
+   authoritative source for paragraph and `.prose` styles. */
+
+p {
+  margin: 0 0 var(--space-sm) 0;
+  line-height: 1.6;
+}
+
+/* Prose container helper for rich text blocks */
+.prose {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-text);
+}
+
+.prose p {
+  margin: 0 0 var(--space-sm) 0;
+}
+
+.lead {
+  font-size: 1.075rem;
+  color: var(--color-text);
+  line-height: 1.5;
+}
+E 1

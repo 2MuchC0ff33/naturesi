@@ -1,0 +1,50 @@
+h29838
+s 00038/00000/00000
+d D 1.1 26/04/12 13:56:42 twomuchcoffee 1 0
+c date and time created 26/04/12 13:56:42 by twomuchcoffee
+e
+u
+U
+f e 0
+t
+T
+I 1
+{
+  "harper.markdown.IgnoreLinkTitle": true,
+  "terminal.integrated.env.windows": {
+    "CHERE_INVOKING": "1"
+  },
+  "editor.rulers": [
+    80
+  ],
+  "editor.wordWrap": "wordWrapColumn",
+  "editor.wordWrapColumn": 80,
+  "editor.formatOnSave": true,
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "files.encoding": "utf8",
+  "files.eol": "\n",
+  "files.exclude": {
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "**/node_modules": true,
+    "**/.vscode": false
+  },
+  "terminal.integrated.defaultProfile.windows": "Cygwin",
+  "terminal.integrated.profiles.windows": {
+    "Cygwin": {
+      "path": "C:\\Users\\galloa\\scoop\\shims\\cygwin.exe",
+      "args": [
+        "-i"
+      ],
+      "env": {
+        "BASH": "/usr/bin/bash",
+        "PATH": "/usr/sbin:/cygdrive/c/Users/galloa/scoop/shims:/cygdrive/c/Users/galloa/scoop/apps/nodejs/current:/cygdrive/c/Users/galloa/scoop/apps/nodejs/current/bin:$PATH"
+      }
+    }
+  },
+  "terminal.integrated.shellIntegration.enabled": true
+}
+E 1

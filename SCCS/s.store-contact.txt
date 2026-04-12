@@ -1,0 +1,17 @@
+h22363
+s 00005/00000/00000
+d D 1.1 26/04/12 13:56:44 twomuchcoffee 1 0
+c date and time created 26/04/12 13:56:44 by twomuchcoffee
+e
+u
+U
+f e 0
+t
+T
+I 1
+email|2MuchC0ff33@example.org
+support_email|2MuchC0ff33@example.org
+phone|+61-XXX-XXX-XXX
+address|Perth, Western Australia
+ABN|XX XXX XXX XXX
+E 1

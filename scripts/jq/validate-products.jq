@@ -1,3 +1,8 @@
+# scripts/jq/validate-products.jq  Validate products.json structure
+# Usage: jq -f scripts/jq/validate-products.jq assets/js/data/products.json
+# Exits 0 if valid, non-zero if errors
+
+
 def validate_product:
   if (.id | not) or (.id | type != "string") or (.id | length == 0)
   then "product missing or invalid id: \(.)" | error

@@ -1,0 +1,43 @@
+h65272
+s 00031/00000/00000
+d D 1.1 26/04/12 13:56:43 twomuchcoffee 1 0
+c date and time created 26/04/12 13:56:43 by twomuchcoffee
+e
+u
+U
+f e 0
+t
+T
+I 1
+/* Utilities – animation helpers */
+
+.u-animate-fade {
+  animation: fade-in 0.3s ease both;
+}
+
+.u-animate-slide-up {
+  animation: slide-up 0.3s ease both;
+}
+
+/* Respect user preference to reduce motion */
+@media (prefers-reduced-motion: reduce) {
+
+  .u-animate-fade,
+  .u-animate-slide-up,
+  .u-reduced-motion {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  /* Turn off smooth scrolling for reduced motion */
+  .u-smooth-scroll {
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Utility to programmatically disable animations on an element */
+.u-reduced-motion {
+  animation: none !important;
+  transition: none !important;
+}
+E 1

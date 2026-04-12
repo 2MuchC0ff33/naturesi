@@ -1,0 +1,29 @@
+h31369
+s 00017/00000/00000
+d D 1.1 26/04/12 13:56:43 twomuchcoffee 1 0
+c date and time created 26/04/12 13:56:43 by twomuchcoffee
+e
+u
+U
+f e 0
+t
+T
+I 1
+/* Utilities – desktop-specific helpers */
+
+@media (min-width: 1025px) {
+  .u-desktop-only {
+    display: block !important;
+  }
+
+  .u-hide-desktop {
+    display: none !important;
+  }
+}
+
+@media (max-width: 1024px) {
+  .u-desktop-only {
+    display: none !important;
+  }
+}
+E 1

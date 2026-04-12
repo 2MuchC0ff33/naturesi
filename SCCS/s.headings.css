@@ -1,0 +1,57 @@
+h29076
+s 00045/00000/00000
+d D 1.1 26/04/12 13:56:43 twomuchcoffee 1 0
+c date and time created 26/04/12 13:56:43 by twomuchcoffee
+e
+u
+U
+f e 0
+t
+T
+I 1
+/* Headings defaults moved from settings/typography.css */
+
+h1,
+h2,
+h3 {
+  -webkit-font-feature-settings: "kern" 1, "liga" 1, "calt" 1, "pnum" 1, "tnum" 0, "onum" 1, "lnum" 0, "dlig" 1;
+  -moz-font-feature-settings: "kern" 1, "liga" 1, "calt" 1, "pnum" 1, "tnum" 0, "onum" 1, "lnum" 0, "dlig" 1;
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1, "pnum" 1, "tnum" 0, "onum" 1, "lnum" 0, "dlig" 1;
+}
+
+/* Responsive typographic scale for headings (mobile-first) */
+h1 {
+  font-size: clamp(1.5rem, 4.5vw, 2.25rem);
+  margin: 0 0 var(--space-xs);
+  line-height: 1.05;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: clamp(1.25rem, 3.5vw, 1.75rem);
+  margin: 0 0 var(--space-sm);
+  font-weight: 600;
+}
+
+h3 {
+  font-size: clamp(1.1rem, 3vw, 1.25rem);
+  margin: 0 0 var(--space-xs);
+  font-weight: 600;
+}
+
+/* Utility heading classes (useful when styling non-semantic elements) */
+.h1 {
+  font-size: var(--h1, clamp(1.5rem, 4.5vw, 2.25rem));
+  font-weight: 700;
+}
+
+.h2 {
+  font-size: var(--h2, clamp(1.25rem, 3.5vw, 1.75rem));
+  font-weight: 600;
+}
+
+.h3 {
+  font-size: var(--h3, clamp(1.1rem, 3vw, 1.25rem));
+  font-weight: 600;
+}
+E 1

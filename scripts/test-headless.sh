@@ -25,9 +25,11 @@ if ! command -v "$CHROMIUM" >/dev/null 2>&1; then
     exit 0
 fi
 
-# Check apache is running
-if ! curl -s -o /dev/null -w '%{http_code}' "${SITE_BASE}/index.html" 2>/dev/null | grep -q '200'; then
-    printf 'WARN: apache not running at %s, skipping headless tests.\n' "$SITE_BASE"
+# Check site is reachable
+CHECK_URL="${SITE_BASE}"
+HTTP_CODE=$(curl -s -o /dev/null -w '%{http_code}' -L "$CHECK_URL" 2>/dev/null)
+if ! printf '%s' "$HTTP_CODE" | grep -qE '^20[0-5]$'; then
+    printf 'WARN: site not reachable at %s (status %s), skipping headless tests.\n' "$SITE_BASE" "$HTTP_CODE"
     printf 'Start with: scripts/serve.sh start\n'
     exit 0
 fi

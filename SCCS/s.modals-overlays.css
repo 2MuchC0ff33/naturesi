@@ -1,0 +1,117 @@
+h54541
+s 00105/00000/00000
+d D 1.1 26/04/12 13:56:43 twomuchcoffee 1 0
+c date and time created 26/04/12 13:56:43 by twomuchcoffee
+e
+u
+U
+f e 0
+t
+T
+I 1
+/* ==========================================================================
+Components — Modals & Overlays
+
+Component layer visuals for modals and overlays. Keep these styles as
+decorative complements to the structural rules in the Objects layer
+(`partials/objects/modals.css`). These styles are component-level and
+can be customised for branding, while objects remain undecorated.
+
+Accessibility:
+- Ensure sufficient contrast for dialog backgrounds and focus outlines.
+- Provide visible focus states for interactive controls inside the dialog.
+- Respect prefers-reduced-motion user setting.
+========================================================================== */
+
+/* Overlay visuals (covers the page) */
+.modal__overlay {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: saturate(90%) blur(4px);
+  -webkit-backdrop-filter: saturate(90%) blur(4px);
+  transition: opacity 180ms ease;
+  opacity: 0;
+}
+
+.modal.is-open .modal__overlay,
+.modal[open] .modal__overlay {
+  opacity: 1;
+}
+
+/* Dialog visual surface */
+.modal__dialog {
+  background: var(--surface, #ffffff);
+  color: var(--text, #111111);
+  border-radius: var(--radius-md, 8px);
+  padding: var(--space-md, 1rem);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  transform: translateY(8px) scale(0.995);
+  transition: transform 240ms cubic-bezier(0.2, 0, 0, 1), box-shadow 240ms ease;
+}
+
+.modal.is-open .modal__dialog,
+.modal[open] .modal__dialog {
+  transform: translateY(0) scale(1);
+}
+
+/* Header / Footer alignment and spacing */
+.modal__header,
+.modal__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm, 0.5rem);
+}
+
+.modal__header {
+  margin-bottom: var(--space-sm, 0.5rem);
+}
+
+.modal__footer {
+  margin-top: var(--space-sm, 0.5rem);
+}
+
+/* Close button visuals (kept unobtrusive) */
+.modal__header .btn[aria-label="Close dialog"],
+.modal__header [data-modal-close] {
+  background: transparent;
+  border: none;
+  padding: var(--space-xs, 0.25rem);
+  cursor: pointer;
+}
+
+.modal__header .btn[aria-label="Close dialog"]:focus,
+.modal__header [data-modal-close]:focus {
+  outline: 3px solid Highlight;
+  /* visible focus for keyboard users */
+  outline-offset: 2px;
+}
+
+/* Visible focus for the dialog container when keyboard-focused */
+.modal__dialog:focus-visible {
+  outline: 4px solid color-mix(in srgb, var(--color-accent) 20%, transparent);
+  outline-offset: 4px;
+}
+
+/* Respect reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .modal__dialog {
+    transition: none !important;
+    transform: none !important;
+  }
+
+  .modal__overlay {
+    transition: none !important;
+  }
+}
+
+/* Ensure dialog content scrolls sensibly on small screens */
+.modal__dialog {
+  max-height: calc(100vh - 3rem);
+  overflow: auto;
+}
+
+/* Keep the overlay pointer-events behaviour sensible */
+.modal__overlay {
+  pointer-events: auto;
+}
+E 1

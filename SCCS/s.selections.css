@@ -1,0 +1,39 @@
+h29281
+s 00027/00000/00000
+d D 1.1 26/04/12 13:56:43 twomuchcoffee 1 0
+c date and time created 26/04/12 13:56:43 by twomuchcoffee
+e
+u
+U
+f e 0
+t
+T
+I 1
+/* ==========================================================================
+Accessible selection styles
+Centralised so theming and contrast checks are applied consistently.
+Use theme tokens and prefer high-contrast defaults for readability.
+========================================================================== */
+
+/* Use color-mix to ensure sufficient contrast with the accent color, with a solid fallback */
+::selection {
+  background: color-mix(in srgb, var(--color-accent) 80%, black 20%);
+  color: #ffffff;
+  text-shadow: none;
+}
+
+/* Firefox selection pseudo-element */
+::-moz-selection {
+  background: color-mix(in srgb, var(--color-accent) 80%, black 20%);
+  color: #ffffff;
+  text-shadow: none;
+}
+
+/* Dark theme: ensure selection remains readable when `data-theme="dark"` is present */
+:where([data-theme="dark"]) ::selection {
+  background: color-mix(in srgb, var(--color-accent) 60%, white 20%);
+  color: #071010;
+}
+
+/* Note: keep selection rules small and test with Accessibility Insights / contrast checks */
+E 1

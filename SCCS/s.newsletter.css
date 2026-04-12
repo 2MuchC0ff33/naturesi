@@ -1,0 +1,51 @@
+h11159
+s 00039/00000/00000
+d D 1.1 26/04/12 13:56:43 twomuchcoffee 1 0
+c date and time created 26/04/12 13:56:43 by twomuchcoffee
+e
+u
+U
+f e 0
+t
+T
+I 1
+.newsletter-panel {
+  background: var(--color-background);
+  border: 2px solid var(--color-accent, #346967);
+  border-radius: 8px;
+  padding: var(--space-lg);
+  margin: var(--space-lg) 0;
+  text-align: center;
+}
+
+.newsletter-panel h2 {
+  color: var(--color-accent);
+  margin-bottom: var(--space-sm);
+}
+
+.newsletter-panel form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.newsletter-panel input[type="email"] {
+  flex: 1 1 220px;
+  max-width: 300px;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+}
+
+.newsletter-panel .btn--primary {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+.newsletter-panel .btn--ghost {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+E 1

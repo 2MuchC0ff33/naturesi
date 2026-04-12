@@ -1,0 +1,28 @@
+h36132
+s 00016/00000/00000
+d D 1.1 26/04/12 13:56:44 twomuchcoffee 1 0
+c date and time created 26/04/12 13:56:44 by twomuchcoffee
+e
+u
+U
+f e 0
+t
+T
+I 1
+# scripts/bc/shipping-calc.bc  Compute shipping with GST
+# Usage: bc -q -f scripts/bc/shipping-calc.bc
+# Then set: base=X; s(base); prints base*1.10
+# SELF-TEST: set base=13; s(base) -> 14.30
+# SELF-TEST: set base=15; s(base) -> 16.50
+
+scale = 2
+
+define s(b) {
+    return b * 1.10
+}
+
+# Run self-test if no argument passed
+if (1 == 1) {
+    s(13)
+}
+E 1

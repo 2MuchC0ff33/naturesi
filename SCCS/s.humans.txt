@@ -1,0 +1,54 @@
+h15681
+s 00042/00000/00000
+d D 1.1 26/04/12 13:56:44 twomuchcoffee 1 0
+c date and time created 26/04/12 13:56:44 by twomuchcoffee
+e
+u
+U
+f e 0
+t
+T
+I 1
+/* TEAM */
+Developer:        A. Gallo (2MuchC0ff33)
+Role:             Automation, AI Content,  Scripting, Support
+Contact:          Online ticketing only ($9/month membership)
+Location:         Australia (Raspberry Pi self-hosted)
+
+/* SITE */
+Platform:         Ultra-Simple  Static EStore Framework
+Type:             Mobile-First, Accessible
+Automation:       90%+ (awk, sh, vi, convert, base64, RCS)
+AI:               Offline AI-generated product descriptions (privacy-first)
+Support:          Online ticketing (no phone/email)
+Business Model:   $195 upfront + $9/month, no transaction/listing fees
+Variety:          One business per craft category (curated)
+Returns:          Only for damaged/defective items (consumer law compliant)
+
+/* TECHNOLOGY */
+Standards:         (IEEE 1003, ISO/IEC 9945:2024), ISO/IEC 9899:2018
+                  HTML5 (W3C), CSS3+, ECMAScript 2024 (ES15)
+Accessibility:    WCAG 2.1 AA, Section 508, ADA, ISO/IEC 40500
+Hosting:          Raspberry Pi,  C HTTP server, 4G minimum
+Version Control:  Automated RCS (ci, co, rlog, rcsdiff)
+
+/* PROCESS */
+Development:      2-hour automated cycle, 48-hour turnover
+                  Strict standardization, content-only changes
+                  No custom layouts, no manual coding per site
+Testing:          Automated validation (HTML, accessibility, ≤2MB, mobile)
+Documentation:    Plain text, ASCII art, troff, RCS
+
+/* SOCIAL */
+Social:           Facebook, Instagram, WhatsApp only
+No:               Twitter, LinkedIn, phone/email support
+
+/* ASCII ART */
+   _   _           _           _           _   _
+  | | | |_ __   __| | ___  ___| |_ ___  __| | | |
+  | | | | '_ \ / _` |/ _ \/ __| __/ _ \/ _` | | |
+  | |_| | | | | (_| |  __/ (__| ||  __/ (_| | |_|
+   \___/|_| |_|\__,_|\___|\___|\__\___|\__,_| (_)
+
+/* THANKS FOR VISITING A LOCAL ARTISAN MARKETPLACE! */
+E 1

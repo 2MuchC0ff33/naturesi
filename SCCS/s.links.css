@@ -1,0 +1,25 @@
+h36060
+s 00013/00000/00000
+d D 1.1 26/04/12 13:56:43 twomuchcoffee 1 0
+c date and time created 26/04/12 13:56:43 by twomuchcoffee
+e
+u
+U
+f e 0
+t
+T
+I 1
+/* Link defaults moved from settings/typography.css */
+
+a {
+  color: var(--color-accent);
+  transition: color var(--transition-medium) ease;
+}
+
+/* Hover and keyboard focus for links */
+a:hover,
+a:focus-visible {
+  color: color-mix(in srgb, var(--color-accent) 90%, black);
+  text-decoration: underline;
+}
+E 1

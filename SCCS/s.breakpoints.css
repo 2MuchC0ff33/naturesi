@@ -1,0 +1,31 @@
+h01955
+s 00019/00000/00000
+d D 1.1 26/04/12 13:56:43 twomuchcoffee 1 0
+c date and time created 26/04/12 13:56:43 by twomuchcoffee
+e
+u
+U
+f e 0
+t
+T
+I 1
+/* ==========================================================================
+Breakpoint variables
+Named breakpoint tokens to centralise responsive breakpoints
+(Usage: reference the pixel values when documenting or generating queries)
+========================================================================== */
+
+:root {
+  --bp-sm: 640px;
+  /* small / mobile breakpoint */
+  --bp-md: 900px;
+  /* medium */
+  --bp-lg: 1200px;
+  /* large / desktop */
+}
+
+/* Note: CSS custom properties cannot (reliably) be used directly inside
+   @media queries in all browsers; these variables are primarily for
+   documentation and tooling. Keep existing @media rules in their
+   components until a full refactor is completed. */
+E 1

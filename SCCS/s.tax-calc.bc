@@ -1,0 +1,27 @@
+h43749
+s 00015/00000/00000
+d D 1.1 26/04/12 13:56:44 twomuchcoffee 1 0
+c date and time created 26/04/12 13:56:44 by twomuchcoffee
+e
+u
+U
+f e 0
+t
+T
+I 1
+# scripts/bc/tax-calc.bc  Compute 10% GST on a subtotal
+# Usage: bc -q scripts/bc/tax-calc.bc <<< "SUBTOTAL"
+# Example: echo "100" | bc -q scripts/bc/tax-calc.bc  -> 110.00
+# SELF-TEST: echo "100" | bc -q scripts/bc/tax-calc.bc  -> 110.00
+# SELF-TEST: echo "14"  | bc -q scripts/bc/tax-calc.bc  -> 15.40
+# SELF-TEST: echo "39"  | bc -q scripts/bc/tax-calc.bc  -> 42.90
+
+scale = 2
+
+subtotal = 0
+while (read line) {
+    subtotal = 0 + line
+}
+
+subtotal * 1.10
+E 1

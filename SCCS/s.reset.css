@@ -1,0 +1,36 @@
+h09301
+s 00024/00000/00000
+d D 1.1 26/04/12 13:56:43 twomuchcoffee 1 0
+c date and time created 26/04/12 13:56:43 by twomuchcoffee
+e
+u
+U
+f e 0
+t
+T
+I 1
+/* ==========================================================================
+Minimal reset and low-level base rules
+Contains only essential resets that provide a safe baseline without conflicting
+with higher ITCSS layers. Typography and normalization moved to dedicated files.
+========================================================================== */
+
+/* Box-sizing reset - essential for consistent sizing model */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Prevent small, stray overflows on very small viewports (portrait phones).
+   This is intentionally scoped to narrow viewports only to avoid hiding
+   legitimate overflow on larger screens during development. */
+@media (max-width: 640px) {
+
+  html,
+  body {
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+}
+E 1

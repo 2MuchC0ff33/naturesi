@@ -1,0 +1,17 @@
+h28674
+s 00005/00000/00000
+d D 1.1 26/04/12 13:56:42 twomuchcoffee 1 0
+c date and time created 26/04/12 13:56:42 by twomuchcoffee
+e
+u
+U
+f e 0
+t
+T
+I 1
+# Code owners for the repository. Use GitHub usernames (teams are supported too).
+# Ensure code owners are valid GitHub handles for automatic review requests.
+
+# Default owner for everything else
+* @2MuchC0ff33
+E 1

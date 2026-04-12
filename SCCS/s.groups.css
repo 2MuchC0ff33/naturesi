@@ -1,0 +1,26 @@
+h44869
+s 00014/00000/00000
+d D 1.1 26/04/12 13:56:43 twomuchcoffee 1 0
+c date and time created 26/04/12 13:56:43 by twomuchcoffee
+e
+u
+U
+f e 0
+t
+T
+I 1
+/* Grouping utilities (Elements layer)
+   Purpose: simple layout helpers used across content areas; keep minimal
+   and low specificity. */
+
+/* Moved to objects layer:
+   - `.container` -> partials/objects/container.css (kept as `.container` + `.container--lg` modifier)
+   - `.stack` and `.stack--sm` -> partials/objects/flexbox.css
+*/
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+E 1

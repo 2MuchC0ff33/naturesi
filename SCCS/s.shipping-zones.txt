@@ -1,0 +1,26 @@
+h06114
+s 00014/00000/00000
+d D 1.1 26/04/12 13:56:44 twomuchcoffee 1 0
+c date and time created 26/04/12 13:56:44 by twomuchcoffee
+e
+u
+U
+f e 0
+t
+T
+I 1
+# Shipping zones based on MMM band (Myrtle Metcalfe Mapping)
+# postcode_prefix|zone|state|mmm_band|description
+# Zone: sameCity, nearMetro, outerPerth, national
+6000-6099|sameCity|WA|1-3|Perth CBD and inner suburbs
+6100-6199|nearMetro|WA|2-3|Perth metro near
+6200-6399|outerPerth|WA|4|Outer Perth metro
+6400-6999|national|WA|5-9|WA regional and remote
+0001-0999|national|NSW|varies|NSW metro and regional
+2000-2999|national|NSW|varies|Sydney metro
+3000-3999|national|VIC|varies|Melbourne metro
+4000-4999|national|QLD|varies|Brisbane metro
+5000-5999|national|SA|varies|Adelaide metro
+6000-6999|national|WA|varies|Perth metro and regional
+7000-7999|national|TAS|varies|Hobart and regional
+E 1
