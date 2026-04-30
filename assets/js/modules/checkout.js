@@ -344,7 +344,6 @@ export async function setupPayPalSDK(documentRoot, cart, shipping, paypalData) {
                   order.purchase_units?.[0]?.payments?.authorizations?.[0]?.id ||
                   '',
                 status: order.status,
-                payerEmail: order.payer?.email_address || '',
                 cart: cart,
                 total: total,
                 timestamp: Date.now()
