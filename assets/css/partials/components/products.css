@@ -203,6 +203,7 @@
   display: block;
   border-radius: calc(var(--radius-sm) - 2px);
   margin-bottom: var(--space-sm);
+  background: var(--color-background);
   background: color-mix(in srgb, var(--color-highlight) 10%, var(--color-background));
 }
 
