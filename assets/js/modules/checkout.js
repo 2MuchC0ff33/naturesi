@@ -330,7 +330,7 @@ export async function setupPayPalSDK(documentRoot, cart, shipping, paypalData) {
           const order = await actions.order.capture();
           if (!order || order.status !== 'COMPLETED') {
             showError(
-              'PayPal did not confirm a completed payment. Your cart has been kept so you can try again.'
+              `PayPal returned status: ${order?.status || 'unknown'}. Your cart has been kept so you can try again.`
             );
             return;
           }
