@@ -198,6 +198,7 @@
 .product-card__media {
   width: 100%;
   aspect-ratio: 1 / 1;
+  min-height: 10rem;
   overflow: hidden;
   display: block;
   border-radius: calc(var(--radius-sm) - 2px);

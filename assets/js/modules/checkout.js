@@ -360,7 +360,7 @@ export async function setupPayPalSDK(documentRoot, cart, shipping, paypalData) {
         } catch (e) {
           console.error('Payment approval handler error:', e);
           showError(
-            'Your PayPal payment could not be finalised. Please try again or contact support before placing another order.'
+            'Your PayPal payment could not be finalised. Please refresh and try again, or contact support before placing another order.'
           );
         }
       },
