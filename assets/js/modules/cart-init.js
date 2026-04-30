@@ -212,7 +212,7 @@ export async function initCart() {
           productEl.querySelector('[itemprop="name"]') ||
           productEl.querySelector('h3, h2, .product-title'));
       const name = nameEl ? nameEl.textContent.trim() : fd.get('name') || 'Item';
-      const size = fd.get('size') || fd.get('package') || '';
+      let size = fd.get('size') || fd.get('package') || '';
       const quantity = parseInt(fd.get('quantity') || fd.get('qty') || 1, 10) || 1;
 
       // price extraction (prefer selected option price, fallback to product-level data-price)
@@ -349,22 +349,39 @@ export async function initCart() {
           productEl.querySelector('.product-description, p'));
       const description = descriptionEl ? descriptionEl.textContent.trim().slice(0, 160) : '';
 
-      // Prefer canonical price from product index when available to avoid DOM tampering
+      // Prefer canonical price from product index to avoid DOM tampering.
+      // When an option radio is selected, match its value against the product options array
+      // so the correct per-option price (e.g. $22 for 70 g cylinder) is used rather than
+      // the base product price ($14).
       try {
-        if ((typeof idx !== 'undefined' && idx) && sku) {
+        if ((typeof idx !== 'undefined' && idx) && (sku || id)) {
           const prod = idx[String(sku)] || idx[String(id)];
-          if (prod && prod.price != null) {
-            price = Number(prod.price);
+          if (prod) {
+            const checkedInput = form.querySelector(
+              'input[type="radio"]:checked, input[type="checkbox"]:checked'
+            );
+            const optionValue = checkedInput ? String(checkedInput.value) : null;
+            let matchedOpt = null;
+            if (optionValue && Array.isArray(prod.options)) {
+              matchedOpt = prod.options.find((o) => String(o.id) === optionValue);
+            }
+            if (matchedOpt) {
+              if (matchedOpt.price != null) price = Number(matchedOpt.price);
+              // Populate size from the option label when not already set by a named field
+              if (!size && matchedOpt.label) size = matchedOpt.label;
+            } else if (prod.price != null) {
+              price = Number(prod.price);
+            }
           }
         }
       } catch (e) {
         // ignore and fall back to detected price
       }
 
-      await window.CartStore.add({ id, name, size, qty: quantity, price, image, sku, description });
+      await window.CartStore.add({ id, name, size, quantity, price, image, sku, description });
       const updated = window.CartStore.get();
       updateCartCountOutputs(
-        (updated.items || []).reduce((s, it) => s + (parseInt(it.qty || it.quantity, 10) || 0), 0)
+        (updated.items || []).reduce((s, it) => s + (parseInt(it.quantity ?? it.qty, 10) || 0), 0)
       );
       renderCartTable(updated);
       // Keep totals in sync with the latest shipping rate

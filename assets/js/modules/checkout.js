@@ -7,7 +7,15 @@ export function parseCartRaw(raw) {
       return { cart: parsed, shipping: 0 };
     }
     if (parsed && typeof parsed === 'object') {
-      const cart = Array.isArray(parsed.cart) ? parsed.cart : [];
+      // Support checkout format {cart:[…], shipping:N} and CartStore format {items:[…]}
+      let cart;
+      if (Array.isArray(parsed.cart)) {
+        cart = parsed.cart;
+      } else if (Array.isArray(parsed.items)) {
+        cart = parsed.items;
+      } else {
+        cart = [];
+      }
       const shipping = typeof parsed.shipping === 'number' ? parsed.shipping : 0;
       return { cart, shipping };
     }
@@ -18,11 +26,13 @@ export function parseCartRaw(raw) {
 }
 
 export function computeGrandTotal(cart) {
-  return cart.reduce((s, x) => s + (Number(x.price) || 0) * (Number(x.qty) || 0), 0);
+  return cart.reduce((s, x) => s + (Number(x.price) || 0) * (Number(x.qty ?? x.quantity) || 0), 0);
 }
 
 export function computeItemLabel(cart) {
-  const itemLabel = cart.map((i) => `${i.qty}×${i.title}`).join(', ');
+  const itemLabel = cart
+    .map((i) => `${i.qty ?? i.quantity}×${i.title ?? i.name}`)
+    .join(', ');
   return itemLabel.length > 127 ? itemLabel.slice(0, 124) + '...' : itemLabel;
 }
 
@@ -30,9 +40,10 @@ export function renderSummaryToString(cart, shipping = 0) {
   if (!cart || !cart.length) return { html: '<p>Your cart is empty.</p>', total: 0 };
   const items = cart.map((it) => {
     const priceVal = Number(it.price) || 0;
-    const qty = Number(it.qty) || 0;
+    const qty = Number(it.qty ?? it.quantity) || 0;
+    const title = it.title ?? it.name ?? '';
     return {
-      title: it.title,
+      title,
       qty,
       price: priceVal.toFixed(2),
       lineTotal: (priceVal * qty).toFixed(2)
@@ -276,7 +287,7 @@ export async function setupPayPalSDK(documentRoot, cart, shipping, paypalData) {
           currency_code: currency,
           value: Number(item.price || 0).toFixed(2)
         },
-        quantity: String(item.qty || 1)
+        quantity: String(item.qty ?? item.quantity ?? 1)
       }))
     }
   ];
