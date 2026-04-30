@@ -1,3 +1,5 @@
+import { escapeHtml } from './html.js';
+
 // Checkout helpers exported for testing + guarded browser runner
 export function parseCartRaw(raw) {
   try {
@@ -189,13 +191,6 @@ export async function runCheckout({
   await setupPayPalSDK(documentRoot, cart, shipping, paypalData);
 }
 
-function escapeHtml(s) {
-  return String(s || '').replace(
-    /[&<>"']/g,
-    (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]
-  );
-}
-
 export async function setupPayPalSDK(documentRoot, cart, shipping, paypalData) {
   const container =
     documentRoot.querySelector('[data-paypal-button]') ||
@@ -226,6 +221,16 @@ export async function setupPayPalSDK(documentRoot, cart, shipping, paypalData) {
     }
   };
 
+  const sdkUrl = new URL('https://www.paypal.com/sdk/js');
+  sdkUrl.searchParams.set('client-id', clientId);
+  sdkUrl.searchParams.set('currency', currency);
+  sdkUrl.searchParams.set('intent', intent);
+  sdkUrl.searchParams.set('components', 'buttons');
+  sdkUrl.searchParams.set('commit', 'true');
+  if (paypalData.merchantId) {
+    sdkUrl.searchParams.set('merchant-id', paypalData.merchantId);
+  }
+
   const loadSdk = () => {
     return new Promise((resolve) => {
       if (window.paypal && window.paypal.Buttons) {
@@ -249,7 +254,7 @@ export async function setupPayPalSDK(documentRoot, cart, shipping, paypalData) {
         return;
       }
       const script = documentRoot.createElement('script');
-      script.src = `https://www.paypal.com/sdk/js?client-id=${encodeURIComponent(clientId)}&currency=${encodeURIComponent(currency)}&intent=${encodeURIComponent(intent)}`;
+      script.src = sdkUrl.toString();
       script.onload = () => resolve();
       script.onerror = () => showError('Failed to load PayPal SDK. Please refresh the page.');
       documentRoot.head
@@ -319,13 +324,27 @@ export async function setupPayPalSDK(documentRoot, cart, shipping, paypalData) {
           purchase_units: purchaseUnits
         });
       },
-      onApprove: (data) => {
+      onApprove: async (data, actions) => {
         try {
+          showMessage('Finalising your PayPal payment…');
+          const order = await actions.order.capture();
+          if (!order || order.status !== 'COMPLETED') {
+            showError(
+              'PayPal did not confirm a completed payment. Your cart has been kept so you can try again.'
+            );
+            return;
+          }
           if (typeof localStorage !== 'undefined') {
             localStorage.setItem(
               'naturesi_last_order',
               JSON.stringify({
-                orderId: data.orderID,
+                orderId: order.id || data.orderID,
+                captureId:
+                  order.purchase_units?.[0]?.payments?.captures?.[0]?.id ||
+                  order.purchase_units?.[0]?.payments?.authorizations?.[0]?.id ||
+                  '',
+                status: order.status,
+                payerEmail: order.payer?.email_address || '',
                 cart: cart,
                 total: total,
                 timestamp: Date.now()
@@ -334,13 +353,14 @@ export async function setupPayPalSDK(documentRoot, cart, shipping, paypalData) {
             localStorage.removeItem('naturesi_cart');
           }
           if (typeof location !== 'undefined') {
-            location.href = `/pages/payment/success.html?orderId=${encodeURIComponent(data.orderID)}`;
+            location.href = `/pages/payment/success.html?orderId=${encodeURIComponent(
+              order.id || data.orderID
+            )}`;
           }
         } catch (e) {
           console.error('Payment approval handler error:', e);
           showError(
-            'Payment approved but redirect failed. Please contact support with order ID: ' +
-              data.orderID
+            'Your PayPal payment could not be finalised. Please try again or contact support before placing another order.'
           );
         }
       },

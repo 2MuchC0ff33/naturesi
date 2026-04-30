@@ -119,12 +119,6 @@ if (typeof document !== 'undefined') {
       }
 
       try {
-        await import('./modules/analytics.js');
-      } catch (err) {
-        console.warn('Analytics module init failed', err);
-      }
-
-      try {
         if (document.getElementById('postcode') || document.querySelector('.postcode-lookup')) {
           const ship = await import('./modules/cartStore.js');
           const form = document.querySelector('.postcode-lookup');
