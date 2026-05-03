@@ -15,7 +15,6 @@ All worker communication uses **JSON** via `postMessage`. See message contracts 
 - `price-calculator.worker.js`: Calculates discounts, tax, shipping without blocking UI.
 - `search-filter.worker.js`: Client-side search and multi-facet filtering.
 - `image-processor.worker.js`: Optional image resizing/compression via `OffscreenCanvas`.
-- `analytics-batch.worker.js`: Buffers events and flushes to backend.
 - `csv-parser.worker.js`: Parses CSV with a simple parser.
 
 ## Shared Workers
@@ -44,7 +43,8 @@ window.SWClient.flushSwErrors();
 When enabled the SW attempts an immediate flush and will keep queued logs until a successful POST to `/api/sw-telemetry` is completed. If your deployment does not provide `/api/sw-telemetry` the SW will silently keep logs queued; ensure your backend implements this endpoint or consumes the `sw-errors` store via server-side tooling. This keeps reporting resilient across offline/spotty network conditions.
 
 ## PayPal Checkout (Mandatory Constraint)
-- **Redirect-only** approach is preserved. No PayPal SDK is loaded.
+- The checkout page loads the PayPal JavaScript SDK only when the PayPal button container is present.
+- Client-side approval must finish with `actions.order.capture()` before the cart is cleared or success UI is shown.
 - Service Worker bypasses `paypal.com` origins for navigation/fetch.
 - Payment tokenization applies only to non-PayPal card flows.
 

@@ -1,0 +1,19 @@
+# api/.htaccess — Security rules for API endpoints
+
+# Block directory listing
+Options -Indexes
+
+# Block direct HTTP access to config.php
+<Files "config.php">
+    Require all denied
+</Files>
+
+# Only allow .php files to execute
+<FilesMatch "\.(?!php$).*$">
+    Require all denied
+</FilesMatch>
+
+# Set proper MIME type for JSON responses
+<IfModule mod_headers.c>
+    Header always set Content-Type "application/json" env=JSON_RESPONSE
+</IfModule>

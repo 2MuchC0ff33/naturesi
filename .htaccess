@@ -5,7 +5,7 @@
 <IfModule mod_headers.c>
   Header set X-Content-Type-Options "nosniff"
   Header set X-Frame-Options "SAMEORIGIN"
-  Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.paypal.com https://www.sandbox.paypal.com https://www.paypalobjects.com; script-src-elem 'self' 'unsafe-inline' https://www.paypal.com https://www.sandbox.paypal.com https://www.paypalobjects.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://www.paypal.com https://www.sandbox.paypal.com https://www.paypalobjects.com; form-action 'self' https://www.paypal.com https://www.sandbox.paypal.com mailto:; upgrade-insecure-requests;"
+  Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.paypal.com https://www.sandbox.paypal.com https://www.paypalobjects.com https://static.cloudflareinsights.com; script-src-elem 'self' 'unsafe-inline' https://www.paypal.com https://www.sandbox.paypal.com https://www.paypalobjects.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com; frame-src https://www.paypal.com https://www.sandbox.paypal.com https://www.paypalobjects.com; child-src https://www.paypal.com https://www.sandbox.paypal.com https://www.paypalobjects.com; worker-src 'self' blob:; connect-src 'self' https://static.cloudflareinsights.com https://cloudflareinsights.com https://www.paypal.com https://www.sandbox.paypal.com https://www.paypalobjects.com; form-action 'self' https://www.paypal.com https://www.sandbox.paypal.com mailto:; upgrade-insecure-requests;"
   # Permissions-Policy restricts device features (adjust as needed)
   Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
   # HSTS: handled by Cloudflare edge for better performance. Enable in Cloudflare dashboard with max-age=63072000, includeSubDomains, preload, then submit to https://hstspreload.org
@@ -13,6 +13,10 @@
   # Expect-CT is optional; configure report-uri or remove if not used
   # Header always set Expect-CT "max-age=86400, enforce, report-uri=\"https://example.com/report\""
 </IfModule>
+
+# --- PHP MIME Type ---
+AddType application/x-httpd-php .php
+AddHandler application/x-httpd-php .php
 
 # --- MIME Types ---
 AddType text/html .html
@@ -81,6 +85,13 @@ RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 RewriteCond %{THE_REQUEST} /index\.html [NC]
 RewriteRule ^index\.html$ / [R=301,L]
 
+# --- API Endpoints: let PHP files execute (before SPA fallback) ---
+RewriteRule ^api/(.*\.php)$ api/$1 [L]
+
+# --- Block direct access to order data directories ---
+RewriteRule ^data/orders/ - [F,L]
+RewriteRule ^data/webhook-log/ - [F,L]
+
 # Fallback to index.html for non-file requests (SPA-like)
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
@@ -114,5 +125,13 @@ Options -Indexes +FollowSymLinks
     Header set Access-Control-Allow-Origin "*"
   </FilesMatch>
 </IfModule>
+
+# --- Block direct access to order data directories ---
+<DirectoryMatch "data/orders">
+  Require all denied
+</DirectoryMatch>
+<DirectoryMatch "data/webhook-log">
+  Require all denied
+</DirectoryMatch>
 
 # --- End of .htaccess ---

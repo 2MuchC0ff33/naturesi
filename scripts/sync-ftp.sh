@@ -41,9 +41,12 @@ done < "$ENV_FILE"
 
 [ -z "${FTP_HOST:-}" ] && echo "ERROR: FTP credentials not found in .env" >&2 && exit 1
 
-FTP_URL="ftp://${FTP_USER}:${FTP_PASS}@${FTP_HOST}/"
+# Change to repo root so relative file paths resolve correctly
+cd "$BASE_DIR"
+
+FTP_URL="ftp://${FTP_HOST}/"
 WGET_OPTS="--ftp-ssl -k --user=$FTP_USER --password=$FTP_PASS"
-CURL_OPTS="--ftp-ssl -k --user=$FTP_USER:$FTP_PASS --silent"
+CURL_OPTS="--ftp-ssl -k --user "$FTP_USER:$FTP_PASS" --silent"
 UPLOADED=0; SKIPPED=0; DELETED=0; FAILED=0
 
 ftp_delete() {

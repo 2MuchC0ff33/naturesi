@@ -233,6 +233,7 @@ export class CartStore {
 
 // Module-level caches for JSON data
 let cachedPostcodes = null;
+let cachedPostage = null;
 
 // Inlined postage rates from postage.json (updated 2026-01-21)
 const POSTAGE_RATES = {"baseRates":{"pouch":{"sameCity":13,"nearMetro":13,"outerPerth":13,"national":13},"satchel":{"sameCity":15,"nearMetro":15,"outerPerth":15,"national":15},"handbag":{"sameCity":19,"nearMetro":19,"outerPerth":19,"national":19},"shoebox":{"sameCity":24,"nearMetro":24,"outerPerth":24,"national":24},"briefcase":{"sameCity":29,"nearMetro":29,"outerPerth":29,"national":29}},"regionalSurcharge":{"pouch":0,"satchel":0,"handbag":0,"shoebox":0,"briefcase":0},"remoteSurcharge":{"pouch":0,"satchel":0,"handbag":0,"shoebox":0,"briefcase":0}};

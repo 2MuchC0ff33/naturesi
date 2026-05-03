@@ -41,6 +41,17 @@ pages/ — HTML pages
 .env — central environment variables (sensitive)
 .env.template — placeholder keys for .env
 
+Deployment & FTP Validation
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+All deployment and FTP validation steps are handled by dedicated scripts:
+
+- Use `scripts/deploy-ftp.sh` for deploying to production FTP
+- Use `scripts/validate-ftp.sh` to audit/verify FTP state after deploy
+- To check for drifts or manual deletions, see `scripts/compare-checksums.sh` and `FTP_DELETE_MANUAL.md`
+- Full deployment workflows are in `DEPLOYMENT.md` and `PRODUCTION_FTP_CCRUD.md`
+
+❗️Do not replicate or summarize deployment/validation logic here. Always defer to the current scripts and markdown docs above, as they evolve more quickly than this file.
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 1. COMMANDS
@@ -523,13 +534,7 @@ git stash push -u -m "wip: hero video centred"
 
 ### Audit & Validation Automation
 
-- Use the Makefile for all audit, validation, and reproducibility workflows essential for agent/human contributors:
-  - `make sccs-init` # SCCS checkin for all tracked files (historical traceability)
-  - `make checksums` # Generate reproducible checksums in .checksums/checksums.txt
-  - `make patches` # Generate .patches/patches.txt for diff review and agent auditing
-  - `make validate-audit` # One-shot refresh: SCCS + checksum + patch (full audit state)
-  - `make lint`, `make test`, `make validate` # Complete validation, lint, and test cycles (for both agents and humans)
-- See also .opencode/README.md for agent/skill structure and perpetual audit workflow expectations.
+- After every substantive code or config change, run `make validate-audit` to keep audit, checksums, and history current. For all reproducibility, lint, and validation automation, always defer to the Makefile and `.opencode/README.md` as authoritative sources. Do not repeat or summarize their detailed logic here, as it evolves quickly.
 
 #### Example session initialization for agents (always run before code changes):
 
@@ -754,6 +759,8 @@ git push -u origin feat/my-feature
 
 After every substantive change, run this sequence:
 
+**Always run both scripts/test-all.sh and scripts/test-headless.sh after any code or config update to ensure complete coverage. For test structure and flow, defer to the test/ directory README and script headers.**
+
 1. scripts/lint-json.sh — all \*.json files valid (jq)
 2. scripts/lint-shellcheck.sh — shellcheck on all \*.sh files
 3. scripts/lint-shell.sh — POSIX compliance checks
@@ -873,7 +880,9 @@ CHROMIUM --headless --disable-gpu --no-sandbox \
 
 Each scripting language lives in its own scripts/ subdirectory.
 Standalone scripts are preferred over inline code in test/lint scripts.
-Each script must:
+Each script must (see script headers and per-directory README for authoritative, current guidance):
+
+**For up-to-date validation, data manipulation, and reporting workflows, always defer to the README and script headers in scripts/bc/, scripts/jq/, scripts/awk/, and scripts/sed/.** These evolve more rapidly than this summary section.
 
 - Have a shebang: #!/bin/sh (wraps AWK/JQ) or be directly executable
 - Have a header comment describing purpose, usage, and examples

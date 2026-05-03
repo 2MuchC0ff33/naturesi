@@ -1,3 +1,5 @@
+import { escapeHtml } from './html.js';
+
 // Checkout helpers exported for testing + guarded browser runner
 export function parseCartRaw(raw) {
   try {
@@ -7,7 +9,15 @@ export function parseCartRaw(raw) {
       return { cart: parsed, shipping: 0 };
     }
     if (parsed && typeof parsed === 'object') {
-      const cart = Array.isArray(parsed.cart) ? parsed.cart : [];
+      // Support checkout format {cart:[…], shipping:N} and CartStore format {items:[…]}
+      let cart;
+      if (Array.isArray(parsed.cart)) {
+        cart = parsed.cart;
+      } else if (Array.isArray(parsed.items)) {
+        cart = parsed.items;
+      } else {
+        cart = [];
+      }
       const shipping = typeof parsed.shipping === 'number' ? parsed.shipping : 0;
       return { cart, shipping };
     }
@@ -18,11 +28,13 @@ export function parseCartRaw(raw) {
 }
 
 export function computeGrandTotal(cart) {
-  return cart.reduce((s, x) => s + (Number(x.price) || 0) * (Number(x.qty) || 0), 0);
+  return cart.reduce((s, x) => s + (Number(x.price) || 0) * (Number(x.qty ?? x.quantity) || 0), 0);
 }
 
 export function computeItemLabel(cart) {
-  const itemLabel = cart.map((i) => `${i.qty}×${i.title}`).join(', ');
+  const itemLabel = cart
+    .map((i) => `${i.qty ?? i.quantity}×${i.title ?? i.name}`)
+    .join(', ');
   return itemLabel.length > 127 ? itemLabel.slice(0, 124) + '...' : itemLabel;
 }
 
@@ -30,9 +42,10 @@ export function renderSummaryToString(cart, shipping = 0) {
   if (!cart || !cart.length) return { html: '<p>Your cart is empty.</p>', total: 0 };
   const items = cart.map((it) => {
     const priceVal = Number(it.price) || 0;
-    const qty = Number(it.qty) || 0;
+    const qty = Number(it.qty ?? it.quantity) || 0;
+    const title = it.title ?? it.name ?? '';
     return {
-      title: it.title,
+      title,
       qty,
       price: priceVal.toFixed(2),
       lineTotal: (priceVal * qty).toFixed(2)
@@ -178,13 +191,6 @@ export async function runCheckout({
   await setupPayPalSDK(documentRoot, cart, shipping, paypalData);
 }
 
-function escapeHtml(s) {
-  return String(s || '').replace(
-    /[&<>"']/g,
-    (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]
-  );
-}
-
 export async function setupPayPalSDK(documentRoot, cart, shipping, paypalData) {
   const container =
     documentRoot.querySelector('[data-paypal-button]') ||
@@ -215,6 +221,16 @@ export async function setupPayPalSDK(documentRoot, cart, shipping, paypalData) {
     }
   };
 
+  const sdkUrl = new URL('https://www.paypal.com/sdk/js');
+  sdkUrl.searchParams.set('client-id', clientId);
+  sdkUrl.searchParams.set('currency', currency);
+  sdkUrl.searchParams.set('intent', intent);
+  sdkUrl.searchParams.set('components', 'buttons');
+  sdkUrl.searchParams.set('commit', 'true');
+  if (paypalData.merchantId) {
+    sdkUrl.searchParams.set('merchant-id', paypalData.merchantId);
+  }
+
   const loadSdk = () => {
     return new Promise((resolve) => {
       if (window.paypal && window.paypal.Buttons) {
@@ -238,7 +254,7 @@ export async function setupPayPalSDK(documentRoot, cart, shipping, paypalData) {
         return;
       }
       const script = documentRoot.createElement('script');
-      script.src = `https://www.paypal.com/sdk/js?client-id=${encodeURIComponent(clientId)}&currency=${encodeURIComponent(currency)}&intent=${encodeURIComponent(intent)}`;
+      script.src = sdkUrl.toString();
       script.onload = () => resolve();
       script.onerror = () => showError('Failed to load PayPal SDK. Please refresh the page.');
       documentRoot.head
@@ -254,32 +270,6 @@ export async function setupPayPalSDK(documentRoot, cart, shipping, paypalData) {
     return;
   }
 
-  const purchaseUnits = [
-    {
-      amount: {
-        currency_code: currency,
-        value: total,
-        breakdown: {
-          item_total: {
-            currency_code: currency,
-            value: computeGrandTotal(cart).toFixed(2)
-          },
-          shipping: {
-            currency_code: currency,
-            value: Number(shipping || 0).toFixed(2)
-          }
-        }
-      },
-      items: cart.map((item) => ({
-        name: String(item.title || item.name || item.id || 'Item').slice(0, 127),
-        unit_amount: {
-          currency_code: currency,
-          value: Number(item.price || 0).toFixed(2)
-        },
-        quantity: String(item.qty || 1)
-      }))
-    }
-  ];
 
   const buttonEl = documentRoot.getElementById('paypal-button-container');
   if (buttonEl) {
@@ -302,19 +292,76 @@ export async function setupPayPalSDK(documentRoot, cart, shipping, paypalData) {
         }
         return actions.resolve();
       },
-      createOrder: (_data, actions) => {
-        return actions.order.create({
-          intent: intent.toUpperCase(),
-          purchase_units: purchaseUnits
-        });
-      },
-      onApprove: (data) => {
+      createOrder: async (_data, actions) => {
         try {
+          const cartItems = cart.map((item) => ({
+            id: item.id || item.sku || '',
+            title: item.title || item.name || 'Item',
+            price: Number(item.price || 0),
+            qty: item.qty ?? item.quantity ?? 1
+          }));
+          const response = await fetch('/api/create-order.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              items: cartItems,
+              total: total,
+              shipping: Number(shipping || 0).toFixed(2),
+              currency: currency
+            })
+          });
+          const result = await response.json();
+          if (result.error) {
+            showError('Could not create order: ' + result.error);
+            return actions.reject();
+          }
+          return result.orderID;
+        } catch (e) {
+          console.error('createOrder server call failed:', e);
+          showError('Order creation failed. Please try again.');
+          return actions.reject();
+        }
+      },
+      onApprove: async (data, actions) => {
+        try {
+          showMessage('Finalising your PayPal payment…');
+
+          // Server-side capture + verification (order was created server-side)
+          try {
+            const verifyResponse = await fetch('/api/capture-order.php', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                orderID: data.orderID,
+                expectedTotal: total,
+                currency: currency
+              })
+            });
+            const verifyResult = await verifyResponse.json();
+            if (!verifyResult.verified) {
+              console.error('Server capture/verification failed:', verifyResult.reason);
+              showError(
+                'Payment could not be completed: ' +
+                  (verifyResult.reason || 'Unknown error') +
+                  '. Your cart has been kept so you can try again.'
+              );
+              return;
+            }
+          } catch (verifyError) {
+            console.error('Server capture call failed:', verifyError);
+            showError(
+              'Payment could not be finalised due to a connection error. Your cart has been kept — please try again.'
+            );
+            return;
+          }
+
+          // Save order locally and clear cart
           if (typeof localStorage !== 'undefined') {
             localStorage.setItem(
               'naturesi_last_order',
               JSON.stringify({
                 orderId: data.orderID,
+                status: 'COMPLETED',
                 cart: cart,
                 total: total,
                 timestamp: Date.now()
@@ -323,13 +370,14 @@ export async function setupPayPalSDK(documentRoot, cart, shipping, paypalData) {
             localStorage.removeItem('naturesi_cart');
           }
           if (typeof location !== 'undefined') {
-            location.href = `/pages/payment/success.html?orderId=${encodeURIComponent(data.orderID)}`;
+            location.href = `/pages/payment/success.html?orderId=${encodeURIComponent(
+              data.orderID
+            )}`;
           }
         } catch (e) {
           console.error('Payment approval handler error:', e);
           showError(
-            'Payment approved but redirect failed. Please contact support with order ID: ' +
-              data.orderID
+            'Your PayPal payment could not be finalised. Please refresh and try again, or contact support before placing another order.'
           );
         }
       },

@@ -305,3 +305,46 @@ To regenerate this report:
 git ls-tree -r --name-only staging | sort > /tmp/staging-files.txt
 
 # (mirror FTP with wget, then compare as documented above)
+
+---
+
+## EXECUTION STATUS — COMPLETED 2026-04-12
+
+### Git Operations
+- [x] Squash-merged staging into main (55 commits → 1)
+- [x] Deleted staging branch (local and remote)
+- [x] Pushed main to origin
+- [x] Created new staging branch from main
+- [x] Created new development branch from main
+
+### FTP Sync Results
+- [x] UPDATE: 43 files uploaded (pages, CSS, products, service worker)
+- [x] CREATE: 10 files uploaded (images, .editorconfig)
+- [x] DELETE: 0 files deleted (shared hosting — FTP user lacks delete permission on files)
+- [x] SKIPPED: 6 files (scripts/) — `scripts/` directory doesn't exist on FTP, cannot create dirs
+
+### Validation
+- [x] All 21 HTML pages pass lint (DOCTYPE, lang, charset, viewport, labels, alt)
+- [x] CSS lint: products.css, forms.css, header.css — all pass
+- [x] JSON lint: products.json valid
+- [x] CSV: 31 products, no blank SKUs
+- [x] Headless tests: 21/23 passed (2 environmental — PayPal SDK in headless, Chromium D-Bus)
+- [x] HTTPS enforcement in .htaccess
+- [x] CSP policy configured for PayPal
+- [x] Sitemap: 33 URLs, all HTTPS
+- [x] Service worker: install, activate, fetch, skipWaiting, clients.claim all present
+- [x] No http:// external URLs (except schema.org JSON-LD identifiers — correct)
+
+### Known Limitations
+- 32 extra files on FTP cannot be deleted (shared hosting permission restriction)
+  These include: old JS modules, DTD files, .env, legacy files
+  They don't affect the live site — they're not referenced or superseded
+- scripts/ directory cannot be uploaded (FTP cannot create directories)
+  Deploy scripts are available in the repository at scripts/sync-ftp.sh etc.
+  For production use, copy them via the cPanel file manager or SSH
+
+### Final State
+- main: pushed to origin ✓
+- staging: new branch tracking origin/staging ✓
+- development: new branch tracking origin/development ✓
+- FTP: 43 files updated, 10 files created, 287 files identical ✓

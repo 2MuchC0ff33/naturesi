@@ -1,3 +1,5 @@
+import { escapeHtml } from './html.js';
+
 export function hasPayPalReturnParams(searchString) {
   try {
     const params = new URLSearchParams(
@@ -112,13 +114,6 @@ export function handlePaymentReturn(searchString) {
     console.error('handlePaymentReturn error', err);
     return false;
   }
-}
-
-function escapeHtml(s) {
-  return String(s || '').replace(
-    /[&<>"']/g,
-    (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]
-  );
 }
 
 export function initPaymentReturn() {
