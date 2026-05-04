@@ -1,7 +1,7 @@
 {
-  "clientId": "AckDjNxIe4cxbIzmY_MURmDXTf1S5fta02QZ0e7e536TWm1WEhzBMbIt6BNMopb54WPhamt5rCHV14s_",
+  "clientId": "AXWUIJd-0IpLUHC0n08wc9WwWrNT902tOTUxmN5l-xkphu_p0Jzlncl_zMZV4mmwa-RVVprlfYENVYD6",
   "merchantId": "",
-  "env": "live",
+  "env": "sandbox",
   "email": "",
   "useSdk": true,
   "currency": "AUD",
