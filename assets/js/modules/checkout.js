@@ -265,13 +265,13 @@ export async function setupPayPalSDK(documentRoot, cart, shipping, paypalData) {
           const result = await response.json();
           if (result.error) {
             showError('Could not create order: ' + result.error);
-            return actions.reject();
+            return Promise.reject(new Error(result.error));
           }
           return result.orderID;
         } catch (e) {
           console.error('createOrder server call failed:', e);
           showError('Order creation failed. Please try again.');
-          return actions.reject();
+          return Promise.reject(new Error('Order creation failed'));
         }
       },
       onApprove: async (data, actions) => {
