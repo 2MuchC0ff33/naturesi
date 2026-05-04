@@ -170,7 +170,10 @@ export async function setupPayPalSDK(documentRoot, cart, shipping, paypalData) {
     }
   };
 
-  const sdkUrl = new URL('https://www.paypal.com/sdk/js');
+  const sdkBase = paypalData.env === 'sandbox' 
+    ? 'https://www.sandbox.paypal.com/sdk/js' 
+    : 'https://www.paypal.com/sdk/js';
+  const sdkUrl = new URL(sdkBase);
   sdkUrl.searchParams.set('client-id', clientId);
   sdkUrl.searchParams.set('currency', currency);
   sdkUrl.searchParams.set('intent', intent);
