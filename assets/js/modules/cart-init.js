@@ -523,6 +523,25 @@ export async function initCart() {
     currentShippingRate = res && (res.totalRate || res.totalRate === 0) ? Number(res.totalRate) : 0;
     updateCartTableTotalsWithShipping(currentShippingRate);
 
+    // Immediately save shipping to localStorage so checkout can read it directly
+    if (currentShippingRate > 0 && typeof localStorage !== 'undefined') {
+      try {
+        const cartRaw = localStorage.getItem('naturesi_cart');
+        const cartData = cartRaw ? JSON.parse(cartRaw) : { items: [] };
+        const postcodeEl = document.getElementById('checkout-postcode');
+        const postcode = postcodeEl ? postcodeEl.value.trim() : '';
+        const cart = window.CartStore ? window.CartStore.get() : { items: cartData.items || cartData.cart || [] };
+        const shippingData = {
+          cart: cart.items || cart.cart || [],
+          shipping: currentShippingRate,
+          postcode: postcode
+        };
+        localStorage.setItem('naturesi_cart', JSON.stringify(shippingData));
+      } catch (e) {
+        console.warn('Failed to save shipping to localStorage:', e);
+      }
+    }
+
     const checkoutBtn = document.getElementById('btn-proceed-checkout');
     if (checkoutBtn) {
       if (currentShippingRate > 0) {
