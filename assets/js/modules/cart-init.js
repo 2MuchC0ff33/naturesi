@@ -522,6 +522,17 @@ export async function initCart() {
     });
     currentShippingRate = res && (res.totalRate || res.totalRate === 0) ? Number(res.totalRate) : 0;
     updateCartTableTotalsWithShipping(currentShippingRate);
+
+    const checkoutBtn = document.getElementById('btn-proceed-checkout');
+    if (checkoutBtn) {
+      if (currentShippingRate > 0) {
+        checkoutBtn.removeAttribute('disabled');
+        checkoutBtn.title = '';
+      } else {
+        checkoutBtn.setAttribute('disabled', 'true');
+        checkoutBtn.title = 'Enter a postcode to calculate shipping';
+      }
+    }
   };
 
   const debouncedRun = debounce(runEstimate, 300);

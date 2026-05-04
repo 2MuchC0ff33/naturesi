@@ -35,9 +35,24 @@
       "outerPerth": 29,
       "national": 29
     },
-    "carryon": null,
-    "duffle": null,
-    "checkin": null
+    "carryon": {
+      "sameCity": 35,
+      "nearMetro": 35,
+      "outerPerth": 35,
+      "national": 35
+    },
+    "duffle": {
+      "sameCity": 55,
+      "nearMetro": 55,
+      "outerPerth": 55,
+      "national": 55
+    },
+    "checkin": {
+      "sameCity": 75,
+      "nearMetro": 75,
+      "outerPerth": 75,
+      "national": 75
+    }
   },
   "regionalSurcharge": {
     "pouch": 0.0,
@@ -45,9 +60,9 @@
     "handbag": 0.0,
     "shoebox": 0.0,
     "briefcase": 0.0,
-    "carryon": null,
-    "duffle": null,
-    "checkin": null
+    "carryon": 0.0,
+    "duffle": 0.0,
+    "checkin": 0.0
   },
   "remoteSurcharge": {
     "pouch": 0.0,
@@ -55,9 +70,9 @@
     "handbag": 0.0,
     "shoebox": 0.0,
     "briefcase": 0.0,
-    "carryon": null,
-    "duffle": null,
-    "checkin": null
+    "carryon": 0.0,
+    "duffle": 0.0,
+    "checkin": 0.0
   },
   "remoteWaNtExtra": {
     "briefcase": null,

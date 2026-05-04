@@ -111,68 +111,17 @@ export async function runCheckout({
     } catch (_) {}
   }
 
+  if (shipping <= 0) {
+    showError('Shipping not calculated. Please go back to cart and enter your postcode.');
+    if (paymentSection) paymentSection.innerHTML = '';
+    return;
+  }
+
   const { html: fallbackHtml } = renderSummaryToString(cart, shipping);
-  let usedWorker = false;
-  if (
-    window.WorkerRegistry &&
-    window.WorkerRegistry.supports &&
-    window.WorkerRegistry.supports.worker
-  ) {
-    try {
-      const w = window.WorkerRegistry.createWorker('/assets/js/workers/price-calculator.worker.js');
-      if (w) {
-        usedWorker = true;
-        const payload = {
-          type: 'CALC',
-          id: String(Date.now()),
-          cartItems: cart.map((i) => ({
-            sku: i.sku || i.id,
-            name: i.title || i.name,
-            qty: i.qty,
-            price: i.price
-          })),
-          address: {},
-          promoCodes: []
-        };
-        w.onmessage = (ev) => {
-          const msg = ev.data || {};
-          if (msg.type === 'SUMMARY') {
-            const parts = [];
-            parts.push('<ul class="checkout-line-items">');
-            msg.lines.forEach((l) =>
-              parts.push(
-                `<li class="checkout-line-item"><span class="line-title">${escapeHtml(l.name)}</span><span class="line-meta">${l.qty} × ${Number(l.price).toFixed(2)}</span><span class="line-total">${Number(l.subtotal).toFixed(2)}</span></li>`
-              )
-            );
-            parts.push('</ul>');
-            parts.push(
-              `<dl class="checkout-totals"><div><dt>Discounts</dt><dd>${msg.discounts.reduce((s, d) => s + (d.amount || 0), 0).toFixed(2)}</dd></div><div><dt>Tax</dt><dd>${Number(msg.tax || 0).toFixed(2)}</dd></div><div><dt>Shipping</dt><dd>${Number(msg.shipping || 0).toFixed(2)}</dd></div></dl>`
-            );
-            parts.push(
-              `<p class="grand-total">Total: <strong>$${Number(msg.total || 0).toFixed(2)}</strong></p>`
-            );
-            summary.innerHTML = parts.join('');
-            try {
-              w.terminate();
-            } catch (_) {}
-          }
-          if (msg.type === 'ERROR') {
-            console.warn('Price worker error', msg.message);
-            summary.innerHTML = fallbackHtml;
-            try {
-              w.terminate();
-            } catch (_) {}
-          }
-        };
-        w.postMessage(payload);
-      }
-    } catch (e) {
-      console.warn('Worker calc failed', e);
-    }
-  }
-  if (!usedWorker) {
-    summary.innerHTML = fallbackHtml;
-  }
+
+  // Note: price-calculator.worker.js removed - server-side validation handles shipping
+  // The fallbackHtml uses cart shipping which is already validated server-side
+  summary.innerHTML = fallbackHtml;
 
   let paypalData;
   try {
@@ -300,6 +249,8 @@ export async function setupPayPalSDK(documentRoot, cart, shipping, paypalData) {
             price: Number(item.price || 0),
             qty: item.qty ?? item.quantity ?? 1
           }));
+          const cartRaw = typeof localStorage !== 'undefined' ? localStorage.getItem('naturesi_cart') : null;
+          const { postcode: savedPostcode = '' } = cartRaw ? JSON.parse(cartRaw) : {};
           const response = await fetch('/api/create-order.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -307,7 +258,8 @@ export async function setupPayPalSDK(documentRoot, cart, shipping, paypalData) {
               items: cartItems,
               total: total,
               shipping: Number(shipping || 0).toFixed(2),
-              currency: currency
+              currency: currency,
+              postcode: savedPostcode
             })
           });
           const result = await response.json();
@@ -489,13 +441,15 @@ export function attachFormHandler({ documentRoot, storage, key = 'naturesi_cart'
     try {
       const cart = collectCartData({ documentRoot });
       const shippingEl = documentRoot.getElementById('summary-shipping');
+      const postcodeEl = documentRoot.getElementById('checkout-postcode');
       let shippingCost = 0;
       if (shippingEl) {
         const shippingText = shippingEl.textContent.trim();
         const match = shippingText.match(/AUD \$(\d+\.\d+)/);
         if (match) shippingCost = parseFloat(match[1]);
       }
-      const cartData = { cart, shipping: shippingCost };
+      const postcode = postcodeEl ? postcodeEl.value.trim() : '';
+      const cartData = { cart, shipping: shippingCost, postcode: postcode };
       if (storage) storage.setItem(key, JSON.stringify(cartData));
     } catch (err) {
       console.error('Save cart failed', err);
@@ -508,7 +462,18 @@ export function attachFormHandler({ documentRoot, storage, key = 'naturesi_cart'
       try {
         ev.preventDefault();
         const shippingEl = documentRoot.getElementById('summary-shipping');
-        if (shippingEl && shippingEl.textContent.trim() === 'Calculated at checkout') {
+        let shippingCost = 0;
+        if (shippingEl) {
+          const shippingText = shippingEl.textContent.trim();
+          const match = shippingText.match(/AUD \$(\d+\.\d+)/);
+          if (match) shippingCost = parseFloat(match[1]);
+        }
+        const shippingNotCalculated =
+          shippingEl &&
+          (shippingEl.textContent.trim() === 'Calculated at checkout' ||
+            shippingEl.textContent.trim() === '' ||
+            shippingEl.textContent.trim() === 'Enter postcode');
+        if (shippingCost <= 0 || shippingNotCalculated) {
           let errorEl = documentRoot.getElementById('checkout-error');
           if (!errorEl) {
             errorEl = documentRoot.createElement('p');
@@ -521,19 +486,16 @@ export function attachFormHandler({ documentRoot, storage, key = 'naturesi_cart'
               documentRoot.querySelector('.cart-actions-external') || documentRoot.body;
             container.insertBefore(errorEl, container.firstChild);
           }
+          if (btn) btn.scrollIntoView({ behavior: 'smooth', block: 'center' });
           return;
         }
         const existingError = documentRoot.getElementById('checkout-error');
         if (existingError) existingError.remove();
 
         const cart = collectCartData({ documentRoot });
-        let shippingCost = 0;
-        if (shippingEl) {
-          const shippingText = shippingEl.textContent.trim();
-          const match = shippingText.match(/AUD \$(\d+\.\d+)/);
-          if (match) shippingCost = parseFloat(match[1]);
-        }
-        const cartData = { cart, shipping: shippingCost };
+        const postcodeEl = documentRoot.getElementById('checkout-postcode');
+        const postcode = postcodeEl ? postcodeEl.value.trim() : '';
+        const cartData = { cart, shipping: shippingCost, postcode: postcode };
         if (storage) storage.setItem(key, JSON.stringify(cartData));
 
         if (!documentRoot.getElementById('checkout-save-note')) {

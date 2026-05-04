@@ -33,34 +33,86 @@ if ($expected_total <= 0) {
     json_response(array('error' => 'Invalid expectedTotal'), 400);
 }
 
-// Step 1: Capture the order via PayPal API
+// Step 1: Get order details via PayPal API (to verify amount BEFORE capturing)
+$order_result = paypal_api_request('GET', '/v2/checkout/orders/' . urlencode($order_id), null);
+
+if (isset($order_result['error'])) {
+    error_log('PayPal get-order API error: ' . $order_result['error']);
+    json_response(array('verified' => false, 'reason' => 'Failed to retrieve order: ' . $order_result['error']));
+}
+
+$order_data = $order_result['data'];
+$order_http_code = $order_result['http_code'];
+
+if ($order_http_code !== 200) {
+    $reason = isset($order_data['message']) ? $order_data['message'] : 'Failed to get order (HTTP ' . $order_http_code . ')';
+    error_log('PayPal get-order failed (HTTP ' . $order_http_code . '): ' . json_encode($order_data));
+    json_response(array('verified' => false, 'reason' => $reason));
+}
+
+// Extract expected amount from order (before capture)
+$order_amount = null;
+$order_currency = null;
+
+if (isset($order_data['purchase_units'][0]['amount'])) {
+    $amount_obj = $order_data['purchase_units'][0]['amount'];
+    if (isset($amount_obj['value'])) {
+        $order_amount = floatval($amount_obj['value']);
+    }
+    if (isset($amount_obj['currency_code'])) {
+        $order_currency = $amount_obj['currency_code'];
+    }
+}
+
+// Verify amount from order matches expected (within 0.01 tolerance)
+if ($order_amount === null) {
+    error_log('Could not extract amount from order: ' . $order_id);
+    json_response(array('verified' => false, 'reason' => 'Could not verify order amount'));
+}
+
+$diff = abs($order_amount - $expected_total);
+if ($diff > 0.01) {
+    error_log('Pre-capture amount mismatch: order=' . $order_amount . ' expected=' . $expected_total . ' order=' . $order_id);
+    json_response(array(
+        'verified' => false,
+        'reason' => 'Amount mismatch: order shows ' . $order_amount . ' but expected ' . $expected_total,
+    ));
+}
+
+// Verify currency matches
+if ($order_currency !== null && $order_currency !== $expected_currency) {
+    error_log('Currency mismatch: order=' . $order_currency . ' expected=' . $expected_currency . ' order=' . $order_id);
+    json_response(array(
+        'verified' => false,
+        'reason' => 'Currency mismatch: ' . $order_currency . ' vs ' . $expected_currency,
+    ));
+}
+
+// Step 2: Now capture the verified order
 $capture_result = paypal_api_request('POST', '/v2/checkout/orders/' . urlencode($order_id) . '/capture', null);
 
 if (isset($capture_result['error'])) {
     error_log('PayPal capture API error: ' . $capture_result['error']);
-    // Use 200 with verified=false to avoid Cloudflare overriding 502
     json_response(array('verified' => false, 'reason' => 'Failed to capture payment: ' . $capture_result['error']));
 }
 
-$order_data = $capture_result['data'];
-$http_code = $capture_result['http_code'];
+$capture_data = $capture_result['data'];
+$capture_http_code = $capture_result['http_code'];
 
-if ($http_code !== 201 && $http_code !== 200) {
-    $reason = isset($order_data['message']) ? $order_data['message'] : 'Capture failed (HTTP ' . $http_code . ')';
-    error_log('PayPal capture failed (HTTP ' . $http_code . '): ' . json_encode($order_data));
-    // Use 200 with verified=false to avoid Cloudflare overriding 502
-    json_response(array('verified' => false, 'reason' => $reason, 'http_code' => $http_code));
+if ($capture_http_code !== 201 && $capture_http_code !== 200) {
+    $reason = isset($capture_data['message']) ? $capture_data['message'] : 'Capture failed (HTTP ' . $capture_http_code . ')';
+    error_log('PayPal capture failed (HTTP ' . $capture_http_code . '): ' . json_encode($capture_data));
+    json_response(array('verified' => false, 'reason' => $reason, 'http_code' => $capture_http_code));
 }
 
-// Step 2: Verify the captured amount
-$status = isset($order_data['status']) ? $order_data['status'] : '';
+// Step 3: Verify the captured amount
+$status = isset($capture_data['status']) ? $capture_data['status'] : '';
 
 if ($status !== 'COMPLETED') {
     json_response(array(
         'verified' => false,
         'reason' => 'Payment status is ' . $status . ', not COMPLETED',
         'status' => $status,
-        'order' => $order_data,
     ));
 }
 
@@ -68,8 +120,8 @@ if ($status !== 'COMPLETED') {
 $captured_amount = null;
 $captured_currency = null;
 
-if (isset($order_data['purchase_units'][0]['payments']['captures'][0])) {
-    $capture_obj = $order_data['purchase_units'][0]['payments']['captures'][0];
+if (isset($capture_data['purchase_units'][0]['payments']['captures'][0])) {
+    $capture_obj = $capture_data['purchase_units'][0]['payments']['captures'][0];
     if (isset($capture_obj['amount']['value'])) {
         $captured_amount = floatval($capture_obj['amount']['value']);
     }
@@ -78,18 +130,20 @@ if (isset($order_data['purchase_units'][0]['payments']['captures'][0])) {
     }
 }
 
-// Verify amount matches (within 0.01 tolerance)
-if ($captured_amount !== null) {
-    $diff = abs($captured_amount - $expected_total);
-    if ($diff > 0.01) {
-        error_log('Amount mismatch: captured=' . $captured_amount . ' expected=' . $expected_total . ' order=' . $order_id);
-        json_response(array(
-            'verified' => false,
-            'reason' => 'Amount mismatch: captured ' . $captured_amount . ' vs expected ' . $expected_total,
-            'status' => 'COMPLETED',
-            'order' => $order_data,
-        ));
-    }
+// Verify amount after capture (within 0.01 tolerance)
+if ($captured_amount === null) {
+    error_log('Could not extract captured amount: ' . $order_id);
+    json_response(array('verified' => false, 'reason' => 'Could not verify captured amount'));
+}
+
+$diff = abs($captured_amount - $expected_total);
+if ($diff > 0.01) {
+    error_log('Post-capture amount mismatch: captured=' . $captured_amount . ' expected=' . $expected_total . ' order=' . $order_id);
+    json_response(array(
+        'verified' => false,
+        'reason' => 'Amount mismatch: captured ' . $captured_amount . ' vs expected ' . $expected_total,
+        'status' => 'COMPLETED',
+    ));
 }
 
 // Verify currency matches
@@ -99,7 +153,6 @@ if ($captured_currency !== null && $captured_currency !== $expected_currency) {
         'verified' => false,
         'reason' => 'Currency mismatch: ' . $captured_currency . ' vs ' . $expected_currency,
         'status' => 'COMPLETED',
-        'order' => $order_data,
     ));
 }
 
@@ -122,6 +175,9 @@ if (!$written) {
     error_log('Failed to write order file: ' . $filepath);
     // Still return verified=true since PayPal confirmed payment
 }
+
+// Send order confirmation email (logged for now, can enable actual sending later)
+send_order_confirmation_email($order_record, $capture_data);
 
 // Success
 json_response(array(

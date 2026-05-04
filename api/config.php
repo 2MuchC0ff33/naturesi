@@ -204,3 +204,68 @@ function json_response($data, $http_code = 200) {
     echo json_encode($data);
     exit;
 }
+
+// Send order confirmation email
+// Returns true if email sent (or queued), false on failure
+function send_order_confirmation_email($order_data, $capture_data) {
+    // Extract customer info from PayPal response
+    $payer = isset($capture_data['payer']) ? $capture_data['payer'] : array();
+    $customer_email = isset($payer['email_address']) ? $payer['email_address'] : '';
+    $customer_name = '';
+    if (isset($payer['name'])) {
+        $name_parts = $payer['name'];
+        $customer_name = trim(($name_parts['given_name'] ?? '') . ' ' . ($name_parts['surname'] ?? ''));
+    }
+
+    // Extract order details
+    $purchase_units = isset($capture_data['purchase_units']) ? $capture_data['purchase_units'] : array();
+    $amount = isset($purchase_units[0]['amount']) ? $purchase_units[0]['amount'] : array();
+    $total = isset($amount['value']) ? $amount['value'] : '0.00';
+    $currency = isset($amount['currency_code']) ? $amount['currency_code'] : 'AUD';
+    $breakdown = isset($amount['breakdown']) ? $amount['breakdown'] : array();
+    $shipping = isset($breakdown['shipping']['value']) ? $breakdown['shipping']['value'] : '0.00';
+
+    // Extract items
+    $items = array();
+    if (isset($purchase_units[0]['items'])) {
+        foreach ($purchase_units[0]['items'] as $item) {
+            $items[] = $item['quantity'] . 'x ' . $item['name'] . ' - ' . $currency . ' ' . $item['unit_amount']['value'];
+        }
+    }
+
+    // Build email to merchant
+    $merchant_to = defined('PAYPAL_EMAIL') && PAYPAL_EMAIL ? PAYPAL_EMAIL : 'tea@naturesinfusions.com.au';
+    $merchant_subject = 'New Order: ' . $total . ' ' . $currency . ' - ' . date('d/m/Y H:i');
+    $merchant_body = "New order received\n";
+    $merchant_body .= "==================\n\n";
+    $merchant_body .= "Customer: " . ($customer_name ?: 'N/A') . "\n";
+    $merchant_body .= "Email: " . ($customer_email ?: 'N/A') . "\n";
+    $merchant_body .= "Total: " . $currency . ' ' . $total . "\n";
+    $merchant_body .= "Shipping: " . $currency . ' ' . $shipping . "\n\n";
+    $merchant_body .= "Items:\n";
+    foreach ($items as $item) {
+        $merchant_body .= "- " . $item . "\n";
+    }
+    $merchant_body .= "\nOrder ID: " . ($order_data['order_id'] ?? 'N/A') . "\n";
+    $merchant_body .= "Capture ID: " . ($capture_data['id'] ?? 'N/A') . "\n";
+
+    // Log merchant email instead of sending (for safety on shared hosting)
+    error_log('MERCHANT ORDER EMAIL: To=' . $merchant_to . ' Subject=' . $merchant_subject . ' Body=' . substr($merchant_body, 0, 500));
+
+    // If customer email available, try to send confirmation
+    if ($customer_email) {
+        $customer_subject = 'Order Confirmation - Nature\'s Infusions';
+        $customer_body = "Thank you for your order!\n\n";
+        $customer_body .= "Order Total: " . $currency . ' ' . $total . "\n";
+        $customer_body .= "Items ordered:\n";
+        foreach ($items as $item) {
+            $customer_body .= "- " . $item . "\n";
+        }
+        $customer_body .= "\nYou will receive a separate email with tracking details once your order is dispatched.\n";
+        $customer_body .= "\nThank you for choosing Nature's Infusions!\n";
+
+        error_log('CUSTOMER ORDER EMAIL: To=' . $customer_email . ' Subject=' . $customer_subject);
+    }
+
+    return true;
+}
