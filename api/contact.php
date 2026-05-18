@@ -176,7 +176,7 @@ function smtp_send($host, $port, $user, $pass, $from, $to, $subject, $text_body,
             fclose($fp);
             return false;
         }
-        if (!stream_socket_enable_crypto($fp, true, STREAM_CRYPTO_METHOD_TLSv1_2_CLIENT | STREAM_CRYPTO_METHOD_TLSv1_3_CLIENT)) {
+        if (!stream_socket_enable_crypto($fp, true, STREAM_CRYPTO_METHOD_TLS_CLIENT)) {
             error_log('Contact SMTP: TLS negotiation failed');
             fclose($fp);
             return false;
