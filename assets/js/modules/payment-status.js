@@ -69,13 +69,11 @@ export function initPaymentCancel() {
 export function handlePaymentReturn(searchString) {
   if (!hasPayPalReturnParams(searchString)) return false;
   try {
-    if (typeof localStorage !== 'undefined') {
-      localStorage.removeItem('naturesi_cart');
-    }
     if (typeof document !== 'undefined') {
       document.dispatchEvent(new CustomEvent('cart:cleared:payment'));
 
       const order = getLastOrder();
+      let confirmationBuilt = false;
       if (order && !document.getElementById('order-confirmation')) {
         const main = document.querySelector('main.container') || document.body;
         const confirm = document.createElement('section');
@@ -96,6 +94,14 @@ export function handlePaymentReturn(searchString) {
           main.appendChild(confirm);
         }
         clearLastOrder();
+        confirmationBuilt = true;
+      }
+
+      // Only clear cart if we have valid order data
+      if (confirmationBuilt || order) {
+        if (typeof localStorage !== 'undefined') {
+          localStorage.removeItem('naturesi_cart');
+        }
       }
 
       if (!document.getElementById('cart-cleared-note')) {
@@ -105,7 +111,9 @@ export function handlePaymentReturn(searchString) {
         note.className = 'muted';
         note.setAttribute('role', 'status');
         note.setAttribute('aria-live', 'polite');
-        note.textContent = 'Your cart has been cleared.';
+        note.textContent = order
+          ? 'Your cart has been cleared.'
+          : 'Payment return detected but no order data found. If your payment was successful, please contact support with your PayPal order ID.';
         main.appendChild(note);
       }
     }

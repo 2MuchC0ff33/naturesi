@@ -1,4 +1,4 @@
-const DEFAULT = { items: [] };
+const DEFAULT = { items: [], shipping: 0, postcode: '' };
 
 function getLocalCart(key) {
   try {
@@ -90,11 +90,34 @@ export class CartStore {
           })),
         };
       } else {
-        this.cart = { items: [], ...local };
+        // Support both CartStore shape {items:[...]} and legacy shipping estimator shape {cart:[...]}
+        const items = Array.isArray(local.items)
+          ? local.items
+          : Array.isArray(local.cart)
+            ? local.cart
+            : [];
+        this.cart = {
+          items: items,
+          shipping: local.shipping !== undefined ? local.shipping : 0,
+          postcode: local.postcode !== undefined ? local.postcode : '',
+        };
       }
     } else {
       const idb = await loadCartFromIDB(this.dbName, this.key);
-      this.cart = idb ? { items: [], ...idb } : DEFAULT;
+      if (idb) {
+        const items = Array.isArray(idb.items)
+          ? idb.items
+          : Array.isArray(idb.cart)
+            ? idb.cart
+            : [];
+        this.cart = {
+          items: items,
+          shipping: idb.shipping !== undefined ? idb.shipping : 0,
+          postcode: idb.postcode !== undefined ? idb.postcode : '',
+        };
+      } else {
+        this.cart = DEFAULT;
+      }
     }
     return this.cart;
   }
@@ -120,7 +143,17 @@ export class CartStore {
       console.error('Invalid cart provided to set');
       return this.cart;
     }
-    this.cart = { items: [], ...cart };  // Ensure items array exists
+    // Normalize items from both 'items' and legacy 'cart' key
+    const items = Array.isArray(cart.items)
+      ? cart.items
+      : Array.isArray(cart.cart)
+        ? cart.cart
+        : [];
+    this.cart = {
+      items: items,
+      shipping: cart.shipping !== undefined ? cart.shipping : this.cart.shipping,
+      postcode: cart.postcode !== undefined ? cart.postcode : this.cart.postcode,
+    };
     return this.save();
   }
 
@@ -216,7 +249,13 @@ export class CartStore {
   }
 
   updateCartItemQuantity(existing, newQuantity) {
-    existing.quantity = parseInt(newQuantity, 10) || 0;
+    const qty = parseInt(newQuantity, 10) || 0;
+    if (qty <= 0) {
+      // Remove the item if quantity is zero or less
+      this.cart.items = this.cart.items.filter((it) => it !== existing);
+    } else {
+      existing.quantity = qty;
+    }
     // return the save promise so callers can await persistence
     return this.save();
   }

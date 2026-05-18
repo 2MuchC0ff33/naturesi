@@ -406,23 +406,14 @@ export async function initCart() {
     if (!(form && form.id === 'cart-form')) return;
     ev.preventDefault();
     const rows = Array.from(form.querySelectorAll('tbody tr'));
-    // sequentially update quantities and await persistence for each
+    // sequentially update quantities using CartStore.updateQuantity
     for (const row of rows) {
       const qtyEl = row.querySelector('input[type="number"]');
       const pid = row.dataset.productId;
       const size = row.dataset.productSize !== undefined ? row.dataset.productSize : row.dataset.size || '';
       const newQty = qtyEl ? (parseInt(qtyEl.value, 10) || 0) : 0;
-      if (pid) {
-        // Normalize cart shape and update item quantity via global CartStore
-        const cur = window.CartStore.get();
-        const items = (cur.items || []).slice();
-        for (const it of items) {
-          if ((it.sku && String(it.sku) === String(pid)) || (it.id && String(it.id) === String(pid))) {
-            it.qty = newQty;
-            if (it.quantity !== undefined) it.quantity = newQty;
-          }
-        }
-        await window.CartStore.set({ items });
+      if (pid && newQty >= 0) {
+        await window.CartStore.updateQuantity(pid, newQty, size);
       }
     }
     const c = window.CartStore.get();
@@ -470,7 +461,7 @@ export async function initCart() {
       (row.dataset.productSize !== undefined ? row.dataset.productSize : row.dataset.size || '');
     if (!id) return;
     try {
-      await window.CartStore.remove(id);
+      await window.CartStore.remove(id, size);
       const c2 = window.CartStore.get();
       updateCartCountOutputs(
         (c2.items || []).reduce((s, it) => s + (parseInt(it.qty || it.quantity, 10) || 0), 0)
@@ -526,13 +517,11 @@ export async function initCart() {
     // Immediately save shipping to localStorage so checkout can read it directly
     if (currentShippingRate > 0 && typeof localStorage !== 'undefined') {
       try {
-        const cartRaw = localStorage.getItem('naturesi_cart');
-        const cartData = cartRaw ? JSON.parse(cartRaw) : { items: [] };
         const postcodeEl = document.getElementById('checkout-postcode');
         const postcode = postcodeEl ? postcodeEl.value.trim() : '';
-        const cart = window.CartStore ? window.CartStore.get() : { items: cartData.items || cartData.cart || [] };
+        const cart = window.CartStore ? window.CartStore.get() : { items: [] };
         const shippingData = {
-          cart: cart.items || cart.cart || [],
+          items: cart.items || [],
           shipping: currentShippingRate,
           postcode: postcode
         };

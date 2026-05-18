@@ -157,7 +157,7 @@
       "inStock": true,
       "price": 14,
       "options": [{"id":"product-red-60g","label":"60g Pouch","price":14,"weight":"60g"},{"id":"product-red-100g","label":"100g Cylinder","price":22,"weight":"100g"}],
-      "ingredients": "Roobios, Honeybush and Cinnamon",
+      "ingredients": "Rooibos, Honeybush and Cinnamon",
       "featured": false
     },
     {
@@ -190,6 +190,7 @@
       "price": 14,
       "options": [],
       "ingredients": "Apple Pieces, Rosehip, Lemongrass and Spearmint",
+      "weight": "50g",
       "featured": false
     },
     {
@@ -317,7 +318,8 @@
       "inStock": false,
       "price": 14,
       "options": [],
-      "ingredients": null,
+      "ingredients": "",
+      "weight": "50g",
       "featured": false
     },
     {
@@ -334,6 +336,7 @@
       "price": 18,
       "options": [{"id":"product-calendula-50ml","label":"50ml Glass Pump Bottle","price":18}],
       "ingredients": "Purified Water, Avocado Oil (*Persea gratissima*), Sweet Almond Oil (*Prunus dulcis*), Soybean Oil (*Glycine max*), Calendula Flowers (*Calendula officinalis*), Cetearyl Alcohol, PE-20 Stearate, Cocoa Butter (*Theobroma cacao*), Glycerine, Phenoxyethanol, Ethylhexylglycerin, Rosehip Oil (*Rosa canina*), Jojoba Oil (*Simmondsia chinensis*), Chamomile Essential Oil (*Matricaria chamomilla*), Natural Vitamin E, Propanediol and Rosemary Leaf Extract (*Salvia rosmarinus*)",
+      "weight": "80g",
       "featured": false
     },
     {
@@ -350,6 +353,7 @@
       "price": 12,
       "options": [{"id":"product-calmbalm-20ml","label":"20ml","price":12}],
       "ingredients": "Coconut Oil (*Cocos nucifera*), Beeswax, Cocobutter (*Cocos nucifera*), Sweet Almond Oil (*Prunus dulcis*), Jojoba Oil (*Simmondsia chinensis*), Vitamin E Oil. Essential Oils: Lavender (*Lavendula angustifolia*), Rosemary (*Rosmarinus officinalis*), Peppermint (*Mentha arvensis*)",
+      "weight": "40g",
       "featured": false
     },
     {
@@ -366,6 +370,7 @@
       "price": 12,
       "options": [{"id":"product-sleepbalm-20ml","label":"20ml","price":12}],
       "ingredients": "Coconut Oil (*Cocos nucifera*), Beeswax, Cocobutter (*Cocos nucifera*), Sweet Almond Oil (*Prunus dulcis*), Jojoba Oil (*Simmondsia chinensis*), Vitamin E Oil. Essential Oils: Lavender (*Lavendula angustifolia*), Chamomile (*Matricaria chamomilla*)",
+      "weight": "40g",
       "featured": false
     },
     {
@@ -382,6 +387,7 @@
       "price": 10,
       "options": [{"id":"product-floralspray-100ml","label":"100ml","price":10}],
       "ingredients": "Purified Water, Lavender Essential Oil (*Lavandula angustifolia*) and Polysorbate 80",
+      "weight": "150g",
       "featured": false
     },
     {
@@ -398,6 +404,7 @@
       "price": 10,
       "options": [{"id":"product-magnesium-350g","label":"350g","price":10}],
       "ingredients": "Magnesium Chloride Flakes",
+      "weight": "350g",
       "featured": false
     },
     {
@@ -414,6 +421,7 @@
       "price": 20,
       "options": [{"id":"product-pillow-1","label":"1 pillow","price":20}],
       "ingredients": "Ground Flaxseed (*Linum usitatissimum*), Ground Lavender (*Lavandula angustifolia*), Ground Rosemary (*Salvia rosmarinus*) and Ground Peppermint (*Mentha × piperita*)",
+      "weight": "200g",
       "featured": false
     },
     {
@@ -430,6 +438,7 @@
       "price": 4,
       "options": [{"id":"product-bag-10pack","label":"10 pack","price":4}],
       "ingredients": "Plant-based Materials",
+      "weight": "30g",
       "featured": false
     },
     {
@@ -445,7 +454,8 @@
       "inStock": false,
       "price": 10,
       "options": [],
-      "ingredients": null,
+      "ingredients": "",
+      "weight": "20g",
       "featured": false
     },
     {
@@ -462,6 +472,7 @@
       "price": 30,
       "options": [{"id":"product-flask-500ml","label":"500ml","price":30}],
       "ingredients": "Stainless Steel and BPA-free Materials",
+      "weight": "400g",
       "featured": false
     },
     {
@@ -478,6 +489,7 @@
       "price": 30,
       "options": [{"id":"product-pot-800ml","label":"800ml","price":30}],
       "ingredients": "Borosilicate Glass and Stainless Steel",
+      "weight": "900g",
       "featured": false
     },
     {
@@ -494,6 +506,7 @@
       "price": 3,
       "options": [{"id":"product-scoop-1","label":"1 scoop","price":3}],
       "ingredients": "Durable Materials",
+      "weight": "50g",
       "featured": false
     }
   ]

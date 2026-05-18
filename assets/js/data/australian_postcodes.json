@@ -35778,6 +35778,16 @@
       "ra_2016": "1",
       "mmm_2019": "1"
     },
+    "6200": {
+      "state": "WA",
+      "localities": ["BUNBURY", "CAREY PARK", "DAVENPORT", "GELORUP", "MILLAGE"],
+      "lat": -33.327,
+      "long": 115.637,
+      "chargezone": "W1",
+      "region": "R3",
+      "ra_2016": "2",
+      "mmm_2019": "4"
+    },
     "6207": {
       "state": "WA",
       "localities": ["MYARA", "NAMBEELUP", "NORTH DANDALUP", "SOLUS", "WHITTAKER"],
