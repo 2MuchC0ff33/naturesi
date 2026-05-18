@@ -139,8 +139,8 @@
       </address>
     </article>
     <section id="contact-form">
-      <h2>Support Request Form</h2>
-      <form action="https://api.naturesinfusions.com.au/contact" method="post">
+      <h2>Support Request</h2>
+      <form id="support-form" action="/api/contact.php" method="post">
         <fieldset>
           <legend>Personal Information</legend>
           <div>
@@ -185,14 +185,56 @@
             <small id="message-hint">Minimum 20 characters. Provide relevant order or account details where
             applicable.</small>
           </div>
+          <input type="hidden" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true" value="">
           <div>
-            <button>Submit Request</button> <button type="reset">Reset Form</button>
+            <button type="submit">Submit Request</button> <button type="reset">Reset Form</button>
           </div>
-          <div id="contact-form-status" role="status" aria-live="polite" aria-atomic="true" class="visually-hidden">
-          </div>
+          <p class="contact-fallback" style="margin-top:1rem;font-size:0.9rem">
+            Prefer to email directly?
+            <a href="mailto:tea@naturesinfusions.com.au?subject=Support%20Request">tea@naturesinfusions.com.au</a>
+          </p>
+          <div id="contact-form-status" role="status" aria-live="polite" aria-atomic="true"></div>
         </fieldset>
       </form>
     </section>
+    <script>
+    (function () {
+      var form = document.getElementById('support-form');
+      var statusEl = document.getElementById('contact-form-status');
+      if (!form || !statusEl) return;
+      form.addEventListener('submit', function (ev) {
+        ev.preventDefault();
+        var btn = form.querySelector('button[type="submit"]');
+        btn.disabled = true;
+        btn.textContent = 'Sending...';
+        var data = new FormData(form);
+        fetch('/api/contact.php', {
+          method: 'POST',
+          body: data,
+          headers: { 'Accept': 'application/json' }
+        }).then(function (res) {
+          return res.json().then(function (body) { return { ok: res.ok, body: body }; });
+        }).then(function (result) {
+          if (result.ok && result.body.success) {
+            statusEl.textContent = 'Message sent successfully. We will reply within 1 business day.';
+            statusEl.style.color = '#2e7d32';
+            form.reset();
+          } else {
+            var msg = result.body && result.body.error ? result.body.error : 'Submission failed.';
+            statusEl.textContent = msg + ' Please try again or email us directly.';
+            statusEl.style.color = '#c62828';
+          }
+          btn.disabled = false;
+          btn.textContent = 'Submit Request';
+        }).catch(function () {
+          statusEl.textContent = 'Network error. Please try again or email us directly.';
+          statusEl.style.color = '#c62828';
+          btn.disabled = false;
+          btn.textContent = 'Submit Request';
+        });
+      });
+    })();
+    </script>
   </main>
   <hr aria-hidden="true">
   <div class="site-footer" itemscope itemtype="https://schema.org/WPFooter">
